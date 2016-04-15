@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="Client" pattern="file[app_server]:_common//*||file[app_server]:_lixo//*||file[app_server]:_tmp//*||file[app_server]:apps//*||file[app_server]:node_modules/tshark/client//*" />
-</component>

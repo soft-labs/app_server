@@ -59,20 +59,20 @@
  * @link <a href='http://koajs.com/'>Koa</a>
  * @link <a href='https://github.com/alexmingoia/koa-router'>koa-router</a>
  * @link <a href='https://github.com/chrisyip/koa-jade'>koa-jade</a>
- * @link <a href='https://github.com/pkoretic/koa-static-server'>koa-static-server</a>
  * @link <a href='https://github.com/LeanKit-Labs/seriate'>Seriate</a>
  * @link <a href='http://underscorejs.org/'>Undescore</a>
  * @link <a href='https://www.npmjs.com/package/extend'>extend</a>
  * @author Labs
  * @since 22/03/2016
  */
-require('app-module-path').addPath(__dirname);
-var static      = require('./tshark/static')
+require('app-module-path').addPath(require('path').resolve(__dirname));
+var ts_static   = require('./tshark/static')
     , koaBody   = require('koa-body')
     , app       = require('koa')()
 ;
 
-//require('koa-qs')(app);
+var path = require('path');
+global.appRoot = path.resolve(__dirname);
 
 /**
  * Configurações gerais da aplicação
@@ -113,12 +113,11 @@ app.use(router.routes());
  * Roteamento especial de arquivos estaticos 
  * (js, css, png, jpg, etc...)
  */
-app.use(static({
-    caching: false, // True quando em produção
-    log: false      // False quando em produção
+app.use(ts_static({
+    caching: false,         // True quando em produção
+    inside_node: false,     // True quando em produção
+    log: false              // False quando em produção
 }));
-
-
 
 
 app.on('aerror', function(err, ctx){

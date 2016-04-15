@@ -8,10 +8,6 @@
  * @author Luiz Antonio B. Silva [Labs]
  * @since 11/10/2015
  */
-var tshark   = new TShark()
-    , client = {}
-;
-
 // Fim da carga do browser
 $(document).ready(function() {
 
@@ -19,9 +15,7 @@ $(document).ready(function() {
     tshark.init();
 
     // Inicializa menu da aplicação
-    tshark.register('app.menu', function(){
-        client.menu = tshark.getMod('app.menu');
-    });
+    tshark.register('sys.app.menu');
 
     // Bind inicial de APIs e componentes
     tshark.bind();

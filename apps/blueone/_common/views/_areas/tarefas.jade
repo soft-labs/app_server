@@ -15,7 +15,24 @@
                         .header {data.row.label}
                         .meta {data.row.info}
                         .description
-
+                            button.ui.button(
+                                data-action='list sys app menu'
+                            ) List
+                            button.ui.button(
+                                data-action='search sys app menu',
+                                data-query='123 e 456'
+                            ) Search
+                            button.ui.button(
+                                data-action='get sys app menu',
+                                data-id='123'
+                            ) Get
+                            button.ui.button(
+                                data-action='create sys app menu'
+                            ) Create
+                            button.ui.button(
+                                data-action='edit sys app menu',
+                                data-id='123'
+                            ) Edit
                     .extra.content
                         div.ui.vertical.fluid.pointing.menu
                             a.item.left(

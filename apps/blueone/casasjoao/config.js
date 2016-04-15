@@ -3,7 +3,9 @@
  * 20/02/16
  */
 module.exports = {
-    d: 'casajoao',
+    depth: {
+        app: true
+    },
     info: {
         owner: 'Casas do João',
         cnpj: '20.335.273/0001-02',

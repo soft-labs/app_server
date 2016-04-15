@@ -3,7 +3,9 @@
  * 20/02/16
  */
 module.exports = {
-    a: 'sys',
+    depth: {
+        app_server: true,
+    },
     info: {
         application: {
             title: 'Sys Testes',
