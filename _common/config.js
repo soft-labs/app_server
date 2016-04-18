@@ -3,6 +3,12 @@
  */
 module.exports = {
     depth: {
-        app_server_common: true
+        app_server_common: {
+            
+        }
+    },
+    security: {
+        mode: 'full',
+        active: true
     }
 };

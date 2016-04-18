@@ -97,20 +97,20 @@ TShark.prototype.modulo = function(path){
     TShark.prototype.modulo.prototype.call  = function(api, data){
         data = data || {};
         var tmp      = api.split(' ')
-            , action = ''
+            , func   = ''
         ;
         if (tmp.length > 1){
             api = tmp.shift();
 
             switch (api){
-                case 'get' : data.id   = tmp.join(' '); break;
+                case 'get' : data.key  = tmp.join(' '); break;
                 case 'form': data.key  = tmp.join(' '); break;
-                case 'exec': data.func = tmp.join(' '); break;
+                case 'exec': func = ' '+ tmp.join(' '); break;
                 default: data.extra = tmp;
             }
         }
 
-        data.action = this.api[api];
+        data.action = this.api[api] + func;
         $('#_direct_api_helper_')
             .data(data)
             .api('query');

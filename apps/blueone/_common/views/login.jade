@@ -1,0 +1,30 @@
+extends header
+
+block content
+
+    div#area_geral.ui
+        #login.ui.fluid.container
+
+            #login_form.ts-center(style='height: 30%; width: 40%;')
+                .ui.card.fluid(style='box-shadow: 0 0 21px -6px black;')
+                    .content
+                        .header Login
+                        .meta Informe seu usuário e senha
+                        .description
+                            .ui.grid
+                                .eleven.wide.column
+                                    .ui.form
+                                        .field
+                                            label Usuário
+                                            .ui.left.icon.input
+                                                input(type='text', placeholder='Informe o seu usuário')
+                                                i.user.icon
+                                        .field
+                                            label Senha
+                                            .ui.left.icon.input
+                                                input(type='password')
+                                                i.lock.icon
+                                .five.wide.column
+                                    img.ui.image(src='imgs/_logos/blueone.png', style='widdth: 22%; opacity: 0.9;')
+                    .extra.content
+                        .ui.float.right.blue.button(data-action='exec sys app security login') Login

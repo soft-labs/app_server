@@ -84,16 +84,15 @@ app.context.running = {};
 
 
 /**
- * Arquivos estáticos
+ * Parsing de body (POST DATA && QUERY STRING)
  */
-//app.use(koaBody({formidable:{uploadDir: app.context.config.paths.default.tmp}}));
-
+app.use(koaBody({formidable:{uploadDir: __dirname}}));
 
 /**
  * Inicializa engine :: TShark
  * @type {TShark}
  */
-app.engine = new (require('./tshark/tshark'))(app);
+app.engine = new (require('./tshark/tshark'))(app, true);
 
 /**
  * Roteamento de APIs de business objects
@@ -114,8 +113,9 @@ app.use(router.routes());
  * (js, css, png, jpg, etc...)
  */
 app.use(ts_static({
-    caching: false,         // True quando em produção
-    inside_node: false,     // True quando em produção
+    caching: false,         // Caching de arquivos       | True quando em produção 
+    inside_node: false,     // TShark como node_module ? | True quando em produção
+    quiet: true,            // Não exibe msg de erros    | True quando em produção
     log: false              // False quando em produção
 }));
 

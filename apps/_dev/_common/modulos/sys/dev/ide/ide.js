@@ -23,15 +23,14 @@ tshark.modulos._add('sys.dev.ide', {
 
         // Objeto que irá armazenar as conexões disponíveis
         this.conn = new Dataset(this.path);
-        this.conn.load('exec getConexoes', {testando: 123});
+        this.conn.load('getConexoes', {testando: 123});
 
         // Objeto que irá armazenar os pacotes existentes no server
         this.obj = new Dataset(this.path);
-        this.obj.load('exec listModulos');
+        this.obj.load('listModulos');
 
         // Objeto que irá armazenar os pacotes existentes no server
         this.tabelas = new Dataset(this.path);
-
 
         this.package = {
             id: '',
@@ -39,7 +38,7 @@ tshark.modulos._add('sys.dev.ide', {
             modulos: new Dataset(this.path)
         };
         this.package.modulos.key = "name";
-
+        
         // Efetua o bind
         $('#ide').data('bound', rivets.bind($('#ide'), this));
 
@@ -66,7 +65,7 @@ tshark.modulos._add('sys.dev.ide', {
     refreshTables: function(){
         var mod = sys.dev.ide;
         mod.tabelas.clear();
-        mod.tabelas.load('exec getTables', {
+        mod.tabelas.load('getTables', {
             connID: mod.conn.row['id']
         });
     },
@@ -102,6 +101,9 @@ tshark.modulos._add('sys.dev.ide', {
         }
     },
 
+    /**
+     * Cria packages
+     */
     createPackage: function(){
         var mod = sys.dev.ide;
         mod.call('exec createPackage', {

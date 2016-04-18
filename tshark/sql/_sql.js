@@ -419,22 +419,35 @@ function getDataPack(){
  * @param obj { BizObject }
  * @private
  */
-SQL.prototype._select = function(provider, obj){
-    this.db.parseProvider(provider, obj);
+SQL.prototype._select = function *(provider, obj, meta){
 
+    // Pacote de retorno
+    var data = getDataPack()
+        , sql = ''
+        , new_key = false
+    ;
+
+    // Ajusta sqlParams
+    if (typeof provider == 'string') {
+        sql = provider;
+    } else {
+        this.db.parseProvider(provider, obj);
+        new_key = (this.sqlParams.key.val == 'NEW_KEY');
+    }
+    
     // Row de insert
-    if (this.sqlParams.key.val == 'NEW_KEY'){
+    if (new_key){
         var row = {_key_: 'NEW_KEY'};
-        for (var f in this.sqlParams.fields){
-            var val     = ''
-                , tipo  = this.sqlParams.meta[f]['tipo'] || {}
-                , def   = tipo['default']
-                , type  = tipo['type']
-            ;
-            def = (typeof def == 'string'? def.toUpperCase() : def);
+        for (var f in this.sqlParams.fields) {
+            var val = ''
+                , tipo = this.sqlParams.meta[f]['tipo'] || {}
+                , def = tipo['default']
+                , type = tipo['type']
+                ;
+            def = (typeof def == 'string' ? def.toUpperCase() : def);
 
             // Monta valores
-            switch (type){
+            switch (type) {
                 case 'int':
                     val = def || 0;
                     break;
@@ -446,19 +459,19 @@ SQL.prototype._select = function(provider, obj){
                     break;
 
                 case 'date':
-                    if (def == 'NOW' || def == 'DATE' || def == 'HOJE'){
+                    if (def == 'NOW' || def == 'DATE' || def == 'HOJE') {
                         val = moment().format("DD/MM/YYYY");
                     }
                     break;
 
                 case 'time':
-                    if (def == 'NOW' || def == 'DATE' || def == 'HOJE'){
+                    if (def == 'NOW' || def == 'DATE' || def == 'HOJE') {
                         val = moment().format("HH:mm:ss");
                     }
                     break;
 
                 case 'datetime':
-                    if (def == 'NOW' || def == 'DATE' || def == 'HOJE'){
+                    if (def == 'NOW' || def == 'DATE' || def == 'HOJE') {
                         val = moment().format("DD/MM/YYYY HH:mm:ss");
                     }
                     break;
@@ -466,17 +479,20 @@ SQL.prototype._select = function(provider, obj){
                 default:
                     val = (def ? def : val);
             }
-
             row[f] = (val == 'NEW_KEY' ? '' : val);
         }
 
-        // Pacote de retorno
-        var data = getDataPack();
         data.rows.push(row);
-        
         return data;
+
+    // Normal
+    } else {
+        sql = sql || this.db.parseSQL(this.sqlParams, obj);
+        
+        var results = yield this.db._exec(sql, obj);
+        
+        return yield this.db.processResults(results, obj, sql, meta);
     }
-    
 };
 
 
@@ -485,10 +501,10 @@ SQL.prototype._select = function(provider, obj){
  * @param results
  * @param sql
  */
-SQL.prototype._processResults = function(results, obj, sql, meta){
+SQL.prototype._processResults = function *(results, obj, sql, meta){
     meta = meta || {};
-    var ndx         = {}
-        , key       = (this.sqlParams.key
+    var ndx   = {}
+        , key = (this.sqlParams.key
             ? this.sqlParams.key.field
             : meta['key']
                 ? meta.key
@@ -498,11 +514,11 @@ SQL.prototype._processResults = function(results, obj, sql, meta){
         , db        = this
         , data      = getDataPack()
     ;
-
     data.key = key;
 
     // Processa
-    results.forEach((row, i) => {
+    for (var i = 0; i<results.length; i++){
+        var row = results[i];
 
         // Monta indice
         row._key_ = row[key];
@@ -510,7 +526,7 @@ SQL.prototype._processResults = function(results, obj, sql, meta){
 
         // Em raros casos onde não houver fields pro sql, será forçado um '*', e
         // essa entrada aqui garantirá que todos os fields fiquem em lower
-        if (this.sqlParams['force_lower']){
+        if (db.sqlParams['force_lower']){
             var k, keys = Object.keys(row);
             var n = keys.length;
             var newobj = {};
@@ -521,12 +537,12 @@ SQL.prototype._processResults = function(results, obj, sql, meta){
             row = newobj;
         }
 
-        // Permite ajustar row no business object
         if (onGetRow) {
-            onGetRow.call(obj, row);
+            yield onGetRow(row);
         }
+
         data.rows.push(row);
-    });
+    }
 
     // Página
     data.page = (this.sqlParams.limit

@@ -32,29 +32,37 @@ module.exports = function(opts) {
     let ts_path = options.inside_node ? 'node_modules/' : '';
     options.root = './';
 
+    let cookies = require('./cookie');
+
     let cache = {};
     return function*(next) {
-        log && console.log(new Date().toISOString(), p);
         try {
-            var key = require('./cookie').getKey(this)
-                , cliente = this.app.context.running[key]
-                , app = cliente.app.join('/')
-                , tmp = this.path.split('/')
-                , file = path.parse(this.path)
+            var key         = cookies.getLoggedUser(this)
+                , tmp       = this.path.split('/')
+                , file      = path.parse(this.path)
+                , cliente   = this.app.context.running[key]
+                , cli       = (cliente
+                    ? cliente.app.join('/')
+                    : ''
+                )
+                , app       = (cliente
+                    ? cliente.app[0]
+                    : tmp[1]
+                )
             ;
             tmp.shift();
             tmp.shift();
             var p = tmp.join('/');
 
-            if (!caching || !cache[app]) {
-                cache[app] = {};
+            if (!caching || !cache[cli]) {
+                cache[cli] = {};
             }
 
-            if (!cache[app][p]) {
-                cache[app][p] = [];
+            if (!cache[cli][p]) {
+                cache[cli][p] = [];
 
-                var base_cli = 'apps/' + cliente.app.join('/') + '/'
-                    , base_app = 'apps/' + cliente.app[0] + '/_common/'
+                var base_cli = 'apps/' + cli + '/'
+                    , base_app = 'apps/' + app + '/_common/'
                     , base_global = '_common/'
                     , base_tshark = ts_path + 'tshark/'
                     , flow_up = [base_cli + p, base_app + p, base_global + p, base_tshark + p]
@@ -73,7 +81,7 @@ module.exports = function(opts) {
 
                     flow.forEach((arq) => {
                         if (!done && fs.existsSync(arq)) {
-                            cache[app][p].push(arq);
+                            cache[cli][p].push(arq);
                             done = over;
                         }
                     });
@@ -86,7 +94,7 @@ module.exports = function(opts) {
                     );
                     flow.forEach((arq) => {
                         if (!done && fs.existsSync(arq)) {
-                            cache[app][p].push(arq);
+                            cache[cli][p].push(arq);
                             done = true;
                         }
                     });
@@ -95,29 +103,33 @@ module.exports = function(opts) {
             }
 
             var sent = false;
-            if (cache[app][p].length == 1) {
-                sent = yield send(this, cache[app][p][0], options);
-                if (sent) {
-                    return;
-                } else {
-                    return yield *next;
+            if (cache[cli][p].length == 1) {
+                try {
+                    sent = yield send(this, cache[cli][p][0], options);
+                    if (sent) {
+                        return;
+                    } else {
+                        return yield *next;
+                    }
+                } catch (e){
+                    
                 }
-
             } else {
                 var buff = '', q = '';
-                for (var i = 0; i < cache[app][p].length; i++) {
-                    buff += q + fs.readFileSync(cache[app][p][i], 'utf8');
+                for (var i = 0; i < cache[cli][p].length; i++) {
+                    buff += q + fs.readFileSync(cache[cli][p][i], 'utf8');
                     q = '\n\n\n';
                 }
                 if (file.ext == '.css'){
                     this.set('Content-Type', 'text/css; charset=utf-8');
                 } else if (file.ext == '.js') {
                     this.set('Content-Type', 'application/javascript; charset=utf-8');
+                    buff += '\n\n//# sourceURL=' + tmp.join('.') + '.js'
                 }
                 this.body = buff;
             }
         } catch (e){
-            console.log(e);
+      //      console.log(e);
         }
 
 

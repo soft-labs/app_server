@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="TShark" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/tshark/types.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/tshark/types.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

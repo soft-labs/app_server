@@ -101,7 +101,7 @@ function Ide(){
     this.listModulos = function *(ctx){
         return {
             data: {
-                rows: this.readDir(module.paths[0] + '/tshark/business_objects')
+                rows: this.readDir(module.paths[0] + '/business_objects')
             }
         };
     };
@@ -113,7 +113,7 @@ function Ide(){
      */
     this.getTables = function *(ctx){
         var connId = this.params['connID']
-            , dts  = yield this.engine.getConnection(connId)
+            , dts  = yield this.engine.getConnection(ctx, connId)
             , sql  = ''
             , meta = {
                 key: 'name',
@@ -137,7 +137,9 @@ function Ide(){
                 sql = 'SELECT name FROM sys.Tables order by name';
         }
 
-        return yield dts.query(sql, this, meta);
+        return {
+            data: yield dts.query(sql, this, meta)
+        };
     };
 
     
@@ -146,8 +148,9 @@ function Ide(){
     this.createPackage = function *(ctx){
         var connId  = this.params['connID']
             , fs    = require('fs-extra')
-            , dir   = module.paths[0] + '/tshark/business_objects/'
-            , dts   = yield this.engine.getConnection(connId)
+            , dir   = module.paths[0] + '/business_objects/'
+            , dts   = yield this.engine.getConnection(ctx, connId)
+            , hoje  = new Date().toString()
             , sql   = ''
             , source = {
                 table: '',
@@ -156,7 +159,7 @@ function Ide(){
                     fields: { }
                 }
             }
-            , templ = {}
+            , templ = fs.readFileSync(dir + '/sys/dev/ide/template.js', 'utf8')
         ;
 
         // Cria owner
@@ -183,26 +186,48 @@ function Ide(){
         }
 
         // Cria modulo
-        this.params.modulos.forEach((mod) => {
-          /*  dir += '/' + mod['name'];
-            if (!fs.existsSync(dir)) {
-                fs.mkdirSync(dir);
+        for (var m = 0; m< this.params.modulos.length; m++){
+            var mod = this.params.modulos[m]
+                , arq = templ
+                , key = ''
+                , fields = ''
+                , v = ''
+            ;
+            
+            // Cria o diretório do módulo
+            var mod_dir = dir + '/' + mod['name'];
+            if (!fs.existsSync(mod_dir)) {
+                fs.mkdirSync(mod_dir);
             }
 
-            var res = yield dts.query(sql + mod['name'], this);
-            /*source.table = mod['name'];
+            source.table = mod['name'];
             source.metadata.key = '';
             source.metadata.fields = {};
 
-            res.data.rows.forEach((row) => {
-                source.metadata.fields[row['Field']] = {
-                    tipo: types.getByField(row['Type']), label: row['Field']
-                };
+            // Fields
+            var res = yield dts.query(sql + mod['name'], this);
+            res.rows.forEach((row) => {
+                if (row['Key'] == 'PRI'){
+                    key = row['Field'];
+                    row['Type'] = 'key';
+                }
+                
+                fields += v +
+'\n                ' + row['Field'] + ': {' +
+"\n                    tipo: types.comp." + types.getByField(row['Type']) + ", label: '" + capitalize(row['Field']) + ":'" +
+'\n                }';
+                v = ',';
             });
-*/
-            templ = source;
 
-        });
+            arq = arq.replace(new RegExp('_MOD_', 'g'), camelCase(mod['name']));
+            arq = arq.replace(new RegExp('_ID_', 'g'), mod['name']);
+            arq = arq.replace('_KEY_', key);
+            arq = arq.replace('_FIELDS_', fields);
+            arq = arq.replace('_DATA_', hoje);
+
+            fs.writeFileSync(mod_dir + '/' + mod['name'] + '.js', arq);
+
+        }
 
     };
 
@@ -211,10 +236,44 @@ function Ide(){
 
 }
 
+function camelCase(str, sep){
+    var tmp = str.split(sep || '_')
+        , res = ''
+    ;
+
+    tmp.forEach((w) => {
+        res += w.charAt(0).toUpperCase() + w.slice(1);
+    });
+    return res;
+}
+
+function capitalize(str, sep){
+    var tmp = str.split(sep || '_')
+        , res = ''
+        , s  = ''
+    ;
+
+    if (tmp[tmp.length-1] == 'key'){
+        tmp.pop();
+    }
+    
+    tmp.forEach((w) => {
+        res += s +  w.charAt(0).toUpperCase() + w.slice(1);
+        s = ' ';
+    });
+
+    res = res.replace(new RegExp('cao', 'g'), 'ção');
+    res = res.replace(new RegExp('coe', 'g'), 'çõe');
+    res = res.replace(new RegExp('ae', 'g'),  'ãe');
+    res = res.replace(new RegExp('ao', 'g'),  'ão');
+    res = res.replace(new RegExp('oe', 'g'),  'õe');
+
+    return res;
+}
 
 
 // Types
-const types = require(module.paths[0] + '/tshark/types');
+const types = require('../../../../tshark/types');
 
 // Exporta
 module.exports = Ide;

@@ -6,10 +6,11 @@
  * @param app { koa }
  * @constructor
  */
-function TShark(app){
+function TShark(app, no_cache){
     this.router = router;
     this.pool = {conn:{}, map: {}};
     this.app = app;
+    this.no_caching_require = no_cache;
 }
 
 
@@ -21,7 +22,10 @@ const router    = require('koa-router')()
     , fs        = require('fs-extra')
     , util      = require('util')
     , jade      = require('jade')
+    , reload    = require('require-reload')(require)
     , BizObject = require('tshark/biz_object.js')
+    , cookies   = require('tshark/cookie.js')
+    , log       = require('tshark/_log.js')
 ;
 
 // endregion
@@ -139,31 +143,21 @@ TShark.prototype.getPathFor = function(tipo){
 /**
  * Procura o arquivo pelos paths customizados e retorna o primeiro
  * que encontrar.
+ * @param ctx
  * @param fname {string}
- * @param tipo {string} 'views', 'modulos', 'lib' ou 'www'
+ * @param tipo {string} 'up' | 'down'
  * @returns { string || false }
  */
-TShark.prototype.findInPath = function(fname, tipo){
-    var cliente = this.getConfig();
-
-    if (cliente) {
-        if (cliente.paths[tipo].filial && fs.existsSync(cliente.paths[tipo].filial + '/' + fname)) {
-            return cliente.paths[tipo].filial + '/' + fname;
+TShark.prototype.findInPath = function(ctx, fname, tipo){
+    ctx.config.flowPaths[tipo].forEach((path) => {
+        if (fs.existsSync(path + fname)){
+            return path + fname;
         }
-
-        if (cliente.paths[tipo].cliente && fs.existsSync(cliente.paths[tipo].cliente + '/' + fname)) {
-            return cliente.paths[tipo].cliente + '/' + fname;
-        }
-
-        if (cliente.paths.default[tipo] && fs.existsSync(cliente.paths.default[tipo] + '/' + fname)) {
-            return cliente.paths.default[tipo] + '/' + fname;
-        }
-    }
+    });
 
     if (fs.existsSync(fname)){
         return fname;
     }
-
     return false;
 };
 
@@ -173,12 +167,12 @@ TShark.prototype.findInPath = function(fname, tipo){
 //region :: Configs
 
 /**
- * Pega configuração de um cliente / filial
+ * Pega configuração de um cliente para o usuário atual
  * @returns {{}}
  */
-TShark.prototype.getConfig = function(ctx) {
-    var key = require('./cookie').getKey(ctx);
-    return this.app.context.running[key];
+TShark.prototype.getConfig = function(ctx, client) {
+    var user_key = cookies.getLoggedUser(ctx, client);
+    return this.app.context.running[user_key];
 };
 
 
@@ -271,16 +265,15 @@ var MySql       = require('./sql/mysql')
 ;
 
 TShark.prototype.getConnection = function *(ctx, id){
-    var config = this.getConfig(ctx);
 
     // Descobre id em config
-    if (id && typeof id != 'string' && config['businessObjects']){
+    if (id && typeof id != 'string' && ctx.state.config['businessObjects']){
         var path = id;
-        if (config['businessObjects'][path[0]]) {
-            id = config['businessObjects'][path[0]]['conn'] || id;
+        if (ctx.state.config['businessObjects'][path[0]]) {
+            id = ctx.state.config['businessObjects'][path[0]]['conn'] || id;
 
-            if (config['businessObjects'][path[0]][path[1]]) {
-                id = config['businessObjects'][path[0]][path[1]]['conn'] || id;
+            if (ctx.state.config['businessObjects'][path[0]][path[1]]) {
+                id = ctx.state.config['businessObjects'][path[0]][path[1]]['conn'] || id;
             }
         }
     }
@@ -289,14 +282,14 @@ TShark.prototype.getConnection = function *(ctx, id){
     }
 
     // Parametros de conexão
-    var connParams = config.conexoes[id];
+    var connParams = ctx.state.config.conexoes[id];
     if (!connParams){
         console.log('Não existe configuração para a conexão "' + id + '"');
         return;
     }
     connParams['id'] = id;
 
-    var appId = config.app.join('/');
+    var appId = ctx.state.config.app.join('/');
     if (!this.pool[appId]){
         this.pool[appId] = {};
     }
@@ -323,12 +316,12 @@ TShark.prototype.getConnection = function *(ctx, id){
             }
 
             // mapeia
-            this.pool[appId][cacheId] = new db(connParams);
+            this.pool[appId][cacheId] = yield new db(connParams);
             return this.pool[appId][cacheId];
                 
         }
     } catch (e){
-        console.log(e);
+        log.erro(e);
     }
     
 };
@@ -370,12 +363,15 @@ TShark.prototype.initObj = function(path, context){
     ;
 
     // Business Object    
-    var obj = require('business_objects/'
+    var op = 'business_objects/'
         + owner + '/'
         + pack + '/'
         + bobj + '/'
-        + bobj + '.js'
-    );
+        + bobj + '.js';
+    var obj = this.no_caching_require  
+        ? reload(op)
+        : require(op)
+    ;
 
     // Extende
     if (!obj['extended']) {
@@ -424,37 +420,50 @@ TShark.prototype.initObj = function(path, context){
 
 
 /**
- * Verificação de registro e log de chamadas API
+ * Registra o inicio de um roteamento
  */
 router.use(function *timeLog(next) {
-    console.log('Time start: ', Date.now())
+    console.log('Time start: ', Date.now());
 
-    var key = require('./cookie').getKey(this);
-
-    // Seta o config no request para o cliente atual
-    if (!key || !this.app.context.running[key]) {
-        this.throw(404, 'Not Found');
-
-    } else {
-        this.state.config = this.app.context.running[key];
-        yield next;
-    }
-});
-
-/**
- * Registra o inicio de um roteamento
- * @param ctx
- */
-router.use(function *(next) {
     var tmp = this.captures[0].split('/').slice(3);
     this.state.api = {
         url: this.originalUrl,
+        call: tmp[tmp.length-1],
         path:  tmp,
-        call: '',
         params: extend(true, this.request.query || {}, this.request.body || {})
     };
-    
+
     yield next;
+});
+
+/**
+ * Validação de chamadas de API
+ */
+router.use(function *(next) {
+
+    // Se pedir com educação
+    if (this.state.api.path[0] == 'sys'      &&
+        this.state.api.path[1] == 'app'      &&
+        this.state.api.path[2] == 'security' &&
+        this.state.api.path[3] == 'login'){
+
+
+        yield next;
+
+    // Senão...
+    } else {
+        var user_key = cookies.getLoggedUser(this);
+
+        // You shall not pass!
+        if (!user_key || !this.app.context.running[user_key]) {
+            this.throw(404, 'Not Found');
+
+        // Multipass!!
+        } else {
+            this.state.config = this.app.context.running[user_key];
+            yield next;
+        }
+    }
 });
 
 
@@ -474,21 +483,23 @@ router.get(/^\/(\w+)\/tshark\/.*$/, function *(next) {
      * Instancia o módulo
      * @type BizObject
      */
-    var mod      = this.app.engine.initObj(this.state.api.path, this)
-        , len    = this.state.api.path.length
+    var mod   = this.app.engine.initObj(this.state.api.path, this)
+        , len = this.state.api.path.length
     ;
 
     // Form de edição
     if (len == 5) {
         this.state.api.call = 'edit';
-        this.body = yield mod.form();
+        mod.params['key'] = this.state.api.path[3];
+        this.body = yield mod.form(this);
 
     } else {
 
         // Form de inserção
         if (len == 4 && this.state.api.path[3] == '_new') {
             this.state.api.call = 'create';
-            this.body = yield mod.form();
+            mod.params['key'] = 'NEW_KEY';
+            this.body = yield mod.form(this);
 
         // Listagem
         } else {
@@ -518,24 +529,29 @@ router.get(/^\/(\w+)\/tshark\/.*$/, function *(next) {
 router.post(/^\/(\w+)\/tshark\/.*/, function *(next) {
 
     /**
-     * Ajusta o path da api
-     */
-    var func = this.state.api.call;
-    this.state.api.call = this.state.api.path.pop();
-
-    /**
      * Instancia o módulo
      * @type BizObject
      */
-    var mod = this.app.engine.initObj(this.state.api.path, this);
+    var mod   = this.app.engine.initObj(this.state.api.path, this)
+        , len = this.state.api.path.length
+    ;
 
-    /**
-     * Executa a função no objeto
-     */
-    try {
-        this.body = yield mod[func](this);
-    } catch (e){
-        console.log(e);
+    // Execução de função
+    if (len = 4){
+        var func = this.state.api.call;
+        this.state.api.call = 'exec';
+
+        /**
+         * Executa a função no objeto
+         */
+        try {
+            this.body = yield mod[func](this);
+        } catch (e){
+            console.log(e);
+        }
+
+    } else {
+        this.body = yield mod.insert();
     }
 
     /**

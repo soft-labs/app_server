@@ -100,6 +100,29 @@
 }
 
 
+
+#login {
+    height: 100%;
+}
+#login:before {
+    content: "";
+    background-image: url("../imgs/_intf/login1.png");
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    left: 0;
+    background-size: cover;
+    -webkit-filter: blur(7px);
+    filter: blur(7px);
+}
+
+.login-bar {
+    height: 150px;
+}
+
+
+
 /* Tarefas */
 #tarefas {
     height: 100%;

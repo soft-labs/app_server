@@ -1,45 +1,89 @@
 /**
  * Created by labs on 15/04/16.
  */
+function Cookie(opts){
+    this.keys = {
+        logged_user     : '707f49254607f5981f11244d423936ec',
+        running_session : '01821914ff3707f1ae3b90c2d1068f64'
+    };
 
-function Cookie(){
-    
+    this.quiet = opts && opts['quiet'] || true;
 }
 
-Cookie.prototype.setKey = function(ctx){
+const crypto = require('crypto')
+    , log = require('./_log')
+;
 
-    // Cria chave identificadora
-    const crypto = require('crypto')
-        , hash1  = crypto.createHash('sha256')
-        , hash2  = crypto.createHash('sha256')
+/**
+ * Cria chave única para cookie de usuário
+ * @param ctx
+ * @param client
+ * @returns {string}
+ */
+Cookie.prototype.userKey = function(ctx, client) {
+    var hash  = crypto.createHash('sha256')
+        , tmp = []
+        , res = ''
     ;
-    hash1.update(ctx.ip);
-    
-    // Registra cookie
-    var c_key = hash1.digest('hex')
-        , key = ctx.cookies.get(c_key)
-    ;
-    if (!key) {
-        hash2.update(ctx.originalUrl + Date.now() + (Math.random() * (500 - 1) + 1));
-        key = hash2.digest('hex');
+
+    try {
+        if (!client) {
+            tmp = ctx.req.headers.referer.split('/').slice(-2);
+            client = tmp.join('/');
+        } else {
+            tmp = client.split('/');
+        }
+
+        client += (ctx.app.context.clientes[tmp[0]][tmp[1]].security.active
+                ? ctx.app.context.clientes[tmp[0]][tmp[1]].security.mode
+                : ''
+        );
+
+        hash.update(client);
+        res = hash.digest('hex') + this.keys.logged_user;
+
+    } catch (e){
+        if (!this.quiet) {
+            log.erro(e);
+        }
     }
-    ctx.cookies.set(c_key, key);
-    
-    return key;
+
+    return res;
 };
 
-
-Cookie.prototype.getKey = function(ctx){
-
-    // Cria chave identificadora
-    const crypto = require('crypto')
-        , hash   = crypto.createHash('sha256')
+/**
+ * Retorna cookie do usuário logado
+ * @param ctx
+ * @param client
+ */
+Cookie.prototype.getLoggedUser = function(ctx, client) {
+    var hash = crypto.createHash('sha256')
+        , key = this.userKey(ctx, client)
     ;
-    hash.update(ctx.ip);
-    var c_key = hash.digest('hex');
-    
-    return ctx.cookies.get(c_key)
+
+    return ctx.cookies.get(key);
 };
+
+/**
+ * Seta cookie com usuário logado
+ * @param ctx
+ * @param client
+ * @param value
+ */
+Cookie.prototype.setLoggedUser = function(ctx, client, value) {
+    var hash = crypto.createHash('sha256')
+        , key = this.userKey(ctx, client)
+    ;
+
+    value = this.keys.running_session + (value || (ctx.ip + Date.now() + (Math.random() * (500 - 1) + 1)));
+    hash.update(value);
+    value  = hash.digest('hex');
+
+    ctx.cookies.set(key, value);
+    
+    return value;
+};
+
 
 
 // Exporta

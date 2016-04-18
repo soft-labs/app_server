@@ -6,34 +6,35 @@
 /**
  * Mapeamento de verbos da API
  *
- *  GET     /owner/pack/mod[?query=params]  (dados)                list | search
- *  GET     /owner/pack/mod/{id}            (dados)                especifico
- *  GET     /owner/pack/mod/{id}/form       (dados & interface)    especifico
- *  GET     /owner/pack/mod/{id}|_new/form  (dados & interface)    edit | create
- *  POST    /owner/pack/mod/_new            (dados)                insert
- *  PUT     /owner/pack/mod/{id}            (dados)                update
- *  DELETE  /owner/pack/mod/{id}            (dados)                delete
- *  POST    /owner/pack/mod/{id}/{*}        (dados & interface)    exec func
+ *  GET     /owner/pack/mod[?query=params]   (dados)                list | search
+ *  GET     /owner/pack/mod/{key}            (dados)                especifico
+ *  GET     /owner/pack/mod/{key}/form       (dados & interface)    especifico
+ *  GET     /owner/pack/mod/{key}|_new/form  (dados & interface)    edit | create
+ *  POST    /owner/pack/mod/_new             (dados)                insert
+ *  PUT     /owner/pack/mod/{key}            (dados)                update
+ *  DELETE  /owner/pack/mod/{key}            (dados)                delete
+ *  POST    /owner/pack/mod/{key}/{*}        (dados & interface)    exec func
  *
  * Abaixo, mapeamento 'amigável' para uso em interfaces:
  *   Ex: "list owner pack mod"
- *       "get owner pack mod" data-id="234"
+ *       "get owner pack mod" data-key="234"
  */
 TShark.prototype.api_map = {
 
     // Comando de layout    | Verbo       | URL
     search  :               ['GET',       '/?query={query}'],
-    get     :               ['GET',       '/{id}'],
+    get     :               ['GET',       '/{key}'],
     list    :               ['GET',       '/'],
+    
     create  :               ['GET',       '/_new'],
-    edit    :               ['GET',       '/{id}/edit'],
+    edit    :               ['GET',       '/{key}/edit'],
 
     exec    :               ['POST',      '/{func}'],
     insert  :               ['POST',      '/'],
 
-    update  :               ['PUT',       '/{id}'],
+    update  :               ['PUT',       '/{key}'],
     
-    delete  :               ['DELETE',    '/{id}']
+    delete  :               ['DELETE',    '/{key}']
 
 };
 
@@ -66,15 +67,20 @@ $.fn.api.settings.api = {};
             // Ajusta API
             var api   = (d['action'] ? d.action : settings.action).split(' ')
                 , map = api.shift()
-                , id  = api.join('.')
                 , el  = this
-                ;
+            ;
 
             if (!tshark.api_map[map]) {
                 alertify.error("API não reconhecida: '" + map + "'");
             }
 
+            // Ajusta função
+            if (map == 'exec'){
+                $(this).data('func', api.pop());
+            }
+
             // Registra modulo
+            var id = api.join('.');
             if (!tshark.isRegistered(id)) {
                 tshark.register(id, function () {
                     $(el).api('query');
@@ -85,7 +91,7 @@ $.fn.api.settings.api = {};
             // Executa onBefore
             var Func = map.capitalize()
                 , mod = tshark.getMod(id)
-                ;
+            ;
 
             // Interno
             if (tshark[map + '_before']) {
@@ -181,11 +187,27 @@ $.fn.api.settings.api = {};
             , id    = response.path.join('.')
             , mod   = this.getMod(id)
             , overwrite = false
+            , isForm = (func == 'edit' || func == 'create')
         ;
 
         if (mod && func) {
 
-            // Before / Overwrite
+            // Forms
+            if (isForm){
+
+                // Before / Overwrite no módulo
+                if (mod['onForm']) {
+                    mod['onForm'].call(mod, response, function () {
+                        tshark['form_callback'].call(tshark, mod, response);
+                    });
+
+                // Default interno
+                } else {
+                    this['form_callback'].call(this, mod, response);
+                }
+            }
+
+            // Before / Overwrite no módulo
             if (mod['on' + Func]) {
                 mod['on' + Func].call(mod, response, function () {
                     tshark[func + '_callback'].call(tshark, mod, response);
@@ -197,6 +219,10 @@ $.fn.api.settings.api = {};
             }
 
             // After
+            if (isForm && mod['onAfterForm']){
+                mod['onAfterForm'].call(mod, response);
+            }
+             
             if (mod['onAfter' + Func]) {
                 mod['onAfter' + Func].call(mod, response);
             }
@@ -261,10 +287,11 @@ $.fn.api.settings.api = {};
      */
     TShark.prototype.search_before = function (sender, settings) {
         var id = $(sender).data('comp');
-        settings.data['query'] = (id && $(id)
+        settings.throttle = 600;
+        $(sender).data('query', (id && $(id)
                 ? $(id).val()
                 : $(sender).val()
-        );
+        ));
     };
 
     /**
@@ -275,14 +302,21 @@ $.fn.api.settings.api = {};
      */
     TShark.prototype.search_callback = function (mod, response) {
         if (response['data']) {
-            resetDataCallback('list', response['data'], mod);
+            mod.data.reset(response['data']);
+
+            // ShowSQL
+            if (response['data']['sql']){
+                console.log('search:' + response['data']['sql'])
+            }
+
+            //resetDataCallback('list', response['data'], mod);
         }
     };
 
     //endregion
 
 
-    //region :: Form
+    //region :: Forms
 
     /**
      * onBefore: Verifica se sender possui data-key. Se sim, ele é recuperado
@@ -294,9 +328,7 @@ $.fn.api.settings.api = {};
      * @since 18/03/16
      */
     TShark.prototype.form_before = function (sender, settings) {
-        settings.data['form'] = {
-            key: $(sender).data('key')
-        };
+
     };
 
     /**
@@ -313,6 +345,32 @@ $.fn.api.settings.api = {};
         if (response['layout']){
             this.forms.create(mod, response.layout)
         }
+    };
+
+    //endregion
+
+
+    //region :: API Create
+
+    TShark.prototype.create_before = function (sender, settings) {
+
+    };
+
+    TShark.prototype.create_callback = function (mod, response) {
+
+    };
+
+    //endregion
+
+
+    //region :: API Edit
+
+    TShark.prototype.edit_before = function (sender, settings) {
+
+    };
+
+    TShark.prototype.edit_callback = function (mod, response) {
+
     };
 
     //endregion

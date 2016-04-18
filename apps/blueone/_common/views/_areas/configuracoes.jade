@@ -30,7 +30,7 @@
                                     rv-data-action='api.search'
                                 )
                         .item
-                            button.ui.green.labeled.icon.button(rv-data-action='api.form')
+                            button.ui.green.labeled.icon.button(rv-data-action='api.create')
                                 i.add.icon
                                 |   Acrescentar
 
@@ -46,4 +46,4 @@
                     .description Edicao
                 div.actions
                     div.ui.button.cancel Cancelar
-                    div.ui.button.ok OK
+                    div.ui.button.ok(rv-data-action='api.update') OK

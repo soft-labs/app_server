@@ -79,12 +79,11 @@ function Menu(){
      * @returns {Type.data}
      */
     this.get = function *(ctx) {
-        var config  = this.engine.getConfig(ctx)
-            , fs    = require('fs-extra')
-            , d     = false
+        var fs  = require('fs-extra')
+            , d = false
         ;
 
-        config.flowPaths.up.forEach((path) => {
+        ctx.state.config.flowPaths.up.forEach((path) => {
             var arq = path + 'menu.js';
             if (!d && fs.existsSync(arq)) {
                 d = types.dataset();

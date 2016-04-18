@@ -3,6 +3,16 @@
  */
 module.exports = {
     depth: {
-        app_comon: true
+        app_comon: {
+            
+        }
+    },
+    security: {
+        active: true,
+        mode: 'simple',
+        users: {
+            labs: '1234',
+            admin: '1234'
+        }
     }
 };

@@ -8,7 +8,7 @@
  */
 
 /**
- * Gera um n�mero aleat�rio entre 0 e n que n�o se repete
+ * Gera um número aleatório entre 0 e n que não se repete
  * em sequencia.
  * @author labs
  * @since 11/2014
@@ -310,6 +310,12 @@ Array.prototype.remove = function(from, to) {
     return this.push.apply(this, rest);
 };
 
+Array.prototype.first = function(){
+    return (this.length ? this[0] : undefined);
+};
+Array.prototype.last = function(){
+    return (this.length ? this[this.length-1] : undefined);
+};
 
 
 /**

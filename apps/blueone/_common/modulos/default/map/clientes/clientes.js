@@ -48,7 +48,7 @@ tshark.modulos._add('default.map.clientes', {
      * on: Chamado no retorno do server antes do processamento default da API no client
      * @param response pacote de dados recebido do server
      * @param next função que dá continuidade ao processo - se não chamada ao final, o processamento default não acontece
-     */
+     *
     onList: function(response, next){
         next();
     },

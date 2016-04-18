@@ -16,6 +16,12 @@ Log.prototype.erro = function(err, extra) {
     this._console('Erro de Desenvolvimento:', err);
     if (extra){
         this._console('Contexto:', extra);
+    } else {
+        try{
+            this._console('Stack:', err.stack);
+        } catch (e){
+
+        }
     }
     return err;
 };

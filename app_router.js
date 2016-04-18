@@ -1,9 +1,10 @@
 /**
  * Roteamentos da aplicação
  */
-var router   = require('koa-router')()
-    , fs     = require('fs-extra')
-    , extend = require('extend')
+var router    = require('koa-router')()
+    , fs      = require('fs-extra')
+    , extend  = require('extend')
+    , cookies = require('tshark/cookie')
 ;
 
 
@@ -38,70 +39,73 @@ router.get(/^\/(\w+)\/(\w+)$/, function *(next) {
  * Inicializa um cliente na primeira carga
  * e seta os cookies necessários para a utilização
  * do aplicativo
- * @param req
+ * @param ctx
  */
-function *initCliente(req){
-    var path        = 'apps' + req.originalUrl + '/'
-        , engine    = req.app.engine
-        , clientes  = req.app.context.clientes
-        , app       = req.captures[0]
+function *initCliente(ctx){
+    var path        = 'apps' + ctx.originalUrl + '/'
+        , engine    = ctx.app.engine
+        , clientes  = ctx.app.context.clientes
+        , app       = ctx.captures[0]
     ;
 
     // Registra o contexto do cliente
-    var novo = engine.assurePath(clientes, req.captures,
-        {
-            _log: {
-                _last_access    : '',
-                _logged_users   : { }
-            },
-            app: req.captures,
-            flowPaths: {
-                up: [
-                    global.appRoot + '/apps/' + req.captures.join('/') + '/',
-                    global.appRoot + '/apps/' + req.captures[0] + '/_common/',
-                    global.appRoot + '/_common/'
-                ],
-                down: [
-                    global.appRoot + '/_common/',
-                    global.appRoot + '/apps/' + req.captures[0] + '/_common/',
-                    global.appRoot + '/apps/' + req.captures.join('/') + '/'
-                ]
-            }
+    var novo = engine.assurePath(clientes, ctx.captures, {
+        _log: {
+            _last_access    : '',
+            _logged_users   : { }
+        },
+        app: ctx.captures,
+        flowPaths: {
+            up: [
+                global.appRoot + '/apps/' + ctx.captures.join('/') + '/',
+                global.appRoot + '/apps/' + ctx.captures[0] + '/_common/',
+                global.appRoot + '/_common/'
+            ],
+            down: [
+                global.appRoot + '/_common/',
+                global.appRoot + '/apps/' + ctx.captures[0] + '/_common/',
+                global.appRoot + '/apps/' + ctx.captures.join('/') + '/'
+            ]
         }
-    );
+    });
     
     // Seta o config no request para o cliente atual
-    req.state.config = engine.getObjPath(clientes, req.captures);
+    ctx.state.config = engine.getObjPath(clientes, ctx.captures);
 
-    // Foi registrado
-    if (novo) {
-
-        extend(true,
-            req.state.config,
-
-            fs.existsSync('./config.js')
-                ? require('./config.js') : {},
-
-            fs.existsSync('./_common/config.js')
-                ? require('./_common/config.js') : {},
-
-            fs.existsSync('apps/' + app  + '/_common/config.js')
-                ? require('apps/' + app  + '/_common/config.js') : {},
-
-            fs.existsSync(path + '/config.js')
-                ? require(path + '/config.js') : {}
-        );
-    }
-
-    // Registra cookie
-    var key = require('tshark/cookie').setKey(req);
-    if (!req.app.context.running[key]){
-        req.app.context.running[key] = req.state.config;
-    }
-
-    // Renderiza index
-    req.body = yield engine.render('index', req);
+    // limpa cache de config
+    ctx.state.config.flowPaths.down.forEach((path) => {
+        if (fs.existsSync(path + '/config.js')) {
+            delete require.cache[require.resolve(path + '/config.js')];
+            extend(true, ctx.state.config, require(path + '/config.js') || {});
+        }
+    });
     
+    // Verifica o usuário logado
+    var user_key = cookies.getLoggedUser(ctx, ctx.captures.join('/'));
+    if (!user_key){
+        
+        // Verifica segurança
+        if (ctx.state.config.security.active){
+            ctx.body = yield engine.render('login', ctx);
+        
+        // Seta aleatório    
+        } else {
+            user_key = cookies.setLoggedUser(ctx, ctx.captures.join('/'));
+        }
+        
+    }
+
+    if (user_key){
+
+        // Registra running
+        if (!ctx.app.context.running[user_key]) {
+            ctx.app.context.running[user_key] = ctx.state.config;
+        }
+
+        // Renderiza index
+        ctx.body = yield engine.render('index', ctx);
+        
+    }
 }
 
 //endregion

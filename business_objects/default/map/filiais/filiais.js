@@ -183,6 +183,24 @@ function Filiais(){
      * @returns {Promise}
      */
     this.onGet = function *(ret, ctx){
+        ret['estive_no_onGet no promises'] = 'ÊêÊêêêê';
+    };
+    
+    /**
+     * Evento chamado antes de renderizar o template de listagem
+     * @param ret Objeto de retorno
+     * @returns {Promise}
+     */
+    this.onAfterGet = function *(ret){
+        ret['estive_no_onafterGet'] = 'ÊêÊêêêê tb!!!';
+    };
+
+    /**
+     * Evento chamado antes de renderizar o template de listagem
+     * @param ret Objeto de retorno
+     * @returns {Promise}
+     */
+    this.onList = function *(ret, ctx){
         ret['estive_no_onlist no promises'] = 'ÊêÊêêêê';
     };
 
@@ -191,18 +209,15 @@ function Filiais(){
      * @param ret Objeto de retorno
      * @returns {Promise}
      */
-    this.onAfterList = function(ret){
-        return new Promise(function(resolve, reject){
-            ret['estive_no_onafterlist'] = 'ÊêÊêêêê tb!!!';
-            resolve(ret);
-        });
+    this.onAfterList = function *(ret){
+        ret['estive_no_onafterlist'] = 'ÊêÊêêêê tb!!!';
     };
 
     /**
      * Evento chamado para cada row em select
      * @param row
      */
-    this.onGetRow = function(row){
+    this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
 
@@ -212,7 +227,7 @@ function Filiais(){
 
 
 // Types
-var types = require('tshark/types');
+var types = require('../../../../tshark/types');
 
 // Exporta
 module.exports = Filiais;

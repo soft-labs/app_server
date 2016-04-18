@@ -91,38 +91,39 @@ Types.prototype.comp = {
 
 
 Types.prototype.getByField = function(type){
-    switch (type){
-        case 'INT':
-            break;
+    var t = type.replace(/[^a-zA-Z]/g, '').toLowerCase();
+    switch (t){
+        case "key":
+            return 'key';
 
         case "char": 
         case "varchar":
         case "nchar":
         case "nvarchar":
-            return 'types.comp.text';
+            return 'text';
 
         case "text":
         case "ntext":
-            return 'types.comp.text_big';
+            return 'text_big';
 
         case "int":
         case "smallint":
         case "tinyint":
-            return 'types.comp.int';
+            return 'int';
 
         case "float":
         case "decimal":
-            return 'types.comp.float';
+            return 'float';
         
         case "date":
-            return 'types.comp.date';
+            return 'date';
             
         case "time":
-            return 'types.comp.time';
+            return 'time';
         
         case "datetime":
-            return 'types.comp.datetime';
-        
+        case "timestamp":
+            return 'datetime';
     }
 };
 

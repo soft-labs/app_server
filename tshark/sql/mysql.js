@@ -6,42 +6,28 @@
  * @param connParams Parâmetros de conexão
  * @constructor
  */
-function MySql(connParams){
-    //return new Promise((resolve, reject) => {
+function *MySql(connParams){
 
-        /**
-         * Driver de acesso a bancos SQL
-         * @type {SQL}
-         */
-        this.driver = new driver(this);
+    /**
+     * Driver de acesso a bancos SQL
+     * @type {SQL}
+     */
+    this.driver = new driver(this);
 
-        // Inicializa
-        this.driver.init(connParams);
+    // Inicializa
+    this.driver.init(connParams);
 
-        // Conex�o
-        self = this;
-       // co(function*(){
-            this.pool = mysql.createPool({
-                //server: connParams.conn['host'],
-                user: connParams.conn['user'],
-                password: connParams.conn['pwd'],
-                database: connParams.conn['database']
-            });
-            this.db = wrapper(this.pool);
-        //});
+    // Conexão
+    this.pool = mysql.createPool(connParams.conn);
 
-        return this;
-        //resolve(this);
-    //});
+    return this;
 }
 
 //region :: Includes
 
-var driver    = require('./_sql')
-    , wrapper = require('co-mysql')
-    , mysql   = require('mysql')
-    , co      = require('co')
-    , log     = require('../_log')
+var driver  = require('./_sql')
+    , mysql = require('koa-mysql')
+    , log   = require('../_log')
 ;
 
 //endregion
@@ -51,10 +37,10 @@ var driver    = require('./_sql')
 
 /**
  * Recebe um sqlParams e monta um SELECT statement
- * @param db { SQL }
+ * @param sqlParams { sqlParams }
  * @param obj { BizObject }
  */
-function parseSQL(db, sqlParams, obj){
+MySql.prototype.parseSQL = function(sqlParams, obj){
     var sql = '', v = '';
 
     if (sqlParams.limit.max){
@@ -86,11 +72,11 @@ function parseSQL(db, sqlParams, obj){
     sql += '\n  WHERE 1=1 ';
 
     // Processa where
-    sql += db.parseWhere(obj.params);
+    sql += this.parseWhere(obj.params);
 
     // Processa search
     if (sqlParams['search'] && obj.params['query']){
-        sql += db.parseSearch(obj.params['query']);
+        sql += this.parseSearch(obj.params['query']);
     }
 
     if (sqlParams.group.length){
@@ -114,8 +100,7 @@ function parseSQL(db, sqlParams, obj){
             ' AND _resultNum_ <= ' + (end   ? end   : sqlParams.limit.max);
     }
     return sql;
-}
-
+};
 
 
 /**
@@ -190,59 +175,41 @@ MySql.prototype.parseSearch = function(req){
 //endregion
 
 
+//region :: Execução
+
 /**
  * Executa um SELECT com base em sqlParams
  * @param provider
  * @param obj { BizObject }
  */
 MySql.prototype.select = function *(provider, obj){
-
-    // Parent
-    var data = this.driver._select(provider, obj)
-        , db = this;
-
-    // Select para insert
-    if (data){
-        return new Promise((resolve, reject) => {
-            this.processResults(results, sql)
-                .then((data) => {
-                    resolve(data);
-                });
-        });
-
-        // Normal
-    } else {
-        var sql = parseSQL(this, this.driver.sqlParams, obj);
-        return yield this.query(sql, obj);
-    }
+    return yield this.driver._select(provider, obj);
 };
 
 /**
  * Roda um SQL direto na base
  * @param sql {string}
  * @param obj {BizObject}
+ * @param meta
  * @returns {Promise}
  */
 MySql.prototype.query = function *(sql, obj, meta){
-    var db = this;
-    return new Promise((resolve, reject) => {
+    return yield this.driver._select(sql, obj, meta);
+};
 
-        this.db.query(sql)
-            .then(
+/**
+ * Executa o statement
+ * @param sql
+ * @returns {*}
+ * @private
+ */
+MySql.prototype._exec = function *(sql){
+    try {
+        return yield this.pool.query(sql);
 
-                // Processa
-                function (results) {
-                    resolve(db.processResults(results, obj, sql, meta));
-                }
-
-            // Erro
-            ).catch(
-                function (err) {
-                    log.erro(err, sql);
-                    reject(err);
-                }
-            );
-    });
+    } catch (e){
+        log.erro(e, sql);
+    }
 };
 
 /**
@@ -250,11 +217,11 @@ MySql.prototype.query = function *(sql, obj, meta){
  * @param results
  * @param sql
  */
-MySql.prototype.processResults = function(results, obj, sql, meta){
-    return this.driver._processResults(results, obj, sql, meta);
+MySql.prototype.processResults = function *(results, obj, sql, meta){
+    return yield this.driver._processResults(results, obj, sql, meta);
 };
 
-
+//endregion
 
 
 // Exporta

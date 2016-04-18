@@ -22,10 +22,10 @@ module.exports = {
             tipo: 'mysql',
             conn: {
                 database: 'tshark',
-                host: 'localhost',
-                port: '3347',
+               // host: 'localhost',
+               // port: '3347',
                 user: 'root',
-                pwd: 'desenv123'
+                password: 'desenv123'
             }
         },
         
@@ -33,14 +33,18 @@ module.exports = {
         sap: {
             tipo: 'sqlserver',
             conn: {
-                database: 'SBO_DEMOCOMERCIAL_HOMOLOG_SAP',
-                host: "10.211.55.8\\SAP",
-                port: '1433',
-                user: 'sa',
-                pwd: '1234'
+                server: "10.211.55.8",
+                userName: 'sa',
+                password: '1234',
+                options: {
+                    instanceName: 'SAP',
+                    database: 'SBO_DEMOCOMERCIAL_HOMOLOG_SAP'
+                }
             },
-            formats:{
-                date: 'DD/MM/YYYY'
+            pool: {
+                min: 1,
+                max: 10,
+                timeout: 30000
             }
         }
     }

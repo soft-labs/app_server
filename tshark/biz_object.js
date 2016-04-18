@@ -235,6 +235,13 @@ BizObject.prototype.get = function *(ctx){
         yield this.onGet(ret, ctx);
     }
     
+    // Evento on[func]
+    var func = ctx.state.api.call;
+    func = func.charAt(0).toUpperCase() + func.slice(1);
+    if (this['on' + func]){
+        yield this['on' + func](ret, ctx);
+    }
+    
     // Template
     var templ = yield this.engine.render(this.path.asString + '/' + ret.template, ctx, 'modulos');
     if (!this.params['_no_template_']) {
@@ -253,6 +260,16 @@ BizObject.prototype.get = function *(ctx){
     // Recupera dados
     ret.data = yield this.select(ctx, provId);
 
+    // Evento onAfterGet
+    if (this['onAfterGet']){
+        yield this.onAfterGet(ret, ctx);
+    }
+
+    // Evento onAfter[func]
+    if (this['onAfter' + func]){
+        yield this['onAfter' + func](ret, ctx);
+    }
+    
     // Retorna
     return ret;
     
@@ -263,75 +280,60 @@ BizObject.prototype.get = function *(ctx){
  * Implementa API de forms para objetos de negócio
  * @returns {{ Promise }}
  */
-BizObject.prototype.form = function(){
+BizObject.prototype.form = function *(ctx){
     var self = this;
 
     // Objeto de retorno:
-    var ret = this.getReturnObj('form');
-    ret.form = this.params['form'] || {};
+    var ret      = this.getReturnObj('form');
+    ret.form     = this.params['form'] || {};
+    ret.form.key = this.params['key'];
     ret.form.field = ret.form['field'] || this.source.metadata.key;
-    ret.form.key = (ret.form['key']
-        ? ret.form['key']
-        : (this.params[ret.form.field]
-            ? this.params[ret.form.field]
-            :'NEW_KEY'
-        )
-    );
 
     // Ajusta o key do form
     this.params[ret.form.field] = ret.form.key;
 
+    // Pega o provider
+    var provId = (this.params['provider'] && this.params['provider']['id']
+        ? this.params['provider']['id']
+        : 'default'
+    );
+    var provider = yield this.getProvider(provId);
 
-    return new Promise((resolve, reject) => {
-        var provId = (this.params['provider'] && this.params['provider']['id']
-                ? this.params['provider']['id']
-                : 'default'
-        );
+    // Recupera o form
+    ret.layout = this.getForm(provider);
 
-        // Recupera provider
-        this.getProvider(provId)
-            .then((provider) => {
+    // Evento onGet
+    if (this['onGetForm']){
+        yield this.onGetForm(ret, ctx);
+    }
 
-                // Recupera o form
-                ret.layout = this.getForm(provider);
-                if (!ret.layout) {
-                    return next({message: "Form não encontrado."});
-                }
+    if (!ret.layout) {
+        return log.erro("Form não encontrado: " + this.path.asString);
+    }
 
-                // Fields em form
-                this.params._fields = [];
-                ret.layout.linhas.forEach((linha) => {
-                    for (var f in linha) {
-                        this.params._fields.push(f);
-                    }
-                });
+    // Fields em form
+    this.params._fields = [];
+    ret.layout.linhas.forEach((linha) => {
+        for (var f in linha) {
+            this.params._fields.push(f);
+        }
+    });
 
-                // Recupera dados
-                this.select(provId)
-                    .then((data) => {
-                        ret.data = data;
-                        resolve(ret);
+    // Evento onGet
+    if (this['onGetFormData']){
+        yield this.onGetFormData(provider, ret, ctx);
+    }
 
-                    }, (e) => {
-                        reject(
-                            log.erro(e.err)
-                        );
-                    });
-            })
+    // Recupera dados
+    ret.data = yield this.select(ctx, provId);
 
-            // Retorna
-            /*.then(() => {
-                return ret;
-            })
+    // Evento onAfterGet
+    if (this['onAfterGetForm']){
+        yield this.onAfterGetForm(ret, ctx);
+    }
 
-            /*.catch(function(e){
-                log.erro(e);
-            })*/;
-
-    })
-        /*.catch(function(e){
-            log.erro(e);
-        })*/;
+    // Retorna
+    return ret;
 };
 
 
@@ -342,15 +344,20 @@ BizObject.prototype.form = function(){
 
 BizObject.prototype.select = function *(ctx, provider, params, from){
     var dts = yield this.engine.getConnection(ctx);
-    
-    // Pega o provider
-    var prov = yield this.getProvider(provider, from);
-                    
-    // Customiza
-    extend(true, prov, params || {});
+    if (dts) {
 
-    // Executa
-    return yield dts.select(prov, this);
+        // Pega o provider
+        var prov = (typeof provider == 'string'
+            ? yield this.getProvider(provider, from)
+            : provider
+        );
+
+        // Customiza
+        extend(true, prov, params || {});
+
+        // Executa
+        return yield dts.select(prov, this);
+    }
 };
 
 

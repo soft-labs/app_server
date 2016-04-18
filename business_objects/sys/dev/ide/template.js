@@ -1,16 +1,27 @@
 /**
- * _DESCRICAO_
+ * BusinessObject :: _MOD_
+ *  Implementação de objeto de negócio: _ID_.
+ *
+ * Engine de aplicações - TShark.
+ * @since _DATA_
  * @constructor
  */
 function _MOD_(){
 
-    //region :: Defini��es do Objeto
+    //region :: Definições do Objeto
 
     // Id
     this.id = '_ID_';
 
     // Map
-    this.source = _SOURCE_;
+    this.source = {
+        table: '_ID_',
+        metadata: {
+            key: '_KEY_',
+            fields: {_FIELDS_
+            }
+        }
+    };
 
     //endregion
 
@@ -61,3 +72,9 @@ function _MOD_(){
     //endregion
 
 }
+
+// Types
+const types = require('../../../../tshark/types');
+
+// Exporta
+module.exports = _MOD_;

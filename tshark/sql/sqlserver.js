@@ -6,39 +6,29 @@
  * @param connParams Parâmetros de conexão
  * @constructor
  */
-function SQLServer(connParams){
-    return new Promise((resolve, reject) => {
+function *SQLServer(connParams){
 
-        /**
-         * Driver de acesso a bancos SQL
-         * @type {SQL}
-         */
-        this.driver = new driver(this);
-        
-        // Inicializa
-        this.driver.init(connParams);
+    /**
+     * Driver de acesso a bancos SQL
+     * @type {SQL}
+     */
+    this.driver = new driver(this);
 
-        // Conexão
-        Seriate.setDefaultConfig({
-            server: connParams.conn['host'],
-            user: connParams.conn['user'],
-            password: connParams.conn['pwd'],
-            database: connParams.conn['database'],
-            pool: {
-                max: 10,
-                min: 4,
-                idleTimeoutMillis: 30000
-            }
-        });
+    // Inicializa
+    this.driver.init(connParams);
 
-        resolve(this);
-    });
+    // Pool de conexões
+    this.pool = yield tedium.createConnectionPool(
+        connParams.conn, connParams.pool
+    );
+
+    return this;
 }
 
 //region :: Includes
 
 var driver      = require('./_sql')
-    , Seriate   = require('seriate')
+    , tedium    = require('tedium')
     , log       = require('../_log')
 ;
 
@@ -49,10 +39,10 @@ var driver      = require('./_sql')
 
 /**
  * Recebe um sqlParams e monta um SELECT statement
- * @param db { SQL }
+ * @param sqlParams { sqlParams }
  * @param obj { BizObject }
  */
-function parseSQL(db, sqlParams, obj){
+SQLServer.prototype.parseSQL = function(sqlParams, obj){
     var sql = '', v = '';
 
     if (sqlParams.limit.max){
@@ -84,11 +74,11 @@ function parseSQL(db, sqlParams, obj){
     sql += '\n  WHERE 1=1 ';
 
     // Processa where
-    sql += db.parseWhere(obj.params);
+    sql += this.parseWhere(obj.params);
 
     // Processa search
     if (sqlParams['search'] && obj.params['query']){
-        sql += db.parseSearch(obj.params['query']);
+        sql += this.parseSearch(obj.params['query']);
     }
 
     if (sqlParams.group.length){
@@ -112,8 +102,7 @@ function parseSQL(db, sqlParams, obj){
                   ' AND _resultNum_ <= ' + (end   ? end   : sqlParams.limit.max);
     }
     return sql;
-}
-
+};
 
 
 /**
@@ -188,60 +177,41 @@ SQLServer.prototype.parseSearch = function(req){
 //endregion
 
 
+//region :: Execução
+
 /**
  * Executa um SELECT com base em sqlParams
  * @param provider
  * @param obj { BizObject }
  */
 SQLServer.prototype.select = function *(provider, obj){
-
-    // Parent
-    var data = this.driver._select(provider, obj)
-        , db = this
-    ;
-
-    // Select para insert
-    if (data){
-        return this.processResults(results, sql);
-    
-    // Normal    
-    } else {
-        var sql = parseSQL(this, this.driver.sqlParams, obj);
-        return yield this.query(sql, obj);
-    }
+    return yield this.driver._select(provider, obj);
 };
 
 /**
  * Roda um SQL direto na base
  * @param sql {string}
  * @param obj {BizObject}
- * @returns {Promise}
+ * @param meta { {} }
+ * @returns {Types.data}
  */
 SQLServer.prototype.query = function *(sql, obj, meta){
-    var db = this;
-    return new Promise((resolve, reject) => {
-        try{
-            Seriate.execute({
-                    query: sql
-                })
-                .then(
-                    
-                    // Processa
-                    function (results) {
-                        resolve(db.processResults(results, obj, sql, meta));
-                    },
+    return yield this.driver._select(sql, obj, meta);
+};
 
-                    // Erro
-                    function (err) {
-                        log.erro(err, sql);
-                        reject(err);
-                    }
-                    
-                );
+/**
+ * Executa o statement
+ * @param sql
+ * @returns {*}
+ * @private
+ */
+SQLServer.prototype._exec = function *(sql){
+    return yield this.pool.using(function *(db) {
+        try {
+            return yield db.request(sql);
             
-        } catch (e){
-            log.erro(err, sql);
-            reject(err);
+        } catch (e) {
+            log.erro(e, sql);
         }
     });
 };
@@ -249,13 +219,15 @@ SQLServer.prototype.query = function *(sql, obj, meta){
 /**
  * Processa o resultado do select ajustando o pacote de retorno.
  * @param results
+ * @param obj
  * @param sql
+ * @param meta
  */
-SQLServer.prototype.processResults = function(results, obj, sql, meta){
-    return this.driver._processResults(results, obj, sql, meta);
+SQLServer.prototype.processResults = function *(results, obj, sql, meta){
+    return yield this.driver._processResults(results.rows, obj, sql, meta);
 };
 
-
+//endregion
 
 
 // Exporta

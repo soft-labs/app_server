@@ -4,7 +4,9 @@
  */
 module.exports = {
     depth: {
-        app: true
+        app: {
+
+        }
     },
     info: {
         owner: 'Casas do João',
@@ -13,7 +15,7 @@ module.exports = {
     },
     
     security:{
-        active: true
+        active: false
     },
     
     // Conexões à repositórios de dados
@@ -23,14 +25,18 @@ module.exports = {
         default: {
             tipo: 'sqlserver',
             conn: {
-                database: 'SBO_DEMOCOMERCIAL_HOMOLOG_SAP',
-                host: "10.211.55.8\\SAP",
-                port: '1433',
-                user: 'sa',
-                pwd: '1234'
+                server: "10.211.55.8",
+                userName: 'sa',
+                password: '1234',
+                options: {
+                    instanceName: 'SAP',
+                    database: 'SBO_DEMOCOMERCIAL_HOMOLOG_SAP'
+                }
             },
-            formats:{
-                date: 'DD/MM/YYYY'
+            pool: {
+                min: 1,
+                max: 10,
+                timeout: 30000
             }
         },
 

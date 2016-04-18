@@ -5,21 +5,21 @@ function Filiais(){
 
     this.teste = 123;
 
-    this.onList = function (ret) {
+    this.onList = function *(ret) {
         return new Promise(function (resolve, reject) {
             ret['estive_no_onlist_overwrite'] = 'UUUUUUUhhh! ÊêÊêêêê!!';
             resolve(ret);
         });
     };
 
-    this.onGetRow = function(row){
+    this.onGetRow = function *(row){
         row['bplname'] += 'estisssssve no get row!!!';
     };
 
     this.providers = {
 
         default: {
-            search: [
+            xsearch: [
                 {alias: '5', field: 'teste',  param: types.search.menor },
                 {alias: '5', field: 'listnum',  param: types.search.maior_igual }
             ],
