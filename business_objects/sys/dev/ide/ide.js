@@ -152,24 +152,19 @@ function Ide(){
             , dts   = yield this.engine.getConnection(ctx, connId)
             , hoje  = new Date().toString()
             , sql   = ''
-            , source = {
-                table: '',
-                metadata: {
-                    key: '',
-                    fields: { }
-                }
-            }
             , templ = fs.readFileSync(dir + '/sys/dev/ide/template.js', 'utf8')
+            , owner = this.params['owner']
+            , pack  = this.params['id']
         ;
 
         // Cria owner
-        dir += this.params['owner'];
+        dir += owner;
         if (!fs.existsSync(dir)){
             fs.mkdirSync(dir);
         }
 
         // Cria pack
-        dir += '/' + this.params['id'];
+        dir += '/' + pack;
         if (!fs.existsSync(dir)){
             fs.mkdirSync(dir);
         }
@@ -188,11 +183,26 @@ function Ide(){
         // Cria modulo
         for (var m = 0; m< this.params.modulos.length; m++){
             var mod = this.params.modulos[m]
+                , from = "'" + owner + "', '" + pack + "', '" + mod['name'] + "'"
+                , t_tbl = mod['name'].split('_')
+                , joins = ''
                 , arq = templ
                 , key = ''
+                , lbl_field = ''
+                , def_field = ''
                 , fields = ''
+                , linhas = ''
+                , ctrls = ''
+                , search = ''
+                , order = ''
                 , v = ''
+                , vl = ''
+                , j = 1
+                , w = 100
             ;
+
+            t_tbl.shift();
+            t_tbl = t_tbl.length ? t_tbl.join('_') : mod['name'];
             
             // Cria o diretório do módulo
             var mod_dir = dir + '/' + mod['name'];
@@ -200,30 +210,109 @@ function Ide(){
                 fs.mkdirSync(mod_dir);
             }
 
-            source.table = mod['name'];
-            source.metadata.key = '';
-            source.metadata.fields = {};
-
             // Fields
             var res = yield dts.query(sql + mod['name'], this);
             res.rows.forEach((row) => {
-                if (row['Key'] == 'PRI'){
-                    key = row['Field'];
-                    row['Type'] = 'key';
+                var _field      = row['Field']
+                    , _type     = row['Type']
+                    , _primary  = row['Key'] == 'PRI'
+                    , is_key    = !_primary && _field.substr(-4) == '_key'
+                    , _fld_no_key = ''
+                    , _fld_no_key_s = ''
+                    , _split    = []
+                ;
+                
+                if (is_key){
+                    _type = 'key';
+                    _fld_no_key = _field.substring(0, _field.length - 4);
+                    _fld_no_key_s = _field.substring(0, _field.length - 5);
+                    _split    = _fld_no_key.split('_');
                 }
                 
+                if (_primary){
+                    key = _field;
+                    _type = 'primary';
+                } 
+
+                if (_field + 's' == t_tbl){
+                    lbl_field = _field;
+                    def_field = "'" + lbl_field + "'";
+                    search = "{alias: 0, field: '" + lbl_field + "',  param: types.search.like }";
+                    order = "[0, '" + lbl_field + "', 'desc']";
+                    ctrls = _field + ': {' +
+"\n                    extra_right: { class: '', tag: '' }," +
+"\n                    extra_left:  { class: '', tag: '' }" +
+"\n                }";
+                }
+
+                // Fields
                 fields += v +
-'\n                ' + row['Field'] + ': {' +
-"\n                    tipo: types.comp." + types.getByField(row['Type']) + ", label: '" + capitalize(row['Field']) + ":'" +
+'\n                ' + _field + ': {' +
+"\n                    tipo: types.comp." + types.getByField(_type) + ", label: '" + capitalize(_field) + ":'";
+
+                if (is_key) {
+                    fields += ',' +
+"\n                    data: { " +
+"\n                        key: ['" + _field + "'], " +
+"\n                        from: ['" + owner + "', '" + (_split.length > 1 ? pack : _fld_no_key) + "', '" + _fld_no_key + "'], " +
+"\n                        template: '{row." + _field + "} - {row." + _fld_no_key_s + "}', " +
+"\n                        provider: '' " +
+"\n                    } ";
+                }
+                fields +=
 '\n                }';
-                v = ',';
+
+
+                // Joins
+                if (is_key){
+                    joins += (j == 1 ? '' : ',') +
+"\n                " + j + ": { " +
+"\n                    from: ['" + owner + "', '" + pack + "', '" + _fld_no_key + "']," +
+"\n                        join: {source: 0, tipo: types.join.left, on: '" + _field + "', where: ''}," +
+"\n                    fields: [" +
+"\n                        " +
+"\n                    ]" +
+"\n                }";
+                    j++;
+                }
+
+
+                // Linhas
+                if (w == 100) {
+                    linhas += vl +
+"\n                {";
+                    vl = '';
+                }
+
+                linhas += vl + _field + ': 25';
+
+                w -= 25;
+                if (w == 0){
+                    w = 100;
+                    linhas += "}";
+                }
+
+                v = vl = ', ';
             });
+
+            if (w > 0 && w < 100){
+                var n = (linhas.substr(-2).trim()*1) + w;
+                linhas = linhas.substring(0, linhas.length -2) + n + '}';
+            }
 
             arq = arq.replace(new RegExp('_MOD_', 'g'), camelCase(mod['name']));
             arq = arq.replace(new RegExp('_ID_', 'g'), mod['name']);
-            arq = arq.replace('_KEY_', key);
-            arq = arq.replace('_FIELDS_', fields);
             arq = arq.replace('_DATA_', hoje);
+            arq = arq.replace('_KEY_', key);
+            arq = arq.replace('_DEF_FIELD_', def_field);
+            arq = arq.replace('_FIELDS_', fields);
+            arq = arq.replace('_LINHAS_', linhas);
+            arq = arq.replace('_CTRLS_', ctrls);
+            arq = arq.replace('_SOURCE_', "'" + owner + "', '" + pack + "', '" + mod['name'] + "'");
+            arq = arq.replace('_JOINS_', joins);
+            arq = arq.replace('_WHERE_', "['AND', 0, '" + key + "', types.where.check]");
+            arq = arq.replace('_ORDER_', order || "['0', '" + key + "', 'desc']");
+            arq = arq.replace('_SEARCH_', search);
 
             fs.writeFileSync(mod_dir + '/' + mod['name'] + '.js', arq);
 
@@ -233,7 +322,7 @@ function Ide(){
 
     //endregion
 
-
+    return true;
 }
 
 function camelCase(str, sep){

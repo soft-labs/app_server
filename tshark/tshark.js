@@ -586,6 +586,7 @@ router.delete(/^\/(\w+)\/tshark\/.*$/, function *(next) {
 function endRoute(ctx){
 
     // Ajusta o pacote de retorno
+    ctx.body = ctx.body || {};
     ctx.body['callback'] = ctx.state.api.call;
 
     // Fecha

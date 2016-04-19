@@ -237,9 +237,11 @@ BizObject.prototype.get = function *(ctx){
     
     // Evento on[func]
     var func = ctx.state.api.call;
-    func = func.charAt(0).toUpperCase() + func.slice(1);
-    if (this['on' + func]){
-        yield this['on' + func](ret, ctx);
+    if (func != 'get') {
+        func = func.charAt(0).toUpperCase() + func.slice(1);
+        if (this['on' + func]) {
+            yield this['on' + func](ret, ctx);
+        }
     }
     
     // Template

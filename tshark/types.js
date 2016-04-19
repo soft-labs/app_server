@@ -93,9 +93,12 @@ Types.prototype.comp = {
 Types.prototype.getByField = function(type){
     var t = type.replace(/[^a-zA-Z]/g, '').toLowerCase();
     switch (t){
-        case "key":
+        case "primary":
             return 'key';
 
+        case "key":
+            return 'dropdown';
+        
         case "char": 
         case "varchar":
         case "nchar":
