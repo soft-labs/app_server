@@ -124,7 +124,7 @@ module.exports = function(opts) {
                     this.set('Content-Type', 'text/css; charset=utf-8');
                 } else if (file.ext == '.js') {
                     this.set('Content-Type', 'application/javascript; charset=utf-8');
-                    buff += '\n\n//# sourceURL=' + tmp.join('.') + '.js'
+                    buff += '\n\n//# sourceURL=' + tmp.join('.')
                 }
                 this.body = buff;
             }

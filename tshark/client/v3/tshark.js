@@ -17,8 +17,14 @@ function TShark(){
         tshark._tmp_[id] = mod;
     };
 
-    this.forms = new Forms();
-    
+    /**
+     * Armazena os rivet binds que forem associados
+     */
+    this.bounded = {};
+
+
+    // Callbacks
+    this._reg_callbacks = {};
 }
 
 // Globals
@@ -45,15 +51,13 @@ var CONSOLE_ON = true;
 
         $('body')
             .append(d);
-
-        this.bind();
     };
 
     /**
      * Ativa o semantic em ref
      * @since 06/10/15
      */
-    TShark.prototype.bind = function (ref) {
+    TShark.prototype.initIntf = function (ref) {
         if (!ref) {
             ref = 'body';
 
@@ -154,7 +158,7 @@ var CONSOLE_ON = true;
      * Remove links de api
      * @since 06/10/15
      */
-    TShark.prototype.unbind = function (ref) {
+    TShark.prototype.resetIntf = function (ref) {
         if (!ref) {
             ref = 'body';
 
@@ -171,6 +175,110 @@ var CONSOLE_ON = true;
         $(ref).find('.binded')
             .removeClass('binded numpader-binded')
         ;
+    };
+
+    //endregion
+
+
+    //region :: Binds
+
+    /**
+     * Executa um bind em uma área da interface, caso ela ainda 
+     * não tenha um bound.
+     * @param ref
+     * @param obj
+     * @param replace
+     * @returns {*}
+     */
+    TShark.prototype.bind = function(ref, obj, replace) {
+        var id = ref || 'body';
+
+        if (!this.bounded[id] || !this.bounded[id].bound) {
+            this.bounded[id] = {bound: false, html: $(id).html()};
+
+            // Atualiza layout
+            if (replace) {
+                var container = (typeof replace == 'string'
+                    ? id
+                    : $(id).find(replace[0])
+                );
+                $(container)
+                    .empty()
+                    .append($(
+                        (typeof replace == 'string'
+                            ? replace
+                            : replace[1]
+                        )
+                    ));
+            }
+
+            // Novo bind
+            this.bounded[id].bound = rivets.bind($(id), obj);
+
+            // Ajusta interface
+            tshark.initIntf(ref);
+
+            // Retorna
+            return this.bounded[id];
+        } 
+    };
+
+    /**
+     * Refaz o bind de uma área, resetando o bind antigo caso 
+     * ele exista.
+     * @param ref
+     * @param obj
+     */
+    TShark.prototype.rebind = function(ref, obj, replace) {
+        var id = ref || 'body';
+
+        // Refresh se já existir
+        if (this.bounded[id]) {
+            this.bounded[id].bound.unbind();
+            this.bounded[id].bound = false;
+
+            $(id).html(this.bounded[id].html);
+        } 
+        
+        // Executa bind
+        return this.bind(ref, obj, replace);
+    };
+
+    /**
+     * Restaura o template original da área de interface e refaz 
+     * o bind da área.
+     * @param ref
+     * @param obj
+     * @param replace
+     */
+    TShark.prototype.resetBind = function(ref, obj, replace){
+        var id = ref || 'body';
+
+        // Refresh se já existir
+        if (this.bounded[id]) {
+            $(id).html(this.bounded[id].html);
+        }
+
+        return this.rebind(ref, obj, replace);
+    };
+
+    /**
+     * Desfaz o bind de uma área, opcionalmente resetando template antigo.
+     * @param ref {string}
+     * @param reset {bool}
+     */
+    TShark.prototype.unbind = function(ref, reset) {
+        var id = ref || 'body';
+
+        // Desativa o bound
+        if (this.bounded[id]) {
+            this.bounded[id].bound.unbind();
+            this.bounded[id].bound = false;
+
+            if (reset) {
+                $(id).html(this.bounded[id].html);
+            }
+        }
     };
 
     //endregion
@@ -201,63 +309,71 @@ var CONSOLE_ON = true;
 
     /**
      * Recupera um módulo, pelo seu id
-     * @param id { 'owner.pack.mod' }
+     * @param path { string } Path 'owner.pack.mod'
      * @returns { TShark.modulo }
      */
-    TShark.prototype.getMod = function (id) {
-        if (typeof id != 'string'){
-            id = id.join('.');
+    TShark.prototype.getMod = function (path) {
+        if (typeof path != 'string'){
+            path = path.join('.');
         }
-        return this.modulos[id];
+        return this.modulos[path];
     };
 
     /**
      * Verifica se um módulo está registrado.
-     * @param id
+     * @param path {string}
      * @returns {boolean}
      */
-    TShark.prototype.isRegistered = function (id) {
-        return (this.modulos[id] ? true : false);
+    TShark.prototype.isRegistered = function (path) {
+        return (this.modulos[path] ? true : false);
     };
 
     /**
      * Registra um módulo
-     * @param id { 'owner.pack.mod' }
+     * @param paths { string || string[] } Path ou array de paths de objetos de negócio
      * @param callFunc { function() } Função que será executada após a carga do módulo
      * @since 21/02/16
      */
-    TShark.prototype.register = function (id, callFunc) {
-
-        // Ajusta path
-        var mod = this.modulos[id];
-
-        // Recupera módulo e instancía
-        if (!mod || !mod['data']) {
-
-            // Recupera modulo
-            var path  = id.split('.')
-                , mod = path.pop()
-                , arq = "modulos/" + path.join('/') + '/' + mod + '/' + mod + ".js";
-            $.getScript(arq)
-
-                // Achou
-                .done(function (data, textStatus) {
-
-                    // Cria instância e merge com recebido
-                    tshark.initMod(id);
-
-                    // Chama função callback
-                    if (callFunc) {
-                        callFunc.apply();
-                    }
-                })
-
-                // Falhou
-                .fail(function (jqxhr, settings, exception) {
-                    //alertify.error("API não reconhecida: '" + map + "'");
-                })
-            ;
+    TShark.prototype.register = function (paths, callFunc) {
+        if (typeof paths == 'string'){
+            paths = [paths];
         }
+
+        paths.forEach(id => {
+
+            // Ajusta path
+            var obj = this.modulos[id];
+
+            // Recupera módulo e instancía
+            if (!obj || !obj['data']) {
+
+                // Recupera modulo
+                var path  = id.split('.')
+                    , mod = path.pop()
+                    , arq = "modulos/" + path.join('/') + '/' + mod + '/' + mod + ".js"
+                ;
+                $.getScript(arq)
+
+                    // Achou
+                    .done(function (data, textStatus) {
+
+                        // Cria instância e merge com recebido
+                        tshark.initMod(id);
+
+                        // Chama função callback
+                        if (callFunc) {
+                            callFunc.apply();
+                        }
+                    })
+
+                    // Falhou
+                    .fail(function (jqxhr, settings, exception) {
+                        //alertify.error("API não reconhecida: '" + map + "'");
+                    })
+                ;
+            }
+
+        });
     };
 
     /**

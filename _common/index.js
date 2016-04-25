@@ -8,6 +8,6 @@
  * @author Luiz Antonio B. Silva [Labs]
  * @since 11/10/2015
  */
-var tshark   = new TShark()  // Instancia do TShark
-    , client = {}            // Instancia do client
+var tshark = new TShark()  // Instancia do TShark
+    , app  = {}            // Instancia do client
 ;

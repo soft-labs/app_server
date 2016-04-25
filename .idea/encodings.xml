@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$USER_HOME$/Downloads/cad_aluno/cad_aluno.php" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/_common/index.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tshark/client/v3/_tshark.css" charset="UTF-8" />
+    <file url="file:///Volumes/Work/Developer/Web/_libs/_tshark/buffers/sql.php" charset="ISO-8859-1" />
+    <file url="file:///Volumes/Work/Developer/Web/_libs/_tshark/buffers/sql/__layer.php" charset="ISO-8859-1" />
+    <file url="file:///Volumes/Work/Developer/Web/_libs/_tshark/buffers/sql/mysql_i.php" charset="ISO-8859-1" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

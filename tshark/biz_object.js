@@ -150,17 +150,8 @@ BizObject.prototype.getForm = function (provider){
     // region :: Ajusta Ctrls
 
     var meta = {};
-    if (provider){
-        for(var s in provider.sources){
-            var src     = provider.sources[s]['src']
-                //, mod   = this.getObjViaFrom(req, src.from)
-            ;
-            extend(true, meta, src.metadata);
-        }
-    } else {
-        extend(true, meta, this.source.metadata);
-    }
-
+    extend(true, meta, this.source.metadata, meta);
+    
     var self = this;
     form['ctrls'] = form['ctrls'] || {};
     form.linhas.forEach(function(linha){
@@ -219,7 +210,9 @@ BizObject.prototype.getForm = function (provider){
 
 /**
  * Implementa API GET em módulos
- * @returns {{ Promise }}
+ *    - get  | url: owner/pack/mod                       | Lista todos os registros do mod
+ *    - get  | url: owner/pack/mod?query='teste um dois' | Filtra os registros do mod por query
+ *    - get  | url: owner/pack/mod/123                   | Retorna o registro id=123
  */
 BizObject.prototype.get = function *(ctx){
     var self = this;
@@ -280,7 +273,8 @@ BizObject.prototype.get = function *(ctx){
 
 /**
  * Implementa API de forms para objetos de negócio
- * @returns {{ Promise }}
+ *    - get  | url: owner/pack/mod/_new                  | Retorna um form para pré inserção
+ *    - get  | url: owner/pack/mod/123/edit              | Retorna um form para edição do registro id=123
  */
 BizObject.prototype.form = function *(ctx){
     var self = this;
@@ -339,6 +333,29 @@ BizObject.prototype.form = function *(ctx){
 };
 
 
+/**
+ * Implementa API PUT em módulos
+ *    - update  | url: owner/pack/mod                    | Atualiza um registro no mod
+ */
+BizObject.prototype.update = function *(ctx){
+    var dts = yield this.engine.getConnection(ctx);
+    if (dts) {
+
+        // Recupera provider
+        var provId = (this.params['provider'] && this.params['provider']['id']
+                ? this.params['provider']['id']
+                : 'update'
+        );
+        
+        // Pega o provider
+        var prov = yield this.getProvider(provId);
+
+        // Executa
+        return yield dts.update(prov, this);
+    }
+};
+
+
 // endregion
 
 
@@ -367,9 +384,6 @@ BizObject.prototype.insert = function(provider, params){
 
 };
 
-BizObject.prototype.update = function(provider, params){
-
-};
 
 BizObject.prototype.delete = function(provider, params){
 
@@ -388,26 +402,30 @@ BizObject.prototype.readDir = function(path, res){
     var fs          = require('fs-extra')
         , dir       = fs.readdirSync(path)
         , result    = res || []
+        , fpath     = require('path')
     ;
 
     dir.forEach((d) => {
-        var p           = { id: d, sub: []}
-            , new_path  = path + '/' + d
-            , is_dir    = false
-        ;
+        if (d[0] != '.') {
+            var p = {id: d, ext: '', sub: []}
+                , new_path = path + '/' + d
+                , is_dir = false
+                , stat = fpath.parse(new_path)
+                ;
 
-        try {
-            is_dir = fs.statSync(new_path).isDirectory();
-        }
-        catch (e) {
-            is_dir = false;
-        }
+            try {
+                is_dir = fs.statSync(new_path).isDirectory();
+            }
+            catch (e) {
+                is_dir = false;
+            }
 
-        if (is_dir){
-            this.readDir(new_path, p.sub);
+            if (is_dir) {
+                this.readDir(new_path, p.sub);
+            }
+            p.ext = stat.ext;
+            result.push(p);
         }
-        
-        result.push(p);
     });
     
     return result;

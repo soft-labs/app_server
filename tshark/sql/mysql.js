@@ -41,18 +41,8 @@ var driver  = require('./_sql')
  * @param obj { BizObject }
  */
 MySql.prototype.parseSQL = function(sqlParams, obj){
-    var sql = '', v = '';
+    var sql = '', fields = '', v = '';
 
-    if (sqlParams.limit.max){
-        sql += ' WITH Ordered AS ( \n';
-        sql += '      SELECT  TOP(999999999) row_number() OVER (ORDER BY ' +
-            (sqlParams.order.length ? sqlParams.order : sqlParams.key.field) +
-            ') as _resultNum_, COUNT(*) OVER () _totalrows_, \n';
-
-    } else {
-        sql += ' SELECT ';
-    }
-    var fields = '';
     for (var fld in sqlParams.fields){
         if (fld == '__as__'){
             sqlParams.fields[fld].forEach((f) => {
@@ -64,41 +54,37 @@ MySql.prototype.parseSQL = function(sqlParams, obj){
         }
         v = ' ,';
     }
+
+    sql += ' SELECT ' + sqlParams.distinct + ' ';
     sql += fields || '*';
     sqlParams.force_lower = !fields;
 
-    sql += '\n    FROM ' + sqlParams.table + ' ' + sqlParams.alias + ' (nolock)';
+    sql += '\n    FROM ' + sqlParams.table + ' ' + sqlParams.alias;
     sql += '\n' + sqlParams.joins.join('\n');
     sql += '\n  WHERE 1=1 ';
 
     // Processa where
-    sql += this.parseWhere(obj.params);
+    sql += this.parseWhere(sqlParams, obj.params);
 
     // Processa search
     if (sqlParams['search'] && obj.params['query']){
-        sql += this.parseSearch(obj.params['query']);
+        sql += this.parseSearch(sqlParams, obj.params['query']);
     }
 
     if (sqlParams.group.length){
         sql += '\n  GROUP BY ' + sqlParams.group.join(', ');
     }
     if (sqlParams.having.length){
-        sql += '\n  HAVING ' + sqlParams.havend.join(', ');
+        sql += '\n  HAVING ' + sqlParams.having.join(', ');
     }
-    if (sqlParams.order.length){
-        sql += '\n  ORDER BY ' + sqlParams.order.join('\n');
+    if (sqlParams.order){
+        sql += '\n  ORDER BY ' + sqlParams.order;
     }
 
     if (sqlParams.limit.max){
-        var start = (parseInt(sqlParams.limit.page) * parseInt(sqlParams.limit.max)) +1
-            , end = (start + parseInt(sqlParams.limit.max)) -1
-            ;
-        sql += ')' +
-            ' SELECT  * ' +
-            '   FROM Ordered ' +
-            '  WHERE _resultNum_ >= ' + (start ? start : 0) +
-            ' AND _resultNum_ <= ' + (end   ? end   : sqlParams.limit.max);
+        sql += ' LIMIT ' + sqlParams.limit.page  + ', ' + sqlParams.limit.max;
     }
+    
     return sql;
 };
 
@@ -124,8 +110,8 @@ MySql.prototype.parseSQL = function(sqlParams, obj){
  * }}
  * @param obj { BizObject }
  */
-MySql.prototype.parseProvider = function(provider, obj){
-    this.driver._parseProvider(provider, obj);
+MySql.prototype.parseProvider = function(sqlParams, provider, obj){
+    return this.driver._parseProvider(sqlParams, provider, obj);
 };
 
 
@@ -136,8 +122,8 @@ MySql.prototype.parseProvider = function(provider, obj){
  * @param meta_fields
  * @param alias
  */
-MySql.prototype.parseFields = function(prov, ctx_fields, meta_fields, alias){
-    return this.driver._parseFields(prov, ctx_fields, meta_fields, alias);
+MySql.prototype.parseFields = function(sqlParams, prov, ctx_fields, meta_fields, alias){
+    return this.driver._parseFields(sqlParams, prov, ctx_fields, meta_fields, alias);
 };
 
 
@@ -148,8 +134,8 @@ MySql.prototype.parseFields = function(prov, ctx_fields, meta_fields, alias){
  * @param alias
  * @param nolock
  */
-MySql.prototype.parseJoin = function(join, table, alias, nolock) {
-    return this.driver._parseJoin(join, table, alias, ' ');
+MySql.prototype.parseJoin = function(sqlParams, join, table, alias, nolock) {
+    return this.driver._parseJoin(sqlParams, join, table, alias, ' ');
 };
 
 
@@ -158,8 +144,8 @@ MySql.prototype.parseJoin = function(join, table, alias, nolock) {
  * @param req { req }
  * @returns { string }
  */
-MySql.prototype.parseWhere = function(req){
-    return this.driver._parseWhere(req);
+MySql.prototype.parseWhere = function(sqlParams, params){
+    return this.driver._parseWhere(sqlParams, params);
 };
 
 
@@ -168,8 +154,8 @@ MySql.prototype.parseWhere = function(req){
  * @param req { req }
  * @returns { string }
  */
-MySql.prototype.parseSearch = function(req){
-    return this.driver._parseSearch(req);
+MySql.prototype.parseSearch = function(sqlParams, query){
+    return this.driver._parseSearch(sqlParams, query);
 };
 
 //endregion
@@ -217,8 +203,8 @@ MySql.prototype._exec = function *(sql){
  * @param results
  * @param sql
  */
-MySql.prototype.processResults = function *(results, obj, sql, meta){
-    return yield this.driver._processResults(results, obj, sql, meta);
+MySql.prototype.processResults = function *(sqlParams, results, obj, sql, meta){
+    return yield this.driver._processResults(sqlParams, results, obj, sql, meta);
 };
 
 //endregion

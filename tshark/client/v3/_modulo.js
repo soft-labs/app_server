@@ -34,12 +34,16 @@ TShark.prototype.modulo = function(path){
     };
 
 
-    // Monta helper para usar APIs em design com rv
+    // Monta helper para usar APIs default em design com rv
     this.api = {};
     var api = this.path.replace(/\./g, ' ');
     for (var a in tshark.api_map){
         this.api[a] = a + ' ' + api;
     }
+
+    // Helper de APIs 'extras'
+    this.api.save = 'save ' + ' ' + api;
+    this.api.last_form_id = '';
 
     /**
      * Info do módulo
@@ -57,11 +61,6 @@ TShark.prototype.modulo = function(path){
      * @type {{key: string, index: {}, rows: Array, page: number}}
      */
     this.data = new Dataset(this.path, this);
-
-    /**
-     * Armazena os rivet binds que forem associados ao modulo
-     */
-    this.binds = {};
 
     /**
      * Templates do módulo
@@ -144,6 +143,43 @@ TShark.prototype.modulo = function(path){
             });
     };
 
+    //endregion
+
+
+    //region :: Interceptação de eventos de API
+
+    /**
+     * A API save é uma api de mentirinha. Aqui no módulo, descobre-se qual a real 
+     * natureza da operação, e retorna-se uma alteração da chamada de API.
+     * @param sender
+     * @param settings
+     * @returns {boolean}
+     */
+    TShark.prototype.modulo.prototype.save_before = function (sender, settings) {
+        if (!this.data.key){
+            console.error(this.path + ': save_before -> data.key não definido');
+            return false
+        }
+        if (!this.data.row){
+            console.error(this.path + ': save_before -> data.row não definido');
+            return false
+        }
+
+        settings.data.row = this.data.row;
+        
+        if (this.data.row[this.data.key] == 'NEW_KEY'){
+            return 'insert';
+        } else {
+            $(sender).data('key', this.data.row[this.data.key]);
+            settings.data.key = this.data.row[this.data.key];
+            return 'update';
+        }
+    };
+
+    //endregion
+
+    
+    
 /*
     TShark.prototype.modulo.prototype.list      = function (data){
         this._callApi('list', data);
@@ -179,37 +215,11 @@ TShark.prototype.modulo = function(path){
 */
     //endregion
 
-
-    //region :: Binds
-
-    /**
-     * Executa um bind
-     * @param ref
-     */
-    TShark.prototype.modulo.prototype.bind = function(ref) {
-        this.binds[ref] = rivets.bind($(ref), this);
-    };
-
-    /**
-     * Remove um bind
-     * @param ref
-     * @param keep
-     */
-    TShark.prototype.modulo.prototype.unbind = function(ref, keep) {
-        try {
-            this.binds[ref].unbind();
-            if (!keep){
-                delete(this.binds[ref]);
-            }
-        } catch (e){
-            console.log(e);
-        }
-    };
-
-    /**
-     * Reseta os dados e os binds 
+    
+    /** ???
+     * Reseta os dados e os binds
      * @param new_data
-     */
+     *
     TShark.prototype.modulo.prototype.reset = function(new_data){
 
         // Unbind
@@ -233,8 +243,5 @@ TShark.prototype.modulo = function(path){
             }
         }
     };
-
-    //endregion
-    
-
+    */
 })($);

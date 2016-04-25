@@ -1,5 +1,6 @@
 /**
- * TShark 3.8
+ * TShark 2.8
+ * 
  * Biblioteca de extenções.
  * @copyright [== � 2014, Softlabs ==]
  * @link www.softlabs.com.br

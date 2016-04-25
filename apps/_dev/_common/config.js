@@ -21,7 +21,7 @@ module.exports = {
         default: {
             tipo: 'mysql',
             conn: {
-                database: 'tshark',
+                database: 'softlabs',
                // host: 'localhost',
                // port: '3347',
                 user: 'root',

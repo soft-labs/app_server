@@ -1,6 +1,18 @@
 /**
- * Created by labs on 11/01/16.
+ *  TShark - Client 3.0
+ *
+ *   Implementa processamento e gateway de APIs tanto
+ *  para chamandas ao server quanto para os eventos de
+ *  callback padrão das mesmas.
+ *
+ * @copyright [== © 2016, Softlabs ==]
+ * @link <a href="http://www.softlabs.com.br">Softlabs</a>
+ * @author Luiz Antonio B. Silva [Labs]
+ * @since 11/01/16.
  */
+var tshark = tshark || new TShark()
+    , app  = app    || {}
+;
 
 
 /**
@@ -34,7 +46,9 @@ TShark.prototype.api_map = {
 
     update  :               ['PUT',       '/{key}'],
     
-    delete  :               ['DELETE',    '/{key}']
+    delete  :               ['DELETE',    '/{key}'],
+
+    save    :               ['POST',      '/']
 
 };
 
@@ -58,80 +72,27 @@ $.fn.api.settings.api = {};
     TShark.prototype.api = {
 
         /**
+         * Exibe mensagens em console
+         */
+        silent: (app['mode'] && app['mode'] == 'desenv'),
+
+        /**
          * Ajusta a API dinamicamente.
          * Contexo 'this': elemento DOM originador da chamada
          */
         beforeSend: function (settings) {
-            var d = $.extend({}, $(this).data() || {});
-
-            // Ajusta API
-            var api   = (d['action'] ? d.action : settings.action).split(' ')
-                , map = api.shift()
-                , el  = this
-            ;
-
-            if (!tshark.api_map[map]) {
-                alertify.error("API não reconhecida: '" + map + "'");
-            }
-
-            // Ajusta função
-            if (map == 'exec'){
-                $(this).data('func', api.pop());
-            }
-
-            // Registra modulo
-            var id = api.join('.');
-            if (!tshark.isRegistered(id)) {
-                tshark.register(id, function () {
-                    $(el).api('query');
-                });
-                return false;
-            }
-
-            // Executa onBefore
-            var Func = map.capitalize()
-                , mod = tshark.getMod(id)
-            ;
-
-            // Interno
-            if (tshark[map + '_before']) {
-                tshark[map + '_before'].call(mod, el, settings);
-            }
-
-            // Externo
-            if (mod['onBefore' + Func] && !settings['_on_before_']) {
-                if (!mod['onBefore' + Func].call(mod, el, settings)) return false;
-            }
-
-            // Ajusta template
-            if (settings['template'] && mod.templates[settings['template']]){
-                settings['_no_template_'] = true;
-            }
-
-            // Ajusta dados
-            delete(d['moduleApi']);
-            delete(d['action']);
-            settings.data = $.extend(settings.data, d);
-            settings.dataType = 'JSON';
-
-            // Ajusta settings
-            settings.url = 'tshark/' + api.join('/') + tshark.api_map[map][1];
-            settings.method = method = tshark.api_map[map][0];
-            settings['_on_before_'] = false;
-
-            // Retorna
-            return settings;
+            return _before(settings, $(this));
         },
 
         /**
          * Ajusta callback
          */
         onSuccess: function (response) {
-            // valid response and response.success = true
-            tshark.callback(response);
+            return _callback(response);
         },
 
-        onResponse: function (response) {
+
+        onResponse: function (ctx, response) {
             // make some adjustments to response
             return response;
         },
@@ -176,23 +137,142 @@ $.fn.api.settings.api = {};
             }
         }
     };
+    
+    /**
+     * Executa chamadas de api direto via call.
+     *  Ex: mod.call('list softlabs financeiro fin_bancos', {provider: 'provTeste'})
+     * @param api {string} Caminho completo da api
+     * @param data {{}} (Opcional) Dados extras 
+     */
+    TShark.prototype.call = function(api, data){
+        data = data || {};
+        
+        data.action = api;
+        $('#_direct_api_helper_')
+            .data(data)
+            .api('query');
+    };
+
+    /**
+     * Registra e redireciona um callback padrão para uma função em
+     * objeto.
+     * @param callback {string} Nome do callback default a registrar ex: 'onList'
+     * @param obj {{}} Objeto onde existe a função
+     * @param func {function} Função com assinatura (mod, response, next)
+     */
+    TShark.prototype.registerCallback = function(callback, obj, func) {
+        tshark._reg_callbacks[callback] = {
+            context: obj,
+            callback: func
+        };
+    };
+
+
+    /**
+     * Gateway para processamento de APIs antes do envio ao
+     * server
+     * @param settings
+     * @param el
+     * @returns {*}
+     * @private
+     */
+    function _before(settings, el) {
+        var d = $.extend({}, $(el).data() || {});
+
+        // Ajusta API
+        var api   = (d['action'] ? d.action : settings.action).replace(/\s{2,}/g, ' ').split(' ')
+            , map = api.shift()
+        ;
+
+        if (!tshark.api_map[map]) {
+            alertify.error("API não reconhecida: '" + map + "'");
+            return false;
+        }
+
+        // Ajusta função
+        if (map == 'exec'){
+            $(el).data('func', api.pop());
+        }
+
+        // Só roda em modulo registrado
+        var path = api.join('.');
+        if (tshark.isRegistered(path)) {
+
+            // Executa onBefore
+            var Func = map.capitalize()
+                , mod = tshark.getMod(path)
+            ;
+
+            // Interno
+            if (tshark[map + '_before']) {
+                if (!tshark[map + '_before'].call(mod, el, settings)) return false;
+            }
+
+            // Interno - modulo
+            if (mod[map + '_before'] && !settings['_on_before_']) {
+                map = mod[map + '_before'].call(mod, el, settings);
+                if (!map) return false;
+                Func = map.capitalize();
+            }
+            
+            // Externo - app
+            if (app['onBefore' + Func] && !settings['_on_before_']) {
+                if (!app['onBefore' + Func].call(app, el, settings)) return false;
+            }
+
+            // Externo - modulo
+            if (mod['onBefore' + Func] && !settings['_on_before_']) {
+                if (!mod['onBefore' + Func].call(mod, el, settings)) return false;
+            }
+
+            // Ajusta template
+            if (settings['template'] && mod.templates[settings['template']]) {
+                settings['_no_template_'] = true;
+            }
+
+            // Ajusta dados
+            delete(d['moduleApi']);
+            delete(d['action']);
+            settings.data = $.extend(settings.data, d);
+            settings.dataType = 'JSON';
+
+            // Ajusta settings
+            settings.url = 'tshark/' + api.join('/') + tshark.api_map[map][1];
+            settings.method = method = tshark.api_map[map][0];
+            settings['_on_before_'] = false;
+
+        } else {
+            tshark.register(path, function () {
+                $(el).api('query');
+            });
+            settings = false;
+        }
+
+        // Retorna
+        return settings;
+    }
 
     /**
      * Gateway para processamento de retornos de API
+     * @param response
      * @since 06/10/15
+     * @private
      */
-    TShark.prototype.callback = function (response) {
+    function _callback(response) {
         var func    = response.callback
             , Func  = func.capitalize()
             , id    = response.path.join('.')
-            , mod   = this.getMod(id)
+            , mod   = tshark.getMod(id)
             , overwrite = false
             , isForm = (func == 'edit' || func == 'create')
+            , o
+            , f
         ;
 
         if (mod && func) {
 
-            // Forms
+            //region :: Forms
+
             if (isForm){
 
                 // Before / Overwrite no módulo
@@ -201,11 +281,24 @@ $.fn.api.settings.api = {};
                         tshark['form_callback'].call(tshark, mod, response);
                     });
 
+                // Overwrite registrado
+                } else if (tshark._reg_callbacks['onForm']) {
+                    o = tshark._reg_callbacks['onForm'].context;
+                    f = tshark._reg_callbacks['onForm'].callback;
+
+                    f.call(o, mod, response, function () {
+                        tshark['onForm'].call(tshark, mod, response);
+                    });
+
                 // Default interno
                 } else {
-                    this['form_callback'].call(this, mod, response);
+                    tshark['form_callback'].call(tshark, mod, response);
                 }
             }
+
+            //endregion
+
+            //region :: APIs
 
             // Before / Overwrite no módulo
             if (mod['on' + Func]) {
@@ -213,31 +306,56 @@ $.fn.api.settings.api = {};
                     tshark[func + '_callback'].call(tshark, mod, response);
                 });
 
+            // Overwrite registrado
+            } else if (tshark._reg_callbacks['on' + Func]) {
+                o = tshark._reg_callbacks['on' + Func].context;
+                f = tshark._reg_callbacks['on' + Func].callback;
+
+                f.call(o, mod, response, function () {
+                    tshark[func + '_callback'].call(tshark, mod, response);
+                });
+
             // Default
-            } else {
-                this[func + '_callback'].call(this, mod, response);
+            } else if (tshark[func + '_callback']) {
+                tshark[func + '_callback'].call(tshark, mod, response);
             }
 
-            // After
+            //endregion
+
+            //region :: After Form
+
             if (isForm && mod['onAfterForm']){
                 mod['onAfterForm'].call(mod, response);
+
+                // Overwrite registrado
+            } else if (isForm && tshark._reg_callbacks['onAfterForm']) {
+                o = tshark._reg_callbacks['onAfterForm'].context;
+                f = tshark._reg_callbacks['onAfterForm'].callback;
+
+                f.call(o, mod, response, function(){});
             }
-             
+
+            //endregion
+
+            //region :: After APIs
+
             if (mod['onAfter' + Func]) {
                 mod['onAfter' + Func].call(mod, response);
+
+                // Overwrite registrado
+            } else if (tshark._reg_callbacks['onAfter' + Func]) {
+                o = tshark._reg_callbacks['onAfter' + Func].context;
+                f = tshark._reg_callbacks['onAfter' + Func].callback;
+
+                f.call(o, mod, response, function(){});
             }
-        }
-    };
 
-    function resetDataCallback(api, data, mod){
-        mod.reset(data);
+            //endregion
 
-        // ShowSQL
-        if (data['sql']){
-            console.log(api + ':' + data['sql'])
         }
     }
 
+    
 
     //region :: API List
 
@@ -252,6 +370,8 @@ $.fn.api.settings.api = {};
         // Seta template default
         settings.data['template'] = 'list';
 
+        // Libera
+        return true;
     };
 
     /**
@@ -267,7 +387,7 @@ $.fn.api.settings.api = {};
         }
 
         if (response['data']) {
-            resetDataCallback('list', response['data'], mod);
+            mod.data.reset(response['data']);
         }
 
     };
@@ -292,6 +412,9 @@ $.fn.api.settings.api = {};
                 ? $(id).val()
                 : $(sender).val()
         ));
+
+        // Libera
+        return true;
     };
 
     /**
@@ -303,13 +426,6 @@ $.fn.api.settings.api = {};
     TShark.prototype.search_callback = function (mod, response) {
         if (response['data']) {
             mod.data.reset(response['data']);
-
-            // ShowSQL
-            if (response['data']['sql']){
-                console.log('search:' + response['data']['sql'])
-            }
-
-            //resetDataCallback('list', response['data'], mod);
         }
     };
 
@@ -329,6 +445,8 @@ $.fn.api.settings.api = {};
      */
     TShark.prototype.form_before = function (sender, settings) {
 
+        // Libera
+        return true;
     };
 
     /**
@@ -343,8 +461,17 @@ $.fn.api.settings.api = {};
         }
 
         if (response['layout']){
-            this.forms.create(mod, response.layout)
+            response['formId'] = tshark.createForm(mod, response.layout);
+            
+            // Bind
+            /*tshark.rebind(                              // Rebind pq a cada form o módulo de origem de dados pode ter mudado
+                '#form',                                // Bind feito no ponto mais alto do layout
+                mod,                                    // (Novo) Mod de origem dos dados
+                [".description", mod.form.obj]          // Aplica o template em uma região do layout '.description'
+            );*/
+
         }
+
     };
 
     //endregion
@@ -354,10 +481,12 @@ $.fn.api.settings.api = {};
 
     TShark.prototype.create_before = function (sender, settings) {
 
+        // Libera
+        return true;
     };
 
     TShark.prototype.create_callback = function (mod, response) {
-
+        tshark.bind();
     };
 
     //endregion
@@ -367,6 +496,8 @@ $.fn.api.settings.api = {};
 
     TShark.prototype.edit_before = function (sender, settings) {
 
+        // Libera
+        return true;
     };
 
     TShark.prototype.edit_callback = function (mod, response) {
@@ -386,6 +517,8 @@ $.fn.api.settings.api = {};
      */
     TShark.prototype.exec_before = function(sender, settings){
 
+        // Libera
+        return true;
     };
 
     /**
@@ -397,8 +530,27 @@ $.fn.api.settings.api = {};
     TShark.prototype.exec_callback = function (mod, response) {
 
         if (response['data']) {
-            resetDataCallback('exec', response['data'], mod);
+            mod.data.reset(response['data']);
         }
+
+    };
+
+    //endregion
+
+
+    //region :: API Update
+
+    TShark.prototype.update_before = function (sender, settings) {
+
+        // Libera
+        return true;
+    };
+
+    /**
+     * Exibe mensagens vindas do server
+     * @since 06/10/15
+     */
+    TShark.prototype.update_callback = function (mod, response) {
 
     };
 
@@ -459,13 +611,6 @@ $.fn.api.settings.api = {};
      * @since 06/10/15
      */
     TShark.prototype.insert_callback = function (params) {
-    };
-
-    /**
-     * Exibe mensagens vindas do server
-     * @since 06/10/15
-     */
-    TShark.prototype.update_callback = function (params) {
     };
 
     /**

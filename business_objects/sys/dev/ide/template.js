@@ -74,6 +74,7 @@ function _MOD_(){
             search: [ 
                 _SEARCH_
             ],
+            limit: 250,
             showSQL: 0
         }
 

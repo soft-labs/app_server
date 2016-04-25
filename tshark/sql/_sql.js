@@ -28,9 +28,26 @@ SQL.prototype.init = function(connParams){
     // Parametros de conexão
     this.connParams = connParams;
 
-    /**
-     * Armazena estrutura extraida do provider
-     * @type {{
+};
+
+
+// region :: Utils
+
+/**
+ * Retorna um pacote no formato padrão
+ * @returns {{index: {}, rows: Array, page: number}}
+ */
+function getDataPack(){
+    return {
+        index: {},
+        rows: [],
+        page: 0
+    };
+}
+
+/**
+ * Retorna sqlPArams
+ * @type {{
      *      table   : '',
      *      alias   : '',
      *      distinct: '',
@@ -45,13 +62,24 @@ SQL.prototype.init = function(connParams){
      *      limit   : {max: 0, page: 0},
      *      showSQL : false
      * }}
-     */
-    this.sqlParams = {};
-
-};
-
-
-// region :: Utils
+ */
+function getSqlParams() {
+    return {
+        table   : '',
+        alias   : '',
+        distinct: '',
+        fields  : [],
+        joins   : [],
+        meta    : {},
+        key     : {field: '', val: ''},
+        where   : [],
+        group   : [],
+        having  : [],
+        order   : [],
+        limit   : {max: 0, page: 0},
+        showSQL : false
+    }
+}
 
 /**
  * Verifica se o texto é uma data válida
@@ -92,8 +120,9 @@ function isDate(str){
 SQL.prototype._parseProvider = function(provider, obj){
 
     // Ajusta sqlParams
-    this.sqlParams = {
+    var sqlParams = {
         key     : {field: '', val: ''},
+        distinct: provider['distinct'] || ' distinct ',
         fields  : provider['fields'] || {},
         meta    : {},
         joins   : [],
@@ -114,23 +143,33 @@ SQL.prototype._parseProvider = function(provider, obj){
             , alias = 'tb' + s;
 
         // Tabela principal
-        if (!this.sqlParams['table']) {
-            this.sqlParams.table = source.table;
-            this.sqlParams.key.field = source.metadata.key;
-            this.sqlParams.key.val = obj.params[source.metadata.key];
-            this.sqlParams.alias = alias;
-            this.sqlParams.distinct = provider.sources[s]['distinct'];
+        if (!sqlParams['table']) {
+            sqlParams.table = source.table;
+            sqlParams.key.field = source.metadata.key;
+            sqlParams.key.val = obj.params[source.metadata.key];
+            sqlParams.alias = alias;
         }
 
         // Fields
-        this.db.parseFields(provider.sources[s], fields, source.metadata.fields, alias);
+        this.db.parseFields(sqlParams, provider.sources[s], fields, source.metadata.fields, alias);
 
         // Joins
         if (provider.sources[s]['join']) {
-            this.db.parseJoin(provider.sources[s]['join'], source.table, alias, '');
+            this.db.parseJoin(sqlParams, provider.sources[s]['join'], source.table, alias, '');
         }
     }
-    
+
+    // Processa order
+    var tmp = '';
+    sqlParams.order.forEach((order) => {
+        tmp += '\n      ' + (typeof order == 'string' 
+            ? order 
+            : 'tb' + order[0] + '.' + order[1] + ' ' + order[2]
+        );
+    });
+    sqlParams.order = tmp;
+
+    return sqlParams;
 };
 
 
@@ -141,13 +180,13 @@ SQL.prototype._parseProvider = function(provider, obj){
  * @param meta_fields
  * @param alias
  */
-SQL.prototype._parseFields = function(prov, ctx_fields, meta_fields, alias){
+SQL.prototype._parseFields = function(sqlParams, prov, ctx_fields, meta_fields, alias){
 
     // Fields forçados
     if (prov['force_fields'] && util.isArray(prov['force_fields'])){
         prov['force_fields'].forEach(function(f){
-            if (!this.sqlParams.fields[f]) {
-                this.sqlParams.fields[f] = alias;
+            if (!sqlParams.fields[f]) {
+                sqlParams.fields[f] = alias;
             }
         }, this);
 
@@ -156,7 +195,7 @@ SQL.prototype._parseFields = function(prov, ctx_fields, meta_fields, alias){
         for (var f in meta_fields){
 
             // Primeiro a chegar entra
-            if (!this.sqlParams.fields[f]) {
+            if (!sqlParams.fields[f]) {
                 var ok = false;
 
                 // Acrescenta _key
@@ -181,8 +220,8 @@ SQL.prototype._parseFields = function(prov, ctx_fields, meta_fields, alias){
                 }
 
                 if (ok) {
-                    this.sqlParams.fields[f] = alias;
-                    this.sqlParams.meta[f] = meta_fields[f];
+                    sqlParams.fields[f] = alias;
+                    sqlParams.meta[f] = meta_fields[f];
                 }
             }
         }
@@ -197,17 +236,17 @@ SQL.prototype._parseFields = function(prov, ctx_fields, meta_fields, alias){
                     , tipo = f[1]
                     , fnc  = f[2];
                 
-                if (!this.sqlParams.fields['__as__']) {
-                    this.sqlParams.fields['__as__'] = [];
+                if (!sqlParams.fields['__as__']) {
+                    sqlParams.fields['__as__'] = [];
                 }
                 
                 if (tipo == 'as') {
-                    this.sqlParams.fields['__as__'].push(
+                    sqlParams.fields['__as__'].push(
                         alias + '.' + fld + ' as ' + fnc
                     );
                 
                 } else if (tipo == 'func'){
-                    this.sqlParams.fields['__as__'].push(
+                    sqlParams.fields['__as__'].push(
                         '(' + fnc + ') as ' + fld
                     );
                 }
@@ -226,15 +265,15 @@ SQL.prototype._parseFields = function(prov, ctx_fields, meta_fields, alias){
  * @param alias
  * @param nolock
  */
-SQL.prototype._parseJoin = function(join, table, alias, nolock){
+SQL.prototype._parseJoin = function(sqlParams, join, table, alias, nolock){
 
     // Join implicito
     if (join['tipo'] == 'implicit') {
-        this.sqlParams.joins.push(", " + table + " as " + alias + ' ' + nolock);
+        sqlParams.joins.push(", " + table + " as " + alias + ' ' + nolock);
 
     // Join 'à mão'
     } else if (join['tipo'] == 'sql'){
-        this.sqlParams.joins.push(join['sql']);
+        sqlParams.joins.push(join['sql']);
 
     // Join normal
     } else {
@@ -274,7 +313,7 @@ SQL.prototype._parseJoin = function(join, table, alias, nolock){
             that_key = that_alias + '.' + join['on'][1];
         }
 
-        this.sqlParams.joins.push(
+        sqlParams.joins.push(
             util.format(template,
                 join['tipo'], table, alias + ' ' + nolock, this_key, opt, that_key
             )
@@ -287,11 +326,11 @@ SQL.prototype._parseJoin = function(join, table, alias, nolock){
  * Processa where
  * @param params { {} }
  */
-SQL.prototype._parseWhere = function(params){
+SQL.prototype._parseWhere = function(sqlParams, params){
 
     var sql     = ''
         , templ = ' %s tb%s.%s %s %s ';
-    this.sqlParams.where.forEach(function(where){
+    sqlParams.where.forEach(function(where){
 
         // Where digitado
         if (typeof where == 'string'){
@@ -336,24 +375,54 @@ SQL.prototype._parseWhere = function(params){
  * Processa req.query e alimenta search
  * @param query { string }
  */
-SQL.prototype._parseSearch = function(query){
+SQL.prototype._parseSearch = function(sqlParams, query){
     var sql     = ''
-        ,qry    = query.split(' ');
+        , orig  = (typeof query == 'string'
+                ? query
+                : query.pop()
+        )
+        , qry   = orig.toLowerCase().split(' ')
+        , exclude = ['o', 'a', 'e', 'do', 'da', 'das']
+    ;
 
     var glue = ' AND ', maior = false, menor = false;
-    this.sqlParams['search'].forEach(function(param){
+    sqlParams['search'].forEach(function(param){
 
         switch (param.param.toUpperCase()) {
 
-            case 'LIKE':
+            case 'LIKE FULL':
+                var abre = " ( ";
                 qry.forEach(function (q) {
-                    sql += glue + 'tb' + param.alias + '.' + param.field + " LIKE '%" + q + "%'";
-                    glue = ' OR ';
+                    if (q.length > 3) {
+                        sql += glue + abre + 'tb' + param.alias + '.' + param.field + " LIKE '%" + q + "%'";
+                        glue = ' OR ';
+                        abre = "";
+                    }
                 });
+                if (orig.length > 3) {
+                    sql += glue + 'tb' + param.alias + '.' + param.field + " LIKE '%" + orig + "%'";
+                }
+                sql += abre ? "" : " ) ";
+                break;
+
+            case 'LIKE':
+                sql += glue + 'tb' + param.alias + '.' + param.field + " LIKE '%" + orig + "%'";
+                break;
+            
+            case 'LIKE INICIO':
+                sql += glue + 'tb' + param.alias + '.' + param.field + " LIKE '%" + orig + "'";
+                break;
+
+            case 'LIKE FIM':
+                sql += glue + 'tb' + param.alias + '.' + param.field + " LIKE '" + orig + "%'";
                 break;
 
             case 'IN':
                 sql += glue + 'tb' + param.alias + '.' + param.field + " IN ('" + qry.join("', '") + "')";
+                break;
+
+            case '=':
+                sql += glue + 'tb' + param.alias + '.' + param.field + " = '" + orig + "' ";
                 break;
 
             case '>':
@@ -401,18 +470,6 @@ SQL.prototype._parseSearch = function(query){
 //region :: CRUD
 
 /**
- * Retorna um pacote no formato padrão
- * @returns {{index: {}, rows: Array, page: number}}
- */
-function getDataPack(){
-    return {
-        index: {},
-        rows: [],
-        page: 0
-    };
-}
-
-/**
  * Executa o parsing do provider, e se for um select para insert
  * interrompe o processo enviando um row default para o client.
  * @param provider
@@ -425,22 +482,23 @@ SQL.prototype._select = function *(provider, obj, meta){
     var data = getDataPack()
         , sql = ''
         , new_key = false
+        , sqlParams = getSqlParams()
     ;
 
     // Ajusta sqlParams
     if (typeof provider == 'string') {
         sql = provider;
     } else {
-        this.db.parseProvider(provider, obj);
-        new_key = (this.sqlParams.key.val == 'NEW_KEY');
+        sqlParams = this.db.parseProvider(provider, obj);
+        new_key = (sqlParams.key.val == 'NEW_KEY');
     }
     
     // Row de insert
     if (new_key){
         var row = {_key_: 'NEW_KEY'};
-        for (var f in this.sqlParams.fields) {
+        for (var f in sqlParams.fields) {
             var val = ''
-                , tipo = this.sqlParams.meta[f]['tipo'] || {}
+                , tipo = sqlParams.meta[f]['tipo'] || {}
                 , def = tipo['default']
                 , type = tipo['type']
                 ;
@@ -487,11 +545,11 @@ SQL.prototype._select = function *(provider, obj, meta){
 
     // Normal
     } else {
-        sql = sql || this.db.parseSQL(this.sqlParams, obj);
+        sql = sql || this.db.parseSQL(sqlParams, obj);
         
         var results = yield this.db._exec(sql, obj);
         
-        return yield this.db.processResults(results, obj, sql, meta);
+        return yield this.db.processResults(sqlParams, results || [], obj, sql, meta);
     }
 };
 
@@ -501,11 +559,11 @@ SQL.prototype._select = function *(provider, obj, meta){
  * @param results
  * @param sql
  */
-SQL.prototype._processResults = function *(results, obj, sql, meta){
+SQL.prototype._processResults = function *(sqlParams, results, obj, sql, meta){
     meta = meta || {};
     var ndx   = {}
-        , key = (this.sqlParams.key
-            ? this.sqlParams.key.field
+        , key = (sqlParams['key'] && sqlParams.key.field
+            ? sqlParams.key.field
             : meta['key']
                 ? meta.key
                 : ''
@@ -526,7 +584,7 @@ SQL.prototype._processResults = function *(results, obj, sql, meta){
 
         // Em raros casos onde não houver fields pro sql, será forçado um '*', e
         // essa entrada aqui garantirá que todos os fields fiquem em lower
-        if (db.sqlParams['force_lower']){
+        if (sqlParams['force_lower']){
             var k, keys = Object.keys(row);
             var n = keys.length;
             var newobj = {};
@@ -545,15 +603,15 @@ SQL.prototype._processResults = function *(results, obj, sql, meta){
     }
 
     // Página
-    data.page = (this.sqlParams.limit
-        ? this.sqlParams.limit.page +1
+    data.page = (sqlParams.limit
+        ? sqlParams.limit.page +1
         : meta['limit'] && meta.limit['page']
             ? meta.limit.page
             : 1
     );
 
     // ShowSQL
-    if (this.sqlParams.showSQL) {
+    if (sqlParams.showSQL) {
         data['sql'] = sql;
         log.msg('SQL gerado:', sql);
     }

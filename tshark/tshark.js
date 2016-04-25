@@ -207,6 +207,13 @@ TShark.prototype.render = function *(templId, ctx, base){
         }
     });
 
+    if(!templ){
+        var arq = 'business_objects/' + templId;
+        if (!templ && fs.existsSync(arq)) {
+            templ = arq;
+        }
+    }
+
     if (templ){
         try {
             html = jade.renderFile(templ, ctx || {});
@@ -545,14 +552,49 @@ router.post(/^\/(\w+)\/tshark\/.*/, function *(next) {
          * Executa a função no objeto
          */
         try {
-            this.body = yield mod[func](this);
+            var res = yield mod[func](this);
+            if (typeof res != 'object'){
+                this.body = {
+                    result: res
+                };
+            } else {
+                this.body = res;
+            }
+            this.body['func'] = func;
+            this.state.api.call = this.state.api.path.pop();
         } catch (e){
             console.log(e);
         }
 
     } else {
-        this.body = yield mod.insert();
+        this.body = yield mod.insert(this);
     }
+
+    /**
+     * Finaliza
+     */
+    yield next;
+
+});
+
+/**
+ * Entrada de API :: PUT
+ *   Oferece suporte para apis:
+ *    - update  | url: owner/pack/mod                    | Atualiza um registro no mod
+ * 25/04/16
+ */
+router.put(/^\/(\w+)\/tshark\/.*/, function *(next) {
+
+    /**
+     * Instancia o módulo
+     * @type BizObject
+     */
+    var mod   = this.app.engine.initObj(this.state.api.path, this)
+        , len = this.state.api.path.length
+    ;
+
+    // Execução de função
+    this.body = yield mod.update(this);
 
     /**
      * Finaliza
@@ -588,6 +630,7 @@ function endRoute(ctx){
     // Ajusta o pacote de retorno
     ctx.body = ctx.body || {};
     ctx.body['callback'] = ctx.state.api.call;
+    ctx.body['path'] = ctx.state.api.path.splice(0, 3);
 
     // Fecha
     console.log('Time finish: ', Date.now());

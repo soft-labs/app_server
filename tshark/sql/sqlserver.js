@@ -85,10 +85,10 @@ SQLServer.prototype.parseSQL = function(sqlParams, obj){
         sql += '\n  GROUP BY ' + sqlParams.group.join(', ');
     }
     if (sqlParams.having.length){
-        sql += '\n  HAVING ' + sqlParams.havend.join(', ');
+        sql += '\n  HAVING ' + sqlParams.having.join(', ');
     }
-    if (sqlParams.order.length){
-        sql += '\n  ORDER BY ' + sqlParams.order.join('\n');
+    if (sqlParams.order){
+        sql += '\n  ORDER BY ' + sqlParams.order;
     }
 
     if (sqlParams.limit.max){

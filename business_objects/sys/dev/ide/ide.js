@@ -99,9 +99,10 @@ function Ide(){
      * @returns {Promise}
      */
     this.listModulos = function *(ctx){
+        var rows = this.readDir(module.paths[0] + '/business_objects');
         return {
             data: {
-                rows: this.readDir(module.paths[0] + '/business_objects')
+                rows: rows
             }
         };
     };
@@ -142,9 +143,11 @@ function Ide(){
         };
     };
 
-    
-    
 
+    /**
+     * Gerador de módulos
+     * @param ctx
+     */
     this.createPackage = function *(ctx){
         var connId  = this.params['connID']
             , fs    = require('fs-extra')
@@ -186,10 +189,13 @@ function Ide(){
                 , from = "'" + owner + "', '" + pack + "', '" + mod['name'] + "'"
                 , t_tbl = mod['name'].split('_')
                 , joins = ''
+                , jade = ''
                 , arq = templ
                 , key = ''
+                , keys = []
                 , lbl_field = ''
                 , def_field = ''
+                , first_no_key_field = ''
                 , fields = ''
                 , linhas = ''
                 , ctrls = ''
@@ -227,6 +233,11 @@ function Ide(){
                     _fld_no_key = _field.substring(0, _field.length - 4);
                     _fld_no_key_s = _field.substring(0, _field.length - 5);
                     _split    = _fld_no_key.split('_');
+                    keys.push(_field);
+                } else {
+                    if (!first_no_key_field){
+                        first_no_key_field = _field;
+                    }
                 }
                 
                 if (_primary){
@@ -237,8 +248,8 @@ function Ide(){
                 if (_field + 's' == t_tbl){
                     lbl_field = _field;
                     def_field = "'" + lbl_field + "'";
-                    search = "{alias: 0, field: '" + lbl_field + "',  param: types.search.like }";
-                    order = "[0, '" + lbl_field + "', 'desc']";
+                    search = "{alias: 0, field: '" + lbl_field + "',  param: types.search.like_full }";
+                    order = "[0, '" + lbl_field + "', 'asc']";
                     ctrls = _field + ': {' +
 "\n                    extra_right: { class: '', tag: '' }," +
 "\n                    extra_left:  { class: '', tag: '' }" +
@@ -316,13 +327,31 @@ function Ide(){
 
             fs.writeFileSync(mod_dir + '/' + mod['name'] + '.js', arq);
 
+            jade  = '//';
+            jade += '\n    Template default para: ' + owner + '.' + pack + '.' + mod['name'];
+            jade += '\n    Criado em ' + hoje + '\n';
+            jade += "\n.ui.fluid.card(rv-each-row='data.rows')";
+            jade += '\n    .content';
+            jade += '\n        .header {row.' + key + '} - {row.' + (lbl_field ? lbl_field : first_no_key_field) + '}';
+            jade += '\n        .meta Keys: ' + (keys.length ? keys.join(', ') : ' - sem dependências -');
+            jade += '\n        .description\n';
+            jade += '\n    .extra.content';
+            jade += '\n        span.left.floated.button';
+            jade += "\n            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row." + key + "')";
+            jade += "\n                i.edit.icon";
+            jade += "\n                | Editar\n";
+            jade += '\n        span.right.floated.button';
+            jade += "\n            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row." + key + "')";
+            jade += "\n                i.delete.icon";
+            jade += "\n                | Remover\n";
+
+            fs.writeFileSync(mod_dir + '/' + 'list.jade', jade);
         }
 
     };
 
     //endregion
 
-    return true;
 }
 
 function camelCase(str, sep){
