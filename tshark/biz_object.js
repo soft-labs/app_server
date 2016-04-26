@@ -37,89 +37,6 @@ BizObject.prototype.getReturnObj = function (){
     };
 };
 
-
-/**
- * Retorna um provider
- * @returns { {Promise} }
- */
-BizObject.prototype.getProvider = function (provId, from){
-
-    // Ajusta o dono
-    var mod = this;
-
-    if (typeof provId == 'string') {
-        if (from) {
-            mod = require('business_objects/'
-                + from[0] + '/'
-                + from[1] + '/'
-                + from[2] + '/'
-                + from[3] + '.js'
-            );
-        }
-
-        // Pega o provider
-        var provider = mod.providers[provId];
-        if (!provider) {
-            log.erro('Provider ' + provId + 'não encontrado');
-        }
-
-        provider.id = provId;
-        for (var s in provider.sources) {
-            var src = provider.sources[s]
-                , s_own = mod.path.owner
-                , s_pck = mod.path.pack
-                , s_tbl
-            ;
-
-            switch (src.from.length) {
-                case 1:
-                    s_tbl = src.from[0];
-                    break;
-
-                case 2:
-                    s_pck = src.from[0];
-                    s_tbl = src.from[1];
-                    break;
-
-                case 3:
-                    s_own = src.from[0];
-                    s_pck = src.from[1];
-                    s_tbl = src.from[2];
-                    break;
-
-                default:
-                    log.erro('Source em formato invalido no provider');
-            }
-
-            // Recupera
-            try {
-                var obj = require('business_objects/'
-                    + s_own + '/'
-                    + s_pck + '/'
-                    + s_tbl + '/'
-                    + s_tbl + '.js'
-                );
-                var m = new obj();
-                provider.sources[s]['src'] = m.source;
-            } catch (e) {
-                log.erro(e,
-                    'getProvider: ' + mod.path.asString + ' - ' + provId + '\n' +
-                    'business_objects/'
-                    + s_own + '/'
-                    + s_pck + '/'
-                    + s_tbl + '/'
-                    + s_tbl + '.js'
-                );
-            }
-        }
-    } else {
-        provider = provId;
-    }
-
-    return provider;
-};
-
-
 /**
  * Retorna um form
  * @param provider
@@ -205,8 +122,7 @@ BizObject.prototype.getForm = function (provider){
 // endregion
 
 
-// region :: APIs
-
+//region :: APIs
 
 /**
  * Implementa API GET em módulos
@@ -270,7 +186,6 @@ BizObject.prototype.get = function *(ctx){
     
 };
 
-
 /**
  * Implementa API de forms para objetos de negócio
  *    - get  | url: owner/pack/mod/_new                  | Retorna um form para pré inserção
@@ -332,43 +247,138 @@ BizObject.prototype.form = function *(ctx){
     return ret;
 };
 
-
 /**
  * Implementa API PUT em módulos
- *    - update  | url: owner/pack/mod                    | Atualiza um registro no mod
+ *    - update  | url: owner/pack/mod/123                | Atualiza um registro no mod
  */
 BizObject.prototype.update = function *(ctx){
-    var dts = yield this.engine.getConnection(ctx);
-    if (dts) {
-
-        // Recupera provider
-        var provId = (this.params['provider'] && this.params['provider']['id']
-                ? this.params['provider']['id']
-                : 'update'
-        );
-        
-        // Pega o provider
-        var prov = yield this.getProvider(provId);
-
-        // Executa
-        return yield dts.update(prov, this);
-    }
+    return yield this.change('update', ctx);
 };
 
+/**
+ * Implementa API POST em módulos
+ *    - insert  | url: owner/pack/mod                    | Insere um novo registro no mod
+ */
+BizObject.prototype.insert = function *(ctx){
+    return yield this.change('insert', ctx);
+};
 
-// endregion
+/**
+ * Implementa API DELETE em módulos
+ *    - delete  | url: owner/pack/mod/123                 | Remove um registro no mod
+ */
+BizObject.prototype.delete = function *(ctx){
+
+    // Ajusta row
+    this.params.row = this.params['row'] || {};
+    this.params.row[this.source.metadata.key] = this.params.row[this.source.metadata.key] || this.params.key;
+
+    // Executa
+    return yield this.change('delete', ctx);
+};
+
+//endregion
 
 
-//region :: CRUD
+//region :: Dados
 
+/**
+ * Retorna um provider
+ * @returns { {Promise} }
+ */
+BizObject.prototype.getProvider = function (provId, from){
+
+    // Ajusta o dono
+    var mod = this;
+
+    if (typeof provId == 'string') {
+        if (from) {
+            mod = require('business_objects/'
+                + from[0] + '/'
+                + from[1] + '/'
+                + from[2] + '/'
+                + from[3] + '.js'
+            );
+        }
+
+        // Pega o provider
+        var provider = mod.providers[provId];
+        if (!provider) {
+            log.erro('Provider ' + provId + 'não encontrado');
+        }
+
+        provider.id = provId;
+        for (var s in provider.sources) {
+            var src = provider.sources[s]
+                , s_own = mod.path.owner
+                , s_pck = mod.path.pack
+                , s_tbl
+                ;
+
+            switch (src.from.length) {
+                case 1:
+                    s_tbl = src.from[0];
+                    break;
+
+                case 2:
+                    s_pck = src.from[0];
+                    s_tbl = src.from[1];
+                    break;
+
+                case 3:
+                    s_own = src.from[0];
+                    s_pck = src.from[1];
+                    s_tbl = src.from[2];
+                    break;
+
+                default:
+                    log.erro('Source em formato invalido no provider');
+            }
+
+            // Recupera
+            try {
+                var obj = require('business_objects/'
+                    + s_own + '/'
+                    + s_pck + '/'
+                    + s_tbl + '/'
+                    + s_tbl + '.js'
+                );
+                var m = new obj();
+                provider.sources[s]['src'] = m.source;
+            } catch (e) {
+                log.erro(e,
+                    'getProvider: ' + mod.path.asString + ' - ' + provId + '\n' +
+                    'business_objects/'
+                    + s_own + '/'
+                    + s_pck + '/'
+                    + s_tbl + '/'
+                    + s_tbl + '.js'
+                );
+            }
+        }
+    } else {
+        provider = provId;
+    }
+
+    return provider;
+};
+
+/**
+ * Implementa uma operação de recuperação de dados
+ * @param ctx
+ * @param provider
+ * @param params
+ * @param from
+ * @returns {*}
+ */
 BizObject.prototype.select = function *(ctx, provider, params, from){
     var dts = yield this.engine.getConnection(ctx);
     if (dts) {
 
         // Pega o provider
         var prov = (typeof provider == 'string'
-            ? yield this.getProvider(provider, from)
-            : provider
+                ? yield this.getProvider(provider, from)
+                : provider
         );
 
         // Customiza
@@ -379,19 +389,41 @@ BizObject.prototype.select = function *(ctx, provider, params, from){
     }
 };
 
+/**
+ * Implementa uma operação de alteração de dados
+ * @param op
+ * @param ctx
+ * @returns {{result: boolean}}
+ */
+BizObject.prototype.change = function *(op, ctx){
+    var dts = yield this.engine.getConnection(ctx);
+    if (dts) {
 
-BizObject.prototype.insert = function(provider, params){
+        // Recupera provider
+        var provId = (this.params['provider'] && this.params['provider']['id']
+                ? this.params['provider']['id']
+                : 'update'
+        );
 
+        // Pega o provider
+        var prov = yield this.getProvider(provId)
+            , res = {
+                result: false
+            }
+        ;
+
+        // Executa
+        switch (op){
+            case 'insert' : res.result = yield dts.insert(prov, this); break;
+            case 'update' : res.result = yield dts.update(prov, this); break;
+            case 'delete' : res.result = yield dts.delete(prov, this); break;
+        }
+
+        // Retorna
+        return res;
+    }
 };
 
-
-BizObject.prototype.delete = function(provider, params){
-
-};
-
-BizObject.prototype.exec = function(provider, params){
-
-};
 
 //endregion
 

@@ -74,11 +74,11 @@ SQLServer.prototype.parseSQL = function(sqlParams, obj){
     sql += '\n  WHERE 1=1 ';
 
     // Processa where
-    sql += this.parseWhere(obj.params);
+    sql += this.parseWhere(sqlParams.where, obj.params);
 
     // Processa search
     if (sqlParams['search'] && obj.params['query']){
-        sql += this.parseSearch(obj.params['query']);
+        sql += this.parseSearch(sqlParams, obj.params['query']);
     }
 
     if (sqlParams.group.length){
@@ -126,8 +126,8 @@ SQLServer.prototype.parseSQL = function(sqlParams, obj){
  * }}
  * @param obj { BizObject }
  */
-SQLServer.prototype.parseProvider = function(provider, obj){
-    this.driver._parseProvider(provider, obj);
+SQLServer.prototype.parseProvider = function(sqlParams, provider, obj){
+    return this.driver._parseProvider(sqlParams, provider, obj);
 };
 
 
@@ -138,8 +138,8 @@ SQLServer.prototype.parseProvider = function(provider, obj){
  * @param meta_fields
  * @param alias
  */
-SQLServer.prototype.parseFields = function(prov, ctx_fields, meta_fields, alias){
-    return this.driver._parseFields(prov, ctx_fields, meta_fields, alias);
+SQLServer.prototype.parseFields = function(sqlParams, prov, ctx_fields, meta_fields, alias){
+    return this.driver._parseFields(sqlParams, prov, ctx_fields, meta_fields, alias);
 };
 
 
@@ -150,8 +150,8 @@ SQLServer.prototype.parseFields = function(prov, ctx_fields, meta_fields, alias)
  * @param alias
  * @param nolock
  */
-SQLServer.prototype.parseJoin = function(join, table, alias, nolock) {
-    return this.driver._parseJoin(join, table, alias, ' (nolock) ');
+SQLServer.prototype.parseJoin = function(sqlParams, join, table, alias, nolock) {
+    return this.driver._parseJoin(sqlParams, join, table, alias, ' (nolock) ');
 };
 
 
@@ -160,8 +160,8 @@ SQLServer.prototype.parseJoin = function(join, table, alias, nolock) {
  * @param req { req }
  * @returns { string }
  */
-SQLServer.prototype.parseWhere = function(req){
-    return this.driver._parseWhere(req);
+SQLServer.prototype.parseWhere = function(whereParams, params){
+    return this.driver._parseWhere(whereParams, params);
 };
 
 
@@ -170,8 +170,31 @@ SQLServer.prototype.parseWhere = function(req){
  * @param req { req }
  * @returns { string }
  */
-SQLServer.prototype.parseSearch = function(req){
-    return this.driver._parseSearch(req);
+SQLServer.prototype.parseSearch = function(sqlParams, query){
+    return this.driver._parseSearch(sqlParams, query);
+};
+
+//endregion
+
+
+//region :: Formatação
+
+/**
+ * Formata um valor para data para salvar no banco
+ * @param value
+ * @returns {string}
+ */
+SQLServer.prototype.formatDateIn = function(value){
+    return "STR_TO_DATE( '" + value + "', '%d/%m/%Y')";
+};
+
+/**
+ * Formata um valor para data e hora para salvar no banco
+ * @param value
+ * @returns {string}
+ */
+SQLServer.prototype.formatDateTimeIn = function(value){
+    return "STR_TO_DATE( '" + value + "', '%d/%m/%Y %H:%i:%s')";
 };
 
 //endregion
@@ -200,6 +223,34 @@ SQLServer.prototype.query = function *(sql, obj, meta){
 };
 
 /**
+ * Executa um UPDATE com base em sqlParams
+ * @param provider
+ * @param obj { BizObject }
+ */
+SQLServer.prototype.update = function *(provider, obj){
+    return yield this.driver._update(provider, obj);
+};
+
+/**
+ * Executa um INSERT com base em sqlParams
+ * @param provider
+ * @param obj { BizObject }
+ */
+SQLServer.prototype.insert = function *(provider, obj){
+    return yield this.driver._insert(provider, obj);
+};
+
+/**
+ * Executa um DELETE com base em sqlParams
+ * @param provider
+ * @param obj { BizObject }
+ */
+SQLServer.prototype.delete = function *(provider, obj){
+    return yield this.driver._delete(provider, obj);
+};
+
+
+/**
  * Executa o statement
  * @param sql
  * @returns {*}
@@ -225,6 +276,27 @@ SQLServer.prototype._exec = function *(sql){
  */
 SQLServer.prototype.processResults = function *(results, obj, sql, meta){
     return yield this.driver._processResults(results.rows, obj, sql, meta);
+};
+
+/**
+ * Processa o resultado de um INSERT ou UPDATE
+ * @param results
+ * @param obj
+ * @returns {*|boolean}
+ */
+SQLServer.prototype.processChangeResults = function *(op, results, obj){
+    var ok = false;
+
+    if (results){
+        if (op == 'upd'){
+            ok = results['changedRows'];
+        } else {
+            ok = results['insertId']
+        }
+    }
+
+    return ok;
+
 };
 
 //endregion

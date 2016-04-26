@@ -23,7 +23,7 @@ Log.prototype.erro = function(err, extra) {
 
         }
     }
-    return err;
+    return false;
 };
 
 /**

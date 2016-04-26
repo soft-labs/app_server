@@ -76,6 +76,19 @@ function _MOD_(){
             ],
             limit: 250,
             showSQL: 0
+        },
+
+        update: {
+            sources: {
+                0: {
+                    from: [_SOURCE_],
+                    key: '_KEY_',
+                    where: [
+                        
+                    ]
+                }
+            },
+            showSQL: 0
         }
 
     };

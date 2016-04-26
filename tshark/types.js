@@ -86,7 +86,8 @@ Types.prototype.comp = {
 
     date        : { type: 'date',       comp: 'inpDate',        default: 'NOW' },
     time        : { type: 'time',       comp: 'inpTime',        default: 'NOW' },
-    datetime    : { type: 'datetime',   comp: 'inpDateTime',    default: 'NOW' }
+    datetime    : { type: 'datetime',   comp: 'inpDateTime',    default: 'NOW' },
+    timestamp   : { type: 'datetime',   comp: 'inpDateTime',    default: 'NOW' },
 };
 
 

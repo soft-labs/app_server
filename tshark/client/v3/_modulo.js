@@ -167,7 +167,7 @@ TShark.prototype.modulo = function(path){
 
         settings.data.row = this.data.row;
         
-        if (this.data.row[this.data.key] == 'NEW_KEY'){
+        if (this.data.row['_key_'] == 'NEW_KEY'){
             return 'insert';
         } else {
             $(sender).data('key', this.data.row[this.data.key]);

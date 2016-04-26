@@ -16,18 +16,6 @@ function Filiais(){
         row['bplname'] += 'estisssssve no get row!!!';
     };
 
-    this.providers = {
-
-        default: {
-            xsearch: [
-                {alias: '5', field: 'teste',  param: types.search.menor },
-                {alias: '5', field: 'listnum',  param: types.search.maior_igual }
-            ],
-            showSQL: 0
-        }
-
-    };
-
 }
 
 // Types

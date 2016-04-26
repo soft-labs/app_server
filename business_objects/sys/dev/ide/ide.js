@@ -314,12 +314,12 @@ function Ide(){
             arq = arq.replace(new RegExp('_MOD_', 'g'), camelCase(mod['name']));
             arq = arq.replace(new RegExp('_ID_', 'g'), mod['name']);
             arq = arq.replace('_DATA_', hoje);
-            arq = arq.replace('_KEY_', key);
+            arq = arq.replace(new RegExp('_KEY_', 'g'), key);
             arq = arq.replace('_DEF_FIELD_', def_field);
             arq = arq.replace('_FIELDS_', fields);
             arq = arq.replace('_LINHAS_', linhas);
             arq = arq.replace('_CTRLS_', ctrls);
-            arq = arq.replace('_SOURCE_', "'" + owner + "', '" + pack + "', '" + mod['name'] + "'");
+            arq = arq.replace(new RegExp('_SOURCE_', 'g'), "'" + owner + "', '" + pack + "', '" + mod['name'] + "'");
             arq = arq.replace('_JOINS_', joins);
             arq = arq.replace('_WHERE_', "['AND', 0, '" + key + "', types.where.check]");
             arq = arq.replace('_ORDER_', order || "['0', '" + key + "', 'desc']");

@@ -21,10 +21,7 @@ function TShark(){
      * Armazena os rivet binds que forem associados
      */
     this.bounded = {};
-
-
-    // Callbacks
-    this._reg_callbacks = {};
+    
 }
 
 // Globals
@@ -42,7 +39,8 @@ var CONSOLE_ON = true;
      * @since 06/10/15
      */
     TShark.prototype.init = function (options) {
-
+        options = options || {};
+        
         // Bind de APIs generico
         var d = $("<div>", {
             id: '_direct_api_helper_',
@@ -51,6 +49,10 @@ var CONSOLE_ON = true;
 
         $('body')
             .append(d);
+        
+        if(options['register']){
+            this.register(options['register']);
+        }
     };
 
     /**
@@ -211,6 +213,7 @@ var CONSOLE_ON = true;
                         )
                     ));
             }
+            
 
             // Novo bind
             this.bounded[id].bound = rivets.bind($(id), obj);

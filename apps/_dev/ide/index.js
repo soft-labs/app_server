@@ -7,10 +7,11 @@ var tshark = tshark || new TShark();
 $(document).ready(function() {
 
     // Inicializa TShark
-    tshark.init();
-
-    // Registrando o módulo da IDE 
-    tshark.register('sys.dev.ide');
+    tshark.init({
+        register: [
+            'sys.dev.ide'
+        ]
+    });
 
     // Inicializa o app
     app.init(); 
@@ -30,7 +31,10 @@ var app = {
     // Inicializador da aplicação
     init: function () {
 
-        // Bind
+        // Registrando o módulo da IDE
+        //tshark.register('sys.dev.ide');
+
+        // Bind interface
         tshark.bind('#ide', this);
 
         // Carga de dados
@@ -39,12 +43,6 @@ var app = {
 
         // Ajusta o dataset de package
         this.package.modulos.key = "name";
-
-        // Capturando o callback de onlist
-        tshark.registerCallback('onAfterList', this, this.onAfterList);
-
-        // Capturando o callback de onform
-        tshark.registerCallback('onAfterForm', this, this.onAfterForm);
 
     },
 
@@ -127,6 +125,39 @@ var app = {
             .modal('setting', 'transition', 'fade')
             .modal('setting', 'allowMultiple', true)
             .modal('show');
+    },
+
+    /**
+     * Exibe mensagem após a operação de update
+     * @param mod
+     * @param response
+     */
+    onAfterUpdate: function(mod, response){
+        this.checkSave(mod, response);
+    },
+
+    /**
+     * Exibe mensagem após a operação de insert
+     * @param mod
+     * @param response
+     */
+    onAfterInsert: function(mod, response){
+        this.checkSave(mod, response);
+    },
+
+    /**
+     * Centraliza a exibição de mensagens de update
+     * e insert.
+     * @param mod
+     * @param response
+     */
+    checkSave: function(mod, response){
+        if (response['result'] && response['result'] == 1){
+            alertify.success('Operação executada com sucesso!');
+        } else {
+            alertify.error('Não foi possível completar a operação.');
+            alertify.error('Por favor, tente novamente.');
+        }
     },
 
     //endregion

@@ -138,7 +138,7 @@ function Dataset (path, ref){
 
                 // ShowSQL
                 if (res.data['sql']){
-                    console.log(api + ':' + res.data['sql'])
+                    console.log(res.data['sql'])
                 }
                 
             });
@@ -165,7 +165,7 @@ function Dataset (path, ref){
 
         // ShowSQL
         if (data['sql']){
-            console.log(api + ':' + data['sql'])
+            console.log(data['sql'])
         }
     };
 

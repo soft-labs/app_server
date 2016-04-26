@@ -480,7 +480,7 @@ router.use(function *(next) {
  *    - get  | url: owner/pack/mod                       | Lista todos os registros do mod
  *    - get  | url: owner/pack/mod?query='teste um dois' | Filtra os registros do mod por query
  *    - get  | url: owner/pack/mod/123                   | Retorna o registro id=123
- *    - get  | url: owner/pack/mod/_new                  | Retorna um form para pré inserção
+ *    - get  | url: owner/pack/mod/new                   | Retorna um form para pré inserção
  *    - get  | url: owner/pack/mod/123/edit              | Retorna um form para edição do registro id=123
  * @since 21/02/16
  */
@@ -503,7 +503,7 @@ router.get(/^\/(\w+)\/tshark\/.*$/, function *(next) {
     } else {
 
         // Form de inserção
-        if (len == 4 && this.state.api.path[3] == '_new') {
+        if (len == 4 && this.state.api.path[3] == 'new') {
             this.state.api.call = 'create';
             mod.params['key'] = 'NEW_KEY';
             this.body = yield mod.form(this);
@@ -546,8 +546,13 @@ router.post(/^\/(\w+)\/tshark\/.*/, function *(next) {
     // Execução de função
     if (len = 4){
         var func = this.state.api.call;
-        this.state.api.call = 'exec';
-
+        if (func == ''){
+            this.state.api.call = func = 'insert';
+            
+        } else {
+            this.state.api.call = 'exec';
+        }
+        
         /**
          * Executa a função no objeto
          */
@@ -565,9 +570,6 @@ router.post(/^\/(\w+)\/tshark\/.*/, function *(next) {
         } catch (e){
             console.log(e);
         }
-
-    } else {
-        this.body = yield mod.insert(this);
     }
 
     /**
@@ -580,7 +582,7 @@ router.post(/^\/(\w+)\/tshark\/.*/, function *(next) {
 /**
  * Entrada de API :: PUT
  *   Oferece suporte para apis:
- *    - update  | url: owner/pack/mod                    | Atualiza um registro no mod
+ *    - update  | url: owner/pack/mod/123                 | Atualiza um registro no mod
  * 25/04/16
  */
 router.put(/^\/(\w+)\/tshark\/.*/, function *(next) {
@@ -594,7 +596,36 @@ router.put(/^\/(\w+)\/tshark\/.*/, function *(next) {
     ;
 
     // Execução de função
+    this.state.api.call = 'update';
     this.body = yield mod.update(this);
+
+    /**
+     * Finaliza
+     */
+    yield next;
+
+});
+
+/**
+ * Entrada de API :: DELETE
+ *   Oferece suporte para apis:
+ *    - delete  | url: owner/pack/mod/123                 | Remove um registro no mod
+ * 25/04/16
+ */
+router.delete(/^\/(\w+)\/tshark\/.*/, function *(next) {
+
+    /**
+     * Instancia o módulo
+     * @type BizObject
+     */
+    var mod   = this.app.engine.initObj(this.state.api.path, this)
+        , len = this.state.api.path.length
+    ;
+
+    // Execução de função
+    this.state.api.call = 'delete';
+    mod.params['key'] = this.state.api.path[3];
+    this.body = yield mod.delete(this);
 
     /**
      * Finaliza

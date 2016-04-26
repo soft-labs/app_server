@@ -20,11 +20,13 @@ tshark.modulos._add('sys.dev.ide', {
      * Refresh dos módulos depois que cria package
      * @param response
      */
-    onAfterCreatePackage: function(response){
+    onAfterCreatePackage: function(response, next){
         app.bizobj.load('listModulos');
         app.package.id = '';
         app.package.modulos.clear();
         alertify.success('Package criado com sucesso!');
+        
+        next();
     }
 
 });

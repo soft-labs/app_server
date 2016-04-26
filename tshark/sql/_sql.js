@@ -326,11 +326,12 @@ SQL.prototype._parseJoin = function(sqlParams, join, table, alias, nolock){
  * Processa where
  * @param params { {} }
  */
-SQL.prototype._parseWhere = function(sqlParams, params){
+SQL.prototype._parseWhere = function(whereParams, params){
+    if (!whereParams) return '';
 
     var sql     = ''
         , templ = ' %s tb%s.%s %s %s ';
-    sqlParams.where.forEach(function(where){
+    whereParams.forEach(function(where){
 
         // Where digitado
         if (typeof where == 'string'){
@@ -384,6 +385,10 @@ SQL.prototype._parseSearch = function(sqlParams, query){
         , qry   = orig.toLowerCase().split(' ')
         , exclude = ['o', 'a', 'e', 'do', 'da', 'das']
     ;
+
+    if (typeof query == 'string'){
+        qry = [query];
+    }
 
     var glue = ' AND ', maior = false, menor = false;
     sqlParams['search'].forEach(function(param){
@@ -553,7 +558,6 @@ SQL.prototype._select = function *(provider, obj, meta){
     }
 };
 
-
 /**
  * Processamento default de resultado de selects
  * @param results
@@ -618,6 +622,131 @@ SQL.prototype._processResults = function *(sqlParams, results, obj, sql, meta){
 
     // Retorna
     return data;
+};
+
+/**
+ * Executa uma operação de UPDATE ou INSERT
+ * @param op
+ * @param provider
+ * @param obj
+ * @returns {*}
+ */
+SQL.prototype.change = function *(op, provider, obj) {
+    var results
+        , ok = false
+    ;
+
+    // Ajusta sqlParams
+    if (typeof provider == 'string') {
+        return log.erro('Para operações de change deverá ser informado um provider.', provider);
+    }
+
+    // Verifica values
+    if (op != 'del'&& !obj.params['row']){
+        return log.erro('Não foi possível encontrar os "row" com valores para o "' + (op == 'upd' ? 'update' : 'insert') + '" no contexto fornecido.');
+    }
+
+    // Processa provider
+    for(var s in provider.sources) {
+        var source = provider.sources[s].src
+            , sql = ''
+            , key = provider.sources[s]['key'] || source.metadata.key
+            , fields = ''
+            , values = ''
+            , v = ''
+        ;
+
+        switch (op){
+            case 'upd':
+                sql = ' UPDATE ' + source.table + ' SET ';
+                break;
+
+            case 'ins':
+                sql = ' INSERT INTO ' + source.table;
+                break;
+
+            case 'del':
+                sql = ' DELETE FROM ' + source.table;
+                break;
+        }
+
+        if (op != 'del') {
+            for (var f in source.metadata.fields) {
+                if (f != key && obj.params.row[f]) {
+                    var value = obj.params.row[f];
+
+                    // Trata formatação de tipos
+                    switch (source.metadata.fields[f].tipo.type) {
+                        case "date":
+                            value = this.db.formatDateIn(value);
+                            break;
+
+                        case "datetime":
+                        case "timestamp":
+                            value = this.db.formatDateTimeIn(value);
+                            break;
+
+                        default:
+                            value = "'" + value + "'";
+                    }
+
+                    // SQL
+                    if (op == 'upd') {
+                        sql += '\n    ' + v + ' ' + f + " = " + value + " ";
+
+                    } else {
+                        fields += v + ' ' + f;
+                        values += v + " " + value + " ";
+                    }
+
+                    v = ',';
+                }
+            }
+        }
+
+        // Processa where
+        if (op != 'ins') {
+            sql += '\n  WHERE ' + key + " = '" + obj.params.row[key] + "' ";
+            sql += this.db.parseWhere(provider.sources[s]['where'], obj.params);
+
+        } else {
+            sql += ' (' + fields + ' ) ';
+            sql += '\n    VALUES (' + values + ') ';
+        }
+
+        // Executa
+        results = yield this.db._exec(sql, obj);
+        ok = yield this.db.processChangeResults(op, results, obj);
+    }
+
+    return ok;
+};
+
+/**
+ * Executa um UPDATE com base em sqlParams
+ * @param provider
+ * @param obj { BizObject }
+ */
+SQL.prototype._update = function *(provider, obj){
+    return yield this.change('upd', provider, obj);
+};
+
+/**
+ * Executa um INSERT com base em sqlParams
+ * @param provider
+ * @param obj { BizObject }
+ */
+SQL.prototype._insert = function *(provider, obj){
+    return yield this.change('ins', provider, obj);
+};
+
+/**
+ * Executa um DELETE com base em sqlParams
+ * @param provider
+ * @param obj { BizObject }
+ */
+SQL.prototype._delete = function *(provider, obj){
+    return yield this.change('del', provider, obj);
 };
 
 

@@ -64,7 +64,7 @@ MySql.prototype.parseSQL = function(sqlParams, obj){
     sql += '\n  WHERE 1=1 ';
 
     // Processa where
-    sql += this.parseWhere(sqlParams, obj.params);
+    sql += this.parseWhere(sqlParams.where, obj.params);
 
     // Processa search
     if (sqlParams['search'] && obj.params['query']){
@@ -144,8 +144,8 @@ MySql.prototype.parseJoin = function(sqlParams, join, table, alias, nolock) {
  * @param req { req }
  * @returns { string }
  */
-MySql.prototype.parseWhere = function(sqlParams, params){
-    return this.driver._parseWhere(sqlParams, params);
+MySql.prototype.parseWhere = function(whereParams, params){
+    return this.driver._parseWhere(whereParams, params);
 };
 
 
@@ -156,6 +156,41 @@ MySql.prototype.parseWhere = function(sqlParams, params){
  */
 MySql.prototype.parseSearch = function(sqlParams, query){
     return this.driver._parseSearch(sqlParams, query);
+};
+
+//endregion
+
+
+//region :: Formatação
+
+function formatDateTimeIn(value, format){
+    value = value.replace('T', ' ');
+    value = value.replace('.000Z', '');
+
+    var dt = value.replace('-', '/');
+    if (dt[2] == '/'){
+        return "STR_TO_DATE( '" + dt + "', '" + format + "')";
+    } else {
+        return "'" + value + "'";
+    }
+}
+
+/**
+ * Formata um valor para data para salvar no banco
+ * @param value
+ * @returns {string}
+ */
+MySql.prototype.formatDateIn = function(value){
+    return formatDateTimeIn(value, '%d/%m/%Y');
+};
+
+/**
+ * Formata um valor para data e hora para salvar no banco
+ * @param value
+ * @returns {string}
+ */
+MySql.prototype.formatDateTimeIn = function(value){
+    return formatDateTimeIn(value, '%d/%m/%Y %H:%i:%s');
 };
 
 //endregion
@@ -184,6 +219,34 @@ MySql.prototype.query = function *(sql, obj, meta){
 };
 
 /**
+ * Executa um UPDATE com base em sqlParams
+ * @param provider
+ * @param obj { BizObject }
+ */
+MySql.prototype.update = function *(provider, obj){
+    return yield this.driver._update(provider, obj);
+};
+
+/**
+ * Executa um INSERT com base em sqlParams
+ * @param provider
+ * @param obj { BizObject }
+ */
+MySql.prototype.insert = function *(provider, obj){
+    return yield this.driver._insert(provider, obj);
+};
+
+/**
+ * Executa um DELETE com base em sqlParams
+ * @param provider
+ * @param obj { BizObject }
+ */
+MySql.prototype.delete = function *(provider, obj){
+    return yield this.driver._delete(provider, obj);
+};
+
+
+/**
  * Executa o statement
  * @param sql
  * @returns {*}
@@ -205,6 +268,27 @@ MySql.prototype._exec = function *(sql){
  */
 MySql.prototype.processResults = function *(sqlParams, results, obj, sql, meta){
     return yield this.driver._processResults(sqlParams, results, obj, sql, meta);
+};
+
+/**
+ * Processa o resultado de um INSERT ou UPDATE
+ * @param results
+ * @param obj
+ * @returns {*|boolean}
+ */
+MySql.prototype.processChangeResults = function *(op, results, obj){
+    var ok = false;
+
+    if (results){
+        if (op == 'upd'){
+            ok = results['changedRows'];
+        } else {
+            ok = results['insertId']
+        }
+    }
+
+    return ok;
+    
 };
 
 //endregion

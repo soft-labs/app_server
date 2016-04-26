@@ -18,14 +18,15 @@ var tshark = tshark || new TShark()
 /**
  * Mapeamento de verbos da API
  *
- *  GET     /owner/pack/mod[?query=params]   (dados)                list | search
+ *  GET     /owner/pack/mod/[?query=params]  (dados)                search
  *  GET     /owner/pack/mod/{key}            (dados)                especifico
- *  GET     /owner/pack/mod/{key}/form       (dados & interface)    especifico
- *  GET     /owner/pack/mod/{key}|_new/form  (dados & interface)    edit | create
- *  POST    /owner/pack/mod/_new             (dados)                insert
+ *  GET     /owner/pack/mod/                 (dados)                list
+ *  GET     /owner/pack/mod/new              (dados & interface)    create
+ *  GET     /owner/pack/mod/{key}/edit       (dados & interface)    edit
+ *  POST    /owner/pack/mod/                 (dados)                insert
  *  PUT     /owner/pack/mod/{key}            (dados)                update
  *  DELETE  /owner/pack/mod/{key}            (dados)                delete
- *  POST    /owner/pack/mod/{key}/{*}        (dados & interface)    exec func
+ *  POST    /owner/pack/mod/{*}              (dados || interface)   exec func
  *
  * Abaixo, mapeamento 'amigável' para uso em interfaces:
  *   Ex: "list owner pack mod"
@@ -38,7 +39,7 @@ TShark.prototype.api_map = {
     get     :               ['GET',       '/{key}'],
     list    :               ['GET',       '/'],
     
-    create  :               ['GET',       '/_new'],
+    create  :               ['GET',       '/new'],
     edit    :               ['GET',       '/{key}/edit'],
 
     exec    :               ['POST',      '/{func}'],
@@ -81,14 +82,14 @@ $.fn.api.settings.api = {};
          * Contexo 'this': elemento DOM originador da chamada
          */
         beforeSend: function (settings) {
-            return _before(settings, $(this));
+            return before(settings, $(this));
         },
 
         /**
          * Ajusta callback
          */
         onSuccess: function (response) {
-            return _callback(response);
+            return callback(response);
         },
 
 
@@ -153,30 +154,20 @@ $.fn.api.settings.api = {};
             .api('query');
     };
 
-    /**
-     * Registra e redireciona um callback padrão para uma função em
-     * objeto.
-     * @param callback {string} Nome do callback default a registrar ex: 'onList'
-     * @param obj {{}} Objeto onde existe a função
-     * @param func {function} Função com assinatura (mod, response, next)
-     */
-    TShark.prototype.registerCallback = function(callback, obj, func) {
-        tshark._reg_callbacks[callback] = {
-            context: obj,
-            callback: func
-        };
-    };
-
 
     /**
-     * Gateway para processamento de APIs antes do envio ao
-     * server
+     * Gateway para processamento de APIs antes do envio ao server.
+     *  Sequencia:
+     *    onBefore - interno        | assinatura: function *_before(mod, el, settings) { return bool }  | this == tshark
+     *    onBefore - interno módulo | assinatura: function *_before(el, settings)  { return bool }      | this == mod
+     *    onBefore - externo app    | assinatura: function onBefore*(el, settings) { return bool }      | this == app
+     *    onBefore - externo módulo | assinatura: function onBefore*(el, settings) { return bool }      | this == mod
      * @param settings
      * @param el
      * @returns {*}
      * @private
      */
-    function _before(settings, el) {
+    function before(settings, el) {
         var d = $.extend({}, $(el).data() || {});
 
         // Ajusta API
@@ -258,105 +249,114 @@ $.fn.api.settings.api = {};
      * @since 06/10/15
      * @private
      */
-    function _callback(response) {
+    function callback(response) {
         var func    = response.callback
-            , Func  = func.capitalize()
             , id    = response.path.join('.')
             , mod   = tshark.getMod(id)
-            , overwrite = false
-            , isForm = (func == 'edit' || func == 'create')
-            , o
-            , f
         ;
 
         if (mod && func) {
 
-            //region :: Forms
-
-            if (isForm){
-
-                // Before / Overwrite no módulo
-                if (mod['onForm']) {
-                    mod['onForm'].call(mod, response, function () {
-                        tshark['form_callback'].call(tshark, mod, response);
-                    });
-
-                // Overwrite registrado
-                } else if (tshark._reg_callbacks['onForm']) {
-                    o = tshark._reg_callbacks['onForm'].context;
-                    f = tshark._reg_callbacks['onForm'].callback;
-
-                    f.call(o, mod, response, function () {
-                        tshark['onForm'].call(tshark, mod, response);
-                    });
-
-                // Default interno
-                } else {
-                    tshark['form_callback'].call(tshark, mod, response);
-                }
+            // onCallback - forms
+            if (func == 'edit' || func == 'create'){
+                onCallback('on', 'form', mod, response);
             }
 
-            //endregion
+            // onCallback
+            onCallback('on', func, mod, response);
 
-            //region :: APIs
 
-            // Before / Overwrite no módulo
-            if (mod['on' + Func]) {
-                mod['on' + Func].call(mod, response, function () {
-                    tshark[func + '_callback'].call(tshark, mod, response);
-                });
 
-            // Overwrite registrado
-            } else if (tshark._reg_callbacks['on' + Func]) {
-                o = tshark._reg_callbacks['on' + Func].context;
-                f = tshark._reg_callbacks['on' + Func].callback;
-
-                f.call(o, mod, response, function () {
-                    tshark[func + '_callback'].call(tshark, mod, response);
-                });
-
-            // Default
-            } else if (tshark[func + '_callback']) {
-                tshark[func + '_callback'].call(tshark, mod, response);
+            // onAfterCallback - forms
+            if (func == 'edit' || func == 'create'){
+                onCallback('onAfter', 'form', mod, response);
             }
 
-            //endregion
-
-            //region :: After Form
-
-            if (isForm && mod['onAfterForm']){
-                mod['onAfterForm'].call(mod, response);
-
-                // Overwrite registrado
-            } else if (isForm && tshark._reg_callbacks['onAfterForm']) {
-                o = tshark._reg_callbacks['onAfterForm'].context;
-                f = tshark._reg_callbacks['onAfterForm'].callback;
-
-                f.call(o, mod, response, function(){});
-            }
-
-            //endregion
-
-            //region :: After APIs
-
-            if (mod['onAfter' + Func]) {
-                mod['onAfter' + Func].call(mod, response);
-
-                // Overwrite registrado
-            } else if (tshark._reg_callbacks['onAfter' + Func]) {
-                o = tshark._reg_callbacks['onAfter' + Func].context;
-                f = tshark._reg_callbacks['onAfter' + Func].callback;
-
-                f.call(o, mod, response, function(){});
-            }
-
-            //endregion
+            // onAfterCallback
+            onAfterCallback('onAfter', func, mod, response);
 
         }
     }
 
-    
+    /**
+     * Processa eventos de callback no retorno do server.
+     *  onCallback - módulo | assinatura: function(response, next)      | this == mod
+     *  onCallback - app    | assinatura: function(mod, response, next) | this == app
+     *  onCallback interno  | assinatura: function(mod, response)       | this == tshark
+     * @param prefix
+     * @param func
+     * @param mod
+     * @param response
+     */
+    function onCallback(prefix, func, mod, response){
+        var Func = func.capitalize();
 
+        // onCallback - módulo | assinatura function(response, defCallback) | this == mod
+        if (mod[prefix + Func]) {
+            mod[prefix + Func].call(mod, response, function () {
+
+                // Permite ao módulo chamar o onCallback no app - chain
+                if (app[prefix + Func]) {
+                    app[prefix + Func].call(app, mod, response, function () {
+
+                        // Permite ao app chamar o onCallback padrão - chain
+                        tshark[func + '_callback'].call(tshark, mod, response);
+
+                    });
+
+                // Permite ao módulo chamar o onCallback padrão
+                } else if (tshark[func + '_callback']) {
+                    tshark[func + '_callback'].call(tshark, mod, response);
+                }
+
+            });
+
+        // onCallback - app | assinatura function(mod, response, defCallback) | this == app
+        } else if (app[prefix + Func]) {
+            app[prefix + Func].call(app, mod, response, function () {
+
+                // Permite ao app chamar o onCallback padrão
+                tshark[func + '_callback'].call(tshark, mod, response);
+
+            });
+
+        // onCallback interno | assinatura function(mod, response) | this == tshark
+        } else if (tshark[func + '_callback']) {
+            tshark[func + '_callback'].call(tshark, mod, response);
+        }
+
+    }
+
+    /**
+     * Processa eventos after callback.
+     *   onAfter no módulo  | assinatura: function(response, next)      | this == mod
+     *   onAfter no app     | assinatura: function(mod, response)       | this == app
+     * @param prefix
+     * @param func
+     * @param mod
+     * @param response
+     */
+    function onAfterCallback(prefix, func, mod, response){
+        var Func = func.capitalize();
+
+        // after no módulo | assinatura function(response, appAfterCallback) | this == mod
+        if (mod[prefix + Func]) {
+            mod[prefix + Func].call(mod, response, function(){
+
+                // Permite ao módulo chamar o onAfterCallback no app - chain
+                if (app[prefix + Func]) {
+                    app[prefix + Func].call(app, mod, response);
+                }
+            });
+
+        // onAfter no app | assinatura function(mod, response) | this == app
+        } else if (app[prefix + Func]) {
+            app[prefix + Func].call(app, mod, response);
+        }
+
+    }
+
+    
     //region :: API List
 
     /**
@@ -486,7 +486,8 @@ $.fn.api.settings.api = {};
     };
 
     TShark.prototype.create_callback = function (mod, response) {
-        tshark.bind();
+
+        //tshark.bind();
     };
 
     //endregion
@@ -509,29 +510,32 @@ $.fn.api.settings.api = {};
 
     //region :: API Exec
 
-    /**
-     * onBefore: Chamado antes de descer ao server
-     *  - this é o módulo da operação.
-     * @param sender elemento html que acionou a API
-     * @param settings pacote que será enviado ao server
-     */
     TShark.prototype.exec_before = function(sender, settings){
 
         // Libera
         return true;
     };
 
-    /**
-     * Callback de listagem de dados
-     * @param mod { TShark.modulo }
-     * @param response
-     * @since 06/10/15
-     */
     TShark.prototype.exec_callback = function (mod, response) {
 
         if (response['data']) {
             mod.data.reset(response['data']);
         }
+
+    };
+
+    //endregion
+
+
+    //region :: API Insert
+
+    TShark.prototype.insert_before = function (sender, settings) {
+
+        // Libera
+        return true;
+    };
+
+    TShark.prototype.insert_callback = function (mod, response) {
 
     };
 
@@ -546,78 +550,23 @@ $.fn.api.settings.api = {};
         return true;
     };
 
-    /**
-     * Exibe mensagens vindas do server
-     * @since 06/10/15
-     */
     TShark.prototype.update_callback = function (mod, response) {
 
     };
 
     //endregion
+    
+    
+    //region :: API Delete
 
+    TShark.prototype.delete_before = function (sender, settings) {
 
-
-    /**
-     * Exibe mensagens vindas do server
-     * @since 06/10/15
-     */
-    TShark.prototype.showMessage_callback = function (params) {
-        var msg = params.mensagem;
-
-        switch (msg.tipo) {
-            case 0:
-                alertify.alert("Erro interno", msg.desc);
-                console.log(msg.msg);
-                console.log(msg.desc);
-                break;
-
-            case 1:
-                alertify.error(msg.msg, msg.desc);
-                console.log(msg.msg);
-                console.log(msg.desc);
-                break;
-
-            case 2:
-                alertify.alert(msg.msg, msg.desc);
-                console.log(msg.msg);
-                console.log(msg.desc);
-                break;
-
-            default:
-                alertify.notify(msg.msg, msg.desc);
-                break;
-        }
-
+        // Libera
+        return true;
     };
 
+    TShark.prototype.delete_callback = function (mod, response) {
 
-    /**
-     * Exibe mensagens vindas do server
-     * @since 06/10/15
-     */
-    TShark.prototype.get_callback = function (params) {
-    };
-
-    /**
-     * Exibe mensagens vindas do server
-     * @since 06/10/15
-     */
-    TShark.prototype.create_callback = function (params) {
-    };
-
-    /**
-     * Exibe mensagens vindas do server
-     * @since 06/10/15
-     */
-    TShark.prototype.insert_callback = function (params) {
-    };
-
-    /**
-     * Exibe mensagens vindas do server
-     * @since 06/10/15
-     */
-    TShark.prototype.delete_callback = function (params) {
     };
 
     //endregion
