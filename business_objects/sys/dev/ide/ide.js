@@ -158,6 +158,7 @@ function Ide(){
             , templ = fs.readFileSync(dir + '/sys/dev/ide/template.js', 'utf8')
             , owner = this.params['owner']
             , pack  = this.params['id']
+            , owner_map = require(dir + owner + '/index.js')
         ;
 
         // Cria owner
@@ -188,11 +189,14 @@ function Ide(){
             var mod = this.params.modulos[m]
                 , from = "'" + owner + "', '" + pack + "', '" + mod['name'] + "'"
                 , t_tbl = mod['name'].split('_')
+                , is_rel = (t_tbl[t_tbl.length-1] == 'rel')
                 , joins = ''
                 , jade = ''
                 , arq = templ
-                , key = ''
+                , key = []
                 , keys = []
+                , key_owner = ''
+                , achou_lbl_field = false
                 , lbl_field = ''
                 , def_field = ''
                 , first_no_key_field = ''
@@ -222,7 +226,7 @@ function Ide(){
                 var _field      = row['Field']
                     , _type     = row['Type']
                     , _primary  = row['Key'] == 'PRI'
-                    , is_key    = !_primary && _field.substr(-4) == '_key'
+                    , is_key    = _field.substr(-4) == '_key' && (!_primary || is_rel)
                     , _fld_no_key = ''
                     , _fld_no_key_s = ''
                     , _split    = []
@@ -241,12 +245,51 @@ function Ide(){
                 }
                 
                 if (_primary){
-                    key = _field;
+                    key.push(_field);
                     _type = 'primary';
                 } 
 
-                if (_field + 's' == t_tbl){
-                    lbl_field = _field;
+                lbl_field = '';
+                if (!achou_lbl_field){
+                    var   _oes     = _field.substr(0, _field.length - 2) + 'oes'
+                        , _aes     = _field.substr(0, _field.length - 2) + 'aes'
+                        , _res     = _field.substr(0, _field.length - 2) + 'res'
+                        , _ras     = _field.substr(0, _field.length - 2) + 'ras'
+                        , _ros     = _field.substr(0, _field.length - 2) + 'ros'
+                    ;
+
+                    if (_field + 's' == t_tbl || _field + 'es' == t_tbl || _field == t_tbl ||
+                        _oes == t_tbl || _aes == t_tbl || _res == t_tbl || _res == t_tbl || _ros == t_tbl
+                    ){
+                        lbl_field = _field;
+
+                    } else {
+                        var _tbl_       = mod['name'].split('_')
+                            , _fld_     = _field.split('_')
+                            , _last_    = _tbl_.pop()
+                            , _inicio_  = _tbl_.shift()
+                            , _resto_   = _tbl_.join('_')
+                        ;
+
+                        if (   _field                       == _last_ || _field        == _resto_
+                            || _field + 's'                 == _last_ || _field + 's'  == _resto_
+                            || _field + 'es'                == _last_ || _field + 'es' == _resto_
+                            || _fld_[_fld_.length]          == _last_ || _fld_[_fld_.length]   == _resto_
+                            || _fld_[_fld_.length] + 's'    == _last_ || _fld_[_fld_.length] + 's'  == _resto_
+                            || _fld_[_fld_.length] + 'es'   == _last_ || _fld_[_fld_.length] + 'es' == _resto_
+
+                            || _oes == _last_ || _aes == _last_ || _res == _last_ || _res == _last_ || _ros == _last_
+                            || _oes == _resto_ || _aes == _resto_ || _res == _resto_ || _res == _resto_ || _ros == _resto_
+                    )
+                        {
+                            lbl_field = _field;
+                        }
+                    }
+
+                }
+
+                if (lbl_field){
+                    achou_lbl_field = true;
                     def_field = "'" + lbl_field + "'";
                     search = "{alias: 0, field: '" + lbl_field + "',  param: types.search.like_full }";
                     order = "[0, '" + lbl_field + "', 'asc']";
@@ -262,10 +305,19 @@ function Ide(){
 "\n                    tipo: types.comp." + types.getByField(_type) + ", label: '" + capitalize(_field) + ":'";
 
                 if (is_key) {
+                    if (owner_map.packs[_split[0]]){
+                        key_owner = owner_map.packs[_split[0]];
+                    } else {
+                        for (var o in owner_map.packs){
+                            if (_fld_no_key == owner_map.packs[o]){
+                                key_owner = owner_map.packs[o];
+                            }
+                        }
+                    }
                     fields += ',' +
 "\n                    data: { " +
 "\n                        key: ['" + _field + "'], " +
-"\n                        from: ['" + owner + "', '" + (_split.length > 1 ? pack : _fld_no_key) + "', '" + _fld_no_key + "'], " +
+"\n                        from: ['" + owner + "', '" + key_owner + "', '" + _fld_no_key + "'], " +
 "\n                        template: '{row." + _field + "} - {row." + _fld_no_key_s + "}', " +
 "\n                        provider: '' " +
 "\n                    } ";
@@ -278,7 +330,7 @@ function Ide(){
                 if (is_key){
                     joins += (j == 1 ? '' : ',') +
 "\n                " + j + ": { " +
-"\n                    from: ['" + owner + "', '" + pack + "', '" + _fld_no_key + "']," +
+"\n                    from: ['" + owner + "', '" + key_owner + "', '" + _fld_no_key + "']," +
 "\n                        join: {source: 0, tipo: types.join.left, on: '" + _field + "', where: ''}," +
 "\n                    fields: [" +
 "\n                        " +
@@ -311,18 +363,29 @@ function Ide(){
                 linhas = linhas.substring(0, linhas.length -2) + n + '}';
             }
 
+            var str_key = (key.length == 1
+                ? "'" + key[0] + "'"
+                : "['" + key.join("', '") + "']"
+            );
             arq = arq.replace(new RegExp('_MOD_', 'g'), camelCase(mod['name']));
             arq = arq.replace(new RegExp('_ID_', 'g'), mod['name']);
             arq = arq.replace('_DATA_', hoje);
-            arq = arq.replace(new RegExp('_KEY_', 'g'), key);
+            arq = arq.replace(new RegExp('_KEY_', 'g'), str_key);
             arq = arq.replace('_DEF_FIELD_', def_field);
             arq = arq.replace('_FIELDS_', fields);
             arq = arq.replace('_LINHAS_', linhas);
             arq = arq.replace('_CTRLS_', ctrls);
             arq = arq.replace(new RegExp('_SOURCE_', 'g'), "'" + owner + "', '" + pack + "', '" + mod['name'] + "'");
             arq = arq.replace('_JOINS_', joins);
-            arq = arq.replace('_WHERE_', "['AND', 0, '" + key + "', types.where.check]");
-            arq = arq.replace('_ORDER_', order || "['0', '" + key + "', 'desc']");
+
+            var where_key = '', order_key = '', v = '';
+            key.forEach(k => {
+                where_key += v + "['AND', 0, '" + k + "', types.where.check]";
+                order_key += v + "['0', '" + k + "', 'desc']";
+                v = ',\n                ';
+            });
+            arq = arq.replace('_WHERE_', where_key);
+            arq = arq.replace('_ORDER_', order || order_key);
             arq = arq.replace('_SEARCH_', search);
 
             fs.writeFileSync(mod_dir + '/' + mod['name'] + '.js', arq);
@@ -332,16 +395,16 @@ function Ide(){
             jade += '\n    Criado em ' + hoje + '\n';
             jade += "\n.ui.fluid.card(rv-each-row='data.rows')";
             jade += '\n    .content';
-            jade += '\n        .header {row.' + key + '} - {row.' + (lbl_field ? lbl_field : first_no_key_field) + '}';
+            jade += '\n        .header {row.' + key[0] + '} - {row.' + (lbl_field ? lbl_field : first_no_key_field) + '}';
             jade += '\n        .meta Keys: ' + (keys.length ? keys.join(', ') : ' - sem dependências -');
             jade += '\n        .description\n';
             jade += '\n    .extra.content';
             jade += '\n        span.left.floated.button';
-            jade += "\n            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row." + key + "')";
+            jade += "\n            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row." + key[0] + "')";
             jade += "\n                i.edit.icon";
             jade += "\n                | Editar\n";
             jade += '\n        span.right.floated.button';
-            jade += "\n            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row." + key + "')";
+            jade += "\n            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row." + key[0] + "')";
             jade += "\n                i.delete.icon";
             jade += "\n                | Remover\n";
 

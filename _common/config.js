@@ -7,8 +7,13 @@ module.exports = {
             
         }
     },
+
     security: {
         mode: 'full',
+        active: true
+    },
+
+    auditoria: {
         active: true
     }
 };

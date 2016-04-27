@@ -5,6 +5,7 @@ var router    = require('koa-router')()
     , fs      = require('fs-extra')
     , extend  = require('extend')
     , cookies = require('tshark/cookie')
+    , reload  = require('require-reload')(require)
 ;
 
 
@@ -75,8 +76,8 @@ function *initCliente(ctx){
     // limpa cache de config
     ctx.state.config.flowPaths.down.forEach((path) => {
         if (fs.existsSync(path + '/config.js')) {
-            delete require.cache[require.resolve(path + '/config.js')];
-            extend(true, ctx.state.config, require(path + '/config.js') || {});
+            // delete require.cache[require.resolve(path + '/config.js')];
+            extend(true, ctx.state.config, reload(path + '/config.js') || {});
         }
     });
     

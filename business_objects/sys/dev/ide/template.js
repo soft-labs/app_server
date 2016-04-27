@@ -17,7 +17,7 @@ function _MOD_(){
     this.source = {
         table: '_ID_',
         metadata: {
-            key: '_KEY_',
+            key: _KEY_,
             fields: {_FIELDS_
             }
         }
@@ -82,7 +82,7 @@ function _MOD_(){
             sources: {
                 0: {
                     from: [_SOURCE_],
-                    key: '_KEY_',
+                    key: _KEY_,
                     where: [
                         
                     ]
