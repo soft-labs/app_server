@@ -40,7 +40,7 @@ module.exports = {
                     label: "Contas à Receber"
                 },
                 {
-                    label: "Demonstrativo de Resultados"
+                    label: "Resultados"
                 }
             ]
         },
@@ -52,10 +52,13 @@ module.exports = {
             icon: "cloud download icon",
             submenu: [
                 {
-                    label: "Vendas"
+                    label: "Operações de Loja"
                 },
                 {
                     label: "Cartões"
+                },
+                {
+                    label: "Bancárias"
                 }
             ]
         },
@@ -95,7 +98,7 @@ module.exports = {
                     label: "Configurações"
                 },
                 {
-                    label: "Permissões de Acessos"
+                    label: "Segurança"
                 },
                 {
                     label: "Sair do Sistema",

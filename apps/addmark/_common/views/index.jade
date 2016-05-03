@@ -18,17 +18,18 @@ block content
             .app-menu-popup.ui.flowing.popup.bottom.left.transition.hidden
                 .ui.four.column.doubling.stackable.relaxed.equal.height.divided.grid
                     .column(rv-each-menu='sys.app.menu.data.rows')
-                        h4.ui.header
+                        h4.ui.header(style="white-space: nowrap;")
                             i(rv-class='menu.icon')
-                            label {menu.label}
+                            | {menu.label}
                         .ui.link.list
                             a.item(
-                                rv-each-submenu='menu.submenu',
-                                rv-data-action='submenu.api',
-                                rv-data-area='submenu.area | if submenu.area menu.area',
+                                rv-each-submenu='menu.submenu'
+                                rv-data-action='submenu.api'
+                                rv-data-area='submenu.area | if submenu.area menu.area'
                                 rv-data-menu-index='menu._index_'
                                 rv-data-submenu-index='submenu._index_'
                                 rv-on-click='sys.app.menu.click'
+                                style="white-space: nowrap;"
                             )
                                 i.angle.double.right.icon
                                 | {submenu.label}
@@ -36,11 +37,11 @@ block content
             .app-submenu-popup.ui.flowing.popup.transition.hidden
                 .ui.two.column.doubling.stackable.relaxed.equal.height.divided.grid
                     .column(rv-each-menu='bar.submenu')
-                        h4.ui.header
+                        h4.ui.header(style="white-space: nowrap;")
                             i(rv-class='menu.icon')
                             label {menu.label}
                         .ui.link.list
-                            .item.icon(rv-each-submenu='menu.submenu')
+                            .item.icon(rv-each-submenu='menu.submenu', style="white-space: nowrap;")
                                 i.angle.double.right.icon
                                 | {submenu.label}
 
@@ -68,11 +69,17 @@ block content
                 .column
                     canvas#chart2
 
+
+
         .ui.container.app-financas.transition.hidden
             include _areas/financas
 
         .ui.container.app-integracoes.transition.hidden
             | Hello Integracoes
+            | Top 5 Credores
+            | Top 5 Devedores
+            | Top 5 Impacto Conta Gerencial - Pagar
+            | Top 5 Impacto Conta Gerencial - Receitas
 
         .ui.container.app-cadastros.transition.hidden
             | Hello Cadastros

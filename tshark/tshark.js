@@ -430,7 +430,7 @@ TShark.prototype.initObj = function(path, context){
  * Registra o inicio de um roteamento
  */
 router.use(function *timeLog(next) {
-    console.log('Time start: ', Date.now());
+    //console.log('Time start: ', Date.now());
 
     var tmp = this.captures[0].split('/').slice(3);
     this.state.api = {
@@ -662,7 +662,7 @@ function endRoute(ctx){
     ctx.body['path'] = ctx.state.api.path.splice(0, 3);
 
     // Fecha
-    console.log('Time finish: ', Date.now());
+   // console.log('Time finish: ', Date.now());
 
 }
 

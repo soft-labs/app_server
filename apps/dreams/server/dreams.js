@@ -68,13 +68,13 @@ var dream = {
     _came_true_date     : 'YYYY-MM-DD HH:MM:SS',
 
     description         : '',
-    status              : 'to_come | coming_true | came_true ',
+    status              : '1 - to_come | 2 - coming_true | 3 - came_true ',
     img_cover           : '',
 
     album               : [
-        {img: '', _active: 0},
-        {img: '', _active: 0},
-        {img: '', _active: 0}
+        {_id: '', img: '', _active: 0, likes: [], comments: []},
+        {_id: '', img: '', _active: 0, likes: [], comments: []},
+        {_id: '', img: '', _active: 0, likes: [], comments: []}
     ],
 
     comments: [
@@ -101,7 +101,7 @@ var dream = {
     ],
 
     likes: [
-        // _user_id ...
+        //  _user_id ...
     ],
 
     dreamers: [

@@ -245,7 +245,7 @@ var app = {
             , m = $(this).data('mod')
         ;
 
-        tshark.call('list ' + o + '  ' + p + ' ' + m);
+        tshark.call(o + '  ' + p + ' ' + m + ' list');
     }
     
     //endregion

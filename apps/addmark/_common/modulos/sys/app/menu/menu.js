@@ -55,7 +55,7 @@ tshark.modulos._add('sys.app.menu', {
 
 
         // Exibe a nova área
-        $("." + sys.app.menu.old_area).transition('show');
+        $("." + sys.app.menu.old_area).transition('fade up');
 
     }
 

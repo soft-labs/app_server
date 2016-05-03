@@ -3,10 +3,18 @@
  *
  */
 
+.app-show-1440 { display: none }
+.app-show-1024 { display: none }
+.app-show-768  { display: none }
+.app-show-425  { display: none }
+.app-show-375  { display: none }
+.app-show-360  { display: none }
 
 /***** Width até 1440px *****/
 
 @media screen and (max-width: 1440px) {
+
+    .app-show-1440 { display: block; }
 
 }
 
@@ -15,6 +23,7 @@
 
 @media screen and (max-width: 1024px) {
 
+    .app-show-1024 { display: block; }
 }
 
 
@@ -22,6 +31,7 @@
 
 @media screen and (max-width: 768px) {
 
+    .app-show-768 { display: block; }
 }
 
 
@@ -31,6 +41,12 @@
 
     .app-logo-header {
         width: 70px !important;
+    }
+
+    .app-show-425 { display: block; }
+
+    .app-receita {
+        text-align: left !important;
     }
 }
 
@@ -43,6 +59,7 @@
         width: 55px !important;
     }
 
+    .app-show-375 { display: block; }
 }
 
 
@@ -58,4 +75,5 @@
         left: 6px;
     }
 
+    .app-show-360 { display: block; }
 }
