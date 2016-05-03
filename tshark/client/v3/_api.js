@@ -16,11 +16,10 @@ var tshark = tshark || new TShark()
 
 
 /**
- * Mapeamento de verbos da API
- *
+ * Definição de verbos da API
+ *  GET     /owner/pack/mod/                 (dados)                list
  *  GET     /owner/pack/mod/[?query=params]  (dados)                search
  *  GET     /owner/pack/mod/{key}            (dados)                especifico
- *  GET     /owner/pack/mod/                 (dados)                list
  *  GET     /owner/pack/mod/new              (dados & interface)    create
  *  GET     /owner/pack/mod/{key}/edit       (dados & interface)    edit
  *  POST    /owner/pack/mod/                 (dados)                insert
@@ -29,28 +28,33 @@ var tshark = tshark || new TShark()
  *  POST    /owner/pack/mod/{*}              (dados || interface)   exec func
  *
  * Abaixo, mapeamento 'amigável' para uso em interfaces:
- *   Ex: "list owner pack mod"
- *       "get owner pack mod" data-key="234"
+ *   Ex:
+ *    "softlabs empresas emp_clientes list"                        -- Listagem de todos os clientes
+ *    "softlabs empresas emp_clientes search" data-query="bahia"   -- Listagem de clientes filtrados por 'bahia'
+ *    "softlabs empresas emp_clientes get"    data-key="8978"      -- Dados do cliente key '8978'
+ *    "softlabs empresas emp_clientes create"                      -- Form para criação de novo cliente
+ *    "softlabs empresas emp_clientes edit"                        -- Form para edição de um cliente
+ *    "softlabs empresas emp_clientes insert"                      -- Envia dados para inserção de novo cliente
+ *    "softlabs empresas emp_clientes update" data-key="8978"      -- Envia dados para alteração de cliente
+ *    "softlabs empresas emp_clientes delete" data-key="8978"      -- Remove o cliente key '8978'
+ *    "softlabs empresas emp_clientes geraBoletos" data-[xyz]      -- Executa a função geraBoletos em emp_clientes
  */
 TShark.prototype.api_map = {
 
     // Comando de layout    | Verbo       | URL
+    list    :               ['GET',       '/'],
     search  :               ['GET',       '/?query={query}'],
     get     :               ['GET',       '/{key}'],
-    list    :               ['GET',       '/'],
     
     create  :               ['GET',       '/new'],
     edit    :               ['GET',       '/{key}/edit'],
 
-    exec    :               ['POST',      '/{func}'],
     insert  :               ['POST',      '/'],
-
     update  :               ['PUT',       '/{key}'],
-    
     delete  :               ['DELETE',    '/{key}'],
 
-    save    :               ['POST',      '/']
-
+    save    :               ['POST',      '/'],
+    exec    :               ['POST',      '/{func}']
 };
 
 /**
@@ -148,7 +152,7 @@ $.fn.api.settings.api = {};
     TShark.prototype.call = function(api, data){
         data = data || {};
         
-        data.action = api;
+        data.action = api.trim();
         $('#_direct_api_helper_')
             .data(data)
             .api('query');
@@ -171,33 +175,34 @@ $.fn.api.settings.api = {};
         var d = $.extend({}, $(el).data() || {});
 
         // Ajusta API
-        var api   = (d['action'] ? d.action : settings.action).replace(/\s{2,}/g, ' ').split(' ')
-            , map = api.shift()
+        var api     = (d['action'] ? d.action : settings.action).replace(/\s{2,}/g, ' ').split(' ')
+            , map   = api.pop()
+            , path  = api.join('.')
+            , Func  = map.capitalize()
         ;
+
+
+        // Ajusta função
+        if (!tshark.api_map[map]){
+            $(el).data('func', map);
+            map = 'exec';
+        }
 
         if (!tshark.api_map[map]) {
             alertify.error("API não reconhecida: '" + map + "'");
             return false;
         }
 
-        // Ajusta função
-        if (map == 'exec'){
-            $(el).data('func', api.pop());
-        }
-
         // Só roda em modulo registrado
-        var path = api.join('.');
         if (tshark.isRegistered(path)) {
-
-            // Executa onBefore
-            var Func = map.capitalize()
-                , mod = tshark.getMod(path)
-            ;
 
             // Interno
             if (tshark[map + '_before']) {
                 if (!tshark[map + '_before'].call(mod, el, settings)) return false;
             }
+
+            // Executa onBefore
+            var mod = tshark.getMod(path);
 
             // Interno - modulo
             if (mod[map + '_before'] && !settings['_on_before_']) {
@@ -225,9 +230,12 @@ $.fn.api.settings.api = {};
             delete(d['moduleApi']);
             delete(d['action']);
             settings.data = $.extend(settings.data, d);
-            settings.dataType = 'JSON';
-
+            
+            // Ajusta dados no módulo
+            mod._send(settings);
+            
             // Ajusta settings
+            settings.dataType = 'JSON';
             settings.url = 'tshark/' + api.join('/') + tshark.api_map[map][1];
             settings.method = method = tshark.api_map[map][0];
             settings['_on_before_'] = false;

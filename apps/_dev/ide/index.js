@@ -221,8 +221,9 @@ var app = {
      * responsável pelo refresh da árvore de app.bizobj
      */
     createPackage: function(){
-        // tshark.call('exec sys dev ide createPackage', {
-        sys.dev.ide.call('exec createPackage', {
+        // tshark.call('exec sys dev ide createPackage', {  // - Chamada pelo TShark, usando path completo
+        // sys.dev.ide.call('exec createPackage', {         // - Chamada pelo módulo, usando call genérico 
+        sys.dev.ide.exec('createPackage', {                 // - Chamada pelo módulo, usando call específico
             id      : app.package.id,
             owner   : app.package.owner,
             modulos : app.package.modulos.rows,

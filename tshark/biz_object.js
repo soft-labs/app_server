@@ -151,6 +151,10 @@ BizObject.prototype.get = function *(ctx){
         if (this['on' + func]) {
             yield this['on' + func](ret, ctx);
         }
+    } else {
+        if (this['source'] && this.source['metadata'] && this.source.metadata['key']) {
+            this.params[this.source.metadata.key] = ctx.state.api.path[3];
+        }
     }
     
     // Template

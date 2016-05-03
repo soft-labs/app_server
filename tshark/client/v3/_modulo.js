@@ -38,11 +38,11 @@ TShark.prototype.modulo = function(path){
     this.api = {};
     var api = this.path.replace(/\./g, ' ');
     for (var a in tshark.api_map){
-        this.api[a] = a + ' ' + api;
+        this.api[a] = api + ' ' + (a == 'exec' ? '' : a);
     }
 
     // Helper de APIs 'extras'
-    this.api.save = 'save ' + ' ' + api;
+    this.api.save = api + ' save ';
     this.api.last_form_id = '';
 
     /**
@@ -58,9 +58,17 @@ TShark.prototype.modulo = function(path){
 
     /**
      * Dataset do modulo
-     * @type {{key: string, index: {}, rows: Array, page: number}}
+     * @type { Dataset }
      */
     this.data = new Dataset(this.path, this);
+    
+    /**
+     * Armazena dados temporários através da função send.
+     * É resetado após o envio.
+     * @type {{}}
+     * @private
+     */
+    this._sending_ = {};
 
     /**
      * Templates do módulo
@@ -84,6 +92,130 @@ TShark.prototype.modulo = function(path){
  */
 (function() {
 
+    //region :: Mensagens
+
+
+    //region :: Soft
+
+    /**
+     * Gera log em console
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.modulo.prototype.log = function(msg, extra, onOk){
+        return tshark.log(msg, extra, onOk);
+    };
+
+    /**
+     * Exibe mensagem de erro na tela
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.modulo.prototype.erro = function(msg, extra, onOk){
+        return tshark.erro(msg, extra, onOk);
+    };
+
+    /**
+     * Exibe mensagem de sucesso na tela
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.modulo.prototype.sucesso = function(msg, extra, onOk){
+        return tshark.sucesso(msg, extra, onOk);
+    };
+
+    /**
+     * Exibe um alerta na tela
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.modulo.prototype.alerta = function(msg, extra, onOk){
+        tshark.alerta(msg, extra, onOk);
+    };
+
+    /**
+     * Exibe uma mensagem na tela
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.modulo.prototype.msg = function(msg, extra, onOk){
+        tshark.msg(msg, extra, onOk);
+    };
+
+    //endregion
+
+    //region :: Popup
+
+    /**
+     * Exibe popup de erro na tela
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.modulo.prototype.popErro = function(msg, extra, onOk){
+        return tshark.popErro(msg, extra, onOk);
+    };
+
+    /**
+     * Exibe popup de sucesso na tela
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.modulo.prototype.popSucesso = function(msg, extra, onOk){
+        return tshark.popSucesso(msg, extra, onOk);
+    };
+
+    /**
+     * Exibe um popup de alerta na tela
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.modulo.prototype.popAlerta = function(msg, extra, onOk){
+        tshark.popAlerta(msg, extra, onOk);
+    };
+
+    /**
+     * Exibe um popup na tela
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.modulo.prototype.popMsg = function(msg, extra, onOk){
+        tshark.popMsg(msg, extra, onOk);
+    };
+
+    /**
+     * Pede confirmação do usuário
+     * @param msg Mensagem ao usuário
+     * @param onOk { function } Callback em caso de sim
+     * @param onCancel { function } Callback em caso de não
+     */
+    TShark.prototype.modulo.prototype.confirm = function(msg, onOk, onCancel){
+        tshark.confirm(msg, onOk, onCancel);
+    };
+
+    /**
+     * Pede ao usuário que informe um valor.
+     * @param msg Mensagem ao usuário
+     * @param defValue Valor default
+     * @param onOk { function } Callback em caso de sim
+     * @param onCancel { function } Callback em caso de não
+     */
+    TShark.prototype.modulo.prototype.prompt = function(msg, defValue, onOk, onCancel){
+        tshark.prompt(msg, defValue, onOk, onCancel);
+    };
+
+    //endregion
+
+    //endregion
+
 
     //region :: Chamadas de API diretas
 
@@ -95,21 +227,11 @@ TShark.prototype.modulo = function(path){
      */
     TShark.prototype.modulo.prototype.call  = function(api, data){
         data = data || {};
-        var tmp      = api.split(' ')
-            , func   = ''
-        ;
-        if (tmp.length > 1){
-            api = tmp.shift();
+        data.action = (this.api[api]
+            ? this.api[api]
+            : this.api['exec'] + api
+        );
 
-            switch (api){
-                case 'get' : data.key  = tmp.join(' '); break;
-                case 'form': data.key  = tmp.join(' '); break;
-                case 'exec': func = ' '+ tmp.join(' '); break;
-                default: data.extra = tmp;
-            }
-        }
-
-        data.action = this.api[api] + func;
         $('#_direct_api_helper_')
             .data(data)
             .api('query');
@@ -117,9 +239,108 @@ TShark.prototype.modulo = function(path){
 
 
     /**
-     * Carrega dados diretamente de um modulo node
+     * Executa uma api search
+     * @param data
      */
-    TShark.prototype.modulo.prototype.load = function (load_api) {
+    TShark.prototype.modulo.prototype.search = function (data){
+        this.call('search', data);
+    };
+    
+    /**
+     * Executa uma api get
+     * @param data
+     */
+    TShark.prototype.modulo.prototype.get = function (data){
+        this.call('get', data);
+    };
+
+    /**
+     * Executa uma api list
+     * @param data
+     */
+    TShark.prototype.modulo.prototype.list = function (data){
+        this.call('list', data);
+    };
+
+
+    /**
+     * Executa uma api create
+     * @param data
+     */
+    TShark.prototype.modulo.prototype.create = function (data){
+        this.call('create', data);
+    };
+    
+    /**
+     * Executa uma api edit
+     * @param data
+     */
+    TShark.prototype.modulo.prototype.edit = function (data){
+        this.call('edit', data);
+    };
+
+
+
+    /**
+     * Executa uma api exec
+     * @param func
+     * @param data
+     */
+    TShark.prototype.modulo.prototype.exec = function (func, data){
+        this.call(func, data);
+    };
+    
+    /**
+     * Executa uma api insert
+     * @param data
+     */
+    TShark.prototype.modulo.prototype.insert = function (data){
+        this.call('insert', data);
+    };
+    
+    
+    /**
+     * Executa uma api update
+     * @param data
+     */
+    TShark.prototype.modulo.prototype.update = function (data){
+        this.call('update', data);
+    };
+    
+    /**
+     * Executa uma api delete
+     * @param data
+     */    
+    TShark.prototype.modulo.prototype.delete = function (data){
+        this.call('delete', data);
+    };
+    
+    /**
+     * Executa uma api save
+     * @param data
+     */
+    TShark.prototype.modulo.prototype.save = function (data){
+        this.call('save', data);
+    };
+
+
+    /**
+     * Carrega dados diretamente da API list de path
+     * @param data {{}} (opcional)
+     * @param load_api {string} (opcional) Se 1 ou 4 strings, tratado como exec, senão como list
+     * @param callback {function} (opcional) função para execução ao final do load
+     * @returns {*}
+     */
+    TShark.prototype.modulo.prototype.load = function () {
+        this.data.load(arguments);
+    };
+
+
+
+
+
+
+    TShark.prototype.modulo.prototype.zzzload = function (load_api) {
         load_api = load_api || this.path.split('.');
         if (typeof load_api == 'string') {
             load_api = load_api.split(' ');
@@ -136,7 +357,7 @@ TShark.prototype.modulo = function(path){
                 }
 
                 self.data.reset(data);
-                
+
                 if (self['onAfterLoad']) {
                     self.onAfterLoad();
                 }
@@ -149,7 +370,7 @@ TShark.prototype.modulo = function(path){
     //region :: Interceptação de eventos de API
 
     /**
-     * A API save é uma api de mentirinha. Aqui no módulo, descobre-se qual a real 
+     * A API save é uma api de mentirinha. Aqui no módulo, descobre-se qual a real
      * natureza da operação, e retorna-se uma alteração da chamada de API.
      * @param sender
      * @param settings
@@ -166,7 +387,7 @@ TShark.prototype.modulo = function(path){
         }
 
         settings.data.row = this.data.row;
-        
+
         if (this.data.row['_key_'] == 'NEW_KEY'){
             return 'insert';
         } else {
@@ -179,69 +400,34 @@ TShark.prototype.modulo = function(path){
     //endregion
 
     
-    
-/*
-    TShark.prototype.modulo.prototype.list      = function (data){
-        this._callApi('list', data);
+    //region :: Envio de dados ao server
+
+
+    /**
+     * Armazena dados para serem enviados ao server no próximo call
+     * de API
+     * @param data {{}} Dados a serem enviados
+     * @param key {string} (Opcional) Se informado, os dados serão encontrados nessa chave em params no server
+     */
+    TShark.prototype.modulo.prototype.send = function (data, key) {
+        this._sending_ = this._sending_ || {};
+        if (key){
+            this._sending_[key] = data;
+        } else {
+            this._sending_ = $.extend(this._sending_, data);
+        }
     };
 
-    TShark.prototype.modulo.prototype.get       = function (data){
-        this._callApi('get', data);
+    /**
+     * Alimenta o pacote de envio e reseta o _sending_
+     * @param settings
+     * @private
+     */
+    TShark.prototype.modulo.prototype._send = function (settings) {
+        settings.data = $.extend(settings.data, this._sending_);
+        this._sending_ = {};
     };
 
-    TShark.prototype.modulo.prototype.search    = function (data){
-        this._callApi('search', data);
-    };
-
-    TShark.prototype.modulo.prototype.form      = function (data){
-        this._callApi('form', data);
-    };
-
-    TShark.prototype.modulo.prototype.insert    = function (data){
-        this._callApi('insert');
-    };
-
-    TShark.prototype.modulo.prototype.update    = function (data){
-        this._callApi('update');
-    };
-
-    TShark.prototype.modulo.prototype.delete    = function (data){
-        this._callApi('delete');
-    };
-
-    TShark.prototype.modulo.prototype.exec      = function (data){
-        this._callApi('exec');
-    };
-*/
     //endregion
 
-    
-    /** ???
-     * Reseta os dados e os binds
-     * @param new_data
-     *
-    TShark.prototype.modulo.prototype.reset = function(new_data){
-
-        // Unbind
-        for (var bound in this.binds){
-            try {
-                this.unbind(bound, true);
-            } catch (e){
-                console.log(e);
-            }
-        }
-
-        // Reseta:
-        this.data.reset(new_data);
-
-        // Re bind
-        for (var bound in this.binds){
-            try {
-                this.bind(bound);
-            } catch (e){
-                console.log(e);
-            }
-        }
-    };
-    */
 })($);

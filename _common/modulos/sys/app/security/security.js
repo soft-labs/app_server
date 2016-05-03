@@ -10,41 +10,94 @@
 tshark.modulos._add('sys.app.security', {
 
     /**
-     * Inicializa o menu
+     * Inicializa
      */
     init: function(){
-
-        // Efetua o bind
-        rivets.bind($('#login'), this);
-        tshark.bind('#login');
-
+        this.data.addRow({
+            username: '',
+            password: ''
+        });
     },
 
     /**
-     * Clique do menu
+     * Executa um login
+     * @param ev
      */
-    click: function(){
+    login: function(ev){
+        if (ev.keyCode == 13) {
+            sys.app.security.exec('login');
+        }
+    },
 
-        // Esconde a área atual
-        $("#" + old_area).css('display', 'none');
-
-        // Nova área
-        old_area = $(this).data('area');
-
-        // Migra menu
-        $("#menu_lateral")
-            .appendTo($("#" + old_area).find("#menu_area"));
-
-        var r = $(this).data('row');
-        sys.app.menu.data.goTo(r);
-
-        tshark.bind('#menu_lateral');
+    /**
+     * Efetua o login
+     */
+    onBeforeLogin: function(el, settings){
+        if (!this.data.row['username']) {
+            $('#username').focus();
+            return this.erro('Informe o seu usuário.');
+        }
         
-        // Exibe
-        $("#" + old_area).css('display', 'block');
+        if (!this.data.row['password']) {
+            $('#password').focus();
+            return this.erro('Informe sua senha.');
+        }
 
+        $('#login_form').addClass('loading');
+        
+        // Acrescenta o row ao pacote
+        this.send(this.data.row);
+        
+        // Libera ou não para continuar
+        return true;
+    },
+    
+    /**
+     * Chamado após o login
+     */
+    onAfterLogin: function(response, next){
+        $('#login_form').removeClass('loading');
+        
+        // Falhou
+        if (!response['result']){
+            this.popErro('Acesso não autorizado.');
+        
+        // Ok    
+        } else {
+            $('#login').transition({
+                animation: 'fade',
+                onComplete: function(){
+                    window.location.reload(true);
+                }
+            });
+        }
+        
+    },
+
+    /**
+     * Executa um logout
+     * @param ev
+     */
+    logout: function(ev){
+        sys.app.security.exec('logout');
+    },
+    
+    /**
+     * Chamado após um logout
+     */
+    onAfterLogout: function(response, next){
+        if (response['result']) {
+            $('.app').transition({
+                animation: 'fade',
+                onComplete: function(){
+                    window.location.reload(true);
+                }
+            });
+        } else {
+            this.popErro('Aconteceu um erro ao executar o comando.', 'Tente novamente, por favor');
+        }
     }
-
+    
 });
 
 

@@ -1,0 +1,82 @@
+extends header
+
+block content
+    .ui.content.app
+
+        .ui.padded.container.segment.app-header
+            h1.ui.header
+                img.app-logo-header(src='imgs/_logos/retailpro_box.png')
+                .content
+                    | Sistema Financeiro
+                    .sub.header
+                        | Gestão financeira | AddMark
+            .app-menu-trigger.ui.floated.right.secondary.menu
+                a.browse.item
+                    i.sidebar.icon
+                    | Menu
+
+            .app-menu-popup.ui.flowing.popup.bottom.left.transition.hidden
+                .ui.four.column.doubling.stackable.relaxed.equal.height.divided.grid
+                    .column(rv-each-menu='sys.app.menu.data.rows')
+                        h4.ui.header
+                            i(rv-class='menu.icon')
+                            label {menu.label}
+                        .ui.link.list
+                            a.item(
+                                rv-each-submenu='menu.submenu',
+                                rv-data-action='submenu.api',
+                                rv-data-area='submenu.area | if submenu.area menu.area',
+                                rv-data-menu-index='menu._index_'
+                                rv-data-submenu-index='submenu._index_'
+                                rv-on-click='sys.app.menu.click'
+                            )
+                                i.angle.double.right.icon
+                                | {submenu.label}
+
+            .app-submenu-popup.ui.flowing.popup.transition.hidden
+                .ui.two.column.doubling.stackable.relaxed.equal.height.divided.grid
+                    .column(rv-each-menu='bar.submenu')
+                        h4.ui.header
+                            i(rv-class='menu.icon')
+                            label {menu.label}
+                        .ui.link.list
+                            .item.icon(rv-each-submenu='menu.submenu')
+                                i.angle.double.right.icon
+                                | {submenu.label}
+
+
+        .ui.container.segment.app-bar
+            i#app-submenu-trigger(rv-class='bar.icon')
+
+            .ui.breadcrumb
+                a.section {bar.area}
+                i.right.chevron.icon.divider
+                .section.active
+                    | {bar.secao}
+
+            .ui.icon.message.transition.hidden
+                i(rv-class='bar.msg.icon')
+                .content
+                    .header {bar.msg.title}
+                    p {bar.msg.text}
+
+
+        .ui.container.transition.app-home
+            .ui.two.column.doubling.stackable.grid.container.app-blue-box
+                .column
+                    canvas#chart1
+                .column
+                    canvas#chart2
+
+        .ui.container.app-financas.transition.hidden
+            include _areas/financas
+
+        .ui.container.app-integracoes.transition.hidden
+            | Hello Integracoes
+
+        .ui.container.app-cadastros.transition.hidden
+            | Hello Cadastros
+
+        .ui.container.app-sistema.transition.hidden
+            | Hello Sistema
+

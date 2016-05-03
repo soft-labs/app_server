@@ -79,15 +79,16 @@ function Menu(){
      * @returns {Type.data}
      */
     this.get = function *(ctx) {
-        var fs  = require('fs-extra')
-            , d = false
+        var fs       = require('fs-extra')
+            , reload = require('require-reload')(require)
+            , d      = false
         ;
 
         ctx.state.config.flowPaths.up.forEach((path) => {
             var arq = path + 'menu.js';
             if (!d && fs.existsSync(arq)) {
                 d = types.dataset();
-                d.data = require(arq);
+                d.data = reload(arq);
             }
         });
 
@@ -102,7 +103,7 @@ function Menu(){
 /**
  * @type Types
  */
-var types = require('tshark/types');
+const types = require('../../../../tshark/types');
 
 
 // Exporta

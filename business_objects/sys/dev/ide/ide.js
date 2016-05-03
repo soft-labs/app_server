@@ -195,6 +195,8 @@ function Ide(){
                 , arq = templ
                 , key = []
                 , keys = []
+                , arr_fields = []
+                , arr_labels = []
                 , key_owner = ''
                 , achou_lbl_field = false
                 , lbl_field = ''
@@ -304,6 +306,9 @@ function Ide(){
 '\n                ' + _field + ': {' +
 "\n                    tipo: types.comp." + types.getByField(_type) + ", label: '" + capitalize(_field) + ":'";
 
+                arr_fields.push(_field);
+                arr_labels.push(capitalize(_field));
+
                 if (is_key) {
                     if (owner_map.packs[_split[0]]){
                         key_owner = owner_map.packs[_split[0]];
@@ -408,7 +413,23 @@ function Ide(){
             jade += "\n                i.delete.icon";
             jade += "\n                | Remover\n";
 
+            fs.writeFileSync(mod_dir + '/' + 'cards.jade', jade);
+
+            jade  = '//';
+            jade += '\n    Template default para: ' + owner + '.' + pack + '.' + mod['name'];
+            jade += '\n    Criado em ' + hoje + '\n';
+            jade += '\ntable.ui.compact.striped.celled.table';
+            jade += '\n    thead';
+            arr_labels.forEach(lbl => {
+                jade += '\n        th ' + lbl;
+            });
+            jade += '\n    tbody';
+            jade += "\n        tr(rv-each-row='data.rows')";
+            arr_fields.forEach(lbl => {
+                jade += '\n            td {row.' + lbl + '}';
+            });
             fs.writeFileSync(mod_dir + '/' + 'list.jade', jade);
+
         }
 
     };

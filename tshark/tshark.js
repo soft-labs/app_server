@@ -454,6 +454,8 @@ router.use(function *(next) {
         this.state.api.path[2] == 'security' &&
         this.state.api.path[3] == 'login'){
 
+        var tmp = this.req.headers.referer.split('/').slice(-2);
+        this.state.config = this.app.context.clientes[tmp[0]][tmp[1]];
 
         yield next;
 
@@ -467,6 +469,7 @@ router.use(function *(next) {
 
         // Multipass!!
         } else {
+            this.state.user_key = user_key;
             this.state.config = this.app.context.running[user_key];
             yield next;
         }
@@ -516,6 +519,9 @@ router.get(/^\/(\w+)\/tshark\/.*$/, function *(next) {
                     ? 'get'
                     : 'list'
             );
+            if (len == 4){
+                mod.params['key'] = this.state.api.path[3];
+            }
             this.body = yield mod.get(this);
         }
     }
@@ -546,13 +552,7 @@ router.post(/^\/(\w+)\/tshark\/.*/, function *(next) {
     // Execução de função
     if (len = 4){
         var func = this.state.api.call;
-        if (func == ''){
-            this.state.api.call = func = 'insert';
-            
-        } else {
-            this.state.api.call = 'exec';
-        }
-        
+
         /**
          * Executa a função no objeto
          */
@@ -565,8 +565,6 @@ router.post(/^\/(\w+)\/tshark\/.*/, function *(next) {
             } else {
                 this.body = res;
             }
-            this.body['func'] = func;
-            this.state.api.call = this.state.api.path.pop();
         } catch (e){
             console.log(e);
         }

@@ -53,6 +53,23 @@ var CONSOLE_ON = true;
         if(options['register']){
             this.register(options['register']);
         }
+
+        // bind
+        var id = '.app'
+            , obj = app
+        ;
+        if (options['bind']){
+            if (typeof options['bind'] == 'string') {
+                this.bind(options['bind'], obj);
+
+            } else {
+                for (var o in options['bind']){
+                    this.bind(o, options['bind'][o]);
+                }
+            }
+        } else {
+            this.bind(id, obj);
+        }
     };
 
     /**
@@ -118,8 +135,20 @@ var CONSOLE_ON = true;
             .addClass('binded')
         ;
 
+        $(ref).find('.ui.menu.item').not('.binded')
+            .state()
+            .addClass('binded')
+        ;
+
         $(ref).find('.ui.checkbox').not('.binded')
             .checkbox()
+            .addClass('binded')
+        ;
+
+        $(ref).find('.ui.accordion.non-exclusive').not('.binded')
+            .accordion({
+                exclusive: false
+            })
             .addClass('binded')
         ;
 
@@ -365,7 +394,7 @@ var CONSOLE_ON = true;
 
                         // Chama função callback
                         if (callFunc) {
-                            callFunc.apply();
+                            callFunc.call(tshark.modulos[id]);
                         }
                     })
 
@@ -425,6 +454,18 @@ var CONSOLE_ON = true;
             obj = obj[p];
         });
 
+        // Registra no app
+        obj = app;
+        tmp.forEach((p, i) => {
+            if (!obj[p]){
+                obj[p] = (i == tmp.length-1
+                        ? tshark.modulos[path]
+                        : {}
+                );
+            }
+            obj = obj[p];
+        });
+
         // Inicializa
         if (mod['init']) {
             mod.init();
@@ -475,5 +516,163 @@ var CONSOLE_ON = true;
     };
     
     //endregion
-    
+
+
+    //region :: Mensagens
+
+    function notify(tipo, msg, extra, onOk){
+        alertify.notify( msg, tipo, 5, onOk );
+        if (extra){
+            alertify.notify( extra, tipo );
+        }
+    }
+
+    function log(msg, extra){
+        if (console) {
+            console.log(msg, extra);
+            if (extra) {
+                console.log(msg, extra);
+            }
+        }
+    }
+
+    function popAlert(title, msg, extra, onOk){
+        alertify.alert(title, msg + (extra ? '<p>&nbsp;</p><p>' + extra : ''), onOk);
+    }
+
+
+    //region :: Suave
+
+    /**
+     * Gera um log em console
+     * @param msg
+     * @param extra
+     */
+    TShark.prototype.log = function(msg, extra){
+        log(msg, extra);
+    };
+
+    /**
+     * Exibe mensagem de erro na tela
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.erro = function(msg, extra, onOk){
+        notify('error', msg, extra, onOk);
+        return false;
+    };
+
+    /**
+     * Exibe mensagem de sucesso na tela
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.sucesso = function(msg, extra, onOk){
+        notify('success', msg, extra, onOk);
+        return true;
+    };
+
+    /**
+     * Exibe um alerta na tela
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.alerta = function(msg, extra, onOk){
+        notify('warning', msg, extra, onOk);
+    };
+
+    /**
+     * Exibe uma mensagem na tela
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.msg = function(msg, extra, onOk){
+        notify('', msg, extra, onOk);
+    };
+
+    //endregion
+
+
+    //region :: Popups
+
+    /**
+     * Exibe popup de erro na tela
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.popErro = function(msg, extra, onOk){
+        popAlert('Erro!', msg, extra, onOk);
+        return false;
+    };
+
+    /**
+     * Exibe popup de sucesso na tela
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.popSucesso = function(msg, extra, onOk){
+        popAlert('Sucesso!', msg, extra, onOk);
+        return true;
+    };
+
+    /**
+     * Exibe um popup na tela
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.popAlerta = function(msg, extra, onOk){
+        popAlert('Alerta!', msg, extra, onOk);
+    };
+
+    /**
+     * Exibe um popup na tela
+     * @param msg
+     * @param extra
+     * @param onOk
+     */
+    TShark.prototype.popMsg = function(msg, extra, onOk){
+        popAlert('Atenção!', msg, extra, onOk);
+    };
+
+    /**
+     * Pede confirmação do usuário
+     * @param msg Mensagem ao usuário
+     * @param onOk { function } Callback em caso de sim
+     * @param onCancel { function } Callback em caso de não
+     */
+    TShark.prototype.confirm = function(msg, onOk, onCancel){
+        alertify
+            .confirm('Atenção!', msg, onOk, onCancel)
+            .set('labels', {cancel: 'Cancelar'})
+        ;
+    };
+
+    /**
+     * Pede ao usuário que informe um valor.
+     * @param msg Mensagem ao usuário
+     * @param defValue Valor default
+     * @param onOk { function } Callback em caso de sim
+     * @param onCancel { function } Callback em caso de não
+     */
+    TShark.prototype.prompt = function(msg, defValue, onOk, onCancel){
+        alertify
+            .prompt('Informe:', msg, defValue, onOk, onCancel)
+            .set('labels', {cancel: 'Cancelar'})
+        ;
+    };
+
+
+    //endregion
+
+
+
+    //endregion
+
 })($);

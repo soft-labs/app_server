@@ -84,7 +84,17 @@ Cookie.prototype.setLoggedUser = function(ctx, client, value) {
     return value;
 };
 
-
+/**
+ * Remove o cookie de usuário logado
+ * @param ctx
+ * @param client
+ */
+Cookie.prototype.clearCoockie = function(ctx, client){
+    var hash = crypto.createHash('sha256')
+        , key = this.userKey(ctx, client)
+    ;
+    ctx.cookies.set(key, '', {expires: new Date(1), path: '/'});
+};
 
 // Exporta
 module.exports = new Cookie();
