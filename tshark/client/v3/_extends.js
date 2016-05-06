@@ -89,6 +89,42 @@ Number.prototype.toFloat = function() {
     return parseFloat(this);
 }
 
+
+/**
+ * Retorna a string convertida em float.
+ * @author labs
+ * @since 11/2014
+ **/
+function isFloat(valor){
+    if (!valor) {
+        return 0;
+    }
+    if (valor === true){
+        return 1;
+    }
+    /*if (typeof valor != "string") {
+     return valor;
+     }*/
+
+    valor = valor.toString().replace(/[\s\$a-zA-Z]/gm, '') + '';
+
+    var r=/\.|,/gi;
+    var keywords = valor.split(r);
+    var decimal  = false;
+    if (keywords.length>1) {
+        decimal = keywords.pop();
+    }
+    var f = parseFloat(keywords.join('') + (decimal ? '.' + decimal : ''));
+    return !isNaN(f);
+}
+String.prototype.isFloat = function() {
+    return isFloat(this);
+}
+Number.prototype.isFloat = function() {
+    return parseFloat(this);
+}
+
+
 /**
  * Formata em moeda.
  * @author labs
@@ -318,6 +354,270 @@ Array.prototype.last = function(){
     return (this.length ? this[this.length-1] : undefined);
 };
 
+/**
+ * Executa pivoteamento de um array de objetos por um
+ * dos campos dos objetos no array
+ *
+ * Ex:
+ *  res = [
+ *    {dia: 'segunda', nome: 'Paulo', valor: 10},
+ *    {dia: 'segunda', nome: 'Maria', valor: 20},
+ *    {dia: 'terça',   nome: 'João',  valor: 15},
+ *    {dia: 'quarta',  nome: 'Paulo', valor:  8},
+ *  ].pivot('dia')
+ *
+ *  res =>
+ *  [
+ *      {
+ *         _stats: { sum: {valor: 30}, count: 2 },
+ *         label: 'segunda',
+ *         values: [
+ *              {dia: 'segunda', nome: 'Paulo', valor: 10},
+ *              {dia: 'segunda', nome: 'Maria', valor: 20},
+*          ]
+*       },
+ *      {
+ *         _stats: { sum: {valor: 15}, count: 1 },
+ *         label: 'terça',
+ *         values: [
+ *              {dia: 'terça',   nome: 'João',  valor: 15},
+ *         ]
+ *      },
+ *      {
+ *         _stats: { sum: {valor: 8}, count: 1 },
+ *         label: 'quarta',
+ *         values: [
+ *              {dia: 'quarta',  nome: 'Paulo', valor:  8}
+ *         ],
+ *      }
+ *  ]
+ *   ... e
+ *
+ *   res._stats = { sum: {valor: 53}, count: 4 }
+ *
+ * @param campo
+ * @returns {Array}
+ */
+Array.prototype.pivot = function (campo, desc) {
+    var tipo, res = [], tmp = {}, first = true, sum = {}, count = 0, f;
+    this.forEach(row => {
+        var field = row[campo];
+
+        if (!tmp[field]){
+            tmp[field] = {
+                _stats: {sum: {}, count: 0},
+                label: field,
+                values: []
+            };
+        }
+        tmp[row[campo]].values.push(row);
+
+        // SUM
+        if (first){
+            for(var fld in row){
+                if (isFloat(row[fld])){
+                    f = toFloat(row[fld]);
+                    sum[fld] = toFloat(row[fld]);
+                    tmp[field]._stats.sum[fld] = f;
+                }
+            }
+        } else {
+            for (var fld in sum) {
+                f = toFloat(row[fld]);
+                sum[fld] += f;
+                if (!tmp[field]._stats.sum[fld]){
+                    tmp[field]._stats.sum[fld] = f;
+                } else {
+                    tmp[field]._stats.sum[fld] += f;
+                }
+            }
+        }
+
+        tmp[field]._stats.count++;
+        first = false;
+    });
+
+    // Monta resultado
+    for (var t in tmp){
+        res.push(tmp[t]);
+    }
+
+    // Stats global
+    res._stats = {sum: sum, count: res.length};
+
+    // Ordenação
+    var order_by = 'label';
+    if (typeof desc == 'string'){
+        order_by = desc;
+        desc = arguments[2];
+    }
+
+    // Retorna com sortBy
+    return res.sortBy(order_by, desc);
+};
+
+/**
+ * Ordena um array de objetos por um de seus campos, tentando
+ * adivinhar o tipo correto para efetuar o sort.
+ * @param field {string} campo a ser utilizado para o sort
+ * @param order_by {string} (Opcional) ordenação descendente?
+ * @param desc {bool} (Opcional) ordenação descendente?
+ * @returns {Array}
+ */
+Array.prototype.sortBy = function (field, desc) {
+    if (!this.length) return this;
+
+    var i = 0, found = false, is_date = false, sample;
+    //do {
+        sample = getObjPath(this[i], field); // this[i][field];
+        found = sample;
+    //} while (i < this.length || found === false);
+
+
+    if (sample) {
+
+        if (typeof sample == 'number' || isFloat(sample)){
+            this.sortByFloat(field, desc);
+
+        } else {
+
+            // Tenta identificar se o tipo é data
+            if (sample.indexOf('/') > -1 || sample.indexOf('-') > -1) {
+                [
+                    'DD/MM/YYYY', 'DD/MM/YY', 'DD/MM', 'MM/YY', 'MM/YYYY',
+                    'YYYY/MM/DD', 'YY/MM/DD', 'MM/DD', 'YY/MM', 'YYYY/MM',
+                    'DD-MM-YYYY', 'DD-MM-YY', 'DD-MM', 'MM-YY', 'MM-YYYY',
+                    'YYYY-MM-DD', 'YY-MM-DD', 'MM-DD', 'YY-MM', 'YYYY-MM'
+                ].forEach(f => {
+                    if (moment(sample, f).isValid()) {
+                        is_date = true;
+                    }
+                });
+            }
+
+            if (is_date) {
+                this.sortByDate(field, desc);
+
+            } else {
+                this.sortByText(field, desc);
+            }
+        }
+    }
+
+    return this;
+};
+
+/**
+ * Organiza array de objetos por um campo de data
+ * @param field {string} campo a ser utilizado para o sort
+ * @param desc {bool} (Opcional) ordenação descendente?
+ * @returns {Array}
+ */
+Array.prototype.sortByDate = function (field, desc) {
+    this.sort(_sortDate.bind(null, field, desc));
+    return this;
+};
+
+function _sortDate(field, desc, a, b) {
+    var
+        aa   = getObjPath(a, field)
+        , bb = getObjPath(b, field)
+        , sep = (aa.indexOf('/') > -1
+            ? '/'
+            : '-'
+        )
+        , tmp1 = aa.split(sep)
+        , tmp2 = bb.split(sep)
+        , dt1
+        , dt2
+    ;
+
+    if (tmp1[0].length == 4){
+        dt1 = tmp1.join('');
+        dt2 = tmp2.join('');
+
+    } else {
+        dt1 = tmp1.reverse().join('');
+        dt2 = tmp2.reverse().join('');
+    }
+
+
+    if (dt1==dt2) return 0;
+    if (desc) {
+        return (dt1<dt2 ? 1 : -1);
+    } else {
+        return (dt1<dt2 ? -1 : 1);
+    }
+}
+
+
+/**
+ * Organiza array de objetos por um campo de float
+ * @param field {string} campo a ser utilizado para o sort
+ * @param desc {bool} (Opcional) ordenação descendente?
+ * @returns {Array}
+ */
+Array.prototype.sortByFloat = function (field, desc) {
+    this.sort(_sortByFloat.bind(null, field, desc));
+    return this;
+};
+
+function _sortByFloat(field, desc, a, b) {
+    var aa   = toFloat(getObjPath(a, field))
+        , bb = toFloat(getObjPath(b, field))
+    ;
+
+    if (aa==bb) return 0;
+    if (desc) {
+        return bb - aa;
+    } else {
+        return aa - bb;
+    }
+}
+
+
+/**
+ * Organiza array de objetos por um campo de float
+ * @param field {string} campo a ser utilizado para o sort
+ * @param desc {bool} (Opcional) ordenação descendente?
+ * @returns {Array}
+ */
+Array.prototype.sortByText = function (field, desc) {
+    this.sort(_sortByText.bind(null, field, desc));
+    return this;
+};
+
+function _sortByText(field, desc, a, b) {
+    var aa   = (a[field]).toUpperCase()
+        , bb = (b[field]).toUpperCase()
+    ;
+
+    if (aa == bb) return 0;
+    if (desc) {
+        return (aa < bb ? -1 : 1);
+    } else {
+        return (aa > bb ? -1 : 1);
+    }
+}
+
+function getObjPath(base, path){
+    var obj = base;
+    if (typeof path == 'string'){
+        path = path.split('.');
+    }
+    path.forEach((p) => {
+        obj = obj[p];
+    });
+    return obj;
+}
+
+
+
+function randomColor() {
+    var max = 0xffffff;
+    return '#' + Math.round( Math.random() * max ).toString( 16 );
+};
+
 
 /**
  * Retorna um (fake) GUID
@@ -388,19 +688,38 @@ Object.values = function(obj){
  */
 var oldEach = rivets.binders['each-*'].routine;
 rivets.binders['each-*'].routine = function(el, value){
-    var first = true;
+    var first = true, sum = {}, count = 0, avg = 0;
     if (value) {
-        value.forEach(function (v, i) {
+        value.forEach( (v, i) => {
+            count++;
             if (typeof v == "object") {
                 v['_index_'] = i;
                 v['_first_'] = first;
                 v['_last_'] = false;
+                
+                // SUM
+                if (first){
+                    for(var p in v){
+                        if (isFloat(v[p])){
+                            sum[p] = toFloat(v[p]);
+                        }
+                    }
+                    
+                } else {
+                    for(var s in sum){
+                        sum[s] += toFloat(v[s]);
+                    }
+                }
+                
                 first = false;
             }
         });
         if (typeof  value[value.length - 1] == "object") {
             value[value.length - 1]['_last_'] = true;
         }
+    }
+    if (this.model != undefined && this.observer.key.path && this.model[this.observer.key.path]) {
+        //this.model[this.observer.key.path]._stats = {sum: sum, count: count, avg: avg};
     }
     oldEach.call(this, el, value);
 };

@@ -44,7 +44,7 @@ tshark.modulos._add('sys.app.menu', {
             ndx = $(this).data('submenu-index')
         ;
 
-        app.bar.icon = 'circular large ' + row.icon;
+       /* app.bar.icon = 'circular large ' + row.icon;
         app.bar.area = row.label;
         row.submenu.forEach(s => {
             if (s._index_ == ndx){
@@ -52,7 +52,7 @@ tshark.modulos._add('sys.app.menu', {
                 app.bar.submenu = s['submenu'];
             }
         });
-
+        */
 
         // Exibe a nova área
         $("." + sys.app.menu.old_area).transition('fade up');

@@ -1,5 +1,69 @@
 /* Estilos globais do app server */
 
+.app {
+
+}
+
+
+/***** Logos *****/
+
+#logo_tshark {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    opacity: 0.6;
+}
+
+
+/***** Boxes *****/
+
+.app-blue-box {
+    overflow: hidden !important;
+    background: linear-gradient(to right, #f0f9ff 0%,rgba(220, 226, 249, 0.82) 100%) !important;
+    border: 1px solid #AFB1DC;
+}
+
+.app-yellow-box {
+    overflow: hidden !important;
+    background: linear-gradient(to right, #f0f9ff 0%,rgba(249, 248, 220, 0.82) 100%) !important;
+    border: 1px solid #DCB7AF;
+}
+
+.app-red-box {
+    overflow: hidden !important;
+    background: linear-gradient(to right, #FFF0F6 0%,rgb(249, 220, 220) 100%) !important;
+    border: 1px solid #AFDCC9;
+}
+
+.app-green-box {
+    overflow: hidden !important;
+    background: linear-gradient(to right, #FFF0F6 0%,rgb(184, 239, 186) 100%) !important;
+    border: 1px solid #B4AFDC;
+}
+
+.app-no-border {
+    border: 0px solid black !important;
+}
+
+
+
+/***** Grid *****/
+
+.app-grid-header,
+.app-grid-rows,
+.app-grid-footer
+{
+    padding: 0.4em !important;
+}
+
+.app-grid-header > .column,
+.app-grid-rows > .column,
+.app-grid-footer > .column
+{
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 
 /***** Semantic UI overrides *****/
 

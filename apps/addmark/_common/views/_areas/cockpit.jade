@@ -1,0 +1,149 @@
+//
+   Created by labs on 04/05/16.
+    -  Top 5 Credores
+    -  Top 5 Devedores
+    -  Top 5 Impacto Conta Gerencial - Pagar
+    -  Top 5 Impacto Conta Gerencial - Receitas
+    -  Projeção de resultado
+
+
+.ui.two.stackable.cards
+
+    // **** Chart Desempenho **** //
+    .ui.card
+        .content
+            //i.right.floated.line.chart.icon
+            .header Desempenho Projetado
+            .meta 1o Semestre / 2016
+        .description.app-no-border(
+            rv-class-app-blue-box="cockpit.struct.forecast.result | isGreater '0'"
+            rv-class-app-red-box="cockpit.struct.forecast.result | isLess '0'"
+        )
+            canvas#chartForecast
+        .extra.content
+            span.right.floated
+                | Resultado Projetado: R$ {cockpit.struct.forecast.result | numberFormat 2 ',' '.'}
+
+            span
+                i.settings.icon
+                | Configurar
+
+
+
+    // **** Chart Impacto **** //
+    .ui.fluid.card
+        .content
+            //i.right.floated.warning.sign.icon
+            .header Mapa de Impacto
+            .meta Principais Receitas e Despesas do Período
+        .description.app-no-border(
+            rv-class-app-blue-box="cockpit.struct.forecast.result | isGreater '0'"
+            rv-class-app-red-box="cockpit.struct.forecast.result | isLess '0'"
+        )
+            canvas#chartImpacto
+        .extra.content
+            span.right.floated
+                i.info.circle.icon
+                | 1o Semestre / 2016
+
+            span
+                i.settings.icon
+                | Configurar
+
+
+
+    // **** Despesas **** //
+    .ui.card
+        .content
+            span.right.floated.ui.secondary.menu
+                .ui.dropdown.item
+                    i.options.icon
+                    span.text Vencimento
+                    .menu
+                        .item(
+                            rv-each-menu='cockpit.struct.despesas.options'
+                            rv-on-click='cockpit.popSubmenu'
+                            rv-data-key='menu._index_'
+                            data-sub='despesas'
+                            style="white-space: nowrap;"
+                        )
+                            i(rv-class='menu.icon')
+                            span.text {menu.label}
+
+            span.right.floated.ui.secondary.menu
+                .ui.dropdown.item
+                    span.text Visualizar
+                    .menu
+                        .active.item
+                            i.list.icon
+                            span.text Listagem
+                        .item
+                            i.pie.chart.icon
+                            span.text Gráficos
+
+            .header Pagamentos Programados
+            .meta Período 01/05/2016 à 25/05/2016
+            .description
+                canvas#piePagtos
+
+                .ui.styled.accordion.non-exclusive
+                    span(rv-each-row='cockpit.struct.despesas.data')
+                        .active.title
+                            i.dropdown.icon
+                            | {row.label}
+                        .active.content
+                            .ui.bottom.aligned.stackable.grid
+                                .row.app-grid-rows(rv-each-item='row.values')
+                                    .thirteen.wide.column
+                                        | {item.nome} -
+                                        | {item.historico}
+                                    .three.wide.column.right.aligned.app-despesa {item.valor | numberFormat 2 ',' '.'}
+                                .row.app-grid-rows
+                                    .column.right.aligned.app-despesa {row._stats.sum.valor | numberFormat 2 ',' '.'}
+
+
+        .extra.content
+            span.right.floated
+                | Total à Pagar: R$ {cockpit.struct.despesas.data._stats.sum.valor | numberFormat 2 ',' '.'}
+
+
+
+    // **** Receitas **** //
+    .ui.card
+        .content
+            span.right.floated.ui.secondary.menu
+                .ui.dropdown.item
+                    i.options.icon
+                    span.text Vencimento
+                    .menu
+                        .item(
+                            rv-each-menu='cockpit.struct.receitas.options'
+                            rv-on-click='cockpit.popSubmenu'
+                            rv-data-key='menu._index_'
+                            data-sub='receitas'
+                            style="white-space: nowrap;"
+                        )
+                            i(rv-class='menu.icon')
+                            span.text {menu.label}
+
+            .header Recebimentos Programados
+            .meta Período 08/05/2016 à 15/05/2016
+            .description
+                .ui.styled.accordion.non-exclusive
+                    span(rv-each-row='cockpit.struct.receitas.data')
+                        .active.title
+                            i.dropdown.icon
+                            | {row.label}
+                        .active.content
+                            .ui.bottom.aligned.stackable.grid
+                                .row.app-grid-rows(rv-each-item='row.values')
+                                    .thirteen.wide.column
+                                        | {item.nome} -
+                                        | {item.historico}
+                                    .three.wide.column.right.aligned.app-receita {item.valor | numberFormat 2 ',' '.'}
+                                .row.app-grid-rows
+                                    .column.right.aligned.app-receita {row._stats.sum.valor | numberFormat 2 ',' '.'}
+
+        .extra.content
+            .right.floated
+                | Total à Receber: R$ {cockpit.struct.receitas.data._stats.sum.valor | numberFormat 2 ',' '.'}

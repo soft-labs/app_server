@@ -1,8 +1,23 @@
-extends header
+extends ../../../../_common/views/header
+
+// Título do app
+block title
+    title='Addmark - RetailPRO - Financeiro'
+
+
+// Estilos do app
+block app_css
+
+
+// Javascripts do app
+block app_scripts
+    script(type='application/javascript', src='cockpit.js')
+    script(type='application/javascript', src='configuracoes.js')
+
 
 block content
     .ui.content.app
-
+        img#logo_tshark.ui.image.cursor(src='imgs/_logos/tshark.png')
         .ui.padded.container.segment.app-header
             h1.ui.header
                 img.app-logo-header(src='imgs/_logos/retailpro_box.png')
@@ -36,14 +51,14 @@ block content
 
             .app-submenu-popup.ui.flowing.popup.transition.hidden
                 .ui.two.column.doubling.stackable.relaxed.equal.height.divided.grid
-                    .column(rv-each-menu='bar.submenu')
+                    .column(rv-each-menu='submenu')
                         h4.ui.header(style="white-space: nowrap;")
                             i(rv-class='menu.icon')
                             label {menu.label}
                         .ui.link.list
-                            .item.icon(rv-each-submenu='menu.submenu', style="white-space: nowrap;")
+                            .item.icon(rv-each-sub='menu.submenu', style="white-space: nowrap;")
                                 i.angle.double.right.icon
-                                | {submenu.label}
+                                | {sub.label}
 
 
         .ui.container.segment.app-bar
@@ -62,12 +77,10 @@ block content
                     p {bar.msg.text}
 
 
+
+        // **** Cockpit **** //
         .ui.container.transition.app-home
-            .ui.two.column.doubling.stackable.grid.container.app-blue-box
-                .column
-                    canvas#chart1
-                .column
-                    canvas#chart2
+            include _areas/cockpit
 
 
 
@@ -76,10 +89,6 @@ block content
 
         .ui.container.app-integracoes.transition.hidden
             | Hello Integracoes
-            | Top 5 Credores
-            | Top 5 Devedores
-            | Top 5 Impacto Conta Gerencial - Pagar
-            | Top 5 Impacto Conta Gerencial - Receitas
 
         .ui.container.app-cadastros.transition.hidden
             | Hello Cadastros

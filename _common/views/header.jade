@@ -1,7 +1,8 @@
 doctype html
 html
     head
-        title='Addmark - RetailPRO - Financeiro'
+        block title
+            title='App Server - TShark 3.0'
 
         meta(charset = 'utf-8')
         meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
@@ -45,8 +46,11 @@ html
         link(rel='stylesheet', href='css/responsive.css')
         script(type='application/javascript', src='index.js')
 
-        // Áreas do app
-        script(type='application/javascript', src='configuracoes.js')
+        // Estilos do app
+        block app_css
+
+        // Javascripts do app
+        block app_scripts
 
     body
         block content

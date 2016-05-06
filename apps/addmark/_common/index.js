@@ -43,8 +43,8 @@ var randomColorFactor = function() {
 };
 
 
-var rec    = [rdVal(), rdVal(), rdVal(), rdVal(), rdVal(), rdVal(), rdVal()]
-    , desp = [rdVal(1), rdVal(1), rdVal(1), rdVal(1), rdVal(1), rdVal(1), rdVal(1)]
+var rec    = [rdVal(), rdVal(), rdVal(), rdVal(), rdVal(), rdVal()]
+    , desp = [rdVal(1), rdVal(1), rdVal(1), rdVal(1), rdVal(1), rdVal(1)]
     , med  = []
     , mr   = 0
     , md   = 0
@@ -91,138 +91,63 @@ app = $.extend(app, {
                 lastResort: 'bottom left'
             })
         ;
-
         
-        
-        
-        
-        // Bind app-bar
-        //tshark.bind('.app-bar', this.bar);
+        // Inicializa cockpit
+        this.cockpit.init();
 
-
-        
-        // Registrando o módulo da IDE
-        //tshark.register('sys.dev.ide');
-
-        var ctx = document.getElementById("chart1").getContext("2d");
-        this.myBar = new Chart(ctx, {
-            type: 'bar',
-            data: this.barChartData,
-            options: {
-                responsive: true,
-                title: {
-                    display: true,
-                    text: 'Desempenho Registrado no Ano - Líquido R$ ' + liq
-                }
-            }
-        });
-
-
-        ctx = document.getElementById("chart2").getContext("2d");
-        window.myDoughnut = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                datasets: [{
-                    data: [
-                        rdVal(),
-                        rdVal(),
-                        rdVal(),
-                        rdVal(),
-                        rdVal(),
-                    ],
-                    backgroundColor: [
-                        "#F7464A",
-                        "#46BFBD",
-                        "#FDB45C",
-                        "#949FB1",
-                        "#4D5360",
-                    ],
-                    label: 'Dataset 1'
-                }, {
-                    hidden: true,
-                    data: [
-                        rdVal(),
-                        rdVal(),
-                        rdVal(),
-                        rdVal(),
-                        rdVal(),
-                    ],
-                    backgroundColor: [
-                        "#F7464A",
-                        "#46BFBD",
-                        "#FDB45C",
-                        "#949FB1",
-                        "#4D5360",
-                    ],
-                    label: 'Dataset 2'
-                }, {
-                    data: [
-                        rdVal(),
-                        rdVal(),
-                        rdVal(),
-                        rdVal(),
-                        rdVal(),
-                    ],
-                    backgroundColor: [
-                        "#F7464A",
-                        "#46BFBD",
-                        "#FDB45C",
-                        "#949FB1",
-                        "#4D5360",
-                    ],
-                    label: 'Dataset 3'
-                }],
-                labels: [
-                    "Red",
-                    "Green",
-                    "Yellow",
-                    "Grey",
-                    "Dark Grey"
-                ]
-            },
-            options: {
-                responsive: true,
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'Projeção de Receitas x Despesas'
-                }
-            }
-        });
     },
 
 
+
+    //region :: Estruturas da aplicação
+
+    // Informações genéricas na interface
+    info: {
+        titulo  : 'Geração de Objetos de Negócio',
+        desc    : 'Gere objetos de negócio à partir da base de dados',
+        help    : '',
+        icon    : 'circular settings icon'
+    },
+    
+    // Submenu dinâmico
+    submenu: [],
+
     // Repositório de dados do app
-    data: {
+    struct: {
+
+        // Objeto para armazenamento das informações do pack que será criado
+        bar: {
+            icon   : '',
+            area   : 'teste',
+            secao  : '123'
+        },
 
         financeiro: {
             fluxo: [
                 {
                     label: '09/04/2016', values: [
-                        {receita: '0', despesa: '459.87', historico: 'Pagamento de Energia Elétrica'},
-                        {receita: '0', despesa: '68.87', historico: 'Fornecedor Casa João'},
-                    ]
+                    {receita: '0', despesa: '459.87', historico: 'Pagamento de Energia Elétrica'},
+                    {receita: '0', despesa: '68.87', historico: 'Fornecedor Casa João'},
+                ]
                 },
                 {
                     label: '10/04/2016', values: [
-                        {receita: '0', despesa: '32.87', historico: 'Reparo Luminária'},
-                        {receita: '500', despesa: '0', historico: 'Receita de Vendas'},
-                    ]
+                    {receita: '0', despesa: '32.87', historico: 'Reparo Luminária'},
+                    {receita: '500', despesa: '0', historico: 'Receita de Vendas'},
+                ]
                 },
                 {
                     label: '11/04/2016', values: [
-                        {receita: '45.78', despesa: '0', historico: 'Receita de Vendas'},
-                        {receita: '0', despesa: '59.8', historico: 'Adiantamento Funcionário'},
-                        {receita: '0', despesa: '43.3', historico: 'Lanches'},
-                        {receita: '100', despesa: '0', historico: 'Receita de Vendas'},
-                    ]
+                    {receita: '45.78', despesa: '0', historico: 'Receita de Vendas'},
+                    {receita: '0', despesa: '59.8', historico: 'Adiantamento Funcionário'},
+                    {receita: '0', despesa: '43.3', historico: 'Lanches'},
+                    {receita: '100', despesa: '0', historico: 'Receita de Vendas'},
+                ]
                 },
                 {
                     label: '12/04/2016', values: [
-                        {receita: '340.7', despesa: '0', historico: 'Taxa Condomínio'},
-                    ]
+                    {receita: '340.7', despesa: '0', historico: 'Taxa Condomínio'},
+                ]
                 }
             ],
 
@@ -238,57 +163,8 @@ app = $.extend(app, {
                 {data: '12/04/2016', receita: '340.7', despesa: '0', historico: 'Taxa Condomínio'}
             ]
         }
-
+        
     },
-    
-    
-    
-    
-    barChartData: {
-        labels: app.meses_array.slice(0,7),
-        datasets: [
-            {
-                type: 'line',
-                label: 'Resultado: R$ ' + liq.formatMoney(),
-                backgroundColor: "rgba(151,187,205,0.5)",
-                data: med,
-                borderColor: 'white',
-                borderWidth: 2
-            },
-            {
-                type: 'bar',
-                label: 'Receitas: R$ ' + mr.formatMoney(),
-                backgroundColor: "rgba(100,53,201,0.8)",
-                data: rec,
-                borderColor: 'black',
-                borderWidth: 1
-            },
-            {
-                type: 'bar',
-                label: 'Despesas: R$ ' + md.formatMoney(),
-                backgroundColor: '#F7464A',
-                data: desp
-            }
-        ]
-    },
-
-    //region :: Estruturas da aplicação
-
-    // Informações genéricas na interface
-    info: {
-        titulo  : 'Geração de Objetos de Negócio',
-        desc    : 'Gere objetos de negócio à partir da base de dados',
-        help    : '',
-        icon    : 'circular settings icon'
-    },
-
-    // Objeto para armazenamento das informações do pack que será criado
-    bar: {
-        icon   : '',
-        area   : 'teste',
-        secao  : '123'
-    },
-
 
 
     //endregion
@@ -469,6 +345,7 @@ app = $.extend(app, {
 
 
     //endregion
+
 
 });
 

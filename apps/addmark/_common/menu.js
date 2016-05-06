@@ -91,7 +91,7 @@ module.exports = {
             icon: "options icon",
             submenu: [
                 {
-                    label: "Tela Inicial",
+                    label: "Cockpit",
                     area: "app-home"
                 },
                 {
