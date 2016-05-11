@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.movimentacoes.movimentacoes
+    Criado em Wed Apr 27 2016 18:09:13 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='data.rows')
+    .content
+        .header {row.movimentacoes_key} - {row.movimentacoes_key}
+        .meta Keys: mov_origem_key, mov_destino_key, mov_tipos_key, mov_status_key, empresas_key, parceiros_key, emp_clientes_key, emp_fornecedores_key, contratos_key, cont_centros_resultado_key, cont_plano_contas_key, emp_dep_origem_key, emp_dep_destino_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.movimentacoes_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.movimentacoes_key')
+                i.delete.icon
+                | Remover

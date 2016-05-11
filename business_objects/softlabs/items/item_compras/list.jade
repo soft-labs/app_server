@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.items.item_compras
+    Criado em Wed Apr 27 2016 18:12:59 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='data.rows')
+    .content
+        .header {row.item_compras_key} - {row.item_compras_key}
+        .meta Keys: items_key, item_fabricantes_key, item_marcas_key, item_modelos_key, item_embalagens_key, item_plano_reposicao_key, unidades_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.item_compras_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.item_compras_key')
+                i.delete.icon
+                | Remover

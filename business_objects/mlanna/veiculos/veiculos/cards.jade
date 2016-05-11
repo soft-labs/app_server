@@ -1,0 +1,20 @@
+//
+    Template default para: mlanna.veiculos.veiculos
+    Criado em Wed May 11 2016 11:19:23 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='data.rows')
+    .content
+        .header {row.veiculos_key} - {row.veiculos_key}
+        .meta Keys: veic_marcas_key, veic_modelos_key, motoristas_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.veiculos_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.veiculos_key')
+                i.delete.icon
+                | Remover

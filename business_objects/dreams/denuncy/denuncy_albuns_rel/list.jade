@@ -1,0 +1,12 @@
+//
+    Template default para: dreams.denuncy.denuncy_albuns_rel
+    Criado em Sat May 07 2016 13:33:20 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Denuncy
+        th Albuns
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.denuncy_key}
+            td {row.albuns_key}

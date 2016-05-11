@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.contratos.contr_item_locacao
+    Criado em Wed Apr 27 2016 18:12:13 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='data.rows')
+    .content
+        .header {row.contr_item_locacao_key} - {row.contr_item_locacao_key}
+        .meta Keys: item_identificado_key, contr_items_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.contr_item_locacao_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.contr_item_locacao_key')
+                i.delete.icon
+                | Remover

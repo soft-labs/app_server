@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.enderecos.end_bairros
+    Criado em Wed Apr 27 2016 18:12:31 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='data.rows')
+    .content
+        .header {row.end_bairros_key} - {row.bairro}
+        .meta Keys: end_cidades_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.end_bairros_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.end_bairros_key')
+                i.delete.icon
+                | Remover

@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.items.item_vendas
+    Criado em Wed Apr 27 2016 18:12:59 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='data.rows')
+    .content
+        .header {row.item_vendas_key} - {row.item_vendas_key}
+        .meta Keys: items_key, prod_tabelas_key, prod_venda_categorias_key, prod_item_producao_key, fichas_tecnicas_key, prod_baixa_tipos_key, prod_embalagens_key, unidades_key, estoques_key, estoq_locais_key, prod_icms_key, prod_cod_origem_key, prod_cod_tributacao_key, cont_plano_contas_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.item_vendas_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.item_vendas_key')
+                i.delete.icon
+                | Remover

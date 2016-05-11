@@ -1,0 +1,14 @@
+//
+    Template default para: dreams.users.users_like_dreams_rel
+    Criado em Sat May 07 2016 13:33:28 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Users
+        th Dreams
+        th  Creation Date
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.users_key}
+            td {row.dreams_key}
+            td {row._creation_date}

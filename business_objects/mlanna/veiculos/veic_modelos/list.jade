@@ -1,0 +1,14 @@
+//
+    Template default para: mlanna.veiculos.veic_modelos
+    Criado em Wed May 11 2016 11:19:23 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Veic Modelos
+        th Modelo
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.veic_modelos_key}
+            td {row.modelo}
+            td {row.observacoes}
