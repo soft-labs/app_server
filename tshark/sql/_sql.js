@@ -523,7 +523,7 @@ SQL.prototype._select = function *(provider, obj, meta){
 
                 case 'date':
                     if (def == 'NOW' || def == 'DATE' || def == 'HOJE') {
-                        val = moment().format("DD/MM/YYYY");
+                        val = moment().format("YYYY-MM-DD");
                     }
                     break;
 
@@ -533,9 +533,10 @@ SQL.prototype._select = function *(provider, obj, meta){
                     }
                     break;
 
+                case 'timestamp':
                 case 'datetime':
                     if (def == 'NOW' || def == 'DATE' || def == 'HOJE') {
-                        val = moment().format("DD/MM/YYYY HH:mm:ss");
+                        val = moment().format("YYYY-MM-DDTHH:mm:ss");
                     }
                     break;
 
@@ -578,6 +579,16 @@ SQL.prototype._processResults = function *(sqlParams, results, obj, sql, meta){
     ;
     data.key = key;
 
+    // Verifica datetimes
+    var formats = [], check = ['date', 'time', 'datetime', 'timestamp'];
+    if (sqlParams['meta']){
+        for(var m in sqlParams['meta']){
+            if (check.indexOf(sqlParams['meta'][m].tipo.type) > -1){
+                formats.push({field: m, tipo: sqlParams['meta'][m].tipo.type});
+            }
+        }
+    }
+
     // Processa
     for (var i = 0; i<results.length; i++){
         var row = results[i];
@@ -598,6 +609,24 @@ SQL.prototype._processResults = function *(sqlParams, results, obj, sql, meta){
             }
             row = newobj;
         }
+
+        formats.forEach(m => {
+            switch (m.tipo){
+                case 'date':
+                    row[m.field] = row[m.field] != null ? moment(row[m.field]).format("YYYY-MM-DD") : '';
+                    break;
+
+                case 'time':
+                    row[m.field] = row[m.field] != null ? moment(row[m.field]).format("HH:mm:ss") : '';
+                    break;
+
+                case 'timestamp':
+                case 'datetime':
+                    row[m.field] = row[m.field] != null ? moment(row[m.field]).format("YYYY-MM-DDTHH:mm:ss") : '';
+                    break;
+            }
+        });
+
 
         if (onGetRow) {
             yield onGetRow(row);
@@ -677,13 +706,19 @@ SQL.prototype.change = function *(op, provider, obj) {
 
                     // Trata formatação de tipos
                     switch (source.metadata.fields[f].tipo.type) {
+                        case "bool":
+                            if (value === true || value === false || value == 'true' || value == 'false'){
+                                value = (!value || value == 'false' ? 0 : 1);
+                            }
+                            break;
+
                         case "date":
-                            value = this.db.formatDateIn(value);
+                            value = (value == 'Invalid date' ? null : this.db.formatDateIn(value));
                             break;
 
                         case "datetime":
                         case "timestamp":
-                            value = this.db.formatDateTimeIn(value);
+                            value = (value == 'Invalid date' ? null : this.db.formatDateTimeIn(value));
                             break;
 
                         default:

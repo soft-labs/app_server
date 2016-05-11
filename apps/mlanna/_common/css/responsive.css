@@ -1,0 +1,79 @@
+/*
+ * Ajustes css para adaptação à dispositivos
+ *
+ */
+
+.app-show-1440 { display: none }
+.app-show-1024 { display: none }
+.app-show-768  { display: none }
+.app-show-425  { display: none }
+.app-show-375  { display: none }
+.app-show-360  { display: none }
+
+/***** Width até 1440px *****/
+
+@media screen and (max-width: 1440px) {
+
+    .app-show-1440 { display: block; }
+
+}
+
+
+/***** Width até 1024px *****/
+
+@media screen and (max-width: 1024px) {
+
+    .app-show-1024 { display: block; }
+}
+
+
+/***** Width até 768px *****/
+
+@media screen and (max-width: 768px) {
+
+    .app-show-768 { display: block; }
+}
+
+
+/***** Width até 425px *****/
+
+@media screen and (max-width: 425px) {
+
+    .app-logo-header {
+        width: 100px !important;
+    }
+
+    .app-show-425 { display: block; }
+
+    .app-receita {
+        text-align: left !important;
+    }
+}
+
+
+/***** Width até 375px *****/
+
+@media screen and (max-width: 375px) {
+
+    .app-logo-header {
+        width: 90px !important;
+    }
+
+    .app-show-375 { display: block; }
+}
+
+
+/***** Width até 360px *****/
+
+@media screen and (max-width: 360px) {
+
+    .app-logo-header {
+        width: 90px !important;
+        position: absolute;
+        opacity: 0.5;
+        bottom: 3px;
+        left: 6px;
+    }
+
+    .app-show-360 { display: block; }
+}

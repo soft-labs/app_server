@@ -174,6 +174,7 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
             case 'inpSlider':
             case 'inpToggle':
             case 'inpRadio':
+                input = getCheck(ctrl, field);
                 break;
 
             default:
@@ -184,9 +185,14 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
 
         if (ctrl['data']){
             mod.form.comps[field] = new Dataset(ctrl.data.from);
-            mod.form.comps[field].load({
-                fields: parseFields(ctrl.data['template'])
-            });
+            if (ctrl['data']['rows']){
+                mod.form.comps[field].reset(ctrl['data']);
+                
+            } else {
+                mod.form.comps[field].load({
+                    fields: parseFields(ctrl.data['template'])
+                });
+            }
         }
 
         return input;
@@ -267,10 +273,16 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
 
             if (!done) {
                 $(wrapper).append(inp);
+                done = true;
             }
+
 
             $(wrapper)
                 .append(ctrl['extra_right']['tag']);
+        }
+
+        if (!done) {
+            $(wrapper).append(inp);
         }
 
         $(wrapper).addClass(classe);
@@ -389,11 +401,37 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
 
         // Extra
         if (ctrl['extra_left'] || ctrl['extra_right']) {
-            memo = wrap(memeo, ctrl)
+            memo = wrap(memo, ctrl)
         }
 
         // Retorna
         return memo;
+
+    }
+
+    /**
+     * Retorna componentes de checkbox
+     * @param ctrl
+     * @param field
+     * @returns {*|jQuery|HTMLElement}
+     */
+    function getCheck(ctrl, field){
+        var params = {
+                class: "ui fluid",
+                type: "checkbox",
+                'rv-checked': "data.row." + field
+            }
+        ;
+
+        var check = setExtras($("<input>", params), ctrl);
+
+        // Extra
+        //if (ctrl['extra_left'] || ctrl['extra_right']) {
+            check = wrap(check, ctrl, 'toggle checkbox')
+        //}
+
+        // Retorna
+        return check;
 
     }
 

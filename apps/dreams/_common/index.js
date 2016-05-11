@@ -74,7 +74,7 @@ app = $.extend(app, {
         url: '',
         apis: [
             {
-                id   : 'users/usuarios',
+                id   : 'users/users',
                 label: 'User',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'},
@@ -202,22 +202,17 @@ app = $.extend(app, {
     //region :: Eventos
 
     /**
-     * Intercepta o afterlist GLOBAL e implementa a atualização
-     * das listagens de todos os módulos apontando dinâmicamente
-     * para um mesmo layout.
-     * @param mod
-     * @param response
+     * Intercepta qualquer retorno que contenha data
+     * e monta o result na tela
      */
-    onAfterList: function(mod, response){
-        app.resetCallGet(response);
-    },
-
-    onAfterSearch: function(mod, response) {
-        app.resetCallGet(response);
-    },
-
-    onAfterGet: function(mod, response) {
-        app.resetCallGet(response);
+    onData: function(mod, response, next){
+        $('#listagem')
+            .empty()
+            .html('<pre style="width: 100%"><code style="width: 100%">' +
+                    JSON.stringify(response['data'], null, 4) +
+                  '</code></pre>'
+            );
+        next();
     },
 
     /**
@@ -244,36 +239,16 @@ app = $.extend(app, {
     },
 
     /**
-     * Exibe mensagem após a operação de update
-     * @param mod
-     * @param response
+     * Centraliza a exibição de mensagens de update e insert.
      */
-    onAfterUpdate: function(mod, response){
-        this.checkSave(mod, response);
-    },
-
-    /**
-     * Exibe mensagem após a operação de insert
-     * @param mod
-     * @param response
-     */
-    onAfterInsert: function(mod, response){
-        this.checkSave(mod, response);
-    },
-
-    /**
-     * Centraliza a exibição de mensagens de update
-     * e insert.
-     * @param mod
-     * @param response
-     */
-    checkSave: function(mod, response){
-        if (response['result'] && response['result'] == 1){
+    onAfterSave: function(mod, response, next){
+        if (response['result']){
             alertify.success('Operação executada com sucesso!');
         } else {
             alertify.error('Não foi possível completar a operação.');
             alertify.error('Por favor, tente novamente.');
         }
+        next();
     },
 
     //endregion
@@ -308,21 +283,6 @@ app = $.extend(app, {
         }
 
         tshark.call(path.join(' ') + ' ' + api, data);
-    },
-
-
-    resetCallGet: function (response) {
-        $('#listagem')
-            .empty()
-            .html('<pre style="width: 100%"><code style="width: 100%">' + JSON.stringify(response['data'], null, 4) + '</code></pre>');
-        /*
-        if (response['data']) {
-            app.data.reset(response['data']);
-        }
-
-        // Bind
-        tshark.rebind('#listagem', app, response.layout['list']);
-        */
     }
 
     //endregion

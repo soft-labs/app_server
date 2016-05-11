@@ -17,6 +17,7 @@ module.exports = {
         parc    : 'parceiros' ,
         rh      : 'rh' ,
         sec     : 'security' ,
-        unid    : 'unidades' 
+        unid    : 'unidades',
+        ml      : 'mlanna',
     }
 };

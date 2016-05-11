@@ -7,8 +7,9 @@
  * @author Luiz Antonio B. Silva [Labs]
  * @since 06/10/2015
  */
-function TShark(){
-    this.clickevent = 'click';
+function TShark(opts){
+    opts = opts || {};
+    this.clickevent = opts['clickevent'] || 'click';
 
     // Módulos
     this._tmp_ = {};
@@ -40,7 +41,7 @@ var CONSOLE_ON = true;
      */
     TShark.prototype.init = function (options) {
         options = options || {};
-        
+
         // Bind de APIs generico
         var d = $("<div>", {
             id: '_direct_api_helper_',
@@ -140,7 +141,12 @@ var CONSOLE_ON = true;
             .addClass('binded')
         ;
 
-        $(ref).find('.ui.checkbox').not('.binded')
+        $(ref).find('.checkbox').not('.binded')
+            .checkbox()
+            .addClass('binded')
+        ;
+
+        $(ref).find('[type=checkbox]').not('.binded')
             .checkbox()
             .addClass('binded')
         ;

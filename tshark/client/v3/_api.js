@@ -172,10 +172,11 @@ $.fn.api.settings.api = {};
      * @private
      */
     function before(settings, el) {
-        var d = $.extend({}, $(el).data() || {});
+        var d = $.extend({}, $(el).data() || {})
+            , str = (d['action'] ? d.action : settings.action).replace(/\s{2,}/g, ' ').trim();
 
         // Ajusta API
-        var api     = (d['action'] ? d.action : settings.action).replace(/\s{2,}/g, ' ').split(' ')
+        var api     = str.split(' ')
             , map   = api.pop()
             , path  = api.join('.')
             , Func  = map.capitalize()
@@ -199,6 +200,11 @@ $.fn.api.settings.api = {};
             // Interno
             if (tshark[map + '_before']) {
                 if (!tshark[map + '_before'].call(mod, el, settings)) return false;
+            }
+            
+            // Interno App
+            if (app[map + '_before']) {
+                if (!app[map + '_before'].call(mod, el, settings)) return false;
             }
 
             // Executa onBefore
@@ -270,14 +276,29 @@ $.fn.api.settings.api = {};
                 onCallback('on', 'form', mod, response);
             }
 
+            // onCallback - data
+            if (response['data']) {
+                onCallback('on', 'data', mod, response);
+            }
+
             // onCallback
             onCallback('on', func, mod, response);
 
 
 
+            // onAfterCallback - gets
+            if (func == 'list' || func == 'search' || func == 'get'){
+                onCallback('onAfter', 'get', mod, response);
+            }
+
             // onAfterCallback - forms
             if (func == 'edit' || func == 'create'){
                 onCallback('onAfter', 'form', mod, response);
+            }
+            
+            // onAfterCallback - save
+            if (func == 'insert' || func == 'update'){
+                onCallback('onAfter', 'save', mod, response);
             }
 
             // onAfterCallback
@@ -324,7 +345,9 @@ $.fn.api.settings.api = {};
             app[prefix + Func].call(app, mod, response, function () {
 
                 // Permite ao app chamar o onCallback padrão
-                tshark[func + '_callback'].call(tshark, mod, response);
+                if (tshark[func + '_callback']) {
+                    tshark[func + '_callback'].call(tshark, mod, response);
+                }
 
             });
 
@@ -364,7 +387,23 @@ $.fn.api.settings.api = {};
 
     }
 
+
+    //region :: Callbacks especiais
+
+    /**
+     * Callback de dados
+     *  Chamado sempre que o response contiver 'data'
+     * @param mod { TShark.modulo }
+     * @param response
+     * @since 15/03/16
+     */
+    TShark.prototype.data_callback = function (mod, response) {
+        
+    };
+
+    //endregion
     
+
     //region :: API List
 
     /**
@@ -376,7 +415,7 @@ $.fn.api.settings.api = {};
     TShark.prototype.list_before = function(sender, settings){
 
         // Seta template default
-        settings.data['template'] = 'list';
+        settings.data['template'] = 'cards';
 
         // Libera
         return true;
@@ -465,6 +504,7 @@ $.fn.api.settings.api = {};
      */
     TShark.prototype.form_callback = function (mod, response) {
         if (response['data']){
+            mod.data.key = response['data']['key'];
             mod.data.setRow(response.form.key, response['data'].rows[0]);
         }
 

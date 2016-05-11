@@ -8,7 +8,9 @@
  * @author Luiz Antonio B. Silva [Labs]
  * @since 11/10/2015
  */
-var tshark = new TShark()  // Instancia do TShark
+var tshark = new TShark({  // Instancia do TShark
+        base_url: 'tshark'
+    })  
     , app  = {             // Instancia do client
 
         //region :: Meses do ano

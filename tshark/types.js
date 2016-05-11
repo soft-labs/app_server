@@ -63,7 +63,7 @@ Types.prototype.ctrls = {
  * Tipos de componentes
  */
 Types.prototype.comp = {
-    key         : { type: 'int',        comp: 'inpInt',         default: 'NEW_KEY'  },
+    key         : { type: 'int',        comp: 'inpInt',         default: 'NEW_KEY', disabled: true },
     int         : { type: 'int',        comp: 'inpInt',         default: 0  },
 
     text        : { type: 'string',     comp: 'inpText',        default: '' },
@@ -84,9 +84,9 @@ Types.prototype.comp = {
     list        : { type: 'string',     comp: 'inpList',        default: '', multi: false },
     choose      : { type: 'string',     comp: 'inpChoose',      default: '', multi: false },
 
-    date        : { type: 'date',       comp: 'inpDate',        default: 'NOW' },
-    time        : { type: 'time',       comp: 'inpTime',        default: 'NOW' },
-    datetime    : { type: 'datetime',   comp: 'inpDateTime',    default: 'NOW' },
+    date        : { type: 'date',       comp: 'inpDate',        default: '' },
+    time        : { type: 'time',       comp: 'inpTime',        default: '' },
+    datetime    : { type: 'datetime',   comp: 'inpDateTime',    default: '' },
     timestamp   : { type: 'datetime',   comp: 'inpDateTime',    default: 'NOW' },
 };
 

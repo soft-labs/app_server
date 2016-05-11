@@ -5,8 +5,9 @@ module.exports = {
     id: 'dreams',
     desc: 'Objetos de negócio do Dreams',
     packs: {
-        dream     : 'dreams' ,
-        contas    : 'users' ,
-        usuarios  : 'users' 
+        dream: 'dreams',
+        user: 'users',
+        denuncy: 'users',
+        comments: 'users',
     }
 };

@@ -77,7 +77,19 @@ var app = {
     
     
     //region :: Eventos
-    
+
+    /**
+     * d
+     */
+    list_before: function(el, settings){
+
+        // Seta template default
+        settings.data['template'] = 'cards';
+
+        // Libera ou não para continuar
+        return true;
+    },
+
     /**
      * Intercepta o afterlist GLOBAL e implementa a atualização
      * das listagens de todos os módulos apontando dinâmicamente
@@ -91,7 +103,7 @@ var app = {
         tshark.rebind(                              // Rebind pq a cada listagem o módulo de origem dos dados pode ser outro
             '#list',                                // Bind feito no ponto mais alto do layout
             mod,                                    // (Novo) Mod de origem dos dados
-            ['#listagem', response.layout['list']]  // Aplica o template em uma região do layout '#list'
+            ['#listagem', response.layout[response['template']]]  // Aplica o template em uma região do layout '#list'
         );
 
         // Limpa a área de pesquisa
@@ -152,7 +164,7 @@ var app = {
      * @param response
      */
     checkSave: function(mod, response){
-        if (response['result'] && response['result'] == 1){
+        if (response['result']){
             alertify.success('Operação executada com sucesso!');
         } else {
             alertify.error('Não foi possível completar a operação.');

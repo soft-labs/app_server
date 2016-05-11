@@ -17,7 +17,7 @@ function TShark(app, no_cache){
 //region :: Includes
 
 const router    = require('koa-router')()
-    , koaBody   = require('koa-body')()
+    // , koaBody   = require('koa-body')
     , extend    = require('extend')
     , fs        = require('fs-extra')
     , util      = require('util')
@@ -447,20 +447,30 @@ router.use(function *timeLog(next) {
  * Validação de chamadas de API
  */
 router.use(function *(next) {
+    var ok = false;
 
     // Se pedir com educação
     if (this.state.api.path[0] == 'sys'      &&
         this.state.api.path[1] == 'app'      &&
         this.state.api.path[2] == 'security' &&
-        this.state.api.path[3] == 'login'){
+        this.state.api.path[3] == 'login') {
 
         var tmp = this.req.headers.referer.split('/').slice(-2);
         this.state.config = this.app.context.clientes[tmp[0]][tmp[1]];
 
-        yield next;
+        ok = true;
+    }
+
+    // Token
+    if (this.req.headers['token']){
+
+        // Validar o token de acesso aqui
+
+        ok = true;
+    }
 
     // Senão...
-    } else {
+    if (!ok) {
         var user_key = cookies.getLoggedUser(this);
 
         // You shall not pass!
@@ -471,8 +481,14 @@ router.use(function *(next) {
         } else {
             this.state.user_key = user_key;
             this.state.config = this.app.context.running[user_key];
-            yield next;
+            ok = true
         }
+    }
+
+    if (ok){
+        yield next;
+    } else {
+        this.throw(404, 'Not Found');
     }
 });
 
@@ -552,6 +568,9 @@ router.post(/^\/(\w+)\/tshark\/.*/, function *(next) {
     // Execução de função
     if (len = 4){
         var func = this.state.api.call;
+        if (!func){
+            func = this.state.api.call = 'insert';
+        }
 
         /**
          * Executa a função no objeto

@@ -15,7 +15,9 @@ function BizObject(){
 
 const _         = require('underscore')
     , extend    = require('extend')
-    , log       = require('./_log');
+    , util      = require('util')
+    , log       = require('./_log')
+;
 
 //endregion
 
@@ -290,19 +292,19 @@ BizObject.prototype.delete = function *(ctx){
  * Retorna um provider
  * @returns { {Promise} }
  */
-BizObject.prototype.getProvider = function (provId, from){
+BizObject.prototype.getProvider = function (provId, from, ctx){
 
     // Ajusta o dono
     var mod = this;
 
     if (typeof provId == 'string') {
         if (from) {
-            mod = require('business_objects/'
+            mod = tshark.initObj(from, ctx) /* require('business_objects/'
                 + from[0] + '/'
                 + from[1] + '/'
                 + from[2] + '/'
                 + from[3] + '.js'
-            );
+            )*/;
         }
 
         // Pega o provider
@@ -364,6 +366,10 @@ BizObject.prototype.getProvider = function (provId, from){
         provider = provId;
     }
 
+    if (this.params['provider'] && util.isObject(this.params['provider'])){
+        provider = extend(true, provider, this.params['provider']);
+    }
+
     return provider;
 };
 
@@ -381,7 +387,7 @@ BizObject.prototype.select = function *(ctx, provider, params, from){
 
         // Pega o provider
         var prov = (typeof provider == 'string'
-                ? yield this.getProvider(provider, from)
+                ? yield this.getProvider(provider, from, ctx)
                 : provider
         );
 
@@ -413,14 +419,23 @@ BizObject.prototype.change = function *(op, ctx){
         var prov = yield this.getProvider(provId)
             , res = {
                 result: false
-            }
+            },
+            evento = op.charAt(0).toUpperCase() + op.slice(1)
         ;
+        
+        if (this['on' + evento]){
+            yield this['on' + evento](res, ctx);
+        }
 
         // Executa
         switch (op){
             case 'insert' : res.result = yield dts.insert(prov, this); break;
             case 'update' : res.result = yield dts.update(prov, this); break;
             case 'delete' : res.result = yield dts.delete(prov, this); break;
+        }
+
+        if (this['onAfter' + evento]){
+            yield this['onAfter' + evento](res, ctx);
         }
 
         // Retorna

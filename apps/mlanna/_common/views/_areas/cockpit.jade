@@ -30,7 +30,6 @@
 
 
 
-
     // **** Chart Impacto **** //
     .ui.fluid.card
         .content
@@ -73,23 +72,21 @@
 
             span.right.floated.ui.secondary.menu
                 .ui.dropdown.item
-                    span.text
-                        i.pie.chart.icon
-                        | Gráficos
+                    span.text Visualizar
                     .menu
-                        .active.item(rv-on-click='cockpit.showListDesp')
+                        .active.item
                             i.list.icon
                             span.text Listagem
-                        .item(rv-on-click='cockpit.showChartDesp')
+                        .item
                             i.pie.chart.icon
                             span.text Gráficos
 
             .header Pagamentos Programados
             .meta Período 01/05/2016 à 25/05/2016
             .description
-                canvas.transition#piePagtos
+                canvas#piePagtos
 
-                .ui.styled.accordion.non-exclusive.lista.despesas.transition.hidden
+                .ui.styled.accordion.non-exclusive
                     span(rv-each-row='cockpit.struct.despesas.data')
                         .active.title
                             i.dropdown.icon
@@ -111,7 +108,6 @@
 
 
 
-
     // **** Receitas **** //
     .ui.card
         .content
@@ -130,25 +126,10 @@
                             i(rv-class='menu.icon')
                             span.text {menu.label}
 
-            span.right.floated.ui.secondary.menu
-                .ui.dropdown.item
-                    span.text
-                        i.pie.list.icon
-                        | Listagem
-                    .menu
-                        .active.item(rv-on-click='cockpit.showListRec')
-                            i.list.icon
-                            span.text Listagem
-                        .item(rv-on-click='cockpit.showChartRec')
-                            i.pie.chart.icon
-                            span.text Gráficos
-
             .header Recebimentos Programados
             .meta Período 08/05/2016 à 15/05/2016
             .description
-                canvas.transition.hidden#pieRec
-
-                .ui.styled.accordion.non-exclusive.lista.receitas
+                .ui.styled.accordion.non-exclusive
                     span(rv-each-row='cockpit.struct.receitas.data')
                         .active.title
                             i.dropdown.icon

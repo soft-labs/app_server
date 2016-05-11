@@ -1,0 +1,121 @@
+/* Estilos globais da aplicação */
+
+body{
+    background-color: #E9EAF0 !important;
+}
+
+
+.app:before {
+    content: "";
+    background-image: url("../imgs/_intf/login8.jpg");
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 0px;
+    left: 0px;
+}
+
+/***** Interface de login *****/
+
+#login {
+    height: 100%;
+}
+#login:before {
+    content: "";
+    background-image: url("../imgs/_intf/login1.png");
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    left: 0;
+    background-size: cover;
+    -webkit-filter: blur(7px);
+    filter: blur(7px);
+}
+
+.login-bar {
+    height: 150px;
+}
+
+
+
+/***** Ajustes de Globais *****/
+
+#logo_softlabs {
+    display: none;
+}
+
+.app-grid-header {
+    padding: 0.9rem 0 !important;
+    border-bottom: 1px inset silver;
+}
+
+.app-grid-rows {
+    border-bottom: 1px dotted rgba(192, 192, 192, 0.47);
+}
+
+/***** Aplicação *****/
+
+.app-header {
+    background: linear-gradient(to top, rgb(255, 255, 255) 0%,rgb(234, 225, 227) 86%,rgb(210, 9, 9) 100%)!important;
+}
+
+.app-header:before {
+    content: "";
+    background-image: url("../imgs/_intf/bg8.jpg");
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    top: 0px;
+    left: 0px;
+    background-position-x: 112%;
+    background-position-y: 42%;
+}
+
+
+.app-logo-header {
+    width: 125px !important;
+}
+
+.app-menu-trigger{
+    margin-top: -18px !important;
+    margin-right: -23px !important;;
+}
+
+
+
+/***** Financas *****/
+
+.app-receita{
+    background: linear-gradient(to left, rgba(68, 197, 66, 0.07) 0%,rgba(129, 206, 105, 0.27) 100%) !important
+}
+
+.app-despesa {
+    background: linear-gradient(to right, rgba(154, 69, 43, 0) 0%,rgba(229, 171, 158, 0.38) 100%)!important;
+}
+
+.fluxo {
+    zborder-bottom: 1px dotted #d8d8d8;
+    width: 100%;
+}
+
+.fluxo>.historico{
+    width: 70%;
+    display: block;
+    border-bottom: 1px dotted #D1D1D6;
+    float: left;
+    margin-bottom: 6px;
+}
+.fluxo>.valor{
+    width: 15%;
+    display: block;
+    float: left;
+    border-bottom: 1px dotted #D0CFCF;
+    text-align: right;
+}

@@ -434,6 +434,11 @@ function Ide(){
 
     };
 
+    
+    this.pack = function *(ctx){
+        require('./pckr');
+    };
+    
     //endregion
 
 }

@@ -44,18 +44,14 @@ app.cockpit = {
             data: this.struct.despesas.pie,
             options: {
                 slegend: false,
-                ztitle: false
-            }
-        });
-
-        // Receitas
-        ctx = document.getElementById("pieRec").getContext("2d");
-        this.charts.pieRec = new Chart(ctx, {
-            type: 'pie',
-            data: this.struct.receitas.pie,
-            options: {
-                slegend: false,
-                ztitle: false
+                ztitle: false,
+                /*scale: {
+                    reverse: false,
+                    ticks: {
+                        display: false,
+                        beginAtZero: true
+                    }
+                }*/
             }
         });
 
@@ -206,46 +202,21 @@ app.cockpit = {
                 break;
         }
 
-        app.cockpit.setPie(s);
-
-    },
-
-    setPie: function(s){
-
-        var pie = app.cockpit.charts[(s == 'receitas' ? 'pieRec' : 'piePagtos')];
-        pie.data.labels = [];
-        pie.data.datasets = [];
-        pie.data.datasets.push({data: [], backgroundColor: []});
+        var piePagtos = app.cockpit.charts.piePagtos;
+        piePagtos.data.labels = [];
+        piePagtos.data.datasets = [];
+        piePagtos.data.datasets.push({data: [], backgroundColor: []});
 
         var l = app.cockpit.struct[s].data.length
             , i = Math.random();
         app.cockpit.struct[s].data.forEach(r => {
-            pie.data.labels.push(r.label);
-            pie.data.datasets[0].data.push(r._stats.sum.valor);
-            pie.data.datasets[0].backgroundColor.push(randomColor());
+
+            piePagtos.data.labels.push(r.label);
+            piePagtos.data.datasets[0].data.push(r._stats.sum.valor);
+            piePagtos.data.datasets[0].backgroundColor.push(randomColor());
 
         });
-        pie.update();
-    },
-
-    showChartDesp: function(){
-        $('.lista.despesas').transition('hide');
-        $('#piePagtos').transition('show');
-    },
-
-    showListDesp: function(){
-        $('#piePagtos').transition('hide');
-        $('.lista.despesas').transition('show');
-    },
-
-    showChartRec: function(){
-        $('.lista.receitas').transition('hide');
-        $('#pieRec').transition('show');
-    },
-
-    showListRec: function(){
-        $('#pieRec').transition('hide');
-        $('.lista.receitas').transition('show');
+        piePagtos.update();
     }
     
 };

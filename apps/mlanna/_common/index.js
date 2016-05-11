@@ -34,10 +34,11 @@ $(document).ready(function() {
  * Implementação da interface da aplicação
  * @since 28/04/16
  */
-app = $.extend(app, {
+app = $.extend(true, app, {
 
     // Modo atual da aplicação
     mode: 'desenv',
+
 
     // Inicializador da aplicação
     init: function () {
@@ -66,14 +67,14 @@ app = $.extend(app, {
         this.cockpit.init();
 
     },
-    
+
 
     //region :: Estruturas da aplicação
 
     // Informações genéricas na interface
     info: {
-        titulo  : 'Geração de Objetos de Negócio',
-        desc    : 'Gere objetos de negócio à partir da base de dados',
+        title   : 'Sistema Martins Lanna',
+        subtitle: 'Suite de aplicações para os processos da mineradora',
         help    : '',
         icon    : 'circular settings icon'
     },
@@ -150,12 +151,8 @@ app = $.extend(app, {
      */
     onAfterList: function(mod, response){
 
-        // Bind
-        tshark.rebind(                              // Rebind pq a cada listagem o módulo de origem dos dados pode ser outro
-            '#list',                                // Bind feito no ponto mais alto do layout
-            mod,                                    // (Novo) Mod de origem dos dados
-            ['#listagem', response.layout['list']]  // Aplica o template em uma região do layout '#list'
-        );
+        // Bind\
+        tshark.initIntf();
 
         // Limpa a área de pesquisa
         $('#search').val('');
@@ -215,7 +212,7 @@ app = $.extend(app, {
      * @param response
      */
     checkSave: function(mod, response){
-        if (response['result'] && response['result'] == 1){
+        if (response['result']){
             alertify.success('Operação executada com sucesso!');
         } else {
             alertify.error('Não foi possível completar a operação.');
@@ -228,99 +225,12 @@ app = $.extend(app, {
 
     //region :: Regras de Negócio
 
-
-    //region :: Listagem de tabelas
-
-    /**
-     * Carrega tabelas do banco da conexão.
-     * Atenção! this neste contexto é o elemento DOM do click!
-     */
-    refreshTables: function(){
-        app.tabelas.clear();
-        app.tabelas.load('getTables', {
-            connID: app.conn.row['id']
-        });
-    },
-
-    /**
-     * Move uma tabela da lista para o novo package.
-     * Atenção! this neste contexto é o elemento DOM do click!
-     */
-    addTable: function(ev){
-        var key   = ev.currentTarget.dataset['id']
-            , row = app.tabelas.getRow(key)
-            ;
-
-        if (row) {
-            app.package.modulos.addRow(row);
-            app.tabelas.delRow(key);
-        }
-    },
-
-    /**
-     * Remove uma tabela do pacote a ser criado.
-     * Atenção! this neste contexto é o elemento DOM do click!
-     */
-    delTable: function(ev){
-        var key   = ev.currentTarget.dataset['id']
-            , row = app.package.modulos.getRow(key)
-            ;
-
-        if (row) {
-            app.tabelas.addRow(row);
-            app.package.modulos.delRow(key);
-        }
-    },
-
-
-    //endregion
-
-
-    //region :: Criação de packages
-
-    /**
-     * Cria packages chamando a api createPackage em sys.dev.ide
-     * Atenção!!! No módulo, o evento 'onCreatePackage' será
-     * responsável pelo refresh da árvore de app.bizobj
-     */
-    createPackage: function(){
-        // tshark.call('exec sys dev ide createPackage', {
-        sys.dev.ide.call('exec createPackage', {
-            id      : app.package.id,
-            owner   : app.package.owner,
-            modulos : app.package.modulos.rows,
-            connID  : app.conn.row['id']
-        });
-    },
-
-    //endregion
-
-
-    //region :: Package Preview
-
-    /**
-     * Exibe uma listagem defaul para um módulo selecionado
-     */
-    showList: function(){
-        var   o = $(this).data('owner')
-            , p = $(this).data('pack')
-            , m = $(this).data('mod')
-            ;
-
-        tshark.call('list ' + o + '  ' + p + ' ' + m);
-    }
-
-    //endregion
-
-
     //endregion
 
 });
 
 
-
-//region :: Extra
-
+//region :: Extras
 
 var rdVal = function(neg) {
     var n = (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);

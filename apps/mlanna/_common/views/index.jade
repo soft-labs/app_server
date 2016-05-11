@@ -2,7 +2,7 @@ extends ../../../../_common/views/header
 
 // Título do app
 block title
-    title='Addmark - RetailPRO - Financeiro'
+    title='Martins Lanna'
 
 
 // Estilos do app
@@ -20,11 +20,11 @@ block content
         img#logo_tshark.ui.image.cursor(src='imgs/_logos/tshark.png')
         .ui.padded.container.segment.app-header
             h1.ui.header
-                img.app-logo-header(src='imgs/_logos/retailpro_box.png')
+                img.ui.small.image.app-logo-header(src='imgs/_logos/mlanna3.png')
                 .content
-                    | Sistema Financeiro
+                    | {info.title}
                     .sub.header
-                        | Gestão financeira | AddMark
+                        | {info.subtitle}
             .app-menu-trigger.ui.floated.right.secondary.menu
                 a.browse.item
                     i.sidebar.icon
@@ -89,7 +89,7 @@ block content
             | Hello Integracoes
 
         .ui.container.app-cadastros.transition.hidden
-            | Hello Cadastros
+            include _areas/cadastros
 
         .ui.container.app-sistema.transition.hidden
             | Hello Sistema

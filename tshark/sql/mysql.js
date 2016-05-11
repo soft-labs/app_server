@@ -181,7 +181,7 @@ function formatDateTimeIn(value, format){
  * @returns {string}
  */
 MySql.prototype.formatDateIn = function(value){
-    return formatDateTimeIn(value, '%d/%m/%Y');
+    return value == formatDateTimeIn(value, '%d/%m/%Y');
 };
 
 /**

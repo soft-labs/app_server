@@ -377,20 +377,25 @@ TShark.prototype.modulo = function(path){
      * @returns {boolean}
      */
     TShark.prototype.modulo.prototype.save_before = function (sender, settings) {
-        if (!this.data.key){
-            console.error(this.path + ': save_before -> data.key não definido');
-            return false
-        }
         if (!this.data.row){
             console.error(this.path + ': save_before -> data.row não definido');
             return false
         }
 
+        // Passa valores
         settings.data.row = this.data.row;
 
+        // Insert
         if (this.data.row['_key_'] == 'NEW_KEY'){
             return 'insert';
+
+        // Update
         } else {
+            if (!this.data.key){
+                console.error(this.path + ': save_before -> data.key não definido');
+                return false
+            }
+
             $(sender).data('key', this.data.row[this.data.key]);
             settings.data.key = this.data.row[this.data.key];
             return 'update';

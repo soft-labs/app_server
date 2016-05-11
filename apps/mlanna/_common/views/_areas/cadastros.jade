@@ -1,0 +1,36 @@
+// Created by labs on 19/02/16.
+
+#cadastros.ui.fluid.container
+
+    .ui.fluid.card(rv-each-veic='mlanna.veiculos.veiculos.data.rows')
+        .content
+            .header {veic.veiculos_key} - Placa: {veic.veiculo}
+            .meta
+            .description
+
+        .extra.content
+            span.left.floated.button
+                button.ui.orange.icon.mini.button(
+                    rv-data-key='veic.veiculos_key'
+                    data-action='mlanna veiculos veiculos edit'
+                )
+                    i.edit.icon
+                    | Editar
+
+            span.right.floated.button
+                button.ui.red.icon.mini.button(data-action='mlanna veiculos veiculos delete', rv-data-key='veic.veiculos_key')
+                    i.delete.icon
+                    | Remover
+
+    #form.ui.modal
+        .header
+            i.big.browser.icon
+            |  Formulário Genérico de Dados
+        div.content
+            .description Edicao
+        div.actions
+            div.ui.green.button.ok(
+                rv-data-action='api.save',
+                rv-data-form='api.last_form_id'
+            ) Salvar Alterações
+            div.ui.orange.button.cancel Cancelar

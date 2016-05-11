@@ -1,0 +1,46 @@
+
+.ui.content.segment
+    table.ui.compact.striped.celled.table
+        thead
+            th.center.aligned Data
+            th.center.aligned Histórico
+            th.center.aligned Receita
+            th.center.aligned Despesa
+            th.center.aligned Saldo
+
+        tbody
+            tr(rv-each-row='data.financeiro.fluxo2')
+                td.center.aligned {row.data}
+                td {row.historico}
+                td.right.aligned.app-receita {row.receita | numberFormat 2 ',' '.'}
+                td.right.aligned.app-despesa {row.despesa | numberFormat 2 ',' '.'}
+                td.right.aligned 0,00
+
+
+    //
+        .ui.content.segment
+            .ui.fluid.feed
+                .event(rv-each-row='data.financeiro.fluxo2')
+                    .content
+                        .date {row.data}
+                        .summary.fluxo
+                            .historico {row.historico}
+                            .valor R$ {row.receita | numberFormat 2 ',' '.'}
+                            .valor R$ {row.despesa | numberFormat 2 ',' '.'}
+
+
+
+        .ui.content.segment
+            .ui.middle.aligned.divided.fluid.list
+                .item(rv-each-row='data.financeiro.fluxo')
+                    i.dropdown.icon
+                    .ui.fluid.content
+                        .header {row.label}
+                        .ui.middle.aligned.divided.fluid.list
+                            .item(rv-each-item='row.values')
+                                i.green.plus.icon(rv-unless='item.receita')
+                                i.red.minus.icon(rv-unless='item.despesa')
+                                .content.fluid.fluxo
+                                    .left.floated.historico {item.historico}
+                                    .left.floated.valor R$ {item.receita | numberFormat 2 ',' '.'}
+                                    .left.floated.valor R$ {item.despesa | numberFormat 2 ',' '.'}

@@ -71,6 +71,14 @@ var ts_static   = require('./tshark/static')
     , app       = require('koa')()
 ;
 
+// Parsing de nested querystring
+require('koa-qs')(app);
+
+/**
+ * Parsing de body (POST DATA && QUERY STRING)
+ */
+app.use(koaBody({formidable:{uploadDir: __dirname}}));
+
 var path = require('path');
 global.appRoot = path.resolve(__dirname);
 
@@ -82,11 +90,6 @@ app.context.config = require('./config');
 app.context.clientes = {};
 app.context.running = {};
 
-
-/**
- * Parsing de body (POST DATA && QUERY STRING)
- */
-app.use(koaBody({formidable:{uploadDir: __dirname}}));
 
 /**
  * Inicializa engine :: TShark
@@ -118,15 +121,6 @@ app.use(ts_static({
     quiet: true,            // Não exibe msg de erros    | True quando em produção
     log: false              // False quando em produção
 }));
-
-
-app.on('aerror', function(err, ctx){
-    console.log(err.message);
-   // ctx.throw(500, err.message);
-
-   // ctx.statusCode = 500;
-   // ctx.body = err.message;
-});
 
 
 /**
