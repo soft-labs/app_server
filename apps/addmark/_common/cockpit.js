@@ -48,6 +48,16 @@ app.cockpit = {
             }
         });
 
+        ctx = document.getElementById("barPagtos").getContext("2d");
+        this.charts.barPagtos = new Chart(ctx, {
+            type: 'bar',
+            data: this.struct.desp_bar,
+            options: {
+                slegend: false,
+                ztitle: false
+            }
+        });
+
         // Receitas
         ctx = document.getElementById("pieRec").getContext("2d");
         this.charts.pieRec = new Chart(ctx, {
@@ -179,6 +189,20 @@ app.cockpit = {
                 {label: 'Fornecedores'},
                 {label: 'Grupo'}
             ]
+        },
+
+        desp_bar: {
+            labels: ['13/05/2016', '14/05/2016', '16/05/2016', '18/05/2016', '19/05/2016', '21/05/2016', '25/05/2016'],
+            datasets: [
+                {
+                    type: 'bar',
+                    label: 'Despesas',
+                    backgroundColor: "#F7464A",
+                    data: ['3145.90', '380.02', '155.9', '223.90', '934.0', '81.0', '345.90'],
+                    borderColor: 'black',
+                    borderWidth: 1
+                }
+            ]
         }
 
     },
@@ -231,10 +255,12 @@ app.cockpit = {
     showChartDesp: function(){
         $('.lista.despesas').transition('hide');
         $('#piePagtos').transition('show');
+        $('#barPagtos').transition('show');
     },
 
     showListDesp: function(){
         $('#piePagtos').transition('hide');
+        $('#barPagtos').transition('hide');
         $('.lista.despesas').transition('show');
     },
 

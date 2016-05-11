@@ -1,0 +1,58 @@
+//
+   Created by labs on 11/05/16.
+
+.ui.container.transition.hidden.app-apagar
+    .ui.fluid.card
+        .content
+            span.right.floated.ui.secondary.menu
+                .ui.dropdown.item
+                    i.options.icon
+                    span.text Vencimento
+                    .menu
+                        .item(
+                        rv-each-menu='cockpit.struct.despesas.options'
+                        rv-on-click='cockpit.popSubmenu'
+                        rv-data-key='menu._index_'
+                        data-sub='despesas'
+                        style="white-space: nowrap;"
+                        )
+                            i(rv-class='menu.icon')
+                            span.text {menu.label}
+
+            span.right.floated.ui.secondary.menu
+                .ui.dropdown.item
+                    span.text
+                        i.pie.chart.icon
+                        | Gráficos
+                    .menu
+                        .active.item(rv-on-click='cockpit.showListDesp')
+                            i.list.icon
+                            span.text Listagem
+                        .item(rv-on-click='cockpit.showChartDesp')
+                            i.pie.chart.icon
+                            span.text Gráficos
+
+            .header Pagamentos Programados
+            .meta Período 01/05/2016 à 25/05/2016
+            .description
+                canvas.transition.hidden#barPagtos
+
+                .ui.fluid.styled.accordion.non-exclusive.lista.despesas
+                    span(rv-each-row='cockpit.struct.despesas.data')
+                        .active.title
+                            i.dropdown.icon
+                            | {row.label}
+                        .active.content
+                            .ui.bottom.aligned.stackable.grid
+                                .row.app-grid-rows(rv-each-item='row.values')
+                                    .thirteen.wide.column
+                                        | {item.nome} -
+                                        | {item.historico}
+                                    .three.wide.column.right.aligned.app-despesa {item.valor | numberFormat 2 ',' '.'}
+                                .row.app-grid-rows
+                                    .column.right.aligned.app-despesa {row._stats.sum.valor | numberFormat 2 ',' '.'}
+
+
+        .extra.content
+            span.right.floated
+                | Total à Pagar: R$ {cockpit.struct.despesas.data._stats.sum.valor | numberFormat 2 ',' '.'}

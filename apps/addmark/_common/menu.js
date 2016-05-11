@@ -12,6 +12,7 @@ module.exports = {
             submenu: [
                 {
                     label: "Fluxo de Caixa",
+                    area: 'app-caixa',
                     submenu: [
                         {
                             label: "Agrupar por",
@@ -20,7 +21,7 @@ module.exports = {
                                 {label: "Semana"},
                                 {label: "Quinzena"},
                                 {label: "Previsto x Realizado"},
-                                {label: "Receitas x Despesas"},
+                                {label: "Receitas x Despesas"}
                             ]
                         },
                         {
@@ -28,16 +29,18 @@ module.exports = {
                             submenu: [
                                 {label: "Fluxo padrão"},
                                 {label: "Por Contas Gerenciais"},
-                                {label: "Por Centros de Resultado"},
+                                {label: "Por Centros de Resultado"}
                             ]
                         }
                     ]
                 },
                 {
-                    label: "Contas à Pagar"
+                    label: "Contas à Pagar",
+                    area: 'app-apagar'
                 },
                 {
-                    label: "Contas à Receber"
+                    label: "Contas à Receber",
+                    area: 'app-areceber'
                 },
                 {
                     label: "Resultados"

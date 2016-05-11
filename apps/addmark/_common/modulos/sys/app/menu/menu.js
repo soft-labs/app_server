@@ -24,6 +24,8 @@ tshark.modulos._add('sys.app.menu', {
 
         // Armazena a última área aberta / inicializa com home
         this.old_area = 'app-home';
+
+        this.old_subarea = '';
     },
 
     /**
@@ -35,14 +37,21 @@ tshark.modulos._add('sys.app.menu', {
         $('.app-menu-trigger').popup('hide');
 
         // Esconde a área atual
-        $("." + sys.app.menu.old_area).transition('hide');
+        if (sys.app.menu.old_area) {
+            $("." + sys.app.menu.old_area).transition('hide');
+        }
+        if (sys.app.menu.old_subarea) {
+            $("." + sys.app.menu.old_subarea).transition('hide');
+        }
 
         // Nova área
-        sys.app.menu.old_area = $(this).data('area');
+        sys.app.menu.old_subarea = $(this).data('area');
 
         var row = sys.app.menu.data.getRowAt($(this).data('menu-index'))
-            ndx = $(this).data('submenu-index')
+            , ndx = $(this).data('submenu-index')
         ;
+
+        sys.app.menu.old_area = row['area'];
 
        /* app.bar.icon = 'circular large ' + row.icon;
         app.bar.area = row.label;
@@ -55,11 +64,15 @@ tshark.modulos._add('sys.app.menu', {
         */
 
         // Exibe a nova área
-        $("." + sys.app.menu.old_area).transition('fade up');
-
+        if (sys.app.menu.old_area) {
+            $("." + sys.app.menu.old_area).transition('fade up');
+        }
+        if (sys.app.menu.old_subarea) {
+            $("." + sys.app.menu.old_subarea).transition('fade up');
+        }
     }
 
 });
 
 
-//# sourceURL=app.menu.js
+//# sourceURL=sys.app.menu.js

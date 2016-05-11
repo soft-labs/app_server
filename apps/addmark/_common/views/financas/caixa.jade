@@ -1,0 +1,19 @@
+//
+   Created by labs on 11/05/16.
+
+.ui.container.transition.hidden.app-caixa
+    table.ui.compact.striped.celled.table
+        thead
+            th.center.aligned Data
+            th.center.aligned Histórico
+            th.center.aligned Receita
+            th.center.aligned Despesa
+            th.center.aligned Saldo
+
+        tbody
+            tr(rv-each-row='data.financeiro.fluxo2')
+                td.center.aligned {row.data}
+                td {row.historico}
+                td.right.aligned.app-receita {row.receita | numberFormat 2 ',' '.'}
+                td.right.aligned.app-despesa {row.despesa | numberFormat 2 ',' '.'}
+                td.right.aligned 0,00
