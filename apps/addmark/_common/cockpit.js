@@ -69,6 +69,16 @@ app.cockpit = {
             }
         });
 
+        ctx = document.getElementById("barRec").getContext("2d");
+        this.charts.barPagtos = new Chart(ctx, {
+            type: 'bar',
+            data: this.struct.rec_bar,
+            options: {
+                slegend: false,
+                ztitle: false
+            }
+        });
+
 
         this.setData(0, 'despesas');
         this.setData(2, 'receitas');
@@ -203,6 +213,20 @@ app.cockpit = {
                     borderWidth: 1
                 }
             ]
+        },
+
+        rec_bar: {
+            labels: ['08/05/2016', '09/05/2016', '10/05/2016', '15/05/2016'],
+            datasets: [
+                {
+                    type: 'bar',
+                    label: 'Receitas',
+                    backgroundColor: "rgba(100,53,201,0.8)",
+                    data: ['260.0', '54.29', '31.8', '5.90', '950.0'],
+                    borderColor: 'black',
+                    borderWidth: 1
+                }
+            ]
         }
 
     },
@@ -267,9 +291,11 @@ app.cockpit = {
     showChartRec: function(){
         $('.lista.receitas').transition('hide');
         $('#pieRec').transition('show');
+        $('#barRec').transition('show');
     },
 
     showListRec: function(){
+        $('#barRec').transition('hide');
         $('#pieRec').transition('hide');
         $('.lista.receitas').transition('show');
     }
