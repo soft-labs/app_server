@@ -11,12 +11,10 @@ block app_css
 
 // Javascripts do app
 block app_scripts
-    script(type='application/javascript', src='cockpit.js')
-    script(type='application/javascript', src='configuracoes.js')
 
 
 block content
-    div.ui
+    div.ui.app
         #login.ui.fluid.container
             img#logo_tshark.ui.image.cursor(src='imgs/_logos/tshark.png')
 
@@ -25,6 +23,7 @@ block content
                     .content
                         .header Login
                         .meta Bem vindo ao sistema financeiro AddMark - Retail Pro
+                            br
                             | Identifique-se, por favor.
                         .description
                             .ui.grid
@@ -34,18 +33,18 @@ block content
                                             label Usuário
                                             .ui.left.icon.input
                                                 input#username(type='text',
-                                                    rv-value='data.row.username',
+                                                    rv-value='sys.app.security.data.row.username',
                                                     placeholder='Informe o seu usuário',
-                                                    rv-on-keydown='login'
+                                                    rv-on-keydown='sys.app.security.login'
                                                 )
                                                 i.user.icon
                                         .field
                                             label Senha
                                             .ui.left.icon.input
                                                 input#password(type='password',
-                                                    rv-value='data.row.password',
+                                                    rv-value='sys.app.security.data.row.password',
                                                     placeholder='Informe sua senha',
-                                                    rv-on-keydown='login'
+                                                    rv-on-keydown='sys.app.security.login'
                                                 )
                                                 i.lock.icon
 

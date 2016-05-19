@@ -68,6 +68,10 @@ function Dataset (path, ref){
  */
 (function() {
 
+    // Tipo
+    Dataset.prototype._type_ = 'Dataset';
+    
+    
     //region :: Funções de dataset
 
     /**
@@ -285,6 +289,27 @@ function Dataset (path, ref){
             this.rows.push(row);
         }
         this.row = this.rows[ndx];
+    };
+
+    /**
+     * Faz o sync de um row inserido no server com um row existente
+     * no dataset
+     * @param new_row
+     */
+    Dataset.prototype.syncInserted = function(new_row){
+        var d, r;
+        for (var i in this.index){
+            if (this.index[i] == new_row['_index_']){
+                d = i;
+                r = this.index[i];
+            }
+        }
+        if (d){
+            delete(this.index[d]);
+            this.rows[r]['_key_'] = new_row['val'];
+            this.rows[r][new_row['key']] = new_row['val'];
+            this.index[new_row['val']] = r;
+        }
     };
 
     //endregion

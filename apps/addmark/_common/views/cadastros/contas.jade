@@ -8,8 +8,8 @@
             .ui.animated.selection.list
                 .item(
                     rv-each-conta='softlabs.financeiro.fin_contas.data.rows'
+                    rv-row-key='conta.fin_contas_key'
                     click='softlabs financeiro fin_contas edit'
-                    rv-data-key='conta.fin_contas_key'
                 )
                     img.ui.avatar.image(rv-src="conta.codigo | replace 'imgs/_logos/bancos/%s.png'")
                     .content
@@ -23,27 +23,3 @@
                     .content Contas Bancárias
                     .sub.header Gestão das contas financeiras
                 .content.softlabs.financeiro.fin_contas-form
-
-    .content.segment#teste123
-
-//
-    .ui.fluid.card
-        .content
-            h2.ui.header
-                i.payment.icon
-                .content Contas Bancárias
-                .sub.header Gestão das contas financeiras
-
-
-            .cards
-
-                .card(
-                    rv-each-conta='softlabs.financeiro.fin_contas.data.rows'
-                )
-                    .ui.avatar.image
-                        img(rv-src="conta.codigo | replace 'imgs/_logos/bancos/%s.png'")
-                    .content
-                        .header {conta.banco}
-                        .meta {conta.conta}
-
-
