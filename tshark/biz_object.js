@@ -30,13 +30,13 @@ const _         = require('underscore')
  * @returns {{status: number, success: boolean, layout: {}, data: Array}}
  */
 BizObject.prototype.getReturnObj = function (){
-    return {
+    return extend({
         status: 200,
         success: true,
         path: this.path.asArray,
         layout: { },
         data: []
-    };
+    }, this.params);
 };
 
 /**
@@ -162,7 +162,7 @@ BizObject.prototype.get = function *(ctx){
     // Template
     var templ = yield this.engine.render(this.path.asString + '/' + ret.template, ctx, 'modulos');
     if (!this.params['_no_template_']) {
-        ret.layout[ret.template] = templ;
+        ret.layout = templ;
     }
 
     // Fields em template
@@ -387,12 +387,16 @@ BizObject.prototype.select = function *(ctx, provider, params, from){
 
         // Pega o provider
         var prov = (typeof provider == 'string'
-                ? yield this.getProvider(provider, from, ctx)
-                : provider
+            ? yield this.getProvider(provider, from, ctx)
+            : provider
         );
 
         // Customiza
         extend(true, prov, params || {});
+
+        if (this['onSelect']){
+            yield this['onSelect'](prov, ctx);
+        }
 
         // Executa
         return yield dts.select(prov, this);
@@ -411,8 +415,8 @@ BizObject.prototype.change = function *(op, ctx){
 
         // Recupera provider
         var provId = (this.params['provider'] && this.params['provider']['id']
-                ? this.params['provider']['id']
-                : 'update'
+            ? this.params['provider']['id']
+            : 'update'
         );
 
         // Pega o provider
@@ -424,7 +428,7 @@ BizObject.prototype.change = function *(op, ctx){
         ;
         
         if (this['on' + evento]){
-            yield this['on' + evento](res, ctx);
+            yield this['on' + evento](prov, ctx);
         }
 
         // Executa

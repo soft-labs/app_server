@@ -1,20 +1,38 @@
 //
     Template default para: softlabs.financeiro.fin_contas
-    Criado em Wed Apr 27 2016 18:12:40 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:43:34 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.fin_contas_key} - {row.fin_contas_key}
-        .meta Keys: fin_contas_tipos_key, fin_bancos_key, cont_plano_contas_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.fin_contas_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.fin_contas_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Fin Contas
+        th Fin Contas Tipos
+        th Fin Bancos
+        th Cont Plano Contas
+        th Ativo
+        th Dia Corte
+        th Dia Vencimento
+        th Multa Cartão
+        th Juros Cartão
+        th Descrição
+        th Conta
+        th Agencia
+        th Gerente
+        th Telefone
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.fin_contas_key}
+            td {row.fin_contas_tipos_key}
+            td {row.fin_bancos_key}
+            td {row.cont_plano_contas_key}
+            td {row.ativo}
+            td {row.dia_corte}
+            td {row.dia_vencimento}
+            td {row.multa_cartao}
+            td {row.juros_cartao}
+            td {row.descricao}
+            td {row.conta}
+            td {row.agencia}
+            td {row.gerente}
+            td {row.telefone}
+            td {row.observacoes}

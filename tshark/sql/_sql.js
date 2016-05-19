@@ -132,7 +132,8 @@ SQL.prototype._parseProvider = function(provider, obj){
         having  : provider['having'] || [],
         order   : provider['order']  || [],
         limit   : {max: provider['limit'] || 0, page: 0},
-        showSQL : provider['showSQL'] || false
+        showSQL : provider['showSQL'] || false,
+        provider: provider['id']
     };
 
     var fields = (obj.params['fields'] || []).concat(obj.params['_fields'] || []);
@@ -504,9 +505,9 @@ SQL.prototype._select = function *(provider, obj, meta){
         for (var f in sqlParams.fields) {
             var val = ''
                 , tipo = sqlParams.meta[f]['tipo'] || {}
-                , def = tipo['default']
+                , def = sqlParams.meta[f]['default'] || tipo['default']
                 , type = tipo['type']
-                ;
+            ;
             def = (typeof def == 'string' ? def.toUpperCase() : def);
 
             // Monta valores
@@ -583,8 +584,12 @@ SQL.prototype._processResults = function *(sqlParams, results, obj, sql, meta){
     var formats = [], check = ['date', 'time', 'datetime', 'timestamp'];
     if (sqlParams['meta']){
         for(var m in sqlParams['meta']){
-            if (check.indexOf(sqlParams['meta'][m].tipo.type) > -1){
-                formats.push({field: m, tipo: sqlParams['meta'][m].tipo.type});
+            try {
+                if (sqlParams['meta'][m] && check.indexOf(sqlParams['meta'][m].tipo.type) > -1) {
+                    formats.push({field: m, tipo: sqlParams['meta'][m].tipo.type});
+                }
+            } catch (e){
+                log.erro(e.message, 'processResults: ' + sqlParams.table + '@' + sqlParams.provider + ' - field: ' + m);
             }
         }
     }

@@ -1,20 +1,18 @@
 //
     Template default para: softlabs.contabil.cont_ent_arrecadadoras
-    Criado em Wed Apr 27 2016 18:11:58 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:44:44 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.cont_ent_arrecadadoras_key} - {row.cont_ent_arrecadadoras_key}
-        .meta Keys: parceiros_key, cont_esfera_governo_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.cont_ent_arrecadadoras_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.cont_ent_arrecadadoras_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Cont Ent Arrecadadoras
+        th Parceiros
+        th Cont Esfera Governo
+        th Ativo
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.cont_ent_arrecadadoras_key}
+            td {row.parceiros_key}
+            td {row.cont_esfera_governo_key}
+            td {row.ativo}
+            td {row.observacoes}

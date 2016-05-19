@@ -722,9 +722,13 @@ rivets.binders['each-*'].routine = function(el, value){
         //this.model[this.observer.key.path]._stats = {sum: sum, count: count, avg: avg};
     }
     oldEach.call(this, el, value);
+
+    // Implementa bindings
+    //tshark.bindAPIs(el);
+    //tshark.bindIntf(el);
 };
 
-/*
+
 // Formatadores
 rivets.formatters.concat = function(value) {
     var sep = arguments[1]
@@ -732,6 +736,10 @@ rivets.formatters.concat = function(value) {
         ;
     args.unshift(value);
     return args.join(sep);
+};
+
+rivets.formatters.replace = function(value){
+    return arguments[1].replace('%s', value);
 };
 
 rivets.formatters.mais = function(value) {
@@ -759,31 +767,31 @@ rivets.formatters.plus = function(value) {
 
 rivets.formatters.money = function(value){
     return (value != undefined ? value.toMoney() : '');
-}
+};
 
 rivets.formatters.float = function(value){
     return (value != undefined ? value.toFloat() : '');
-}
+};
 
 rivets.formatters.int = function(value){
     return (value != undefined ? value.toInt() : '');
-}
+};
 
 rivets.formatters.menorQueZero = function(value){
     return (toFloat(value) < 0 ? true : false);
-}
+};
 
 rivets.formatters.maiorQueZero = function(value){
     return (toFloat(value) > 0 ? true : false);
-}
+};
 
 rivets.formatters.clearIfEmpty = function(value){
     return (value == "" ? null : value);
-}
+};
 
 rivets.formatters.clearIfEmptyOrZero = function(value){
     return (value == "" || value == "0" || value == "0,00" ? null : value);
-}
+};
 
 rivets.formatters.igualA = function(value) {
     var args = Array.prototype.slice.call(arguments, 1);
@@ -812,7 +820,7 @@ rivets.formatters.not = function(value) {
     return !value;
 };
 
-
+/*
 rivets.adapters['#'] = {
     observe: function(obj, keypath, callback) {
         $(obj).on('change:' + keypath, callback);

@@ -1,20 +1,22 @@
 //
     Template default para: softlabs.contratos.contr_fases
-    Criado em Wed Apr 27 2016 18:12:13 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:44:55 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.contr_fases_key} - {row.contr_fases_key}
-        .meta Keys: contratos_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.contr_fases_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.contr_fases_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Contr Fases
+        th Contratos
+        th Dt Inicio
+        th Dt Encerramento
+        th Valor Anterior
+        th Valor Atual
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.contr_fases_key}
+            td {row.contratos_key}
+            td {row.dt_inicio}
+            td {row.dt_encerramento}
+            td {row.valor_anterior}
+            td {row.valor_atual}
+            td {row.observacoes}

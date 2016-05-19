@@ -1,20 +1,30 @@
 //
     Template default para: softlabs.empresas.emp_depositos
-    Criado em Wed Apr 27 2016 18:12:23 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:45:08 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.emp_depositos_key} - {row.emp_depositos_key}
-        .meta Keys: empresas_key, emp_depositos_tipos_key, cont_centro_resultados_key, enderecos_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.emp_depositos_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.emp_depositos_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Emp Depositos
+        th Empresas
+        th Emp Depositos Tipos
+        th Cont Centro Resultados
+        th Enderecos
+        th Deposito
+        th Produção
+        th Altura
+        th Largura
+        th Comprimento
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.emp_depositos_key}
+            td {row.empresas_key}
+            td {row.emp_depositos_tipos_key}
+            td {row.cont_centro_resultados_key}
+            td {row.enderecos_key}
+            td {row.deposito}
+            td {row.producao}
+            td {row.altura}
+            td {row.largura}
+            td {row.comprimento}
+            td {row.observacoes}

@@ -1,20 +1,18 @@
 //
     Template default para: softlabs.contabil.contabil
-    Criado em Wed Apr 27 2016 18:11:58 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:44:44 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.contabil_key} - {row.contabil_key}
-        .meta Keys:  - sem dependências -
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.contabil_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.contabil_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Contabil
+        th Periodo
+        th Dt Inicio
+        th Dt Final
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.contabil_key}
+            td {row.periodo}
+            td {row.dt_inicio}
+            td {row.dt_final}
+            td {row.observacoes}

@@ -71,6 +71,22 @@ body{
     margin-right: -23px !important;;
 }
 
+.app-bar {
+
+}
+.app-bar:before {
+    content: "";
+    background-image: url("../imgs/_logos/addmark_horizontal.png");
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    background-repeat: no-repeat;
+    background-size: 106px;
+    background-position-x: 98%;
+    background-position-y: -1px;
+}
+
 
 
 /***** Financas *****/

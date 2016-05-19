@@ -1,20 +1,12 @@
 //
     Template default para: softlabs.enderecos.end_estoques_rel
-    Criado em Wed Apr 27 2016 18:12:31 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:46:29 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.enderecos_key} - {row.}
-        .meta Keys: enderecos_key, estoques_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.enderecos_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.enderecos_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Enderecos
+        th Estoques
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.enderecos_key}
+            td {row.estoques_key}

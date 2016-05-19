@@ -79,7 +79,9 @@ module.exports = {
                     label: "Fornecedores"
                 },
                 {
-                    label: "Bancos e Contas"
+                    label: "Bancos e Contas",
+                    api: "softlabs financeiro fin_contas list",
+                    area: "app-contas"
                 },
                 {
                     label: "Plano de Contas"

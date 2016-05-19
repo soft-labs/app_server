@@ -1,20 +1,32 @@
 //
     Template default para: softlabs.security.sec_usuarios
-    Criado em Wed Apr 27 2016 18:13:34 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:48:22 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.sec_usuarios_key} - {row.sec_usuarios_key}
-        .meta Keys: parceiros_key, sec_perfis_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.sec_usuarios_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.sec_usuarios_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Sec Usuarios
+        th Parceiros
+        th Sec Perfis
+        th Ativo
+        th Auditar
+        th Usuario
+        th Senha
+        th Nome
+        th Telefone
+        th Email
+        th Expira Em
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.sec_usuarios_key}
+            td {row.parceiros_key}
+            td {row.sec_perfis_key}
+            td {row.ativo}
+            td {row.auditar}
+            td {row.usuario}
+            td {row.senha}
+            td {row.nome}
+            td {row.telefone}
+            td {row.email}
+            td {row.expira_em}
+            td {row.observacoes}

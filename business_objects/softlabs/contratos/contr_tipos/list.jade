@@ -1,20 +1,14 @@
 //
     Template default para: softlabs.contratos.contr_tipos
-    Criado em Wed Apr 27 2016 18:12:13 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:44:55 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.contr_tipos_key} - {row.contr_tipos_key}
-        .meta Keys:  - sem dependências -
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.contr_tipos_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.contr_tipos_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Contr Tipos
+        th Tipo
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.contr_tipos_key}
+            td {row.tipo}
+            td {row.observacoes}

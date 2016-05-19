@@ -1,20 +1,36 @@
 //
     Template default para: softlabs.contabil.cont_diario_resultado
-    Criado em Wed Apr 27 2016 18:11:58 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:44:44 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.cont_diario_resultado_key} - {row.cont_diario_resultado_key}
-        .meta Keys: cont_centro_resultados_key, empresas_key, movimentacoes_key, fin_lancamentos_key, fin_baixas_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.cont_diario_resultado_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.cont_diario_resultado_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Cont Diario Resultado
+        th Cont Centro Resultados
+        th Empresas
+        th Movimentações
+        th Fin Lancamentos
+        th Fin Baixas
+        th Dt Diario
+        th Historico
+        th Credito
+        th Debito
+        th Ref1
+        th Ref2
+        th Ref3
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.cont_diario_resultado_key}
+            td {row.cont_centro_resultados_key}
+            td {row.empresas_key}
+            td {row.movimentacoes_key}
+            td {row.fin_lancamentos_key}
+            td {row.fin_baixas_key}
+            td {row.dt_diario}
+            td {row.historico}
+            td {row.credito}
+            td {row.debito}
+            td {row.ref1}
+            td {row.ref2}
+            td {row.ref3}
+            td {row.observacoes}

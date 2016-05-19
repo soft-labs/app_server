@@ -10,7 +10,7 @@ block app_scripts
     script(type='application/javascript', src='configuracoes.js')
 
 block content
-    .ui.segment.bg
+    .ui.segment.bg.app
 
         #ide.container.logo(style='margin: 15px')
             h2.ui.header
@@ -20,8 +20,9 @@ block content
                     .sub.header {info.desc}
                 img.ui.tiny.right.top.floated.image(src="imgs/_logos/tshark.png", style="margin-top: -13px;")
 
-            .form.ui
-                h4.ui.dividing.header Conexão ao banco
+
+            .form.ui#obj
+                h4.ui.dividing.header Geração de Objetos de Negócio
                 .field
                     .fields
 
@@ -40,6 +41,16 @@ block content
                             button.ui.green.button(rv-on-click='refreshTables')
                                 i.refresh.icon
                                 | Refresh
+
+                        .ten.wide.field
+                            .ui.text.menu
+                                .ui.right.dropdown.item
+                                    | Modo de Operação
+                                    i.dropdown.icon
+                                    .menu
+                                        .item(rv-on-click='showObj') Geração de Objetos de Negócio
+                                        .item(rv-on-click='showMod') Geração de Módulos
+
                 p &nbsp;
 
                 .field
@@ -113,20 +124,20 @@ block content
                                             i.circular.folder.icon
                                             |{o.id}
                                         .content
-                                            .ui.accordion
+                                            .accordion
                                                 .ident(rv-each-pack='o.sub')
                                                     .title
                                                         i.cubes.icon
                                                         |{pack.id}
                                                     .content
-                                                        .ui.accordion
+                                                        .accordion
                                                             .ident(rv-each-mod='pack.sub')
                                                                 .title
                                                                     i.settings.icon
                                                                     |{mod.id}
 
                                                                 .content
-                                                                    .ui.accordion
+                                                                    .accordion
                                                                         .ident(rv-each-arq='mod.sub')
                                                                             .title(rv-if="arq.ext | eq '.js'",
                                                                                     rv-on-dblclick='showList',
@@ -140,6 +151,86 @@ block content
                                                                             .title(rv-if="arq.ext | eq '.jade'")
                                                                                 i.blue.image.file.outline.icon
                                                                                 |{arq.id}
+
+
+
+
+
+
+
+
+
+            //
+            .form.ui.transition.hidden#mod
+                h4.ui.dividing.header Geração de Módulos
+                .field
+                    .fields
+                        .sixteen.wide.field
+                            .ui.text.menu
+                                .ui.right.dropdown.item
+                                    | Modo de Operação
+                                    i.dropdown.icon
+                                    .menu
+                                        .item(rv-on-click='showObj') Geração de Objetos de Negócio
+                                        .item(rv-on-click='showMod') Geração de Módulos
+
+                p &nbsp;
+
+                .field
+                    .fields
+                        .six.wide.field
+                            h4.ui.dividing.header
+                                i.settings.icon
+                                | Objetos de Negócio na Biblioteca
+
+                            .ui.segment.height
+                                .ui.accordion
+                                    .ident(rv-each-o='bizobj.rows')
+                                        .title
+                                            i.circular.folder.icon
+                                            | {o.id}
+                                        .content
+                                            .accordion
+                                                .ident(rv-each-pack='o.sub')
+                                                    .title
+                                                        i.cubes.icon
+                                                        | {pack.id}
+                                                    .content
+                                                        .accordion
+                                                            .ident(rv-each-mod='pack.sub')
+                                                                .title(
+                                                                    rv-on-dblclick='createMod'
+                                                                    rv-data-owner='o.id',
+                                                                    rv-data-pack='pack.id',
+                                                                    rv-data-mod='mod.id'
+                                                                )
+                                                                    i.settings.icon
+                                                                    | {mod.id}
+
+                        .six.wide.field
+                            h4.ui.dividing.header
+                                i.database.icon
+                                .content
+                                    | Módulos em Apps
+
+                            // Lista de apps
+                            .ui.segment.height
+                                .ui.accordion
+                                    .ident(rv-each-app='apps.rows')
+                                        .title
+                                            i.circular.folder.icon
+                                            | {app.id}
+                                        .content
+                                            .accordion
+                                                .ident(rv-each-cli='app.sub')
+                                                    .title
+                                                        i.cubes.icon
+                                                        .ui.radio.checkbox
+                                                            input(type="radio", name="radio",
+                                                                rv-data-app="app.id",
+                                                                rv-data-cli="cli.id"
+                                                            )
+                                                            label {cli.id}
 
 
 
@@ -179,7 +270,7 @@ block content
                 i.big.browser.icon
                 |  Formulário Genérico de Dados
             div.content
-                .description Edicao
+                .description#form_area Edicao
             div.actions
                 div.ui.green.button.ok(
                     rv-data-action='api.save',

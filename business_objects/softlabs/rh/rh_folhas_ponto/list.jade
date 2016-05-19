@@ -1,20 +1,24 @@
 //
     Template default para: softlabs.rh.rh_folhas_ponto
-    Criado em Wed Apr 27 2016 18:13:26 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:47:54 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.rh_folhas_ponto_key} - {row.rh_folhas_ponto_key}
-        .meta Keys: parceiros_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.rh_folhas_ponto_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.rh_folhas_ponto_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Rh Folhas Ponto
+        th Parceiros
+        th Ponto
+        th Hr Entrada
+        th Hr Almoco Saida
+        th Hr Almoco Retorno
+        th Hr Saida
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.rh_folhas_ponto_key}
+            td {row.parceiros_key}
+            td {row.ponto}
+            td {row.hr_entrada}
+            td {row.hr_almoco_saida}
+            td {row.hr_almoco_retorno}
+            td {row.hr_saida}
+            td {row.observacoes}

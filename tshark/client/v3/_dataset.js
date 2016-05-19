@@ -123,18 +123,27 @@ function Dataset (path, ref){
 
             // Processa retorno
             .done(function (res) {
+                
+                // Se o dataset tem evento onLoad
                 if (self['onLoad']) {
                     self.onLoad(res);
                 }
 
+                // Reseta os dados
                 self.reset(res.data);
 
+                // Se foi passado uma func de callback
                 if (func){
                     func.apply(self);
 
+                // ou se tem onAfterLoad    
                 } else  if (self['onAfterLoad']) {
                     self.onAfterLoad();
                 }
+
+                // Ajusta binds
+                tshark.bindAPIs();
+                tshark.bindIntf();
 
                 // ShowSQL
                 if (res.data['sql']){

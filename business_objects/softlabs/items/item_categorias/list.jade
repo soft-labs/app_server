@@ -1,20 +1,18 @@
 //
     Template default para: softlabs.items.item_categorias
-    Criado em Wed Apr 27 2016 18:12:59 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:46:43 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.item_categorias_key} - {row.item_categorias_key}
-        .meta Keys: cont_centros_resultado_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.item_categorias_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.item_categorias_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Item Categorias
+        th Gera Cmv
+        th Categoria
+        th Observações
+        th Cont Centros Resultado
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.item_categorias_key}
+            td {row.gera_cmv}
+            td {row.categoria}
+            td {row.observacoes}
+            td {row.cont_centros_resultado_key}

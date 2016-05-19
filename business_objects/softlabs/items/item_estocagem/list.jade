@@ -1,20 +1,30 @@
 //
     Template default para: softlabs.items.item_estocagem
-    Criado em Wed Apr 27 2016 18:12:59 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:46:43 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.item_estocagem_key} - {row.item_estocagem_key}
-        .meta Keys: item_compras_key, emp_depositos_key, ult_mov_itens_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.item_estocagem_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.item_estocagem_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Item Estocagem
+        th Item Compras
+        th Emp Depositos
+        th Ult Mov Itens
+        th Localização
+        th Qtd Estoque
+        th Disponibilidade
+        th Dt Ultima Entrada
+        th Dt Ultima Saida
+        th Preco Ultima Compra
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.item_estocagem_key}
+            td {row.item_compras_key}
+            td {row.emp_depositos_key}
+            td {row.ult_mov_itens_key}
+            td {row.localizacao}
+            td {row.qtd_estoque}
+            td {row.disponibilidade}
+            td {row.dt_ultima_entrada}
+            td {row.dt_ultima_saida}
+            td {row.preco_ultima_compra}
+            td {row.observacoes}

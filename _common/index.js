@@ -9,72 +9,70 @@
  * @since 11/10/2015
  */
 var tshark = new TShark({  // Instancia do TShark
-        base_url: 'tshark'
-    })  
-    , app  = {             // Instancia do client
+    base_url: 'tshark'
+});
 
-        //region :: Meses do ano
-        meses: {
-            1: 'Janeiro', 2: 'Fevereiro', 3: 'Março', 4: 'Abril', 5: 'Maio', 6: 'Junho',
-            7: 'Julho', 8: 'Agosto', 9: 'Setembro', 10: 'Outubro', 11: 'Novembro', 12: 'Dezembro'
-        },
-        meses_array: [
-            'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-            'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-        ],
+// Instancia do app
+var app  = {             
 
-        meses_abrev: {
-            1: 'Jan', 2: 'Fev', 3: 'Mar', 4: 'Abr', 5: 'Mai', 6: 'Jun',
-            7: 'Jul', 8: 'Ago', 9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez'
-        },
-        meses_abrev_array: [
-            'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
-            'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
-        ],
-    
-        //endregion
-    
-        //region :: Dias da semana
-        
-        dias: {1: 'Domingo', 2: 'Segunda', 3: 'Terça', 4: 'Quarta', 5: 'Quinta', 6: 'Sexta', 7: 'Sábado'},
-        dias_array: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-    
-        dias_abrev: {1: 'Dom', 2: 'Seg', 3: 'Ter', 4: 'Qua', 5: 'Qui', 6: 'Sex', 7: 'Sáb'},
-        dias_abrev_array: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+    //region :: Meses do ano
+    meses: {
+        1: 'Janeiro', 2: 'Fevereiro', 3: 'Março', 4: 'Abril', 5: 'Maio', 6: 'Junho',
+        7: 'Julho', 8: 'Agosto', 9: 'Setembro', 10: 'Outubro', 11: 'Novembro', 12: 'Dezembro'
+    },
+    meses_array: [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ],
 
-        dias_full: {
-            1: 'Domingo', 2: 'Segunda-feira', 3: 'Terça-feira', 4: 'Quarta-feira', 
-            5: 'Quinta-feira', 6: 'Sexta-feira', 7: 'Sábado'
-        },
-        dias_full_array: [
-            'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 
-            'Quinta-feira', 'Sexta-feira', 'Sábado'
-        ],
- 
-        //endregion
+    meses_abrev: {
+        1: 'Jan', 2: 'Fev', 3: 'Mar', 4: 'Abr', 5: 'Mai', 6: 'Jun',
+        7: 'Jul', 8: 'Ago', 9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez'
+    },
+    meses_abrev_array: [
+        'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+        'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
+    ],
+
+    //endregion
+
+    //region :: Dias da semana
     
-        /**
-         * Inicializador default
-         */
-        init: function(){
+    dias: {1: 'Domingo', 2: 'Segunda', 3: 'Terça', 4: 'Quarta', 5: 'Quinta', 6: 'Sexta', 7: 'Sábado'},
+    dias_array: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+
+    dias_abrev: {1: 'Dom', 2: 'Seg', 3: 'Ter', 4: 'Qua', 5: 'Qui', 6: 'Sex', 7: 'Sáb'},
+    dias_abrev_array: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+
+    dias_full: {
+        1: 'Domingo', 2: 'Segunda-feira', 3: 'Terça-feira', 4: 'Quarta-feira', 
+        5: 'Quinta-feira', 6: 'Sexta-feira', 7: 'Sábado'
+    },
+    dias_full_array: [
+        'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 
+        'Quinta-feira', 'Sexta-feira', 'Sábado'
+    ],
+
+    //endregion
+
+    /**
+     * Dataset global do app
+     */
+    data: new Dataset(),
+
+    /**
+     * Inicializador default
+     */
+    init: function(){
             
-        }
     }
-;
+};
 
 // Fim da carga do browser
 $(document).ready(function() {
 
     // Registra o módulo de security
-    tshark.register('sys.app.security', function(){
-
-        // Efetua o bind, caso exista #login
-        tshark.bind('#login', this);
-        
-        // Efetua o bind, caso exista #logout
-        tshark.bind('#logout', this);
-
-    });
+    tshark.register('sys.app.security');
 
 });
 

@@ -1,20 +1,26 @@
 //
     Template default para: softlabs.items.item_identificado
-    Criado em Wed Apr 27 2016 18:12:59 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:46:43 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.item_identificado_key} - {row.item_identificado_key}
-        .meta Keys: items_key, item_ident_tipos_key, item_lotes_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.item_identificado_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.item_identificado_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Item Identificado
+        th Items
+        th Item Ident Tipos
+        th Item Lotes
+        th Identificação
+        th Num Serie
+        th Num Fabricante
+        th Num Patrimonio
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.item_identificado_key}
+            td {row.items_key}
+            td {row.item_ident_tipos_key}
+            td {row.item_lotes_key}
+            td {row.identificacao}
+            td {row.num_serie}
+            td {row.num_fabricante}
+            td {row.num_patrimonio}
+            td {row.observacoes}

@@ -20,7 +20,7 @@ block content
         img#logo_tshark.ui.image.cursor(src='imgs/_logos/tshark.png')
         .ui.padded.container.segment.app-header
             h1.ui.header
-                img.app-logo-header(src='imgs/_logos/retailpro_box.png')
+                img.app-logo-header(src='imgs/_logos/cacaushow.png')
                 .content
                     | Sistema Financeiro
                     .sub.header
@@ -62,20 +62,16 @@ block content
 
 
         .ui.container.segment.app-bar
-            i#app-submenu-trigger(rv-class='bar.icon')
-
-            .ui.breadcrumb
-                a.section {bar.area}
-                i.right.chevron.icon.divider
-                .section.active
-                    | {bar.secao}
-
-            .ui.icon.message.transition.hidden
-                i(rv-class='bar.msg.icon')
-                .content
-                    .header {bar.msg.title}
-                    p {bar.msg.text}
-
+            .ui.steps
+                .step.cursor(
+                    rv-class-active='item.active'
+                    rv-each-item='sys.app.menu.appbar'
+                    rv-data-action='item.api'
+                )
+                    i(rv-class='item.icon')
+                    .content
+                        .title {item.title} / {item.icon}
+                        .description {item.description}
 
 
         // **** Cockpit **** //
@@ -89,7 +85,7 @@ block content
             | Hello Integracoes
 
         .ui.container.app-cadastros.transition.hidden
-            | Hello Cadastros
+            include cadastros/cadastros
 
         .ui.container.app-sistema.transition.hidden
             | Hello Sistema

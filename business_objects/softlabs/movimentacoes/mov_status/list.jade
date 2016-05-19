@@ -1,20 +1,12 @@
 //
     Template default para: softlabs.movimentacoes.mov_status
-    Criado em Wed Apr 27 2016 18:09:13 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:47:04 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.mov_status_key} - {row.mov_status_key}
-        .meta Keys:  - sem dependências -
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.mov_status_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.mov_status_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Mov Status
+        th Mov Status
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.mov_status_key}
+            td {row.mov_status}

@@ -52,13 +52,13 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
      * Cria um novo form
      * @param mod
      * @param layout
-     * @param id (opcional)
+     * @param place (opcional)
      * @returns {*|jQuery|HTMLElement}
      */
-    TShark.prototype.createForm = function (mod, layout, id) {
+    TShark.prototype.createForm = function (mod, layout, place) {
         var
-            f_config    = layout['_config'] || {}
-            , f_id      = id || guid()
+            f_config = layout['_config'] || {}
+            , f_id   = guid()
 
             // Configurações do form
             , form = $("<form>", {
@@ -125,11 +125,55 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
         // Registra
         mod.form.obj = form;
         mod.api.last_form_id = f_id;
-        
+
+        // Coloca na tela
+        if (place){
+
+            tshark.putLayout(form, place);
+
+           // rivets.bind($(f_id), app);
+        }
+
         // Retorna
         return f_id;
     };
 
+
+    /**
+     * Coloca um form em um lugar na tela e efetua seu bind
+     * @param content
+     * @param place (opcional)
+     * @returns {*|jQuery|HTMLElement}
+     */
+    TShark.prototype.putLayout = function (content, place) {
+
+        if (typeof place == 'string'){
+            place = $(place);
+        }
+
+        if (place.length){
+            var bound = place.data('_bound');
+            if (bound){
+                bound.unbind();
+            }
+
+            place
+                .empty()
+                .append(content)
+            ;
+
+
+            // Bind global do var app com o .app
+            //tshark.appBound.update();
+
+            tshark.bindIntf(place);
+            
+            place.data('_bound', rivets.bind(place, app));
+
+            tshark.bindIntf(place);
+            tshark.bindAPIs(place);
+        }
+    };
 
     /**
      * Cria uma área de componente
@@ -154,33 +198,33 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
             case 'inpDate'      :
             case 'inpTime'      :
             case 'inpDateTime'  :
-                input = getInput(ctrl, field);
+                input = getInput(ctrl, field, mod.path);
                 break;
 
             case 'inpMemo'      :
             case 'inpMemoShort' :
             case 'inpMemoLong'  :
-                input = getMemo(ctrl, field);
+                input = getMemo(ctrl, field, mod.path);
                 break;
 
             case 'dropdown'  :
             case 'inpDropdown'  :
             case 'inpList'      :
             case 'inpChoose'    :
-                input = getSelect(ctrl, field);
+                input = getSelect(ctrl, field, mod.path);
                 break;
 
             case 'inpCheckBox':
             case 'inpSlider':
             case 'inpToggle':
             case 'inpRadio':
-                input = getCheck(ctrl, field);
+                input = getCheck(ctrl, field, mod.path);
                 break;
 
             default:
                 ctrl['state'] = 'error';
                 ctrl['placeholder'] = 'componente desconhecido';
-                input = getInput(ctrl, field);
+                input = getInput(ctrl, field, mod.path);
         }
 
         if (ctrl['data']){
@@ -335,11 +379,12 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
      * @param ctrl
      * @param field
      */
-    function getInput(ctrl, field) {
+    function getInput(ctrl, field, path) {
         var params = {
                 type: "text",
                 class: "ui fluid",
-                'rv-value': "data.row." + field
+                'rv-value': path + ".data.row." + field,
+                'onblur': path.split('.').join(' ') + " save"
             }
         ;
 
@@ -385,10 +430,11 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
      * @param field
      * @returns {*|jQuery|HTMLElement}
      */
-    function getMemo(ctrl, field){
+    function getMemo(ctrl, field, path){
         var params = {
                 class: "ui fluid",
-                'rv-value': "data.row." + field
+                'rv-value': path + ".data.row." + field,
+                'onblur': path.split('.').join(' ') + " save"
             }
         ;
 
@@ -415,11 +461,12 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
      * @param field
      * @returns {*|jQuery|HTMLElement}
      */
-    function getCheck(ctrl, field){
+    function getCheck(ctrl, field, path){
         var params = {
                 class: "ui fluid",
                 type: "checkbox",
-                'rv-checked': "data.row." + field
+                'rv-checked': path + ".data.row." + field,
+                'onchange': path.split('.').join(' ') + " save"
             }
         ;
 
@@ -440,8 +487,43 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
      * @param ctrl
      * @param field
      */
-    function getSelect(ctrl, field){
-        return simpleSelect(ctrl, field);
+    function getSelect(ctrl, field, path){
+        return simpleSelect(ctrl, field, path);
+        //return selSelection(ctrl, field, path);
+    }
+
+    function selSelection(ctrl, field, path) {
+        var
+            val      = (ctrl.data['key'] ? ctrl.data['key'] : field)
+            , select = $("<div>", {
+                id : field,
+                class: "ui selection dropdown",
+                "rv-value"  : path + ".data.row." + val
+            })
+            .append(
+                $("<input>", {
+                    type: "hidden",
+                    name: field
+
+                })
+            )
+            .append($("<i>", {class: "dropdown icon"}))
+            .append($("<div>", {class: "default text"}))
+            .append(
+                $("<div>", {class: "menu"})
+                    .append(
+                        $("<div>", {
+                            class: "item",
+                            'rv-each-row'  : path + '.form.comps.' + field + '.rows',
+                            'rv-data-value': 'row.' + val
+                        })
+                            .html(
+                                (ctrl.data['template'] ? ctrl.data['template'] : "{row." + field + "}")
+                            )
+                    )
+            )
+        ;
+        return select;
     }
 
     /**
@@ -450,25 +532,28 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
      * @param field
      * @returns {*|jQuery|HTMLElement}
      */
-    function simpleSelect(ctrl, field){
+    function simpleSelect(ctrl, field, path){
         var
             val  = (ctrl.data['key'] ? ctrl.data['key'] : field)
         , select = $("<select>", {
+                id : field,
                 class       : "ui fluid dropdown",
                 style       : "white-space: nowrap !important",
-                'rv-value'  : "data.row." + val
+                //'rv-value'  : "tshark.selectOpt < " + path + ".data.row." + val,
+               'rv-selectvalue' : path + ".data.row." + val,
+               // 'onschange'    : path.split('.').join(' ') + " save"
             }
+        ).append(
+            $("<option>", {
+                'rv-each-row': path + '.form.comps.' + field + '.rows',
+                'rv-value'   : 'row.' + val
+                }
+            )
+                .html(
+                    (ctrl.data['template'] ? ctrl.data['template'] : "{row." + field + "}")
+                )
         );
 
-        $("<option>", {
-                'rv-each-row': 'form.comps.' + field + '.rows',
-                'rv-value'   : 'row.' + val
-            })
-            .html(
-                (ctrl.data['template'] ? ctrl.data['template'] : "{row." + field + "}")
-            )
-            .appendTo(select)
-        ;
         return select;
     }
 
@@ -478,7 +563,7 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
      * @param field
      * @returns {*|jQuery|HTMLElement}
      */
-    function extraSelect(ctrl, field){
+    function extraSelect(ctrl, field, path){
         var
             val   = (ctrl.data['key'] ? ctrl.data['key'] : field)
         ,  params = {
@@ -520,3 +605,36 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
 
 
 })($);
+
+
+TShark.prototype.selectOpt = function () {
+
+    var x = arguments;
+
+};
+
+rivets.binders.selectvalue = function (el, value){
+    tshark.sucesso(el.id + ' - ' + value);
+    $(el).dropdown('set value', value);
+};
+
+rivets.binders.sselectvalue = {
+    bind: function(el) {
+        var self = this;
+        this.callback = function() {
+            self.model[self.observer.key.path] = $(this).val();
+        };
+        $(el).on('change', this.callback);
+    },
+
+    unbind: function(el) {
+        $(el).off('change', this.callback);
+    },
+
+    routine: function(el, value) {
+        if (value != null) {
+            $(this.el).dropdown('set value', value);
+        }
+        tshark.sucesso($(this.el).id + ' - ' + value);
+    }
+};

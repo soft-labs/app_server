@@ -1,20 +1,18 @@
 //
     Template default para: softlabs.empresas.emp_setores
-    Criado em Wed Apr 27 2016 18:12:23 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:45:08 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.emp_setores_key} - {row.emp_setores_key}
-        .meta Keys: empresas_key, cont_centro_resultados_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.emp_setores_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.emp_setores_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Emp Setores
+        th Empresas
+        th Setor
+        th Observações
+        th Cont Centro Resultados
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.emp_setores_key}
+            td {row.empresas_key}
+            td {row.setor}
+            td {row.observacoes}
+            td {row.cont_centro_resultados_key}

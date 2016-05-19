@@ -1,20 +1,16 @@
 //
     Template default para: softlabs.financeiro.fin_especies
-    Criado em Wed Apr 27 2016 18:12:40 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:43:34 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.fin_especies_key} - {row.fin_especies_key}
-        .meta Keys:  - sem dependências -
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.fin_especies_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.fin_especies_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Fin Especies
+        th Baixa Vira Lanc
+        th Especie
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.fin_especies_key}
+            td {row.baixa_vira_lanc}
+            td {row.especie}
+            td {row.observacoes}

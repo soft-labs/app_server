@@ -1,20 +1,46 @@
 //
     Template default para: softlabs.contabil.cont_determinacao
-    Criado em Wed Apr 27 2016 18:11:58 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:44:44 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.cont_determinacao_key} - {row.cont_determinacao_key}
-        .meta Keys: conta_receitas_key, conta_despesas_key, conta_diferencas_key, cont_credito_compras_key, conta_credito_venda_key, conta_venda_gratis_key, conta_compra_gratis_key, conta_cmv_key, conta_estoque_key, conta_estoque_transito_key, conta_estoque_perdas_key, emp_depositos_key, item_categorias_key, item_categ_sub_key, items_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.cont_determinacao_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.cont_determinacao_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Cont Determinação
+        th Conta Receitas
+        th Conta Despesas
+        th Conta Diferencas
+        th Cont Credito Compras
+        th Conta Credito Venda
+        th Conta Venda Gratis
+        th Conta Compra Gratis
+        th Conta Cmv
+        th Conta Estoque
+        th Conta Estoque Transito
+        th Conta Estoque Perdas
+        th Emp Depositos
+        th Item Categorias
+        th Item Categ Sub
+        th Items
+        th Dt Inicio
+        th Dt Final
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.cont_determinacao_key}
+            td {row.conta_receitas_key}
+            td {row.conta_despesas_key}
+            td {row.conta_diferencas_key}
+            td {row.cont_credito_compras_key}
+            td {row.conta_credito_venda_key}
+            td {row.conta_venda_gratis_key}
+            td {row.conta_compra_gratis_key}
+            td {row.conta_cmv_key}
+            td {row.conta_estoque_key}
+            td {row.conta_estoque_transito_key}
+            td {row.conta_estoque_perdas_key}
+            td {row.emp_depositos_key}
+            td {row.item_categorias_key}
+            td {row.item_categ_sub_key}
+            td {row.items_key}
+            td {row.dt_inicio}
+            td {row.dt_final}
+            td {row.observacoes}

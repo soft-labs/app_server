@@ -44,10 +44,10 @@ var configuracoes = {
             .modal('show');
 
         // Bind de dados
-        config_form_bind = rivets.bind($(formId), this);
+        //config_form_bind = rivets.bind($(formId), this);
 
         // Bind de funcionalidade
-        tshark.bind(formId);
+        //tshark.bind(formId);
     },
 
     search: function(){

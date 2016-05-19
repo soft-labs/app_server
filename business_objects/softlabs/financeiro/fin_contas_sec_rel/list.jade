@@ -1,20 +1,22 @@
 //
     Template default para: softlabs.financeiro.fin_contas_sec_rel
-    Criado em Wed Apr 27 2016 18:12:40 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:43:34 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.fin_contas_key} - {row.ve_movimento}
-        .meta Keys: fin_contas_key, sec_usuarios_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.fin_contas_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.fin_contas_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Fin Contas
+        th Sec Usuarios
+        th Ve Movimento
+        th Lanca Debito
+        th Lanca Credito
+        th Baixa Debito
+        th Baixa Credito
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.fin_contas_key}
+            td {row.sec_usuarios_key}
+            td {row.ve_movimento}
+            td {row.lanca_debito}
+            td {row.lanca_credito}
+            td {row.baixa_debito}
+            td {row.baixa_credito}

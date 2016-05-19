@@ -23,23 +23,18 @@ $(document).ready(function() {
  * Implementação da interface da aplicação
  * @since 10/03/16
  */
-var app = {
+app = $.extend(true, app, {
     
     // Modo atual da aplicação
     mode: 'desenv',
 
     // Inicializador da aplicação
     init: function () {
-
-        // Registrando o módulo da IDE
-        //tshark.register('sys.dev.ide');
-
-        // Bind interface
-        tshark.bind('#ide', this);
-
+        
         // Carga de dados
         this.conn.load('getConexoes');
         this.bizobj.load('listModulos');
+        this.apps.load('listApps');
 
         // Ajusta o dataset de package
         this.package.modulos.key = "name";
@@ -66,6 +61,9 @@ var app = {
     // Objeto que irá armazenar os pacotes existentes no server
     bizobj: new Dataset('sys.dev.ide'),
 
+    // armazena os apps
+    apps: new Dataset('sys.dev.ide'),
+
     // Objeto para armazenamento das informações do pack que será criado
     package: {
         id      : '',
@@ -79,32 +77,25 @@ var app = {
     //region :: Eventos
 
     /**
-     * d
+     * Força o template para todos listagem de todos
+     * os módulos como "cards"
      */
-    list_before: function(el, settings){
+    onBeforeList: function(el, settings){
 
-        // Seta template default
-        settings.data['template'] = 'cards';
+        // Ajusta template e local onde serão colocadas as listagens
+        tshark.send({
+            template: 'cards',
+            list_place: '#listagem'
+        });
 
         // Libera ou não para continuar
         return true;
     },
 
     /**
-     * Intercepta o afterlist GLOBAL e implementa a atualização
-     * das listagens de todos os módulos apontando dinâmicamente
-     * para um mesmo layout.
-     * @param mod
-     * @param response
+     * Exibe o popup com a listagem
      */
     onAfterList: function(mod, response){
-
-        // Bind
-        tshark.rebind(                              // Rebind pq a cada listagem o módulo de origem dos dados pode ser outro
-            '#list',                                // Bind feito no ponto mais alto do layout
-            mod,                                    // (Novo) Mod de origem dos dados
-            ['#listagem', response.layout[response['template']]]  // Aplica o template em uma região do layout '#list'
-        );
 
         // Limpa a área de pesquisa
         $('#search').val('');
@@ -112,32 +103,38 @@ var app = {
         // Exibe a janela de listagem
         $('#list')
             .modal('setting', 'transition', 'fade')
-           // .modal('setting', 'allowMultiple', true)
             .modal('show');
+
+    },
+
+
+    /**
+     * Força o template para todos listagem de todos
+     * os módulos como "cards"
+     */
+    onBeforeForm: function(el, settings){
+
+        // Ajusta template e local onde serão colocadas as listagens
+        tshark.send({
+            form_place: '#form_area'
+        });
+
+        // Libera ou não para continuar
+        return true;
     },
 
     /**
-     * Intercepta o afterform GLOBAL e implementa os formulários
-     * de todos os módulos apontando dinâmicamente para um mesmo
-     * layout.
+     * Exibe a janela do form
      * @param mod
      * @param response
      */
     onAfterForm: function(mod, response){
-
-        // Bind
-        tshark.rebind(                              // Rebind pq a cada form o módulo de origem de dados pode ter mudado
-            '#form',                                // Bind feito no ponto mais alto do layout
-            mod,                                    // (Novo) Mod de origem dos dados
-            [".description", mod.form.obj]          // Aplica o template em uma região do layout '.description'
-        );
-
-        // Exibe a janela do form
         $('#form')
             .modal('setting', 'transition', 'fade')
             .modal('setting', 'allowMultiple', true)
             .modal('show');
     },
+
 
     /**
      * Exibe mensagem após a operação de update
@@ -233,7 +230,8 @@ var app = {
      * responsável pelo refresh da árvore de app.bizobj
      */
     createPackage: function(){
-        // tshark.call('exec sys dev ide createPackage', {  // - Chamada pelo TShark, usando path completo
+        //tshark.call('sys dev testes test');
+        // tshark.call('sys dev ide createPackage', {  // - Chamada pelo TShark, usando path completo
         // sys.dev.ide.call('exec createPackage', {         // - Chamada pelo módulo, usando call genérico 
         sys.dev.ide.exec('createPackage', {                 // - Chamada pelo módulo, usando call específico
             id      : app.package.id,
@@ -258,11 +256,40 @@ var app = {
         ;
 
         tshark.call(o + '  ' + p + ' ' + m + ' list');
+    },
+    
+    //endregion
+
+    createMod: function () {
+        var m = $(this).data()
+            , c = $('input[name=radio]:checked').data()
+        ;
+        
+        sys.dev.ide.exec('createMod', {                 // - Chamada pelo módulo, usando call específico
+            pack: m,
+            app : c
+        });
+        
+    },
+    
+    onAfterCreateMod: function(mod, response){
+        if (response){
+            tshark.sucesso('Módulo criado com sucesso.');
+        } else {
+            tshark.erro('Não foi possível gerar o módulo');
+        }
+    },
+
+    showObj: function(){
+        $('#mod').transition('hide');
+        $('#obj').transition('show');
+    },
+
+    showMod: function(){
+        $('#obj').transition('hide');
+        $('#mod').transition('show');
     }
-    
+
     //endregion
     
-    
-    //endregion
-    
-};
+});

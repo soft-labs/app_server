@@ -1,20 +1,16 @@
 //
     Template default para: softlabs.items.item_ident_veiculos
-    Criado em Wed Apr 27 2016 18:12:59 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:46:43 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.item_identificado_key} - {row.item_identificado_key}
-        .meta Keys:  - sem dependências -
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.item_identificado_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.item_identificado_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Item Identificado
+        th Placa
+        th Chassi
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.item_identificado_key}
+            td {row.placa}
+            td {row.chassi}
+            td {row.observacoes}

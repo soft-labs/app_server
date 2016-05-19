@@ -42,22 +42,23 @@ html
 
     body
 
-        #teste.ui.content
-            label {titulo}
-            #list
+        .ui.content.app
+            #teste.ui.content
+                label {titulo}
+                #list
+                    .content(rv-each-row='rows')
+                        label {row.key} - {row.label}
+
+            br
+            br
+            br
+
+            textarea#t1
                 .content(rv-each-row='rows')
                     label {row.key} - {row.label}
 
-        br
-        br
-        br
-
-        textarea#t1
-            .content(rv-each-row='rows')
-                label {row.key} - {row.label}
-
-        textarea#t2
-            .content(rv-each-row='rows')
-                label {row.test} - {row.name}
+            textarea#t2
+                .content(rv-each-row='rows')
+                    label {row.test} - {row.name}
 
 

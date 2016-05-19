@@ -2,7 +2,10 @@
  * Created by labs on 05/05/16.
  */
 app.cockpit = {
-    
+
+    /**
+     * Chamado na inicialização do app
+     */
     init: function(){
 
         this.charts = {};
@@ -96,6 +99,13 @@ app.cockpit = {
             })
         ;
 
+    },
+
+    /**
+     * Chamado sempre que o módulo é exibido
+     */
+    show: function(){
+        
     },
 
 

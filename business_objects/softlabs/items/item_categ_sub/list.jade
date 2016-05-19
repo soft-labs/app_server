@@ -1,20 +1,18 @@
 //
     Template default para: softlabs.items.item_categ_sub
-    Criado em Wed Apr 27 2016 18:12:59 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:46:43 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.item_categ_sub_key} - {row.item_categ_sub_key}
-        .meta Keys: item_categorias_key, cont_centros_resultado_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.item_categ_sub_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.item_categ_sub_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Item Categ Sub
+        th Item Categorias
+        th Cont Centros Resultado
+        th Sub Categoria
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.item_categ_sub_key}
+            td {row.item_categorias_key}
+            td {row.cont_centros_resultado_key}
+            td {row.sub_categoria}
+            td {row.observacoes}

@@ -1,20 +1,32 @@
 //
     Template default para: softlabs.financeiro.fin_caixa_lanc
-    Criado em Wed Apr 27 2016 18:12:40 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:43:34 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.fin_caixa_lanc_key} - {row.fin_caixa_lanc_key}
-        .meta Keys: fin_caixa_key, fin_especies_key, fin_contas_key, entidades_key, sec_usuarios_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.fin_caixa_lanc_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.fin_caixa_lanc_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Fin Caixa Lanc
+        th Fin Caixa
+        th Fin Especies
+        th Fin Contas
+        th Entidades
+        th Sec Usuarios
+        th Data
+        th Hora
+        th Historico
+        th Credito
+        th Debito
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.fin_caixa_lanc_key}
+            td {row.fin_caixa_key}
+            td {row.fin_especies_key}
+            td {row.fin_contas_key}
+            td {row.entidades_key}
+            td {row.sec_usuarios_key}
+            td {row.data}
+            td {row.hora}
+            td {row.historico}
+            td {row.credito}
+            td {row.debito}
+            td {row.observacoes}

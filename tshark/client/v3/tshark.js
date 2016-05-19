@@ -21,7 +21,12 @@ function TShark(opts){
     /**
      * Armazena os rivet binds que forem associados
      */
-    this.bounded = {};
+    this.appBound = false;
+
+    /**
+     * Estrutura para envio de dados
+     */
+    this._sending_ = {};
     
 }
 
@@ -42,7 +47,7 @@ var CONSOLE_ON = true;
     TShark.prototype.init = function (options) {
         options = options || {};
 
-        // Bind de APIs generico
+        // Elemento para chamadas de APIs genericas
         var d = $("<div>", {
             id: '_direct_api_helper_',
             class: "ui hidden"
@@ -50,36 +55,95 @@ var CONSOLE_ON = true;
 
         $('body')
             .append(d);
-        
+
+
+        // Registra módulos no init
         if(options['register']){
             this.register(options['register']);
         }
+        
+        // Bind global do var app com o .app
+        this._bindData();
 
-        // bind
-        var id = '.app'
-            , obj = app
-        ;
-        if (options['bind']){
-            if (typeof options['bind'] == 'string') {
-                this.bind(options['bind'], obj);
+        // Bind das APIs
+        this.bindAPIs();
+        
+        // Liga Semantic
+        this.bindIntf();
 
-            } else {
-                for (var o in options['bind']){
-                    this.bind(o, options['bind'][o]);
-                }
-            }
-        } else {
-            this.bind(id, obj);
-        }
     };
 
+
+    /**
+     * Executa o bind de dados do objeto app
+     * com a estrutura '.app' no layout
+     * @private
+     */
+    TShark.prototype._bindData = function(){
+        this.appBound = rivets.bind($('.app'), app);
+    };
+    
+    /**
+     * Ativa APIs em ref
+     * @param ref
+     */
+    TShark.prototype.bindAPIs = function (ref) {
+        ref = '.app';
+        
+        // Bind de APIs
+        $('[data-action]').not('.api-binded')
+            .api(this.api)
+            .addClass('api-binded');
+
+        $('[action]').not('.api-binded')
+            .api(this.api)
+            .addClass('api-binded');
+
+        // Bind de APIs em click
+        $('[click]').not('.api-binded')
+            .api(this.api)
+            .addClass('api-binded')
+            .each(function(){
+                $(this).data('action', $(this).attr('click'));
+            })
+        ;
+
+        // Bind de APIs em dblclick
+        $('[dblclick]').not('.api-binded')
+            .api(this.dblclick_api)
+            .addClass('api-binded')
+            .each(function(){
+                $(this).data('action', $(this).attr('dblclick'));
+            })
+        ;
+
+        // Bind de APIs em blur
+        $('[onblur]').not('.api-binded')
+            .api(this.blur_api)
+            .addClass('api-binded')
+            .each(function(){
+                $(this).data('action', $(this).attr('onblur'));
+            })
+        ;
+
+        // Bind de APIs em change
+        $('[onchange]').not('.api-binded')
+            .api(this.blur_api)
+            .addClass('api-binded')
+            .each(function(){
+                $(this).data('action', $(this).attr('onchange'));
+            })
+        ;
+        
+    };
+    
     /**
      * Ativa o semantic em ref
      * @since 06/10/15
      */
-    TShark.prototype.initIntf = function (ref) {
+    TShark.prototype.bindIntf = function (ref) {
         if (!ref) {
-            ref = 'body';
+            ref = '.app';
 
         } else {
             if (typeof ref == 'string') {
@@ -91,12 +155,6 @@ var CONSOLE_ON = true;
                 ref = $(ref);
             }
         }
-
-        // Bind de APIs
-        $(ref).find('[data-action]').not('.api-binded')
-            .api(this.api)
-            .addClass('api-binded');
-
         
         // Bind Semantic
         $(ref).find('.ui.dropdown').not('.binded')
@@ -224,37 +282,34 @@ var CONSOLE_ON = true;
      * não tenha um bound.
      * @param ref
      * @param obj
-     * @param replace
+     * @param content
      * @returns {*}
-     */
-    TShark.prototype.bind = function(ref, obj, replace) {
+     *
+    TShark.prototype.bind = function(ref, obj, content) {
         var id = ref || 'body';
 
         if (!this.bounded[id] || !this.bounded[id].bound) {
             this.bounded[id] = {bound: false, html: $(id).html()};
 
             // Atualiza layout
-            if (replace) {
-                var container = (typeof replace == 'string'
+            if (content) {
+                var container = (typeof content == 'string'
                     ? id
-                    : $(id).find(replace[0])
+                    : $(id).find(content[0])
                 );
                 $(container)
                     .empty()
-                    .append($(
-                        (typeof replace == 'string'
-                            ? replace
-                            : replace[1]
-                        )
-                    ));
+                    .append(typeof content == 'string'
+                        ? $(content)
+                        : content[1]
+                    );
             }
-            
 
             // Novo bind
-            this.bounded[id].bound = rivets.bind($(id), obj);
+            //this.bounded[id].bound = rivets.bind($(id), obj);
 
             // Ajusta interface
-            tshark.initIntf(ref);
+           // tshark.bindIntf();
 
             // Retorna
             return this.bounded[id];
@@ -266,8 +321,9 @@ var CONSOLE_ON = true;
      * ele exista.
      * @param ref
      * @param obj
-     */
-    TShark.prototype.rebind = function(ref, obj, replace) {
+     * @param content
+     *
+    TShark.prototype.rebind = function(ref, obj, content) {
         var id = ref || 'body';
 
         // Refresh se já existir
@@ -279,7 +335,7 @@ var CONSOLE_ON = true;
         } 
         
         // Executa bind
-        return this.bind(ref, obj, replace);
+        return this.bind(ref, obj, content);
     };
 
     /**
@@ -288,7 +344,7 @@ var CONSOLE_ON = true;
      * @param ref
      * @param obj
      * @param replace
-     */
+     *
     TShark.prototype.resetBind = function(ref, obj, replace){
         var id = ref || 'body';
 
@@ -304,7 +360,7 @@ var CONSOLE_ON = true;
      * Desfaz o bind de uma área, opcionalmente resetando template antigo.
      * @param ref {string}
      * @param reset {bool}
-     */
+     *
     TShark.prototype.unbind = function(ref, reset) {
         var id = ref || 'body';
 
@@ -521,6 +577,35 @@ var CONSOLE_ON = true;
         return obj;
     };
     
+    //endregion
+
+
+    //region :: Envio de dados ao server
+
+
+    /**
+     * Armazena dados para serem enviados ao server no próximo call
+     * de API
+     */
+    TShark.prototype.send = function (key, data) {
+        this._sending_ = this._sending_ || {};
+        if (data){
+            this._sending_[key] = data;
+        } else {
+            this._sending_ = $.extend(this._sending_, key);
+        }
+    };
+
+    /**
+     * Alimenta o pacote de envio e reseta o _sending_
+     * @param settings
+     * @private
+     */
+    TShark.prototype._send = function (settings) {
+        settings.data = $.extend(settings.data, this._sending_);
+        this._sending_ = {};
+    };
+
     //endregion
 
 

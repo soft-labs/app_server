@@ -142,6 +142,29 @@ $.fn.api.settings.api = {};
             }
         }
     };
+
+    /**
+     * API acionada em dbl clicks
+     */
+    TShark.prototype.dblclick_api = $.extend(true, {
+        on: 'dblclick'
+    }, TShark.prototype.api);
+    
+    /**
+     * API acionada em blur
+     */
+    TShark.prototype.blur_api = $.extend(true, {
+        on: 'blur'
+    }, TShark.prototype.api);
+    
+    /**
+     * API acionada em blur
+     */
+    TShark.prototype.change_api = $.extend(true, {
+        on: 'change'
+    }, TShark.prototype.api);
+    
+    
     
     /**
      * Executa chamadas de api direto via call.
@@ -173,7 +196,10 @@ $.fn.api.settings.api = {};
      */
     function before(settings, el) {
         var d = $.extend({}, $(el).data() || {})
-            , str = (d['action'] ? d.action : settings.action).replace(/\s{2,}/g, ' ').trim();
+            , str = (d['action'] ? d.action : settings.action)
+        ;
+
+        str = str.replace(/\s{2,}/g, ' ').trim();
 
         // Ajusta API
         var api     = str.split(' ')
@@ -216,7 +242,21 @@ $.fn.api.settings.api = {};
                 if (!map) return false;
                 Func = map.capitalize();
             }
-            
+
+            if (Func == 'Edit' || Func == 'Create'){
+
+                // Externo - app
+                if (app['onBeforeForm'] && !settings['_on_before_']) {
+                    if (!app['onBeforeForm'].call(app, el, settings)) return false;
+                }
+
+                // Externo - modulo
+                if (mod['onBeforeForm'] && !settings['_on_before_']) {
+                    if (!mod['onBeforeForm'].call(mod, el, settings)) return false;
+                }
+                
+            }
+
             // Externo - app
             if (app['onBefore' + Func] && !settings['_on_before_']) {
                 if (!app['onBefore' + Func].call(app, el, settings)) return false;
@@ -239,6 +279,9 @@ $.fn.api.settings.api = {};
             
             // Ajusta dados no módulo
             mod._send(settings);
+            
+            // Ajusta dados no tshark
+            tshark._send(settings);
             
             // Ajusta settings
             settings.dataType = 'JSON';
@@ -285,26 +328,36 @@ $.fn.api.settings.api = {};
             onCallback('on', func, mod, response);
 
 
-
             // onAfterCallback - gets
             if (func == 'list' || func == 'search' || func == 'get'){
-                onCallback('onAfter', 'get', mod, response);
+                onAfterCallback('onAfter', 'get', mod, response);
             }
 
             // onAfterCallback - forms
             if (func == 'edit' || func == 'create'){
-                onCallback('onAfter', 'form', mod, response);
+                onAfterCallback('onAfter', 'form', mod, response);
             }
             
             // onAfterCallback - save
             if (func == 'insert' || func == 'update'){
-                onCallback('onAfter', 'save', mod, response);
+                onAfterCallback('onAfter', 'save', mod, response);
             }
 
             // onAfterCallback
             onAfterCallback('onAfter', func, mod, response);
 
         }
+
+
+        // Bind das APIs
+        tshark.bindAPIs();
+
+        // Liga Semantic
+        tshark.bindIntf();
+
+        // Bind global do var app com o .app
+        //tshark._bindData();
+
     }
 
     /**
@@ -430,13 +483,18 @@ $.fn.api.settings.api = {};
     TShark.prototype.list_callback = function (mod, response) {
 
         if (response['layout']) {
-            mod.templates = $.extend(mod.templates, response.layout);
+            mod.templates = response.layout;
+
+            var place = response['list_place']
+                ? response['list_place']
+                : '.' + mod.path + '-list'
+            ;
+            tshark.putLayout(response.layout, place);
         }
 
         if (response['data']) {
             mod.data.reset(response['data']);
         }
-
     };
 
     //endregion
@@ -503,23 +561,19 @@ $.fn.api.settings.api = {};
      * @since 19/03/16
      */
     TShark.prototype.form_callback = function (mod, response) {
+        
+        if (response['layout']){
+            var place = response['form_place']
+                ? response['form_place']
+                : '.' + mod.path + '-form'
+            ;
+            response['formId'] = tshark.createForm(mod, response.layout, place);
+        }
+
         if (response['data']){
             mod.data.key = response['data']['key'];
             mod.data.setRow(response.form.key, response['data'].rows[0]);
         }
-
-        if (response['layout']){
-            response['formId'] = tshark.createForm(mod, response.layout);
-            
-            // Bind
-            /*tshark.rebind(                              // Rebind pq a cada form o módulo de origem de dados pode ter mudado
-                '#form',                                // Bind feito no ponto mais alto do layout
-                mod,                                    // (Novo) Mod de origem dos dados
-                [".description", mod.form.obj]          // Aplica o template em uma região do layout '.description'
-            );*/
-
-        }
-
     };
 
     //endregion

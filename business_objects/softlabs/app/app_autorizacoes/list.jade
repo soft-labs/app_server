@@ -1,20 +1,18 @@
 //
     Template default para: softlabs.app.app_autorizacoes
-    Criado em Wed Apr 27 2016 18:11:43 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:44:24 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.app_autorizacoes_key} - {row.app_autorizacoes_key}
-        .meta Keys:  - sem dependências -
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.app_autorizacoes_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.app_autorizacoes_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th App Autorizações
+        th Ativo
+        th Autorização
+        th Modulo
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.app_autorizacoes_key}
+            td {row.ativo}
+            td {row.autorizacao}
+            td {row.modulo}
+            td {row.observacoes}

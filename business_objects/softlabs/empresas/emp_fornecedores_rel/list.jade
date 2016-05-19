@@ -1,20 +1,22 @@
 //
     Template default para: softlabs.empresas.emp_fornecedores_rel
-    Criado em Wed Apr 27 2016 18:12:23 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:45:08 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.empresas_key} - {row.ativo}
-        .meta Keys: empresas_key, emp_fornecedores_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.empresas_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.empresas_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Empresas
+        th Emp Fornecedores
+        th Ativo
+        th Dt Inicio
+        th Ultima Compra
+        th Classificação
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.empresas_key}
+            td {row.emp_fornecedores_key}
+            td {row.ativo}
+            td {row.dt_inicio}
+            td {row.ultima_compra}
+            td {row.classificacao}
+            td {row.observacoes}

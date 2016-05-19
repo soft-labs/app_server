@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: fin_contas.
  *
  * Engine de aplicações - TShark.
- * @since Wed Apr 27 2016 18:12:40 GMT-0300 (BRT)
+ * @since Mon May 16 2016 10:43:34 GMT-0300 (BRT)
  * @constructor
  */
 function FinContas(){
@@ -23,29 +23,30 @@ function FinContas(){
                     tipo: types.comp.key, label: 'Fin Contas:'
                 }, 
                 fin_contas_tipos_key: {
-                    tipo: types.comp.dropdown, label: 'Fin Contas Tipos:',
+                    tipo: types.comp.dropdown, label: 'Tipo de Conta:',
                     data: { 
                         key: ['fin_contas_tipos_key'], 
                         from: ['softlabs', 'financeiro', 'fin_contas_tipos'], 
-                        template: '{row.fin_contas_tipos_key} - {row.fin_contas_tipo}', 
+                        template: '{row.tipo_conta}',
                         provider: '' 
                     } 
                 }, 
                 fin_bancos_key: {
-                    tipo: types.comp.dropdown, label: 'Fin Bancos:',
+                    tipo: types.comp.dropdown, label: 'Banco:',
                     data: { 
                         key: ['fin_bancos_key'], 
                         from: ['softlabs', 'financeiro', 'fin_bancos'], 
-                        template: '{row.fin_bancos_key} - {row.fin_banco}', 
+                        template: '{row.fin_bancos_key} - {row.banco}',
                         provider: '' 
                     } 
                 }, 
                 cont_plano_contas_key: {
-                    tipo: types.comp.dropdown, label: 'Cont Plano Contas:',
+                    default: 1,
+                    tipo: types.comp.dropdown, label: 'Conta Gerencial:',
                     data: { 
                         key: ['cont_plano_contas_key'], 
                         from: ['softlabs', 'contabil', 'cont_plano_contas'], 
-                        template: '{row.cont_plano_contas_key} - {row.cont_plano_conta}', 
+                        template: '{row.cont_plano_conta}',
                         provider: '' 
                     } 
                 }, 
@@ -80,7 +81,7 @@ function FinContas(){
                     tipo: types.comp.text, label: 'Telefone:'
                 }, 
                 observacoes: {
-                    tipo: types.comp.undefined, label: 'Observações:'
+                    tipo: types.comp.text_big, label: 'Observações:'
                 }
             }
         }
@@ -103,11 +104,14 @@ function FinContas(){
                 size  : types.form.size.small
             },
             linhas: [
-                {titulo: "Informações de fin_contas"},
-                {fin_contas_key: 25, fin_contas_tipos_key: 25, fin_bancos_key: 25, cont_plano_contas_key: 25}, 
-                {ativo: 25, dia_corte: 25, dia_vencimento: 25, multa_cartao: 25}, 
-                {juros_cartao: 25, descricao: 25, conta: 25, agencia: 25}, 
-                {gerente: 25, telefone: 25, observacoes: 50}
+                {titulo: ""},
+                {fin_bancos_key: 30, conta: 20, agencia: 20, fin_contas_tipos_key: 30},
+                {gerente: 60, telefone: 40},
+                {observacoes: 100},
+
+                //{fin_contas_key: 25, cont_plano_contas_key: 25},
+                //{ativo: 25, dia_corte: 25, dia_vencimento: 25, multa_cartao: 25, juros_cartao: 25, },
+
             ],
             ctrls: {
                 conta: {
@@ -131,7 +135,7 @@ function FinContas(){
                 0: {
                     from: ['softlabs', 'financeiro', 'fin_contas'],
                     fields: [
-                        'conta'
+                        'conta', 'agencia'
                     ]
                 },
                 1: { 
@@ -145,7 +149,7 @@ function FinContas(){
                     from: ['softlabs', 'financeiro', 'fin_bancos'],
                         join: {source: 0, tipo: types.join.left, on: 'fin_bancos_key', where: ''},
                     fields: [
-                        
+                        'codigo', 'banco'
                     ]
                 },
                 3: { 
@@ -228,7 +232,7 @@ function FinContas(){
      * @param ret Objeto de retorno
      * @param ctx Contexto de chamada
      *
-     this.onSearch = function *(ret, ctx){
+    this.onSearch = function *(ret, ctx){
 
     };
 
@@ -236,7 +240,7 @@ function FinContas(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-     this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret){
 
     };
 
@@ -245,7 +249,7 @@ function FinContas(){
      * cada row em um select
      * @param row
      *
-     this.onGetRow = function (row){
+    this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
      
@@ -254,7 +258,7 @@ function FinContas(){
      * @param ret Objeto de retorno
      * @param ctx Contexto de chamada
      *
-     this.onEdit = function *(ret, ctx){
+    this.onEdit = function *(ret, ctx){
 
     };
 
@@ -262,33 +266,42 @@ function FinContas(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-     this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret){
 
     };
 
-     /**
+    /**
      * Evento chamado na operação GET :: CREATE
      * @param ret Objeto de retorno
      * @param ctx Contexto de chamada
      *
-     this.onCreate = function *(ret, ctx){
+    this.onCreate = function *(ret, ctx){
 
     };
 
-     /**
+    /**
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-     this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret){
+
+    };
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+    this.onSelect = function *(prov, ctx){
 
     };
      
     /**
      * Evento chamado na operação POST :: Insert
-     * @param ret Objeto de retorno
+     * @param prov Provider de dados
      * @param ctx Contexto de chamada
      *
-     this.onInsert = function *(ret, ctx){
+    this.onInsert = function *(prov, ctx){
 
     };
 
@@ -296,16 +309,16 @@ function FinContas(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-     this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret){
 
     };
 
     /**
      * Evento chamado na operação PUT :: Update
-     * @param ret Objeto de retorno
+     * @param prov Provider de dados
      * @param ctx Contexto de chamada
      *
-     this.onUpdate = function *(ret, ctx){
+    this.onUpdate = function *(prov, ctx){
 
     };
 
@@ -313,16 +326,16 @@ function FinContas(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-     this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret){
 
     };
 
     /**
      * Evento chamado na operação DELETE :: Delete
-     * @param ret Objeto de retorno
+     * @param prov Provider de dados
      * @param ctx Contexto de chamada
      *
-     this.onDelete = function *(ret, ctx){
+    this.onDelete = function *(prov, ctx){
 
     };
 
@@ -330,12 +343,12 @@ function FinContas(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-     this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret){
 
     };
      
      
-     /* */
+    /* */
 
     //endregion
 

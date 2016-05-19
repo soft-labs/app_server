@@ -1,20 +1,16 @@
 //
     Template default para: softlabs.rh.rh_cargos_habilidades_rel
-    Criado em Wed Apr 27 2016 18:13:26 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:47:54 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.rh_cargos_key} - {row.mandatoria}
-        .meta Keys: rh_cargos_key, rh_habilidades_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.rh_cargos_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.rh_cargos_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Rh Cargos
+        th Rh Habilidades
+        th Mandatoria
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.rh_cargos_key}
+            td {row.rh_habilidades_key}
+            td {row.mandatoria}
+            td {row.observacoes}

@@ -320,6 +320,7 @@ TShark.prototype.modulo = function(path){
      * @param data
      */
     TShark.prototype.modulo.prototype.save = function (data){
+        var x = self;
         this.call('save', data);
     };
 
@@ -411,15 +412,13 @@ TShark.prototype.modulo = function(path){
     /**
      * Armazena dados para serem enviados ao server no próximo call
      * de API
-     * @param data {{}} Dados a serem enviados
-     * @param key {string} (Opcional) Se informado, os dados serão encontrados nessa chave em params no server
      */
-    TShark.prototype.modulo.prototype.send = function (data, key) {
+    TShark.prototype.modulo.prototype.send = function (key, data) {
         this._sending_ = this._sending_ || {};
-        if (key){
+        if (data){
             this._sending_[key] = data;
         } else {
-            this._sending_ = $.extend(this._sending_, data);
+            this._sending_ = $.extend(this._sending_, key);
         }
     };
 

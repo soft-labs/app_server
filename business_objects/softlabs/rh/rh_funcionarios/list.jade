@@ -1,20 +1,24 @@
 //
     Template default para: softlabs.rh.rh_funcionarios
-    Criado em Wed Apr 27 2016 18:13:26 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:47:54 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.rh_funcionarios_key} - {row.rh_funcionarios_key}
-        .meta Keys: parceiros_key, rh_cargos_key, cont_centro_resultados_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.rh_funcionarios_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.rh_funcionarios_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Rh Funcionarios
+        th Parceiros
+        th Rh Cargos
+        th Cont Centro Resultados
+        th Ativo
+        th Dt Contratação
+        th Dt Desligamento
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.rh_funcionarios_key}
+            td {row.parceiros_key}
+            td {row.rh_cargos_key}
+            td {row.cont_centro_resultados_key}
+            td {row.ativo}
+            td {row.dt_contratacao}
+            td {row.dt_desligamento}
+            td {row.observacoes}

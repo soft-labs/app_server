@@ -1,20 +1,20 @@
 //
     Template default para: softlabs.contratos.contr_items
-    Criado em Wed Apr 27 2016 18:12:13 GMT-0300 (BRT)
+    Criado em Mon May 16 2016 10:44:55 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='data.rows')
-    .content
-        .header {row.contr_items_key} - {row.contr_items_key}
-        .meta Keys: items_key, contr_fases_key
-        .description
-
-    .extra.content
-        span.left.floated.button
-            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row.contr_items_key')
-                i.edit.icon
-                | Editar
-
-        span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row.contr_items_key')
-                i.delete.icon
-                | Remover
+table.ui.compact.striped.celled.table
+    thead
+        th Contr Items
+        th Items
+        th Contr Fases
+        th Quantidade
+        th Valor Unit
+        th Observações
+    tbody
+        tr(rv-each-row='data.rows')
+            td {row.contr_items_key}
+            td {row.items_key}
+            td {row.contr_fases_key}
+            td {row.quantidade}
+            td {row.valor_unit}
+            td {row.observacoes}

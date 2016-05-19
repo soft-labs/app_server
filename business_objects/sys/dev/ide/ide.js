@@ -107,6 +107,23 @@ function Ide(){
         };
     };
 
+
+    /**
+     * Gera uma listagem de business objects e retorna em
+     * formato dataset
+     * @param ctx Contexto de chamada
+     * @returns {Promise}
+     */
+    this.listApps = function *(ctx){
+        var rows = this.readDir(module.paths[0] + '/apps');
+        return {
+            data: {
+                rows: rows
+            }
+        };
+    };
+
+    
     /**
      * Lista todas as tabelas do banco
       * @param ctx
@@ -398,18 +415,18 @@ function Ide(){
             jade  = '//';
             jade += '\n    Template default para: ' + owner + '.' + pack + '.' + mod['name'];
             jade += '\n    Criado em ' + hoje + '\n';
-            jade += "\n.ui.fluid.card(rv-each-row='data.rows')";
+            jade += "\n.ui.fluid.card(rv-each-row='" + owner + '.' + pack + '.' + mod + ".data.rows')";
             jade += '\n    .content';
             jade += '\n        .header {row.' + key[0] + '} - {row.' + (lbl_field ? lbl_field : first_no_key_field) + '}';
             jade += '\n        .meta Keys: ' + (keys.length ? keys.join(', ') : ' - sem dependências -');
             jade += '\n        .description\n';
             jade += '\n    .extra.content';
             jade += '\n        span.left.floated.button';
-            jade += "\n            button.ui.orange.icon.mini.button(rv-data-action='api.edit', rv-data-key='row." + key[0] + "')";
+            jade += "\n            button.ui.orange.icon.mini.button(data-action='" + owner + ' ' + pack + ' ' + mod + " edit', rv-data-key='row." + key[0] + "')";
             jade += "\n                i.edit.icon";
             jade += "\n                | Editar\n";
             jade += '\n        span.right.floated.button';
-            jade += "\n            button.ui.red.icon.mini.button(rv-data-action='api.delete', rv-data-key='row." + key[0] + "')";
+            jade += "\n            button.ui.red.icon.mini.button(rv-data-action='" + owner + ' ' + pack + ' ' + mod + " delete', rv-data-key='row." + key[0] + "')";
             jade += "\n                i.delete.icon";
             jade += "\n                | Remover\n";
 
@@ -424,7 +441,7 @@ function Ide(){
                 jade += '\n        th ' + lbl;
             });
             jade += '\n    tbody';
-            jade += "\n        tr(rv-each-row='data.rows')";
+            jade += "\n        tr(rv-each-row='" + owner + '.' + pack + '.' + mod + ".data.rows')";
             arr_fields.forEach(lbl => {
                 jade += '\n            td {row.' + lbl + '}';
             });
@@ -434,6 +451,41 @@ function Ide(){
 
     };
 
+    
+    
+    this.createMod = function *(ctx){
+        var hoje  = new Date().toString()
+            , fs    = require('fs-extra')
+            , dir1  = module.paths[0] + '/business_objects/'
+            , dir2  = module.paths[0] + '/apps'
+            , templ = fs.readFileSync(dir1 + '/sys/dev/ide/modulo.js', 'utf8')
+        ;
+
+        templ = templ.replace(new RegExp('_DATA_', 'g'), hoje);
+        templ = templ.replace(new RegExp('_OWNER_', 'g'), this.params.pack['owner']);
+        templ = templ.replace(new RegExp('_PACK_', 'g'), this.params.pack['pack']);
+        templ = templ.replace(new RegExp('_MOD_', 'g'), this.params.pack['mod']);
+
+        var paths = [
+            this.params.app['app'],
+            this.params.app['cli'],
+            'modulos',
+            this.params.pack['owner'],
+            this.params.pack['pack'],
+            this.params.pack['mod']
+        ];
+
+        paths.forEach(p => {
+            dir2 += '/' + p;
+            if (!fs.existsSync(dir2)) {
+                fs.mkdirSync(dir2);
+            }
+        });
+
+        fs.writeFileSync(dir2 + '/' + this.params.pack['mod'] + '.js', templ);
+
+    };
+    
     
     this.pack = function *(ctx){
         require('./pckr');

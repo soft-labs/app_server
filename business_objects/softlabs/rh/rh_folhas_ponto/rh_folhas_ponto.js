@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: rh_folhas_ponto.
  *
  * Engine de aplicações - TShark.
- * @since Wed Apr 27 2016 18:13:26 GMT-0300 (BRT)
+ * @since Mon May 16 2016 10:47:54 GMT-0300 (BRT)
  * @constructor
  */
 function RhFolhasPonto(){
@@ -179,7 +179,7 @@ function RhFolhasPonto(){
      * @param ret Objeto de retorno
      * @param ctx Contexto de chamada
      *
-     this.onSearch = function *(ret, ctx){
+    this.onSearch = function *(ret, ctx){
 
     };
 
@@ -187,7 +187,7 @@ function RhFolhasPonto(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-     this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret){
 
     };
 
@@ -196,7 +196,7 @@ function RhFolhasPonto(){
      * cada row em um select
      * @param row
      *
-     this.onGetRow = function (row){
+    this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
      
@@ -205,7 +205,7 @@ function RhFolhasPonto(){
      * @param ret Objeto de retorno
      * @param ctx Contexto de chamada
      *
-     this.onEdit = function *(ret, ctx){
+    this.onEdit = function *(ret, ctx){
 
     };
 
@@ -213,33 +213,42 @@ function RhFolhasPonto(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-     this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret){
 
     };
 
-     /**
+    /**
      * Evento chamado na operação GET :: CREATE
      * @param ret Objeto de retorno
      * @param ctx Contexto de chamada
      *
-     this.onCreate = function *(ret, ctx){
+    this.onCreate = function *(ret, ctx){
 
     };
 
-     /**
+    /**
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-     this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret){
+
+    };
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+    this.onSelect = function *(prov, ctx){
 
     };
      
     /**
      * Evento chamado na operação POST :: Insert
-     * @param ret Objeto de retorno
+     * @param prov Provider de dados
      * @param ctx Contexto de chamada
      *
-     this.onInsert = function *(ret, ctx){
+    this.onInsert = function *(prov, ctx){
 
     };
 
@@ -247,16 +256,16 @@ function RhFolhasPonto(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-     this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret){
 
     };
 
     /**
      * Evento chamado na operação PUT :: Update
-     * @param ret Objeto de retorno
+     * @param prov Provider de dados
      * @param ctx Contexto de chamada
      *
-     this.onUpdate = function *(ret, ctx){
+    this.onUpdate = function *(prov, ctx){
 
     };
 
@@ -264,16 +273,16 @@ function RhFolhasPonto(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-     this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret){
 
     };
 
     /**
      * Evento chamado na operação DELETE :: Delete
-     * @param ret Objeto de retorno
+     * @param prov Provider de dados
      * @param ctx Contexto de chamada
      *
-     this.onDelete = function *(ret, ctx){
+    this.onDelete = function *(prov, ctx){
 
     };
 
@@ -281,12 +290,12 @@ function RhFolhasPonto(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-     this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret){
 
     };
      
      
-     /* */
+    /* */
 
     //endregion
 
