@@ -258,6 +258,10 @@ BizObject.prototype.form = function *(ctx){
  *    - update  | url: owner/pack/mod/123                | Atualiza um registro no mod
  */
 BizObject.prototype.update = function *(ctx){
+    var key = this.source.metadata['key'];
+    if (!this.params.row[key] && this.params['key']){
+        this.params.row[key] = this.params['key'];
+    }
     return yield this.change('update', ctx);
 };
 
@@ -266,7 +270,20 @@ BizObject.prototype.update = function *(ctx){
  *    - insert  | url: owner/pack/mod                    | Insere um novo registro no mod
  */
 BizObject.prototype.insert = function *(ctx){
-    return yield this.change('insert', ctx);
+    var res = yield this.change('insert', ctx);
+
+    if (res['result']){
+        var key = this.source.metadata['key']
+            , r = {}
+        ;
+
+        r['key'] = key;
+        r['val'] = res['result'];
+        r['_index_'] = this.params.row['_index_'];
+        res['new'] = r;
+    }
+
+    return res;
 };
 
 /**

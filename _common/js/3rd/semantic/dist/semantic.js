@@ -18606,7 +18606,7 @@ $.api = $.fn.api = function(parameters) {
           // check if before send cancelled request
           if(requestSettings === false) {
             module.cancelled = true;
-            module.error(error.beforeSend);
+            //module.error(error.beforeSend);
             return;
           }
           else {
@@ -19130,6 +19130,7 @@ $.api = $.fn.api = function(parameters) {
                 runSettings.onComplete = runSettings.complete;
               }
             }
+            if (runSettings === false) return false;
             if(runSettings === undefined) {
               module.error(error.noReturnedValue);
             }

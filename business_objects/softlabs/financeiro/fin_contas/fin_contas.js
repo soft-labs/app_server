@@ -23,6 +23,7 @@ function FinContas(){
                     tipo: types.comp.key, label: 'Fin Contas:'
                 }, 
                 fin_contas_tipos_key: {
+                    default: 1,
                     tipo: types.comp.dropdown, label: 'Tipo de Conta:',
                     data: { 
                         key: ['fin_contas_tipos_key'], 
@@ -32,6 +33,7 @@ function FinContas(){
                     } 
                 }, 
                 fin_bancos_key: {
+                    default: 1,
                     tipo: types.comp.dropdown, label: 'Banco:',
                     data: { 
                         key: ['fin_bancos_key'], 
@@ -135,21 +137,21 @@ function FinContas(){
                 0: {
                     from: ['softlabs', 'financeiro', 'fin_contas'],
                     fields: [
-                        'conta', 'agencia'
+                        '*'
                     ]
                 },
                 1: { 
                     from: ['softlabs', 'financeiro', 'fin_contas_tipos'],
                         join: {source: 0, tipo: types.join.left, on: 'fin_contas_tipos_key', where: ''},
                     fields: [
-                        
+                        '*'
                     ]
                 },
                 2: { 
                     from: ['softlabs', 'financeiro', 'fin_bancos'],
                         join: {source: 0, tipo: types.join.left, on: 'fin_bancos_key', where: ''},
                     fields: [
-                        'codigo', 'banco'
+                        '*'
                     ]
                 },
                 3: { 

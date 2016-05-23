@@ -540,7 +540,7 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
                 class       : "ui fluid dropdown",
                 style       : "white-space: nowrap !important",
                 //'rv-value'  : "tshark.selectOpt < " + path + ".data.row." + val,
-               'rv-selectvalue' : path + ".data.row." + val,
+               //'rv-selectvalue' : path + ".data.row." + val,
                // 'onschange'    : path.split('.').join(' ') + " save"
             }
         ).append(

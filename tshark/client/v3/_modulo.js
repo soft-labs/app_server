@@ -392,13 +392,13 @@ TShark.prototype.modulo = function(path){
 
         // Update
         } else {
-            if (!this.data.key){
+            if (!this.data.row['_key_']){
                 console.error(this.path + ': save_before -> data.key não definido');
                 return false
             }
 
-            $(sender).data('key', this.data.row[this.data.key]);
-            settings.data.key = this.data.row[this.data.key];
+            $(sender).data('key', this.data.row['_key_']);
+            settings.data.key = this.data.row['_key_'];
             return 'update';
         }
     };

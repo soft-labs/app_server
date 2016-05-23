@@ -519,7 +519,7 @@ SQL.prototype._select = function *(provider, obj, meta){
                 case 'float':
                 case 'money':
                 case 'percent':
-                    val = def || '0,00';
+                    val = def || 0;
                     break;
 
                 case 'date':

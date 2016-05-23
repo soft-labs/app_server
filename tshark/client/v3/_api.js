@@ -79,14 +79,18 @@ $.fn.api.settings.api = {};
         /**
          * Exibe mensagens em console
          */
-        silent: (app['mode'] && app['mode'] == 'desenv'),
+        verbose: false, // (app['mode'] && app['mode'] == 'desenv'),
 
         /**
          * Ajusta a API dinamicamente.
          * Contexo 'this': elemento DOM originador da chamada
          */
         beforeSend: function (settings) {
-            return before(settings, $(this));
+            if (before(settings, $(this))) {
+                return settings;
+            } else {
+                return false;
+            }
         },
 
         /**
@@ -638,7 +642,11 @@ $.fn.api.settings.api = {};
     };
 
     TShark.prototype.insert_callback = function (mod, response) {
-
+        try{
+            if (response['result'] && response['new']){
+                mod.data.syncInserted(response['new']);
+            }
+        } catch (e){}
     };
 
     //endregion
