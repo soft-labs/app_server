@@ -1,0 +1,14 @@
+//
+    Template choose para: softlabs.empresas.emp_clientes
+    Criado em Mon May 23 2016 09:14:47 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Cliente
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.emp_clientes_key'
+        )
+            td {row.parceiro}

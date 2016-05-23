@@ -1,0 +1,26 @@
+//
+    Template choose para: softlabs.contratos.contr_fases
+    Criado em Mon May 23 2016 09:14:28 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Contr Fases
+        th Contratos
+        th Dt Inicio
+        th Dt Encerramento
+        th Valor Anterior
+        th Valor Atual
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.contr_fases_key'
+        )
+            td {row.contr_fases_key}
+            td {row.contratos_key}
+            td {row.dt_inicio}
+            td {row.dt_encerramento}
+            td {row.valor_anterior}
+            td {row.valor_atual}
+            td {row.observacoes}

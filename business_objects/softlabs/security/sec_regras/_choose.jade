@@ -1,0 +1,24 @@
+//
+    Template choose para: softlabs.security.sec_regras
+    Criado em Mon May 23 2016 09:16:55 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Sec Regras
+        th Sec Regras Categ
+        th Ativo
+        th Codigo
+        th Regra
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.sec_regras_key'
+        )
+            td {row.sec_regras_key}
+            td {row.sec_regras_categ_key}
+            td {row.ativo}
+            td {row.codigo}
+            td {row.regra}
+            td {row.observacoes}

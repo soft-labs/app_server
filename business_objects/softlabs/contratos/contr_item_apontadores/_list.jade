@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.contratos.contr_item_apontadores
+    Criado em Mon May 23 2016 09:14:28 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Contr Item Apontadores
+        th Item Locação
+        th Contr Franquias
+        th Apontador
+        th Franquia
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.contratos.[object Object].data.rows')
+            td {row.contr_item_apontadores_key}
+            td {row.item_locacao_key}
+            td {row.contr_franquias_key}
+            td {row.apontador}
+            td {row.franquia}
+            td {row.observacoes}

@@ -1,0 +1,14 @@
+//
+    Template default para: softlabs.security.sec_perfis_regras
+    Criado em Mon May 23 2016 09:16:55 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Sec Perfis
+        th Sec Regras
+        th Nivel
+    tbody
+        tr(rv-each-row='softlabs.security.[object Object].data.rows')
+            td {row.sec_perfis_key}
+            td {row.sec_regras_key}
+            td {row.nivel}

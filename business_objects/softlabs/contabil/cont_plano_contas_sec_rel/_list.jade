@@ -1,0 +1,14 @@
+//
+    Template default para: softlabs.contabil.cont_plano_contas_sec_rel
+    Criado em Mon May 23 2016 09:14:17 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Cont Plano Contas
+        th Sec Usuarios
+        th Visualiza
+    tbody
+        tr(rv-each-row='softlabs.contabil.[object Object].data.rows')
+            td {row.cont_plano_contas_key}
+            td {row.sec_usuarios_key}
+            td {row.visualiza}

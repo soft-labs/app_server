@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.app.app_logs_tipos
+    Criado em Mon May 23 2016 09:13:21 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='softlabs.app.[object Object].data.rows')
+    .content
+        .header {row.app_logs_tipos_key} - {row.app_logs_tipos_key}
+        .meta Keys:  - sem dependências -
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='softlabs app [object Object] edit', rv-data-key='row.app_logs_tipos_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='softlabs app [object Object] delete', rv-data-key='row.app_logs_tipos_key')
+                i.delete.icon
+                | Remover

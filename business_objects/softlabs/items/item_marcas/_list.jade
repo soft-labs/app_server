@@ -1,0 +1,14 @@
+//
+    Template default para: softlabs.items.item_marcas
+    Criado em Mon May 23 2016 09:15:42 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Item Marcas
+        th Item Fabricantes
+        th Marca
+    tbody
+        tr(rv-each-row='softlabs.items.[object Object].data.rows')
+            td {row.item_marcas_key}
+            td {row.item_fabricantes_key}
+            td {row.marca}

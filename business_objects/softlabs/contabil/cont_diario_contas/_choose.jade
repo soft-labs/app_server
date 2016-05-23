@@ -1,0 +1,40 @@
+//
+    Template choose para: softlabs.contabil.cont_diario_contas
+    Criado em Mon May 23 2016 09:14:17 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Cont Diario Contas
+        th Empresas
+        th Cont Plano Contas
+        th Movimentações
+        th Fin Lancamentos
+        th Fin Baixas
+        th Dt Diario
+        th Historico
+        th Credito
+        th Debito
+        th Ref1
+        th Ref2
+        th Ref3
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.cont_diario_contas_key'
+        )
+            td {row.cont_diario_contas_key}
+            td {row.empresas_key}
+            td {row.cont_plano_contas_key}
+            td {row.movimentacoes_key}
+            td {row.fin_lancamentos_key}
+            td {row.fin_baixas_key}
+            td {row.dt_diario}
+            td {row.historico}
+            td {row.credito}
+            td {row.debito}
+            td {row.ref1}
+            td {row.ref2}
+            td {row.ref3}
+            td {row.observacoes}

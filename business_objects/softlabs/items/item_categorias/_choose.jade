@@ -1,0 +1,22 @@
+//
+    Template choose para: softlabs.items.item_categorias
+    Criado em Mon May 23 2016 09:15:42 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Item Categorias
+        th Gera Cmv
+        th Categoria
+        th Observações
+        th Cont Centros Resultado
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.item_categorias_key'
+        )
+            td {row.item_categorias_key}
+            td {row.gera_cmv}
+            td {row.categoria}
+            td {row.observacoes}
+            td {row.cont_centros_resultado_key}

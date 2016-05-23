@@ -1,0 +1,84 @@
+//
+    Template default para: softlabs.financeiro.fin_lancamentos
+    Criado em Mon May 23 2016 09:15:29 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Fin Lancamentos
+        th Fin Lanc Origem
+        th Fin Lanc Destino
+        th Fin Lanc Tipos
+        th Fin Lanc Status
+        th Empresas
+        th Fin Contas
+        th Parceiros
+        th Contratos
+        th Movimentações
+        th Cancelado
+        th Competencia
+        th Dt Lancamento
+        th Dt Documento
+        th Dt Vencimento
+        th Numero
+        th Qtd Parcelas
+        th Num Parcela
+        th Descrição
+        th Complemento
+        th Valor Bruto
+        th Valor Desconto
+        th Valor Baixa Previsto
+        th Valor Baixa
+        th Juros
+        th Multa
+        th Multa Em Mõeda
+        th Baixa Autorizada
+        th Baixa Data
+        th Baixa Bancaria
+        th Baixa Multa
+        th Baixa Juros
+        th Baixa Desconto
+        th Cancelamento Data
+        th Cancelamento Motivo
+        th Estorno Data
+        th Estorno Motivo
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.financeiro.[object Object].data.rows')
+            td {row.fin_lancamentos_key}
+            td {row.fin_lanc_origem_key}
+            td {row.fin_lanc_destino_key}
+            td {row.fin_lanc_tipos_key}
+            td {row.fin_lanc_status_key}
+            td {row.empresas_key}
+            td {row.fin_contas_key}
+            td {row.parceiros_key}
+            td {row.contratos_key}
+            td {row.movimentacoes_key}
+            td {row.cancelado}
+            td {row.competencia}
+            td {row.dt_lancamento}
+            td {row.dt_documento}
+            td {row.dt_vencimento}
+            td {row.numero}
+            td {row.qtd_parcelas}
+            td {row.num_parcela}
+            td {row.descricao}
+            td {row.complemento}
+            td {row.valor_bruto}
+            td {row.valor_desconto}
+            td {row.valor_baixa_previsto}
+            td {row.valor_baixa}
+            td {row.juros}
+            td {row.multa}
+            td {row.multa_em_moeda}
+            td {row.baixa_autorizada}
+            td {row.baixa_data}
+            td {row.baixa_bancaria}
+            td {row.baixa_multa}
+            td {row.baixa_juros}
+            td {row.baixa_desconto}
+            td {row.cancelamento_data}
+            td {row.cancelamento_motivo}
+            td {row.estorno_data}
+            td {row.estorno_motivo}
+            td {row.observacoes}

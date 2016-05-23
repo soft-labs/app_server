@@ -1,0 +1,26 @@
+//
+    Template choose para: softlabs.enderecos.end_paises
+    Criado em Mon May 23 2016 09:15:16 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th End Paises
+        th Ativo
+        th Cod Siscomex
+        th Cod Ibge
+        th Sigla
+        th Pais
+        th Nacionalidade
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.end_paises_key'
+        )
+            td {row.end_paises_key}
+            td {row.ativo}
+            td {row.cod_siscomex}
+            td {row.cod_ibge}
+            td {row.sigla}
+            td {row.pais}
+            td {row.nacionalidade}

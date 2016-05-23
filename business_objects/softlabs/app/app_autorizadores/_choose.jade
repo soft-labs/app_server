@@ -1,0 +1,20 @@
+//
+    Template choose para: softlabs.app.app_autorizadores
+    Criado em Mon May 23 2016 09:13:21 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th App Autorizadores
+        th Ativo
+        th Autorizadores
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.app_autorizadores_key'
+        )
+            td {row.app_autorizadores_key}
+            td {row.ativo}
+            td {row.autorizadores}
+            td {row.observacoes}

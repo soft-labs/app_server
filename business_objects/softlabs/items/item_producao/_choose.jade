@@ -1,0 +1,22 @@
+//
+    Template choose para: softlabs.items.item_producao
+    Criado em Mon May 23 2016 09:15:42 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Item Produção
+        th Items
+        th Fichas Tecnicas
+        th Produção
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.item_producao_key'
+        )
+            td {row.item_producao_key}
+            td {row.items_key}
+            td {row.fichas_tecnicas_key}
+            td {row.producao}
+            td {row.observacoes}

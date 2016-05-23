@@ -1,0 +1,24 @@
+//
+    Template choose para: softlabs.movimentacoes.mov_itens_impostos_rel
+    Criado em Mon May 23 2016 09:16:00 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Mov Itens
+        th Impostos
+        th Aliquota
+        th Base Tributada
+        th Base Isenta
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.mov_itens_key'
+        )
+            td {row.mov_itens_key}
+            td {row.impostos_key}
+            td {row.aliquota}
+            td {row.base_tributada}
+            td {row.base_isenta}
+            td {row.observacoes}

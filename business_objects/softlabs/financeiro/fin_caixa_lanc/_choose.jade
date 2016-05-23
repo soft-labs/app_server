@@ -1,0 +1,36 @@
+//
+    Template choose para: softlabs.financeiro.fin_caixa_lanc
+    Criado em Mon May 23 2016 09:15:29 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Fin Caixa Lanc
+        th Fin Caixa
+        th Fin Especies
+        th Fin Contas
+        th Entidades
+        th Sec Usuarios
+        th Data
+        th Hora
+        th Historico
+        th Credito
+        th Debito
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.fin_caixa_lanc_key'
+        )
+            td {row.fin_caixa_lanc_key}
+            td {row.fin_caixa_key}
+            td {row.fin_especies_key}
+            td {row.fin_contas_key}
+            td {row.entidades_key}
+            td {row.sec_usuarios_key}
+            td {row.data}
+            td {row.hora}
+            td {row.historico}
+            td {row.credito}
+            td {row.debito}
+            td {row.observacoes}

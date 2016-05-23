@@ -1,0 +1,12 @@
+//
+    Template default para: softlabs.app.app_logs_tipos
+    Criado em Mon May 23 2016 09:13:21 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th App Logs Tipos
+        th Log Tipo
+    tbody
+        tr(rv-each-row='softlabs.app.[object Object].data.rows')
+            td {row.app_logs_tipos_key}
+            td {row.log_tipo}

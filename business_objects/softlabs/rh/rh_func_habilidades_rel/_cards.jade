@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.rh.rh_func_habilidades_rel
+    Criado em Mon May 23 2016 09:16:46 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='softlabs.rh.[object Object].data.rows')
+    .content
+        .header {row.rh_funcionarios_key} - {row.dt_adquirida}
+        .meta Keys: rh_funcionarios_key, rh_habilidades_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='softlabs rh [object Object] edit', rv-data-key='row.rh_funcionarios_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='softlabs rh [object Object] delete', rv-data-key='row.rh_funcionarios_key')
+                i.delete.icon
+                | Remover

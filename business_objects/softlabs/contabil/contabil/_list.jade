@@ -1,0 +1,18 @@
+//
+    Template default para: softlabs.contabil.contabil
+    Criado em Mon May 23 2016 09:14:17 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Contabil
+        th Periodo
+        th Dt Inicio
+        th Dt Final
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.contabil.[object Object].data.rows')
+            td {row.contabil_key}
+            td {row.periodo}
+            td {row.dt_inicio}
+            td {row.dt_final}
+            td {row.observacoes}

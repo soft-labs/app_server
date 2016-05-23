@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.enderecos.end_cidades
+    Criado em Mon May 23 2016 09:15:16 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='softlabs.enderecos.[object Object].data.rows')
+    .content
+        .header {row.end_cidades_key} - {row.cidade}
+        .meta Keys: end_estados_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='softlabs enderecos [object Object] edit', rv-data-key='row.end_cidades_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='softlabs enderecos [object Object] delete', rv-data-key='row.end_cidades_key')
+                i.delete.icon
+                | Remover

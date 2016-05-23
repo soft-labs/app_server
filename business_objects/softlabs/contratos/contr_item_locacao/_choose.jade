@@ -1,0 +1,26 @@
+//
+    Template choose para: softlabs.contratos.contr_item_locacao
+    Criado em Mon May 23 2016 09:14:28 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Contr Item Locação
+        th Item Identificado
+        th Contr Items
+        th Dt Inicio
+        th Dt Encerramento
+        th Observações
+        th Contr Item Locaçãocol
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.contr_item_locacao_key'
+        )
+            td {row.contr_item_locacao_key}
+            td {row.item_identificado_key}
+            td {row.contr_items_key}
+            td {row.dt_inicio}
+            td {row.dt_encerramento}
+            td {row.observacoes}
+            td {row.contr_item_locacaocol}

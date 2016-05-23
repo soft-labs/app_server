@@ -1,0 +1,38 @@
+//
+    Template choose para: softlabs.app.app_auditoria
+    Criado em Mon May 23 2016 09:13:21 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th App Auditoria
+        th Sec Usuarios
+        th Empresas
+        th Dt Registro
+        th Ip User
+        th Modulo
+        th Tabela
+        th Key Field
+        th Key Value
+        th Operação
+        th Data Old
+        th Data New
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.app_auditoria_key'
+        )
+            td {row.app_auditoria_key}
+            td {row.sec_usuarios_key}
+            td {row.empresas_key}
+            td {row.dt_registro}
+            td {row.ip_user}
+            td {row.modulo}
+            td {row.tabela}
+            td {row.key_field}
+            td {row.key_value}
+            td {row.operacao}
+            td {row.data_old}
+            td {row.data_new}
+            td {row.observacoes}

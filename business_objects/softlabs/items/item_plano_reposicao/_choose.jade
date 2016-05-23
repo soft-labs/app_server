@@ -1,0 +1,26 @@
+//
+    Template choose para: softlabs.items.item_plano_reposicao
+    Criado em Mon May 23 2016 09:15:42 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Item Plano Reposição
+        th Descrição
+        th Tipo Intervalo
+        th Intervalo
+        th Dia
+        th Quantidade
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.item_plano_reposicao_key'
+        )
+            td {row.item_plano_reposicao_key}
+            td {row.descricao}
+            td {row.tipo_intervalo}
+            td {row.intervalo}
+            td {row.dia}
+            td {row.quantidade}
+            td {row.observacoes}

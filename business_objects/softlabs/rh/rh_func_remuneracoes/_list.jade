@@ -1,0 +1,22 @@
+//
+    Template default para: softlabs.rh.rh_func_remuneracoes
+    Criado em Mon May 23 2016 09:16:46 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Rh Func Remunerações
+        th Parceiros
+        th Rh Cargos
+        th Dt Inicio
+        th Dt Encerramento
+        th Valor
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.rh.[object Object].data.rows')
+            td {row.rh_func_remuneracoes_key}
+            td {row.parceiros_key}
+            td {row.rh_cargos_key}
+            td {row.dt_inicio}
+            td {row.dt_encerramento}
+            td {row.valor}
+            td {row.observacoes}

@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.contratos.contr_item_leituras
+    Criado em Mon May 23 2016 09:14:28 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='softlabs.contratos.[object Object].data.rows')
+    .content
+        .header {row.contr_item_leituras_key} - {row.contr_item_leituras_key}
+        .meta Keys: contr_item_apontadores_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='softlabs contratos [object Object] edit', rv-data-key='row.contr_item_leituras_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='softlabs contratos [object Object] delete', rv-data-key='row.contr_item_leituras_key')
+                i.delete.icon
+                | Remover

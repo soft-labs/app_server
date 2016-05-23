@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.parceiros.parc_relacionados
+    Criado em Mon May 23 2016 09:16:25 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='softlabs.parceiros.[object Object].data.rows')
+    .content
+        .header {row.parc_relacionados_key} - {row.parc_relacionados_key}
+        .meta Keys: parc_rel_tipos_key, parceiros_key, parceiros_rel_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='softlabs parceiros [object Object] edit', rv-data-key='row.parc_relacionados_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='softlabs parceiros [object Object] delete', rv-data-key='row.parc_relacionados_key')
+                i.delete.icon
+                | Remover

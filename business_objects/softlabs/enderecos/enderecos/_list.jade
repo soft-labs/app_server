@@ -1,0 +1,32 @@
+//
+    Template default para: softlabs.enderecos.enderecos
+    Criado em Mon May 23 2016 09:15:16 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Enderecos
+        th End Bairros
+        th End Cidades
+        th End Estados
+        th End Paises
+        th Cep
+        th Endereco
+        th Numero
+        th Complemento
+        th Bairro
+        th Localidade
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.enderecos.[object Object].data.rows')
+            td {row.enderecos_key}
+            td {row.end_bairros_key}
+            td {row.end_cidades_key}
+            td {row.end_estados_key}
+            td {row.end_paises_key}
+            td {row.cep}
+            td {row.endereco}
+            td {row.numero}
+            td {row.complemento}
+            td {row.bairro}
+            td {row.localidade}
+            td {row.observacoes}

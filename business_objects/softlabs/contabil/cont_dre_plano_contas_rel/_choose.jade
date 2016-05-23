@@ -1,0 +1,20 @@
+//
+    Template choose para: softlabs.contabil.cont_dre_plano_contas_rel
+    Criado em Mon May 23 2016 09:14:17 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Cont Dre Config
+        th Cont Plano Contas
+        th Ordem
+        th Operação
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.cont_dre_config_key'
+        )
+            td {row.cont_dre_config_key}
+            td {row.cont_plano_contas_key}
+            td {row.ordem}
+            td {row.operacao}

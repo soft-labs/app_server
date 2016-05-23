@@ -1,0 +1,12 @@
+//
+    Template default para: softlabs.contabil.cont_esfera_governo
+    Criado em Mon May 23 2016 09:14:17 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Cont Esfera Governo
+        th Esfera
+    tbody
+        tr(rv-each-row='softlabs.contabil.[object Object].data.rows')
+            td {row.cont_esfera_governo_key}
+            td {row.esfera}

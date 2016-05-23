@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.security.sec_regras
+    Criado em Mon May 23 2016 09:16:55 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='softlabs.security.[object Object].data.rows')
+    .content
+        .header {row.sec_regras_key} - {row.sec_regras_key}
+        .meta Keys: sec_regras_categ_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='softlabs security [object Object] edit', rv-data-key='row.sec_regras_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='softlabs security [object Object] delete', rv-data-key='row.sec_regras_key')
+                i.delete.icon
+                | Remover

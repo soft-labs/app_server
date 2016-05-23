@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.contratos.contratos
+    Criado em Mon May 23 2016 09:14:28 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='softlabs.contratos.[object Object].data.rows')
+    .content
+        .header {row.contratos_key} - {row.contratos_key}
+        .meta Keys: contr_tipos_key, empresas_key, parceiros_key, cont_plano_contas_key, cont_centros_resultado_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='softlabs contratos [object Object] edit', rv-data-key='row.contratos_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='softlabs contratos [object Object] delete', rv-data-key='row.contratos_key')
+                i.delete.icon
+                | Remover

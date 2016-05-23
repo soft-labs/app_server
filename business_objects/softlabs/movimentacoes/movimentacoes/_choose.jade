@@ -1,0 +1,104 @@
+//
+    Template choose para: softlabs.movimentacoes.movimentacoes
+    Criado em Mon May 23 2016 09:16:00 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Movimentações
+        th Mov Origem
+        th Mov Destino
+        th Mov Tipos
+        th Mov Status
+        th Empresas
+        th Parceiros
+        th Emp Clientes
+        th Emp Fornecedores
+        th Contratos
+        th Cont Centros Resultado
+        th Cont Plano Contas
+        th Emp Dep Origem
+        th Emp Dep Destino
+        th Competencia
+        th Dt Lancamento
+        th Dt Documento
+        th Dt Vencimento
+        th Numero
+        th Valor Bruto
+        th Valor Frete
+        th Valor Seguro
+        th Valor Desconto
+        th Valor Imp Ii
+        th Valor Imp Ipi
+        th Valor Imp Pis
+        th Valor Imp Cofins
+        th Valor Imp Icms
+        th Valor Imp Icmsst
+        th Valor Out Desp
+        th Valor Liquido
+        th Multa
+        th Multa Em Mõeda
+        th Juros
+        th Doc Fiscal Tipo
+        th Doc Fiscal Data
+        th Doc Fiscal Caixa
+        th Doc Fiscal Num Equip
+        th Doc Fiscal Numero
+        th Doc Fiscal Serie
+        th Doc Fiscal Subserie
+        th Doc Fiscal Modelo
+        th Doc Fiscal Chave
+        th Doc Fiscal Extra
+        th Doc Fiscal File
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.movimentacoes_key'
+        )
+            td {row.movimentacoes_key}
+            td {row.mov_origem_key}
+            td {row.mov_destino_key}
+            td {row.mov_tipos_key}
+            td {row.mov_status_key}
+            td {row.empresas_key}
+            td {row.parceiros_key}
+            td {row.emp_clientes_key}
+            td {row.emp_fornecedores_key}
+            td {row.contratos_key}
+            td {row.cont_centros_resultado_key}
+            td {row.cont_plano_contas_key}
+            td {row.emp_dep_origem_key}
+            td {row.emp_dep_destino_key}
+            td {row.competencia}
+            td {row.dt_lancamento}
+            td {row.dt_documento}
+            td {row.dt_vencimento}
+            td {row.numero}
+            td {row.valor_bruto}
+            td {row.valor_frete}
+            td {row.valor_seguro}
+            td {row.valor_desconto}
+            td {row.valor_imp_ii}
+            td {row.valor_imp_ipi}
+            td {row.valor_imp_pis}
+            td {row.valor_imp_cofins}
+            td {row.valor_imp_icms}
+            td {row.valor_imp_icmsst}
+            td {row.valor_out_desp}
+            td {row.valor_liquido}
+            td {row.multa}
+            td {row.multa_em_moeda}
+            td {row.juros}
+            td {row.doc_fiscal_tipo}
+            td {row.doc_fiscal_data}
+            td {row.doc_fiscal_caixa}
+            td {row.doc_fiscal_num_equip}
+            td {row.doc_fiscal_numero}
+            td {row.doc_fiscal_serie}
+            td {row.doc_fiscal_subserie}
+            td {row.doc_fiscal_modelo}
+            td {row.doc_fiscal_chave}
+            td {row.doc_fiscal_extra}
+            td {row.doc_fiscal_file}
+            td {row.observacoes}

@@ -1,0 +1,16 @@
+//
+    Template default para: softlabs.empresas.emp_fornecedores
+    Criado em Mon May 23 2016 09:14:47 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Emp Fornecedores
+        th Parceiros
+        th Ativo
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.empresas.[object Object].data.rows')
+            td {row.emp_fornecedores_key}
+            td {row.parceiros_key}
+            td {row.ativo}
+            td {row.observacoes}

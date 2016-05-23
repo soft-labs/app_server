@@ -1,0 +1,12 @@
+//
+    Template default para: softlabs.empresas.emp_depositos_end_eletronicos_rel
+    Criado em Mon May 23 2016 09:14:47 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Emp Depositos
+        th End Eletronicos
+    tbody
+        tr(rv-each-row='softlabs.empresas.[object Object].data.rows')
+            td {row.emp_depositos_key}
+            td {row.end_eletronicos_key}

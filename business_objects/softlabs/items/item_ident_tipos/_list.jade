@@ -1,0 +1,14 @@
+//
+    Template default para: softlabs.items.item_ident_tipos
+    Criado em Mon May 23 2016 09:15:42 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Item Ident Tipos
+        th Ident Tipo
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.items.[object Object].data.rows')
+            td {row.item_ident_tipos_key}
+            td {row.ident_tipo}
+            td {row.observacoes}

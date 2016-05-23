@@ -1,0 +1,16 @@
+//
+    Template default para: softlabs.contabil.cont_dre_config
+    Criado em Mon May 23 2016 09:14:17 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Cont Dre Config
+        th Ordem
+        th Agrupador
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.contabil.[object Object].data.rows')
+            td {row.cont_dre_config_key}
+            td {row.ordem}
+            td {row.agrupador}
+            td {row.observacoes}

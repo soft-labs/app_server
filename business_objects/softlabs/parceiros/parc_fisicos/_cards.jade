@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.parceiros.parc_fisicos
+    Criado em Mon May 23 2016 09:16:25 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='softlabs.parceiros.[object Object].data.rows')
+    .content
+        .header {row.parceiros_key} - {row.parceiros_key}
+        .meta Keys:  - sem dependências -
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='softlabs parceiros [object Object] edit', rv-data-key='row.parceiros_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='softlabs parceiros [object Object] delete', rv-data-key='row.parceiros_key')
+                i.delete.icon
+                | Remover

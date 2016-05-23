@@ -1,0 +1,14 @@
+//
+    Template default para: softlabs.app.app_autorizadores_usuarios
+    Criado em Mon May 23 2016 09:13:21 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th App Autorizadores
+        th Sec Usuarios
+        th Ativo
+    tbody
+        tr(rv-each-row='softlabs.app.[object Object].data.rows')
+            td {row.app_autorizadores_key}
+            td {row.sec_usuarios_key}
+            td {row.ativo}

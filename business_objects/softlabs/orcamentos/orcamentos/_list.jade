@@ -1,0 +1,18 @@
+//
+    Template default para: softlabs.orcamentos.orcamentos
+    Criado em Mon May 23 2016 09:16:12 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Orcamentos
+        th Ent Coligadas
+        th Descrição
+        th Observações
+        th Coligadas
+    tbody
+        tr(rv-each-row='softlabs.orcamentos.[object Object].data.rows')
+            td {row.orcamentos_key}
+            td {row.ent_coligadas_key}
+            td {row.descricao}
+            td {row.observacoes}
+            td {row.coligadas_key}

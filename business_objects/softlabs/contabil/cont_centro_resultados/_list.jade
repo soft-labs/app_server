@@ -1,0 +1,22 @@
+//
+    Template default para: softlabs.contabil.cont_centro_resultados
+    Criado em Mon May 23 2016 09:14:17 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Cont Centro Resultados
+        th Parent
+        th  Integração
+        th Ativo
+        th Codigo
+        th Centro Resultado
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.contabil.[object Object].data.rows')
+            td {row.cont_centro_resultados_key}
+            td {row.parent_key}
+            td {row._integracao}
+            td {row.ativo}
+            td {row.codigo}
+            td {row.centro_resultado}
+            td {row.observacoes}

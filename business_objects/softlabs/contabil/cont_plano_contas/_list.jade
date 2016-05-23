@@ -1,0 +1,24 @@
+//
+    Template default para: softlabs.contabil.cont_plano_contas
+    Criado em Mon May 23 2016 09:14:17 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Cont Plano Contas
+        th Cont Categorias
+        th Parent
+        th  Integração
+        th Ativo
+        th Codigo
+        th Plano Conta
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.contabil.[object Object].data.rows')
+            td {row.cont_plano_contas_key}
+            td {row.cont_categorias_key}
+            td {row.parent_key}
+            td {row._integracao}
+            td {row.ativo}
+            td {row.codigo}
+            td {row.plano_conta}
+            td {row.observacoes}

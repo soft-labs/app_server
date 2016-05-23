@@ -1,0 +1,126 @@
+//
+    Template choose para: softlabs.movimentacoes.mov_tipos
+    Criado em Mon May 23 2016 09:16:00 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Mov Tipos
+        th Codigo
+        th Mov Tipo
+        th Gera Credito
+        th Gera Debito
+        th Gera Entrada
+        th Gera Saida
+        th Mod Origem
+        th Mod Destino
+        th Observações
+        th Val Estoq Entrada
+        th Val Estoq Saida
+        th Val Ent Destino
+        th Val Ent Origem
+        th Val Rateios Templates
+        th Val Cont Plano Contas
+        th Val Fin Contas Credito
+        th Val Fin Contas Debito
+        th Val Dia Vencimento
+        th Lbl Valor Liquido
+        th Lbl Valor Bruto
+        th Lbl Dt Vencimento
+        th Lbl Estoq Entrada
+        th Lbl Estoq Saida
+        th Lbl Fin Contas Credito
+        th Lbl Fin Contas Debito
+        th Lbl Descrição
+        th Exibe Cfop
+        th Exibe Mov Itens Valor
+        th Exibe Mov Itens
+        th Exibe Plano Contas
+        th Exibe Rateio
+        th Exibe Desconto
+        th Exibe Multa Juros
+        th Exibe Dt Entrada
+        th Exibe Responsavel Destino
+        th Exibe Responsavel Origem
+        th Intf Height
+        th Intf Width
+        th Intf Focus
+        th Intf Label
+        th After Finalizar
+        th Finaliza Ao Criar
+        th Requer Observações
+        th Importar Mov Tipos
+        th Importar Filtro Entidade
+        th Mod Destino Label
+        th Mod Origem Label
+        th Gera Lanc Ent Destino
+        th Gera Lanc Ao Criar
+        th Gera Parcelamentos
+        th Gera Mensalidades
+        th Gera Impostos
+        th Gera Saida Produção
+        th Gera Entrada Produção
+        th Mov Customizada
+        th Mov Tipos Categorias
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.mov_tipos_key'
+        )
+            td {row.mov_tipos_key}
+            td {row.codigo}
+            td {row.mov_tipo}
+            td {row.gera_credito}
+            td {row.gera_debito}
+            td {row.gera_entrada}
+            td {row.gera_saida}
+            td {row.mod_origem}
+            td {row.mod_destino}
+            td {row.observacoes}
+            td {row.val_estoq_entrada_key}
+            td {row.val_estoq_saida_key}
+            td {row.val_ent_destino_key}
+            td {row.val_ent_origem_key}
+            td {row.val_rateios_templates_key}
+            td {row.val_cont_plano_contas_key}
+            td {row.val_fin_contas_credito_key}
+            td {row.val_fin_contas_debito_key}
+            td {row.val_dia_vencimento}
+            td {row.lbl_valor_liquido}
+            td {row.lbl_valor_bruto}
+            td {row.lbl_dt_vencimento}
+            td {row.lbl_estoq_entrada_key}
+            td {row.lbl_estoq_saida_key}
+            td {row.lbl_fin_contas_credito_key}
+            td {row.lbl_fin_contas_debito_key}
+            td {row.lbl_descricao}
+            td {row.exibe_cfop}
+            td {row.exibe_mov_itens_valor}
+            td {row.exibe_mov_itens}
+            td {row.exibe_plano_contas}
+            td {row.exibe_rateio}
+            td {row.exibe_desconto}
+            td {row.exibe_multa_juros}
+            td {row.exibe_dt_entrada}
+            td {row.exibe_responsavel_destino}
+            td {row.exibe_responsavel_origem}
+            td {row.intf_height}
+            td {row.intf_width}
+            td {row.intf_focus}
+            td {row.intf_label}
+            td {row.after_finalizar}
+            td {row.finaliza_ao_criar}
+            td {row.requer_observacoes}
+            td {row.importar_mov_tipos_key}
+            td {row.importar_filtro_entidade}
+            td {row.mod_destino_label}
+            td {row.mod_origem_label}
+            td {row.gera_lanc_ent_destino}
+            td {row.gera_lanc_ao_criar}
+            td {row.gera_parcelamentos}
+            td {row.gera_mensalidades}
+            td {row.gera_impostos}
+            td {row.gera_saida_producao}
+            td {row.gera_entrada_producao}
+            td {row.mov_customizada}
+            td {row.mov_tipos_categorias_key}

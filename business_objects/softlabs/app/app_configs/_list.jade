@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.app.app_configs
+    Criado em Mon May 23 2016 09:13:21 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th App Configs
+        th Code
+        th Config
+        th Valor
+        th Fields
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.app.[object Object].data.rows')
+            td {row.app_configs_key}
+            td {row.code}
+            td {row.config}
+            td {row.valor}
+            td {row.fields}
+            td {row.observacoes}

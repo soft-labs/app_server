@@ -1,0 +1,22 @@
+//
+    Template choose para: softlabs.contratos.contr_franquias
+    Criado em Mon May 23 2016 09:14:28 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Contr Franquias
+        th Descrição
+        th Periodo
+        th Tipo Periodo
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.contr_franquias_key'
+        )
+            td {row.contr_franquias_key}
+            td {row.descricao}
+            td {row.periodo}
+            td {row.tipo_periodo}
+            td {row.observacoes}

@@ -1,0 +1,24 @@
+//
+    Template choose para: softlabs.contratos.contr_items
+    Criado em Mon May 23 2016 09:14:28 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Contr Items
+        th Items
+        th Contr Fases
+        th Quantidade
+        th Valor Unit
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.contr_items_key'
+        )
+            td {row.contr_items_key}
+            td {row.items_key}
+            td {row.contr_fases_key}
+            td {row.quantidade}
+            td {row.valor_unit}
+            td {row.observacoes}

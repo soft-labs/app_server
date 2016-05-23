@@ -1,0 +1,18 @@
+//
+    Template default para: softlabs.parceiros.parc_relacionados
+    Criado em Mon May 23 2016 09:16:25 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Parc Relacionados
+        th Parc Rel Tipos
+        th Parceiros
+        th Parceiros Rel
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.parceiros.[object Object].data.rows')
+            td {row.parc_relacionados_key}
+            td {row.parc_rel_tipos_key}
+            td {row.parceiros_key}
+            td {row.parceiros_rel_key}
+            td {row.observacoes}

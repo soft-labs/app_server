@@ -1,0 +1,22 @@
+//
+    Template choose para: softlabs.contabil.contabil
+    Criado em Mon May 23 2016 09:14:17 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Contabil
+        th Periodo
+        th Dt Inicio
+        th Dt Final
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.contabil_key'
+        )
+            td {row.contabil_key}
+            td {row.periodo}
+            td {row.dt_inicio}
+            td {row.dt_final}
+            td {row.observacoes}

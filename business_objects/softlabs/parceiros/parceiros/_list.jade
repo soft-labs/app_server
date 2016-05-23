@@ -1,0 +1,36 @@
+//
+    Template default para: softlabs.parceiros.parceiros
+    Criado em Mon May 23 2016 09:16:25 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Parceiros
+        th End Paises
+        th Parc Contas
+        th Cont Plano Contas
+        th Cont Centro Resultados
+        th Juridico
+        th Codigo
+        th Parceiro
+        th Foto
+        th Dt Foto
+        th Limite Credito
+        th Limite Compromisso
+        th Limite Desconto
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.parceiros.[object Object].data.rows')
+            td {row.parceiros_key}
+            td {row.end_paises_key}
+            td {row.parc_contas_key}
+            td {row.cont_plano_contas_key}
+            td {row.cont_centro_resultados_key}
+            td {row.juridico}
+            td {row.codigo}
+            td {row.parceiro}
+            td {row.foto}
+            td {row.dt_foto}
+            td {row.limite_credito}
+            td {row.limite_compromisso}
+            td {row.limite_desconto}
+            td {row.observacoes}

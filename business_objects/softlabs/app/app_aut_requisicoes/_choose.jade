@@ -1,0 +1,28 @@
+//
+    Template choose para: softlabs.app.app_aut_requisicoes
+    Criado em Mon May 23 2016 09:13:21 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th App Aut Requisições
+        th App Aut Regras
+        th App Autorizadores
+        th Dt Requisição
+        th Dt Resolução
+        th Liberado
+        th Observações
+        th Sec Usuarios
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.app_aut_requisicoes_key'
+        )
+            td {row.app_aut_requisicoes_key}
+            td {row.app_aut_regras_key}
+            td {row.app_autorizadores_key}
+            td {row.dt_requisicao}
+            td {row.dt_resolucao}
+            td {row.liberado}
+            td {row.observacoes}
+            td {row.sec_usuarios_key}

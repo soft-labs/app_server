@@ -1,0 +1,20 @@
+//
+    Template choose para: softlabs.producao.prod_tabelas
+    Criado em Mon May 23 2016 09:16:38 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Prod Tabelas
+        th Ativo
+        th Tabela
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.prod_tabelas_key'
+        )
+            td {row.prod_tabelas_key}
+            td {row.ativo}
+            td {row.tabela}
+            td {row.observacoes}

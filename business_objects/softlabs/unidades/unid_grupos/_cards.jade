@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.unidades.unid_grupos
+    Criado em Mon May 23 2016 09:17:03 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='softlabs.unidades.[object Object].data.rows')
+    .content
+        .header {row.unid_grupos_key} - {row.unid_grupos_key}
+        .meta Keys:  - sem dependências -
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='softlabs unidades [object Object] edit', rv-data-key='row.unid_grupos_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='softlabs unidades [object Object] delete', rv-data-key='row.unid_grupos_key')
+                i.delete.icon
+                | Remover

@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.contabil.contabil
+    Criado em Mon May 23 2016 09:14:17 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='softlabs.contabil.[object Object].data.rows')
+    .content
+        .header {row.contabil_key} - {row.contabil_key}
+        .meta Keys:  - sem dependências -
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='softlabs contabil [object Object] edit', rv-data-key='row.contabil_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='softlabs contabil [object Object] delete', rv-data-key='row.contabil_key')
+                i.delete.icon
+                | Remover

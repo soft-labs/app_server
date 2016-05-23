@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.rh.rh_cargos
+    Criado em Mon May 23 2016 09:16:46 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Rh Cargos
+        th Cont Centro Resultados
+        th Cargo
+        th Remuneração Min
+        th Remuneração Max
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.rh.[object Object].data.rows')
+            td {row.rh_cargos_key}
+            td {row.cont_centro_resultados_key}
+            td {row.cargo}
+            td {row.remuneracao_min}
+            td {row.remuneracao_max}
+            td {row.observacoes}

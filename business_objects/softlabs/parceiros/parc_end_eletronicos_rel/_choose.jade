@@ -1,0 +1,16 @@
+//
+    Template choose para: softlabs.parceiros.parc_end_eletronicos_rel
+    Criado em Mon May 23 2016 09:16:25 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Parceiros
+        th End Eletronicos
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.parceiros_key'
+        )
+            td {row.parceiros_key}
+            td {row.end_eletronicos_key}

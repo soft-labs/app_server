@@ -1,0 +1,24 @@
+//
+    Template default para: softlabs.orcamentos.orc_periodos
+    Criado em Mon May 23 2016 09:16:12 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Orc Periodos
+        th Orcamentos
+        th Sec Alterado Por
+        th Dt Cad
+        th Dt Inicio
+        th Dt Final
+        th Periodo
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.orcamentos.[object Object].data.rows')
+            td {row.orc_periodos_key}
+            td {row.orcamentos_key}
+            td {row.sec_alterado_por_key}
+            td {row.dt_cad}
+            td {row.dt_inicio}
+            td {row.dt_final}
+            td {row.periodo}
+            td {row.observacoes}

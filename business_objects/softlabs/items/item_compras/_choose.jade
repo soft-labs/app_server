@@ -1,0 +1,46 @@
+//
+    Template choose para: softlabs.items.item_compras
+    Criado em Mon May 23 2016 09:15:42 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Item Compras
+        th Items
+        th Item Fabricantes
+        th Item Marcas
+        th Item Modelos
+        th Item Embalagens
+        th Item Plano Reposição
+        th Unidades
+        th Ativo
+        th Codigo
+        th Item Compra
+        th Quantidade
+        th Qtd Embalagem
+        th Ult Compra Data
+        th Ult Compra Qtd
+        th Ult Compra Preco
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.item_compras_key'
+        )
+            td {row.item_compras_key}
+            td {row.items_key}
+            td {row.item_fabricantes_key}
+            td {row.item_marcas_key}
+            td {row.item_modelos_key}
+            td {row.item_embalagens_key}
+            td {row.item_plano_reposicao_key}
+            td {row.unidades_key}
+            td {row.ativo}
+            td {row.codigo}
+            td {row.item_compra}
+            td {row.quantidade}
+            td {row.qtd_embalagem}
+            td {row.ult_compra_data}
+            td {row.ult_compra_qtd}
+            td {row.ult_compra_preco}
+            td {row.observacoes}

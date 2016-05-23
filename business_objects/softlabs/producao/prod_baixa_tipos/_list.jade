@@ -1,0 +1,12 @@
+//
+    Template default para: softlabs.producao.prod_baixa_tipos
+    Criado em Mon May 23 2016 09:16:38 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Prod Baixa Tipos
+        th Tipo Baixa
+    tbody
+        tr(rv-each-row='softlabs.producao.[object Object].data.rows')
+            td {row.prod_baixa_tipos_key}
+            td {row.tipo_baixa}

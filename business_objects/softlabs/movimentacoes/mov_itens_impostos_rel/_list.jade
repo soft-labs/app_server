@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.movimentacoes.mov_itens_impostos_rel
+    Criado em Mon May 23 2016 09:16:00 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Mov Itens
+        th Impostos
+        th Aliquota
+        th Base Tributada
+        th Base Isenta
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.movimentacoes.[object Object].data.rows')
+            td {row.mov_itens_key}
+            td {row.impostos_key}
+            td {row.aliquota}
+            td {row.base_tributada}
+            td {row.base_isenta}
+            td {row.observacoes}

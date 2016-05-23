@@ -1,0 +1,14 @@
+//
+    Template default para: softlabs.producao.prod_cod_origem
+    Criado em Mon May 23 2016 09:16:38 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Prod Cod Origem
+        th Cod Origem
+        th Origem
+    tbody
+        tr(rv-each-row='softlabs.producao.[object Object].data.rows')
+            td {row.prod_cod_origem_key}
+            td {row.cod_origem}
+            td {row.origem}

@@ -1,0 +1,14 @@
+//
+    Template default para: softlabs.contabil.cont_determinacao_rel
+    Criado em Mon May 23 2016 09:14:17 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Contabil
+        th Cont Determinação
+        th Empresas
+    tbody
+        tr(rv-each-row='softlabs.contabil.[object Object].data.rows')
+            td {row.contabil_key}
+            td {row.cont_determinacao_key}
+            td {row.empresas_key}

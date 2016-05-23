@@ -1,0 +1,36 @@
+//
+    Template choose para: softlabs.security.sec_usuarios
+    Criado em Mon May 23 2016 09:16:55 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Sec Usuarios
+        th Parceiros
+        th Sec Perfis
+        th Ativo
+        th Auditar
+        th Usuario
+        th Senha
+        th Nome
+        th Telefone
+        th Email
+        th Expira Em
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.sec_usuarios_key'
+        )
+            td {row.sec_usuarios_key}
+            td {row.parceiros_key}
+            td {row.sec_perfis_key}
+            td {row.ativo}
+            td {row.auditar}
+            td {row.usuario}
+            td {row.senha}
+            td {row.nome}
+            td {row.telefone}
+            td {row.email}
+            td {row.expira_em}
+            td {row.observacoes}

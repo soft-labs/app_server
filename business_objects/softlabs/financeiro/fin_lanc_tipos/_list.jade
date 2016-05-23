@@ -1,0 +1,16 @@
+//
+    Template default para: softlabs.financeiro.fin_lanc_tipos
+    Criado em Mon May 23 2016 09:15:29 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Fin Lanc Tipos
+        th Codigo
+        th Lanc Tipo
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.financeiro.[object Object].data.rows')
+            td {row.fin_lanc_tipos_key}
+            td {row.codigo}
+            td {row.lanc_tipo}
+            td {row.observacoes}

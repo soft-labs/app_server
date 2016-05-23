@@ -1,0 +1,22 @@
+//
+    Template default para: softlabs.contabil.cont_impostos
+    Criado em Mon May 23 2016 09:14:17 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Cont Impostos
+        th Cont Ent Arrecadadoras
+        th Cont Plano Contas
+        th Dia Vencimento
+        th Imposto
+        th Aliquota
+        th Observações
+    tbody
+        tr(rv-each-row='softlabs.contabil.[object Object].data.rows')
+            td {row.cont_impostos_key}
+            td {row.cont_ent_arrecadadoras_key}
+            td {row.cont_plano_contas_key}
+            td {row.dia_vencimento}
+            td {row.imposto}
+            td {row.aliquota}
+            td {row.observacoes}

@@ -1,0 +1,12 @@
+//
+    Template default para: softlabs.movimentacoes.mov_status
+    Criado em Mon May 23 2016 09:16:00 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Mov Status
+        th Mov Status
+    tbody
+        tr(rv-each-row='softlabs.movimentacoes.[object Object].data.rows')
+            td {row.mov_status_key}
+            td {row.mov_status}

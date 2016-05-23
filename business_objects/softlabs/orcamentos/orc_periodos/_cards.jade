@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.orcamentos.orc_periodos
+    Criado em Mon May 23 2016 09:16:12 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='softlabs.orcamentos.[object Object].data.rows')
+    .content
+        .header {row.orc_periodos_key} - {row.orc_periodos_key}
+        .meta Keys: orcamentos_key, sec_alterado_por_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='softlabs orcamentos [object Object] edit', rv-data-key='row.orc_periodos_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='softlabs orcamentos [object Object] delete', rv-data-key='row.orc_periodos_key')
+                i.delete.icon
+                | Remover

@@ -1,0 +1,24 @@
+//
+    Template choose para: softlabs.rh.rh_func_habilidades_rel
+    Criado em Mon May 23 2016 09:16:46 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Rh Funcionarios
+        th Rh Habilidades
+        th Dt Adquirida
+        th Dt Planejada
+        th Nivel
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.rh_funcionarios_key'
+        )
+            td {row.rh_funcionarios_key}
+            td {row.rh_habilidades_key}
+            td {row.dt_adquirida}
+            td {row.dt_planejada}
+            td {row.nivel}
+            td {row.observacoes}

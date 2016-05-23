@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.enderecos.enderecos
+    Criado em Mon May 23 2016 09:15:16 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='softlabs.enderecos.[object Object].data.rows')
+    .content
+        .header {row.enderecos_key} - {row.enderecos_key}
+        .meta Keys: end_bairros_key, end_cidades_key, end_estados_key, end_paises_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='softlabs enderecos [object Object] edit', rv-data-key='row.enderecos_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='softlabs enderecos [object Object] delete', rv-data-key='row.enderecos_key')
+                i.delete.icon
+                | Remover
