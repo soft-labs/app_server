@@ -52,8 +52,10 @@ tshark.modulos._add('softlabs.financeiro.fin_areceber', {
 
     /**
      * Chamado antes de requisitar uma listagem no server
-     *
+     */
     onBeforeList: function(el, settings){
+
+        settings.data['teste'] = 987;
 
         // Libera ou não para continuar
         return true;

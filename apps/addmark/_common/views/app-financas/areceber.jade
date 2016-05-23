@@ -2,6 +2,20 @@
    Created by labs on 11/05/16.
 
 .ui.container.transition.hidden.app-areceber
+
+    .ui.midle.aligned.selection.list
+        .item(
+            rv-each-row='softlabs.financeiro.fin_areceber.data.rows'
+        )
+            img.ui.avatar.image(
+                src=''
+                rv-data-action='row.api'
+                rv-data-num_doc='row.num_doc'
+            )
+            .content
+                .header {row.parceiro}
+
+
     .ui.fluid.card
         .content
 
@@ -21,6 +35,7 @@
                             i(rv-class='menu.icon')
                             span.text {menu.label}
 
+
             // Menu Listagem / Chart
             span.right.floated.ui.secondary.menu
                 .ui.dropdown.item
@@ -34,6 +49,7 @@
                         .item(rv-on-click='home.showChartDesp')
                             i.pie.chart.icon
                             span.text Gráficos
+
 
             // Listagem
             .header Recebimentos Programados
@@ -61,9 +77,11 @@
                                     .column.right.aligned.app-receita {row._stats.sum.valor_bruto | numberFormat 2 ',' '.'}
 
 
+
         .extra.content
             span.right.floated
                 | Total à Receber: R$ {softlabs.financeiro.fin_areceber.pivot._stats.sum.valor_bruto | numberFormat 2 ',' '.'}
+
 
 #form_areceber.ui.modal
     .header
