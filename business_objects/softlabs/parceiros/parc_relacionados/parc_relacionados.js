@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: parc_relacionados.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:22 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:25 GMT-0300 (BRT)
  * @constructor
  */
 function ParcRelacionados(){
@@ -18,6 +18,7 @@ function ParcRelacionados(){
         table: 'parc_relacionados',
         metadata: {
             key: 'parc_relacionados_key',
+            label: parc_relacionados_key,
             fields: {
                 parc_relacionados_key: {
                     tipo: types.comp.key, label: 'Parc Relacionados:'
@@ -96,7 +97,7 @@ function ParcRelacionados(){
                 0: {
                     from: ['softlabs', 'parceiros', 'parc_relacionados'],
                     fields: [
-                        
+                        parc_relacionados_key
                     ]
                 },
                 1: { 

@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: parc_rel_tipos.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:22 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:25 GMT-0300 (BRT)
  * @constructor
  */
 function ParcRelTipos(){
@@ -18,6 +18,7 @@ function ParcRelTipos(){
         table: 'parc_rel_tipos',
         metadata: {
             key: 'parc_rel_tipos_key',
+            label: 'rel_tipo',
             fields: {
                 parc_rel_tipos_key: {
                     tipo: types.comp.key, label: 'Parc Rel Tipos:'

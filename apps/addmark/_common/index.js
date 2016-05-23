@@ -39,6 +39,9 @@ app = $.extend(true, app, {
     // Modo atual da aplicação
     mode: 'desenv',
 
+    // Barra de ação
+    appbar: [],
+
     // Inicializador da aplicação
     init: function () {
 
@@ -63,8 +66,17 @@ app = $.extend(true, app, {
         ;
         
         // Inicializa cockpit
-        this.cockpit.init();
+        this.home.init();
 
+    },
+
+    /**
+     * Atualiza a barra de botões global do app
+     * @param itens
+     */
+    resetAppBar: function(itens){
+        this.appbar = itens;
+        tshark.bindAPIs('.app-bar');
     },
     
 

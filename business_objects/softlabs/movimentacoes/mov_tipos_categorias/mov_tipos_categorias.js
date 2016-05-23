@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: mov_tipos_categorias.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:04 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:00 GMT-0300 (BRT)
  * @constructor
  */
 function MovTiposCategorias(){
@@ -18,6 +18,7 @@ function MovTiposCategorias(){
         table: 'mov_tipos_categorias',
         metadata: {
             key: 'mov_tipos_categorias_key',
+            label: 'tipos_categoria',
             fields: {
                 mov_tipos_categorias_key: {
                     tipo: types.comp.key, label: 'Mov Tipos Categorias:'

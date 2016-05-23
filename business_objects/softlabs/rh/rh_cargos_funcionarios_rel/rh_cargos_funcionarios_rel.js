@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: rh_cargos_funcionarios_rel.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:54 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:46 GMT-0300 (BRT)
  * @constructor
  */
 function RhCargosFuncionariosRel(){
@@ -18,6 +18,7 @@ function RhCargosFuncionariosRel(){
         table: 'rh_cargos_funcionarios_rel',
         metadata: {
             key: ['parceiros_key', 'rh_cargos_key'],
+            label: dt_inicio,
             fields: {
                 parceiros_key: {
                     tipo: types.comp.key, label: 'Parceiros:',
@@ -93,7 +94,7 @@ function RhCargosFuncionariosRel(){
                 0: {
                     from: ['softlabs', 'rh', 'rh_cargos_funcionarios_rel'],
                     fields: [
-                        
+                        dt_inicio
                     ]
                 },
                 1: { 

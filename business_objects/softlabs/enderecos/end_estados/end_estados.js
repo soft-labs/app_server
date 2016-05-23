@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: end_estados.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:46:29 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:16 GMT-0300 (BRT)
  * @constructor
  */
 function EndEstados(){
@@ -18,6 +18,7 @@ function EndEstados(){
         table: 'end_estados',
         metadata: {
             key: 'end_estados_key',
+            label: 'estado',
             fields: {
                 end_estados_key: {
                     tipo: types.comp.key, label: 'End Estados:'

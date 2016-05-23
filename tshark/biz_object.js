@@ -63,6 +63,10 @@ BizObject.prototype.getForm = function (provider){
     form._config['state']  = form._config['state']  || types.form.state.loading;
     form._config['size']   = form._config['size']   || types.form.size.small;
 
+    if (this.params['autosave']){
+        form._config['autosave'] = true;
+    }
+    
     //endregion
 
 
@@ -81,6 +85,12 @@ BizObject.prototype.getForm = function (provider){
                 ? extend(meta.fields[ctrl], meta.fields[ctrl]['tipo'])
                 : {}
             );
+
+            if (ctrl == 'space'){
+                comp = {
+                    type: 'space', comp: 'space'
+                }
+            }
 
             // Se o comp tá sobreescrito em ctrls
             if (form.ctrls[ctrl]){
@@ -139,7 +149,7 @@ BizObject.prototype.get = function *(ctx){
     var ret = this.getReturnObj();
 
     // Template:
-    ret.template = this.params['template'] || 'list';
+    ret.template = this.params['template'] || '_list';
 
     // Evento onGet
     if (this['onGet']){

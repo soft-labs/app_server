@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_embalagens.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:46:43 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:42 GMT-0300 (BRT)
  * @constructor
  */
 function ItemEmbalagens(){
@@ -18,6 +18,7 @@ function ItemEmbalagens(){
         table: 'item_embalagens',
         metadata: {
             key: 'item_embalagens_key',
+            label: item_embalagens_key,
             fields: {
                 item_embalagens_key: {
                     tipo: types.comp.key, label: 'Item Embalagens:'
@@ -74,7 +75,7 @@ function ItemEmbalagens(){
                 0: {
                     from: ['softlabs', 'items', 'item_embalagens'],
                     fields: [
-                        
+                        item_embalagens_key
                     ]
                 }, 
             },

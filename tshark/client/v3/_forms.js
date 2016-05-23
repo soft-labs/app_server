@@ -38,9 +38,45 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
         },
         settings:{
             focus: undefined
+        },
+        prepare: function(){
+
         }
     };
 });
+
+
+/**
+ * Choose from list
+ */
+if(!alertify.choose){
+
+    alertify.dialog('choose',function factory(){
+        return{
+            main:function(message){
+                this.message = message;
+            },
+            setup:function(){
+                return {
+                    options: {
+                        title: "Selecione:",
+                        padding : !1,
+                    },
+                    //buttons:[{text: "Fechar!", key:27/*Esc*/}],
+                    //focus: { element:0 }
+                };
+            },
+            prepare:function(){
+                $(this.elements.dialog).css('height', '80%');
+                this.setContent(this.message);
+                rivets.bind($('.choose-rows'), app);
+            },
+            build: function(){
+                this.setHeader($(this.elements.content).find('table')[0]);
+            }
+        }
+    }, true);
+}
 
 /**
  * Implementação da classe
@@ -112,6 +148,8 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
                                 .html(icon + ' ' + ctrl['label'])
                         );
                     }
+
+                    ctrl['autosave'] = f_config['autosave'];
 
                     // Processa um comp
                     field.append(getComp(ctrl, f, mod));
@@ -207,10 +245,21 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
                 input = getMemo(ctrl, field, mod.path);
                 break;
 
-            case 'dropdown'  :
-            case 'inpDropdown'  :
-            case 'inpList'      :
             case 'inpChoose'    :
+                input = getChoose(ctrl, field, mod.path);
+                break;
+
+            case 'dropdown'     :
+            case 'inpDropdown'  :
+                input = getDropdown(ctrl, field, mod.path);
+
+                mod.form.comps[field] = new Dataset(ctrl.data.from);
+                if (ctrl['data']['rows']){
+                    mod.form.comps[field].reset(ctrl['data']);
+                }
+                break;
+
+            case 'inpList'      :
                 input = getSelect(ctrl, field, mod.path);
                 break;
 
@@ -221,12 +270,17 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
                 input = getCheck(ctrl, field, mod.path);
                 break;
 
+            case 'space':
+                input = getInput(ctrl, field, mod.path);
+                break;
+
             default:
                 ctrl['state'] = 'error';
                 ctrl['placeholder'] = 'componente desconhecido';
                 input = getInput(ctrl, field, mod.path);
         }
 
+        /*
         if (ctrl['data']){
             mod.form.comps[field] = new Dataset(ctrl.data.from);
             if (ctrl['data']['rows']){
@@ -237,7 +291,7 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
                     fields: parseFields(ctrl.data['template'])
                 });
             }
-        }
+        }*/
 
         return input;
     }
@@ -384,7 +438,7 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
                 type: "text",
                 class: "ui fluid",
                 'rv-value': path + ".data.row." + field,
-                'onblur': path.split('.').join(' ') + " save"
+                'onblur': ctrl['autosave'] ? path.split('.').join(' ') + " save" : ''
             }
         ;
 
@@ -412,6 +466,11 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
             case 'inpDateTime':
                 params.type = 'datetime-local';
                 break;
+
+            case 'space':
+                params.type = 'hidden';
+                break;
+
         }
         var input = setExtras($("<input>", params), ctrl);
 
@@ -434,7 +493,7 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
         var params = {
                 class: "ui fluid",
                 'rv-value': path + ".data.row." + field,
-                'onblur': path.split('.').join(' ') + " save"
+                'onblur': ctrl['autosave'] ? path.split('.').join(' ') + " save" : ''
             }
         ;
 
@@ -481,6 +540,94 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
         return check;
 
     }
+
+    /**
+     * Retorna um componente do tipo input choose from list
+     * @param ctrl
+     * @param field
+     */
+    function getChoose(ctrl, field, path) {
+        var inp = $('<div>', {class:"ui icon input"})
+                .append(
+                    $('<input>', {
+                        type: 'text',
+                        readonly: 'on',
+                        class: 'cursor',
+                        'rv-template': path + ".data.row." + field + " | " + ctrl['data']['template'],
+                        'data-action': ctrl['data']['from'].join(' ') + ' choose',
+                        'data-from': path,
+                        'data-field': field
+                    }),
+                    $('<input>', {
+                        type: 'hidden',
+                        'rv-value': path + ".data.row." + field
+                    })
+                )
+                .append($('<i>', {
+                    class: 'circular angle double up link icon',
+                    'data-action': ctrl['data']['from'].join(' ') + ' choose',
+                    'data-from': path,
+                    'data-field': field
+                }))
+            ;
+
+        // Retorna
+        return inp;
+    }
+
+    /**
+     * componente dropdown
+     * @param ctrl
+     * @param field
+     * @param path
+     */
+    function getDropdown(ctrl, field, path){
+       return $('<div>', {class: 'ui fluid search selection dropdown binded', style: 'line-height: 0.9em !important; min-height: 0px'})
+           .append(
+               $('<input>', {
+                   type: 'hidden',
+                   'rv-value': path + ".data.row." + field,
+                //   'onchange': path.split('.').join(' ') + " save"
+               })
+           )
+           .append(
+               $('<i>', {class: 'dropdown icon'})
+           )
+           .append(
+               $('<div>', {
+                   class: 'text',
+                   'rv-text': path + ".data.row." + ctrl['data']['label']
+               }).html('{' + path + ".data.row." + ctrl['data']['label'] + '}')
+           )
+           .append(
+               $('<div>', {class: 'menu'})
+               .append(
+                   $('<div>', {
+                       class: 'item',
+                       'rv-each-row'  : path + 'form.comps.' + field + '.rows',
+                       'rv-data-value': 'row.' + field
+                   }).html('{row.' + ctrl['data']['label'] + '}')
+               )
+           ).dropdown({
+               apiSettings: {
+                   throttle: 600,
+                   url: '/comps/dropdown/' + ctrl['data']['from'].join('/') + '/{query}',
+                   data: {
+                       label: ctrl['data']['label'],
+                       provider: ctrl['data']['provider']
+                   }
+               },
+               onChange: function (value, text, selectedItem){
+                   var mod = tshark.getMod(path);
+                   mod.data.row[field] = value;
+                   if (ctrl['autosave']) {
+                       mod.save();
+                   }
+               }
+           });
+    }
+
+
 
     /**
      * Retorna um dropdown
@@ -606,35 +753,3 @@ alertify.popupForm || alertify.dialog('popupForm', function(){
 
 })($);
 
-
-TShark.prototype.selectOpt = function () {
-
-    var x = arguments;
-
-};
-
-rivets.binders.selectvalue = function (el, value){
-    tshark.sucesso(el.id + ' - ' + value);
-    $(el).dropdown('set value', value);
-};
-
-rivets.binders.sselectvalue = {
-    bind: function(el) {
-        var self = this;
-        this.callback = function() {
-            self.model[self.observer.key.path] = $(this).val();
-        };
-        $(el).on('change', this.callback);
-    },
-
-    unbind: function(el) {
-        $(el).off('change', this.callback);
-    },
-
-    routine: function(el, value) {
-        if (value != null) {
-            $(this.el).dropdown('set value', value);
-        }
-        tshark.sucesso($(this.el).id + ' - ' + value);
-    }
-};

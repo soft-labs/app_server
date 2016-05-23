@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: end_paises.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:46:29 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:16 GMT-0300 (BRT)
  * @constructor
  */
 function EndPaises(){
@@ -18,6 +18,7 @@ function EndPaises(){
         table: 'end_paises',
         metadata: {
             key: 'end_paises_key',
+            label: 'pais',
             fields: {
                 end_paises_key: {
                     tipo: types.comp.key, label: 'End Paises:'

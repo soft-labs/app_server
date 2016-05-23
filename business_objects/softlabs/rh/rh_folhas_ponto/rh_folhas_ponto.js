@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: rh_folhas_ponto.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:54 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:46 GMT-0300 (BRT)
  * @constructor
  */
 function RhFolhasPonto(){
@@ -18,6 +18,7 @@ function RhFolhasPonto(){
         table: 'rh_folhas_ponto',
         metadata: {
             key: 'rh_folhas_ponto_key',
+            label: 'ponto',
             fields: {
                 rh_folhas_ponto_key: {
                     tipo: types.comp.key, label: 'Rh Folhas Ponto:'

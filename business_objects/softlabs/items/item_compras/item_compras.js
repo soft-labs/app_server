@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_compras.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:46:43 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:42 GMT-0300 (BRT)
  * @constructor
  */
 function ItemCompras(){
@@ -18,6 +18,7 @@ function ItemCompras(){
         table: 'item_compras',
         metadata: {
             key: 'item_compras_key',
+            label: item_compras_key,
             fields: {
                 item_compras_key: {
                     tipo: types.comp.key, label: 'Item Compras:'
@@ -159,7 +160,7 @@ function ItemCompras(){
                 0: {
                     from: ['softlabs', 'items', 'item_compras'],
                     fields: [
-                        
+                        item_compras_key
                     ]
                 },
                 1: { 

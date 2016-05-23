@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_producao.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:46:43 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:42 GMT-0300 (BRT)
  * @constructor
  */
 function ItemProducao(){
@@ -18,6 +18,7 @@ function ItemProducao(){
         table: 'item_producao',
         metadata: {
             key: 'item_producao_key',
+            label: 'producao',
             fields: {
                 item_producao_key: {
                     tipo: types.comp.key, label: 'Item Produção:'

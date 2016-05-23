@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_autorizadores_usuarios.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:24 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:13:21 GMT-0300 (BRT)
  * @constructor
  */
 function AppAutorizadoresUsuarios(){
@@ -18,6 +18,7 @@ function AppAutorizadoresUsuarios(){
         table: 'app_autorizadores_usuarios',
         metadata: {
             key: ['app_autorizadores_key', 'sec_usuarios_key'],
+            label: app_autorizadores_key,
             fields: {
                 app_autorizadores_key: {
                     tipo: types.comp.key, label: 'App Autorizadores:'
@@ -71,7 +72,7 @@ function AppAutorizadoresUsuarios(){
                 0: {
                     from: ['softlabs', 'app', 'app_autorizadores_usuarios'],
                     fields: [
-                        
+                        app_autorizadores_key
                     ]
                 }, 
             },

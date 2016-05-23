@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: mov_tipos.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:04 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:00 GMT-0300 (BRT)
  * @constructor
  */
 function MovTipos(){
@@ -18,6 +18,7 @@ function MovTipos(){
         table: 'mov_tipos',
         metadata: {
             key: 'mov_tipos_key',
+            label: mov_tipos_key,
             fields: {
                 mov_tipos_key: {
                     tipo: types.comp.key, label: 'Mov Tipos:'
@@ -331,7 +332,7 @@ function MovTipos(){
                 0: {
                     from: ['softlabs', 'movimentacoes', 'mov_tipos'],
                     fields: [
-                        
+                        mov_tipos_key
                     ]
                 },
                 1: { 

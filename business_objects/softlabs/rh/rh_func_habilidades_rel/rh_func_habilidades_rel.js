@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: rh_func_habilidades_rel.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:54 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:46 GMT-0300 (BRT)
  * @constructor
  */
 function RhFuncHabilidadesRel(){
@@ -18,6 +18,7 @@ function RhFuncHabilidadesRel(){
         table: 'rh_func_habilidades_rel',
         metadata: {
             key: ['rh_funcionarios_key', 'rh_habilidades_key'],
+            label: dt_adquirida,
             fields: {
                 rh_funcionarios_key: {
                     tipo: types.comp.key, label: 'Rh Funcionarios:',
@@ -93,7 +94,7 @@ function RhFuncHabilidadesRel(){
                 0: {
                     from: ['softlabs', 'rh', 'rh_func_habilidades_rel'],
                     fields: [
-                        
+                        dt_adquirida
                     ]
                 },
                 1: { 

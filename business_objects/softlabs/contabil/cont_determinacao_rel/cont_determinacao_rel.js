@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_determinacao_rel.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:44 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:17 GMT-0300 (BRT)
  * @constructor
  */
 function ContDeterminacaoRel(){
@@ -18,6 +18,7 @@ function ContDeterminacaoRel(){
         table: 'cont_determinacao_rel',
         metadata: {
             key: ['contabil_key', 'cont_determinacao_key'],
+            label: ,
             fields: {
                 contabil_key: {
                     tipo: types.comp.key, label: 'Contabil:',

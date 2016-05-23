@@ -418,7 +418,7 @@ TShark.prototype.modulo = function(path){
         if (data){
             this._sending_[key] = data;
         } else {
-            this._sending_ = $.extend(this._sending_, key);
+            this._sending_ = $.extend(true, this._sending_, key);
         }
     };
 

@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: end_estoques_rel.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:46:29 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:16 GMT-0300 (BRT)
  * @constructor
  */
 function EndEstoquesRel(){
@@ -18,6 +18,7 @@ function EndEstoquesRel(){
         table: 'end_estoques_rel',
         metadata: {
             key: ['enderecos_key', 'estoques_key'],
+            label: ,
             fields: {
                 enderecos_key: {
                     tipo: types.comp.key, label: 'Enderecos:',

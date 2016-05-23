@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_categorias.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:44 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:17 GMT-0300 (BRT)
  * @constructor
  */
 function ContCategorias(){
@@ -18,6 +18,7 @@ function ContCategorias(){
         table: 'cont_categorias',
         metadata: {
             key: 'cont_categorias_key',
+            label: cont_categorias_key,
             fields: {
                 cont_categorias_key: {
                     tipo: types.comp.key, label: 'Cont Categorias:'
@@ -68,7 +69,7 @@ function ContCategorias(){
                 0: {
                     from: ['softlabs', 'contabil', 'cont_categorias'],
                     fields: [
-                        
+                        cont_categorias_key
                     ]
                 }, 
             },

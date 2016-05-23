@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: movimentacoes.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:04 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:00 GMT-0300 (BRT)
  * @constructor
  */
 function Movimentacoes(){
@@ -18,6 +18,7 @@ function Movimentacoes(){
         table: 'movimentacoes',
         metadata: {
             key: 'movimentacoes_key',
+            label: 'movimentacoes_key',
             fields: {
                 movimentacoes_key: {
                     tipo: types.comp.key, label: 'Movimentações:'
@@ -230,7 +231,7 @@ function Movimentacoes(){
                     tipo: types.comp.text_big, label: 'Doc Fiscal Extra:'
                 }, 
                 doc_fiscal_file: {
-                    tipo: types.comp.undefined, label: 'Doc Fiscal File:'
+                    tipo: types.comp.text_big, label: 'Doc Fiscal File:'
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
@@ -289,7 +290,7 @@ function Movimentacoes(){
                 0: {
                     from: ['softlabs', 'movimentacoes', 'movimentacoes'],
                     fields: [
-                        
+
                     ]
                 },
                 1: { 

@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: fin_baixas.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:43:34 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:29 GMT-0300 (BRT)
  * @constructor
  */
 function FinBaixas(){
@@ -18,6 +18,7 @@ function FinBaixas(){
         table: 'fin_baixas',
         metadata: {
             key: 'fin_baixas_key',
+            label: fin_baixas_key,
             fields: {
                 fin_baixas_key: {
                     tipo: types.comp.key, label: 'Fin Baixas:'
@@ -157,7 +158,7 @@ function FinBaixas(){
                 0: {
                     from: ['softlabs', 'financeiro', 'fin_baixas'],
                     fields: [
-                        
+                        fin_baixas_key
                     ]
                 },
                 1: { 

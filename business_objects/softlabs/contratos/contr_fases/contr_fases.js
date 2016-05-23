@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: contr_fases.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:55 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:28 GMT-0300 (BRT)
  * @constructor
  */
 function ContrFases(){
@@ -18,6 +18,7 @@ function ContrFases(){
         table: 'contr_fases',
         metadata: {
             key: 'contr_fases_key',
+            label: contr_fases_key,
             fields: {
                 contr_fases_key: {
                     tipo: types.comp.key, label: 'Contr Fases:'
@@ -90,7 +91,7 @@ function ContrFases(){
                 0: {
                     from: ['softlabs', 'contratos', 'contr_fases'],
                     fields: [
-                        
+                        contr_fases_key
                     ]
                 },
                 1: { 

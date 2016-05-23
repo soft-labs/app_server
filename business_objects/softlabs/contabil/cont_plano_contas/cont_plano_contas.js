@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_plano_contas.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:44 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:17 GMT-0300 (BRT)
  * @constructor
  */
 function ContPlanoContas(){
@@ -18,6 +18,7 @@ function ContPlanoContas(){
         table: 'cont_plano_contas',
         metadata: {
             key: 'cont_plano_contas_key',
+            label: 'plano_conta',
             fields: {
                 cont_plano_contas_key: {
                     tipo: types.comp.key, label: 'Cont Plano Contas:'
@@ -35,17 +36,17 @@ function ContPlanoContas(){
                     tipo: types.comp.dropdown, label: 'Parent:',
                     data: { 
                         key: ['parent_key'], 
-                        from: ['softlabs', 'contabil', 'cont_plano_contas'],
-                        template: '{row.parent_key} - {row.plano_conta}',
+                        from: ['softlabs', 'contabil', 'parent'], 
+                        template: '{row.parent_key} - {row.paren}', 
                         provider: '' 
                     } 
-                },
+                }, 
                 _integracao: {
                     tipo: types.comp.text, label: ' Integração:'
                 }, 
                 ativo: {
                     tipo: types.comp.int, label: 'Ativo:'
-                },
+                }, 
                 codigo: {
                     tipo: types.comp.text, label: 'Codigo:'
                 }, 
@@ -77,9 +78,8 @@ function ContPlanoContas(){
             },
             linhas: [
                 {titulo: "Informações de cont_plano_contas"},
-                {cont_plano_contas_key: 25, cont_categorias_key: 25, parent_key: 25, _left: 25}, 
-                {_right: 25, _moving: 25, _integracao: 25, ativo: 25}, 
-                {gera_despesa: 25, codigo: 25, plano_conta: 25, observacoes: 25}
+                {cont_plano_contas_key: 25, cont_categorias_key: 25, parent_key: 25, _integracao: 25}, 
+                {ativo: 25, codigo: 25, plano_conta: 25, observacoes: 25}
             ],
             ctrls: {
                 plano_conta: {
@@ -113,6 +113,13 @@ function ContPlanoContas(){
                         
                     ]
                 },
+                2: { 
+                    from: ['softlabs', 'contabil', 'parent'],
+                        join: {source: 0, tipo: types.join.left, on: 'parent_key', where: ''},
+                    fields: [
+                        
+                    ]
+                } 
             },
             where: [ 
                 ['AND', 0, 'cont_plano_contas_key', types.where.check]

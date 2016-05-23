@@ -391,9 +391,9 @@ function Ide(){
             );
             arq = arq.replace(new RegExp('_MOD_', 'g'), camelCase(mod['name']));
             arq = arq.replace(new RegExp('_ID_', 'g'), mod['name']);
-            arq = arq.replace('_DATA_', hoje);
+            arq = arq.replace(new RegExp('_DATA_', 'g'), hoje);
             arq = arq.replace(new RegExp('_KEY_', 'g'), str_key);
-            arq = arq.replace('_DEF_FIELD_', def_field);
+            arq = arq.replace(new RegExp('_DEF_FIELD_', 'g'), def_field || first_no_key_field);
             arq = arq.replace('_FIELDS_', fields);
             arq = arq.replace('_LINHAS_', linhas);
             arq = arq.replace('_CTRLS_', ctrls);
@@ -429,8 +429,7 @@ function Ide(){
             jade += "\n            button.ui.red.icon.mini.button(rv-data-action='" + owner + ' ' + pack + ' ' + mod + " delete', rv-data-key='row." + key[0] + "')";
             jade += "\n                i.delete.icon";
             jade += "\n                | Remover\n";
-
-            fs.writeFileSync(mod_dir + '/' + 'cards.jade', jade);
+            fs.writeFileSync(mod_dir + '/' + '_cards.jade', jade);
 
             jade  = '//';
             jade += '\n    Template default para: ' + owner + '.' + pack + '.' + mod['name'];
@@ -445,7 +444,27 @@ function Ide(){
             arr_fields.forEach(lbl => {
                 jade += '\n            td {row.' + lbl + '}';
             });
-            fs.writeFileSync(mod_dir + '/' + 'list.jade', jade);
+            fs.writeFileSync(mod_dir + '/' + '_list.jade', jade);
+
+
+            jade  = '//';
+            jade += '\n    Template choose para: ' + owner + '.' + pack + '.' + mod['name'];
+            jade += '\n    Criado em ' + hoje + '\n';
+            jade += '\ntable.ui.compact.striped.selectable.celled.table.choose-rows';
+            jade += '\n    thead';
+            arr_labels.forEach(lbl => {
+                jade += '\n        th ' + lbl;
+            });
+            jade += '\n    tbody';
+            jade += '\n        tr.cursor(';
+            jade += "\n            rv-each-row='choose.data.rows'";
+            jade += "\n            rv-on-click='choose.select'";
+            jade += "\n            rv-data-key='row." + key[0] + "'";
+            jade += '\n        )';
+            arr_fields.forEach(lbl => {
+                jade += '\n            td {row.' + lbl + '}';
+            });
+            fs.writeFileSync(mod_dir + '/' + '_choose.jade', jade);
 
         }
 

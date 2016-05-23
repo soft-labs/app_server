@@ -81,6 +81,26 @@ rivets.binders['row-key'] = {
     }
 };
 
+/**
+ * Binder de template
+ * Substituiu o que estiver em chaves por entradas no objeto de bind.
+ * Ex:  "rv-template-value=data.row | '{banco_key} - {banco}'"
+ */
+rivets.binders['template'] = function(el, value) {
+    var txt = this.options.formatters[0];
+    if (txt){
+        var model = this.model;
+        var val = txt.replace(/{(\w+)}/g, function(n,k){
+            return model[k];
+        });
+        if ($(el).is('input')) {
+            $(el).val(val);
+        } else {
+            $(el).html(val);
+        }
+    }
+};
+
 
 
 //endregion
@@ -98,6 +118,17 @@ rivets.formatters.concat = function(value) {
 };
 
 rivets.formatters.replace = function(value){
+    return arguments[1].replace('%s', value);
+};
+
+rivets.formatters.template = function(value){
+    var txt = this.options.formatters[0];
+    if (txt){
+        var val = txt.replace(/{(\w+)}/g, function(n,k){
+            return value[k];
+        });
+        $(el).val(val);
+    }
     return arguments[1].replace('%s', value);
 };
 

@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: sec_perfis.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:48:22 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:55 GMT-0300 (BRT)
  * @constructor
  */
 function SecPerfis(){
@@ -18,6 +18,7 @@ function SecPerfis(){
         table: 'sec_perfis',
         metadata: {
             key: 'sec_perfis_key',
+            label: sec_perfis_key,
             fields: {
                 sec_perfis_key: {
                     tipo: types.comp.key, label: 'Sec Perfis:'
@@ -71,7 +72,7 @@ function SecPerfis(){
                 0: {
                     from: ['softlabs', 'security', 'sec_perfis'],
                     fields: [
-                        
+                        sec_perfis_key
                     ]
                 }, 
             },

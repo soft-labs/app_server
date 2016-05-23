@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: contratos.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:55 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:28 GMT-0300 (BRT)
  * @constructor
  */
 function Contratos(){
@@ -18,6 +18,7 @@ function Contratos(){
         table: 'contratos',
         metadata: {
             key: 'contratos_key',
+            label: 'contratos_key',
             fields: {
                 contratos_key: {
                     tipo: types.comp.key, label: 'Contratos:'

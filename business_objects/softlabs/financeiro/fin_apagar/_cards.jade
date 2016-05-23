@@ -1,0 +1,20 @@
+//
+    Template default para: softlabs.financeiro.fin_lancamentos
+    Criado em Sun May 22 2016 11:24:24 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='softlabs.financeiro.[object Object].data.rows')
+    .content
+        .header {row.fin_lancamentos_key} - {row.fin_lancamentos_key}
+        .meta Keys: fin_lanc_origem_key, fin_lanc_destino_key, fin_lanc_tipos_key, fin_lanc_status_key, empresas_key, fin_contas_key, parceiros_key, contratos_key, movimentacoes_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='softlabs financeiro [object Object] edit', rv-data-key='row.fin_lancamentos_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='softlabs financeiro [object Object] delete', rv-data-key='row.fin_lancamentos_key')
+                i.delete.icon
+                | Remover

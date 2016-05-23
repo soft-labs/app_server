@@ -193,11 +193,15 @@ SQL.prototype._parseFields = function(sqlParams, prov, ctx_fields, meta_fields, 
 
         // Fields mapeados
     } else {
+        var all = true; //sqlParams.fields == '*';
+        if (all){
+           // sqlParams.fields = [];
+        }
         for (var f in meta_fields){
 
             // Primeiro a chegar entra
             if (!sqlParams.fields[f]) {
-                var ok = false;
+                var ok = all;
 
                 // Acrescenta _key
                 if (f.substr(-4) == '_key') {
@@ -727,7 +731,7 @@ SQL.prototype.change = function *(op, provider, obj) {
                             break;
 
                         default:
-                            value = "'" + value + "'";
+                            value = "'" + value + "'"; 998451053
                     }
 
                     // SQL

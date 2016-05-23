@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: emp_fin_contas_rel.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:45:08 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:47 GMT-0300 (BRT)
  * @constructor
  */
 function EmpFinContasRel(){
@@ -18,6 +18,7 @@ function EmpFinContasRel(){
         table: 'emp_fin_contas_rel',
         metadata: {
             key: ['empresas_key', 'fin_contas_key'],
+            label: padrao,
             fields: {
                 empresas_key: {
                     tipo: types.comp.key, label: 'Empresas:',
@@ -83,7 +84,7 @@ function EmpFinContasRel(){
                 0: {
                     from: ['softlabs', 'empresas', 'emp_fin_contas_rel'],
                     fields: [
-                        
+                        padrao
                     ]
                 },
                 1: { 

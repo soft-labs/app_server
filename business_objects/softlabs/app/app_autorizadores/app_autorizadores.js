@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_autorizadores.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:24 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:13:21 GMT-0300 (BRT)
  * @constructor
  */
 function AppAutorizadores(){
@@ -18,6 +18,7 @@ function AppAutorizadores(){
         table: 'app_autorizadores',
         metadata: {
             key: 'app_autorizadores_key',
+            label: 'autorizadores',
             fields: {
                 app_autorizadores_key: {
                     tipo: types.comp.key, label: 'App Autorizadores:'

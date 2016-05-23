@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_aut_regras.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:24 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:13:21 GMT-0300 (BRT)
  * @constructor
  */
 function AppAutRegras(){
@@ -18,6 +18,7 @@ function AppAutRegras(){
         table: 'app_aut_regras',
         metadata: {
             key: 'app_aut_regras_key',
+            label: 'regra',
             fields: {
                 app_aut_regras_key: {
                     tipo: types.comp.key, label: 'App Aut Regras:'

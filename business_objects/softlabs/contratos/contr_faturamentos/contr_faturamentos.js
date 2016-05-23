@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: contr_faturamentos.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:55 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:28 GMT-0300 (BRT)
  * @constructor
  */
 function ContrFaturamentos(){
@@ -18,6 +18,7 @@ function ContrFaturamentos(){
         table: 'contr_faturamentos',
         metadata: {
             key: 'contr_faturamentos_key',
+            label: contr_faturamentos_key,
             fields: {
                 contr_faturamentos_key: {
                     tipo: types.comp.key, label: 'Contr Faturamentos:'
@@ -97,7 +98,7 @@ function ContrFaturamentos(){
                 0: {
                     from: ['softlabs', 'contratos', 'contr_faturamentos'],
                     fields: [
-                        
+                        contr_faturamentos_key
                     ]
                 },
                 1: { 

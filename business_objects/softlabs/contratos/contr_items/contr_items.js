@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: contr_items.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:55 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:28 GMT-0300 (BRT)
  * @constructor
  */
 function ContrItems(){
@@ -18,6 +18,7 @@ function ContrItems(){
         table: 'contr_items',
         metadata: {
             key: 'contr_items_key',
+            label: contr_items_key,
             fields: {
                 contr_items_key: {
                     tipo: types.comp.key, label: 'Contr Items:'
@@ -93,7 +94,7 @@ function ContrItems(){
                 0: {
                     from: ['softlabs', 'contratos', 'contr_items'],
                     fields: [
-                        
+                        contr_items_key
                     ]
                 },
                 1: { 

@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: rh_habilidades.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:54 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:46 GMT-0300 (BRT)
  * @constructor
  */
 function RhHabilidades(){
@@ -18,6 +18,7 @@ function RhHabilidades(){
         table: 'rh_habilidades',
         metadata: {
             key: 'rh_habilidades_key',
+            label: 'habilidade',
             fields: {
                 rh_habilidades_key: {
                     tipo: types.comp.key, label: 'Rh Habilidades:'

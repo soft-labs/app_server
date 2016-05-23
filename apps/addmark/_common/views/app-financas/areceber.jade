@@ -1,0 +1,78 @@
+//
+   Created by labs on 11/05/16.
+
+.ui.container.transition.hidden.app-areceber
+    .ui.fluid.card
+        .content
+
+            // Mennu Agrupamento
+            span.right.floated.ui.secondary.menu
+                .ui.dropdown.item
+                    i.options.icon
+                    span.text Vencimento
+                    .menu
+                        .item(
+                        rv-each-menu='softlabs.financeiro.fin_areceber.options'
+                        rv-on-click='softlabs.financeiro.fin_areceber.popSubmenu'
+                        rv-data-key='menu._index_'
+                        data-sub='despesas'
+                        style="white-space: nowrap;"
+                        )
+                            i(rv-class='menu.icon')
+                            span.text {menu.label}
+
+            // Menu Listagem / Chart
+            span.right.floated.ui.secondary.menu
+                .ui.dropdown.item
+                    span.text
+                        i.list.icon
+                        | Listagem
+                    .menu
+                        .active.item(rv-on-click='home.showListDesp')
+                            i.list.icon
+                            span.text Listagem
+                        .item(rv-on-click='home.showChartDesp')
+                            i.pie.chart.icon
+                            span.text Gráficos
+
+            // Listagem
+            .header Recebimentos Programados
+            .meta Período 01/05/2016 à 25/05/2016
+            .description
+                canvas.transition.hidden#barPagtos
+
+                .ui.fluid.styled.accordion.non-exclusive.lista.despesas
+                    span(rv-each-row='softlabs.financeiro.fin_areceber.pivot')
+                        .active.title
+                            i.dropdown.icon
+                            | {row.label}
+                        .active.content
+                            .ui.bottom.aligned.stackable.grid
+                                .row.cursor.app-grid-rows(
+                                rv-each-item='row.values'
+                                rv-data-key='item.fin_lancamentos_key'
+                                data-action='softlabs financeiro fin_areceber edit'
+                                )
+                                    .thirteen.wide.column
+                                        | {item.parceiro} -
+                                        | {item.descricao}
+                                    .three.wide.column.right.aligned.app-receita {item.valor_bruto | numberFormat 2 ',' '.'}
+                                .row.app-grid-rows
+                                    .column.right.aligned.app-receita {row._stats.sum.valor_bruto | numberFormat 2 ',' '.'}
+
+
+        .extra.content
+            span.right.floated
+                | Total à Receber: R$ {softlabs.financeiro.fin_areceber.pivot._stats.sum.valor_bruto | numberFormat 2 ',' '.'}
+
+#form_areceber.ui.modal
+    .header
+        i.big.browser.icon
+        |  Lançamentos à Receber
+    div.content
+        .description#form_area_areceber
+    div.actions
+        div.ui.green.button.ok(
+            data-action='softlabs financeiro fin_areceber save',
+        ) Salvar Alterações
+        div.ui.orange.button.cancel Cancelar

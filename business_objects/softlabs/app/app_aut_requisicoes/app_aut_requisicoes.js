@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_aut_requisicoes.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:24 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:13:21 GMT-0300 (BRT)
  * @constructor
  */
 function AppAutRequisicoes(){
@@ -18,6 +18,7 @@ function AppAutRequisicoes(){
         table: 'app_aut_requisicoes',
         metadata: {
             key: 'app_aut_requisicoes_key',
+            label: app_aut_requisicoes_key,
             fields: {
                 app_aut_requisicoes_key: {
                     tipo: types.comp.key, label: 'App Aut Requisições:'
@@ -105,7 +106,7 @@ function AppAutRequisicoes(){
                 0: {
                     from: ['softlabs', 'app', 'app_aut_requisicoes'],
                     fields: [
-                        
+                        app_aut_requisicoes_key
                     ]
                 },
                 1: { 

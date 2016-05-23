@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_modelos.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:46:43 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:42 GMT-0300 (BRT)
  * @constructor
  */
 function ItemModelos(){
@@ -18,6 +18,7 @@ function ItemModelos(){
         table: 'item_modelos',
         metadata: {
             key: 'item_modelos_key',
+            label: 'modelo',
             fields: {
                 item_modelos_key: {
                     tipo: types.comp.key, label: 'Item Modelos:'

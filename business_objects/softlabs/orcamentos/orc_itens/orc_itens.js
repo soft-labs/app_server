@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: orc_itens.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:12 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:12 GMT-0300 (BRT)
  * @constructor
  */
 function OrcItens(){
@@ -18,6 +18,7 @@ function OrcItens(){
         table: 'orc_itens',
         metadata: {
             key: 'orc_itens_key',
+            label: orc_itens_key,
             fields: {
                 orc_itens_key: {
                     tipo: types.comp.key, label: 'Orc Itens:'
@@ -112,7 +113,7 @@ function OrcItens(){
                 0: {
                     from: ['softlabs', 'orcamentos', 'orc_itens'],
                     fields: [
-                        
+                        orc_itens_key
                     ]
                 },
                 1: { 

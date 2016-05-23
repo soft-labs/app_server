@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: rh_cargos_habilidades_rel.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:54 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:46 GMT-0300 (BRT)
  * @constructor
  */
 function RhCargosHabilidadesRel(){
@@ -18,6 +18,7 @@ function RhCargosHabilidadesRel(){
         table: 'rh_cargos_habilidades_rel',
         metadata: {
             key: ['rh_cargos_key', 'rh_habilidades_key'],
+            label: mandatoria,
             fields: {
                 rh_cargos_key: {
                     tipo: types.comp.key, label: 'Rh Cargos:',
@@ -86,7 +87,7 @@ function RhCargosHabilidadesRel(){
                 0: {
                     from: ['softlabs', 'rh', 'rh_cargos_habilidades_rel'],
                     fields: [
-                        
+                        mandatoria
                     ]
                 },
                 1: { 

@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: end_bairros.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:46:29 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:16 GMT-0300 (BRT)
  * @constructor
  */
 function EndBairros(){
@@ -18,6 +18,7 @@ function EndBairros(){
         table: 'end_bairros',
         metadata: {
             key: 'end_bairros_key',
+            label: 'bairro',
             fields: {
                 end_bairros_key: {
                     tipo: types.comp.key, label: 'End Bairros:'

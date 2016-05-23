@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: sec_regras.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:48:22 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:55 GMT-0300 (BRT)
  * @constructor
  */
 function SecRegras(){
@@ -18,6 +18,7 @@ function SecRegras(){
         table: 'sec_regras',
         metadata: {
             key: 'sec_regras_key',
+            label: 'regra',
             fields: {
                 sec_regras_key: {
                     tipo: types.comp.key, label: 'Sec Regras:'

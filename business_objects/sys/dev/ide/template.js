@@ -18,6 +18,7 @@ function _MOD_(){
         table: '_ID_',
         metadata: {
             key: _KEY_,
+            label: _DEF_FIELD_,
             fields: {_FIELDS_
             }
         }

@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_categ_sub.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:46:43 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:42 GMT-0300 (BRT)
  * @constructor
  */
 function ItemCategSub(){
@@ -18,6 +18,7 @@ function ItemCategSub(){
         table: 'item_categ_sub',
         metadata: {
             key: 'item_categ_sub_key',
+            label: item_categ_sub_key,
             fields: {
                 item_categ_sub_key: {
                     tipo: types.comp.key, label: 'Item Categ Sub:'
@@ -90,7 +91,7 @@ function ItemCategSub(){
                 0: {
                     from: ['softlabs', 'items', 'item_categ_sub'],
                     fields: [
-                        
+                        item_categ_sub_key
                     ]
                 },
                 1: { 

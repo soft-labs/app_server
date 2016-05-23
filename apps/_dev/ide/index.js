@@ -84,7 +84,7 @@ app = $.extend(true, app, {
 
         // Ajusta template e local onde serão colocadas as listagens
         tshark.send({
-            template: 'cards',
+            template: '_cards',
             list_place: '#listagem'
         });
 

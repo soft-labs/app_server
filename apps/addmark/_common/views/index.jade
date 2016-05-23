@@ -11,7 +11,7 @@ block app_css
 
 // Javascripts do app
 block app_scripts
-    script(type='application/javascript', src='cockpit.js')
+    script(type='application/javascript', src='views/app-home/home.js')
     script(type='application/javascript', src='configuracoes.js')
 
 
@@ -61,32 +61,48 @@ block content
                                 | {sub.label}
 
 
+        // Barra global de botões
         .ui.container.segment.app-bar
             .ui.steps
                 .step.cursor(
                     rv-class-active='item.active'
-                    rv-each-item='sys.app.menu.appbar'
+                    rv-each-item='appbar'
                     rv-data-action='item.api'
+                    brv-on-click='item.click'
                 )
                     i(rv-class='item.icon')
                     .content
-                        .title {item.title} / {item.icon}
+                        .title {item.title}
                         .description {item.description}
 
 
         // **** Cockpit **** //
         .ui.container.transition.app-home
-            include _areas/cockpit
+            include app-home/home
 
         .ui.container.app-financas.transition.hidden
-            include financas/financas
+            include app-financas/financas
 
         .ui.container.app-integracoes.transition.hidden
             | Hello Integracoes
 
         .ui.container.app-cadastros.transition.hidden
-            include cadastros/cadastros
+            include app-cadastros/cadastros
 
         .ui.container.app-sistema.transition.hidden
             | Hello Sistema
 
+
+
+        #form.ui.modal
+            .header
+                i.big.browser.icon
+                |  {title}
+            div.content
+                .description#form_area Edicao
+            div.actions
+                div.ui.green.button.ok(
+                    rv-data-action='api.save',
+                    rv-data-form='api.last_form_id'
+                ) Salvar Alterações
+                div.ui.orange.button.cancel Cancelar

@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: rh_cargos.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:54 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:46 GMT-0300 (BRT)
  * @constructor
  */
 function RhCargos(){
@@ -18,6 +18,7 @@ function RhCargos(){
         table: 'rh_cargos',
         metadata: {
             key: 'rh_cargos_key',
+            label: 'cargo',
             fields: {
                 rh_cargos_key: {
                     tipo: types.comp.key, label: 'Rh Cargos:'

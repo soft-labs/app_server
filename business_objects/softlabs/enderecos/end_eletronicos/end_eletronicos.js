@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: end_eletronicos.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:46:29 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:16 GMT-0300 (BRT)
  * @constructor
  */
 function EndEletronicos(){
@@ -18,6 +18,7 @@ function EndEletronicos(){
         table: 'end_eletronicos',
         metadata: {
             key: 'end_eletronicos_key',
+            label: end_eletronicos_key,
             fields: {
                 end_eletronicos_key: {
                     tipo: types.comp.key, label: 'End Eletronicos:'
@@ -80,7 +81,7 @@ function EndEletronicos(){
                 0: {
                     from: ['softlabs', 'enderecos', 'end_eletronicos'],
                     fields: [
-                        
+                        end_eletronicos_key
                     ]
                 },
                 1: { 

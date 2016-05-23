@@ -13,7 +13,7 @@ tshark.modulos._add('sys.app.menu', {
      * Inicializa o menu
      */
     init: function(){
-        this.appbar = [
+        app.appbar = [
             {icon: 'add icon', title: 'Lançar Débito',  description: 'Cadastrar nova despesa'},
             {icon: 'add icon', title: 'Lançar Crédito', description: 'Cadastrar nova receita'},
             {icon: 'add icon', title: 'Fluxo de Caixa', description: 'Ver o seu fluxo de caixa'}
@@ -59,17 +59,8 @@ tshark.modulos._add('sys.app.menu', {
         ;
 
         sys.app.menu.old_area = row['area'];
-        sys.app.menu.appbar = row['appbar'] || [];
+        app.resetAppBar(row['appbar'] || []);
 
-       /* app.bar.icon = 'circular large ' + row.icon;
-        app.bar.area = row.label;
-        row.submenu.forEach(s => {
-            if (s._index_ == ndx){
-                app.bar.secao = s.label;
-                app.bar.submenu = s['submenu'];
-            }
-        });
-        */
 
         // Exibe a nova área
         if (sys.app.menu.old_area) {
@@ -77,6 +68,10 @@ tshark.modulos._add('sys.app.menu', {
         }
         if (sys.app.menu.old_subarea) {
             $("." + sys.app.menu.old_subarea).transition('fade up');
+            var area = sys.app.menu.old_subarea.split('-')[1];
+            if (app[area]){
+                app[area].show();
+            }
         }
     }
 

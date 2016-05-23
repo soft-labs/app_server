@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_centro_resultados.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:44 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:17 GMT-0300 (BRT)
  * @constructor
  */
 function ContCentroResultados(){
@@ -18,6 +18,7 @@ function ContCentroResultados(){
         table: 'cont_centro_resultados',
         metadata: {
             key: 'cont_centro_resultados_key',
+            label: 'centro_resultado',
             fields: {
                 cont_centro_resultados_key: {
                     tipo: types.comp.key, label: 'Cont Centro Resultados:'
@@ -30,15 +31,6 @@ function ContCentroResultados(){
                         template: '{row.parent_key} - {row.paren}', 
                         provider: '' 
                     } 
-                }, 
-                _left: {
-                    tipo: types.comp.int, label: ' Left:'
-                }, 
-                _right: {
-                    tipo: types.comp.int, label: ' Right:'
-                }, 
-                _moving: {
-                    tipo: types.comp.int, label: ' Moving:'
                 }, 
                 _integracao: {
                     tipo: types.comp.text, label: ' Integração:'
@@ -77,9 +69,8 @@ function ContCentroResultados(){
             },
             linhas: [
                 {titulo: "Informações de cont_centro_resultados"},
-                {cont_centro_resultados_key: 25, parent_key: 25, _left: 25, _right: 25}, 
-                {_moving: 25, _integracao: 25, ativo: 25, codigo: 25}, 
-                {centro_resultado: 25, observacoes: 75}
+                {cont_centro_resultados_key: 25, parent_key: 25, _integracao: 25, ativo: 25}, 
+                {codigo: 25, centro_resultado: 25, observacoes: 50}
             ],
             ctrls: {
                 centro_resultado: {

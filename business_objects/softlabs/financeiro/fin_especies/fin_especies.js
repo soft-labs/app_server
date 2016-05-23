@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: fin_especies.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:43:34 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:29 GMT-0300 (BRT)
  * @constructor
  */
 function FinEspecies(){
@@ -18,6 +18,7 @@ function FinEspecies(){
         table: 'fin_especies',
         metadata: {
             key: 'fin_especies_key',
+            label: 'especie',
             fields: {
                 fin_especies_key: {
                     tipo: types.comp.key, label: 'Fin Especies:'

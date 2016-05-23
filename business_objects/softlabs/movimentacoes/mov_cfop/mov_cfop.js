@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: mov_cfop.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:04 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:00 GMT-0300 (BRT)
  * @constructor
  */
 function MovCfop(){
@@ -18,6 +18,7 @@ function MovCfop(){
         table: 'mov_cfop',
         metadata: {
             key: 'mov_cfop_key',
+            label: 'cfop',
             fields: {
                 mov_cfop_key: {
                     tipo: types.comp.key, label: 'Mov Cfop:'

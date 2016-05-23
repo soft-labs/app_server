@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: fin_contas_sec_rel.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:43:34 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:29 GMT-0300 (BRT)
  * @constructor
  */
 function FinContasSecRel(){
@@ -18,6 +18,7 @@ function FinContasSecRel(){
         table: 'fin_contas_sec_rel',
         metadata: {
             key: ['fin_contas_key', 'sec_usuarios_key'],
+            label: ve_movimento,
             fields: {
                 fin_contas_key: {
                     tipo: types.comp.key, label: 'Fin Contas:',
@@ -96,7 +97,7 @@ function FinContasSecRel(){
                 0: {
                     from: ['softlabs', 'financeiro', 'fin_contas_sec_rel'],
                     fields: [
-                        
+                        ve_movimento
                     ]
                 },
                 1: { 

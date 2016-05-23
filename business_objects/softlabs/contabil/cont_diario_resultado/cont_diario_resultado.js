@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_diario_resultado.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:44 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:17 GMT-0300 (BRT)
  * @constructor
  */
 function ContDiarioResultado(){
@@ -18,6 +18,7 @@ function ContDiarioResultado(){
         table: 'cont_diario_resultado',
         metadata: {
             key: 'cont_diario_resultado_key',
+            label: cont_diario_resultado_key,
             fields: {
                 cont_diario_resultado_key: {
                     tipo: types.comp.key, label: 'Cont Diario Resultado:'
@@ -137,7 +138,7 @@ function ContDiarioResultado(){
                 0: {
                     from: ['softlabs', 'contabil', 'cont_diario_resultado'],
                     fields: [
-                        
+                        cont_diario_resultado_key
                     ]
                 },
                 1: { 

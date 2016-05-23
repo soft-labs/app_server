@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_integracoes.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:24 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:13:21 GMT-0300 (BRT)
  * @constructor
  */
 function AppIntegracoes(){
@@ -18,6 +18,7 @@ function AppIntegracoes(){
         table: 'app_integracoes',
         metadata: {
             key: 'app_integracoes_key',
+            label: app_integracoes_key,
             fields: {
                 app_integracoes_key: {
                     tipo: types.comp.key, label: 'App Integrações:'
@@ -90,7 +91,7 @@ function AppIntegracoes(){
                 0: {
                     from: ['softlabs', 'app', 'app_integracoes'],
                     fields: [
-                        
+                        app_integracoes_key
                     ]
                 },
                 1: { 

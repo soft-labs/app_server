@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: contr_item_locacao.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:55 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:28 GMT-0300 (BRT)
  * @constructor
  */
 function ContrItemLocacao(){
@@ -18,6 +18,7 @@ function ContrItemLocacao(){
         table: 'contr_item_locacao',
         metadata: {
             key: ['contr_item_locacao_key', 'contr_item_locacaocol'],
+            label: contr_item_locacao_key,
             fields: {
                 contr_item_locacao_key: {
                     tipo: types.comp.key, label: 'Contr Item Locação:'
@@ -96,7 +97,7 @@ function ContrItemLocacao(){
                 0: {
                     from: ['softlabs', 'contratos', 'contr_item_locacao'],
                     fields: [
-                        
+                        contr_item_locacao_key
                     ]
                 },
                 1: { 

@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_impostos.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:44 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:17 GMT-0300 (BRT)
  * @constructor
  */
 function ContImpostos(){
@@ -18,6 +18,7 @@ function ContImpostos(){
         table: 'cont_impostos',
         metadata: {
             key: 'cont_impostos_key',
+            label: 'imposto',
             fields: {
                 cont_impostos_key: {
                     tipo: types.comp.key, label: 'Cont Impostos:'

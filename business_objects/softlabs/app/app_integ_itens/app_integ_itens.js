@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_integ_itens.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:24 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:13:21 GMT-0300 (BRT)
  * @constructor
  */
 function AppIntegItens(){
@@ -18,6 +18,7 @@ function AppIntegItens(){
         table: 'app_integ_itens',
         metadata: {
             key: 'app_integ_itens_key',
+            label: app_integ_itens_key,
             fields: {
                 app_integ_itens_key: {
                     tipo: types.comp.key, label: 'App Integ Itens:'
@@ -100,7 +101,7 @@ function AppIntegItens(){
                 0: {
                     from: ['softlabs', 'app', 'app_integ_itens'],
                     fields: [
-                        
+                        app_integ_itens_key
                     ]
                 },
                 1: { 

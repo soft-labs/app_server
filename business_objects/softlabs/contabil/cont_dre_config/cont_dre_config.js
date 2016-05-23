@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_dre_config.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:44 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:17 GMT-0300 (BRT)
  * @constructor
  */
 function ContDreConfig(){
@@ -18,6 +18,7 @@ function ContDreConfig(){
         table: 'cont_dre_config',
         metadata: {
             key: 'cont_dre_config_key',
+            label: cont_dre_config_key,
             fields: {
                 cont_dre_config_key: {
                     tipo: types.comp.key, label: 'Cont Dre Config:'
@@ -74,7 +75,7 @@ function ContDreConfig(){
                 0: {
                     from: ['softlabs', 'contabil', 'cont_dre_config'],
                     fields: [
-                        
+                        cont_dre_config_key
                     ]
                 }, 
             },

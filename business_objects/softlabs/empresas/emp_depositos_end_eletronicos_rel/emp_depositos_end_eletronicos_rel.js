@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: emp_depositos_end_eletronicos_rel.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:45:08 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:47 GMT-0300 (BRT)
  * @constructor
  */
 function EmpDepositosEndEletronicosRel(){
@@ -18,6 +18,7 @@ function EmpDepositosEndEletronicosRel(){
         table: 'emp_depositos_end_eletronicos_rel',
         metadata: {
             key: ['emp_depositos_key', 'end_eletronicos_key'],
+            label: ,
             fields: {
                 emp_depositos_key: {
                     tipo: types.comp.key, label: 'Emp Depositos:',

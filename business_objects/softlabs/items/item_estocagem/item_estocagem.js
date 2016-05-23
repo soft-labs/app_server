@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_estocagem.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:46:43 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:42 GMT-0300 (BRT)
  * @constructor
  */
 function ItemEstocagem(){
@@ -18,6 +18,7 @@ function ItemEstocagem(){
         table: 'item_estocagem',
         metadata: {
             key: 'item_estocagem_key',
+            label: item_estocagem_key,
             fields: {
                 item_estocagem_key: {
                     tipo: types.comp.key, label: 'Item Estocagem:'
@@ -115,7 +116,7 @@ function ItemEstocagem(){
                 0: {
                     from: ['softlabs', 'items', 'item_estocagem'],
                     fields: [
-                        
+                        item_estocagem_key
                     ]
                 },
                 1: { 

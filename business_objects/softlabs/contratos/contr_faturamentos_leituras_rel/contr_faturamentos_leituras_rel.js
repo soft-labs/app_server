@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: contr_faturamentos_leituras_rel.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:55 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:28 GMT-0300 (BRT)
  * @constructor
  */
 function ContrFaturamentosLeiturasRel(){
@@ -18,6 +18,7 @@ function ContrFaturamentosLeiturasRel(){
         table: 'contr_faturamentos_leituras_rel',
         metadata: {
             key: ['contr_item_leituras_key', 'contr_faturamentos_key'],
+            label: ,
             fields: {
                 contr_item_leituras_key: {
                     tipo: types.comp.key, label: 'Contr Item Leituras:',

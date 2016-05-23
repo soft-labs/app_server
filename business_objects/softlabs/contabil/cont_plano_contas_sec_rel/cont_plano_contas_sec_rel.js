@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_plano_contas_sec_rel.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:44 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:17 GMT-0300 (BRT)
  * @constructor
  */
 function ContPlanoContasSecRel(){
@@ -18,6 +18,7 @@ function ContPlanoContasSecRel(){
         table: 'cont_plano_contas_sec_rel',
         metadata: {
             key: ['cont_plano_contas_key', 'sec_usuarios_key'],
+            label: visualiza,
             fields: {
                 cont_plano_contas_key: {
                     tipo: types.comp.key, label: 'Cont Plano Contas:',
@@ -83,7 +84,7 @@ function ContPlanoContasSecRel(){
                 0: {
                     from: ['softlabs', 'contabil', 'cont_plano_contas_sec_rel'],
                     fields: [
-                        
+                        visualiza
                     ]
                 },
                 1: { 

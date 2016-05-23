@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_ent_arrecadadoras.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:44 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:17 GMT-0300 (BRT)
  * @constructor
  */
 function ContEntArrecadadoras(){
@@ -18,6 +18,7 @@ function ContEntArrecadadoras(){
         table: 'cont_ent_arrecadadoras',
         metadata: {
             key: 'cont_ent_arrecadadoras_key',
+            label: cont_ent_arrecadadoras_key,
             fields: {
                 cont_ent_arrecadadoras_key: {
                     tipo: types.comp.key, label: 'Cont Ent Arrecadadoras:'
@@ -90,7 +91,7 @@ function ContEntArrecadadoras(){
                 0: {
                     from: ['softlabs', 'contabil', 'cont_ent_arrecadadoras'],
                     fields: [
-                        
+                        cont_ent_arrecadadoras_key
                     ]
                 },
                 1: { 

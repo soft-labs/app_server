@@ -54,7 +54,11 @@ TShark.prototype.api_map = {
     delete  :               ['DELETE',    '/{key}'],
 
     save    :               ['POST',      '/'],
-    exec    :               ['POST',      '/{func}']
+    exec    :               ['POST',      '/{func}'],
+
+
+    // Comandos internos    | Verbo       | URL
+    choose  :               ['GET',       '/']
 };
 
 /**
@@ -227,6 +231,9 @@ $.fn.api.settings.api = {};
         // Só roda em modulo registrado
         if (tshark.isRegistered(path)) {
 
+            // Executa onBefore
+            var mod = tshark.getMod(path);
+
             // Interno
             if (tshark[map + '_before']) {
                 if (!tshark[map + '_before'].call(mod, el, settings)) return false;
@@ -236,9 +243,6 @@ $.fn.api.settings.api = {};
             if (app[map + '_before']) {
                 if (!app[map + '_before'].call(mod, el, settings)) return false;
             }
-
-            // Executa onBefore
-            var mod = tshark.getMod(path);
 
             // Interno - modulo
             if (mod[map + '_before'] && !settings['_on_before_']) {
@@ -472,7 +476,7 @@ $.fn.api.settings.api = {};
     TShark.prototype.list_before = function(sender, settings){
 
         // Seta template default
-        settings.data['template'] = 'cards';
+        settings.data['template'] = '_cards';
 
         // Libera
         return true;
@@ -681,5 +685,46 @@ $.fn.api.settings.api = {};
 
     //endregion
 
+
+    //region :: API Interna - Choose
+
+    /**
+     * onBefore: Chamado antes de descer ao server
+     *  - this é o módulo da operação.
+     * @param sender elemento html que acionou a API
+     * @param settings pacote que será enviado ao server
+     */
+    TShark.prototype.choose_before = function(sender, settings){
+
+        // Seta template default
+        settings.data['template'] = '_choose';
+
+        var mod = tshark.getMod($(sender).data('from'));
+        app.choose.target = mod.data;
+        app.choose.element = $(sender);
+        
+        // Libera
+        return true;
+    };
+
+    /**
+     * Callback de listagem de dados
+     * @param mod { TShark.modulo }
+     * @param response
+     * @since 06/10/15
+     */
+    TShark.prototype.choose_callback = function (mod, response) {
+
+        if (response['data']) {
+            app.choose.data.reset(response['data']);
+        }
+        
+        if (response['layout']) {
+            app.choose.dialog = alertify.choose(response.layout);
+        }
+
+    };
+
+    //endregion
 
 })($);

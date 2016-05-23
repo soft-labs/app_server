@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: fin_bancos.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:43:34 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:29 GMT-0300 (BRT)
  * @constructor
  */
 function FinBancos(){
@@ -18,18 +18,22 @@ function FinBancos(){
         table: 'fin_bancos',
         metadata: {
             key: 'fin_bancos_key',
+            label: 'banco',
             fields: {
                 fin_bancos_key: {
                     tipo: types.comp.key, label: 'Fin Bancos:'
                 }, 
+                ativo: {
+                    tipo: types.comp.int, label: 'Ativo:'
+                }, 
+                codigo: {
+                    tipo: types.comp.text, label: 'Cádigo:'
+                }, 
                 banco: {
                     tipo: types.comp.text, label: 'Banco:'
                 }, 
-                codigo: {
-                    tipo: types.comp.text, label: 'Codigo:'
-                }, 
-                ativo: {
-                    tipo: types.comp.int, label: 'Ativo:'
+                url: {
+                    tipo: types.comp.text, label: 'Site:'
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
@@ -55,9 +59,9 @@ function FinBancos(){
                 size  : types.form.size.small
             },
             linhas: [
-                {titulo: "Informações de fin_bancos"},
-                {fin_bancos_key: 25, banco: 25, codigo: 25, ativo: 25}, 
-                {observacoes: 100}
+                {titulo: "Cadastro de Banco"},
+                {fin_bancos_key: 25, ativo: 25, codigo: 25, banco: 25}, 
+                {url: 25, observacoes: 75}
             ],
             ctrls: {
                 banco: {

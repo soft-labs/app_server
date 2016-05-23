@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: rh_funcionarios.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:54 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:46 GMT-0300 (BRT)
  * @constructor
  */
 function RhFuncionarios(){
@@ -18,6 +18,7 @@ function RhFuncionarios(){
         table: 'rh_funcionarios',
         metadata: {
             key: 'rh_funcionarios_key',
+            label: rh_funcionarios_key,
             fields: {
                 rh_funcionarios_key: {
                     tipo: types.comp.key, label: 'Rh Funcionarios:'
@@ -105,7 +106,7 @@ function RhFuncionarios(){
                 0: {
                     from: ['softlabs', 'rh', 'rh_funcionarios'],
                     fields: [
-                        
+                        rh_funcionarios_key
                     ]
                 },
                 1: { 

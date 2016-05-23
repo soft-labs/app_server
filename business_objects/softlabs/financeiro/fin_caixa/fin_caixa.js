@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: fin_caixa.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:43:34 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:29 GMT-0300 (BRT)
  * @constructor
  */
 function FinCaixa(){
@@ -18,6 +18,7 @@ function FinCaixa(){
         table: 'fin_caixa',
         metadata: {
             key: 'fin_caixa_key',
+            label: fin_caixa_key,
             fields: {
                 fin_caixa_key: {
                     tipo: types.comp.key, label: 'Fin Caixa:'
@@ -116,7 +117,7 @@ function FinCaixa(){
                 0: {
                     from: ['softlabs', 'financeiro', 'fin_caixa'],
                     fields: [
-                        
+                        fin_caixa_key
                     ]
                 },
                 1: { 

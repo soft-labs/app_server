@@ -128,7 +128,15 @@ var CONSOLE_ON = true;
 
         // Bind de APIs em change
         $('[onchange]').not('.api-binded')
-            .api(this.blur_api)
+            .api(this.change_api)
+            .addClass('api-binded')
+            .each(function(){
+                $(this).data('action', $(this).attr('onchange'));
+            })
+        ;
+        // Bind de APIs em change
+        $('[onvalue]').not('.api-binded')
+            .api(this.change_api)
             .addClass('api-binded')
             .each(function(){
                 $(this).data('action', $(this).attr('onchange'));
@@ -374,7 +382,7 @@ var CONSOLE_ON = true;
             }
         }
     };
-
+    /* */
     //endregion
 
 
@@ -592,7 +600,7 @@ var CONSOLE_ON = true;
         if (data){
             this._sending_[key] = data;
         } else {
-            this._sending_ = $.extend(this._sending_, key);
+            this._sending_ = $.extend(true, this._sending_, key);
         }
     };
 

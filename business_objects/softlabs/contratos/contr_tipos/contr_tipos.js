@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: contr_tipos.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:55 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:28 GMT-0300 (BRT)
  * @constructor
  */
 function ContrTipos(){
@@ -18,6 +18,7 @@ function ContrTipos(){
         table: 'contr_tipos',
         metadata: {
             key: 'contr_tipos_key',
+            label: 'tipo',
             fields: {
                 contr_tipos_key: {
                     tipo: types.comp.key, label: 'Contr Tipos:'

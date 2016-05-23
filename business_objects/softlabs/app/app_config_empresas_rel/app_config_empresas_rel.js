@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_config_empresas_rel.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:24 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:13:21 GMT-0300 (BRT)
  * @constructor
  */
 function AppConfigEmpresasRel(){
@@ -18,6 +18,7 @@ function AppConfigEmpresasRel(){
         table: 'app_config_empresas_rel',
         metadata: {
             key: ['app_config_key', 'empresas_key'],
+            label: ,
             fields: {
                 app_config_key: {
                     tipo: types.comp.key, label: 'App Config:',

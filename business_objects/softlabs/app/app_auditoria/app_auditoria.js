@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_auditoria.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:24 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:13:21 GMT-0300 (BRT)
  * @constructor
  */
 function AppAuditoria(){
@@ -18,6 +18,7 @@ function AppAuditoria(){
         table: 'app_auditoria',
         metadata: {
             key: 'app_auditoria_key',
+            label: app_auditoria_key,
             fields: {
                 app_auditoria_key: {
                     tipo: types.comp.key, label: 'App Auditoria:'
@@ -116,7 +117,7 @@ function AppAuditoria(){
                 0: {
                     from: ['softlabs', 'app', 'app_auditoria'],
                     fields: [
-                        
+                        app_auditoria_key
                     ]
                 },
                 1: { 

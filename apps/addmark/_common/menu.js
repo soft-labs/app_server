@@ -36,10 +36,12 @@ module.exports = {
                 },
                 {
                     label: "Contas à Pagar",
+                    api: "softlabs financeiro fin_apagar list",
                     area: 'app-apagar'
                 },
                 {
                     label: "Contas à Receber",
+                    api: "softlabs financeiro fin_areceber list",
                     area: 'app-areceber'
                 },
                 {
@@ -73,10 +75,14 @@ module.exports = {
             icon: "edit icon",
             submenu: [
                 {
-                    label: "Clientes"
+                    label: "Clientes",
+                    api: "softlabs empresas emp_clientes list",
+                    area: "app-contas"
                 },
                 {
-                    label: "Fornecedores"
+                    label: "Fornecedores",
+                    api: "softlabs empresas emp_fornecedores list",
+                    area: "app-contas"
                 },
                 {
                     label: "Bancos e Contas",

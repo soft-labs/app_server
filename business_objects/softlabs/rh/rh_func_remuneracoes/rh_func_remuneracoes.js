@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: rh_func_remuneracoes.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:54 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:46 GMT-0300 (BRT)
  * @constructor
  */
 function RhFuncRemuneracoes(){
@@ -18,6 +18,7 @@ function RhFuncRemuneracoes(){
         table: 'rh_func_remuneracoes',
         metadata: {
             key: 'rh_func_remuneracoes_key',
+            label: rh_func_remuneracoes_key,
             fields: {
                 rh_func_remuneracoes_key: {
                     tipo: types.comp.key, label: 'Rh Func Remunerações:'
@@ -96,7 +97,7 @@ function RhFuncRemuneracoes(){
                 0: {
                     from: ['softlabs', 'rh', 'rh_func_remuneracoes'],
                     fields: [
-                        
+                        rh_func_remuneracoes_key
                     ]
                 },
                 1: { 

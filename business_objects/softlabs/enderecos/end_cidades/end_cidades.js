@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: end_cidades.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:46:29 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:16 GMT-0300 (BRT)
  * @constructor
  */
 function EndCidades(){
@@ -18,6 +18,7 @@ function EndCidades(){
         table: 'end_cidades',
         metadata: {
             key: 'end_cidades_key',
+            label: 'cidade',
             fields: {
                 end_cidades_key: {
                     tipo: types.comp.key, label: 'End Cidades:'

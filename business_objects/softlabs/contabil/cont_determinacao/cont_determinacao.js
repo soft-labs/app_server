@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_determinacao.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:44 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:14:17 GMT-0300 (BRT)
  * @constructor
  */
 function ContDeterminacao(){
@@ -18,6 +18,7 @@ function ContDeterminacao(){
         table: 'cont_determinacao',
         metadata: {
             key: 'cont_determinacao_key',
+            label: cont_determinacao_key,
             fields: {
                 cont_determinacao_key: {
                     tipo: types.comp.key, label: 'Cont Determinação:'
@@ -213,7 +214,7 @@ function ContDeterminacao(){
                 0: {
                     from: ['softlabs', 'contabil', 'cont_determinacao'],
                     fields: [
-                        
+                        cont_determinacao_key
                     ]
                 },
                 1: { 

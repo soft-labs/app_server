@@ -167,12 +167,12 @@ function formatDateTimeIn(value, format){
     value = value.replace('T', ' ');
     value = value.replace('.000Z', '');
 
-    var dt = value.replace('-', '/');
-    if (dt[2] == '/'){
+    var dt = value.replace(/-/g, '/');
+    //if (dt[2] == '/'){
         return "STR_TO_DATE( '" + dt + "', '" + format + "')";
-    } else {
-        return "'" + value + "'";
-    }
+    //} else {
+    //    return "'" + value + "'";
+    //}
 }
 
 /**
@@ -181,7 +181,7 @@ function formatDateTimeIn(value, format){
  * @returns {string}
  */
 MySql.prototype.formatDateIn = function(value){
-    return value == formatDateTimeIn(value, '%d/%m/%Y');
+    return formatDateTimeIn(value, '%Y/%m/%d');
 };
 
 /**

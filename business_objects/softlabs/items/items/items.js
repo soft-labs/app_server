@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: items.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:46:43 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:42 GMT-0300 (BRT)
  * @constructor
  */
 function Items(){
@@ -18,6 +18,7 @@ function Items(){
         table: 'items',
         metadata: {
             key: 'items_key',
+            label: 'item',
             fields: {
                 items_key: {
                     tipo: types.comp.key, label: 'Items:'

@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_logs_tipos.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:24 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:13:21 GMT-0300 (BRT)
  * @constructor
  */
 function AppLogsTipos(){
@@ -18,6 +18,7 @@ function AppLogsTipos(){
         table: 'app_logs_tipos',
         metadata: {
             key: 'app_logs_tipos_key',
+            label: app_logs_tipos_key,
             fields: {
                 app_logs_tipos_key: {
                     tipo: types.comp.key, label: 'App Logs Tipos:'
@@ -68,7 +69,7 @@ function AppLogsTipos(){
                 0: {
                     from: ['softlabs', 'app', 'app_logs_tipos'],
                     fields: [
-                        
+                        app_logs_tipos_key
                     ]
                 }, 
             },

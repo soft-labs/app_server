@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: mov_itens_status.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:04 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:00 GMT-0300 (BRT)
  * @constructor
  */
 function MovItensStatus(){
@@ -18,6 +18,7 @@ function MovItensStatus(){
         table: 'mov_itens_status',
         metadata: {
             key: 'mov_itens_status_key',
+            label: 'status',
             fields: {
                 mov_itens_status_key: {
                     tipo: types.comp.key, label: 'Mov Itens Status:'

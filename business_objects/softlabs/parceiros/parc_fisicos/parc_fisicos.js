@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: parc_fisicos.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:22 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:25 GMT-0300 (BRT)
  * @constructor
  */
 function ParcFisicos(){
@@ -18,6 +18,7 @@ function ParcFisicos(){
         table: 'parc_fisicos',
         metadata: {
             key: 'parceiros_key',
+            label: parceiros_key,
             fields: {
                 parceiros_key: {
                     tipo: types.comp.key, label: 'Parceiros:'
@@ -100,7 +101,7 @@ function ParcFisicos(){
                 0: {
                     from: ['softlabs', 'parceiros', 'parc_fisicos'],
                     fields: [
-                        
+                        parceiros_key
                     ]
                 }, 
             },

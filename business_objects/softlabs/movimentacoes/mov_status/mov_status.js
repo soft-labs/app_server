@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: mov_status.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:47:04 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:16:00 GMT-0300 (BRT)
  * @constructor
  */
 function MovStatus(){
@@ -18,6 +18,7 @@ function MovStatus(){
         table: 'mov_status',
         metadata: {
             key: 'mov_status_key',
+            label: mov_status_key,
             fields: {
                 mov_status_key: {
                     tipo: types.comp.key, label: 'Mov Status:'
@@ -68,7 +69,7 @@ function MovStatus(){
                 0: {
                     from: ['softlabs', 'movimentacoes', 'mov_status'],
                     fields: [
-                        
+                        mov_status_key
                     ]
                 }, 
             },

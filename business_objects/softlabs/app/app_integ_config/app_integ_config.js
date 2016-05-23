@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_integ_config.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:44:24 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:13:21 GMT-0300 (BRT)
  * @constructor
  */
 function AppIntegConfig(){
@@ -18,6 +18,7 @@ function AppIntegConfig(){
         table: 'app_integ_config',
         metadata: {
             key: 'app_integ_config_key',
+            label: 'config',
             fields: {
                 app_integ_config_key: {
                     tipo: types.comp.key, label: 'App Integ Config:'

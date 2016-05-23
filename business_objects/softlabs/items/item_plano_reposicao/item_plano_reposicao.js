@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_plano_reposicao.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 16 2016 10:46:43 GMT-0300 (BRT)
+ * @since Mon May 23 2016 09:15:42 GMT-0300 (BRT)
  * @constructor
  */
 function ItemPlanoReposicao(){
@@ -18,6 +18,7 @@ function ItemPlanoReposicao(){
         table: 'item_plano_reposicao',
         metadata: {
             key: 'item_plano_reposicao_key',
+            label: item_plano_reposicao_key,
             fields: {
                 item_plano_reposicao_key: {
                     tipo: types.comp.key, label: 'Item Plano Reposição:'
@@ -84,7 +85,7 @@ function ItemPlanoReposicao(){
                 0: {
                     from: ['softlabs', 'items', 'item_plano_reposicao'],
                     fields: [
-                        
+                        item_plano_reposicao_key
                     ]
                 }, 
             },
