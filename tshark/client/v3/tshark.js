@@ -229,6 +229,32 @@ var CONSOLE_ON = true;
             .addClass('binded')
         ;
 
+        var dateObj = {
+            container: '.app',
+            format: 'dd/mm/yyyy',
+            format_submit: 'yyyy-mm-dd',
+            onSet: function(thingSet) {
+                this.$node.trigger('input');
+            }
+        };
+
+        $(ref).find('.date').not('.binded')
+            .pickadate(dateObj)
+            .addClass('binded')
+        ;
+
+        $(ref).find('.datetime').not('.binded')
+            .pickadate(dateObj)
+            .addClass('binded')
+        ;
+
+        $(ref).find('.time').not('.binded')
+            .pickatime({
+                container: '.app'
+            })
+            .addClass('binded')
+        ;
+
         $(ref).find('[data-help]').not('.binded')
             .each(function(){
                 $(this).attr('data-content', $(this).data('help'));

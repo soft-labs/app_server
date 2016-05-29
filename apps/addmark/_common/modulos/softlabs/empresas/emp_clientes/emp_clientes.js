@@ -111,8 +111,9 @@ tshark.modulos._add('softlabs.empresas.emp_clientes', {
 
     /**
      * Chamado antes de requisitar uma interface de formulário
-     *
+     */
     onBeforeForm: function(el, settings){
+        this.send('form_place', "#form_area");
 
         // Libera ou não para continuar
         return true;
@@ -120,9 +121,17 @@ tshark.modulos._add('softlabs.empresas.emp_clientes', {
 
     /**
      * Chamado após receber qualquer das interfaces de formulário
-     *
+     */
     onAfterForm: function(response, next){
+        $('#form')
+            .modal('setting', 'transition', 'fade')
+            .modal('setting', 'allowMultiple', true)
+            .modal('show');
 
+        $('#form .button.ok')
+            .data('action', "softlabs empresas emp_clientes save")
+            .api(tshark.api)
+        ;
     },
 
     /* */

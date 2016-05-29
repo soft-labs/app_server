@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: enderecos.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:15:16 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:09:35 GMT-0300 (BRT)
  * @constructor
  */
 function Enderecos(){
@@ -24,38 +24,38 @@ function Enderecos(){
                     tipo: types.comp.key, label: 'Enderecos:'
                 }, 
                 end_bairros_key: {
-                    tipo: types.comp.dropdown, label: 'End Bairros:',
+                    tipo: types.comp.choose, label: 'End Bairros:',
                     data: { 
                         key: ['end_bairros_key'], 
                         from: ['softlabs', 'enderecos', 'end_bairros'], 
-                        template: '{row.end_bairros_key} - {row.end_bairro}', 
+                        template: '{end_bairros_key} - {end_bairro}', 
                         provider: '' 
                     } 
                 }, 
                 end_cidades_key: {
-                    tipo: types.comp.dropdown, label: 'End Cidades:',
+                    tipo: types.comp.choose, label: 'End Cidades:',
                     data: { 
                         key: ['end_cidades_key'], 
                         from: ['softlabs', 'enderecos', 'end_cidades'], 
-                        template: '{row.end_cidades_key} - {row.end_cidade}', 
+                        template: '{end_cidades_key} - {end_cidade}', 
                         provider: '' 
                     } 
                 }, 
                 end_estados_key: {
-                    tipo: types.comp.dropdown, label: 'End Estados:',
+                    tipo: types.comp.choose, label: 'End Estados:',
                     data: { 
                         key: ['end_estados_key'], 
                         from: ['softlabs', 'enderecos', 'end_estados'], 
-                        template: '{row.end_estados_key} - {row.end_estado}', 
+                        template: '{end_estados_key} - {end_estado}', 
                         provider: '' 
                     } 
                 }, 
                 end_paises_key: {
-                    tipo: types.comp.dropdown, label: 'End Paises:',
+                    tipo: types.comp.choose, label: 'End Paises:',
                     data: { 
                         key: ['end_paises_key'], 
                         from: ['softlabs', 'enderecos', 'end_paises'], 
-                        template: '{row.end_paises_key} - {row.end_paise}', 
+                        template: '{end_paises_key} - {end_paise}', 
                         provider: '' 
                     } 
                 }, 
@@ -98,7 +98,10 @@ function Enderecos(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de enderecos"},
@@ -128,33 +131,33 @@ function Enderecos(){
                 0: {
                     from: ['softlabs', 'enderecos', 'enderecos'],
                     fields: [
-                        'endereco'
+                        
                     ]
                 },
                 1: { 
                     from: ['softlabs', 'enderecos', 'end_bairros'],
-                        join: {source: 0, tipo: types.join.left, on: 'end_bairros_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'end_bairros_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 2: { 
                     from: ['softlabs', 'enderecos', 'end_cidades'],
-                        join: {source: 0, tipo: types.join.left, on: 'end_cidades_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'end_cidades_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 3: { 
                     from: ['softlabs', 'enderecos', 'end_estados'],
-                        join: {source: 0, tipo: types.join.left, on: 'end_estados_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'end_estados_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 4: { 
                     from: ['softlabs', 'enderecos', 'end_paises'],
-                        join: {source: 0, tipo: types.join.left, on: 'end_paises_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'end_paises_key', where: ''},
                     fields: [
                         
                     ]
@@ -166,8 +169,13 @@ function Enderecos(){
             order: [
                 [0, 'endereco', 'asc']
             ],
-            search: [ 
-                {alias: 0, field: 'endereco',  param: types.search.like_full }
+            search: [
+                    {alias: 0, field: 'cep',  param: types.search.like_full },
+                    {alias: 0, field: 'endereco',  param: types.search.like_full },
+                    {alias: 0, field: 'numero',  param: types.search.like_full },
+                    {alias: 0, field: 'complemento',  param: types.search.like_full },
+                    {alias: 0, field: 'bairro',  param: types.search.like_full },
+                    {alias: 0, field: 'localidade',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -193,6 +201,9 @@ function Enderecos(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -206,10 +217,16 @@ function Enderecos(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -223,10 +240,16 @@ function Enderecos(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -240,18 +263,68 @@ function Enderecos(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -266,9 +339,15 @@ function Enderecos(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -283,18 +362,15 @@ function Enderecos(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -309,9 +385,15 @@ function Enderecos(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -326,9 +408,15 @@ function Enderecos(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -343,13 +431,15 @@ function Enderecos(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

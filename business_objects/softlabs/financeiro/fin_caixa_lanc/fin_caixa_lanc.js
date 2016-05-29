@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: fin_caixa_lanc.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:15:29 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:09:45 GMT-0300 (BRT)
  * @constructor
  */
 function FinCaixaLanc(){
@@ -18,53 +18,53 @@ function FinCaixaLanc(){
         table: 'fin_caixa_lanc',
         metadata: {
             key: 'fin_caixa_lanc_key',
-            label: fin_caixa_lanc_key,
+            label: 'historico',
             fields: {
                 fin_caixa_lanc_key: {
                     tipo: types.comp.key, label: 'Fin Caixa Lanc:'
                 }, 
                 fin_caixa_key: {
-                    tipo: types.comp.dropdown, label: 'Fin Caixa:',
+                    tipo: types.comp.choose, label: 'Fin Caixa:',
                     data: { 
                         key: ['fin_caixa_key'], 
                         from: ['softlabs', 'financeiro', 'fin_caixa'], 
-                        template: '{row.fin_caixa_key} - {row.fin_caix}', 
+                        template: '{fin_caixa_key} - {fin_caix}', 
                         provider: '' 
                     } 
                 }, 
                 fin_especies_key: {
-                    tipo: types.comp.dropdown, label: 'Fin Especies:',
+                    tipo: types.comp.choose, label: 'Fin Especies:',
                     data: { 
                         key: ['fin_especies_key'], 
                         from: ['softlabs', 'financeiro', 'fin_especies'], 
-                        template: '{row.fin_especies_key} - {row.fin_especie}', 
+                        template: '{fin_especies_key} - {fin_especie}', 
                         provider: '' 
                     } 
                 }, 
                 fin_contas_key: {
-                    tipo: types.comp.dropdown, label: 'Fin Contas:',
+                    tipo: types.comp.choose, label: 'Fin Contas:',
                     data: { 
                         key: ['fin_contas_key'], 
                         from: ['softlabs', 'financeiro', 'fin_contas'], 
-                        template: '{row.fin_contas_key} - {row.fin_conta}', 
+                        template: '{fin_contas_key} - {fin_conta}', 
                         provider: '' 
                     } 
                 }, 
                 entidades_key: {
-                    tipo: types.comp.dropdown, label: 'Entidades:',
+                    tipo: types.comp.choose, label: 'Entidades:',
                     data: { 
                         key: ['entidades_key'], 
                         from: ['softlabs', 'financeiro', 'entidades'], 
-                        template: '{row.entidades_key} - {row.entidade}', 
+                        template: '{entidades_key} - {entidade}', 
                         provider: '' 
                     } 
                 }, 
                 sec_usuarios_key: {
-                    tipo: types.comp.dropdown, label: 'Sec Usuarios:',
+                    tipo: types.comp.choose, label: 'Sec Usuarios:',
                     data: { 
                         key: ['sec_usuarios_key'], 
                         from: ['softlabs', 'security', 'sec_usuarios'], 
-                        template: '{row.sec_usuarios_key} - {row.sec_usuario}', 
+                        template: '{sec_usuarios_key} - {sec_usuario}', 
                         provider: '' 
                     } 
                 }, 
@@ -104,7 +104,10 @@ function FinCaixaLanc(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de fin_caixa_lanc"},
@@ -113,7 +116,10 @@ function FinCaixaLanc(){
                 {historico: 25, credito: 25, debito: 25, observacoes: 25}
             ],
             ctrls: {
-                
+                historico: {
+                    extra_right: { class: '', tag: '' },
+                    extra_left:  { class: '', tag: '' }
+                }
             }
         }
 
@@ -131,40 +137,40 @@ function FinCaixaLanc(){
                 0: {
                     from: ['softlabs', 'financeiro', 'fin_caixa_lanc'],
                     fields: [
-                        fin_caixa_lanc_key
+                        
                     ]
                 },
                 1: { 
                     from: ['softlabs', 'financeiro', 'fin_caixa'],
-                        join: {source: 0, tipo: types.join.left, on: 'fin_caixa_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'fin_caixa_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 2: { 
                     from: ['softlabs', 'financeiro', 'fin_especies'],
-                        join: {source: 0, tipo: types.join.left, on: 'fin_especies_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'fin_especies_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 3: { 
                     from: ['softlabs', 'financeiro', 'fin_contas'],
-                        join: {source: 0, tipo: types.join.left, on: 'fin_contas_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'fin_contas_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 4: { 
                     from: ['softlabs', 'financeiro', 'entidades'],
-                        join: {source: 0, tipo: types.join.left, on: 'entidades_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'entidades_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 5: { 
                     from: ['softlabs', 'security', 'sec_usuarios'],
-                        join: {source: 0, tipo: types.join.left, on: 'sec_usuarios_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'sec_usuarios_key', where: ''},
                     fields: [
                         
                     ]
@@ -174,10 +180,11 @@ function FinCaixaLanc(){
                 ['AND', 0, 'fin_caixa_lanc_key', types.where.check]
             ],
             order: [
-                ['0', 'fin_caixa_lanc_key', 'desc']
+                [0, 'historico', 'asc']
             ],
-            search: [ 
-                
+            search: [
+                    {alias: 3, field: 'data',  param: types.search.maior_igual },
+                    {alias: 3, field: 'historico',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -203,6 +210,9 @@ function FinCaixaLanc(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -216,10 +226,16 @@ function FinCaixaLanc(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -233,10 +249,16 @@ function FinCaixaLanc(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -250,18 +272,68 @@ function FinCaixaLanc(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -276,9 +348,15 @@ function FinCaixaLanc(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -293,18 +371,15 @@ function FinCaixaLanc(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -319,9 +394,15 @@ function FinCaixaLanc(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -336,9 +417,15 @@ function FinCaixaLanc(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -353,13 +440,15 @@ function FinCaixaLanc(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

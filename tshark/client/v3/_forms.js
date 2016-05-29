@@ -214,6 +214,46 @@ if(!alertify.choose){
     };
 
     /**
+     * Mascaras de digitação para inputs
+     */
+    TShark.prototype.mask = {
+
+        // Máscara numérica
+        number: function(inp){
+            var txt = $(inp).val().replace(/\D/g, '');
+            $(inp).val(txt);
+        },
+
+        // Máscara money / percent
+        float: function(inp){
+            var txt = ($(inp).val().replace(/\D/g, '') * 1) + ''
+                , len = txt.length - 3
+                , res = ''
+                , l = -5
+                , p = ''
+            ;
+
+            while (len < 0){
+                txt = '0' + txt;
+                len++;
+            }
+
+            res = ',' + txt.substr(-2);
+            txt = txt.substr(0, txt.length-2);
+
+            do {
+                res = txt.substr(-3) + p + res;
+                txt = txt.substr(0, txt.length-3);
+                p = '.';
+            } while (txt);
+
+            $(inp).val(res);
+            $(inp).trigger('input');
+        }
+
+    };
+
+    /**
      * Cria uma área de componente
      * @param ctrl
      * @param field
@@ -228,15 +268,36 @@ if(!alertify.choose){
 
         switch (ctrl['comp']){
 
-            case 'inpText'      :
-            case 'inpInt'       :
-            case 'inpFloat'     :
-            case 'inpMoney'     :
-            case 'inpPercent'   :
-            case 'inpDate'      :
-            case 'inpTime'      :
-            case 'inpDateTime'  :
-                input = getInput(ctrl, field, mod.path);
+            case 'inpText':
+                input = getInpText(ctrl, field, mod.path);
+                break;
+
+            case 'inpInt':
+                input = getInpInt(ctrl, field, mod.path);
+                break;
+
+            case 'inpFloat':
+                input = getInpFloat(ctrl, field, mod.path);
+                break;
+
+            case 'inpMoney':
+                input = getInpMoney(ctrl, field, mod.path);
+                break;
+
+            case 'inpPercent':
+                input = getInpPercent(ctrl, field, mod.path);
+                break;
+
+            case 'inpDate':
+                input = getInpDate(ctrl, field, mod.path);
+                break;
+
+            case 'inpTime':
+                input = getInpTime(ctrl, field, mod.path);
+                break;
+
+            case 'inpDateTime':
+                input = getDateTime(ctrl, field, mod.path);
                 break;
 
             case 'inpMemo'      :
@@ -271,7 +332,7 @@ if(!alertify.choose){
                 break;
 
             case 'space':
-                input = getInput(ctrl, field, mod.path);
+                input = getSpace(ctrl, field);
                 break;
 
             default:
@@ -346,17 +407,23 @@ if(!alertify.choose){
         var wrapper  = $("<div>")
             , classe = "ui " + (tipo || 'input')
             , done
+            , tag
         ;
 
         // Extra left?
         if (ctrl['extra_left']) {
             classe += ' left ';
-            if (ctrl['extra_left']['class']) {
-                classe += ctrl['extra_left']['class'];
+            if (typeof ctrl['extra_left'] == 'string'){
+                tag = ctrl['extra_left'];
+            } else {
+                if (ctrl['extra_left']['class']) {
+                    classe += ctrl['extra_left']['class'];
+                }
+                tag = ctrl['extra_left']['tag'];
             }
 
             $(wrapper)
-                .append(ctrl['extra_left']['tag'])
+                .append(tag)
                 .append(inp)
             ;
             done = true;
@@ -365,18 +432,24 @@ if(!alertify.choose){
         // Extra right?
         if (ctrl['extra_right']) {
             classe += ' right ';
-            if (ctrl['extra_right']['class']) {
-                classe += ctrl['extra_right']['class'];
+            if (typeof ctrl['extra_right'] == 'string'){
+                tag = ctrl['extra_right'];
+            } else {
+                if (ctrl['extra_right']['class']) {
+                    classe += ctrl['extra_right']['class'];
+                }
+                tag = ctrl['extra_right']['tag'];
             }
 
             if (!done) {
-                $(wrapper).append(inp);
+                $(wrapper)
+                    .append(inp);
                 done = true;
             }
 
 
             $(wrapper)
-                .append(ctrl['extra_right']['tag']);
+                .append(tag);
         }
 
         if (!done) {
@@ -428,55 +501,274 @@ if(!alertify.choose){
         return input;
     }
 
+
     /**
-     * Retorna um componente do tipo input
+     * Input de texto
      * @param ctrl
      * @param field
+     * @param path
+     * @returns {*}
      */
-    function getInput(ctrl, field, path) {
-        var params = {
-                type: "text",
-                class: "ui fluid",
-                'rv-value': path + ".data.row." + field,
-                'onblur': ctrl['autosave'] ? path.split('.').join(' ') + " save" : ''
-            }
-        ;
+    function getSpace(ctrl, field){
+        var input = $("<input>", {
+            type: "hidden",
+            class: "ui fluid"
+        }, ctrl);
 
-        switch (ctrl['comp']) {
-            case 'inpInt':
-                params.type = 'number';
-                params.step = 1;
-                break;
-
-            case 'inpFloat':
-            case 'inpMoney':
-            case 'inpPercent':
-                params.type = 'number';
-                params.step = 0.01;
-                break;
-
-            case 'inpDate':
-                params.type = 'date';
-                break;
-
-            case 'inpTime':
-                params.type = 'time';
-                break;
-
-            case 'inpDateTime':
-                params.type = 'datetime-local';
-                break;
-
-            case 'space':
-                params.type = 'hidden';
-                break;
-
+        // Extra
+        if (ctrl['extra_left'] || ctrl['extra_right']) {
+            input = wrap(input, ctrl)
         }
+
+        // Retorna
+        return input;
+    }
+
+    /**
+     * Input de texto
+     * @param ctrl
+     * @param field
+     * @param path
+     * @returns {*}
+     */
+    function getInpText(ctrl, field, path){
+        var params = {
+            type: "text",
+            class: "ui fluid",
+            'rv-value': path + ".data.row." + field
+        };
+
+        if (ctrl['autosave']){
+            params['onblur'] = path.split('.').join(' ') + " save";
+        }
+
         var input = setExtras($("<input>", params), ctrl);
 
         // Extra
         if (ctrl['extra_left'] || ctrl['extra_right']) {
             input = wrap(input, ctrl)
+        }
+
+        // Retorna
+        return input;
+    }
+
+    /**
+     * Input de inteiros
+     * @param ctrl
+     * @param field
+     * @param path
+     * @returns {*}
+     */
+    function getInpInt(ctrl, field, path){
+        var params = {
+            type    : "text",
+            class   : "ui fluid",
+            style   : 'text-align: center;',
+            onkeyup : 'tshark.mask.number(this)',
+            onclick : 'tshark.mask.number(this)',
+            'rv-value': path + ".data.row." + field
+        };
+
+        if (ctrl['autosave']){
+            params['onblur'] = path.split('.').join(' ') + " save";
+        }
+
+        var input = setExtras($("<input>", params), ctrl);
+
+        // Extra
+        if (ctrl['extra_left'] || ctrl['extra_right']) {
+            input = wrap(input, ctrl)
+        }
+
+        // Retorna
+        return input;
+    }
+
+    /**
+     * Input de inteiros
+     * @param ctrl
+     * @param field
+     * @param path
+     * @returns {*}
+     */
+    function getInpFloat(ctrl, field, path){
+        var params = {
+            type    : "text",
+            class   : "ui fluid",
+            style   : 'text-align: center;',
+            onkeyup : 'tshark.mask.float(this)',
+            onclick : 'tshark.mask.float(this)',
+            'rv-value': path + ".data.row." + field
+        };
+
+        if (ctrl['autosave']){
+            params['onblur'] = path.split('.').join(' ') + " save";
+        }
+
+        var input = setExtras($("<input>", params), ctrl);
+
+        // Extra
+        if (ctrl['extra_left'] || ctrl['extra_right']) {
+            input = wrap(input, ctrl)
+        }
+
+        // Retorna
+        return input;
+    }
+
+    /**
+     * Input de inteiros
+     * @param ctrl
+     * @param field
+     * @param path
+     * @returns {*}
+     */
+    function getInpMoney(ctrl, field, path){
+        var params = {
+            type    : "text",
+            class   : "ui fluid",
+            style   : 'text-align: right;',
+            onkeyup : 'tshark.mask.float(this)',
+            onclick : 'tshark.mask.float(this)',
+            'rv-value': path + ".data.row." + field
+        };
+
+        if (ctrl['autosave']){
+            params['onblur'] = path.split('.').join(' ') + " save";
+        }
+
+        var input = setExtras($("<input>", params), ctrl);
+
+        // Extra
+        ctrl['extra_right'] = ctrl['extra_right'] || "<div class='ui label'>R$</div>";
+        if (ctrl['extra_left'] || ctrl['extra_right']) {
+            input = wrap(input, ctrl, ' right labeled input')
+        }
+
+        // Retorna
+        return input;
+    }
+
+    /**
+     * Input de inteiros
+     * @param ctrl
+     * @param field
+     * @param path
+     * @returns {*}
+     */
+    function getInpPercent(ctrl, field, path){
+        var params = {
+            type    : "text",
+            class   : "ui fluid",
+            style   : 'text-align: right;',
+            onkeyup : 'tshark.mask.float(this)',
+            onclick : 'tshark.mask.float(this)',
+            'rv-value': path + ".data.row." + field
+        };
+
+        if (ctrl['autosave']){
+            params['onblur'] = path.split('.').join(' ') + " save";
+        }
+
+        var input = setExtras($("<input>", params), ctrl);
+
+        // Extra
+        ctrl['extra_right'] = ctrl['extra_right'] || "<div class='ui label'>%</div>";
+        if (ctrl['extra_left'] || ctrl['extra_right']) {
+            input = wrap(input, ctrl, ' right labeled input')
+        }
+
+        // Retorna
+        return input;
+    }
+
+    /**
+     * Input de inteiros
+     * @param ctrl
+     * @param field
+     * @param path
+     * @returns {*}
+     */
+    function getInpDate(ctrl, field, path){
+        var params = {
+            type    : "text",
+            class   : "ui fluid date",
+            style   : 'text-align: center;',
+            'rv-value': path + ".data.row." + field
+        };
+
+        if (ctrl['autosave']){
+            params['onblur'] = path.split('.').join(' ') + " save";
+        }
+
+        var input = setExtras($("<input>", params), ctrl);
+
+        // Extra
+        ctrl['extra_right'] = ctrl['extra_right'] || "<i class='circular calendar icon' />";
+        if (ctrl['extra_left'] || ctrl['extra_right']) {
+            input = wrap(input, ctrl, ' icon input')
+        }
+
+        // Retorna
+        return input;
+    }
+
+    /**
+     * Input de inteiros
+     * @param ctrl
+     * @param field
+     * @param path
+     * @returns {*}
+     */
+    function getInpTime(ctrl, field, path){
+        var params = {
+            type    : "text",
+            class   : "ui fluid time",
+            style   : 'text-align: center;',
+            'rv-value': path + ".data.row." + field
+        };
+
+        if (ctrl['autosave']){
+            params['onblur'] = path.split('.').join(' ') + " save";
+        }
+
+        var input = setExtras($("<input>", params), ctrl);
+
+        // Extra
+        ctrl['extra_right'] = ctrl['extra_right'] || "<i class='circular wait icon' />";
+        if (ctrl['extra_left'] || ctrl['extra_right']) {
+            input = wrap(input, ctrl, ' icon input')
+        }
+
+        // Retorna
+        return input;
+    }
+
+    /**
+     * Input de inteiros
+     * @param ctrl
+     * @param field
+     * @param path
+     * @returns {*}
+     */
+    function getInpDateTime(ctrl, field, path){
+        var params = {
+            type    : "text",
+            class   : "ui fluid datetime",
+            style   : 'text-align: center;',
+            'rv-value': path + ".data.row." + field
+        };
+
+        if (ctrl['autosave']){
+            params['onblur'] = path.split('.').join(' ') + " save";
+        }
+
+        var input = setExtras($("<input>", params), ctrl);
+
+        // Extra
+        if (ctrl['extra_left'] || ctrl['extra_right']) {
+            input = wrap(input, ctrl, ' icon input')
         }
 
         // Retorna
@@ -493,9 +785,11 @@ if(!alertify.choose){
         var params = {
                 class: "ui fluid",
                 'rv-value': path + ".data.row." + field,
-                'onblur': ctrl['autosave'] ? path.split('.').join(' ') + " save" : ''
             }
         ;
+        if (ctrl['autosave']){
+            params['onblur'] = path.split('.').join(' ') + " save";
+        }
 
         switch (ctrl['comp']) {
             case 'inpMemoShort' : params.rows = 2;  break;
@@ -525,9 +819,11 @@ if(!alertify.choose){
                 class: "ui fluid",
                 type: "checkbox",
                 'rv-checked': path + ".data.row." + field,
-                'onchange': path.split('.').join(' ') + " save"
             }
         ;
+        if (ctrl['autosave']){
+            params['onchange'] = path.split('.').join(' ') + " save";
+        }
 
         var check = setExtras($("<input>", params), ctrl);
 
@@ -626,6 +922,13 @@ if(!alertify.choose){
                }
            });
     }
+
+
+
+
+
+
+
 
 
 

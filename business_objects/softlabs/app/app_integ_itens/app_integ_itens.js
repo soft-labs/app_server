@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_integ_itens.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:13:21 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:08:50 GMT-0300 (BRT)
  * @constructor
  */
 function AppIntegItens(){
@@ -18,17 +18,17 @@ function AppIntegItens(){
         table: 'app_integ_itens',
         metadata: {
             key: 'app_integ_itens_key',
-            label: app_integ_itens_key,
+            label: 'modulo',
             fields: {
                 app_integ_itens_key: {
                     tipo: types.comp.key, label: 'App Integ Itens:'
                 }, 
                 app_integracoes_key: {
-                    tipo: types.comp.dropdown, label: 'App Integrações:',
+                    tipo: types.comp.choose, label: 'App Integrações:',
                     data: { 
                         key: ['app_integracoes_key'], 
                         from: ['softlabs', 'app', 'app_integracoes'], 
-                        template: '{row.app_integracoes_key} - {row.app_integracoe}', 
+                        template: '{app_integracoes_key} - {app_integracoe}', 
                         provider: '' 
                     } 
                 }, 
@@ -74,7 +74,10 @@ function AppIntegItens(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de app_integ_itens"},
@@ -83,7 +86,10 @@ function AppIntegItens(){
                 {ref_externa: 25, observacoes: 75}
             ],
             ctrls: {
-                
+                modulo: {
+                    extra_right: { class: '', tag: '' },
+                    extra_left:  { class: '', tag: '' }
+                }
             }
         }
 
@@ -101,12 +107,12 @@ function AppIntegItens(){
                 0: {
                     from: ['softlabs', 'app', 'app_integ_itens'],
                     fields: [
-                        app_integ_itens_key
+                        
                     ]
                 },
                 1: { 
                     from: ['softlabs', 'app', 'app_integracoes'],
-                        join: {source: 0, tipo: types.join.left, on: 'app_integracoes_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'app_integracoes_key', where: ''},
                     fields: [
                         
                     ]
@@ -116,10 +122,15 @@ function AppIntegItens(){
                 ['AND', 0, 'app_integ_itens_key', types.where.check]
             ],
             order: [
-                ['0', 'app_integ_itens_key', 'desc']
+                [0, 'modulo', 'asc']
             ],
-            search: [ 
-                
+            search: [
+                    {alias: 11, field: 'modulo',  param: types.search.like_full },
+                    {alias: 11, field: 'tabela',  param: types.search.like_full },
+                    {alias: 11, field: 'key_field',  param: types.search.like_full },
+                    {alias: 11, field: 'key_value',  param: types.search.like_full },
+                    {alias: 11, field: 'ref_externa',  param: types.search.like_full },
+                    {alias: 11, field: 'observacoes',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -145,6 +156,9 @@ function AppIntegItens(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -158,10 +172,16 @@ function AppIntegItens(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -175,10 +195,16 @@ function AppIntegItens(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -192,18 +218,68 @@ function AppIntegItens(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -218,9 +294,15 @@ function AppIntegItens(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -235,18 +317,15 @@ function AppIntegItens(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -261,9 +340,15 @@ function AppIntegItens(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -278,9 +363,15 @@ function AppIntegItens(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -295,13 +386,15 @@ function AppIntegItens(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

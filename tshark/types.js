@@ -71,9 +71,9 @@ Types.prototype.comp = {
     text_big    : { type: 'text',       comp: 'inpMemo',        default: '' },
     text_huge   : { type: 'text',       comp: 'inpMemoLong',    default: '' },
 
-    float       : { type: 'float',      comp: 'inpFloat',       default: 0 },
-    money       : { type: 'float',      comp: 'inpMoney',       default: 0 },
-    percent     : { type: 'float',      comp: 'inpPercent',     default: 0 },
+    float       : { type: 'float',      comp: 'inpFloat',       default: '0,00' },
+    money       : { type: 'float',      comp: 'inpMoney',       default: '0,00' },
+    percent     : { type: 'float',      comp: 'inpPercent',     default: '0,00' },
 
     check       : { type: 'bool',       comp: 'inpCheckBox',    default: 0 },
     slider      : { type: 'bool',       comp: 'inpSlider',      default: 0 },
@@ -98,7 +98,7 @@ Types.prototype.getByField = function(type){
             return 'key';
 
         case "key":
-            return 'dropdown';
+            return 'choose';
         
         case "char": 
         case "varchar":

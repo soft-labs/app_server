@@ -18,7 +18,7 @@ function *MySql(connParams){
     this.driver.init(connParams);
 
     // Conexão
-    this.pool = mysql.createPool(connParams.conn);
+    this.conn = mysql.createConnection(connParams.conn);
 
     return this;
 }
@@ -181,7 +181,7 @@ function formatDateTimeIn(value, format){
  * @returns {string}
  */
 MySql.prototype.formatDateIn = function(value){
-    return formatDateTimeIn(value, '%Y/%m/%d');
+    return formatDateTimeIn(value, '%d/%m/%Y');
 };
 
 /**
@@ -254,11 +254,32 @@ MySql.prototype.delete = function *(provider, obj){
  */
 MySql.prototype._exec = function *(sql){
     try {
-        return yield this.pool.query(sql);
+        return yield this.conn.query(sql);
 
     } catch (e){
         log.erro(e, sql);
     }
+};
+
+/**
+ * Controle transacional
+ */
+MySql.prototype.startTransaction = function *(){
+    yield this.conn.beginTransaction();
+};
+
+/**
+ * Commit
+ */
+MySql.prototype.commit = function *(){
+    yield this.conn.commit();
+};
+
+/**
+ * Rollback
+ */
+MySql.prototype.rollback = function *(){
+    yield this.conn.rollback();
 };
 
 /**

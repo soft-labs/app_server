@@ -219,6 +219,7 @@ function Ide(){
                 , lbl_field = ''
                 , def_field = ''
                 , first_no_key_field = ''
+                , first_varchar_field = ''
                 , fields = ''
                 , linhas = ''
                 , ctrls = ''
@@ -268,7 +269,6 @@ function Ide(){
                     _type = 'primary';
                 } 
 
-                lbl_field = '';
                 if (!achou_lbl_field){
                     var   _oes     = _field.substr(0, _field.length - 2) + 'oes'
                         , _aes     = _field.substr(0, _field.length - 2) + 'aes'
@@ -281,6 +281,7 @@ function Ide(){
                         _oes == t_tbl || _aes == t_tbl || _res == t_tbl || _res == t_tbl || _ros == t_tbl
                     ){
                         lbl_field = _field;
+                        achou_lbl_field = true;
 
                     } else {
                         var _tbl_       = mod['name'].split('_')
@@ -299,24 +300,30 @@ function Ide(){
 
                             || _oes == _last_ || _aes == _last_ || _res == _last_ || _res == _last_ || _ros == _last_
                             || _oes == _resto_ || _aes == _resto_ || _res == _resto_ || _res == _resto_ || _ros == _resto_
+
                     )
                         {
                             lbl_field = _field;
+                            achou_lbl_field = true;
                         }
                     }
 
                 }
 
-                if (lbl_field){
-                    achou_lbl_field = true;
-                    def_field = "'" + lbl_field + "'";
-                    search = "{alias: 0, field: '" + lbl_field + "',  param: types.search.like_full }";
-                    order = "[0, '" + lbl_field + "', 'asc']";
-                    ctrls = _field + ': {' +
-"\n                    extra_right: { class: '', tag: '' }," +
-"\n                    extra_left:  { class: '', tag: '' }" +
-"\n                }";
+
+                var sv = search ? ",\n" : "\n";
+                switch (types.getByField(_type)){
+                    case 'text':
+                        first_varchar_field = first_varchar_field || _field;
+                        search += sv + "                    {alias: " + m + ", field: '" + _field + "',  param: types.search.like_full }";
+                        break;
+
+                    case 'date':
+                        search += sv + "                    {alias: " + m + ", field: '" + _field + "',  param: types.search.maior_igual }";
+                        break;
+
                 }
+
 
                 // Fields
                 fields += v +
@@ -340,7 +347,7 @@ function Ide(){
 "\n                    data: { " +
 "\n                        key: ['" + _field + "'], " +
 "\n                        from: ['" + owner + "', '" + key_owner + "', '" + _fld_no_key + "'], " +
-"\n                        template: '{row." + _field + "} - {row." + _fld_no_key_s + "}', " +
+"\n                        template: '{" + _field + "} - {" + _fld_no_key_s + "}', " +
 "\n                        provider: '' " +
 "\n                    } ";
                 }
@@ -353,7 +360,7 @@ function Ide(){
                     joins += (j == 1 ? '' : ',') +
 "\n                " + j + ": { " +
 "\n                    from: ['" + owner + "', '" + key_owner + "', '" + _fld_no_key + "']," +
-"\n                        join: {source: 0, tipo: types.join.left, on: '" + _field + "', where: ''}," +
+"\n                    join: {source: 0, tipo: types.join.left, on: '" + _field + "', where: ''}," +
 "\n                    fields: [" +
 "\n                        " +
 "\n                    ]" +
@@ -385,6 +392,18 @@ function Ide(){
                 linhas = linhas.substring(0, linhas.length -2) + n + '}';
             }
 
+            if (!lbl_field) {
+                lbl_field = first_varchar_field;
+            }
+            if (lbl_field){
+                def_field = "'" + lbl_field + "'";
+                order = "[0, '" + lbl_field + "', 'asc']";
+                ctrls = lbl_field + ': {' +
+                    "\n                    extra_right: { class: '', tag: '' }," +
+                    "\n                    extra_left:  { class: '', tag: '' }" +
+                    "\n                }";
+            }
+
             var str_key = (key.length == 1
                 ? "'" + key[0] + "'"
                 : "['" + key.join("', '") + "']"
@@ -393,7 +412,7 @@ function Ide(){
             arq = arq.replace(new RegExp('_ID_', 'g'), mod['name']);
             arq = arq.replace(new RegExp('_DATA_', 'g'), hoje);
             arq = arq.replace(new RegExp('_KEY_', 'g'), str_key);
-            arq = arq.replace(new RegExp('_DEF_FIELD_', 'g'), def_field || first_no_key_field);
+            arq = arq.replace(new RegExp('_LBL_FIELD_', 'g'), lbl_field);
             arq = arq.replace('_FIELDS_', fields);
             arq = arq.replace('_LINHAS_', linhas);
             arq = arq.replace('_CTRLS_', ctrls);

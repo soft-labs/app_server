@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: mov_itens.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:16:00 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:10:05 GMT-0300 (BRT)
  * @constructor
  */
 function MovItens(){
@@ -18,53 +18,53 @@ function MovItens(){
         table: 'mov_itens',
         metadata: {
             key: 'mov_itens_key',
-            label: mov_itens_key,
+            label: 'ncm',
             fields: {
                 mov_itens_key: {
                     tipo: types.comp.key, label: 'Mov Itens:'
                 }, 
                 movimentacoes_key: {
-                    tipo: types.comp.dropdown, label: 'Movimentações:',
+                    tipo: types.comp.choose, label: 'Movimentações:',
                     data: { 
                         key: ['movimentacoes_key'], 
                         from: ['softlabs', 'movimentacoes', 'movimentacoes'], 
-                        template: '{row.movimentacoes_key} - {row.movimentacoe}', 
+                        template: '{movimentacoes_key} - {movimentacoe}', 
                         provider: '' 
                     } 
                 }, 
                 items_key: {
-                    tipo: types.comp.dropdown, label: 'Items:',
+                    tipo: types.comp.choose, label: 'Items:',
                     data: { 
                         key: ['items_key'], 
                         from: ['softlabs', 'items', 'items'], 
-                        template: '{row.items_key} - {row.item}', 
+                        template: '{items_key} - {item}', 
                         provider: '' 
                     } 
                 }, 
                 mov_itens_status_key: {
-                    tipo: types.comp.dropdown, label: 'Mov Itens Status:',
+                    tipo: types.comp.choose, label: 'Mov Itens Status:',
                     data: { 
                         key: ['mov_itens_status_key'], 
                         from: ['softlabs', 'movimentacoes', 'mov_itens_status'], 
-                        template: '{row.mov_itens_status_key} - {row.mov_itens_statu}', 
+                        template: '{mov_itens_status_key} - {mov_itens_statu}', 
                         provider: '' 
                     } 
                 }, 
                 mov_cfop_key: {
-                    tipo: types.comp.dropdown, label: 'Mov Cfop:',
+                    tipo: types.comp.choose, label: 'Mov Cfop:',
                     data: { 
                         key: ['mov_cfop_key'], 
                         from: ['softlabs', 'movimentacoes', 'mov_cfop'], 
-                        template: '{row.mov_cfop_key} - {row.mov_cfo}', 
+                        template: '{mov_cfop_key} - {mov_cfo}', 
                         provider: '' 
                     } 
                 }, 
                 cont_centro_resultados_key: {
-                    tipo: types.comp.dropdown, label: 'Cont Centro Resultados:',
+                    tipo: types.comp.choose, label: 'Cont Centro Resultados:',
                     data: { 
                         key: ['cont_centro_resultados_key'], 
                         from: ['softlabs', 'contabil', 'cont_centro_resultados'], 
-                        template: '{row.cont_centro_resultados_key} - {row.cont_centro_resultado}', 
+                        template: '{cont_centro_resultados_key} - {cont_centro_resultado}', 
                         provider: '' 
                     } 
                 }, 
@@ -84,11 +84,11 @@ function MovItens(){
                     tipo: types.comp.int, label: 'Compõe Tot Mov:'
                 }, 
                 unidades_key: {
-                    tipo: types.comp.dropdown, label: 'Unidades:',
+                    tipo: types.comp.choose, label: 'Unidades:',
                     data: { 
                         key: ['unidades_key'], 
                         from: ['softlabs', 'unidades', 'unidades'], 
-                        template: '{row.unidades_key} - {row.unidade}', 
+                        template: '{unidades_key} - {unidade}', 
                         provider: '' 
                     } 
                 }, 
@@ -134,7 +134,10 @@ function MovItens(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de mov_itens"},
@@ -145,7 +148,10 @@ function MovItens(){
                 {valor_seguro: 25, valor_desconto: 25, valor_out_desp: 25, observacoes: 25}
             ],
             ctrls: {
-                
+                ncm: {
+                    extra_right: { class: '', tag: '' },
+                    extra_left:  { class: '', tag: '' }
+                }
             }
         }
 
@@ -163,47 +169,47 @@ function MovItens(){
                 0: {
                     from: ['softlabs', 'movimentacoes', 'mov_itens'],
                     fields: [
-                        mov_itens_key
+                        
                     ]
                 },
                 1: { 
                     from: ['softlabs', 'movimentacoes', 'movimentacoes'],
-                        join: {source: 0, tipo: types.join.left, on: 'movimentacoes_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'movimentacoes_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 2: { 
                     from: ['softlabs', 'items', 'items'],
-                        join: {source: 0, tipo: types.join.left, on: 'items_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'items_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 3: { 
                     from: ['softlabs', 'movimentacoes', 'mov_itens_status'],
-                        join: {source: 0, tipo: types.join.left, on: 'mov_itens_status_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'mov_itens_status_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 4: { 
                     from: ['softlabs', 'movimentacoes', 'mov_cfop'],
-                        join: {source: 0, tipo: types.join.left, on: 'mov_cfop_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'mov_cfop_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 5: { 
                     from: ['softlabs', 'contabil', 'cont_centro_resultados'],
-                        join: {source: 0, tipo: types.join.left, on: 'cont_centro_resultados_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'cont_centro_resultados_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 6: { 
                     from: ['softlabs', 'unidades', 'unidades'],
-                        join: {source: 0, tipo: types.join.left, on: 'unidades_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'unidades_key', where: ''},
                     fields: [
                         
                     ]
@@ -213,10 +219,11 @@ function MovItens(){
                 ['AND', 0, 'mov_itens_key', types.where.check]
             ],
             order: [
-                ['0', 'mov_itens_key', 'desc']
+                [0, 'ncm', 'asc']
             ],
-            search: [ 
-                
+            search: [
+                    {alias: 2, field: 'ncm',  param: types.search.like_full },
+                    {alias: 2, field: 'ean_gtin',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -242,6 +249,9 @@ function MovItens(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -255,10 +265,16 @@ function MovItens(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -272,10 +288,16 @@ function MovItens(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -289,18 +311,68 @@ function MovItens(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -315,9 +387,15 @@ function MovItens(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -332,18 +410,15 @@ function MovItens(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -358,9 +433,15 @@ function MovItens(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -375,9 +456,15 @@ function MovItens(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -392,13 +479,15 @@ function MovItens(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

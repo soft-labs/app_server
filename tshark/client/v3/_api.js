@@ -206,16 +206,18 @@ $.fn.api.settings.api = {};
         var d = $.extend({}, $(el).data() || {})
             , str = (d['action'] ? d.action : settings.action)
         ;
-
-        str = str.replace(/\s{2,}/g, ' ').trim();
+        if (!str){
+            tshark.erro('API não definida para a operação.');
+            return false;
+        }
 
         // Ajusta API
+        str = str.replace(/\s{2,}/g, ' ').trim();
         var api     = str.split(' ')
             , map   = api.pop()
             , path  = api.join('.')
             , Func  = map.capitalize()
         ;
-
 
         // Ajusta função
         if (!tshark.api_map[map]){

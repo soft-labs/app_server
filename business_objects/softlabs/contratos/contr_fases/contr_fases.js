@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: contr_fases.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:14:28 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:09:00 GMT-0300 (BRT)
  * @constructor
  */
 function ContrFases(){
@@ -18,17 +18,17 @@ function ContrFases(){
         table: 'contr_fases',
         metadata: {
             key: 'contr_fases_key',
-            label: contr_fases_key,
+            label: 'dt_encerramento',
             fields: {
                 contr_fases_key: {
                     tipo: types.comp.key, label: 'Contr Fases:'
                 }, 
                 contratos_key: {
-                    tipo: types.comp.dropdown, label: 'Contratos:',
+                    tipo: types.comp.choose, label: 'Contratos:',
                     data: { 
                         key: ['contratos_key'], 
                         from: ['softlabs', 'contratos', 'contratos'], 
-                        template: '{row.contratos_key} - {row.contrato}', 
+                        template: '{contratos_key} - {contrato}', 
                         provider: '' 
                     } 
                 }, 
@@ -65,7 +65,10 @@ function ContrFases(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de contr_fases"},
@@ -73,7 +76,10 @@ function ContrFases(){
                 {valor_anterior: 25, valor_atual: 25, observacoes: 50}
             ],
             ctrls: {
-                
+                dt_encerramento: {
+                    extra_right: { class: '', tag: '' },
+                    extra_left:  { class: '', tag: '' }
+                }
             }
         }
 
@@ -91,12 +97,12 @@ function ContrFases(){
                 0: {
                     from: ['softlabs', 'contratos', 'contr_fases'],
                     fields: [
-                        contr_fases_key
+                        
                     ]
                 },
                 1: { 
                     from: ['softlabs', 'contratos', 'contratos'],
-                        join: {source: 0, tipo: types.join.left, on: 'contratos_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'contratos_key', where: ''},
                     fields: [
                         
                     ]
@@ -106,10 +112,10 @@ function ContrFases(){
                 ['AND', 0, 'contr_fases_key', types.where.check]
             ],
             order: [
-                ['0', 'contr_fases_key', 'desc']
+                [0, 'dt_encerramento', 'asc']
             ],
-            search: [ 
-                
+            search: [
+                    {alias: 1, field: 'dt_encerramento',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -135,6 +141,9 @@ function ContrFases(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -148,10 +157,16 @@ function ContrFases(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -165,10 +180,16 @@ function ContrFases(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -182,18 +203,68 @@ function ContrFases(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -208,9 +279,15 @@ function ContrFases(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -225,18 +302,15 @@ function ContrFases(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -251,9 +325,15 @@ function ContrFases(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -268,9 +348,15 @@ function ContrFases(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -285,13 +371,15 @@ function ContrFases(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

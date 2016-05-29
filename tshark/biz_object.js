@@ -44,89 +44,110 @@ BizObject.prototype.getReturnObj = function (){
  * @param provider
  * @returns {*}
  */
-BizObject.prototype.getForm = function (provider){
-    var formId = (
-        this.params['form'] && this.params['form']['id']
-            ? this.params['form']['id']
-            : 'update'
-    );
-    var form = this.forms[formId];
-    if (!form) { return false; }
+BizObject.prototype.getForm = function *(provider, ctx){
+    var form = false;
 
-
-    //region :: Ajusta config
-
-    form['_config']        = form['_config']        || {};
-    form._config['bounds'] = form._config['bounds'] || { width: 800, height: 450 };
-    form._config['labels'] = form._config['labels'] || types.form.lines.labels.ontop;
-    form._config['comps']  = form._config['comps']  || types.form.lines.distribution.percent;
-    form._config['state']  = form._config['state']  || types.form.state.loading;
-    form._config['size']   = form._config['size']   || types.form.size.small;
-
-    if (this.params['autosave']){
-        form._config['autosave'] = true;
-    }
-    
-    //endregion
-
-
-    // region :: Ajusta Ctrls
-
-    var meta = {};
-    extend(true, meta, this.source.metadata, meta);
-    
-    var self = this;
-    form['ctrls'] = form['ctrls'] || {};
-    form.linhas.forEach(function(linha){
-        for(var ctrl in linha){
-
-            // Pega o comp no meta e ajusta tipo
-            var comp = (meta.fields[ctrl]
-                ? extend(meta.fields[ctrl], meta.fields[ctrl]['tipo'])
-                : {}
-            );
-
-            if (ctrl == 'space'){
-                comp = {
-                    type: 'space', comp: 'space'
-                }
-            }
-
-            // Se o comp tá sobreescrito em ctrls
-            if (form.ctrls[ctrl]){
-                extend(true, comp, form.ctrls[ctrl]);
-                if(form.ctrls[ctrl]['tipo']) {
-                    extend(true, comp, form.ctrls[ctrl]['tipo'] || {});
-                }
-            }
-
-            // Comp com dataset
-            /*if (comp['data']){
-                var mod = self.getObjViaFrom(req, comp['data']['from']);
-
-                // Recupera provider
-                var prov = mod.getProvider({
-                    query: {
-                        provider: {id: comp['data']['provider']}
-                    }
-                });
-
-                // Recupera dados
-                if (prov) {
-                    var ds = mod.getDataSource(req);
-                    var r = ds.load(prov, req);
-                    comp.data['rows'] = r;
-                }
-            }*/
-
-            // Entrega
-            delete(comp['tipo']);
-            form.ctrls[ctrl] = comp;
+    try {
+        var formId = (
+            this.params['form'] && this.params['form']['id']
+                ? this.params['form']['id']
+                : 'update'
+        );
+        form = this.forms[formId];
+        if (!form) {
+            return false;
         }
 
-    });
 
-    // endregion
+        //region :: Ajusta config
+
+        form['_config'] = form['_config'] || {};
+        form._config['bounds'] = form._config['bounds'] || {width: 800, height: 450};
+        form._config['labels'] = form._config['labels'] || types.form.lines.labels.ontop;
+        form._config['comps']  = form._config['comps'] || types.form.lines.distribution.percent;
+        form._config['state']  = form._config['state'] || types.form.state.loading;
+        form._config['size']   = form._config['size'] || types.form.size.small;
+        form._config['external'] = form._config['external'] || [];
+
+        if (this.params['autosave']) {
+            form._config['autosave'] = true;
+        }
+
+        //endregion
+
+        // Evento onGetForm
+        if (this['onGetForm']) {
+            yield this.onGetForm(form, ctx);
+        }
+
+        // region :: Ajusta Ctrls
+
+        var meta = extend(true, {}, this.source.metadata);
+
+        // Ctrls externos
+        form._config.external.forEach(ext => {
+            var mod = this.engine.initObj(ext, ctx);
+            if (mod) {
+                meta = extend(true, meta, mod.source.metadata);
+            }
+        });
+
+        var self = this;
+        form['ctrls'] = form['ctrls'] || {};
+        form.linhas.forEach(function (linha) {
+            for (var ctrl in linha) {
+
+                // Pega o comp no meta e ajusta tipo
+                var comp = (meta.fields[ctrl]
+                    ? extend(meta.fields[ctrl], meta.fields[ctrl]['tipo'])
+                    : {}
+                );
+
+                if (ctrl == 'space') {
+                    comp = {
+                        type: 'space', comp: 'space'
+                    }
+                }
+
+                // Se o comp tá sobreescrito em ctrls
+                if (form.ctrls[ctrl]) {
+                    extend(true, comp, form.ctrls[ctrl]);
+                    if (form.ctrls[ctrl]['tipo']) {
+                        extend(true, comp, form.ctrls[ctrl]['tipo'] || {});
+                    }
+                }
+
+                // Comp com dataset
+                /*if (comp['data']){
+                 var mod = self.getObjViaFrom(req, comp['data']['from']);
+
+                 // Recupera provider
+                 var prov = mod.getProvider({
+                 query: {
+                 provider: {id: comp['data']['provider']}
+                 }
+                 });
+
+                 // Recupera dados
+                 if (prov) {
+                 var ds = mod.getDataSource(req);
+                 var r = ds.load(prov, req);
+                 comp.data['rows'] = r;
+                 }
+                 }*/
+
+                // Entrega
+                delete(comp['tipo']);
+                form.ctrls[ctrl] = comp;
+            }
+        });
+
+        //endregion
+
+
+    } catch (e){
+        log.erro(e);
+    }
 
     return form;
 };
@@ -148,53 +169,59 @@ BizObject.prototype.get = function *(ctx){
     // Objeto de retorno:
     var ret = this.getReturnObj();
 
-    // Template:
-    ret.template = this.params['template'] || '_list';
+    try {
 
-    // Evento onGet
-    if (this['onGet']){
-        yield this.onGet(ret, ctx);
-    }
-    
-    // Evento on[func]
-    var func = ctx.state.api.call;
-    if (func != 'get') {
-        func = func.charAt(0).toUpperCase() + func.slice(1);
-        if (this['on' + func]) {
-            yield this['on' + func](ret, ctx);
+        // Template:
+        ret.template = this.params['template'] || '_list';
+
+        // Evento onGet
+        if (this['onGet']) {
+            yield this.onGet(ret, ctx);
         }
-    } else {
-        if (this['source'] && this.source['metadata'] && this.source.metadata['key']) {
-            this.params[this.source.metadata.key] = ctx.state.api.path[3];
+
+        // Evento on[func]
+        var func = ctx.state.api.call;
+        if (func != 'get') {
+            func = func.charAt(0).toUpperCase() + func.slice(1);
+            if (this['on' + func]) {
+                yield this['on' + func](ret, ctx);
+            }
+        } else {
+            if (this['source'] && this.source['metadata'] && this.source.metadata['key']) {
+                this.params[this.source.metadata.key] = ctx.state.api.path[3];
+            }
         }
-    }
-    
-    // Template
-    var templ = yield this.engine.render(this.path.asString + '/' + ret.template, ctx, 'modulos');
-    if (!this.params['_no_template_']) {
-        ret.layout = templ;
-    }
 
-    // Fields em template
-    this.params._fields = this.engine.parseFields(templ);
-        
-    // Recupera provider
-    var provId = (this.params['provider'] && this.params['provider']['id']
-        ? this.params['provider']['id']
-        : 'default'
-    );
+        // Template
+        var templ = yield this.engine.render(this.path.asString + '/' + ret.template, ctx, 'modulos');
+        if (!this.params['_no_template_']) {
+            ret.layout = templ;
+        }
 
-    // Recupera dados
-    ret.data = yield this.select(ctx, provId);
+        // Fields em template
+        this.params._fields = this.engine.parseFields(templ);
 
-    // Evento onAfterGet
-    if (this['onAfterGet']){
-        yield this.onAfterGet(ret, ctx);
-    }
+        // Recupera provider
+        var provId = (this.params['provider'] && this.params['provider']['id']
+            ? this.params['provider']['id']
+            : 'default'
+        );
 
-    // Evento onAfter[func]
-    if (this['onAfter' + func]){
-        yield this['onAfter' + func](ret, ctx);
+        // Recupera dados
+        ret.data = yield this.select(ctx, provId);
+
+        // Evento onAfterGet
+        if (this['onAfterGet']) {
+            yield this.onAfterGet(ret, ctx);
+        }
+
+        // Evento onAfter[func]
+        if (this['onAfter' + func]) {
+            yield this['onAfter' + func](ret, ctx);
+        }
+
+    } catch (e){
+        log.erro(e);
     }
     
     // Retorna
@@ -211,52 +238,58 @@ BizObject.prototype.form = function *(ctx){
     var self = this;
 
     // Objeto de retorno:
-    var ret      = this.getReturnObj('form');
-    ret.form     = this.params['form'] || {};
-    ret.form.key = this.params['key'];
-    ret.form.field = ret.form['field'] || this.source.metadata.key;
+    var ret = this.getReturnObj('form');
+    try {
+        ret.form = this.params['form'] || {};
+        ret.form.key = this.params['key'];
+        ret.form.field = ret.form['field'] || this.source.metadata.key;
 
-    // Ajusta o key do form
-    this.params[ret.form.field] = ret.form.key;
+        // Ajusta o key do form
+        this.params[ret.form.field] = ret.form.key;
 
-    // Pega o provider
-    var provId = (this.params['provider'] && this.params['provider']['id']
-        ? this.params['provider']['id']
-        : 'default'
-    );
-    var provider = yield this.getProvider(provId);
+        // Pega o provider
+        var provId = (this.params['provider'] && this.params['provider']['id']
+            ? this.params['provider']['id']
+            : 'default'
+        );
+        var provider = yield this.getProvider(provId);
 
-    // Recupera o form
-    ret.layout = this.getForm(provider);
+        // Recupera o form
+        ret.layout = yield this.getForm(provider, ctx);
 
-    // Evento onGet
-    if (this['onGetForm']){
-        yield this.onGetForm(ret, ctx);
-    }
-
-    if (!ret.layout) {
-        return log.erro("Form não encontrado: " + this.path.asString);
-    }
-
-    // Fields em form
-    this.params._fields = [];
-    ret.layout.linhas.forEach((linha) => {
-        for (var f in linha) {
-            this.params._fields.push(f);
+        if (!ret.layout) {
+            return log.erro("Form não encontrado: " + this.path.asString);
         }
-    });
 
-    // Evento onGet
-    if (this['onGetFormData']){
-        yield this.onGetFormData(provider, ret, ctx);
-    }
+        // Evento onEdit / onCreate
+        var Func = this.state.api.call;
+        Func = Func.charAt(0).toUpperCase() + Func.slice(1);
+        if (this['on' + Func]) {
+            yield this['on' + Func](ret, ctx);
+        }
 
-    // Recupera dados
-    ret.data = yield this.select(ctx, provId);
+        // Fields em form
+        this.params._fields = [];
+        ret.layout.linhas.forEach((linha) => {
+            for (var f in linha) {
+                this.params._fields.push(f);
+            }
+        });
 
-    // Evento onAfterGet
-    if (this['onAfterGetForm']){
-        yield this.onAfterGetForm(ret, ctx);
+        // Evento onGet
+        if (this['onGetFormData']) {
+            yield this.onGetFormData(provider, ret, ctx);
+        }
+
+        // Recupera dados
+        ret.data = yield this.select(ctx, provId);
+
+        // Evento onAfterGet
+        if (this['onAfter' + Func]) {
+            yield this['onAfter' + Func](ret, ctx);
+        }
+    } catch (e){
+        log.erro(e);
     }
 
     // Retorna
@@ -268,9 +301,13 @@ BizObject.prototype.form = function *(ctx){
  *    - update  | url: owner/pack/mod/123                | Atualiza um registro no mod
  */
 BizObject.prototype.update = function *(ctx){
-    var key = this.source.metadata['key'];
-    if (!this.params.row[key] && this.params['key']){
-        this.params.row[key] = this.params['key'];
+    try {
+        var key = this.source.metadata['key'];
+        if (!this.params.row[key] && this.params['key']) {
+            this.params.row[key] = this.params['key'];
+        }
+    } catch (e){
+        log.erro(e);
     }
     return yield this.change('update', ctx);
 };
@@ -320,81 +357,81 @@ BizObject.prototype.delete = function *(ctx){
  * @returns { {Promise} }
  */
 BizObject.prototype.getProvider = function (provId, from, ctx){
+    var provider = false;
+    try {
+        // Ajusta o dono
+        var mod = this;
 
-    // Ajusta o dono
-    var mod = this;
-
-    if (typeof provId == 'string') {
-        if (from) {
-            mod = tshark.initObj(from, ctx) /* require('business_objects/'
-                + from[0] + '/'
-                + from[1] + '/'
-                + from[2] + '/'
-                + from[3] + '.js'
-            )*/;
-        }
-
-        // Pega o provider
-        var provider = mod.providers[provId];
-        if (!provider) {
-            log.erro('Provider ' + provId + 'não encontrado');
-        }
-
-        provider.id = provId;
-        for (var s in provider.sources) {
-            var src = provider.sources[s]
-                , s_own = mod.path.owner
-                , s_pck = mod.path.pack
-                , s_tbl
-                ;
-
-            switch (src.from.length) {
-                case 1:
-                    s_tbl = src.from[0];
-                    break;
-
-                case 2:
-                    s_pck = src.from[0];
-                    s_tbl = src.from[1];
-                    break;
-
-                case 3:
-                    s_own = src.from[0];
-                    s_pck = src.from[1];
-                    s_tbl = src.from[2];
-                    break;
-
-                default:
-                    log.erro('Source em formato invalido no provider');
+        if (typeof provId == 'string') {
+            if (from) {
+                mod = tshark.initObj(from, ctx);
             }
 
-            // Recupera
-            try {
-                var obj = require('business_objects/'
-                    + s_own + '/'
-                    + s_pck + '/'
-                    + s_tbl + '/'
-                    + s_tbl + '.js'
-                );
-                var m = new obj();
-                provider.sources[s]['src'] = m.source;
-            } catch (e) {
-                log.erro(e,
-                    'getProvider: ' + mod.path.asString + ' - ' + provId + '\n' +
-                    'business_objects/'
-                    + s_own + '/'
-                    + s_pck + '/'
-                    + s_tbl + '/'
-                    + s_tbl + '.js'
-                );
+            // Pega o provider
+            provider = mod.providers[provId];
+            if (!provider) {
+                return log.erro('Provider ' + provId + 'não encontrado');
             }
-        }
-    } else {
-        provider = provId;
-    }
 
-    if (this.params['provider'] && util.isObject(this.params['provider'])){
-        provider = extend(true, provider, this.params['provider']);
+            provider.id = provId;
+            for (var s in provider.sources) {
+                var src = provider.sources[s]
+                    , s_own = mod.path.owner
+                    , s_pck = mod.path.pack
+                    , s_tbl
+                    ;
+
+                switch (src.from.length) {
+                    case 1:
+                        s_tbl = src.from[0];
+                        break;
+
+                    case 2:
+                        s_pck = src.from[0];
+                        s_tbl = src.from[1];
+                        break;
+
+                    case 3:
+                        s_own = src.from[0];
+                        s_pck = src.from[1];
+                        s_tbl = src.from[2];
+                        break;
+
+                    default:
+                        log.erro('Source em formato invalido no provider');
+                }
+
+                // Recupera
+                try {
+                    var obj = require('business_objects/'
+                        + s_own + '/'
+                        + s_pck + '/'
+                        + s_tbl + '/'
+                        + s_tbl + '.js'
+                    );
+                    var m = new obj();
+                    provider.sources[s]['src'] = m.source;
+                } catch (e) {
+                    log.erro(e,
+                        'getProvider: ' + mod.path.asString + ' - ' + provId + '\n' +
+                        'business_objects/'
+                        + s_own + '/'
+                        + s_pck + '/'
+                        + s_tbl + '/'
+                        + s_tbl + '.js'
+                    );
+                }
+            }
+        } else {
+            provider = provId;
+        }
+
+        if (this.params['provider'] && util.isObject(this.params['provider'])) {
+            provider = extend(true, provider, this.params['provider']);
+        }
+
+    } catch (e){
+        log.erro(e);
     }
 
     return provider;
@@ -437,41 +474,90 @@ BizObject.prototype.select = function *(ctx, provider, params, from){
  * @returns {{result: boolean}}
  */
 BizObject.prototype.change = function *(op, ctx){
-    var dts = yield this.engine.getConnection(ctx);
+    var dts = yield this.engine.getConnection(ctx)
+        , res = {
+            result: false
+        }
+    ;
+
     if (dts) {
+        try {
 
-        // Recupera provider
-        var provId = (this.params['provider'] && this.params['provider']['id']
-            ? this.params['provider']['id']
-            : 'update'
-        );
+            // Recupera provider
+            var provId = (this.params['provider'] && this.params['provider']['id']
+                ? this.params['provider']['id']
+                : 'update'
+            );
 
-        // Pega o provider
-        var prov = yield this.getProvider(provId)
-            , res = {
-                result: false
-            },
-            evento = op.charAt(0).toUpperCase() + op.slice(1)
-        ;
-        
-        if (this['on' + evento]){
-            yield this['on' + evento](prov, ctx);
+            // Pega o provider
+            var prov = yield this.getProvider(provId)
+                , evento = op.charAt(0).toUpperCase() + op.slice(1)
+            ;
+
+            yield dts.startTransaction();
+
+            // Para cada source
+            for (var s in prov.sources){
+                var source = prov.sources[s]
+                    , mod = this
+                ;
+
+                // Mod externo
+                if (source.from.toString() != this.path.asArray.toString()){
+                    mod = this.engine.initObj(source.from, ctx);
+                }
+
+                if (mod['on' + evento]) {
+                    yield mod['on' + evento](prov, ctx);
+                }
+
+                // Executa
+                switch (op) {
+                    case 'insert' :
+
+                        // Atualiza keys inseridos
+                        if (res['insert']){
+                            mod.params.row = extend(mod.params.row, res.insert);
+                        }
+
+                        // Insere
+                        res.result = yield dts.insert(source, mod);
+
+                        // Propaga
+                        if (res.result){
+                            var key = source.src.metadata.key;
+                            res['insert'] = res['insert'] || {};
+                            res.insert[key] = res.result;
+                            ctx.request.body.row[key] = res.result;
+                        } else {
+                            dts.rollback();
+                            return {result: false};
+                        }
+                        break;
+
+                    case 'update' :
+                        res.result = yield dts.update(source, mod);
+                        break;
+
+                    case 'delete' :
+                        res.result = yield dts.delete(source, mod);
+                        break;
+                }
+
+                if (mod['onAfter' + evento]) {
+                    yield mod['onAfter' + evento](res, ctx);
+                }
+            }
+
+            yield dts.commit();
+
+        } catch (e) {
+            log.erro(e);
         }
-
-        // Executa
-        switch (op){
-            case 'insert' : res.result = yield dts.insert(prov, this); break;
-            case 'update' : res.result = yield dts.update(prov, this); break;
-            case 'delete' : res.result = yield dts.delete(prov, this); break;
-        }
-
-        if (this['onAfter' + evento]){
-            yield this['onAfter' + evento](res, ctx);
-        }
-
-        // Retorna
-        return res;
     }
+
+    // Retorna
+    return res;
 };
 
 

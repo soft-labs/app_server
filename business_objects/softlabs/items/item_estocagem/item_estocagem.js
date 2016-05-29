@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_estocagem.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:15:42 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:09:57 GMT-0300 (BRT)
  * @constructor
  */
 function ItemEstocagem(){
@@ -18,35 +18,35 @@ function ItemEstocagem(){
         table: 'item_estocagem',
         metadata: {
             key: 'item_estocagem_key',
-            label: item_estocagem_key,
+            label: 'localizacao',
             fields: {
                 item_estocagem_key: {
                     tipo: types.comp.key, label: 'Item Estocagem:'
                 }, 
                 item_compras_key: {
-                    tipo: types.comp.dropdown, label: 'Item Compras:',
+                    tipo: types.comp.choose, label: 'Item Compras:',
                     data: { 
                         key: ['item_compras_key'], 
                         from: ['softlabs', 'items', 'item_compras'], 
-                        template: '{row.item_compras_key} - {row.item_compra}', 
+                        template: '{item_compras_key} - {item_compra}', 
                         provider: '' 
                     } 
                 }, 
                 emp_depositos_key: {
-                    tipo: types.comp.dropdown, label: 'Emp Depositos:',
+                    tipo: types.comp.choose, label: 'Emp Depositos:',
                     data: { 
                         key: ['emp_depositos_key'], 
                         from: ['softlabs', 'empresas', 'emp_depositos'], 
-                        template: '{row.emp_depositos_key} - {row.emp_deposito}', 
+                        template: '{emp_depositos_key} - {emp_deposito}', 
                         provider: '' 
                     } 
                 }, 
                 ult_mov_itens_key: {
-                    tipo: types.comp.dropdown, label: 'Ult Mov Itens:',
+                    tipo: types.comp.choose, label: 'Ult Mov Itens:',
                     data: { 
                         key: ['ult_mov_itens_key'], 
                         from: ['softlabs', 'empresas', 'ult_mov_itens'], 
-                        template: '{row.ult_mov_itens_key} - {row.ult_mov_iten}', 
+                        template: '{ult_mov_itens_key} - {ult_mov_iten}', 
                         provider: '' 
                     } 
                 }, 
@@ -89,7 +89,10 @@ function ItemEstocagem(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de item_estocagem"},
@@ -98,7 +101,10 @@ function ItemEstocagem(){
                 {dt_ultima_saida: 25, preco_ultima_compra: 25, observacoes: 50}
             ],
             ctrls: {
-                
+                localizacao: {
+                    extra_right: { class: '', tag: '' },
+                    extra_left:  { class: '', tag: '' }
+                }
             }
         }
 
@@ -116,26 +122,26 @@ function ItemEstocagem(){
                 0: {
                     from: ['softlabs', 'items', 'item_estocagem'],
                     fields: [
-                        item_estocagem_key
+                        
                     ]
                 },
                 1: { 
                     from: ['softlabs', 'items', 'item_compras'],
-                        join: {source: 0, tipo: types.join.left, on: 'item_compras_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'item_compras_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 2: { 
                     from: ['softlabs', 'empresas', 'emp_depositos'],
-                        join: {source: 0, tipo: types.join.left, on: 'emp_depositos_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'emp_depositos_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 3: { 
                     from: ['softlabs', 'empresas', 'ult_mov_itens'],
-                        join: {source: 0, tipo: types.join.left, on: 'ult_mov_itens_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'ult_mov_itens_key', where: ''},
                     fields: [
                         
                     ]
@@ -145,10 +151,12 @@ function ItemEstocagem(){
                 ['AND', 0, 'item_estocagem_key', types.where.check]
             ],
             order: [
-                ['0', 'item_estocagem_key', 'desc']
+                [0, 'localizacao', 'asc']
             ],
-            search: [ 
-                
+            search: [
+                    {alias: 5, field: 'localizacao',  param: types.search.like_full },
+                    {alias: 5, field: 'dt_ultima_entrada',  param: types.search.maior_igual },
+                    {alias: 5, field: 'dt_ultima_saida',  param: types.search.maior_igual }
             ],
             limit: 250,
             showSQL: 0
@@ -174,6 +182,9 @@ function ItemEstocagem(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -187,10 +198,16 @@ function ItemEstocagem(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -204,10 +221,16 @@ function ItemEstocagem(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -221,18 +244,68 @@ function ItemEstocagem(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -247,9 +320,15 @@ function ItemEstocagem(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -264,18 +343,15 @@ function ItemEstocagem(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -290,9 +366,15 @@ function ItemEstocagem(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -307,9 +389,15 @@ function ItemEstocagem(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -324,13 +412,15 @@ function ItemEstocagem(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

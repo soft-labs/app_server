@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: emp_depositos_end_eletronicos_rel.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:14:47 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:09:24 GMT-0300 (BRT)
  * @constructor
  */
 function EmpDepositosEndEletronicosRel(){
@@ -18,14 +18,14 @@ function EmpDepositosEndEletronicosRel(){
         table: 'emp_depositos_end_eletronicos_rel',
         metadata: {
             key: ['emp_depositos_key', 'end_eletronicos_key'],
-            label: ,
+            label: '',
             fields: {
                 emp_depositos_key: {
                     tipo: types.comp.key, label: 'Emp Depositos:',
                     data: { 
                         key: ['emp_depositos_key'], 
                         from: ['softlabs', 'empresas', 'emp_depositos'], 
-                        template: '{row.emp_depositos_key} - {row.emp_deposito}', 
+                        template: '{emp_depositos_key} - {emp_deposito}', 
                         provider: '' 
                     } 
                 }, 
@@ -34,7 +34,7 @@ function EmpDepositosEndEletronicosRel(){
                     data: { 
                         key: ['end_eletronicos_key'], 
                         from: ['softlabs', 'enderecos', 'end_eletronicos'], 
-                        template: '{row.end_eletronicos_key} - {row.end_eletronico}', 
+                        template: '{end_eletronicos_key} - {end_eletronico}', 
                         provider: '' 
                     } 
                 }
@@ -56,7 +56,10 @@ function EmpDepositosEndEletronicosRel(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de emp_depositos_end_eletronicos_rel"},
@@ -86,14 +89,14 @@ function EmpDepositosEndEletronicosRel(){
                 },
                 1: { 
                     from: ['softlabs', 'empresas', 'emp_depositos'],
-                        join: {source: 0, tipo: types.join.left, on: 'emp_depositos_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'emp_depositos_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 2: { 
                     from: ['softlabs', 'enderecos', 'end_eletronicos'],
-                        join: {source: 0, tipo: types.join.left, on: 'end_eletronicos_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'end_eletronicos_key', where: ''},
                     fields: [
                         
                     ]
@@ -107,8 +110,7 @@ function EmpDepositosEndEletronicosRel(){
                 ['0', 'emp_depositos_key', 'desc'],
                 ['0', 'end_eletronicos_key', 'desc']
             ],
-            search: [ 
-                
+            search: [
             ],
             limit: 250,
             showSQL: 0
@@ -134,6 +136,9 @@ function EmpDepositosEndEletronicosRel(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -147,10 +152,16 @@ function EmpDepositosEndEletronicosRel(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -164,10 +175,16 @@ function EmpDepositosEndEletronicosRel(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -181,18 +198,68 @@ function EmpDepositosEndEletronicosRel(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -207,9 +274,15 @@ function EmpDepositosEndEletronicosRel(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -224,18 +297,15 @@ function EmpDepositosEndEletronicosRel(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -250,9 +320,15 @@ function EmpDepositosEndEletronicosRel(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -267,9 +343,15 @@ function EmpDepositosEndEletronicosRel(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -284,13 +366,15 @@ function EmpDepositosEndEletronicosRel(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

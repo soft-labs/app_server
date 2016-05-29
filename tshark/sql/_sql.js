@@ -528,7 +528,7 @@ SQL.prototype._select = function *(provider, obj, meta){
 
                 case 'date':
                     if (def == 'NOW' || def == 'DATE' || def == 'HOJE') {
-                        val = moment().format("YYYY-MM-DD");
+                        val = moment().format("DD/MM/YYYY");
                     }
                     break;
 
@@ -541,7 +541,7 @@ SQL.prototype._select = function *(provider, obj, meta){
                 case 'timestamp':
                 case 'datetime':
                     if (def == 'NOW' || def == 'DATE' || def == 'HOJE') {
-                        val = moment().format("YYYY-MM-DDTHH:mm:ss");
+                        val = moment().format("DD/MM/YYYY HH:mm:ss");
                     }
                     break;
 
@@ -622,7 +622,7 @@ SQL.prototype._processResults = function *(sqlParams, results, obj, sql, meta){
         formats.forEach(m => {
             switch (m.tipo){
                 case 'date':
-                    row[m.field] = row[m.field] != null ? moment(row[m.field]).format("YYYY-MM-DD") : '';
+                    row[m.field] = row[m.field] != null ? moment(row[m.field]).format("DD/MM/YYYY") : '';
                     break;
 
                 case 'time':
@@ -631,7 +631,7 @@ SQL.prototype._processResults = function *(sqlParams, results, obj, sql, meta){
 
                 case 'timestamp':
                 case 'datetime':
-                    row[m.field] = row[m.field] != null ? moment(row[m.field]).format("YYYY-MM-DDTHH:mm:ss") : '';
+                    row[m.field] = row[m.field] != null ? moment(row[m.field]).format("DD/MM/YYYY HH:mm:ss") : '';
                     break;
             }
         });
@@ -669,101 +669,97 @@ SQL.prototype._processResults = function *(sqlParams, results, obj, sql, meta){
  * @param obj
  * @returns {*}
  */
-SQL.prototype.change = function *(op, provider, obj) {
+SQL.prototype.change = function *(op, source, obj) {
     var results
         , ok = false
     ;
 
-    // Ajusta sqlParams
-    if (typeof provider == 'string') {
-        return log.erro('Para operações de change deverá ser informado um provider.', provider);
-    }
-
     // Verifica values
-    if (op != 'del'&& !obj.params['row']){
+    if (op != 'del' && !obj.params['row']){
         return log.erro('Não foi possível encontrar os "row" com valores para o "' + (op == 'upd' ? 'update' : 'insert') + '" no contexto fornecido.');
     }
 
-    // Processa provider
-    for(var s in provider.sources) {
-        var source = provider.sources[s].src
-            , sql = ''
-            , key = provider.sources[s]['key'] || source.metadata.key
-            , fields = ''
-            , values = ''
-            , v = ''
-        ;
+    // Processa 
+    var sql      = ''
+        , key    = source['key'] || source.src.metadata.key
+        , fields = ''
+        , values = ''
+        , v = ''
+    ;
 
-        switch (op){
-            case 'upd':
-                sql = ' UPDATE ' + source.table + ' SET ';
-                break;
+    switch (op){
+        case 'upd':
+            sql = ' UPDATE ' + source.src.table + ' SET ';
+            break;
 
-            case 'ins':
-                sql = ' INSERT INTO ' + source.table;
-                break;
+        case 'ins':
+            sql = ' INSERT INTO ' + source.src.table;
+            break;
 
-            case 'del':
-                sql = ' DELETE FROM ' + source.table;
-                break;
-        }
-
-        if (op != 'del') {
-            for (var f in source.metadata.fields) {
-                if (f != key && obj.params.row[f]) {
-                    var value = obj.params.row[f];
-
-                    // Trata formatação de tipos
-                    switch (source.metadata.fields[f].tipo.type) {
-                        case "bool":
-                            if (value === true || value === false || value == 'true' || value == 'false'){
-                                value = (!value || value == 'false' ? 0 : 1);
-                            }
-                            break;
-
-                        case "date":
-                            value = (value == 'Invalid date' ? null : this.db.formatDateIn(value));
-                            break;
-
-                        case "datetime":
-                        case "timestamp":
-                            value = (value == 'Invalid date' ? null : this.db.formatDateTimeIn(value));
-                            break;
-
-                        default:
-                            value = "'" + value + "'"; 998451053
-                    }
-
-                    // SQL
-                    if (op == 'upd') {
-                        sql += '\n    ' + v + ' ' + f + " = " + value + " ";
-
-                    } else {
-                        fields += v + ' ' + f;
-                        values += v + " " + value + " ";
-                    }
-
-                    v = ',';
-                }
-            }
-        }
-
-        // Processa where
-        if (op != 'ins') {
-            sql += '\n  WHERE ' + key + " = '" + obj.params.row[key] + "' ";
-            sql += this.db.parseWhere(provider.sources[s]['where'], obj.params);
-
-        } else {
-            sql += ' (' + fields + ' ) ';
-            sql += '\n    VALUES (' + values + ') ';
-        }
-
-        // Executa
-        results = yield this.db._exec(sql, obj);
-        ok = yield this.db.processChangeResults(op, results, obj);
+        case 'del':
+            sql = ' DELETE FROM ' + source.src.table;
+            break;
     }
 
-    return ok;
+    if (op != 'del') {
+        for (var f in source.src.metadata.fields) {
+            if (f != key && obj.params.row[f]) {
+                var value = obj.params.row[f];
+
+                // Trata formatação de tipos
+                switch (source.src.metadata.fields[f].tipo.type) {
+                    case "bool":
+                        if (value === true || value === false || value == 'true' || value == 'false'){
+                            value = (!value || value == 'false' ? 0 : 1);
+                        }
+                        break;
+
+                    case "float":
+                        value = value.replace(/\./g, '');
+                        value = value.replace(',', '.');
+                        break;
+
+                    case "date":
+                        value = (value == 'Invalid date' ? null : this.db.formatDateIn(value));
+                        break;
+
+                    case "datetime":
+                    case "timestamp":
+                        value = (value == 'Invalid date' ? null : this.db.formatDateTimeIn(value));
+                        break;
+
+                    default:
+                        value = "'" + value + "'"; 
+                }
+
+                // SQL
+                if (op == 'upd') {
+                    sql += '\n    ' + v + ' ' + f + " = " + value + " ";
+
+                } else {
+                    fields += v + ' ' + f;
+                    values += v + " " + value + " ";
+                }
+
+                v = ',';
+            }
+        }
+    }
+
+    // Processa where
+    if (op != 'ins') {
+        sql += '\n  WHERE ' + key + " = '" + obj.params.row[key] + "' ";
+        sql += this.db.parseWhere(source['where'], obj.params);
+
+    } else {
+        sql += ' (' + fields + ' ) ';
+        sql += '\n    VALUES (' + values + ') ';
+    }
+
+    // Executa
+    results = yield this.db._exec(sql, obj);
+    return yield this.db.processChangeResults(op, results, obj);
+    
 };
 
 /**

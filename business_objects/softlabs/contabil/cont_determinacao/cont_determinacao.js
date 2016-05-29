@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_determinacao.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:14:17 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:09:09 GMT-0300 (BRT)
  * @constructor
  */
 function ContDeterminacao(){
@@ -18,143 +18,143 @@ function ContDeterminacao(){
         table: 'cont_determinacao',
         metadata: {
             key: 'cont_determinacao_key',
-            label: cont_determinacao_key,
+            label: '',
             fields: {
                 cont_determinacao_key: {
                     tipo: types.comp.key, label: 'Cont Determinação:'
                 }, 
                 conta_receitas_key: {
-                    tipo: types.comp.dropdown, label: 'Conta Receitas:',
+                    tipo: types.comp.choose, label: 'Conta Receitas:',
                     data: { 
                         key: ['conta_receitas_key'], 
                         from: ['softlabs', '', 'conta_receitas'], 
-                        template: '{row.conta_receitas_key} - {row.conta_receita}', 
+                        template: '{conta_receitas_key} - {conta_receita}', 
                         provider: '' 
                     } 
                 }, 
                 conta_despesas_key: {
-                    tipo: types.comp.dropdown, label: 'Conta Despesas:',
+                    tipo: types.comp.choose, label: 'Conta Despesas:',
                     data: { 
                         key: ['conta_despesas_key'], 
                         from: ['softlabs', '', 'conta_despesas'], 
-                        template: '{row.conta_despesas_key} - {row.conta_despesa}', 
+                        template: '{conta_despesas_key} - {conta_despesa}', 
                         provider: '' 
                     } 
                 }, 
                 conta_diferencas_key: {
-                    tipo: types.comp.dropdown, label: 'Conta Diferencas:',
+                    tipo: types.comp.choose, label: 'Conta Diferencas:',
                     data: { 
                         key: ['conta_diferencas_key'], 
                         from: ['softlabs', '', 'conta_diferencas'], 
-                        template: '{row.conta_diferencas_key} - {row.conta_diferenca}', 
+                        template: '{conta_diferencas_key} - {conta_diferenca}', 
                         provider: '' 
                     } 
                 }, 
                 cont_credito_compras_key: {
-                    tipo: types.comp.dropdown, label: 'Cont Credito Compras:',
+                    tipo: types.comp.choose, label: 'Cont Credito Compras:',
                     data: { 
                         key: ['cont_credito_compras_key'], 
                         from: ['softlabs', 'contabil', 'cont_credito_compras'], 
-                        template: '{row.cont_credito_compras_key} - {row.cont_credito_compra}', 
+                        template: '{cont_credito_compras_key} - {cont_credito_compra}', 
                         provider: '' 
                     } 
                 }, 
                 conta_credito_venda_key: {
-                    tipo: types.comp.dropdown, label: 'Conta Credito Venda:',
+                    tipo: types.comp.choose, label: 'Conta Credito Venda:',
                     data: { 
                         key: ['conta_credito_venda_key'], 
                         from: ['softlabs', 'contabil', 'conta_credito_venda'], 
-                        template: '{row.conta_credito_venda_key} - {row.conta_credito_vend}', 
+                        template: '{conta_credito_venda_key} - {conta_credito_vend}', 
                         provider: '' 
                     } 
                 }, 
                 conta_venda_gratis_key: {
-                    tipo: types.comp.dropdown, label: 'Conta Venda Gratis:',
+                    tipo: types.comp.choose, label: 'Conta Venda Gratis:',
                     data: { 
                         key: ['conta_venda_gratis_key'], 
                         from: ['softlabs', 'contabil', 'conta_venda_gratis'], 
-                        template: '{row.conta_venda_gratis_key} - {row.conta_venda_grati}', 
+                        template: '{conta_venda_gratis_key} - {conta_venda_grati}', 
                         provider: '' 
                     } 
                 }, 
                 conta_compra_gratis_key: {
-                    tipo: types.comp.dropdown, label: 'Conta Compra Gratis:',
+                    tipo: types.comp.choose, label: 'Conta Compra Gratis:',
                     data: { 
                         key: ['conta_compra_gratis_key'], 
                         from: ['softlabs', 'contabil', 'conta_compra_gratis'], 
-                        template: '{row.conta_compra_gratis_key} - {row.conta_compra_grati}', 
+                        template: '{conta_compra_gratis_key} - {conta_compra_grati}', 
                         provider: '' 
                     } 
                 }, 
                 conta_cmv_key: {
-                    tipo: types.comp.dropdown, label: 'Conta Cmv:',
+                    tipo: types.comp.choose, label: 'Conta Cmv:',
                     data: { 
                         key: ['conta_cmv_key'], 
                         from: ['softlabs', 'contabil', 'conta_cmv'], 
-                        template: '{row.conta_cmv_key} - {row.conta_cm}', 
+                        template: '{conta_cmv_key} - {conta_cm}', 
                         provider: '' 
                     } 
                 }, 
                 conta_estoque_key: {
-                    tipo: types.comp.dropdown, label: 'Conta Estoque:',
+                    tipo: types.comp.choose, label: 'Conta Estoque:',
                     data: { 
                         key: ['conta_estoque_key'], 
                         from: ['softlabs', 'contabil', 'conta_estoque'], 
-                        template: '{row.conta_estoque_key} - {row.conta_estoqu}', 
+                        template: '{conta_estoque_key} - {conta_estoqu}', 
                         provider: '' 
                     } 
                 }, 
                 conta_estoque_transito_key: {
-                    tipo: types.comp.dropdown, label: 'Conta Estoque Transito:',
+                    tipo: types.comp.choose, label: 'Conta Estoque Transito:',
                     data: { 
                         key: ['conta_estoque_transito_key'], 
                         from: ['softlabs', 'contabil', 'conta_estoque_transito'], 
-                        template: '{row.conta_estoque_transito_key} - {row.conta_estoque_transit}', 
+                        template: '{conta_estoque_transito_key} - {conta_estoque_transit}', 
                         provider: '' 
                     } 
                 }, 
                 conta_estoque_perdas_key: {
-                    tipo: types.comp.dropdown, label: 'Conta Estoque Perdas:',
+                    tipo: types.comp.choose, label: 'Conta Estoque Perdas:',
                     data: { 
                         key: ['conta_estoque_perdas_key'], 
                         from: ['softlabs', 'contabil', 'conta_estoque_perdas'], 
-                        template: '{row.conta_estoque_perdas_key} - {row.conta_estoque_perda}', 
+                        template: '{conta_estoque_perdas_key} - {conta_estoque_perda}', 
                         provider: '' 
                     } 
                 }, 
                 emp_depositos_key: {
-                    tipo: types.comp.dropdown, label: 'Emp Depositos:',
+                    tipo: types.comp.choose, label: 'Emp Depositos:',
                     data: { 
                         key: ['emp_depositos_key'], 
                         from: ['softlabs', 'empresas', 'emp_depositos'], 
-                        template: '{row.emp_depositos_key} - {row.emp_deposito}', 
+                        template: '{emp_depositos_key} - {emp_deposito}', 
                         provider: '' 
                     } 
                 }, 
                 item_categorias_key: {
-                    tipo: types.comp.dropdown, label: 'Item Categorias:',
+                    tipo: types.comp.choose, label: 'Item Categorias:',
                     data: { 
                         key: ['item_categorias_key'], 
                         from: ['softlabs', 'items', 'item_categorias'], 
-                        template: '{row.item_categorias_key} - {row.item_categoria}', 
+                        template: '{item_categorias_key} - {item_categoria}', 
                         provider: '' 
                     } 
                 }, 
                 item_categ_sub_key: {
-                    tipo: types.comp.dropdown, label: 'Item Categ Sub:',
+                    tipo: types.comp.choose, label: 'Item Categ Sub:',
                     data: { 
                         key: ['item_categ_sub_key'], 
                         from: ['softlabs', 'items', 'item_categ_sub'], 
-                        template: '{row.item_categ_sub_key} - {row.item_categ_su}', 
+                        template: '{item_categ_sub_key} - {item_categ_su}', 
                         provider: '' 
                     } 
                 }, 
                 items_key: {
-                    tipo: types.comp.dropdown, label: 'Items:',
+                    tipo: types.comp.choose, label: 'Items:',
                     data: { 
                         key: ['items_key'], 
                         from: ['softlabs', 'items', 'items'], 
-                        template: '{row.items_key} - {row.item}', 
+                        template: '{items_key} - {item}', 
                         provider: '' 
                     } 
                 }, 
@@ -185,7 +185,10 @@ function ContDeterminacao(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de cont_determinacao"},
@@ -214,110 +217,110 @@ function ContDeterminacao(){
                 0: {
                     from: ['softlabs', 'contabil', 'cont_determinacao'],
                     fields: [
-                        cont_determinacao_key
+                        
                     ]
                 },
                 1: { 
                     from: ['softlabs', '', 'conta_receitas'],
-                        join: {source: 0, tipo: types.join.left, on: 'conta_receitas_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'conta_receitas_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 2: { 
                     from: ['softlabs', '', 'conta_despesas'],
-                        join: {source: 0, tipo: types.join.left, on: 'conta_despesas_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'conta_despesas_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 3: { 
                     from: ['softlabs', '', 'conta_diferencas'],
-                        join: {source: 0, tipo: types.join.left, on: 'conta_diferencas_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'conta_diferencas_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 4: { 
                     from: ['softlabs', 'contabil', 'cont_credito_compras'],
-                        join: {source: 0, tipo: types.join.left, on: 'cont_credito_compras_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'cont_credito_compras_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 5: { 
                     from: ['softlabs', 'contabil', 'conta_credito_venda'],
-                        join: {source: 0, tipo: types.join.left, on: 'conta_credito_venda_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'conta_credito_venda_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 6: { 
                     from: ['softlabs', 'contabil', 'conta_venda_gratis'],
-                        join: {source: 0, tipo: types.join.left, on: 'conta_venda_gratis_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'conta_venda_gratis_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 7: { 
                     from: ['softlabs', 'contabil', 'conta_compra_gratis'],
-                        join: {source: 0, tipo: types.join.left, on: 'conta_compra_gratis_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'conta_compra_gratis_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 8: { 
                     from: ['softlabs', 'contabil', 'conta_cmv'],
-                        join: {source: 0, tipo: types.join.left, on: 'conta_cmv_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'conta_cmv_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 9: { 
                     from: ['softlabs', 'contabil', 'conta_estoque'],
-                        join: {source: 0, tipo: types.join.left, on: 'conta_estoque_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'conta_estoque_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 10: { 
                     from: ['softlabs', 'contabil', 'conta_estoque_transito'],
-                        join: {source: 0, tipo: types.join.left, on: 'conta_estoque_transito_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'conta_estoque_transito_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 11: { 
                     from: ['softlabs', 'contabil', 'conta_estoque_perdas'],
-                        join: {source: 0, tipo: types.join.left, on: 'conta_estoque_perdas_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'conta_estoque_perdas_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 12: { 
                     from: ['softlabs', 'empresas', 'emp_depositos'],
-                        join: {source: 0, tipo: types.join.left, on: 'emp_depositos_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'emp_depositos_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 13: { 
                     from: ['softlabs', 'items', 'item_categorias'],
-                        join: {source: 0, tipo: types.join.left, on: 'item_categorias_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'item_categorias_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 14: { 
                     from: ['softlabs', 'items', 'item_categ_sub'],
-                        join: {source: 0, tipo: types.join.left, on: 'item_categ_sub_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'item_categ_sub_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 15: { 
                     from: ['softlabs', 'items', 'items'],
-                        join: {source: 0, tipo: types.join.left, on: 'items_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'items_key', where: ''},
                     fields: [
                         
                     ]
@@ -329,8 +332,9 @@ function ContDeterminacao(){
             order: [
                 ['0', 'cont_determinacao_key', 'desc']
             ],
-            search: [ 
-                
+            search: [
+                    {alias: 3, field: 'dt_inicio',  param: types.search.maior_igual },
+                    {alias: 3, field: 'dt_final',  param: types.search.maior_igual }
             ],
             limit: 250,
             showSQL: 0
@@ -356,6 +360,9 @@ function ContDeterminacao(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -369,10 +376,16 @@ function ContDeterminacao(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -386,10 +399,16 @@ function ContDeterminacao(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -403,18 +422,68 @@ function ContDeterminacao(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -429,9 +498,15 @@ function ContDeterminacao(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -446,18 +521,15 @@ function ContDeterminacao(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -472,9 +544,15 @@ function ContDeterminacao(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -489,9 +567,15 @@ function ContDeterminacao(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -506,13 +590,15 @@ function ContDeterminacao(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

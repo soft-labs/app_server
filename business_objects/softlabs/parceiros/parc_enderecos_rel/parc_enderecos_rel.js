@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: parc_enderecos_rel.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:16:25 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:10:21 GMT-0300 (BRT)
  * @constructor
  */
 function ParcEnderecosRel(){
@@ -18,14 +18,14 @@ function ParcEnderecosRel(){
         table: 'parc_enderecos_rel',
         metadata: {
             key: ['parceiros_key', 'enderecos_key'],
-            label: ,
+            label: '',
             fields: {
                 parceiros_key: {
                     tipo: types.comp.key, label: 'Parceiros:',
                     data: { 
                         key: ['parceiros_key'], 
                         from: ['softlabs', 'parceiros', 'parceiros'], 
-                        template: '{row.parceiros_key} - {row.parceiro}', 
+                        template: '{parceiros_key} - {parceiro}', 
                         provider: '' 
                     } 
                 }, 
@@ -34,16 +34,16 @@ function ParcEnderecosRel(){
                     data: { 
                         key: ['enderecos_key'], 
                         from: ['softlabs', 'enderecos', 'enderecos'], 
-                        template: '{row.enderecos_key} - {row.endereco}', 
+                        template: '{enderecos_key} - {endereco}', 
                         provider: '' 
                     } 
                 }, 
                 end_tipos_key: {
-                    tipo: types.comp.dropdown, label: 'End Tipos:',
+                    tipo: types.comp.choose, label: 'End Tipos:',
                     data: { 
                         key: ['end_tipos_key'], 
                         from: ['softlabs', 'enderecos', 'end_tipos'], 
-                        template: '{row.end_tipos_key} - {row.end_tipo}', 
+                        template: '{end_tipos_key} - {end_tipo}', 
                         provider: '' 
                     } 
                 }
@@ -65,7 +65,10 @@ function ParcEnderecosRel(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de parc_enderecos_rel"},
@@ -95,21 +98,21 @@ function ParcEnderecosRel(){
                 },
                 1: { 
                     from: ['softlabs', 'parceiros', 'parceiros'],
-                        join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 2: { 
                     from: ['softlabs', 'enderecos', 'enderecos'],
-                        join: {source: 0, tipo: types.join.left, on: 'enderecos_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'enderecos_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 3: { 
                     from: ['softlabs', 'enderecos', 'end_tipos'],
-                        join: {source: 0, tipo: types.join.left, on: 'end_tipos_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'end_tipos_key', where: ''},
                     fields: [
                         
                     ]
@@ -123,8 +126,7 @@ function ParcEnderecosRel(){
                 ['0', 'parceiros_key', 'desc'],
                 ['0', 'enderecos_key', 'desc']
             ],
-            search: [ 
-                
+            search: [
             ],
             limit: 250,
             showSQL: 0
@@ -150,6 +152,9 @@ function ParcEnderecosRel(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -163,10 +168,16 @@ function ParcEnderecosRel(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -180,10 +191,16 @@ function ParcEnderecosRel(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -197,18 +214,68 @@ function ParcEnderecosRel(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -223,9 +290,15 @@ function ParcEnderecosRel(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -240,18 +313,15 @@ function ParcEnderecosRel(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -266,9 +336,15 @@ function ParcEnderecosRel(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -283,9 +359,15 @@ function ParcEnderecosRel(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -300,13 +382,15 @@ function ParcEnderecosRel(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

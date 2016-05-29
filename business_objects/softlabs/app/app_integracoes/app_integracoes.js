@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_integracoes.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:13:21 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:08:50 GMT-0300 (BRT)
  * @constructor
  */
 function AppIntegracoes(){
@@ -18,26 +18,26 @@ function AppIntegracoes(){
         table: 'app_integracoes',
         metadata: {
             key: 'app_integracoes_key',
-            label: app_integracoes_key,
+            label: '',
             fields: {
                 app_integracoes_key: {
                     tipo: types.comp.key, label: 'App Integrações:'
                 }, 
                 app_integ_config_key: {
-                    tipo: types.comp.dropdown, label: 'App Integ Config:',
+                    tipo: types.comp.choose, label: 'App Integ Config:',
                     data: { 
                         key: ['app_integ_config_key'], 
                         from: ['softlabs', 'app', 'app_integ_config'], 
-                        template: '{row.app_integ_config_key} - {row.app_integ_confi}', 
+                        template: '{app_integ_config_key} - {app_integ_confi}', 
                         provider: '' 
                     } 
                 }, 
                 sec_usuarios_key: {
-                    tipo: types.comp.dropdown, label: 'Sec Usuarios:',
+                    tipo: types.comp.choose, label: 'Sec Usuarios:',
                     data: { 
                         key: ['sec_usuarios_key'], 
                         from: ['softlabs', 'security', 'sec_usuarios'], 
-                        template: '{row.sec_usuarios_key} - {row.sec_usuario}', 
+                        template: '{sec_usuarios_key} - {sec_usuario}', 
                         provider: '' 
                     } 
                 }, 
@@ -65,7 +65,10 @@ function AppIntegracoes(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de app_integracoes"},
@@ -91,19 +94,19 @@ function AppIntegracoes(){
                 0: {
                     from: ['softlabs', 'app', 'app_integracoes'],
                     fields: [
-                        app_integracoes_key
+                        
                     ]
                 },
                 1: { 
                     from: ['softlabs', 'app', 'app_integ_config'],
-                        join: {source: 0, tipo: types.join.left, on: 'app_integ_config_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'app_integ_config_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 2: { 
                     from: ['softlabs', 'security', 'sec_usuarios'],
-                        join: {source: 0, tipo: types.join.left, on: 'sec_usuarios_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'sec_usuarios_key', where: ''},
                     fields: [
                         
                     ]
@@ -115,8 +118,7 @@ function AppIntegracoes(){
             order: [
                 ['0', 'app_integracoes_key', 'desc']
             ],
-            search: [ 
-                
+            search: [
             ],
             limit: 250,
             showSQL: 0
@@ -142,6 +144,9 @@ function AppIntegracoes(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -155,10 +160,16 @@ function AppIntegracoes(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -172,10 +183,16 @@ function AppIntegracoes(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -189,18 +206,68 @@ function AppIntegracoes(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -215,9 +282,15 @@ function AppIntegracoes(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -232,18 +305,15 @@ function AppIntegracoes(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -258,9 +328,15 @@ function AppIntegracoes(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -275,9 +351,15 @@ function AppIntegracoes(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -292,13 +374,15 @@ function AppIntegracoes(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

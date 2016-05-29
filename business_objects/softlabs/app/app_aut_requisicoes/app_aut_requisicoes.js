@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_aut_requisicoes.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:13:21 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:08:50 GMT-0300 (BRT)
  * @constructor
  */
 function AppAutRequisicoes(){
@@ -18,26 +18,26 @@ function AppAutRequisicoes(){
         table: 'app_aut_requisicoes',
         metadata: {
             key: 'app_aut_requisicoes_key',
-            label: app_aut_requisicoes_key,
+            label: 'observacoes',
             fields: {
                 app_aut_requisicoes_key: {
                     tipo: types.comp.key, label: 'App Aut Requisições:'
                 }, 
                 app_aut_regras_key: {
-                    tipo: types.comp.dropdown, label: 'App Aut Regras:',
+                    tipo: types.comp.choose, label: 'App Aut Regras:',
                     data: { 
                         key: ['app_aut_regras_key'], 
                         from: ['softlabs', 'app', 'app_aut_regras'], 
-                        template: '{row.app_aut_regras_key} - {row.app_aut_regra}', 
+                        template: '{app_aut_regras_key} - {app_aut_regra}', 
                         provider: '' 
                     } 
                 }, 
                 app_autorizadores_key: {
-                    tipo: types.comp.dropdown, label: 'App Autorizadores:',
+                    tipo: types.comp.choose, label: 'App Autorizadores:',
                     data: { 
                         key: ['app_autorizadores_key'], 
                         from: ['softlabs', 'app', 'app_autorizadores'], 
-                        template: '{row.app_autorizadores_key} - {row.app_autorizadore}', 
+                        template: '{app_autorizadores_key} - {app_autorizadore}', 
                         provider: '' 
                     } 
                 }, 
@@ -54,11 +54,11 @@ function AppAutRequisicoes(){
                     tipo: types.comp.text, label: 'Observações:'
                 }, 
                 sec_usuarios_key: {
-                    tipo: types.comp.dropdown, label: 'Sec Usuarios:',
+                    tipo: types.comp.choose, label: 'Sec Usuarios:',
                     data: { 
                         key: ['sec_usuarios_key'], 
                         from: ['softlabs', 'security', 'sec_usuarios'], 
-                        template: '{row.sec_usuarios_key} - {row.sec_usuario}', 
+                        template: '{sec_usuarios_key} - {sec_usuario}', 
                         provider: '' 
                     } 
                 }
@@ -80,7 +80,10 @@ function AppAutRequisicoes(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de app_aut_requisicoes"},
@@ -88,7 +91,10 @@ function AppAutRequisicoes(){
                 {dt_resolucao: 25, liberado: 25, observacoes: 25, sec_usuarios_key: 25}
             ],
             ctrls: {
-                
+                observacoes: {
+                    extra_right: { class: '', tag: '' },
+                    extra_left:  { class: '', tag: '' }
+                }
             }
         }
 
@@ -106,26 +112,26 @@ function AppAutRequisicoes(){
                 0: {
                     from: ['softlabs', 'app', 'app_aut_requisicoes'],
                     fields: [
-                        app_aut_requisicoes_key
+                        
                     ]
                 },
                 1: { 
                     from: ['softlabs', 'app', 'app_aut_regras'],
-                        join: {source: 0, tipo: types.join.left, on: 'app_aut_regras_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'app_aut_regras_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 2: { 
                     from: ['softlabs', 'app', 'app_autorizadores'],
-                        join: {source: 0, tipo: types.join.left, on: 'app_autorizadores_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'app_autorizadores_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 3: { 
                     from: ['softlabs', 'security', 'sec_usuarios'],
-                        join: {source: 0, tipo: types.join.left, on: 'sec_usuarios_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'sec_usuarios_key', where: ''},
                     fields: [
                         
                     ]
@@ -135,10 +141,10 @@ function AppAutRequisicoes(){
                 ['AND', 0, 'app_aut_requisicoes_key', types.where.check]
             ],
             order: [
-                ['0', 'app_aut_requisicoes_key', 'desc']
+                [0, 'observacoes', 'asc']
             ],
-            search: [ 
-                
+            search: [
+                    {alias: 6, field: 'observacoes',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -164,6 +170,9 @@ function AppAutRequisicoes(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -177,10 +186,16 @@ function AppAutRequisicoes(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -194,10 +209,16 @@ function AppAutRequisicoes(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -211,18 +232,68 @@ function AppAutRequisicoes(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -237,9 +308,15 @@ function AppAutRequisicoes(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -254,18 +331,15 @@ function AppAutRequisicoes(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -280,9 +354,15 @@ function AppAutRequisicoes(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -297,9 +377,15 @@ function AppAutRequisicoes(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -314,13 +400,15 @@ function AppAutRequisicoes(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

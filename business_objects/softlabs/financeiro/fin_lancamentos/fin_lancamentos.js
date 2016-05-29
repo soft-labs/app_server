@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: fin_lancamentos.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:15:29 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:09:45 GMT-0300 (BRT)
  * @constructor
  */
 function FinLancamentos(){
@@ -18,89 +18,89 @@ function FinLancamentos(){
         table: 'fin_lancamentos',
         metadata: {
             key: 'fin_lancamentos_key',
-            label: 'fin_lancamentos_key',
+            label: 'competencia',
             fields: {
                 fin_lancamentos_key: {
                     tipo: types.comp.key, label: 'Fin Lancamentos:'
                 }, 
                 fin_lanc_origem_key: {
-                    tipo: types.comp.dropdown, label: 'Fin Lanc Origem:',
+                    tipo: types.comp.choose, label: 'Fin Lanc Origem:',
                     data: { 
                         key: ['fin_lanc_origem_key'], 
                         from: ['softlabs', 'financeiro', 'fin_lanc_origem'], 
-                        template: '{row.fin_lanc_origem_key} - {row.fin_lanc_orige}', 
+                        template: '{fin_lanc_origem_key} - {fin_lanc_orige}', 
                         provider: '' 
                     } 
                 }, 
                 fin_lanc_destino_key: {
-                    tipo: types.comp.dropdown, label: 'Fin Lanc Destino:',
+                    tipo: types.comp.choose, label: 'Fin Lanc Destino:',
                     data: { 
                         key: ['fin_lanc_destino_key'], 
                         from: ['softlabs', 'financeiro', 'fin_lanc_destino'], 
-                        template: '{row.fin_lanc_destino_key} - {row.fin_lanc_destin}', 
+                        template: '{fin_lanc_destino_key} - {fin_lanc_destin}', 
                         provider: '' 
                     } 
                 }, 
                 fin_lanc_tipos_key: {
-                    tipo: types.comp.dropdown, label: 'Fin Lanc Tipos:',
+                    tipo: types.comp.choose, label: 'Fin Lanc Tipos:',
                     data: { 
                         key: ['fin_lanc_tipos_key'], 
                         from: ['softlabs', 'financeiro', 'fin_lanc_tipos'], 
-                        template: '{row.fin_lanc_tipos_key} - {row.fin_lanc_tipo}', 
+                        template: '{fin_lanc_tipos_key} - {fin_lanc_tipo}', 
                         provider: '' 
                     } 
                 }, 
                 fin_lanc_status_key: {
-                    tipo: types.comp.dropdown, label: 'Fin Lanc Status:',
+                    tipo: types.comp.choose, label: 'Fin Lanc Status:',
                     data: { 
                         key: ['fin_lanc_status_key'], 
                         from: ['softlabs', 'financeiro', 'fin_lanc_status'], 
-                        template: '{row.fin_lanc_status_key} - {row.fin_lanc_statu}', 
+                        template: '{fin_lanc_status_key} - {fin_lanc_statu}', 
                         provider: '' 
                     } 
                 }, 
                 empresas_key: {
-                    tipo: types.comp.dropdown, label: 'Empresas:',
+                    tipo: types.comp.choose, label: 'Empresas:',
                     data: { 
                         key: ['empresas_key'], 
                         from: ['softlabs', 'empresas', 'empresas'], 
-                        template: '{row.empresas_key} - {row.empresa}', 
+                        template: '{empresas_key} - {empresa}', 
                         provider: '' 
                     } 
                 }, 
                 fin_contas_key: {
-                    tipo: types.comp.dropdown, label: 'Fin Contas:',
+                    tipo: types.comp.choose, label: 'Fin Contas:',
                     data: { 
                         key: ['fin_contas_key'], 
                         from: ['softlabs', 'financeiro', 'fin_contas'], 
-                        template: '{row.fin_contas_key} - {row.fin_conta}', 
+                        template: '{fin_contas_key} - {fin_conta}', 
                         provider: '' 
                     } 
                 }, 
                 parceiros_key: {
-                    tipo: types.comp.dropdown, label: 'Parceiros:',
+                    tipo: types.comp.choose, label: 'Parceiros:',
                     data: { 
                         key: ['parceiros_key'], 
                         from: ['softlabs', 'parceiros', 'parceiros'], 
-                        template: '{row.parceiros_key} - {row.parceiro}', 
+                        template: '{parceiros_key} - {parceiro}', 
                         provider: '' 
                     } 
                 }, 
                 contratos_key: {
-                    tipo: types.comp.dropdown, label: 'Contratos:',
+                    tipo: types.comp.choose, label: 'Contratos:',
                     data: { 
                         key: ['contratos_key'], 
                         from: ['softlabs', 'contratos', 'contratos'], 
-                        template: '{row.contratos_key} - {row.contrato}', 
+                        template: '{contratos_key} - {contrato}', 
                         provider: '' 
                     } 
                 }, 
                 movimentacoes_key: {
-                    tipo: types.comp.dropdown, label: 'Movimentações:',
+                    tipo: types.comp.choose, label: 'Movimentações:',
                     data: { 
                         key: ['movimentacoes_key'], 
                         from: ['softlabs', 'movimentacoes', 'movimentacoes'], 
-                        template: '{row.movimentacoes_key} - {row.movimentacoe}', 
+                        template: '{movimentacoes_key} - {movimentacoe}', 
                         provider: '' 
                     } 
                 }, 
@@ -206,7 +206,10 @@ function FinLancamentos(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de fin_lancamentos"},
@@ -222,7 +225,10 @@ function FinLancamentos(){
                 {estorno_motivo: 25, observacoes: 75}
             ],
             ctrls: {
-                
+                competencia: {
+                    extra_right: { class: '', tag: '' },
+                    extra_left:  { class: '', tag: '' }
+                }
             }
         }
 
@@ -245,63 +251,63 @@ function FinLancamentos(){
                 },
                 1: { 
                     from: ['softlabs', 'financeiro', 'fin_lanc_origem'],
-                        join: {source: 0, tipo: types.join.left, on: 'fin_lanc_origem_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'fin_lanc_origem_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 2: { 
                     from: ['softlabs', 'financeiro', 'fin_lanc_destino'],
-                        join: {source: 0, tipo: types.join.left, on: 'fin_lanc_destino_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'fin_lanc_destino_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 3: { 
                     from: ['softlabs', 'financeiro', 'fin_lanc_tipos'],
-                        join: {source: 0, tipo: types.join.left, on: 'fin_lanc_tipos_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'fin_lanc_tipos_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 4: { 
                     from: ['softlabs', 'financeiro', 'fin_lanc_status'],
-                        join: {source: 0, tipo: types.join.left, on: 'fin_lanc_status_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'fin_lanc_status_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 5: { 
                     from: ['softlabs', 'empresas', 'empresas'],
-                        join: {source: 0, tipo: types.join.left, on: 'empresas_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'empresas_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 6: { 
                     from: ['softlabs', 'financeiro', 'fin_contas'],
-                        join: {source: 0, tipo: types.join.left, on: 'fin_contas_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'fin_contas_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 7: { 
                     from: ['softlabs', 'parceiros', 'parceiros'],
-                        join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 8: { 
                     from: ['softlabs', 'contratos', 'contratos'],
-                        join: {source: 0, tipo: types.join.left, on: 'contratos_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'contratos_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 9: { 
                     from: ['softlabs', 'movimentacoes', 'movimentacoes'],
-                        join: {source: 0, tipo: types.join.left, on: 'movimentacoes_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'movimentacoes_key', where: ''},
                     fields: [
                         
                     ]
@@ -311,10 +317,19 @@ function FinLancamentos(){
                 ['AND', 0, 'fin_lancamentos_key', types.where.check]
             ],
             order: [
-                ['0', 'fin_lancamentos_key', 'desc']
+                [0, 'competencia', 'asc']
             ],
-            search: [ 
-                
+            search: [
+                    {alias: 9, field: 'competencia',  param: types.search.like_full },
+                    {alias: 9, field: 'dt_documento',  param: types.search.maior_igual },
+                    {alias: 9, field: 'dt_vencimento',  param: types.search.maior_igual },
+                    {alias: 9, field: 'numero',  param: types.search.like_full },
+                    {alias: 9, field: 'descricao',  param: types.search.like_full },
+                    {alias: 9, field: 'complemento',  param: types.search.like_full },
+                    {alias: 9, field: 'baixa_data',  param: types.search.maior_igual },
+                    {alias: 9, field: 'baixa_bancaria',  param: types.search.maior_igual },
+                    {alias: 9, field: 'cancelamento_data',  param: types.search.maior_igual },
+                    {alias: 9, field: 'estorno_data',  param: types.search.maior_igual }
             ],
             limit: 250,
             showSQL: 0
@@ -340,6 +355,9 @@ function FinLancamentos(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -353,10 +371,16 @@ function FinLancamentos(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -370,10 +394,16 @@ function FinLancamentos(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -387,18 +417,68 @@ function FinLancamentos(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -413,9 +493,15 @@ function FinLancamentos(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -430,18 +516,15 @@ function FinLancamentos(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -456,9 +539,15 @@ function FinLancamentos(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -473,9 +562,15 @@ function FinLancamentos(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -490,13 +585,15 @@ function FinLancamentos(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

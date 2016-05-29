@@ -9,36 +9,37 @@ html
 
         // JQuery
         script(type='text/javascript', src='js/3rd/jquery/jquery-2.1.1.min.js')
-        script(type='text/javascript', src='js/3rd/jquery/jquery-ui.min.js')
+        //script(type='text/javascript', src='js/3rd/jquery/jquery-ui.min.js')
 
         // Alertify
-        link(rel='stylesheet', href="js/3rd/alertifyjs/css/alertify.min.css")
-        link(rel='stylesheet', href="js/3rd/alertifyjs/css/themes/default.min.css", id="toggleCSS")
-        script(type="application/javascript", src="js/3rd/alertifyjs/alertify.min.js")
+            link(rel='stylesheet', href="js/3rd/alertifyjs/css/alertify.min.css")
+            link(rel='stylesheet', href="js/3rd/alertifyjs/css/themes/default.min.css", id="toggleCSS")
+            script(type="application/javascript", src="js/3rd/alertifyjs/alertify.min.js")
 
         // Semantic
-        link(rel='stylesheet', href='js/3rd/semantic/dist/semantic.min.css')
-        script(type='application/javascript', src='js/3rd/semantic/dist/semantic.js')
+            link(rel='stylesheet', href='js/3rd/semantic/dist/semantic.min.css')
+            script(type='application/javascript', src='js/3rd/semantic/dist/semantic.js')
 
         // Rivet
-        script(type='text/javascript', src='js/3rd/rivets/rivets.min.js')
-        script(type='text/javascript', src='js/3rd/rivets/stdlib.js')
+            script(type='text/javascript', src='js/3rd/rivets/rivets.min.js')
+            script(type='text/javascript', src='js/3rd/rivets/stdlib.js')
 
         // Momentjs
-        script(type='text/javascript', src='js/3rd/moment/moment-with-locales.min.js')
+            script(type='text/javascript', src='js/3rd/moment/moment-with-locales.min.js')
+
 
         // Tshark
-        link(rel="stylesheet", href="client/v3/_engine.css")
-        script(type="application/javascript", src="client/v3/_extends.js")
-        script(type="application/javascript", src="client/v3/tshark.js")
-        script(type="application/javascript", src="client/v3/_api.js")
-        script(type="application/javascript", src="client/v3/_modulo.js")
-        script(type="application/javascript", src="client/v3/_dataset.js")
-        script(type="application/javascript", src="client/v3/_forms.js")
+            link(rel="stylesheet", href="client/v3/_engine.css")
+            script(type="application/javascript", src="client/v3/_extends.js")
+            script(type="application/javascript", src="client/v3/tshark.js")
+            script(type="application/javascript", src="client/v3/_api.js")
+            script(type="application/javascript", src="client/v3/_modulo.js")
+            script(type="application/javascript", src="client/v3/_dataset.js")
+            script(type="application/javascript", src="client/v3/_forms.js")
 
         // App
-        link(rel='stylesheet', href='css/app.css')
-        script(type='application/javascript', src='index.js')
+            link(rel='stylesheet', href='css/app.css')
+        script(type='application/javascript', src='index2.js')
 
     body
 
@@ -50,6 +51,7 @@ html
                         label {row.key} - {row.label}
 
             br
+            input.date
             br
             br
 
@@ -61,4 +63,16 @@ html
                 .content(rv-each-row='rows')
                     label {row.test} - {row.name}
 
+        #root-picker-outlet(style="position:relative")
 
+        link(rel='stylesheet', href="js/3rd/lib/themes/default.css")
+
+        script(type='text/javascript', src='js/3rd/lib/picker.js')
+
+
+        link(rel='stylesheet', href="js/3rd/lib/themes/classic.date.css")
+        link(rel='stylesheet', href="js/3rd/lib/themes/classic.time.css")
+
+        script(type='text/javascript', src='js/3rd/lib/picker.date.js')
+        script(type='text/javascript', src='js/3rd/lib/picker.time.js')
+        script(type='text/javascript', src='js/3rd/lib/translations/pt_BR.js')

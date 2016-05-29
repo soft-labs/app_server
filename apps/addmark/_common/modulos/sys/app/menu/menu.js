@@ -73,16 +73,6 @@ tshark.modulos._add('sys.app.menu', {
                 app[area].show();
             }
         }
-
-
-        softlabs.empresas.emp_clientes.list({doc_key: 1});
-
-        tshark.call('softlabs empresas ' + mod + ' list', {doc_key: 1});
-
-        tshark.send({doc_key: 1});
-        
-        softlabs.empresas.emp_clientes.send({doc_key: 1});
-
     }
 
 });

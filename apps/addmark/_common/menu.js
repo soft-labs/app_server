@@ -76,7 +76,7 @@ module.exports = {
             submenu: [
                 {
                     label: "Clientes",
-                    api: "softlabs empresas emp_clientes list",
+                    api: "softlabs empresas emp_clientes create",
                     area: "app-contas"
                 },
                 {

@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_vendas.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:15:42 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:09:57 GMT-0300 (BRT)
  * @constructor
  */
 function ItemVendas(){
@@ -18,134 +18,134 @@ function ItemVendas(){
         table: 'item_vendas',
         metadata: {
             key: 'item_vendas_key',
-            label: item_vendas_key,
+            label: 'item_venda',
             fields: {
                 item_vendas_key: {
                     tipo: types.comp.key, label: 'Item Vendas:'
                 }, 
                 items_key: {
-                    tipo: types.comp.dropdown, label: 'Items:',
+                    tipo: types.comp.choose, label: 'Items:',
                     data: { 
                         key: ['items_key'], 
                         from: ['softlabs', 'items', 'items'], 
-                        template: '{row.items_key} - {row.item}', 
+                        template: '{items_key} - {item}', 
                         provider: '' 
                     } 
                 }, 
                 prod_tabelas_key: {
-                    tipo: types.comp.dropdown, label: 'Prod Tabelas:',
+                    tipo: types.comp.choose, label: 'Prod Tabelas:',
                     data: { 
                         key: ['prod_tabelas_key'], 
                         from: ['softlabs', 'items', 'prod_tabelas'], 
-                        template: '{row.prod_tabelas_key} - {row.prod_tabela}', 
+                        template: '{prod_tabelas_key} - {prod_tabela}', 
                         provider: '' 
                     } 
                 }, 
                 prod_venda_categorias_key: {
-                    tipo: types.comp.dropdown, label: 'Prod Venda Categorias:',
+                    tipo: types.comp.choose, label: 'Prod Venda Categorias:',
                     data: { 
                         key: ['prod_venda_categorias_key'], 
                         from: ['softlabs', 'items', 'prod_venda_categorias'], 
-                        template: '{row.prod_venda_categorias_key} - {row.prod_venda_categoria}', 
+                        template: '{prod_venda_categorias_key} - {prod_venda_categoria}', 
                         provider: '' 
                     } 
                 }, 
                 prod_item_producao_key: {
-                    tipo: types.comp.dropdown, label: 'Prod Item Produção:',
+                    tipo: types.comp.choose, label: 'Prod Item Produção:',
                     data: { 
                         key: ['prod_item_producao_key'], 
                         from: ['softlabs', 'items', 'prod_item_producao'], 
-                        template: '{row.prod_item_producao_key} - {row.prod_item_produca}', 
+                        template: '{prod_item_producao_key} - {prod_item_produca}', 
                         provider: '' 
                     } 
                 }, 
                 fichas_tecnicas_key: {
-                    tipo: types.comp.dropdown, label: 'Fichas Tecnicas:',
+                    tipo: types.comp.choose, label: 'Fichas Tecnicas:',
                     data: { 
                         key: ['fichas_tecnicas_key'], 
                         from: ['softlabs', 'items', 'fichas_tecnicas'], 
-                        template: '{row.fichas_tecnicas_key} - {row.fichas_tecnica}', 
+                        template: '{fichas_tecnicas_key} - {fichas_tecnica}', 
                         provider: '' 
                     } 
                 }, 
                 prod_baixa_tipos_key: {
-                    tipo: types.comp.dropdown, label: 'Prod Baixa Tipos:',
+                    tipo: types.comp.choose, label: 'Prod Baixa Tipos:',
                     data: { 
                         key: ['prod_baixa_tipos_key'], 
                         from: ['softlabs', 'items', 'prod_baixa_tipos'], 
-                        template: '{row.prod_baixa_tipos_key} - {row.prod_baixa_tipo}', 
+                        template: '{prod_baixa_tipos_key} - {prod_baixa_tipo}', 
                         provider: '' 
                     } 
                 }, 
                 prod_embalagens_key: {
-                    tipo: types.comp.dropdown, label: 'Prod Embalagens:',
+                    tipo: types.comp.choose, label: 'Prod Embalagens:',
                     data: { 
                         key: ['prod_embalagens_key'], 
                         from: ['softlabs', 'items', 'prod_embalagens'], 
-                        template: '{row.prod_embalagens_key} - {row.prod_embalagen}', 
+                        template: '{prod_embalagens_key} - {prod_embalagen}', 
                         provider: '' 
                     } 
                 }, 
                 unidades_key: {
-                    tipo: types.comp.dropdown, label: 'Unidades:',
+                    tipo: types.comp.choose, label: 'Unidades:',
                     data: { 
                         key: ['unidades_key'], 
                         from: ['softlabs', 'unidades', 'unidades'], 
-                        template: '{row.unidades_key} - {row.unidade}', 
+                        template: '{unidades_key} - {unidade}', 
                         provider: '' 
                     } 
                 }, 
                 estoques_key: {
-                    tipo: types.comp.dropdown, label: 'Estoques:',
+                    tipo: types.comp.choose, label: 'Estoques:',
                     data: { 
                         key: ['estoques_key'], 
                         from: ['softlabs', 'unidades', 'estoques'], 
-                        template: '{row.estoques_key} - {row.estoque}', 
+                        template: '{estoques_key} - {estoque}', 
                         provider: '' 
                     } 
                 }, 
                 estoq_locais_key: {
-                    tipo: types.comp.dropdown, label: 'Estoq Locais:',
+                    tipo: types.comp.choose, label: 'Estoq Locais:',
                     data: { 
                         key: ['estoq_locais_key'], 
                         from: ['softlabs', 'unidades', 'estoq_locais'], 
-                        template: '{row.estoq_locais_key} - {row.estoq_locai}', 
+                        template: '{estoq_locais_key} - {estoq_locai}', 
                         provider: '' 
                     } 
                 }, 
                 prod_icms_key: {
-                    tipo: types.comp.dropdown, label: 'Prod Icms:',
+                    tipo: types.comp.choose, label: 'Prod Icms:',
                     data: { 
                         key: ['prod_icms_key'], 
                         from: ['softlabs', 'unidades', 'prod_icms'], 
-                        template: '{row.prod_icms_key} - {row.prod_icm}', 
+                        template: '{prod_icms_key} - {prod_icm}', 
                         provider: '' 
                     } 
                 }, 
                 prod_cod_origem_key: {
-                    tipo: types.comp.dropdown, label: 'Prod Cod Origem:',
+                    tipo: types.comp.choose, label: 'Prod Cod Origem:',
                     data: { 
                         key: ['prod_cod_origem_key'], 
                         from: ['softlabs', 'unidades', 'prod_cod_origem'], 
-                        template: '{row.prod_cod_origem_key} - {row.prod_cod_orige}', 
+                        template: '{prod_cod_origem_key} - {prod_cod_orige}', 
                         provider: '' 
                     } 
                 }, 
                 prod_cod_tributacao_key: {
-                    tipo: types.comp.dropdown, label: 'Prod Cod Tributação:',
+                    tipo: types.comp.choose, label: 'Prod Cod Tributação:',
                     data: { 
                         key: ['prod_cod_tributacao_key'], 
                         from: ['softlabs', 'unidades', 'prod_cod_tributacao'], 
-                        template: '{row.prod_cod_tributacao_key} - {row.prod_cod_tributaca}', 
+                        template: '{prod_cod_tributacao_key} - {prod_cod_tributaca}', 
                         provider: '' 
                     } 
                 }, 
                 cont_plano_contas_key: {
-                    tipo: types.comp.dropdown, label: 'Cont Plano Contas:',
+                    tipo: types.comp.choose, label: 'Cont Plano Contas:',
                     data: { 
                         key: ['cont_plano_contas_key'], 
                         from: ['softlabs', 'contabil', 'cont_plano_contas'], 
-                        template: '{row.cont_plano_contas_key} - {row.cont_plano_conta}', 
+                        template: '{cont_plano_contas_key} - {cont_plano_conta}', 
                         provider: '' 
                     } 
                 }, 
@@ -200,7 +200,10 @@ function ItemVendas(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de item_vendas"},
@@ -213,7 +216,10 @@ function ItemVendas(){
                 {foto_grande: 25, observacoes: 75}
             ],
             ctrls: {
-                
+                item_venda: {
+                    extra_right: { class: '', tag: '' },
+                    extra_left:  { class: '', tag: '' }
+                }
             }
         }
 
@@ -231,103 +237,103 @@ function ItemVendas(){
                 0: {
                     from: ['softlabs', 'items', 'item_vendas'],
                     fields: [
-                        item_vendas_key
+                        
                     ]
                 },
                 1: { 
                     from: ['softlabs', 'items', 'items'],
-                        join: {source: 0, tipo: types.join.left, on: 'items_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'items_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 2: { 
                     from: ['softlabs', 'items', 'prod_tabelas'],
-                        join: {source: 0, tipo: types.join.left, on: 'prod_tabelas_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'prod_tabelas_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 3: { 
                     from: ['softlabs', 'items', 'prod_venda_categorias'],
-                        join: {source: 0, tipo: types.join.left, on: 'prod_venda_categorias_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'prod_venda_categorias_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 4: { 
                     from: ['softlabs', 'items', 'prod_item_producao'],
-                        join: {source: 0, tipo: types.join.left, on: 'prod_item_producao_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'prod_item_producao_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 5: { 
                     from: ['softlabs', 'items', 'fichas_tecnicas'],
-                        join: {source: 0, tipo: types.join.left, on: 'fichas_tecnicas_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'fichas_tecnicas_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 6: { 
                     from: ['softlabs', 'items', 'prod_baixa_tipos'],
-                        join: {source: 0, tipo: types.join.left, on: 'prod_baixa_tipos_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'prod_baixa_tipos_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 7: { 
                     from: ['softlabs', 'items', 'prod_embalagens'],
-                        join: {source: 0, tipo: types.join.left, on: 'prod_embalagens_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'prod_embalagens_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 8: { 
                     from: ['softlabs', 'unidades', 'unidades'],
-                        join: {source: 0, tipo: types.join.left, on: 'unidades_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'unidades_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 9: { 
                     from: ['softlabs', 'unidades', 'estoques'],
-                        join: {source: 0, tipo: types.join.left, on: 'estoques_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'estoques_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 10: { 
                     from: ['softlabs', 'unidades', 'estoq_locais'],
-                        join: {source: 0, tipo: types.join.left, on: 'estoq_locais_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'estoq_locais_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 11: { 
                     from: ['softlabs', 'unidades', 'prod_icms'],
-                        join: {source: 0, tipo: types.join.left, on: 'prod_icms_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'prod_icms_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 12: { 
                     from: ['softlabs', 'unidades', 'prod_cod_origem'],
-                        join: {source: 0, tipo: types.join.left, on: 'prod_cod_origem_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'prod_cod_origem_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 13: { 
                     from: ['softlabs', 'unidades', 'prod_cod_tributacao'],
-                        join: {source: 0, tipo: types.join.left, on: 'prod_cod_tributacao_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'prod_cod_tributacao_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 14: { 
                     from: ['softlabs', 'contabil', 'cont_plano_contas'],
-                        join: {source: 0, tipo: types.join.left, on: 'cont_plano_contas_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'cont_plano_contas_key', where: ''},
                     fields: [
                         
                     ]
@@ -337,10 +343,13 @@ function ItemVendas(){
                 ['AND', 0, 'item_vendas_key', types.where.check]
             ],
             order: [
-                ['0', 'item_vendas_key', 'desc']
+                [0, 'item_venda', 'asc']
             ],
-            search: [ 
-                
+            search: [
+                    {alias: 20, field: 'item_venda',  param: types.search.like_full },
+                    {alias: 20, field: 'cod_barras',  param: types.search.like_full },
+                    {alias: 20, field: 'foto_peq',  param: types.search.like_full },
+                    {alias: 20, field: 'foto_grande',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -366,6 +375,9 @@ function ItemVendas(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -379,10 +391,16 @@ function ItemVendas(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -396,10 +414,16 @@ function ItemVendas(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -413,18 +437,68 @@ function ItemVendas(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -439,9 +513,15 @@ function ItemVendas(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -456,18 +536,15 @@ function ItemVendas(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -482,9 +559,15 @@ function ItemVendas(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -499,9 +582,15 @@ function ItemVendas(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -516,13 +605,15 @@ function ItemVendas(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

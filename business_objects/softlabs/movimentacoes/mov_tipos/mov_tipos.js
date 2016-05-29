@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: mov_tipos.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:16:00 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:10:05 GMT-0300 (BRT)
  * @constructor
  */
 function MovTipos(){
@@ -18,7 +18,7 @@ function MovTipos(){
         table: 'mov_tipos',
         metadata: {
             key: 'mov_tipos_key',
-            label: mov_tipos_key,
+            label: 'codigo',
             fields: {
                 mov_tipos_key: {
                     tipo: types.comp.key, label: 'Mov Tipos:'
@@ -51,74 +51,74 @@ function MovTipos(){
                     tipo: types.comp.text_big, label: 'Observações:'
                 }, 
                 val_estoq_entrada_key: {
-                    tipo: types.comp.dropdown, label: 'Val Estoq Entrada:',
+                    tipo: types.comp.choose, label: 'Val Estoq Entrada:',
                     data: { 
                         key: ['val_estoq_entrada_key'], 
                         from: ['softlabs', '', 'val_estoq_entrada'], 
-                        template: '{row.val_estoq_entrada_key} - {row.val_estoq_entrad}', 
+                        template: '{val_estoq_entrada_key} - {val_estoq_entrad}', 
                         provider: '' 
                     } 
                 }, 
                 val_estoq_saida_key: {
-                    tipo: types.comp.dropdown, label: 'Val Estoq Saida:',
+                    tipo: types.comp.choose, label: 'Val Estoq Saida:',
                     data: { 
                         key: ['val_estoq_saida_key'], 
                         from: ['softlabs', '', 'val_estoq_saida'], 
-                        template: '{row.val_estoq_saida_key} - {row.val_estoq_said}', 
+                        template: '{val_estoq_saida_key} - {val_estoq_said}', 
                         provider: '' 
                     } 
                 }, 
                 val_ent_destino_key: {
-                    tipo: types.comp.dropdown, label: 'Val Ent Destino:',
+                    tipo: types.comp.choose, label: 'Val Ent Destino:',
                     data: { 
                         key: ['val_ent_destino_key'], 
                         from: ['softlabs', '', 'val_ent_destino'], 
-                        template: '{row.val_ent_destino_key} - {row.val_ent_destin}', 
+                        template: '{val_ent_destino_key} - {val_ent_destin}', 
                         provider: '' 
                     } 
                 }, 
                 val_ent_origem_key: {
-                    tipo: types.comp.dropdown, label: 'Val Ent Origem:',
+                    tipo: types.comp.choose, label: 'Val Ent Origem:',
                     data: { 
                         key: ['val_ent_origem_key'], 
                         from: ['softlabs', '', 'val_ent_origem'], 
-                        template: '{row.val_ent_origem_key} - {row.val_ent_orige}', 
+                        template: '{val_ent_origem_key} - {val_ent_orige}', 
                         provider: '' 
                     } 
                 }, 
                 val_rateios_templates_key: {
-                    tipo: types.comp.dropdown, label: 'Val Rateios Templates:',
+                    tipo: types.comp.choose, label: 'Val Rateios Templates:',
                     data: { 
                         key: ['val_rateios_templates_key'], 
                         from: ['softlabs', '', 'val_rateios_templates'], 
-                        template: '{row.val_rateios_templates_key} - {row.val_rateios_template}', 
+                        template: '{val_rateios_templates_key} - {val_rateios_template}', 
                         provider: '' 
                     } 
                 }, 
                 val_cont_plano_contas_key: {
-                    tipo: types.comp.dropdown, label: 'Val Cont Plano Contas:',
+                    tipo: types.comp.choose, label: 'Val Cont Plano Contas:',
                     data: { 
                         key: ['val_cont_plano_contas_key'], 
                         from: ['softlabs', '', 'val_cont_plano_contas'], 
-                        template: '{row.val_cont_plano_contas_key} - {row.val_cont_plano_conta}', 
+                        template: '{val_cont_plano_contas_key} - {val_cont_plano_conta}', 
                         provider: '' 
                     } 
                 }, 
                 val_fin_contas_credito_key: {
-                    tipo: types.comp.dropdown, label: 'Val Fin Contas Credito:',
+                    tipo: types.comp.choose, label: 'Val Fin Contas Credito:',
                     data: { 
                         key: ['val_fin_contas_credito_key'], 
                         from: ['softlabs', '', 'val_fin_contas_credito'], 
-                        template: '{row.val_fin_contas_credito_key} - {row.val_fin_contas_credit}', 
+                        template: '{val_fin_contas_credito_key} - {val_fin_contas_credit}', 
                         provider: '' 
                     } 
                 }, 
                 val_fin_contas_debito_key: {
-                    tipo: types.comp.dropdown, label: 'Val Fin Contas Debito:',
+                    tipo: types.comp.choose, label: 'Val Fin Contas Debito:',
                     data: { 
                         key: ['val_fin_contas_debito_key'], 
                         from: ['softlabs', '', 'val_fin_contas_debito'], 
-                        template: '{row.val_fin_contas_debito_key} - {row.val_fin_contas_debit}', 
+                        template: '{val_fin_contas_debito_key} - {val_fin_contas_debit}', 
                         provider: '' 
                     } 
                 }, 
@@ -135,38 +135,38 @@ function MovTipos(){
                     tipo: types.comp.text, label: 'Lbl Dt Vencimento:'
                 }, 
                 lbl_estoq_entrada_key: {
-                    tipo: types.comp.dropdown, label: 'Lbl Estoq Entrada:',
+                    tipo: types.comp.choose, label: 'Lbl Estoq Entrada:',
                     data: { 
                         key: ['lbl_estoq_entrada_key'], 
                         from: ['softlabs', '', 'lbl_estoq_entrada'], 
-                        template: '{row.lbl_estoq_entrada_key} - {row.lbl_estoq_entrad}', 
+                        template: '{lbl_estoq_entrada_key} - {lbl_estoq_entrad}', 
                         provider: '' 
                     } 
                 }, 
                 lbl_estoq_saida_key: {
-                    tipo: types.comp.dropdown, label: 'Lbl Estoq Saida:',
+                    tipo: types.comp.choose, label: 'Lbl Estoq Saida:',
                     data: { 
                         key: ['lbl_estoq_saida_key'], 
                         from: ['softlabs', '', 'lbl_estoq_saida'], 
-                        template: '{row.lbl_estoq_saida_key} - {row.lbl_estoq_said}', 
+                        template: '{lbl_estoq_saida_key} - {lbl_estoq_said}', 
                         provider: '' 
                     } 
                 }, 
                 lbl_fin_contas_credito_key: {
-                    tipo: types.comp.dropdown, label: 'Lbl Fin Contas Credito:',
+                    tipo: types.comp.choose, label: 'Lbl Fin Contas Credito:',
                     data: { 
                         key: ['lbl_fin_contas_credito_key'], 
                         from: ['softlabs', '', 'lbl_fin_contas_credito'], 
-                        template: '{row.lbl_fin_contas_credito_key} - {row.lbl_fin_contas_credit}', 
+                        template: '{lbl_fin_contas_credito_key} - {lbl_fin_contas_credit}', 
                         provider: '' 
                     } 
                 }, 
                 lbl_fin_contas_debito_key: {
-                    tipo: types.comp.dropdown, label: 'Lbl Fin Contas Debito:',
+                    tipo: types.comp.choose, label: 'Lbl Fin Contas Debito:',
                     data: { 
                         key: ['lbl_fin_contas_debito_key'], 
                         from: ['softlabs', '', 'lbl_fin_contas_debito'], 
-                        template: '{row.lbl_fin_contas_debito_key} - {row.lbl_fin_contas_debit}', 
+                        template: '{lbl_fin_contas_debito_key} - {lbl_fin_contas_debit}', 
                         provider: '' 
                     } 
                 }, 
@@ -225,11 +225,11 @@ function MovTipos(){
                     tipo: types.comp.int, label: 'Requer Observações:'
                 }, 
                 importar_mov_tipos_key: {
-                    tipo: types.comp.dropdown, label: 'Importar Mov Tipos:',
+                    tipo: types.comp.choose, label: 'Importar Mov Tipos:',
                     data: { 
                         key: ['importar_mov_tipos_key'], 
                         from: ['softlabs', '', 'importar_mov_tipos'], 
-                        template: '{row.importar_mov_tipos_key} - {row.importar_mov_tipo}', 
+                        template: '{importar_mov_tipos_key} - {importar_mov_tipo}', 
                         provider: '' 
                     } 
                 }, 
@@ -267,11 +267,11 @@ function MovTipos(){
                     tipo: types.comp.int, label: 'Mov Customizada:'
                 }, 
                 mov_tipos_categorias_key: {
-                    tipo: types.comp.dropdown, label: 'Mov Tipos Categorias:',
+                    tipo: types.comp.choose, label: 'Mov Tipos Categorias:',
                     data: { 
                         key: ['mov_tipos_categorias_key'], 
                         from: ['softlabs', 'movimentacoes', 'mov_tipos_categorias'], 
-                        template: '{row.mov_tipos_categorias_key} - {row.mov_tipos_categoria}', 
+                        template: '{mov_tipos_categorias_key} - {mov_tipos_categoria}', 
                         provider: '' 
                     } 
                 }
@@ -293,7 +293,10 @@ function MovTipos(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de mov_tipos"},
@@ -314,7 +317,10 @@ function MovTipos(){
                 {mov_tipos_categorias_key: 100}
             ],
             ctrls: {
-                
+                codigo: {
+                    extra_right: { class: '', tag: '' },
+                    extra_left:  { class: '', tag: '' }
+                }
             }
         }
 
@@ -332,103 +338,103 @@ function MovTipos(){
                 0: {
                     from: ['softlabs', 'movimentacoes', 'mov_tipos'],
                     fields: [
-                        mov_tipos_key
+                        
                     ]
                 },
                 1: { 
                     from: ['softlabs', '', 'val_estoq_entrada'],
-                        join: {source: 0, tipo: types.join.left, on: 'val_estoq_entrada_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'val_estoq_entrada_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 2: { 
                     from: ['softlabs', '', 'val_estoq_saida'],
-                        join: {source: 0, tipo: types.join.left, on: 'val_estoq_saida_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'val_estoq_saida_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 3: { 
                     from: ['softlabs', '', 'val_ent_destino'],
-                        join: {source: 0, tipo: types.join.left, on: 'val_ent_destino_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'val_ent_destino_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 4: { 
                     from: ['softlabs', '', 'val_ent_origem'],
-                        join: {source: 0, tipo: types.join.left, on: 'val_ent_origem_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'val_ent_origem_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 5: { 
                     from: ['softlabs', '', 'val_rateios_templates'],
-                        join: {source: 0, tipo: types.join.left, on: 'val_rateios_templates_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'val_rateios_templates_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 6: { 
                     from: ['softlabs', '', 'val_cont_plano_contas'],
-                        join: {source: 0, tipo: types.join.left, on: 'val_cont_plano_contas_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'val_cont_plano_contas_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 7: { 
                     from: ['softlabs', '', 'val_fin_contas_credito'],
-                        join: {source: 0, tipo: types.join.left, on: 'val_fin_contas_credito_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'val_fin_contas_credito_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 8: { 
                     from: ['softlabs', '', 'val_fin_contas_debito'],
-                        join: {source: 0, tipo: types.join.left, on: 'val_fin_contas_debito_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'val_fin_contas_debito_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 9: { 
                     from: ['softlabs', '', 'lbl_estoq_entrada'],
-                        join: {source: 0, tipo: types.join.left, on: 'lbl_estoq_entrada_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'lbl_estoq_entrada_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 10: { 
                     from: ['softlabs', '', 'lbl_estoq_saida'],
-                        join: {source: 0, tipo: types.join.left, on: 'lbl_estoq_saida_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'lbl_estoq_saida_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 11: { 
                     from: ['softlabs', '', 'lbl_fin_contas_credito'],
-                        join: {source: 0, tipo: types.join.left, on: 'lbl_fin_contas_credito_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'lbl_fin_contas_credito_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 12: { 
                     from: ['softlabs', '', 'lbl_fin_contas_debito'],
-                        join: {source: 0, tipo: types.join.left, on: 'lbl_fin_contas_debito_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'lbl_fin_contas_debito_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 13: { 
                     from: ['softlabs', '', 'importar_mov_tipos'],
-                        join: {source: 0, tipo: types.join.left, on: 'importar_mov_tipos_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'importar_mov_tipos_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 14: { 
                     from: ['softlabs', 'movimentacoes', 'mov_tipos_categorias'],
-                        join: {source: 0, tipo: types.join.left, on: 'mov_tipos_categorias_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'mov_tipos_categorias_key', where: ''},
                     fields: [
                         
                     ]
@@ -438,10 +444,22 @@ function MovTipos(){
                 ['AND', 0, 'mov_tipos_key', types.where.check]
             ],
             order: [
-                ['0', 'mov_tipos_key', 'desc']
+                [0, 'codigo', 'asc']
             ],
-            search: [ 
-                
+            search: [
+                    {alias: 6, field: 'codigo',  param: types.search.like_full },
+                    {alias: 6, field: 'mov_tipo',  param: types.search.like_full },
+                    {alias: 6, field: 'mod_origem',  param: types.search.like_full },
+                    {alias: 6, field: 'mod_destino',  param: types.search.like_full },
+                    {alias: 6, field: 'lbl_valor_liquido',  param: types.search.like_full },
+                    {alias: 6, field: 'lbl_valor_bruto',  param: types.search.like_full },
+                    {alias: 6, field: 'lbl_dt_vencimento',  param: types.search.like_full },
+                    {alias: 6, field: 'lbl_descricao',  param: types.search.like_full },
+                    {alias: 6, field: 'intf_focus',  param: types.search.like_full },
+                    {alias: 6, field: 'intf_label',  param: types.search.like_full },
+                    {alias: 6, field: 'after_finalizar',  param: types.search.like_full },
+                    {alias: 6, field: 'mod_destino_label',  param: types.search.like_full },
+                    {alias: 6, field: 'mod_origem_label',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -467,6 +485,9 @@ function MovTipos(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -480,10 +501,16 @@ function MovTipos(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -497,10 +524,16 @@ function MovTipos(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -514,18 +547,68 @@ function MovTipos(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -540,9 +623,15 @@ function MovTipos(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -557,18 +646,15 @@ function MovTipos(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -583,9 +669,15 @@ function MovTipos(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -600,9 +692,15 @@ function MovTipos(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -617,13 +715,15 @@ function MovTipos(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

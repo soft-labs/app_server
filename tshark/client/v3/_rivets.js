@@ -101,6 +101,23 @@ rivets.binders['template'] = function(el, value) {
     }
 };
 
+rivets.binders.compvalue = {
+    bind : function(el) {
+        var self = this;
+        this.callback = function(ev) {
+            if (self['model'] && self.model['_dataset_']) {
+
+            }
+        };
+        $(el).on('input', this.callback);
+    },
+    unbind : function(el) {
+        $(el).off('input', this.callback);
+    },
+    routine : function(el, value) {
+        $(el).val(value);
+    }
+};
 
 
 //endregion

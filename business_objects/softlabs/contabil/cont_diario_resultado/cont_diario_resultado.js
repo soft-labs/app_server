@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_diario_resultado.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:14:17 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:09:09 GMT-0300 (BRT)
  * @constructor
  */
 function ContDiarioResultado(){
@@ -18,53 +18,53 @@ function ContDiarioResultado(){
         table: 'cont_diario_resultado',
         metadata: {
             key: 'cont_diario_resultado_key',
-            label: cont_diario_resultado_key,
+            label: 'historico',
             fields: {
                 cont_diario_resultado_key: {
                     tipo: types.comp.key, label: 'Cont Diario Resultado:'
                 }, 
                 cont_centro_resultados_key: {
-                    tipo: types.comp.dropdown, label: 'Cont Centro Resultados:',
+                    tipo: types.comp.choose, label: 'Cont Centro Resultados:',
                     data: { 
                         key: ['cont_centro_resultados_key'], 
                         from: ['softlabs', 'contabil', 'cont_centro_resultados'], 
-                        template: '{row.cont_centro_resultados_key} - {row.cont_centro_resultado}', 
+                        template: '{cont_centro_resultados_key} - {cont_centro_resultado}', 
                         provider: '' 
                     } 
                 }, 
                 empresas_key: {
-                    tipo: types.comp.dropdown, label: 'Empresas:',
+                    tipo: types.comp.choose, label: 'Empresas:',
                     data: { 
                         key: ['empresas_key'], 
                         from: ['softlabs', 'empresas', 'empresas'], 
-                        template: '{row.empresas_key} - {row.empresa}', 
+                        template: '{empresas_key} - {empresa}', 
                         provider: '' 
                     } 
                 }, 
                 movimentacoes_key: {
-                    tipo: types.comp.dropdown, label: 'Movimentações:',
+                    tipo: types.comp.choose, label: 'Movimentações:',
                     data: { 
                         key: ['movimentacoes_key'], 
                         from: ['softlabs', 'movimentacoes', 'movimentacoes'], 
-                        template: '{row.movimentacoes_key} - {row.movimentacoe}', 
+                        template: '{movimentacoes_key} - {movimentacoe}', 
                         provider: '' 
                     } 
                 }, 
                 fin_lancamentos_key: {
-                    tipo: types.comp.dropdown, label: 'Fin Lancamentos:',
+                    tipo: types.comp.choose, label: 'Fin Lancamentos:',
                     data: { 
                         key: ['fin_lancamentos_key'], 
                         from: ['softlabs', 'financeiro', 'fin_lancamentos'], 
-                        template: '{row.fin_lancamentos_key} - {row.fin_lancamento}', 
+                        template: '{fin_lancamentos_key} - {fin_lancamento}', 
                         provider: '' 
                     } 
                 }, 
                 fin_baixas_key: {
-                    tipo: types.comp.dropdown, label: 'Fin Baixas:',
+                    tipo: types.comp.choose, label: 'Fin Baixas:',
                     data: { 
                         key: ['fin_baixas_key'], 
                         from: ['softlabs', 'financeiro', 'fin_baixas'], 
-                        template: '{row.fin_baixas_key} - {row.fin_baixa}', 
+                        template: '{fin_baixas_key} - {fin_baixa}', 
                         provider: '' 
                     } 
                 }, 
@@ -110,7 +110,10 @@ function ContDiarioResultado(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de cont_diario_resultado"},
@@ -120,7 +123,10 @@ function ContDiarioResultado(){
                 {ref3: 25, observacoes: 75}
             ],
             ctrls: {
-                
+                historico: {
+                    extra_right: { class: '', tag: '' },
+                    extra_left:  { class: '', tag: '' }
+                }
             }
         }
 
@@ -138,40 +144,40 @@ function ContDiarioResultado(){
                 0: {
                     from: ['softlabs', 'contabil', 'cont_diario_resultado'],
                     fields: [
-                        cont_diario_resultado_key
+                        
                     ]
                 },
                 1: { 
                     from: ['softlabs', 'contabil', 'cont_centro_resultados'],
-                        join: {source: 0, tipo: types.join.left, on: 'cont_centro_resultados_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'cont_centro_resultados_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 2: { 
                     from: ['softlabs', 'empresas', 'empresas'],
-                        join: {source: 0, tipo: types.join.left, on: 'empresas_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'empresas_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 3: { 
                     from: ['softlabs', 'movimentacoes', 'movimentacoes'],
-                        join: {source: 0, tipo: types.join.left, on: 'movimentacoes_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'movimentacoes_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 4: { 
                     from: ['softlabs', 'financeiro', 'fin_lancamentos'],
-                        join: {source: 0, tipo: types.join.left, on: 'fin_lancamentos_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'fin_lancamentos_key', where: ''},
                     fields: [
                         
                     ]
                 },
                 5: { 
                     from: ['softlabs', 'financeiro', 'fin_baixas'],
-                        join: {source: 0, tipo: types.join.left, on: 'fin_baixas_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'fin_baixas_key', where: ''},
                     fields: [
                         
                     ]
@@ -181,10 +187,13 @@ function ContDiarioResultado(){
                 ['AND', 0, 'cont_diario_resultado_key', types.where.check]
             ],
             order: [
-                ['0', 'cont_diario_resultado_key', 'desc']
+                [0, 'historico', 'asc']
             ],
-            search: [ 
-                
+            search: [
+                    {alias: 6, field: 'historico',  param: types.search.like_full },
+                    {alias: 6, field: 'ref1',  param: types.search.like_full },
+                    {alias: 6, field: 'ref2',  param: types.search.like_full },
+                    {alias: 6, field: 'ref3',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -210,6 +219,9 @@ function ContDiarioResultado(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -223,10 +235,16 @@ function ContDiarioResultado(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -240,10 +258,16 @@ function ContDiarioResultado(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -257,18 +281,68 @@ function ContDiarioResultado(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -283,9 +357,15 @@ function ContDiarioResultado(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -300,18 +380,15 @@ function ContDiarioResultado(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -326,9 +403,15 @@ function ContDiarioResultado(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -343,9 +426,15 @@ function ContDiarioResultado(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -360,13 +449,15 @@ function ContDiarioResultado(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

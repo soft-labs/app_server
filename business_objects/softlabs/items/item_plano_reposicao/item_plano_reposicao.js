@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_plano_reposicao.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:15:42 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:09:57 GMT-0300 (BRT)
  * @constructor
  */
 function ItemPlanoReposicao(){
@@ -18,7 +18,7 @@ function ItemPlanoReposicao(){
         table: 'item_plano_reposicao',
         metadata: {
             key: 'item_plano_reposicao_key',
-            label: item_plano_reposicao_key,
+            label: 'descricao',
             fields: {
                 item_plano_reposicao_key: {
                     tipo: types.comp.key, label: 'Item Plano Reposição:'
@@ -59,7 +59,10 @@ function ItemPlanoReposicao(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de item_plano_reposicao"},
@@ -67,7 +70,10 @@ function ItemPlanoReposicao(){
                 {dia: 25, quantidade: 25, observacoes: 50}
             ],
             ctrls: {
-                
+                descricao: {
+                    extra_right: { class: '', tag: '' },
+                    extra_left:  { class: '', tag: '' }
+                }
             }
         }
 
@@ -85,7 +91,7 @@ function ItemPlanoReposicao(){
                 0: {
                     from: ['softlabs', 'items', 'item_plano_reposicao'],
                     fields: [
-                        item_plano_reposicao_key
+                        
                     ]
                 }, 
             },
@@ -93,10 +99,11 @@ function ItemPlanoReposicao(){
                 ['AND', 0, 'item_plano_reposicao_key', types.where.check]
             ],
             order: [
-                ['0', 'item_plano_reposicao_key', 'desc']
+                [0, 'descricao', 'asc']
             ],
-            search: [ 
-                
+            search: [
+                    {alias: 17, field: 'descricao',  param: types.search.like_full },
+                    {alias: 17, field: 'tipo_intervalo',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -122,6 +129,9 @@ function ItemPlanoReposicao(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -135,10 +145,16 @@ function ItemPlanoReposicao(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -152,10 +168,16 @@ function ItemPlanoReposicao(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -169,18 +191,68 @@ function ItemPlanoReposicao(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -195,9 +267,15 @@ function ItemPlanoReposicao(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -212,18 +290,15 @@ function ItemPlanoReposicao(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -238,9 +313,15 @@ function ItemPlanoReposicao(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -255,9 +336,15 @@ function ItemPlanoReposicao(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -272,13 +359,15 @@ function ItemPlanoReposicao(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

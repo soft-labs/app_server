@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: sec_regras_categ.
  *
  * Engine de aplicações - TShark.
- * @since Mon May 23 2016 09:16:55 GMT-0300 (BRT)
+ * @since Thu May 26 2016 11:10:38 GMT-0300 (BRT)
  * @constructor
  */
 function SecRegrasCateg(){
@@ -18,7 +18,7 @@ function SecRegrasCateg(){
         table: 'sec_regras_categ',
         metadata: {
             key: 'sec_regras_categ_key',
-            label: sec_regras_categ_key,
+            label: 'categoria',
             fields: {
                 sec_regras_categ_key: {
                     tipo: types.comp.key, label: 'Sec Regras Categ:'
@@ -47,14 +47,20 @@ function SecRegrasCateg(){
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
-                size  : types.form.size.small
+                size  : types.form.size.small,
+                external: [
+                    
+                ]
             },
             linhas: [
                 {titulo: "Informações de sec_regras_categ"},
                 {sec_regras_categ_key: 25, categoria: 25, observacoes: 50}
             ],
             ctrls: {
-                
+                categoria: {
+                    extra_right: { class: '', tag: '' },
+                    extra_left:  { class: '', tag: '' }
+                }
             }
         }
 
@@ -72,7 +78,7 @@ function SecRegrasCateg(){
                 0: {
                     from: ['softlabs', 'security', 'sec_regras_categ'],
                     fields: [
-                        sec_regras_categ_key
+                        
                     ]
                 }, 
             },
@@ -80,10 +86,10 @@ function SecRegrasCateg(){
                 ['AND', 0, 'sec_regras_categ_key', types.where.check]
             ],
             order: [
-                ['0', 'sec_regras_categ_key', 'desc']
+                [0, 'categoria', 'asc']
             ],
-            search: [ 
-                
+            search: [
+                    {alias: 3, field: 'categoria',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -109,6 +115,9 @@ function SecRegrasCateg(){
 
     //region :: Eventos
 
+
+    //region :: onGet
+
     /**
      * Evento chamado no início de qualquer operação GET
      * @param ret Objeto de retorno
@@ -122,10 +131,16 @@ function SecRegrasCateg(){
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret){
+    this.onAfterGet = function *(ret, ctx){
 
     };
 
+    /* */
+    //endregion
+
+    
+    //region :: onList
+    
     /**
      * Evento chamado na operação GET :: LIST
      * @param ret Objeto de retorno
@@ -139,10 +154,16 @@ function SecRegrasCateg(){
      * Evento chamado ao final da operação GET :: LIST
      * @param ret Objeto de retorno
      *
-    this.onAfterList = function *(ret){
+    this.onAfterList = function *(ret, ctx){
 
     };
 
+     /* */
+    //endregion
+
+    
+    //region :: onSearch
+    
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
@@ -156,18 +177,68 @@ function SecRegrasCateg(){
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret){
+    this.onAfterSearch = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onSelect
+
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetRow
 
     /**
      * Evento chamado para processamento customizado de
      * cada row em um select
      * @param row
      *
-    this.onGetRow = function (row){
+     this.onGetRow = function (row){
         row['teste'] = 'estive no get row!!!';
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onGetForm
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+    this.onGetForm = function *(form, ctx){
+
+    };
+
+     /**
+     * Evento chamado na recuperação de dados de um formulário
+     * @param ret Objeto de retorno
+     *
+    this.onGetFormData = function *(ret, get){
+
+    };
+
+     /* */
+    //endregion
+
+
+    //region :: onEdit
      
     /**
      * Evento chamado na operação GET :: EDIT
@@ -182,9 +253,15 @@ function SecRegrasCateg(){
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret){
+    this.onAfterEdit = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onCreate
 
     /**
      * Evento chamado na operação GET :: CREATE
@@ -199,18 +276,15 @@ function SecRegrasCateg(){
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret){
+    this.onAfterCreate = function *(ret, ctx){
 
     };
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-    this.onSelect = function *(prov, ctx){
+     /* */
+    //endregion
 
-    };
+
+    //region :: onInsert
      
     /**
      * Evento chamado na operação POST :: Insert
@@ -225,9 +299,15 @@ function SecRegrasCateg(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onUpdate
 
     /**
      * Evento chamado na operação PUT :: Update
@@ -242,9 +322,15 @@ function SecRegrasCateg(){
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret){
+    this.onAfterUpdate = function *(ret, ctx){
 
     };
+
+     /* */
+    //endregion
+
+
+    //region :: onDelete
 
     /**
      * Evento chamado na operação DELETE :: Delete
@@ -259,13 +345,15 @@ function SecRegrasCateg(){
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret){
+    this.onAfterDelete = function *(ret, ctx){
 
     };
-     
-     
-    /* */
 
+     /* */
+    //endregion
+
+
+    /* */
     //endregion
 
 

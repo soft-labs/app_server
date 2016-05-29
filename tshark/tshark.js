@@ -190,39 +190,42 @@ TShark.prototype.getConfig = function(ctx, client) {
  * @returns {string}
  */
 TShark.prototype.render = function *(templId, ctx, base){
-    var check   = templId.split('.')
-        , html  = ''
-    ;
-
-    if (!check || check.length != 2 || check[1] != 'jade'){
-        templId += '.jade';
-    }
-
-    // Rastreia o template
-    var templ;
-    base = base || 'views';
-    ctx.state.config.flowPaths.up.forEach((path) => {
-        var arq = path + base + '/' + templId;
-        if (!templ && fs.existsSync(arq)) {
-            templ = arq;
+    var html = '';
+    
+    try {
+        var check = templId.split('.');
+        if (!check || check.length != 2 || check[1] != 'jade') {
+            templId += '.jade';
         }
-    });
 
-    if(!templ){
-        var arq = 'business_objects/' + templId;
-        if (!templ && fs.existsSync(arq)) {
-            templ = arq;
+        // Rastreia o template
+        var templ;
+        base = base || 'views';
+        ctx.state.config.flowPaths.up.forEach((path) => {
+            var arq = path + base + '/' + templId;
+            if (!templ && fs.existsSync(arq)) {
+                templ = arq;
+            }
+        });
+
+        if (!templ) {
+            var arq = 'business_objects/' + templId;
+            if (!templ && fs.existsSync(arq)) {
+                templ = arq;
+            }
         }
-    }
 
-    if (templ){
-        try {
-            html = jade.renderFile(templ, ctx || {});
-        } catch (e){
-            console.error(e);
+        if (templ) {
+            try {
+                html = jade.renderFile(templ, ctx || {});
+            } catch (e) {
+                console.error(e);
+            }
         }
+    } catch (e){
+        log.erro(e);
     }
-
+    
     // Retorna
     return html;
 };
@@ -248,17 +251,19 @@ TShark.prototype.renderStr = function(template, params) {
  */
 TShark.prototype.parseFields = function(templ, re){
     if (!templ) return [];
-
-    var tmp = templ.match(re || /row\.(\w+)/g)
-        , fields = []
-        ;
-
-    if (tmp != null){
-        fields = tmp.map(function(f){
-            return f.split('.')[1];
-        });
+    var fields = [];
+    
+    try {
+        var tmp = templ.match(re || /row\.(\w+)/g);
+        if (tmp != null) {
+            fields = tmp.map(function (f) {
+                return f.split('.')[1];
+            });
+        }
+    } catch (e){
+        log.erro(e);
     }
-
+    
     return fields;
 };
 
@@ -341,16 +346,20 @@ TShark.prototype.getConnection = function *(ctx, id){
 //region :: Utils
 
 function myextend(target) {
-    var sources = [].slice.call(arguments, 1);
-    sources.forEach(function (source) {
-        for (var prop in source) {
-            if (util.isObject(source[prop]) && !util.isArray(source[prop])){
-                myextend(target[prop], source[prop])
-            } else {
-                target[prop] = source[prop];
+    try {
+        var sources = [].slice.call(arguments, 1);
+        sources.forEach(function (source) {
+            for (var prop in source) {
+                if (util.isObject(source[prop]) && !util.isArray(source[prop])) {
+                    myextend(target[prop], source[prop])
+                } else {
+                    target[prop] = source[prop];
+                }
             }
-        }
-    });
+        });
+    } catch (e){
+        log.erro(e);
+    }
     return target;
 }
 
@@ -365,59 +374,66 @@ function myextend(target) {
  * @return { BizObject }
  */
 TShark.prototype.initObj = function(path, context){
-    var owner  = path[0]
-        , pack = path[1]
-        , bobj = path[2]
-    ;
+    var mod = false;
+    
+    try {
+        var owner = path[0]
+            , pack = path[1]
+            , bobj = path[2]
+            ;
 
-    // Business Object    
-    var op = 'business_objects/'
-        + owner + '/'
-        + pack + '/'
-        + bobj + '/'
-        + bobj + '.js';
-    var obj = this.no_caching_require  
-        ? reload(op)
-        : require(op)
-    ;
+        // Business Object    
+        var op = 'business_objects/'
+            + owner + '/'
+            + pack + '/'
+            + bobj + '/'
+            + bobj + '.js';
+        var obj = this.no_caching_require
+                ? reload(op)
+                : require(op)
+            ;
 
-    // Extende
-    if (!obj['extended']) {
-        util.inherits(obj, BizObject);
-    }
-
-    // Cria
-    var mod = new obj(path);
-
-    // Overwrite e customização
-    context.state.config.flowPaths.down.forEach((path) => {
-        var arq = path + 'modulos/' + owner + '/' + pack + '/' + bobj + '/' + bobj + '.server.js'
-        try {
-            if (fs.existsSync(arq)) {
-                var overObj = new (require(arq))();
-                myextend(mod, overObj);
-            }
-        } catch (e){
-            console.log(e);
+        // Extende
+        if (!obj['extended']) {
+            util.inherits(obj, BizObject);
         }
-    });
 
-    // Vinculo ao engine
-    mod.engine = this;
+        // Cria
+        mod = new obj(path);
 
-    // Path
-    mod.path = {
-        owner   : owner,
-        pack    : pack,
-        obj     : bobj,
-        asArray : [owner, pack, bobj],
-        asString: owner + '/' + pack + '/' + bobj
-    };
+        // Overwrite e customização
+        context.state.config.flowPaths.down.forEach((path) => {
+            var arq = path + 'modulos/' + owner + '/' + pack + '/' + bobj + '/' + bobj + '.server.js'
+            try {
+                if (fs.existsSync(arq)) {
+                    var overObj = new (require(arq))();
+                    myextend(mod, overObj);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        });
 
-    // Params
-    mod.context = this.app.context;
-    mod.state   = context.state;
-    mod.params  = extend(true, context.request.query || {}, context.request.body || {});
+        // Vinculo ao engine
+        mod.engine = this;
+
+        // Path
+        mod.path = {
+            owner: owner,
+            pack: pack,
+            obj: bobj,
+            asArray: [owner, pack, bobj],
+            asString: owner + '/' + pack + '/' + bobj
+        };
+
+        // Params
+        mod.context = this.app.context;
+        mod.state = context.state;
+        mod.params = extend(true, context.request.query || {}, context.request.body || {});
+        
+    } catch (e){
+        log.erro(e);
+    }
     
     // Retorna
     return mod;
@@ -431,16 +447,18 @@ TShark.prototype.initObj = function(path, context){
  * Registra o inicio de um roteamento
  */
 router.use(function *timeLog(next) {
-    //console.log('Time start: ', Date.now());
-
-    var tmp = this.captures[0].split('/').slice(3);
-    this.state.api = {
-        url: this.originalUrl,
-        call: tmp[tmp.length-1],
-        path:  tmp,
-        params: extend(true, this.request.query || {}, this.request.body || {})
-    };
-
+    try {
+        var tmp = this.captures[0].split('/').slice(3);
+        this.state.api = {
+            url: this.originalUrl,
+            call: tmp[tmp.length - 1],
+            path: tmp,
+            params: extend(true, this.request.query || {}, this.request.body || {})
+        };
+    } catch (e){
+        log.erro(e, 'timelog');
+    }
+    
     yield next;
 });
 
@@ -450,42 +468,47 @@ router.use(function *timeLog(next) {
 router.use(function *(next) {
     var ok = false;
 
-    // Se pedir com educação
-    if (this.state.api.path[0] == 'sys'      &&
-        this.state.api.path[1] == 'app'      &&
-        this.state.api.path[2] == 'security' &&
-        this.state.api.path[3] == 'login') {
+    try {
+        // Se pedir com educação
+        if (this.state.api.path[0] == 'sys' &&
+            this.state.api.path[1] == 'app' &&
+            this.state.api.path[2] == 'security' &&
+            this.state.api.path[3] == 'login') {
 
-        var tmp = this.req.headers.referer.split('/').slice(-2);
-        this.state.config = this.app.context.clientes[tmp[0]][tmp[1]];
+            var tmp = this.req.headers.referer.split('/').slice(-2);
+            this.state.config = this.app.context.clientes[tmp[0]][tmp[1]];
 
-        ok = true;
-    }
-
-    // Token
-    if (this.req.headers['token']){
-
-        // Validar o token de acesso aqui
-
-        ok = true;
-    }
-
-    // Senão...
-    if (!ok) {
-        var user_key = cookies.getLoggedUser(this);
-
-        // You shall not pass!
-        if (!user_key || !this.app.context.running[user_key]) {
-            this.throw(404, 'Not Found');
-
-        // Multipass!!
-        } else {
-            this.state.user_key = user_key;
-            this.state.config = this.app.context.running[user_key];
-            ok = true
+            ok = true;
         }
-    }
 
+        // Token
+        if (this.req.headers['token']) {
+
+            // Validar o token de acesso aqui
+
+            ok = true;
+        }
+
+        // Senão...
+        if (!ok) {
+            var user_key = cookies.getLoggedUser(this);
+
+            // You shall not pass!
+            if (!user_key || !this.app.context.running[user_key]) {
+                this.throw(404, 'Not Found');
+
+                // Multipass!!
+            } else {
+                this.state.user_key = user_key;
+                this.state.config = this.app.context.running[user_key];
+                ok = true
+            }
+        }
+    
+    } catch (e){
+        log.erro(e, 'TShark Router - validação');
+    }
+    
     if (ok){
         yield next;
     } else {
@@ -505,48 +528,53 @@ router.use(function *(next) {
  * @since 21/02/16
  */
 router.get(/^\/(\w+)\/tshark\/.*$/, function *(next) {
+    try {
 
-    /**
-     * Instancia o módulo
-     * @type BizObject
-     */
-    var mod   = this.app.engine.initObj(this.state.api.path, this)
-        , len = this.state.api.path.length
-    ;
+        /**
+         * Instancia o módulo
+         * @type BizObject
+         */
+        var mod = this.app.engine.initObj(this.state.api.path, this)
+            , len = this.state.api.path.length
+            ;
 
-    // Form de edição
-    if (len == 5) {
-        this.state.api.call = 'edit';
-        mod.params['key'] = this.state.api.path[3];
-        this.body = yield mod.form(this);
-
-    } else {
-
-        // Form de inserção
-        if (len == 4 && this.state.api.path[3] == 'new') {
-            this.state.api.call = 'create';
-            mod.params['key'] = 'NEW_KEY';
+        // Form de edição
+        if (len == 5) {
+            this.state.api.call = 'edit';
+            mod.params['key'] = this.state.api.path[3];
             this.body = yield mod.form(this);
 
-        // Listagem
         } else {
-            this.state.api.call = (this.request.query['query']
-                ? 'search'
-                : len == 4 && this.state.api.path[3]
-                    ? 'get'
-                    : 'list'
-            );
-            if (len == 4){
-                mod.params['key'] = this.state.api.path[3];
-            }
-            this.body = yield mod.get(this);
 
-            if (mod.params['template'] && mod.params['template'] == '_choose'){
-                this.state.api.call = 'choose';
+            // Form de inserção
+            if (len == 4 && this.state.api.path[3] == 'new') {
+                this.state.api.call = 'create';
+                mod.params['key'] = 'NEW_KEY';
+                this.body = yield mod.form(this);
+
+                // Listagem
+            } else {
+                this.state.api.call = (this.request.query['query']
+                        ? 'search'
+                        : len == 4 && this.state.api.path[3]
+                        ? 'get'
+                        : 'list'
+                );
+                if (len == 4) {
+                    mod.params['key'] = this.state.api.path[3];
+                }
+                this.body = yield mod.get(this);
+
+                if (mod.params['template'] && mod.params['template'] == '_choose') {
+                    this.state.api.call = 'choose';
+                }
             }
         }
+    
+    } catch (e){
+        log.erro(e);
     }
-
+    
     /**
      * Finaliza
      */
@@ -561,39 +589,43 @@ router.get(/^\/(\w+)\/tshark\/.*$/, function *(next) {
  * 11/04/16
  */
 router.post(/^\/(\w+)\/tshark\/.*/, function *(next) {
-
-    /**
-     * Instancia o módulo
-     * @type BizObject
-     */
-    var mod   = this.app.engine.initObj(this.state.api.path, this)
-        , len = this.state.api.path.length
-    ;
-
-    // Execução de função
-    if (len = 4){
-        var func = this.state.api.call;
-        if (!func){
-            func = this.state.api.call = 'insert';
-        }
+    try {
 
         /**
-         * Executa a função no objeto
+         * Instancia o módulo
+         * @type BizObject
          */
-        try {
-            var res = yield mod[func](this);
-            if (typeof res != 'object'){
-                this.body = {
-                    result: res
-                };
-            } else {
-                this.body = res;
-            }
-        } catch (e){
-            console.log(e);
-        }
-    }
+        var mod = this.app.engine.initObj(this.state.api.path, this)
+            , len = this.state.api.path.length
+            ;
 
+        // Execução de função
+        if (len = 4) {
+            var func = this.state.api.call;
+            if (!func) {
+                func = this.state.api.call = 'insert';
+            }
+
+            /**
+             * Executa a função no objeto
+             */
+            try {
+                var res = yield mod[func](this);
+                if (typeof res != 'object') {
+                    this.body = {
+                        result: res
+                    };
+                } else {
+                    this.body = res;
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    } catch (e){
+        log.erro(e);
+    }
+    
     /**
      * Finaliza
      */
@@ -608,19 +640,24 @@ router.post(/^\/(\w+)\/tshark\/.*/, function *(next) {
  * 25/04/16
  */
 router.put(/^\/(\w+)\/tshark\/.*/, function *(next) {
+    try {
+        
+        /**
+         * Instancia o módulo
+         * @type BizObject
+         */
+        var mod = this.app.engine.initObj(this.state.api.path, this)
+            , len = this.state.api.path.length
+            ;
 
-    /**
-     * Instancia o módulo
-     * @type BizObject
-     */
-    var mod   = this.app.engine.initObj(this.state.api.path, this)
-        , len = this.state.api.path.length
-    ;
-
-    // Execução de função
-    this.state.api.call = 'update';
-    this.body = yield mod.update(this);
-
+        // Execução de função
+        this.state.api.call = 'update';
+        this.body = yield mod.update(this);
+    
+    } catch (e){
+        log.erro(e);
+    }
+    
     /**
      * Finaliza
      */
@@ -635,20 +672,25 @@ router.put(/^\/(\w+)\/tshark\/.*/, function *(next) {
  * 25/04/16
  */
 router.delete(/^\/(\w+)\/tshark\/.*/, function *(next) {
+    try {
+        
+        /**
+         * Instancia o módulo
+         * @type BizObject
+         */
+        var mod = this.app.engine.initObj(this.state.api.path, this)
+            , len = this.state.api.path.length
+            ;
 
-    /**
-     * Instancia o módulo
-     * @type BizObject
-     */
-    var mod   = this.app.engine.initObj(this.state.api.path, this)
-        , len = this.state.api.path.length
-    ;
-
-    // Execução de função
-    this.state.api.call = 'delete';
-    mod.params['key'] = this.state.api.path[3];
-    this.body = yield mod.delete(this);
-
+        // Execução de função
+        this.state.api.call = 'delete';
+        mod.params['key'] = this.state.api.path[3];
+        this.body = yield mod.delete(this);
+    
+    } catch (e){
+        log.erro(e);
+    }
+    
     /**
      * Finaliza
      */
@@ -707,42 +749,47 @@ function endRoute(ctx){
  * @since 21/02/16
  */
 router.get(/\/comps\/dropdown\/(\w+)\/(\w+)\/(\w+)/, function *(next) {
-
-    /**
-     * Instancia o módulo
-     * @type BizObject
-     */
-    var mod    = this.app.engine.initObj(this.state.api.path, this)
-        , opts = {
-            success: true,
-            results: []
-        }
-        , label = mod.source.metadata['label']
-    ;
-
-    mod.params['query'] = decodeURIComponent(this.state.api.path[3]);
-
-    // Recupera dados
-    var data = yield mod.select(this, mod.params.provider || 'default', {
-        sources: {
-            0: {
-                fields: [label, mod.params.label.replace(/\W/g, '')]
+    try {
+        
+        /**
+         * Instancia o módulo
+         * @type BizObject
+         */
+        var mod = this.app.engine.initObj(this.state.api.path, this)
+            , opts = {
+                success: true,
+                results: []
             }
-        },
-        search: [
-            {alias: 0, field: label,  param: types.search.like_full }
-        ],
-        showSQL: false
-    });
+            , label = mod.source.metadata['label']
+            ;
 
-    data.rows.forEach(r => {
-        opts.results.push({
-            name: r[label],
-            value: r[mod.source.metadata['key']]
-        })
-    });
-    this.body = opts;
+        mod.params['query'] = decodeURIComponent(this.state.api.path[3]);
 
+        // Recupera dados
+        var data = yield mod.select(this, mod.params.provider || 'default', {
+            sources: {
+                0: {
+                    fields: [label, mod.params.label.replace(/\W/g, '')]
+                }
+            },
+            search: [
+                {alias: 0, field: label, param: types.search.like_full}
+            ],
+            showSQL: false
+        });
+
+        data.rows.forEach(r => {
+            opts.results.push({
+                name: r[label],
+                value: r[mod.source.metadata['key']]
+            })
+        });
+        this.body = opts;
+        
+    } catch (e){
+        log.erro(e);
+    }
+    
     /**
      * Finaliza
      */
