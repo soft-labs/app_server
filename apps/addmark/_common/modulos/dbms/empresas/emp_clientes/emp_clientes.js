@@ -22,17 +22,38 @@ tshark.modulos._add('dbms.empresas.emp_clientes', {
     /**
      * Chamado antes de requisitar uma listagem no server
      *
-    onBeforeList: function(el, settings){
+     onBeforeList: function(el, settings){
 
         // Libera ou não para continuar
         return true;
     },
 
-    /**
+     /**
      * Chamado após a listagem de dados
-     *
+     */
     onAfterList: function(response, next){
 
+        app.actionbar.reset([
+            {
+                icon: 'home icon',
+                title: 'Home',
+                description: 'Cockpit financeiro',
+                client: 'sys app menu click',
+                area: "app-home"
+            },
+            {
+                icon: 'users icon',
+                title: 'Clientes Cadastrados',
+                description: 'Listagem'
+            },
+            {
+                icon: 'add icon',
+                title: 'Novo Cliente',
+                description: 'Cadastrar Novo',
+                server: 'dbms empresa emp_clientes create',
+                active: 1
+            }
+        ]);
     },
 
     /* */
