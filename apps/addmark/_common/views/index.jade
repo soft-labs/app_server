@@ -11,8 +11,13 @@ block app_css
 
 // Javascripts do app
 block app_scripts
-    script(type='application/javascript', src='views/app-home/home.js')
-    script(type='application/javascript', src='configuracoes.js')
+
+    // Componentes
+    script(type='application/javascript', src='components/actionbar.js')
+
+    // Areas
+    script(type='application/javascript', src='views/app-home/app-home.js')
+    script(type='application/javascript', src='views/app-financas/app-financas.js')
 
 
 block content
@@ -40,11 +45,11 @@ block content
                             a.item(
                                 rv-each-submenu='menu.submenu'
                                 rv-server='submenu.server'
-                                client='sys app menu click'
 
-                                rv-data-area='submenu.area | if submenu.area menu.area'
-                                rv-data-menu-index='menu._index_'
-                                rv-data-submenu-index='submenu._index_'
+                                client='app areas show'
+                                rv-data-area='menu.area'
+                                rv-data-subarea='submenu.subarea'
+
                                 style="white-space: nowrap;"
                             )
                                 i.angle.double.right.icon

@@ -146,35 +146,35 @@ var CONSOLE_ON = true;
         $('[client]').not('.api-client-binded')
             .addClass('api-client-binded')
             .on('click', function(ev) {
-                funcClient.call($(this), 'client', ev);
+                return funcClient.call($(this), 'client', ev);
             })
         ;
 
         $('[client-dblclick]').not('.api-client-binded')
             .addClass('api-client-binded')
             .on('dblclick', function(ev) {
-                funcClient.call($(this), 'client-dblclick', ev);
+                return funcClient.call($(this), 'client-dblclick', ev);
             })
         ;
 
         $('[client-onblur]').not('.api-client-binded')
             .addClass('api-client-binded')
             .on('blur', function(ev) {
-                funcClient.call($(this), 'client-blur', ev);
+                return funcClient.call($(this), 'client-blur', ev);
             })
         ;
 
         $('[client-onchange]').not('.api-client-binded')
             .addClass('api-client-binded')
             .on('change', function(ev) {
-                funcClient.call($(this), 'client-change', ev);
+                return funcClient.call($(this), 'client-change', ev);
             })
         ;
 
         $('[client-onkeydown]').not('.api-client-binded')
             .addClass('api-client-binded')
             .on('keydown', function(ev){
-                funcClient.call($(this), 'client-onkeydown', ev);
+                return funcClient.call($(this), 'client-onkeydown', ev);
             })
         ;
 
@@ -182,7 +182,7 @@ var CONSOLE_ON = true;
             .addClass('api-client-binded')
             .on('keydown', function(ev){
                 if (ev.keyCode != 13) return;
-                funcClient.call($(this), 'client-onenter', ev);
+                return funcClient.call($(this), 'client-onenter', ev);
             })
         ;
 
