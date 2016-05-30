@@ -102,27 +102,33 @@ rivets.binders['template'] = function(el, value) {
 };
 
 
-
-rivets.binders['server*'] = function(el, value) {
+/**
+ * Binders de API
+ * @param el
+ * @param value
+ */
+rivets.binders['server'] = function(el, value) {
     $(el).attr(this.type, value);
+    $(el).data('action', value);
     $(el).removeAttr('rv-' + this.type);
 };
-/*
+
 rivets.binders['server-*'] = function(el, value) {
     $(el).attr(this.type, value);
-    $(el).removeAttr(this.type);
+    $(el).data('action', value);
+    $(el).removeAttr('rv-' + this.type);
 };
 
 rivets.binders['client'] = function(el, value) {
-    $(el).attr('client', value);
-    $(el).removeAttr('rv-client');
+    $(el).attr(this.type, value);
+    $(el).removeAttr('rv-' + this.type);
 };
 
 rivets.binders['client-*'] = function(el, value) {
     $(el).attr(this.type, value);
-    $(el).removeAttr(this.type);
+    $(el).removeAttr('rv-' + this.type);
 };
-*/
+
 
 //endregion
 

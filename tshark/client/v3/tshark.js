@@ -90,7 +90,37 @@ var CONSOLE_ON = true;
     TShark.prototype.bindAPIs = function (ref) {
         ref = '.app';
         
-        // Bind de APIs
+        //region :: Bind de APIs Server
+
+        $('[server]').not('.api-binded')
+            .api(this.api)
+            .addClass('api-binded')
+        ;
+
+        // Bind de APIs em click
+        $('[server-click]').not('.api-binded')
+            .api(this.api)
+            .addClass('api-binded')
+        ;
+
+        // Bind de APIs em dblclick
+        $('[server-dblclick]').not('.api-binded')
+            .api(this.dblclick_api)
+            .addClass('api-binded')
+        ;
+
+        // Bind de APIs em blur
+        $('[server-onblur]').not('.api-binded')
+            .api(this.blur_api)
+            .addClass('api-binded')
+        ;
+
+        // Bind de APIs em change
+        $('[server-onchange]').not('.api-binded')
+            .api(this.change_api)
+            .addClass('api-binded')
+        ;
+        
         $('[data-action]').not('.api-binded')
             .api(this.api)
             .addClass('api-binded');
@@ -99,58 +129,65 @@ var CONSOLE_ON = true;
             .api(this.api)
             .addClass('api-binded');
 
-        $('[server]').not('.api-binded')
-            .api(this.api)
-            .addClass('api-binded')
-            .each(function(){
-                $(this).data('action', $(this).attr('server'));
-            });
+        //endregion
 
 
-        // Bind de APIs em click
-        $('[server-click]').not('.api-binded')
-            .api(this.api)
-            .addClass('api-binded')
-            .each(function(){
-                $(this).data('action', $(this).attr('server-click'));
+        //region :: Bind de APIs Client
+
+        var funcClient = function(key, ev){
+            var api = $(this).attr(key)
+                , data = $(this).data()
+            ;
+
+            var obj = tshark.getObjPath(window, api);
+            obj.call($(this), ev, data);
+        };
+
+        $('[client]').not('.api-client-binded')
+            .addClass('api-client-binded')
+            .on('click', function(ev) {
+                funcClient.call($(this), 'client', ev);
             })
         ;
 
-        // Bind de APIs em dblclick
-        $('[server-dblclick]').not('.api-binded')
-            .api(this.dblclick_api)
-            .addClass('api-binded')
-            .each(function(){
-                $(this).data('action', $(this).attr('server-dblclick'));
+        $('[client-dblclick]').not('.api-client-binded')
+            .addClass('api-client-binded')
+            .on('dblclick', function(ev) {
+                funcClient.call($(this), 'client-dblclick', ev);
             })
         ;
 
-        // Bind de APIs em blur
-        $('[server-onblur]').not('.api-binded')
-            .api(this.blur_api)
-            .addClass('api-binded')
-            .each(function(){
-                $(this).data('action', $(this).attr('server-onblur'));
+        $('[client-onblur]').not('.api-client-binded')
+            .addClass('api-client-binded')
+            .on('blur', function(ev) {
+                funcClient.call($(this), 'client-blur', ev);
             })
         ;
 
-        // Bind de APIs em change
-        $('[server-onchange]').not('.api-binded')
-            .api(this.change_api)
-            .addClass('api-binded')
-            .each(function(){
-                $(this).data('action', $(this).attr('server-onchange'));
+        $('[client-onchange]').not('.api-client-binded')
+            .addClass('api-client-binded')
+            .on('change', function(ev) {
+                funcClient.call($(this), 'client-change', ev);
             })
         ;
 
-        // ???? Bind de APIs em change
-        $('[onvalue]').not('.api-binded')
-            .api(this.change_api)
-            .addClass('api-binded')
-            .each(function(){
-                $(this).data('action', $(this).attr('onchange'));
+        $('[client-onkeydown]').not('.api-client-binded')
+            .addClass('api-client-binded')
+            .on('keydown', function(ev){
+                funcClient.call($(this), 'client-onkeydown', ev);
             })
         ;
+
+        $('[client-onenter]').not('.api-client-binded')
+            .addClass('api-client-binded')
+            .on('keydown', function(ev){
+                if (ev.keyCode != 13) return;
+                funcClient.call($(this), 'client-onenter', ev);
+            })
+        ;
+
+        //endregion
+
         
     };
     
@@ -612,7 +649,7 @@ var CONSOLE_ON = true;
     TShark.prototype.getObjPath = (base, path) => {
         var obj = base;
         if (typeof path == 'string'){
-            path = path.split('.');
+            path = path.indexOf('.') > -1 ? path.split('.') : path.split(' ');
         }
         path.forEach((p) => {
             obj = obj[p];

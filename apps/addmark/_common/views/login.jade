@@ -35,7 +35,7 @@ block content
                                                 input#username(type='text',
                                                     rv-value='sys.app.security.data.row.username',
                                                     placeholder='Informe o seu usuário',
-                                                    rv-on-keydown='sys.app.security.login',
+                                                    client-onenter='sys app security login',
                                                 )
                                                 i.user.icon
                                         .field
@@ -44,7 +44,7 @@ block content
                                                 input#password(type='password',
                                                     rv-value='sys.app.security.data.row.password',
                                                     placeholder='Informe sua senha',
-                                                    rv-on-keydown='sys.app.security.login'
+                                                    client-onenter='sys app security login'
                                                 )
                                                 i.lock.icon
 

@@ -41,6 +41,22 @@ var tshark = tshark || new TShark()
  *    "softlabs empresas emp_clientes update" data-key="8978"      -- Envia dados para alteração de cliente
  *    "softlabs empresas emp_clientes delete" data-key="8978"      -- Remove o cliente key '8978'
  *    "softlabs empresas emp_clientes geraBoletos" data-[xyz]      -- Executa a função geraBoletos em emp_clientes
+ *
+ *  Atributos HTML para APIs server
+ *              server=""
+ *        server-click=""
+ *     server-dblclick=""
+ *       server-onblur=""
+ *     server-onchange=""
+ *
+ *  Atributos HTML para APIs client
+ *              client=""
+ *        client-click=""
+ *     client-dblclick=""
+ *       client-onblur=""
+ *     client-onchange=""
+ *    client-onkeydown=""
+ *      client-onenter=""
  */
 TShark.prototype.api_map = {
 
