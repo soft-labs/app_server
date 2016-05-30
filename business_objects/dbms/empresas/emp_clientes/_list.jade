@@ -1,0 +1,16 @@
+//
+    Template default para: dbms.empresas.emp_clientes
+    Criado em Sun May 29 2016 08:57:48 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Emp Clientes
+        th Parceiros
+        th Ativo
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.empresas.[object Object].data.rows')
+            td {row.emp_clientes_key}
+            td {row.parceiros_key}
+            td {row.ativo}
+            td {row.observacoes}

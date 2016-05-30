@@ -1,0 +1,12 @@
+//
+    Template default para: dbms.contabil.cont_categorias
+    Criado em Sun May 29 2016 08:57:35 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Cont Categorias
+        th Cont Categoria
+    tbody
+        tr(rv-each-row='dbms.contabil.[object Object].data.rows')
+            td {row.cont_categorias_key}
+            td {row.cont_categoria}

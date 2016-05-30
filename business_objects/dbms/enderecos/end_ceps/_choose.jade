@@ -1,0 +1,28 @@
+//
+    Template choose para: dbms.enderecos.end_ceps
+    Criado em Sun May 29 2016 08:57:57 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th End Ceps
+        th End Bairros
+        th End Cidades
+        th End Estados
+        th End Paises
+        th Cep
+        th Logradouro
+        th Endereco
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.end_ceps_key'
+        )
+            td {row.end_ceps_key}
+            td {row.end_bairros_key}
+            td {row.end_cidades_key}
+            td {row.end_estados_key}
+            td {row.end_paises_key}
+            td {row.cep}
+            td {row.logradouro}
+            td {row.endereco}

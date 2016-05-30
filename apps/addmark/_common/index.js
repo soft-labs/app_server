@@ -21,7 +21,10 @@ $(document).ready(function() {
     // Inicializa TShark
     tshark.init({
         register: [
-            'sys.app.menu'
+            'sys.app.menu',
+            'dbms.financeiro.fin_apagar',
+            'dbms.financeiro.fin_areceber',
+            'dbms.financeiro.fin_lancamentos'
         ]
     });
 
@@ -36,12 +39,46 @@ $(document).ready(function() {
  */
 app = $.extend(true, app, {
 
+    // Informações genéricas na interface
+    info: {
+        titulo  : 'Geração de Objetos de Negócio',
+        desc    : 'Gere objetos de negócio à partir da base de dados',
+        help    : '',
+        icon    : 'circular settings icon'
+    },
+
     // Modo atual da aplicação
     mode: 'desenv',
 
-    // Barra de ação
-    appbar: [],
+    // Período de data ativo
+    periodo:{
+        de : moment().subtract(7, 'days').format('DD/MM/YYYY'),
+        ate: moment().add(7, 'days').format('DD/MM/YYYY'),
 
+        hello: function(){
+
+        }
+        
+    },
+
+    //region :: Barra de ação
+    
+    actionbar: {
+        itens: [],
+
+        /**
+         * Atualiza a barra de botões global do app
+         */
+        reset: function(itens){
+            app.actionbar.itens = itens;
+            tshark.bindAPIs('.app-bar');
+        }
+        
+    },
+
+    //endregion
+    
+    
     // Inicializador da aplicação
     init: function () {
 
@@ -70,28 +107,11 @@ app = $.extend(true, app, {
 
     },
 
-    /**
-     * Atualiza a barra de botões global do app
-     * @param itens
-     */
-    resetAppBar: function(itens){
-        this.appbar = itens;
-        tshark.bindAPIs('.app-bar');
-    },
     
 
     //region :: Estruturas da aplicação
 
-    // Informações genéricas na interface
-    info: {
-        titulo  : 'Geração de Objetos de Negócio',
-        desc    : 'Gere objetos de negócio à partir da base de dados',
-        help    : '',
-        icon    : 'circular settings icon'
-    },
     
-    // Submenu dinâmico
-    submenu: [],
 
     // Repositório de dados do app
     struct: {
@@ -145,7 +165,7 @@ app = $.extend(true, app, {
             ]
         }
         
-    },
+    }
 
 
     //endregion

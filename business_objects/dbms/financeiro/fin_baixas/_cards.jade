@@ -1,0 +1,20 @@
+//
+    Template default para: dbms.financeiro.fin_baixas
+    Criado em Sun May 29 2016 08:58:09 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='dbms.financeiro.[object Object].data.rows')
+    .content
+        .header {row.fin_baixas_key} - {row.historico}
+        .meta Keys: fin_lancamentos_key, fin_contas_key, fin_especies_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='dbms financeiro [object Object] edit', rv-data-key='row.fin_baixas_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='dbms financeiro [object Object] delete', rv-data-key='row.fin_baixas_key')
+                i.delete.icon
+                | Remover

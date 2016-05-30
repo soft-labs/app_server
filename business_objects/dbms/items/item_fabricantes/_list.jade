@@ -1,0 +1,14 @@
+//
+    Template default para: dbms.items.item_fabricantes
+    Criado em Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Item Fabricantes
+        th Fabricante
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.items.[object Object].data.rows')
+            td {row.item_fabricantes_key}
+            td {row.fabricante}
+            td {row.observacoes}

@@ -396,6 +396,8 @@ Array.prototype.last = function(){
  *   res._stats = { sum: {valor: 53}, count: 4 }
  *
  * @param campo
+ * @param order
+ * @param desc
  * @returns {Array}
  */
 Array.prototype.pivot = function (campo, desc) {

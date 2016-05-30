@@ -1,0 +1,32 @@
+//
+    Template choose para: dbms.unidades.unidades
+    Criado em Sun May 29 2016 08:59:27 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Unidades
+        th Unid Grupos
+        th Parent
+        th Sigla
+        th Unidade
+        th Proporção
+        th Padrão
+        th Referencia
+        th Familia
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.unidades_key'
+        )
+            td {row.unidades_key}
+            td {row.unid_grupos_key}
+            td {row.parent_key}
+            td {row.sigla}
+            td {row.unidade}
+            td {row.proporcao}
+            td {row.padrao}
+            td {row.referencia}
+            td {row.familia}
+            td {row.observacoes}

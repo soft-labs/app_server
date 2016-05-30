@@ -1,0 +1,18 @@
+//
+    Template default para: dbms.apps.app_autorizacoes
+    Criado em Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th App Autorizações
+        th Ativo
+        th Autorização
+        th Modulo
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.apps.[object Object].data.rows')
+            td {row.app_autorizacoes_key}
+            td {row.ativo}
+            td {row.autorizacao}
+            td {row.modulo}
+            td {row.observacoes}

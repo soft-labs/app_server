@@ -1,0 +1,20 @@
+//
+    Template choose para: dbms.empresas.emp_clientes
+    Criado em Sun May 29 2016 08:57:48 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Emp Clientes
+        th Parceiros
+        th Ativo
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.emp_clientes_key'
+        )
+            td {row.emp_clientes_key}
+            td {row.parceiros_key}
+            td {row.ativo}
+            td {row.observacoes}

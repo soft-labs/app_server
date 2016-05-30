@@ -5,44 +5,53 @@
     .ui.fluid.card
         .content
 
-            // Mennu Agrupamento
+            // Menu Agrupamento
             span.right.floated.ui.secondary.menu
-                .ui.dropdown.item
-                    i.options.icon
-                    span.text Vencimento
+                .ui.labeled.icon.selection.dropdown.pivot.apagar
+                    i
+                    span.text
                     .menu
+                        .header
+                            i.options.icon
+                            | Agrupar por...
+                        .divider
                         .item(
-                           rv-each-menu='softlabs.financeiro.fin_apagar.options'
-                           rv-on-click='softlabs.financeiro.fin_apagar.popSubmenu'
-                           rv-data-key='menu._index_'
-                           data-sub='despesas'
+                           rv-each-menu='dbms.financeiro.fin_apagar.pivotOpts'
+                           rv-data-value='menu.value'
                            style="white-space: nowrap;"
                         )
                             i(rv-class='menu.icon')
-                            span.text {menu.label}
+                            | {menu.label}
 
             // Menu Listagem / Chart
             span.right.floated.ui.secondary.menu
-                .ui.dropdown.item
+                .ui.labeled.icon.selection.dropdown.display.apagar
+                    i
                     span.text
-                        i.list.icon
-                        | Listagem
                     .menu
-                        .active.item(rv-on-click='home.showListDesp')
-                            i.list.icon
-                            span.text Listagem
-                        .item(rv-on-click='home.showChartDesp')
-                            i.pie.chart.icon
-                            span.text Gráficos
+                        .header
+                            i.options.icon
+                            | Visualizar...
+                        .divider
+                        .item(
+                            rv-each-menu='dbms.financeiro.fin_apagar.displayOpts'
+                            rv-data-value='menu.value'
+                            style="white-space: nowrap;"
+                        )
+                            i(rv-class='menu.icon')
+                            | {menu.label}
 
             // Listagem
             .header Pagamentos Programados
             .meta Período 01/05/2016 à 25/05/2016
             .description
-                canvas.transition.hidden#barPagtos
 
-                .ui.fluid.styled.accordion.non-exclusive.lista.despesas
-                    span(rv-each-row='softlabs.financeiro.fin_apagar.pivot')
+                // Gráfico
+                canvas.transition.hidden#chart_apagar
+
+                // Listagem
+                .ui.fluid.styled.accordion.non-exclusive.lista.apagar
+                    span(rv-each-row='dbms.financeiro.fin_apagar.data.group')
                         .active.title
                             i.dropdown.icon
                             | {row.label}
@@ -51,19 +60,19 @@
                                 .row.cursor.app-grid-rows(
                                     rv-each-item='row.values'
                                     rv-data-key='item.fin_lancamentos_key'
-                                    data-action='softlabs financeiro fin_apagar edit'
+                                    data-action='dbms financeiro fin_apagar edit'
                                 )
                                     .thirteen.wide.column
                                         | {item.parceiro} -
                                         | {item.descricao}
-                                    .three.wide.column.right.aligned.app-despesa {item.valor_bruto | numberFormat 2 ',' '.'}
+                                    .three.wide.column.right.aligned.app-despesa {item.valor_bruto | money}
                                 .row.app-grid-rows
-                                    .column.right.aligned.app-despesa {row._stats.sum.valor_bruto | numberFormat 2 ',' '.'}
+                                    .column.right.aligned.app-despesa-sum {row._stats.sum.valor_bruto | money}
 
 
         .extra.content
             span.right.floated
-                | Total à Pagar: R$ {softlabs.financeiro.fin_apagar.pivot._stats.sum.valor_bruto | numberFormat 2 ',' '.'}
+                | Total à Pagar: R$ {dbms.financeiro.fin_apagar.data.group._stats.sum.valor_bruto | money}
 
 #form_apagar.ui.modal
     .header
@@ -73,6 +82,6 @@
         .description#form_area_apagar
     div.actions
         div.ui.green.button.ok(
-            data-action='softlabs financeiro fin_apagar save',
+            data-action='dbms financeiro fin_apagar save',
         ) Salvar Alterações
         div.ui.orange.button.cancel Cancelar

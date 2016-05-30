@@ -1,0 +1,14 @@
+//
+    Template default para: dbms.financeiro.fin_contas_tipos
+    Criado em Sun May 29 2016 08:58:09 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Fin Contas Tipos
+        th Tipo Conta
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.financeiro.[object Object].data.rows')
+            td {row.fin_contas_tipos_key}
+            td {row.tipo_conta}
+            td {row.observacoes}

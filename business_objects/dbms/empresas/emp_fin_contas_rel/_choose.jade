@@ -1,0 +1,18 @@
+//
+    Template choose para: dbms.empresas.emp_fin_contas_rel
+    Criado em Sun May 29 2016 08:57:48 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Empresas
+        th Fin Contas
+        th Padrão
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.empresas_key'
+        )
+            td {row.empresas_key}
+            td {row.fin_contas_key}
+            td {row.padrao}

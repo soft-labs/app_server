@@ -1,0 +1,28 @@
+//
+    Template default para: dbms.items.item_estoq_historico
+    Criado em Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Estoq Historico
+        th Item Compras
+        th Item Estocagem
+        th Tipo E S
+        th Dt Historico
+        th Qtd Inicial
+        th Qtd Entrada
+        th Qtd Saida
+        th Valor
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.items.[object Object].data.rows')
+            td {row.estoq_historico_key}
+            td {row.item_compras_key}
+            td {row.item_estocagem_key}
+            td {row.tipo_e_s}
+            td {row.dt_historico}
+            td {row.qtd_inicial}
+            td {row.qtd_entrada}
+            td {row.qtd_saida}
+            td {row.valor}
+            td {row.observacoes}

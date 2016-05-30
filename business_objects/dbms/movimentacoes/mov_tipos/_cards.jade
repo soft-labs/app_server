@@ -1,0 +1,20 @@
+//
+    Template default para: dbms.movimentacoes.mov_tipos
+    Criado em Sun May 29 2016 08:58:34 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='dbms.movimentacoes.[object Object].data.rows')
+    .content
+        .header {row.mov_tipos_key} - {row.codigo}
+        .meta Keys: val_estoq_entrada_key, val_estoq_saida_key, val_ent_destino_key, val_ent_origem_key, val_rateios_templates_key, val_cont_plano_contas_key, val_fin_contas_credito_key, val_fin_contas_debito_key, lbl_estoq_entrada_key, lbl_estoq_saida_key, lbl_fin_contas_credito_key, lbl_fin_contas_debito_key, importar_mov_tipos_key, mov_tipos_categorias_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='dbms movimentacoes [object Object] edit', rv-data-key='row.mov_tipos_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='dbms movimentacoes [object Object] delete', rv-data-key='row.mov_tipos_key')
+                i.delete.icon
+                | Remover

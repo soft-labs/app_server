@@ -1,0 +1,18 @@
+//
+    Template default para: dbms.movimentacoes.mov_cfop
+    Criado em Sun May 29 2016 08:58:34 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Mov Cfop
+        th Cfop
+        th Descrição
+        th Tipo
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.movimentacoes.[object Object].data.rows')
+            td {row.mov_cfop_key}
+            td {row.cfop}
+            td {row.descricao}
+            td {row.tipo}
+            td {row.observacoes}

@@ -1,0 +1,22 @@
+//
+    Template default para: dbms.contratos.contr_fases
+    Criado em Sun May 29 2016 08:57:20 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Contr Fases
+        th Contratos
+        th Dt Inicio
+        th Dt Encerramento
+        th Valor Anterior
+        th Valor Atual
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.contratos.[object Object].data.rows')
+            td {row.contr_fases_key}
+            td {row.contratos_key}
+            td {row.dt_inicio}
+            td {row.dt_encerramento}
+            td {row.valor_anterior}
+            td {row.valor_atual}
+            td {row.observacoes}

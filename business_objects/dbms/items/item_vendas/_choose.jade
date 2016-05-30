@@ -1,0 +1,64 @@
+//
+    Template choose para: dbms.items.item_vendas
+    Criado em Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Item Vendas
+        th Items
+        th Prod Tabelas
+        th Prod Venda Categorias
+        th Prod Item Produção
+        th Fichas Tecnicas
+        th Prod Baixa Tipos
+        th Prod Embalagens
+        th Unidades
+        th Estoques
+        th Estoq Locais
+        th Prod Icms
+        th Prod Cod Origem
+        th Prod Cod Tributação
+        th Cont Plano Contas
+        th Regra Baixa Estoque
+        th Item Venda
+        th Quantidade
+        th Cod Barras
+        th Margem Custo
+        th Preco Custo
+        th Preco Venda
+        th Desconto Maximo
+        th Foto Peq
+        th Foto Grande
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.item_vendas_key'
+        )
+            td {row.item_vendas_key}
+            td {row.items_key}
+            td {row.prod_tabelas_key}
+            td {row.prod_venda_categorias_key}
+            td {row.prod_item_producao_key}
+            td {row.fichas_tecnicas_key}
+            td {row.prod_baixa_tipos_key}
+            td {row.prod_embalagens_key}
+            td {row.unidades_key}
+            td {row.estoques_key}
+            td {row.estoq_locais_key}
+            td {row.prod_icms_key}
+            td {row.prod_cod_origem_key}
+            td {row.prod_cod_tributacao_key}
+            td {row.cont_plano_contas_key}
+            td {row.regra_baixa_estoque}
+            td {row.item_venda}
+            td {row.quantidade}
+            td {row.cod_barras}
+            td {row.margem_custo}
+            td {row.preco_custo}
+            td {row.preco_venda}
+            td {row.desconto_maximo}
+            td {row.foto_peq}
+            td {row.foto_grande}
+            td {row.observacoes}

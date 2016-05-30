@@ -1,0 +1,22 @@
+//
+    Template default para: dbms.empresas.emp_fornecedores_rel
+    Criado em Sun May 29 2016 08:57:48 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Empresas
+        th Emp Fornecedores
+        th Ativo
+        th Dt Inicio
+        th Ultima Compra
+        th Classificação
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.empresas.[object Object].data.rows')
+            td {row.empresas_key}
+            td {row.emp_fornecedores_key}
+            td {row.ativo}
+            td {row.dt_inicio}
+            td {row.ultima_compra}
+            td {row.classificacao}
+            td {row.observacoes}

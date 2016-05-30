@@ -1,0 +1,20 @@
+//
+    Template default para: dbms.enderecos.end_eletronico_tipos
+    Criado em Sun May 29 2016 08:57:57 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='dbms.enderecos.[object Object].data.rows')
+    .content
+        .header {row.end_eletronico_tipos_key} - {row.tipo}
+        .meta Keys:  - sem dependências -
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='dbms enderecos [object Object] edit', rv-data-key='row.end_eletronico_tipos_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='dbms enderecos [object Object] delete', rv-data-key='row.end_eletronico_tipos_key')
+                i.delete.icon
+                | Remover

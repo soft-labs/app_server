@@ -1,0 +1,14 @@
+//
+    Template default para: dbms.movimentacoes.mov_tipos_categorias
+    Criado em Sun May 29 2016 08:58:34 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Mov Tipos Categorias
+        th Tipos Categoria
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.movimentacoes.[object Object].data.rows')
+            td {row.mov_tipos_categorias_key}
+            td {row.tipos_categoria}
+            td {row.observacoes}

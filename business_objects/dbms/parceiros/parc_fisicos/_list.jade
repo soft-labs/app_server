@@ -1,0 +1,32 @@
+//
+    Template default para: dbms.parceiros.parc_fisicos
+    Criado em Sun May 29 2016 08:58:53 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Parceiros
+        th Apelido
+        th Dia Nasc
+        th Mes Nasc
+        th Ano Nasc
+        th Rg
+        th Cpf
+        th Sexo
+        th Est Civil
+        th Profissão
+        th Naturalidade
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.parceiros.[object Object].data.rows')
+            td {row.parceiros_key}
+            td {row.apelido}
+            td {row.dia_nasc}
+            td {row.mes_nasc}
+            td {row.ano_nasc}
+            td {row.rg}
+            td {row.cpf}
+            td {row.sexo}
+            td {row.est_civil}
+            td {row.profissao}
+            td {row.naturalidade}
+            td {row.observacoes}

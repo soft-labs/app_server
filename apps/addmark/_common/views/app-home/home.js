@@ -8,19 +8,9 @@ app.home = {
      */
     init: function(){
 
+
         this.charts = {};
 
-        // Forecast
-        var ctx = document.getElementById("chartForecast").getContext("2d");
-        this.charts.forecast = new Chart(ctx, {
-            type: 'bar',
-            data: this.struct.forecast,
-            options: {
-                responsive: true,
-                title: false,
-                legend: { position: 'bottom' }
-            }
-        });
 
         // Impacto
         ctx = document.getElementById("chartImpacto").getContext("2d");
@@ -45,16 +35,6 @@ app.home = {
         this.charts.piePagtos = new Chart(ctx, {
             type: 'pie',
             data: this.struct.despesas.pie,
-            options: {
-                slegend: false,
-                ztitle: false
-            }
-        });
-
-        ctx = document.getElementById("barPagtos").getContext("2d");
-        this.charts.barPagtos = new Chart(ctx, {
-            type: 'bar',
-            data: this.struct.desp_bar,
             options: {
                 slegend: false,
                 ztitle: false
@@ -96,7 +76,7 @@ app.home = {
      * Chamado sempre que o módulo é exibido
      */
     show: function(){
-        app.resetAppBar([
+        app.actionbar.reset([
             {icon: 'add icon', title: 'Lançar Débito',  description: 'Cadastrar nova despesa', api: 'softlabs financeiro fin_lancamentos create'},
             {icon: 'add icon', title: 'Lançar Crédito', description: 'Cadastrar nova receita'},
             {icon: 'add icon', title: 'Fluxo de Caixa', description: 'Ver o seu fluxo de caixa'}

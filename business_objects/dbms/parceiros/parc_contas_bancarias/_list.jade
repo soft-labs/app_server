@@ -1,0 +1,18 @@
+//
+    Template default para: dbms.parceiros.parc_contas_bancarias
+    Criado em Sun May 29 2016 08:58:53 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Parc Contas Bancarias
+        th Fin Bancos
+        th Conta
+        th Agencia
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.parceiros.[object Object].data.rows')
+            td {row.parc_contas_bancarias_key}
+            td {row.fin_bancos_key}
+            td {row.conta}
+            td {row.agencia}
+            td {row.observacoes}

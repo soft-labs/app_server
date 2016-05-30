@@ -29,6 +29,9 @@ var tshark = tshark || new TShark()
  *
  * Abaixo, mapeamento 'amigável' para uso em interfaces:
  *   Ex:
+ *   <div client="app teste helloWorld" data-name="João">
+ *   <div server="softlabs empresas emp_clientes list" data-teste="123" data-provider-id="meuprovider" data-provider-showSQL="1">
+ *
  *    "softlabs empresas emp_clientes list"                        -- Listagem de todos os clientes
  *    "softlabs empresas emp_clientes search" data-query="bahia"   -- Listagem de clientes filtrados por 'bahia'
  *    "softlabs empresas emp_clientes get"    data-key="8978"      -- Dados do cliente key '8978'

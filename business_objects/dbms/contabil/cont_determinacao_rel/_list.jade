@@ -1,0 +1,14 @@
+//
+    Template default para: dbms.contabil.cont_determinacao_rel
+    Criado em Sun May 29 2016 08:57:35 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Contabil
+        th Cont Determinação
+        th Empresas
+    tbody
+        tr(rv-each-row='dbms.contabil.[object Object].data.rows')
+            td {row.contabil_key}
+            td {row.cont_determinacao_key}
+            td {row.empresas_key}

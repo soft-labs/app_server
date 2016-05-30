@@ -1,0 +1,22 @@
+//
+    Template choose para: dbms.contratos.contr_item_leituras
+    Criado em Sun May 29 2016 08:57:20 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Contr Item Leituras
+        th Dt Leitura
+        th Leitura
+        th Observações
+        th Contr Item Apontadores
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.contr_item_leituras_key'
+        )
+            td {row.contr_item_leituras_key}
+            td {row.dt_leitura}
+            td {row.leitura}
+            td {row.observacoes}
+            td {row.contr_item_apontadores_key}

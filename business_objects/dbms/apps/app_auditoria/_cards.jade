@@ -1,0 +1,20 @@
+//
+    Template default para: dbms.apps.app_auditoria
+    Criado em Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='dbms.apps.[object Object].data.rows')
+    .content
+        .header {row.app_auditoria_key} - {row.ip_user}
+        .meta Keys: sec_usuarios_key, empresas_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='dbms apps [object Object] edit', rv-data-key='row.app_auditoria_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='dbms apps [object Object] delete', rv-data-key='row.app_auditoria_key')
+                i.delete.icon
+                | Remover

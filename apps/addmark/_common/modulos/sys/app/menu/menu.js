@@ -59,7 +59,7 @@ tshark.modulos._add('sys.app.menu', {
         ;
 
         sys.app.menu.old_area = row['area'];
-        app.resetAppBar(row['appbar'] || []);
+        app.actionbar.reset(row['appbar'] || []);
 
 
         // Exibe a nova área

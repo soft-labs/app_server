@@ -1,0 +1,34 @@
+//
+    Template choose para: dbms.items.item_estocagem
+    Criado em Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Item Estocagem
+        th Item Compras
+        th Emp Depositos
+        th Ult Mov Itens
+        th Localização
+        th Qtd Estoque
+        th Disponibilidade
+        th Dt Ultima Entrada
+        th Dt Ultima Saida
+        th Preco Ultima Compra
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.item_estocagem_key'
+        )
+            td {row.item_estocagem_key}
+            td {row.item_compras_key}
+            td {row.emp_depositos_key}
+            td {row.ult_mov_itens_key}
+            td {row.localizacao}
+            td {row.qtd_estoque}
+            td {row.disponibilidade}
+            td {row.dt_ultima_entrada}
+            td {row.dt_ultima_saida}
+            td {row.preco_ultima_compra}
+            td {row.observacoes}

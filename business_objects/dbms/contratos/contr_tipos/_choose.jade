@@ -1,0 +1,18 @@
+//
+    Template choose para: dbms.contratos.contr_tipos
+    Criado em Sun May 29 2016 08:57:20 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Contr Tipos
+        th Tipo
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.contr_tipos_key'
+        )
+            td {row.contr_tipos_key}
+            td {row.tipo}
+            td {row.observacoes}

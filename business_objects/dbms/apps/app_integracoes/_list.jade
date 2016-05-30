@@ -1,0 +1,18 @@
+//
+    Template default para: dbms.apps.app_integracoes
+    Criado em Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th App Integrações
+        th App Integ Config
+        th Sec Usuarios
+        th Dt Integração
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.apps.[object Object].data.rows')
+            td {row.app_integracoes_key}
+            td {row.app_integ_config_key}
+            td {row.sec_usuarios_key}
+            td {row.dt_integracao}
+            td {row.observacoes}

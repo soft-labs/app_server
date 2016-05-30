@@ -1,0 +1,38 @@
+//
+    Template choose para: dbms.financeiro.fin_caixa
+    Criado em Sun May 29 2016 08:58:09 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Fin Caixa
+        th Aberto Por
+        th Fechado Por
+        th Numero Caixa
+        th Dia Abertura
+        th Hr Abertura
+        th Dia Fechamento
+        th Hr Fechamento
+        th Valor Abertura
+        th Receitas
+        th Despesas
+        th Saldo
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.fin_caixa_key'
+        )
+            td {row.fin_caixa_key}
+            td {row.aberto_por_key}
+            td {row.fechado_por_key}
+            td {row.numero_caixa}
+            td {row.dia_abertura}
+            td {row.hr_abertura}
+            td {row.dia_fechamento}
+            td {row.hr_fechamento}
+            td {row.valor_abertura}
+            td {row.receitas}
+            td {row.despesas}
+            td {row.saldo}
+            td {row.observacoes}

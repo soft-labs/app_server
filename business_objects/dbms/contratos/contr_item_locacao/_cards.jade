@@ -1,0 +1,20 @@
+//
+    Template default para: dbms.contratos.contr_item_locacao
+    Criado em Sun May 29 2016 08:57:20 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='dbms.contratos.[object Object].data.rows')
+    .content
+        .header {row.contr_item_locacao_key} - {row.contr_item_locacao_key}
+        .meta Keys: item_identificado_key, contr_items_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='dbms contratos [object Object] edit', rv-data-key='row.contr_item_locacao_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='dbms contratos [object Object] delete', rv-data-key='row.contr_item_locacao_key')
+                i.delete.icon
+                | Remover

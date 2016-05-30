@@ -1,0 +1,172 @@
+/* Estilos globais da aplicação */
+
+body{
+    background-color: #E9EAF0 !important;
+}
+body:before {
+    content: "";
+    background-image: url("../imgs/_bgs/bg01.jpg");
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    left: 0;
+    background-size: cover;
+    -webkit-filter: blur(7px);
+    filter: blur(7px);
+    animation: slide 60s linear infinite;
+}
+
+
+/***** Interface de login *****/
+
+#login {
+    height: 100%;
+}
+#login:before {
+    content: "";
+    background-image: url("../imgs/_intf/login1.png");
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    left: 0;
+    background-size: cover;
+    -webkit-filter: blur(7px);
+    filter: blur(7px);
+}
+
+.login-bar {
+    height: 150px;
+}
+
+
+
+/***** Ajustes de Globais *****/
+
+#logo_softlabs {
+    display: none;
+}
+
+/***** Aplicação *****/
+
+.app,
+.app-screen {
+    width: 100%;
+    height: 100%;
+}
+
+.app-lateral {
+
+}
+.app-lateral:before {
+    content: "";
+    background-color: rgba(238, 243, 62, 0.62);
+    position: absolute;
+    width: 107%;
+    height: 100%;
+    opacity: 0.72;
+    transform: skewX(5deg);
+    left: -20px;
+    box-shadow: inset 0px 0px 11px 0px #696464;
+    -webkit-backface-visibility: hidden;
+}
+
+
+
+@keyframes .slide {
+    0%{
+        transform: translate3d(0, 0, 0);
+    }
+    100%{
+        transform: translate3d(-1692px, 0, 0);
+    }
+}
+
+
+.app-grid-header {
+    padding: 0.9rem 0 !important;
+    border-bottom: 1px inset silver;
+}
+
+.app-grid-rows {
+    border-bottom: 1px dotted rgba(192, 192, 192, 0.47);
+}
+
+.app-header:before {
+    content: "";
+    background-image: url("../imgs/_intf/bg8.jpg");
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    top: 0px;
+    left: 0px;
+    background-position-x: 112%;
+    background-position-y: 42%;
+}
+
+
+.app-logo-header {
+    width: 100px !important;
+}
+
+.app-menu-trigger{
+    margin-top: -18px !important;
+    margin-right: -23px !important;;
+}
+
+.app-bar {
+
+}
+.app-bar:before {
+    content: "";
+    background-image: url("../imgs/_logos/addmark_horizontal.png");
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    background-repeat: no-repeat;
+    background-size: 106px;
+    background-position-x: 98%;
+    background-position-y: -1px;
+}
+
+
+
+/***** Financas *****/
+
+.app-receita{
+    background: linear-gradient(to left, rgba(68, 197, 66, 0.07) 0%,rgba(129, 206, 105, 0.27) 100%) !important
+}
+
+.app-despesa {
+    background: linear-gradient(to right, rgba(154, 69, 43, 0) 0%,rgba(229, 171, 158, 0.38) 100%)!important;
+}
+
+.app-despesa-sum{
+    background: linear-gradient(to top, rgba(236,59,5,0.01) 0%,rgba(241,53,11,0.32) 100%)!important;
+    border-top: 1px solid #B3ADAD;
+}
+
+.fluxo {
+    zborder-bottom: 1px dotted #d8d8d8;
+    width: 100%;
+}
+
+.fluxo>.historico{
+    width: 70%;
+    display: block;
+    border-bottom: 1px dotted #D1D1D6;
+    float: left;
+    margin-bottom: 6px;
+}
+.fluxo>.valor{
+    width: 15%;
+    display: block;
+    float: left;
+    border-bottom: 1px dotted #D0CFCF;
+    text-align: right;
+}

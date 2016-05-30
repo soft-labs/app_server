@@ -1,0 +1,16 @@
+//
+    Template default para: dbms.rh.rh_habilidades
+    Criado em Sun May 29 2016 08:59:15 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Rh Habilidades
+        th Codigo
+        th Habilidade
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.rh.[object Object].data.rows')
+            td {row.rh_habilidades_key}
+            td {row.codigo}
+            td {row.habilidade}
+            td {row.observacoes}

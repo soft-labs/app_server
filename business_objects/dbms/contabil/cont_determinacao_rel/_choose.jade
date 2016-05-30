@@ -1,0 +1,18 @@
+//
+    Template choose para: dbms.contabil.cont_determinacao_rel
+    Criado em Sun May 29 2016 08:57:35 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Contabil
+        th Cont Determinação
+        th Empresas
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.contabil_key'
+        )
+            td {row.contabil_key}
+            td {row.cont_determinacao_key}
+            td {row.empresas_key}

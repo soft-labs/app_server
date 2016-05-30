@@ -1,0 +1,38 @@
+//
+    Template default para: dbms.financeiro.fin_contas
+    Criado em Sun May 29 2016 08:58:09 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Fin Contas
+        th Fin Contas Tipos
+        th Fin Bancos
+        th Cont Plano Contas
+        th Ativo
+        th Dia Corte
+        th Dia Vencimento
+        th Multa Cartão
+        th Juros Cartão
+        th Descrição
+        th Conta
+        th Agencia
+        th Gerente
+        th Telefone
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.financeiro.[object Object].data.rows')
+            td {row.fin_contas_key}
+            td {row.fin_contas_tipos_key}
+            td {row.fin_bancos_key}
+            td {row.cont_plano_contas_key}
+            td {row.ativo}
+            td {row.dia_corte}
+            td {row.dia_vencimento}
+            td {row.multa_cartao}
+            td {row.juros_cartao}
+            td {row.descricao}
+            td {row.conta}
+            td {row.agencia}
+            td {row.gerente}
+            td {row.telefone}
+            td {row.observacoes}

@@ -1,0 +1,18 @@
+//
+    Template choose para: dbms.producao.prod_cod_origem
+    Criado em Sun May 29 2016 08:59:08 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Prod Cod Origem
+        th Cod Origem
+        th Origem
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.prod_cod_origem_key'
+        )
+            td {row.prod_cod_origem_key}
+            td {row.cod_origem}
+            td {row.origem}

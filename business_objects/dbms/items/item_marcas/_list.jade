@@ -1,0 +1,14 @@
+//
+    Template default para: dbms.items.item_marcas
+    Criado em Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Item Marcas
+        th Item Fabricantes
+        th Marca
+    tbody
+        tr(rv-each-row='dbms.items.[object Object].data.rows')
+            td {row.item_marcas_key}
+            td {row.item_fabricantes_key}
+            td {row.marca}

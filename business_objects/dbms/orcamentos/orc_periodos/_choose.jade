@@ -1,0 +1,28 @@
+//
+    Template choose para: dbms.orcamentos.orc_periodos
+    Criado em Sun May 29 2016 08:58:43 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Orc Periodos
+        th Orcamentos
+        th Sec Alterado Por
+        th Dt Cad
+        th Dt Inicio
+        th Dt Final
+        th Periodo
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.orc_periodos_key'
+        )
+            td {row.orc_periodos_key}
+            td {row.orcamentos_key}
+            td {row.sec_alterado_por_key}
+            td {row.dt_cad}
+            td {row.dt_inicio}
+            td {row.dt_final}
+            td {row.periodo}
+            td {row.observacoes}

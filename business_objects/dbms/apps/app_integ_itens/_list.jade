@@ -1,0 +1,28 @@
+//
+    Template default para: dbms.apps.app_integ_itens
+    Criado em Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th App Integ Itens
+        th App Integrações
+        th Enviando
+        th Modulo
+        th Tabela
+        th Key Field
+        th Key Value
+        th Dt Transação
+        th Ref Externa
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.apps.[object Object].data.rows')
+            td {row.app_integ_itens_key}
+            td {row.app_integracoes_key}
+            td {row.enviando}
+            td {row.modulo}
+            td {row.tabela}
+            td {row.key_field}
+            td {row.key_value}
+            td {row.dt_transacao}
+            td {row.ref_externa}
+            td {row.observacoes}

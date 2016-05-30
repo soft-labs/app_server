@@ -1,0 +1,12 @@
+//
+    Template default para: dbms.enderecos.end_eletronico_tipos
+    Criado em Sun May 29 2016 08:57:57 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th End Eletronico Tipos
+        th Tipo
+    tbody
+        tr(rv-each-row='dbms.enderecos.[object Object].data.rows')
+            td {row.end_eletronico_tipos_key}
+            td {row.tipo}

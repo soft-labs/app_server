@@ -1,0 +1,20 @@
+//
+    Template default para: dbms.parceiros.parc_juridicos
+    Criado em Sun May 29 2016 08:58:53 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='dbms.parceiros.[object Object].data.rows')
+    .content
+        .header {row.parceiros_key} - {row.razao_social}
+        .meta Keys:  - sem dependências -
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='dbms parceiros [object Object] edit', rv-data-key='row.parceiros_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='dbms parceiros [object Object] delete', rv-data-key='row.parceiros_key')
+                i.delete.icon
+                | Remover

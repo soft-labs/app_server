@@ -1,0 +1,14 @@
+//
+    Template default para: dbms.empresas.emp_fin_contas_rel
+    Criado em Sun May 29 2016 08:57:48 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Empresas
+        th Fin Contas
+        th Padrão
+    tbody
+        tr(rv-each-row='dbms.empresas.[object Object].data.rows')
+            td {row.empresas_key}
+            td {row.fin_contas_key}
+            td {row.padrao}

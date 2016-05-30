@@ -1,0 +1,20 @@
+//
+    Template default para: dbms.contratos.contr_item_apontadores
+    Criado em Sun May 29 2016 08:57:20 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Contr Item Apontadores
+        th Item Locação
+        th Contr Franquias
+        th Apontador
+        th Franquia
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.contratos.[object Object].data.rows')
+            td {row.contr_item_apontadores_key}
+            td {row.item_locacao_key}
+            td {row.contr_franquias_key}
+            td {row.apontador}
+            td {row.franquia}
+            td {row.observacoes}

@@ -1,0 +1,28 @@
+//
+    Template default para: dbms.orcamentos.orc_itens
+    Criado em Sun May 29 2016 08:58:43 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Orc Itens
+        th Orcamentos
+        th Cont Centros Resultado
+        th Cont Plano Contas
+        th Dt Inicio
+        th Dt Final
+        th Receita
+        th Valor
+        th Observações
+        th Tipo Valor
+    tbody
+        tr(rv-each-row='dbms.orcamentos.[object Object].data.rows')
+            td {row.orc_itens_key}
+            td {row.orcamentos_key}
+            td {row.cont_centros_resultado_key}
+            td {row.cont_plano_contas_key}
+            td {row.dt_inicio}
+            td {row.dt_final}
+            td {row.receita}
+            td {row.valor}
+            td {row.observacoes}
+            td {row.tipo_valor}

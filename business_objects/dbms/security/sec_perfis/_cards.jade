@@ -1,0 +1,20 @@
+//
+    Template default para: dbms.security.sec_perfis
+    Criado em Sun May 29 2016 08:59:22 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='dbms.security.[object Object].data.rows')
+    .content
+        .header {row.sec_perfis_key} - {row.perfil}
+        .meta Keys:  - sem dependências -
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='dbms security [object Object] edit', rv-data-key='row.sec_perfis_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='dbms security [object Object] delete', rv-data-key='row.sec_perfis_key')
+                i.delete.icon
+                | Remover

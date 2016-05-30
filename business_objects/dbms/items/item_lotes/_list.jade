@@ -1,0 +1,26 @@
+//
+    Template default para: dbms.items.item_lotes
+    Criado em Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Item Lotes
+        th Dt Lote
+        th Dt Valid De
+        th Dt Valid Ate
+        th Lote
+        th Lote Id De
+        th Lote Id Ate
+        th Qtd Lote
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.items.[object Object].data.rows')
+            td {row.item_lotes_key}
+            td {row.dt_lote}
+            td {row.dt_valid_de}
+            td {row.dt_valid_ate}
+            td {row.lote}
+            td {row.lote_id_de}
+            td {row.lote_id_ate}
+            td {row.qtd_lote}
+            td {row.observacoes}

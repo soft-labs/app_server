@@ -1,0 +1,20 @@
+//
+    Template default para: dbms.producao.prod_venda_categorias
+    Criado em Sun May 29 2016 08:59:08 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='dbms.producao.[object Object].data.rows')
+    .content
+        .header {row.prod_venda_categorias_key} - {row.categoria}
+        .meta Keys: cont_plano_contas_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='dbms producao [object Object] edit', rv-data-key='row.prod_venda_categorias_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='dbms producao [object Object] delete', rv-data-key='row.prod_venda_categorias_key')
+                i.delete.icon
+                | Remover

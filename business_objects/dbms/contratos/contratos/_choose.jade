@@ -1,0 +1,36 @@
+//
+    Template choose para: dbms.contratos.contratos
+    Criado em Sun May 29 2016 08:57:20 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Contratos
+        th Contr Tipos
+        th Empresas
+        th Parceiros
+        th Cont Plano Contas
+        th Cont Centros Resultado
+        th Dt Inicio
+        th Dt Encerramento
+        th Descrição
+        th Valor Original
+        th Valor Atual
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.contratos_key'
+        )
+            td {row.contratos_key}
+            td {row.contr_tipos_key}
+            td {row.empresas_key}
+            td {row.parceiros_key}
+            td {row.cont_plano_contas_key}
+            td {row.cont_centros_resultado_key}
+            td {row.dt_inicio}
+            td {row.dt_encerramento}
+            td {row.descricao}
+            td {row.valor_original}
+            td {row.valor_atual}
+            td {row.observacoes}

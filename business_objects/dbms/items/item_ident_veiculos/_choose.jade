@@ -1,0 +1,20 @@
+//
+    Template choose para: dbms.items.item_ident_veiculos
+    Criado em Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Item Identificado
+        th Placa
+        th Chassi
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.item_identificado_key'
+        )
+            td {row.item_identificado_key}
+            td {row.placa}
+            td {row.chassi}
+            td {row.observacoes}

@@ -1,0 +1,12 @@
+//
+    Template default para: dbms.movimentacoes.mov_status
+    Criado em Sun May 29 2016 08:58:34 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Mov Status
+        th Mov Status
+    tbody
+        tr(rv-each-row='dbms.movimentacoes.[object Object].data.rows')
+            td {row.mov_status_key}
+            td {row.mov_status}

@@ -1,0 +1,28 @@
+//
+    Template default para: dbms.apps.app_integ_config
+    Criado em Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th App Integ Config
+        th Config
+        th Host
+        th Port
+        th User
+        th Pwd
+        th Api Remota
+        th Modulo
+        th Api Modulo
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.apps.[object Object].data.rows')
+            td {row.app_integ_config_key}
+            td {row.config}
+            td {row.host}
+            td {row.port}
+            td {row.user}
+            td {row.pwd}
+            td {row.api_remota}
+            td {row.modulo}
+            td {row.api_modulo}
+            td {row.observacoes}

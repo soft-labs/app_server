@@ -1,0 +1,14 @@
+//
+    Template default para: dbms.producao.prod_cod_tributacao
+    Criado em Sun May 29 2016 08:59:08 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Prod Cod Tributação
+        th Cod Tributação
+        th Tributação
+    tbody
+        tr(rv-each-row='dbms.producao.[object Object].data.rows')
+            td {row.prod_cod_tributacao_key}
+            td {row.cod_tributacao}
+            td {row.tributacao}

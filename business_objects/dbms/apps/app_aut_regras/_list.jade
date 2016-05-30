@@ -1,0 +1,22 @@
+//
+    Template default para: dbms.apps.app_aut_regras
+    Criado em Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th App Aut Regras
+        th App Autorizações
+        th Regra
+        th Min Autorizações
+        th Evento
+        th Codigo
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.apps.[object Object].data.rows')
+            td {row.app_aut_regras_key}
+            td {row.app_autorizacoes_key}
+            td {row.regra}
+            td {row.min_autorizacoes}
+            td {row.evento}
+            td {row.codigo}
+            td {row.observacoes}

@@ -1,0 +1,20 @@
+//
+    Template default para: dbms.movimentacoes.mov_itens_status
+    Criado em Sun May 29 2016 08:58:34 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='dbms.movimentacoes.[object Object].data.rows')
+    .content
+        .header {row.mov_itens_status_key} - {row.status}
+        .meta Keys:  - sem dependências -
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='dbms movimentacoes [object Object] edit', rv-data-key='row.mov_itens_status_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='dbms movimentacoes [object Object] delete', rv-data-key='row.mov_itens_status_key')
+                i.delete.icon
+                | Remover

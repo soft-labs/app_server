@@ -1,0 +1,30 @@
+//
+    Template choose para: dbms.contratos.contr_faturamentos
+    Criado em Sun May 29 2016 08:57:20 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Contr Faturamentos
+        th Contr Fases
+        th Dt Vencimento
+        th Descrição
+        th Valor Base
+        th Valor Excedente
+        th Desconto
+        th Valor Final
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.contr_faturamentos_key'
+        )
+            td {row.contr_faturamentos_key}
+            td {row.contr_fases_key}
+            td {row.dt_vencimento}
+            td {row.descricao}
+            td {row.valor_base}
+            td {row.valor_excedente}
+            td {row.desconto}
+            td {row.valor_final}
+            td {row.observacoes}

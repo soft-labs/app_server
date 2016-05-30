@@ -99,42 +99,51 @@ var CONSOLE_ON = true;
             .api(this.api)
             .addClass('api-binded');
 
-        // Bind de APIs em click
-        $('[click]').not('.api-binded')
+        $('[server]').not('.api-binded')
             .api(this.api)
             .addClass('api-binded')
             .each(function(){
-                $(this).data('action', $(this).attr('click'));
+                $(this).data('action', $(this).attr('server'));
+            });
+
+
+        // Bind de APIs em click
+        $('[server-click]').not('.api-binded')
+            .api(this.api)
+            .addClass('api-binded')
+            .each(function(){
+                $(this).data('action', $(this).attr('server-click'));
             })
         ;
 
         // Bind de APIs em dblclick
-        $('[dblclick]').not('.api-binded')
+        $('[server-dblclick]').not('.api-binded')
             .api(this.dblclick_api)
             .addClass('api-binded')
             .each(function(){
-                $(this).data('action', $(this).attr('dblclick'));
+                $(this).data('action', $(this).attr('server-dblclick'));
             })
         ;
 
         // Bind de APIs em blur
-        $('[onblur]').not('.api-binded')
+        $('[server-onblur]').not('.api-binded')
             .api(this.blur_api)
             .addClass('api-binded')
             .each(function(){
-                $(this).data('action', $(this).attr('onblur'));
+                $(this).data('action', $(this).attr('server-onblur'));
             })
         ;
 
         // Bind de APIs em change
-        $('[onchange]').not('.api-binded')
+        $('[server-onchange]').not('.api-binded')
             .api(this.change_api)
             .addClass('api-binded')
             .each(function(){
-                $(this).data('action', $(this).attr('onchange'));
+                $(this).data('action', $(this).attr('server-onchange'));
             })
         ;
-        // Bind de APIs em change
+
+        // ???? Bind de APIs em change
         $('[onvalue]').not('.api-binded')
             .api(this.change_api)
             .addClass('api-binded')
@@ -685,6 +694,7 @@ var CONSOLE_ON = true;
      */
     TShark.prototype.erro = function(msg, extra, onOk){
         notify('error', msg, extra, onOk);
+        log(msg, extra);
         return false;
     };
 

@@ -58,7 +58,8 @@ function EmpClientes(){
                 state : types.form.state.ok,
                 size  : types.form.size.small,
                 external: [
-                    ["softlabs", "parceiros", "parceiros"]
+                    ["softlabs", "parceiros", "parceiros"],
+                    ["softlabs", "parceiros", "teste"],
                 ]
             },
             linhas: [

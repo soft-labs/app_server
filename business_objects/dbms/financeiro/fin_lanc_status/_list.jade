@@ -1,0 +1,16 @@
+//
+    Template default para: dbms.financeiro.fin_lanc_status
+    Criado em Sun May 29 2016 08:58:09 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Fin Lanc Status
+        th Codigo
+        th Lanc Status
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.financeiro.[object Object].data.rows')
+            td {row.fin_lanc_status_key}
+            td {row.codigo}
+            td {row.lanc_status}
+            td {row.observacoes}

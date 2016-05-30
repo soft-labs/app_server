@@ -1,0 +1,20 @@
+//
+    Template default para: dbms.empresas.emp_fornecedores
+    Criado em Sun May 29 2016 08:57:48 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='dbms.empresas.[object Object].data.rows')
+    .content
+        .header {row.emp_fornecedores_key} - {row.emp_fornecedores_key}
+        .meta Keys: parceiros_key
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='dbms empresas [object Object] edit', rv-data-key='row.emp_fornecedores_key')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='dbms empresas [object Object] delete', rv-data-key='row.emp_fornecedores_key')
+                i.delete.icon
+                | Remover

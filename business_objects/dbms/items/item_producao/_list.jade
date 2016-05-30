@@ -1,0 +1,18 @@
+//
+    Template default para: dbms.items.item_producao
+    Criado em Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Item Produção
+        th Items
+        th Fichas Tecnicas
+        th Produção
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.items.[object Object].data.rows')
+            td {row.item_producao_key}
+            td {row.items_key}
+            td {row.fichas_tecnicas_key}
+            td {row.producao}
+            td {row.observacoes}

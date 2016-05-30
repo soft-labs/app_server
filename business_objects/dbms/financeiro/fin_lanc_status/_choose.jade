@@ -1,0 +1,20 @@
+//
+    Template choose para: dbms.financeiro.fin_lanc_status
+    Criado em Sun May 29 2016 08:58:09 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Fin Lanc Status
+        th Codigo
+        th Lanc Status
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.fin_lanc_status_key'
+        )
+            td {row.fin_lanc_status_key}
+            td {row.codigo}
+            td {row.lanc_status}
+            td {row.observacoes}

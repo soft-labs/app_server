@@ -1,0 +1,20 @@
+//
+    Template choose para: dbms.rh.rh_habilidades
+    Criado em Sun May 29 2016 08:59:15 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Rh Habilidades
+        th Codigo
+        th Habilidade
+        th Observações
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.rh_habilidades_key'
+        )
+            td {row.rh_habilidades_key}
+            td {row.codigo}
+            td {row.habilidade}
+            td {row.observacoes}

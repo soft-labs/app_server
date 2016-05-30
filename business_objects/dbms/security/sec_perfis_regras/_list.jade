@@ -1,0 +1,14 @@
+//
+    Template default para: dbms.security.sec_perfis_regras
+    Criado em Sun May 29 2016 08:59:22 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Sec Perfis
+        th Sec Regras
+        th Nivel
+    tbody
+        tr(rv-each-row='dbms.security.[object Object].data.rows')
+            td {row.sec_perfis_key}
+            td {row.sec_regras_key}
+            td {row.nivel}

@@ -39,11 +39,13 @@ block content
                         .ui.link.list
                             a.item(
                                 rv-each-submenu='menu.submenu'
-                                rv-data-action='submenu.api'
+                                rv-server='submenu.server'
+                                rv-server-dblclick='submenu.server'
+                                client='sys app menu click'
+
                                 rv-data-area='submenu.area | if submenu.area menu.area'
                                 rv-data-menu-index='menu._index_'
                                 rv-data-submenu-index='submenu._index_'
-                                rv-on-click='sys.app.menu.click'
                                 style="white-space: nowrap;"
                             )
                                 i.angle.double.right.icon
@@ -65,10 +67,11 @@ block content
         .ui.container.segment.app-bar
             .ui.steps
                 .step.cursor(
+                    rv-each-item='actionbar.itens'
                     rv-class-active='item.active'
-                    rv-each-item='appbar'
-                    rv-data-action='item.api'
-                    brv-on-click='item.click'
+                    rv-server='item.server'
+                    rv-client='item.client'
+                    rv-data-area='item.area'
                 )
                     i(rv-class='item.icon')
                     .content

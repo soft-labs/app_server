@@ -101,24 +101,28 @@ rivets.binders['template'] = function(el, value) {
     }
 };
 
-rivets.binders.compvalue = {
-    bind : function(el) {
-        var self = this;
-        this.callback = function(ev) {
-            if (self['model'] && self.model['_dataset_']) {
 
-            }
-        };
-        $(el).on('input', this.callback);
-    },
-    unbind : function(el) {
-        $(el).off('input', this.callback);
-    },
-    routine : function(el, value) {
-        $(el).val(value);
-    }
+
+rivets.binders['server*'] = function(el, value) {
+    $(el).attr(this.type, value);
+    $(el).removeAttr('rv-' + this.type);
+};
+/*
+rivets.binders['server-*'] = function(el, value) {
+    $(el).attr(this.type, value);
+    $(el).removeAttr(this.type);
 };
 
+rivets.binders['client'] = function(el, value) {
+    $(el).attr('client', value);
+    $(el).removeAttr('rv-client');
+};
+
+rivets.binders['client-*'] = function(el, value) {
+    $(el).attr(this.type, value);
+    $(el).removeAttr(this.type);
+};
+*/
 
 //endregion
 

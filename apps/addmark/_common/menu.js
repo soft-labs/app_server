@@ -12,36 +12,16 @@ module.exports = {
             submenu: [
                 {
                     label: "Fluxo de Caixa",
-                    area: 'app-caixa',
-                    submenu: [
-                        {
-                            label: "Agrupar por",
-                            submenu: [
-                                {label: "Data"},
-                                {label: "Semana"},
-                                {label: "Quinzena"},
-                                {label: "Previsto x Realizado"},
-                                {label: "Receitas x Despesas"}
-                            ]
-                        },
-                        {
-                            label: "Visualizar",
-                            submenu: [
-                                {label: "Fluxo padrão"},
-                                {label: "Por Contas Gerenciais"},
-                                {label: "Por Centros de Resultado"}
-                            ]
-                        }
-                    ]
+                    area: 'app-caixa'
                 },
                 {
                     label: "Contas à Pagar",
-                    api: "softlabs financeiro fin_apagar list",
+                    server: "dbms financeiro fin_apagar list",
                     area: 'app-apagar'
                 },
                 {
                     label: "Contas à Receber",
-                    api: "softlabs financeiro fin_areceber list",
+                    server: "dbms financeiro fin_areceber list",
                     area: 'app-areceber'
                 },
                 {
@@ -76,17 +56,17 @@ module.exports = {
             submenu: [
                 {
                     label: "Clientes",
-                    api: "softlabs empresas emp_clientes create",
+                    server: "softlabs empresas emp_clientes create",
                     area: "app-contas"
                 },
                 {
                     label: "Fornecedores",
-                    api: "softlabs empresas emp_fornecedores list",
+                    server: "softlabs empresas emp_fornecedores list",
                     area: "app-contas"
                 },
                 {
                     label: "Bancos e Contas",
-                    api: "softlabs financeiro fin_contas list",
+                    server: "softlabs financeiro fin_contas list",
                     area: "app-contas"
                 },
                 {
@@ -113,7 +93,7 @@ module.exports = {
                 },
                 {
                     label: "Sair do Sistema",
-                    api: "sys app security logout"
+                    server: "sys app security logout"
                 }
             ]
         }

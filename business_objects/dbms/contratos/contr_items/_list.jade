@@ -1,0 +1,20 @@
+//
+    Template default para: dbms.contratos.contr_items
+    Criado em Sun May 29 2016 08:57:20 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Contr Items
+        th Items
+        th Contr Fases
+        th Quantidade
+        th Valor Unit
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.contratos.[object Object].data.rows')
+            td {row.contr_items_key}
+            td {row.items_key}
+            td {row.contr_fases_key}
+            td {row.quantidade}
+            td {row.valor_unit}
+            td {row.observacoes}

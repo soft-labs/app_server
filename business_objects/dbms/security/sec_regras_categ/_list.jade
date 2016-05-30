@@ -1,0 +1,14 @@
+//
+    Template default para: dbms.security.sec_regras_categ
+    Criado em Sun May 29 2016 08:59:22 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Sec Regras Categ
+        th Categoria
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.security.[object Object].data.rows')
+            td {row.sec_regras_categ_key}
+            td {row.categoria}
+            td {row.observacoes}
