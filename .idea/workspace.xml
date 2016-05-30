@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a146162b-14dc-4c20-a173-fb543af77caf" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/menu.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/menu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes/emp_clientes.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes/emp_clientes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/cadastros.jade" afterPath="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/cadastros.jade" />
+    </list>
+    <ignored path="app_server.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="app_server" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="clientes.jade" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes.jade">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/apps/addmark/_common/views/index.jade" />
+        <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/cadastros.jade" />
+        <option value="$PROJECT_DIR$/apps/addmark/_common/menu.js" />
+        <option value="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes/emp_clientes.js" />
+        <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes.jade" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
+    <package-json value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="1" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js-jscs-nodeInterpreter" value="C:\Program Files (x86)\nodejs\node.exe" />
+    <property name="nodejs_interpreter_path" value="C:\Program Files (x86)\nodejs\node" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\app_server\apps\addmark\_common\views\app-cadastros" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Node.js.app_server">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+    <configuration default="false" name="app_server" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Node.js.app_server" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="9668000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.63502455" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39869282" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/index.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="48" column="29" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business_objects/dbms/empresas/emp_clientes/emp_clientes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/modulos/softlabs/empresas/emp_clientes/emp_clientes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#237#0" expanded="false" />
+            <element signature="e#299#335#0" expanded="false" />
+            <element signature="e#356#364#0" expanded="false" />
+            <element signature="e#372#398#0" expanded="false" />
+            <element signature="e#404#701#0" expanded="false" />
+            <element signature="e#724#752#0" expanded="false" />
+            <element signature="e#758#1066#0" expanded="false" />
+            <element signature="e#1089#1115#0" expanded="false" />
+            <element signature="e#1121#1435#0" expanded="false" />
+            <element signature="e#1458#1486#0" expanded="false" />
+            <element signature="e#1492#1814#0" expanded="false" />
+            <element signature="e#1837#1872#0" expanded="false" />
+            <element signature="e#1878#1952#0" expanded="false" />
+            <element signature="e#1993#2109#0" expanded="false" />
+            <element signature="e#2116#2193#0" expanded="false" />
+            <element signature="e#2235#2531#0" expanded="false" />
+            <element signature="e#2538#2543#0" expanded="false" />
+            <element signature="e#2566#2594#0" expanded="false" />
+            <element signature="e#2600#2921#0" expanded="false" />
+            <element signature="e#2944#2972#0" expanded="false" />
+            <element signature="e#2978#3297#0" expanded="false" />
+            <element signature="e#3320#3348#0" expanded="false" />
+            <element signature="e#3354#3673#0" expanded="false" />
+            <element signature="e#3696#3723#0" expanded="false" />
+            <element signature="e#3729#4076#0" expanded="false" />
+            <element signature="e#4107#4136#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/cadastros.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-financas/financas.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/menu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="68" column="33" selection-start-line="68" selection-start-column="33" selection-end-line="68" selection-end-column="33" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/financeiro/fin_apagar/fin_apagar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="80" column="4" selection-start-line="80" selection-start-column="4" selection-end-line="113" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#235#0" expanded="false" />
+            <element signature="e#293#329#0" expanded="false" />
+            <element signature="e#350#2094#0" expanded="false" />
+            <element signature="e#361#385#0" expanded="false" />
+            <element signature="e#436#571#0" expanded="false" />
+            <element signature="e#484#561#0" expanded="false" />
+            <element signature="e#573#851#0" expanded="false" />
+            <element signature="e#621#841#0" expanded="false" />
+            <element signature="e#622#840#0" expanded="false" />
+            <element signature="e#882#1021#0" expanded="false" />
+            <element signature="e#1075#1382#0" expanded="false" />
+            <element signature="e#1133#1368#0" expanded="false" />
+            <element signature="e#1456#1473#0" expanded="false" />
+            <element signature="e#1539#1804#0" expanded="false" />
+            <element signature="e#1864#2015#0" expanded="false" />
+            <element signature="e#1922#2001#0" expanded="false" />
+            <element signature="e#2134#2370#0" expanded="false" />
+            <element signature="e#2412#3104#0" expanded="false" />
+            <element signature="e#2443#3040#0" expanded="false" />
+            <element signature="e#2457#2664#0" expanded="false" />
+            <element signature="e#2678#2801#0" expanded="false" />
+            <element signature="e#2815#3030#0" expanded="false" />
+            <element signature="e#3111#3116#0" expanded="false" />
+            <element signature="e#3139#3167#0" expanded="false" />
+            <element signature="e#3173#3417#0" expanded="false" />
+            <element signature="e#3461#3494#0" expanded="false" />
+            <element signature="e#3502#3507#0" expanded="false" />
+            <element signature="e#3530#3556#0" expanded="false" />
+            <element signature="e#3562#3876#0" expanded="false" />
+            <element signature="e#3899#3927#0" expanded="false" />
+            <element signature="e#3933#4255#0" expanded="false" />
+            <element signature="e#4278#4313#0" expanded="false" />
+            <element signature="e#4319#4647#0" expanded="false" />
+            <element signature="e#4670#4698#0" expanded="false" />
+            <element signature="e#4704#5025#0" expanded="false" />
+            <element signature="e#5048#5076#0" expanded="false" />
+            <element signature="e#5082#5401#0" expanded="false" />
+            <element signature="e#5424#5452#0" expanded="false" />
+            <element signature="e#5458#5777#0" expanded="false" />
+            <element signature="e#5800#5827#0" expanded="false" />
+            <element signature="e#5833#6180#0" expanded="false" />
+            <element signature="e#6211#6240#0" expanded="false" />
+            <element signature="e#6267#7184#0" expanded="false" />
+            <element signature="e#6336#7075#0" expanded="false" />
+            <element signature="e#7218#7581#0" expanded="false" />
+            <element signature="e#7380#7536#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="63" column="33" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes/emp_clientes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="46" column="38" selection-start-line="46" selection-start-column="38" selection-end-line="46" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#237#0" expanded="false" />
+            <element signature="e#295#331#0" expanded="false" />
+            <element signature="e#352#360#0" expanded="false" />
+            <element signature="e#400#638#0" expanded="false" />
+            <element signature="e#1376#1404#0" expanded="false" />
+            <element signature="e#1410#1718#0" expanded="false" />
+            <element signature="e#1741#1767#0" expanded="false" />
+            <element signature="e#1773#2087#0" expanded="false" />
+            <element signature="e#2110#2138#0" expanded="false" />
+            <element signature="e#2144#2466#0" expanded="false" />
+            <element signature="e#2489#2524#0" expanded="false" />
+            <element signature="e#2530#2858#0" expanded="false" />
+            <element signature="e#2881#2909#0" expanded="false" />
+            <element signature="e#2915#3236#0" expanded="false" />
+            <element signature="e#3259#3287#0" expanded="false" />
+            <element signature="e#3293#3612#0" expanded="false" />
+            <element signature="e#3635#3663#0" expanded="false" />
+            <element signature="e#3669#3988#0" expanded="false" />
+            <element signature="e#4011#4038#0" expanded="false" />
+            <element signature="e#4044#4391#0" expanded="false" />
+            <element signature="e#4422#4451#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

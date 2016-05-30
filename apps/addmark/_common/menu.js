@@ -56,17 +56,17 @@ module.exports = {
             submenu: [
                 {
                     label: "Clientes",
-                    server: "softlabs empresas emp_clientes create",
-                    area: "app-contas"
+                    server: "dbms empresas emp_clientes list",
+                    area: "app-clientes"
                 },
                 {
                     label: "Fornecedores",
-                    server: "softlabs empresas emp_fornecedores list",
+                    server: "dbms empresas emp_fornecedores list",
                     area: "app-contas"
                 },
                 {
                     label: "Bancos e Contas",
-                    server: "softlabs financeiro fin_contas list",
+                    server: "dbms financeiro fin_contas list",
                     area: "app-contas"
                 },
                 {
