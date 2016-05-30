@@ -12,17 +12,17 @@ module.exports = {
             submenu: [
                 {
                     label: "Fluxo de Caixa",
-                    area: 'app-caixa'
+                    subarea: 'app-caixa'
                 },
                 {
                     label: "Contas à Pagar",
                     server: "dbms financeiro fin_apagar list",
-                    area: 'app-apagar'
+                    subarea: 'app-apagar'
                 },
                 {
                     label: "Contas à Receber",
                     server: "dbms financeiro fin_areceber list",
-                    area: 'app-areceber'
+                    subarea: 'app-areceber'
                 },
                 {
                     label: "Resultados"

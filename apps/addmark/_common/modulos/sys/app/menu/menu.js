@@ -73,6 +73,36 @@ tshark.modulos._add('sys.app.menu', {
                 app[area].show();
             }
         }
+    },
+
+    changeArea: function(area, subarea){
+
+        // Esconde o menu
+        $('.app-menu-trigger').popup('hide');
+
+        // Esconde a área atual
+        if (sys.app.menu.old_area) {
+            $("." + sys.app.menu.old_area).transition('hide');
+        }
+        if (sys.app.menu.old_subarea) {
+            $("." + sys.app.menu.old_subarea).transition('hide');
+        }
+
+        sys.app.menu.old_area    = area || $(this).data('area');
+        sys.app.menu.old_subarea = subarea || $(this).data('subarea');
+
+
+        // Exibe a nova área
+        if (sys.app.menu.old_area) {
+            $("." + sys.app.menu.old_area).transition('fade up');
+        }
+        if (sys.app.menu.old_subarea) {
+            $("." + sys.app.menu.old_subarea).transition('fade up');
+            var area = sys.app.menu.old_subarea.split('-')[1];
+            if (app[area]){
+                app[area].show();
+            }
+        }
     }
 
 });

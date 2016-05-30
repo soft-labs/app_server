@@ -1,7 +1,7 @@
 /**
- * Created by labs on 05/05/16.
+ * Área principal do app
  */
-app.home = {
+app.areas.add('app-home', {
 
     /**
      * Chamado na inicialização do app
@@ -227,32 +227,32 @@ app.home = {
 
         switch (opt){
             case 0:
-                app.home.struct[s].data = app.home.struct[s]._raw.pivot('data');
+                app.areas['app-home'].struct[s].data = app.areas['app-home'].struct[s]._raw.pivot('data');
                 break;
 
             case 1:
-                app.home.struct[s].data = app.home.struct[s]._raw.pivot('nome', '_stats.sum.valor', true);
+                app.areas['app-home'].struct[s].data = app.areas['app-home'].struct[s]._raw.pivot('nome', '_stats.sum.valor', true);
                 break;
 
             case 2:
-                app.home.struct[s].data = app.home.struct[s]._raw.pivot('historico', '_stats.sum.valor', true);
+                app.areas['app-home'].struct[s].data = app.areas['app-home'].struct[s]._raw.pivot('historico', '_stats.sum.valor', true);
                 break;
         }
 
-        app.home.setPie(s);
+        app.areas['app-home'].setPie(s);
 
     },
 
     setPie: function(s){
 
-        var pie = app.home.charts[(s == 'receitas' ? 'pieRec' : 'piePagtos')];
+        var pie = app.areas['app-home'].charts[(s == 'receitas' ? 'pieRec' : 'piePagtos')];
         pie.data.labels = [];
         pie.data.datasets = [];
         pie.data.datasets.push({data: [], backgroundColor: []});
 
-        var l = app.home.struct[s].data.length
+        var l = app.areas['app-home'].struct[s].data.length
             , i = Math.random();
-        app.home.struct[s].data.forEach(r => {
+        app.areas['app-home'].struct[s].data.forEach(r => {
             pie.data.labels.push(r.label);
             pie.data.datasets[0].data.push(r._stats.sum.valor);
             pie.data.datasets[0].backgroundColor.push(randomColor());
@@ -285,4 +285,4 @@ app.home = {
         $('.lista.receitas').transition('show');
     }
     
-};
+});

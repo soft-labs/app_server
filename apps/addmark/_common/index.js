@@ -58,29 +58,15 @@ app = $.extend(true, app, {
         hello: function(){
 
         }
-        
+
     },
 
-    //region :: Barra de ação
-    
-    actionbar: {
-        itens: [],
-
-        /**
-         * Atualiza a barra de botões global do app
-         */
-        reset: function(itens){
-            app.actionbar.itens = itens;
-            tshark.bindAPIs('.app-bar');
-        }
-        
-    },
-
-    //endregion
-    
     
     // Inicializador da aplicação
     init: function () {
+
+        // Áreas ativas
+        app.areas.init('app-home');
 
         // Ativa o menu principal
         $('.app-menu-trigger')
@@ -101,9 +87,6 @@ app = $.extend(true, app, {
                 lastResort: 'bottom left'
             })
         ;
-        
-        // Inicializa cockpit
-        this.home.init();
 
     },
 

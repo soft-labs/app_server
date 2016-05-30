@@ -56,94 +56,19 @@ var app  = {
     //endregion
 
     /**
+     * Indicador da carga
+     */
+    loaded: false,
+    
+    /**
      * Dataset global do app
      */
     data: new Dataset(),
 
     /**
-     * Choose from list
-     */
-    choose: {
-
-        dialog: '',
-        
-        // dataset
-        data: new Dataset(),
-
-        // Dataset que ele aponta
-        target: '',
-
-        // campo que ele altera
-        //key: '',
-
-        // template de exibição
-        //template: '',
-
-        // Elemento que chamou o choose
-        element: '',
-        
-        // função de seleção - this é o row da lista do choose
-        select: function(){
-            
-            // Ajusta o dataset
-            var row   = app.choose.data.getRow($(this).data('key'))
-                , fld = $(app.choose.element).data('field')
-            ;
-
-            var ignore = ['_first_', '_last_', '_index_', '_key_', '_rv', '_dataset_', '__proto__'];
-            for (var r in row){
-                if (r != fld && typeof r != 'function' && ignore.indexOf(r) == -1){
-                    app.choose.target.row[r] = row[r];
-                }
-            }
-            app.choose.target.row[fld] = row[fld];
-
-            // Fecha o dialogo
-            if (app.choose.dialog) {
-                app.choose.dialog.destroy();
-                app.choose.dialog = false;
-            }
-            
-        }
-    },
-
-    /**
      * Submenu dinâmico
      */
     submenu: [],
-
-    /**
-     * Gráficos
-     */
-    charts: {
-
-        // Armazena dados dos charts
-        data: {},
-
-        // Acrescenta um gráfico
-        add: function(id, canvas, opts, data){
-            try {
-                var ctx = document.getElementById(canvas).getContext("2d");
-                if (app.charts[id]) {
-                    app.charts[id].destroy();
-                }
-
-                opts.data = app.charts.data[id] = data;
-                app.charts[id]      = new Chart(ctx, opts);
-                //app.charts[id].data = app.charts.data[id];
-
-            } catch (e){
-                tshark.log(e.message, e.stack);
-            }
-        },
-
-        // Atualiza um gráfico
-        reset: function(id){
-            if (app.charts[id]){
-                app.charts[id].update();
-            }
-        }
-    },
     
     /**
      * Inicializador default
@@ -159,5 +84,7 @@ $(document).ready(function() {
     // Registra o módulo de security
     tshark.register('sys.app.security');
 
+    // Carga feita
+    app.loaded = true;
 });
 

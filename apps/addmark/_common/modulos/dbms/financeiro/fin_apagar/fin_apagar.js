@@ -91,23 +91,6 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
      * Chamado após a listagem de dados
      */
     onAfterList: function(response, next){
-
-        app.actionbar.reset([
-            {icon: 'home icon',    title: 'Home',             
-                description: 'Cockpit financeiro',            
-                client: 'sys app menu click', 
-                area: "app-home"
-            },
-            {icon: 'payment icon', title: 'Contas à Pagar',   
-                description: 'Gestão de Gastos e Despesas'
-            },
-            {icon: 'add icon',     title: 'Lançar Pagamento', 
-                description: 'Cadastrar nova conta',          
-                server: 'dbms financeiro fin_apagar create', 
-                active: 1
-            }
-        ]);
-
         this.pivotData();
 
         app.periodo.hello()
