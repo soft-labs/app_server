@@ -47,6 +47,31 @@ app.areas.add('app-financas', {
             ]);
         }
 
+    },
+
+    'app-areceber':{
+
+        /**
+         * Chamado sempre que a área é exibida
+         */
+        onShow: function (area, subarea, data) {
+            app.actionbar.reset([
+                {icon: 'home icon',    title: 'Home',
+                    description: 'Cockpit financeiro',
+                    client: 'app areas show',
+                    area: "app-home"
+                },
+                {icon: 'payment icon', title: 'Contas à Pagar',
+                    description: 'Gestão de Recebimentos'
+                },
+                {icon: 'add icon',     title: 'Lançar Recebimento',
+                    description: 'Cadastrar novo recebimento',
+                    server: 'dbms financeiro fin_areceber create',
+                    active: 1
+                }
+            ]);
+        }
+
     }
 
 
