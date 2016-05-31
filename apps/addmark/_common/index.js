@@ -55,8 +55,20 @@ app = $.extend(true, app, {
         de : moment().subtract(7, 'days').format('DD/MM/YYYY'),
         ate: moment().add(7, 'days').format('DD/MM/YYYY'),
 
-        hello: function(){
-
+        changeDe: function(){
+            app.periodo.change(this, 'de');
+        },
+        changeAte: function(){
+            app.periodo.change(this, 'ate');
+        },
+        change: function(el, dt){
+            $(el)
+                .pickadate({
+                    container: '.app',
+                    onSet: function(ctx){
+                        app.periodo[dt] = moment(ctx.select).format('DD/MM/YYYY');
+                    }
+                });
         }
 
     },
@@ -89,6 +101,7 @@ app = $.extend(true, app, {
         ;
 
     },
+
 
     
 

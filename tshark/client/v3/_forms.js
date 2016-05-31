@@ -297,7 +297,8 @@ if(!alertify.choose){
                 break;
 
             case 'inpDateTime':
-                input = getDateTime(ctrl, field, mod.path);
+                ctrl['state'] = 'disabled';
+                input = getInpText(ctrl, field, mod.path);
                 break;
 
             case 'inpMemo'      :

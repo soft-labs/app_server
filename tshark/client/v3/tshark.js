@@ -95,30 +95,45 @@ var CONSOLE_ON = true;
         $('[server]').not('.api-binded')
             .api(this.api)
             .addClass('api-binded')
+            .each(function(){
+                $(this).data('action', $(this).attr('server'));
+            })
         ;
 
         // Bind de APIs em click
         $('[server-click]').not('.api-binded')
             .api(this.api)
-            .addClass('api-binded')
+            .addClass('cursor api-binded')
+            .each(function(){
+                $(this).data('action', $(this).attr('server-click'));
+            })
         ;
 
         // Bind de APIs em dblclick
         $('[server-dblclick]').not('.api-binded')
             .api(this.dblclick_api)
-            .addClass('api-binded')
+            .addClass('cursor api-binded')
+            .each(function(){
+                $(this).data('action', $(this).attr('server-dblclick'));
+            })
         ;
 
         // Bind de APIs em blur
         $('[server-onblur]').not('.api-binded')
             .api(this.blur_api)
             .addClass('api-binded')
+            .each(function(){
+                $(this).data('action', $(this).attr('server-onblur'));
+            })
         ;
 
         // Bind de APIs em change
         $('[server-onchange]').not('.api-binded')
             .api(this.change_api)
             .addClass('api-binded')
+            .each(function(){
+                $(this).data('action', $(this).attr('server-onchange'));
+            })
         ;
         
         $('[data-action]').not('.api-binded')
@@ -127,7 +142,10 @@ var CONSOLE_ON = true;
 
         $('[action]').not('.api-binded')
             .api(this.api)
-            .addClass('api-binded');
+            .addClass('api-binded')
+            .each(function(){
+                $(this).data('action', $(this).attr('action'));
+            });
 
         //endregion
 
@@ -144,14 +162,14 @@ var CONSOLE_ON = true;
         };
 
         $('[client]').not('.api-client-binded')
-            .addClass('api-client-binded')
+            .addClass('cursor api-client-binded')
             .on('click', function(ev) {
                 return funcClient.call($(this), 'client', ev);
             })
         ;
 
         $('[client-dblclick]').not('.api-client-binded')
-            .addClass('api-client-binded')
+            .addClass('cursor api-client-binded')
             .on('dblclick', function(ev) {
                 return funcClient.call($(this), 'client-dblclick', ev);
             })

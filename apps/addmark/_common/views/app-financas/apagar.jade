@@ -43,7 +43,16 @@
 
             // Listagem
             .header Pagamentos Programados
-            .meta Período 01/05/2016 à 25/05/2016
+            .meta(data-modulo='dbms.financeiro.fin_apagar')
+                | Período: &nbsp;
+                a.ui.label(client='app periodo changeDe')
+                    | {periodo.de}
+                    i.calendar.icon
+                |&nbsp; à &nbsp;
+                a.ui.label(client='app periodo changeAte')
+                    | {periodo.ate}
+                    i.calendar.icon
+
             .description
 
                 // Gráfico

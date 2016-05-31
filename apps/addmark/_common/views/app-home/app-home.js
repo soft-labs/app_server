@@ -69,13 +69,13 @@ app.areas.add('app-home', {
             })
         ;
 
-        this.show();
+        this.onShow();
     },
 
     /**
      * Chamado sempre que o módulo é exibido
      */
-    show: function(){
+    onShow: function(){
         app.actionbar.reset([
             {icon: 'add icon', title: 'Lançar Débito',  description: 'Cadastrar nova despesa', api: 'softlabs financeiro fin_lancamentos create'},
             {icon: 'add icon', title: 'Lançar Crédito', description: 'Cadastrar nova receita'},

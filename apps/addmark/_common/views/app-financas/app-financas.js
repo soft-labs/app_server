@@ -24,6 +24,9 @@ app.areas.add('app-financas', {
         return true;
     },
 
+    /**
+     * Subarea Contas a pagar
+     */
     'app-apagar':{
 
         /**
@@ -49,6 +52,9 @@ app.areas.add('app-financas', {
 
     },
 
+    /**
+     * Subarea Contas a receber
+     */
     'app-areceber':{
 
         /**

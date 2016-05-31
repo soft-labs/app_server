@@ -92,8 +92,6 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
      */
     onAfterList: function(response, next){
         this.pivotData();
-
-        app.periodo.hello()
     },
 
     /* */
