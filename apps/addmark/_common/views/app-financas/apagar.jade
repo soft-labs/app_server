@@ -61,14 +61,15 @@
                 // Listagem
                 .ui.fluid.styled.accordion.non-exclusive.lista.apagar
                     span(rv-each-row='dbms.financeiro.fin_apagar.data.group')
-                        .active.title
+                        .title
                             i.dropdown.icon
                             | {row.label}
-                        .active.content
+                            .basic.label.app-despesa-title-sum {row._stats.sum.valor_bruto | money}
+                        .content
                             .ui.bottom.aligned.stackable.grid
                                 .row.cursor.app-grid-rows(
                                     rv-each-item='row.values'
-                                    rv-data-key='item.fin_lancamentos_key'
+                                    rv-row-key='item.fin_lancamentos_key'
                                     data-action='dbms financeiro fin_apagar edit'
                                 )
                                     .thirteen.wide.column
@@ -76,11 +77,12 @@
                                         | {item.descricao}
                                     .three.wide.column.right.aligned.app-despesa {item.valor_bruto | money}
                                 .row.app-grid-rows
-                                    .column.right.aligned.app-despesa-sum {row._stats.sum.valor_bruto | money}
+                                    .thirteen.wide.right.aligned.column Subtotal:
+                                    .three.wide.column.right.aligned.app-despesa-sum {row._stats.sum.valor_bruto | money}
 
 
         .extra.content
-            span.right.floated
+            span.right.floated.app-despesa-footer-sum
                 | Total à Pagar: R$ {dbms.financeiro.fin_apagar.data.group._stats.sum.valor_bruto | money}
 
 #form_apagar.ui.modal

@@ -1,30 +1,45 @@
 /**
- * BusinessObject :: FinLancamentos à Pagar
- *  Implementação de objeto de negócio: fin_lancamentos.
+ * BusinessObject :: ContHistoricos
+ *  Implementação de objeto de negócio: cont_historicos.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:58:09 GMT-0300 (BRT)
+ * @since Tue May 31 2016 14:32:48 GMT-0300 (BRT)
  * @constructor
  */
-function FinAPagar(){
+function ContHistoricos(){
 
     //region :: Definições do Objeto
 
     // Id
-    this.id = 'fin_apagar';
-    
-    // Extends
-    this.extends = ['dbms', 'financeiro', 'fin_lancamentos'];
+    this.id = 'cont_historicos';
 
     // Map
     this.source = {
-        table: 'fin_lancamentos',
+        table: 'cont_historicos',
         metadata: {
-            key: 'fin_lancamentos_key',
-            label: 'competencia',
+            key: 'cont_historicos_key',
+            label: 'historico',
             fields: {
-                fin_lanc_tipos_key: {
-                    tipo: types.comp.int, default: 1, label: 'Tipo:'
+                cont_historicos_key: {
+                    tipo: types.comp.key, label: 'Cont Historicos:'
+                }, 
+                cont_determinacao_key: {
+                    tipo: types.comp.choose, label: 'Cont Determinação:',
+                    data: { 
+                        key: ['cont_determinacao_key'], 
+                        from: ['dbms', 'contabil', 'cont_determinacao'], 
+                        template: '{cont_determinacao_key} - {cont_determinaca}', 
+                        provider: '' 
+                    } 
+                }, 
+                ativo: {
+                    tipo: types.comp.int, label: 'Ativo:'
+                }, 
+                historico: {
+                    tipo: types.comp.text, label: 'Historico:'
+                }, 
+                observacoes: {
+                    tipo: types.comp.text_big, label: 'Observações:'
                 }
             }
         }
@@ -50,12 +65,15 @@ function FinAPagar(){
                 ]
             },
             linhas: [
-                {titulo: "Novo Pagamento"},
-                {space: 25, dt_documento: 22, dt_vencimento: 22, dt_lancamento: 22, numero: 20},
-                {parceiros_key: 75, valor_bruto: 25}
+                {titulo: "Informações de cont_historicos"},
+                {cont_historicos_key: 25, cont_determinacao_key: 25, ativo: 25, historico: 25}, 
+                {observacoes: 100}
             ],
             ctrls: {
-
+                historico: {
+                    extra_right: { class: '', tag: '' },
+                    extra_left:  { class: '', tag: '' }
+                }
             }
         }
 
@@ -71,79 +89,27 @@ function FinAPagar(){
         default: {
             sources: {
                 0: {
-                    from: ['dbms', 'financeiro', 'fin_lancamentos'],
+                    from: ['dbms', 'contabil', 'cont_historicos'],
                     fields: [
-
+                        
                     ]
                 },
-                1: {
-                    from: ['dbms', 'financeiro', 'fin_lanc_tipos'],
-                    join: {source: 0, tipo: types.join.left, on: 'fin_lanc_tipos_key', where: ''},
+                1: { 
+                    from: ['dbms', 'contabil', 'cont_determinacao'],
+                    join: {source: 0, tipo: types.join.left, on: 'cont_determinacao_key', where: ''},
                     fields: [
-
+                        
                     ]
-                },
-                2: {
-                    from: ['dbms', 'financeiro', 'fin_lanc_status'],
-                    join: {source: 0, tipo: types.join.left, on: 'fin_lanc_status_key', where: ''},
-                    fields: [
-
-                    ]
-                },
-                3: {
-                    from: ['dbms', 'empresas', 'empresas'],
-                    join: {source: 0, tipo: types.join.left, on: 'empresas_key', where: ''},
-                    fields: [
-
-                    ]
-                },
-                4: {
-                    from: ['dbms', 'financeiro', 'fin_contas'],
-                    join: {source: 0, tipo: types.join.left, on: 'fin_contas_key', where: ''},
-                    fields: [
-
-                    ]
-                },
-                5: {
-                    from: ['dbms', 'parceiros', 'parceiros'],
-                    join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
-                    fields: [
-
-                    ]
-                },
-                6: {
-                    from: ['dbms', 'contratos', 'contratos'],
-                    join: {source: 0, tipo: types.join.left, on: 'contratos_key', where: ''},
-                    fields: [
-
-                    ]
-                },
-                7: {
-                    from: ['dbms', 'movimentacoes', 'movimentacoes'],
-                    join: {source: 0, tipo: types.join.left, on: 'movimentacoes_key', where: ''},
-                    fields: [
-
-                    ]
-                }
+                } 
             },
-            where: [
-                ['AND', 0, 'fin_lanc_tipos_key', "=", "1"],
-                ['AND', 0, 'fin_lancamentos_key', types.where.check]
+            where: [ 
+                ['AND', 0, 'cont_historicos_key', types.where.check]
             ],
             order: [
-                [0, 'competencia', 'asc']
+                [0, 'historico', 'asc']
             ],
             search: [
-                {alias: 1, field: 'competencia',        param: types.search.like_full },
-                {alias: 1, field: 'dt_documento',       param: types.search.maior_igual },
-                {alias: 1, field: 'dt_vencimento',      param: types.search.maior_igual },
-                {alias: 1, field: 'numero',             param: types.search.like_full },
-                {alias: 1, field: 'descricao',          param: types.search.like_full },
-                {alias: 1, field: 'complemento',        param: types.search.like_full },
-                {alias: 1, field: 'baixa_data',         param: types.search.maior_igual },
-                {alias: 1, field: 'baixa_bancaria',     param: types.search.maior_igual },
-                {alias: 1, field: 'cancelamento_data',  param: types.search.maior_igual },
-                {alias: 1, field: 'estorno_data',       param: types.search.maior_igual }
+                    {alias: 0, field: 'historico',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -152,9 +118,9 @@ function FinAPagar(){
         update: {
             sources: {
                 0: {
-                    from: ['dbms', 'financeiro', 'fin_lancamentos'],
+                    from: ['dbms', 'contabil', 'cont_historicos'],
                     where: [
-
+                        
                     ]
                 }
             },
@@ -168,14 +134,6 @@ function FinAPagar(){
 
     //region :: Eventos
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     */
-    this.onSelect = function *(prov, ctx){
-        yield this.parent.onSelect(prov, ctx);
-    };
 
     //region :: onGet
 
@@ -248,6 +206,14 @@ function FinAPagar(){
 
     //region :: onSelect
 
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     *
+     this.onSelect = function *(prov, ctx){
+
+    };
 
      /* */
     //endregion
@@ -420,4 +386,4 @@ function FinAPagar(){
 const types = require('../../../../tshark/types');
 
 // Exporta
-module.exports = FinAPagar;
+module.exports = ContHistoricos;

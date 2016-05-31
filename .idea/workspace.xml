@@ -2,546 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9af883f-d607-471e-9364-120eb2596f34" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/addmark/_common/components/periodo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_fornecedores.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/empresas.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_auditoria/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_auditoria/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_auditoria/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_auditoria/app_auditoria.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_aut_regras/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_aut_regras/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_aut_regras/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_aut_regras/app_aut_regras.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_aut_requisicoes/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_aut_requisicoes/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_aut_requisicoes/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_aut_requisicoes/app_aut_requisicoes.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_autorizacoes/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_autorizacoes/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_autorizacoes/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_autorizacoes/app_autorizacoes.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_autorizadores/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_autorizadores/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_autorizadores/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_autorizadores/app_autorizadores.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_autorizadores_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_autorizadores_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_autorizadores_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_autorizadores_rel/app_autorizadores_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_autorizadores_usuarios/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_autorizadores_usuarios/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_autorizadores_usuarios/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_autorizadores_usuarios/app_autorizadores_usuarios.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_config_empresas_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_config_empresas_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_config_empresas_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_config_empresas_rel/app_config_empresas_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_configs/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_configs/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_configs/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_configs/app_configs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_integ_config/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_integ_config/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_integ_config/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_integ_config/app_integ_config.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_integ_itens/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_integ_itens/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_integ_itens/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_integ_itens/app_integ_itens.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_integracoes/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_integracoes/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_integracoes/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_integracoes/app_integracoes.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_logs/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_logs/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_logs/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_logs/app_logs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_logs_tipos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_logs_tipos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_logs_tipos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/app/app_logs_tipos/app_logs_tipos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_categorias/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_categorias/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_categorias/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_categorias/cont_categorias.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_centro_resultados/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_centro_resultados/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_centro_resultados/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_centro_resultados/cont_centro_resultados.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_determinacao/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_determinacao/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_determinacao/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_determinacao/cont_determinacao.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_determinacao_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_determinacao_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_determinacao_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_determinacao_rel/cont_determinacao_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_diario_contas/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_diario_contas/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_diario_contas/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_diario_contas/cont_diario_contas.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_diario_resultado/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_diario_resultado/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_diario_resultado/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_diario_resultado/cont_diario_resultado.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_dre_config/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_dre_config/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_dre_config/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_dre_config/cont_dre_config.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_dre_plano_contas_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_dre_plano_contas_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_dre_plano_contas_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_dre_plano_contas_rel/cont_dre_plano_contas_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_ent_arrecadadoras/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_ent_arrecadadoras/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_ent_arrecadadoras/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_ent_arrecadadoras/cont_ent_arrecadadoras.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_esfera_governo/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_esfera_governo/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_esfera_governo/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_esfera_governo/cont_esfera_governo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_impostos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_impostos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_impostos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_impostos/cont_impostos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_plano_contas/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_plano_contas/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_plano_contas/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_plano_contas/cont_plano_contas.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_plano_contas_sec_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_plano_contas_sec_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_plano_contas_sec_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/cont_plano_contas_sec_rel/cont_plano_contas_sec_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/contabil/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/contabil/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/contabil/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contabil/contabil/contabil.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_fases/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_fases/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_fases/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_fases/contr_fases.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_faturamentos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_faturamentos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_faturamentos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_faturamentos/contr_faturamentos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_faturamentos_leituras_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_faturamentos_leituras_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_faturamentos_leituras_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_faturamentos_leituras_rel/contr_faturamentos_leituras_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_franquias/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_franquias/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_franquias/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_franquias/contr_franquias.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_item_apontadores/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_item_apontadores/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_item_apontadores/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_item_apontadores/contr_item_apontadores.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_item_leituras/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_item_leituras/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_item_leituras/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_item_leituras/contr_item_leituras.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_item_locacao/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_item_locacao/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_item_locacao/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_item_locacao/contr_item_locacao.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_items/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_items/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_items/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_items/contr_items.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_tipos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_tipos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_tipos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contr_tipos/contr_tipos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contratos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contratos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contratos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/contratos/contratos/contratos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_clientes/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_clientes/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_clientes/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_clientes/emp_clientes.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_clientes_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_clientes_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_clientes_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_clientes_rel/emp_clientes_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_depositos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_depositos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_depositos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_depositos/emp_depositos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_depositos_end_eletronicos_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_depositos_end_eletronicos_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_depositos_end_eletronicos_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_depositos_end_eletronicos_rel/emp_depositos_end_eletronicos_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_depositos_tipos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_depositos_tipos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_depositos_tipos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_depositos_tipos/emp_depositos_tipos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_end_eletronicos_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_end_eletronicos_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_end_eletronicos_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_end_eletronicos_rel/emp_end_eletronicos_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_enderecos_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_enderecos_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_enderecos_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_enderecos_rel/emp_enderecos_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_fin_contas_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_fin_contas_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_fin_contas_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_fin_contas_rel/emp_fin_contas_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_fornecedores/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_fornecedores/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_fornecedores/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_fornecedores/emp_fornecedores.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_fornecedores_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_fornecedores_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_fornecedores_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_fornecedores_rel/emp_fornecedores_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_setores/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_setores/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_setores/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_setores/emp_setores.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/empresas/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/empresas/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/empresas/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/empresas/empresas/empresas.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_bairros/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_bairros/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_bairros/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_bairros/end_bairros.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_ceps/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_ceps/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_ceps/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_ceps/end_ceps.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_cidades/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_cidades/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_cidades/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_cidades/end_cidades.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_eletronico_tipos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_eletronico_tipos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_eletronico_tipos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_eletronico_tipos/end_eletronico_tipos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_eletronicos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_eletronicos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_eletronicos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_eletronicos/end_eletronicos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_estados/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_estados/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_estados/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_estados/end_estados.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_estoques_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_estoques_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_estoques_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_estoques_rel/end_estoques_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_paises/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_paises/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_paises/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_paises/end_paises.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_tipos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_tipos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_tipos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/end_tipos/end_tipos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/enderecos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/enderecos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/enderecos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/enderecos/enderecos/enderecos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_baixas/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_baixas/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_baixas/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_baixas/fin_baixas.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_bancos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_bancos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_bancos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_bancos/fin_bancos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_caixa/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_caixa/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_caixa/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_caixa/fin_caixa.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_caixa_lanc/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_caixa_lanc/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_caixa_lanc/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_caixa_lanc/fin_caixa_lanc.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_caixa_lanc_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_caixa_lanc_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_caixa_lanc_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_caixa_lanc_rel/fin_caixa_lanc_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_contas/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_contas/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_contas/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_contas/fin_contas.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_contas_sec_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_contas_sec_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_contas_sec_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_contas_sec_rel/fin_contas_sec_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_contas_tipos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_contas_tipos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_contas_tipos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_contas_tipos/fin_contas_tipos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_especies/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_especies/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_especies/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_especies/fin_especies.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_lanc_status/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_lanc_status/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_lanc_status/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_lanc_status/fin_lanc_status.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_lanc_tipos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_lanc_tipos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_lanc_tipos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_lanc_tipos/fin_lanc_tipos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_lancamentos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_lancamentos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_lancamentos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/financeiro/fin_lancamentos/fin_lancamentos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_categ_sub/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_categ_sub/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_categ_sub/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_categ_sub/item_categ_sub.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_categorias/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_categorias/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_categorias/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_categorias/item_categorias.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_compras/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_compras/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_compras/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_compras/item_compras.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_embalagens/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_embalagens/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_embalagens/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_embalagens/item_embalagens.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_estocagem/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_estocagem/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_estocagem/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_estocagem/item_estocagem.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_estoq_historico/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_estoq_historico/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_estoq_historico/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_estoq_historico/item_estoq_historico.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_fabricantes/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_fabricantes/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_fabricantes/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_fabricantes/item_fabricantes.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_ident_equipamentos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_ident_equipamentos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_ident_equipamentos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_ident_equipamentos/item_ident_equipamentos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_ident_imoveis/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_ident_imoveis/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_ident_imoveis/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_ident_imoveis/item_ident_imoveis.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_ident_tipos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_ident_tipos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_ident_tipos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_ident_tipos/item_ident_tipos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_ident_veiculos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_ident_veiculos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_ident_veiculos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_ident_veiculos/item_ident_veiculos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_identificado/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_identificado/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_identificado/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_identificado/item_identificado.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_lotes/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_lotes/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_lotes/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_lotes/item_lotes.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_manutencao/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_manutencao/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_manutencao/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_manutencao/item_manutencao.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_marcas/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_marcas/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_marcas/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_marcas/item_marcas.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_modelos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_modelos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_modelos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_modelos/item_modelos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_plano_reposicao/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_plano_reposicao/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_plano_reposicao/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_plano_reposicao/item_plano_reposicao.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_producao/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_producao/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_producao/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_producao/item_producao.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_servicos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_servicos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_servicos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_servicos/item_servicos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_vendas/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_vendas/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_vendas/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/item_vendas/item_vendas.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/items/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/items/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/items/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/items/items/items.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_cfop/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_cfop/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_cfop/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_cfop/mov_cfop.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_itens/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_itens/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_itens/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_itens/mov_itens.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_itens_impostos_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_itens_impostos_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_itens_impostos_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_itens_impostos_rel/mov_itens_impostos_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_itens_status/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_itens_status/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_itens_status/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_itens_status/mov_itens_status.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_status/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_status/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_status/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_status/mov_status.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_tipos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_tipos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_tipos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_tipos/mov_tipos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_tipos_categorias/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_tipos_categorias/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_tipos_categorias/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/mov_tipos_categorias/mov_tipos_categorias.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/movimentacoes/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/movimentacoes/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/movimentacoes/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/movimentacoes/movimentacoes/movimentacoes.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/orcamentos/orc_itens/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/orcamentos/orc_itens/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/orcamentos/orc_itens/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/orcamentos/orc_itens/orc_itens.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/orcamentos/orc_periodos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/orcamentos/orc_periodos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/orcamentos/orc_periodos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/orcamentos/orc_periodos/orc_periodos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/orcamentos/orc_valores/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/orcamentos/orc_valores/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/orcamentos/orc_valores/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/orcamentos/orc_valores/orc_valores.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/orcamentos/orcamentos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/orcamentos/orcamentos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/orcamentos/orcamentos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/orcamentos/orcamentos/orcamentos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/clientes/cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/clientes/clientes.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/clientes/list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_contas_bancarias/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_contas_bancarias/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_contas_bancarias/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_contas_bancarias/parc_contas_bancarias.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_end_eletronicos_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_end_eletronicos_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_end_eletronicos_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_end_eletronicos_rel/parc_end_eletronicos_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_enderecos_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_enderecos_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_enderecos_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_enderecos_rel/parc_enderecos_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_fisicos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_fisicos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_fisicos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_fisicos/parc_fisicos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_juridicos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_juridicos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_juridicos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_juridicos/parc_juridicos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_rel_tipos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_rel_tipos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_rel_tipos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_rel_tipos/parc_rel_tipos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_relacionados/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_relacionados/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_relacionados/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parc_relacionados/parc_relacionados.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parceiros/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parceiros/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parceiros/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/parceiros/parceiros/parceiros.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_cargos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_cargos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_cargos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_cargos/rh_cargos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_cargos_emp_setores_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_cargos_emp_setores_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_cargos_emp_setores_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_cargos_emp_setores_rel/rh_cargos_emp_setores_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_cargos_funcionarios_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_cargos_funcionarios_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_cargos_funcionarios_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_cargos_funcionarios_rel/rh_cargos_funcionarios_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_cargos_habilidades_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_cargos_habilidades_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_cargos_habilidades_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_cargos_habilidades_rel/rh_cargos_habilidades_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_folhas_ponto/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_folhas_ponto/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_folhas_ponto/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_folhas_ponto/rh_folhas_ponto.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_func_habilidades_rel/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_func_habilidades_rel/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_func_habilidades_rel/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_func_habilidades_rel/rh_func_habilidades_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_func_remuneracoes/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_func_remuneracoes/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_func_remuneracoes/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_func_remuneracoes/rh_func_remuneracoes.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_funcionarios/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_funcionarios/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_funcionarios/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_funcionarios/rh_funcionarios.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_habilidades/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_habilidades/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_habilidades/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/rh/rh_habilidades/rh_habilidades.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_perfis/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_perfis/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_perfis/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_perfis/sec_perfis.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_perfis_regras/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_perfis_regras/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_perfis_regras/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_perfis_regras/sec_perfis_regras.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_regras/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_regras/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_regras/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_regras/sec_regras.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_regras_categ/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_regras_categ/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_regras_categ/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_regras_categ/sec_regras_categ.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_usuarios/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_usuarios/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_usuarios/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/security/sec_usuarios/sec_usuarios.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/unidades/unid_grupos/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/unidades/unid_grupos/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/unidades/unid_grupos/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/unidades/unid_grupos/unid_grupos.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/unidades/unidades/_cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/unidades/unidades/_choose.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/unidades/unidades/_list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/softlabs/unidades/unidades/unidades.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_common/modulos/sys/app/exemplo/exemplo.js" afterPath="$PROJECT_DIR$/_common/modulos/sys/app/exemplo.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_common/modulos/sys/app/security/security.js" afterPath="$PROJECT_DIR$/_common/modulos/sys/app/security.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/apps/app_configs/app_configs.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/apps/app_configs.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/apps/app_logs/app_logs.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/apps/app_logs.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/financeiro/fin_apagar/fin_apagar.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/financeiro/fin_apagar.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/financeiro/fin_areceber/fin_areceber.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/financeiro/fin_areceber.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/financeiro/fin_lancamentos/fin_lancamentos.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/financeiro/fin_lancamentos.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/sys/app/menu/menu.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/modulos/sys/app/menu.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/business_objects/dbms/_model/Softlabs.mwb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/business_objects/dbms/contabil/cont_historicos/_cards.jade" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/business_objects/dbms/contabil/cont_historicos/_choose.jade" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/business_objects/dbms/contabil/cont_historicos/_list.jade" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/business_objects/dbms/contabil/cont_historicos/cont_historicos.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/business_objects/dbms/contabil/cont_historicos_resultados_rel/_cards.jade" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/business_objects/dbms/contabil/cont_historicos_resultados_rel/_choose.jade" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/business_objects/dbms/contabil/cont_historicos_resultados_rel/_list.jade" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/business_objects/dbms/contabil/cont_historicos_resultados_rel/cont_historicos_resultados_rel.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/index.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/css/app.css" afterPath="$PROJECT_DIR$/apps/addmark/_common/css/app.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade" afterPath="$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/views/index.jade" afterPath="$PROJECT_DIR$/apps/addmark/_common/views/index.jade" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_apagar/fin_apagar.js" afterPath="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_apagar/fin_apagar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business_objects/sys/dev/ide/ide.js" afterPath="$PROJECT_DIR$/business_objects/sys/dev/ide/ide.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/_cards.jade" afterPath="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/_cards.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/_choose.jade" afterPath="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/_choose.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/_list.jade" afterPath="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/_list.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/fin_lancamentos.js" afterPath="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/fin_lancamentos.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tshark/client/v3/tshark.js" afterPath="$PROJECT_DIR$/tshark/client/v3/tshark.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tshark/tshark.js" afterPath="$PROJECT_DIR$/tshark/tshark.js" />
     </list>
     <ignored mask="workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -551,7 +29,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="ChangesViewManager" flattened_view="false" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -568,7 +46,7 @@
       <file leaf-file-name="index.jade" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/index.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
+            <state relative-caret-position="-165">
               <caret line="16" column="65" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
               <folding>
                 <element signature="n#div#2;n#div#0;n#div#0;n#block#3;n#!!top" expanded="false" />
@@ -577,33 +55,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app-financas.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-financas/app-financas.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#1325#2112#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="apagar.jade" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
+            <state relative-caret-position="453">
+              <caret line="84" column="49" selection-start-line="84" selection-start-column="49" selection-end-line="84" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tshark.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="fin_lancamentos.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/fin_lancamentos.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="524">
+              <caret line="372" column="9" selection-start-line="372" selection-start-column="9" selection-end-line="372" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tshark.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tshark/client/v3/tshark.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="423">
-              <caret line="670" column="9" selection-start-line="670" selection-start-column="9" selection-end-line="670" selection-end-column="9" />
+            <state relative-caret-position="381">
+              <caret line="301" column="10" selection-start-line="301" selection-start-column="10" selection-end-line="301" selection-end-column="10" />
               <folding>
                 <element signature="e#2058#2137#0" expanded="true" />
                 <element signature="e#2328#2413#0" expanded="true" />
@@ -618,20 +94,19 @@
                 <element signature="e#4766#4851#0" expanded="true" />
                 <element signature="e#5004#5092#0" expanded="true" />
                 <element signature="e#5243#5375#0" expanded="true" />
-                <element signature="e#13704#14858#0" expanded="true" />
-                <element signature="e#13813#14850#0" expanded="true" />
-                <element signature="e#14295#14605#0" expanded="true" />
-                <element signature="e#14702#14806#0" expanded="true" />
-                <element signature="e#15778#15986#0" expanded="true" />
-                <element signature="e#17483#17520#0" expanded="true" />
-                <element signature="e#18786#18803#0" expanded="true" />
-                <element signature="e#19136#19233#0" expanded="true" />
+                <element signature="e#11222#12259#0" expanded="true" />
+                <element signature="e#11704#12014#0" expanded="true" />
+                <element signature="e#12111#12215#0" expanded="true" />
+                <element signature="e#13187#13395#0" expanded="true" />
+                <element signature="e#14892#14929#0" expanded="true" />
+                <element signature="e#16195#16212#0" expanded="true" />
+                <element signature="e#16545#16642#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="periodo.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="periodo.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/addmark/_common/components/periodo.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
@@ -641,6 +116,16 @@
                 <element signature="e#376#424#0" expanded="true" />
                 <element signature="e#611#1044#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/css/app.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="474">
+              <caret line="116" column="19" selection-start-line="116" selection-start-column="19" selection-end-line="116" selection-end-column="19" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -672,13 +157,9 @@
       <file leaf-file-name="fin_apagar.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/business_objects/dbms/financeiro/fin_apagar/fin_apagar.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="543">
-              <caret line="167" column="4" selection-start-line="167" selection-start-column="4" selection-end-line="167" selection-end-column="4" />
-              <folding>
-                <element signature="e#239#271#0" expanded="true" />
-                <element signature="e#754#771#0" expanded="true" />
-                <element signature="e#6448#6802#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="300">
+              <caret line="176" column="46" selection-start-line="176" selection-start-column="46" selection-end-line="176" selection-end-column="46" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -691,21 +172,6 @@
               <folding>
                 <element signature="e#5552#5581#0" expanded="true" />
                 <element signature="e#7162#7190#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tshark.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tshark/tshark.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="31" column="12" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
-              <folding>
-                <element signature="e#8752#10692#0" expanded="true" />
-                <element signature="e#9782#10138#0" expanded="true" />
-                <element signature="e#10696#10738#0" expanded="true" />
-                <element signature="e#13094#14515#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -743,14 +209,12 @@
         <option value="$PROJECT_DIR$/business_objects/dbms/movimentacoes/movimentacoes/movimentacoes.js" />
         <option value="$PROJECT_DIR$/tshark/client/v3/_extends.js" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/modulos/softlabs/financeiro/fin_apagar/fin_apagar.js" />
-        <option value="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/fin_lancamentos.js" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/financeiro/fin_lancamentos/fin_lancamentos.js" />
         <option value="$PROJECT_DIR$/apps/schoolkids/arcoiris/config.js" />
         <option value="$PROJECT_DIR$/apps/schoolkids/_common/views/login.jade" />
         <option value="$PROJECT_DIR$/apps/schoolkids/_common/index.js" />
         <option value="$PROJECT_DIR$/apps/schoolkids/_common/views/index.jade" />
         <option value="$PROJECT_DIR$/apps/schoolkids/_common/css/app.css" />
-        <option value="$PROJECT_DIR$/apps/addmark/_common/css/app.css" />
         <option value="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_clientes/emp_clientes.js" />
         <option value="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_areceber/fin_receber.js" />
         <option value="$PROJECT_DIR$/tshark/client/v3/_api.js" />
@@ -778,13 +242,15 @@
         <option value="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes/emp_clientes.js" />
         <option value="$PROJECT_DIR$/business_objects/sys/dev/ide/ide.js" />
         <option value="$PROJECT_DIR$/tshark/tshark.js" />
-        <option value="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_apagar/fin_apagar.js" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/index.js" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/financeiro/fin_apagar.js" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/views/index.jade" />
-        <option value="$PROJECT_DIR$/tshark/client/v3/tshark.js" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/components/periodo.js" />
+        <option value="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_apagar/fin_apagar.js" />
+        <option value="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/fin_lancamentos.js" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade" />
+        <option value="$PROJECT_DIR$/apps/addmark/_common/css/app.css" />
+        <option value="$PROJECT_DIR$/tshark/client/v3/tshark.js" />
       </list>
     </option>
   </component>
@@ -806,7 +272,7 @@
     <scope name="School" pattern="file[app_server]:_common//*||file[app_server]:business_objects//*||file[app_server]:tshark/*||file:app.js||file:app_router.js||file:config.js||file[app_server]:tshark/sql//*||file[app_server]:tshark/client//*||file[app_server]:apps/schoolkids//*" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2" />
+    <option name="x" value="1" />
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="873" />
@@ -1077,166 +543,6 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="External Dependencies">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="/">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Users">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="labs">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Web">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app_server">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app_server">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="apps">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="addmark">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app_server">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="apps">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="addmark">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="_common">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app_server">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="apps">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="addmark">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="_common">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="modulos">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app_server">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="apps">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="addmark">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="_common">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="modulos">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="dbms">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="financeiro">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app_server">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="apps">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="addmark">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="_common">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="modulos">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="dbms">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
         <subPane subId="Client" />
@@ -1409,7 +715,7 @@
       <workItem from="1464195806657" duration="47965000" />
       <workItem from="1464544368193" duration="1184000" />
       <workItem from="1464607546631" duration="27679000" />
-      <workItem from="1464696691083" duration="12337000" />
+      <workItem from="1464696691083" duration="16263000" />
     </task>
     <task id="LOCAL-00001" summary="Start">
       <created>1460666716795</created>
@@ -1614,20 +920,27 @@
       <option name="project" value="LOCAL" />
       <updated>1464702724835</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Reduzido o nível de pastas em modulos&#10;Implementado o componente periodo em addmark&#10;Implementado o envio de periodo em beforelist global em addmark&#10;">
+      <created>1464713180494</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1464713180494</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="615038000" />
+    <option name="totallyTimeSpent" value="618964000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2" y="23" width="1440" height="873" extended-state="6" />
+    <frame x="1" y="23" width="1440" height="873" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26286116" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5134443" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5134443" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32738853" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24947146" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3263434" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1666,7 +979,8 @@
     <MESSAGE value="Implementado Change em cascata;&#10;Implementado TRANSACTION" />
     <MESSAGE value="Implementado componentes&#10;Implementado áreas" />
     <MESSAGE value="Ajuste da definição de valor de action na APIs Server;&#10;Implementação de sql_fields em providers;&#10;Avanços no contas a pagar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajuste da definição de valor de action na APIs Server;&#10;Implementação de sql_fields em providers;&#10;Avanços no contas a pagar" />
+    <MESSAGE value="Reduzido o nível de pastas em modulos&#10;Implementado o componente periodo em addmark&#10;Implementado o envio de periodo em beforelist global em addmark&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reduzido o nível de pastas em modulos&#10;Implementado o componente periodo em addmark&#10;Implementado o envio de periodo em beforelist global em addmark&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1695,20 +1009,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/_common/components/charts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_common/components/choose.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_common/views/header.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-237">
@@ -2057,10 +1357,10 @@
         <state relative-caret-position="229">
           <caret line="84" column="19" selection-start-line="84" selection-start-column="19" selection-end-line="84" selection-end-column="58" />
           <folding>
-            <element signature="e#4020#4036#0" expanded="true" />
-            <element signature="e#4392#6057#0" expanded="true" />
-            <element signature="e#9374#9391#0" expanded="true" />
-            <element signature="e#12092#12554#0" expanded="true" />
+            <element signature="e#4020#4036#0" expanded="false" />
+            <element signature="e#4392#6057#0" expanded="false" />
+            <element signature="e#9374#9391#0" expanded="false" />
+            <element signature="e#12092#12554#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2088,70 +1388,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/business_objects/dbms/financeiro/fin_apagar/fin_apagar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="167" column="4" selection-start-line="167" selection-start-column="4" selection-end-line="167" selection-end-column="4" />
-          <folding>
-            <element signature="e#239#271#0" expanded="true" />
-            <element signature="e#754#771#0" expanded="true" />
-            <element signature="e#6448#6802#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/index.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="65" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
-          <folding>
-            <element signature="n#div#2;n#div#0;n#div#0;n#block#3;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tshark/client/v3/tshark.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="670" column="9" selection-start-line="670" selection-start-column="9" selection-end-line="670" selection-end-column="9" />
-          <folding>
-            <element signature="e#2058#2137#0" expanded="true" />
-            <element signature="e#2328#2413#0" expanded="true" />
-            <element signature="e#2619#2707#0" expanded="true" />
-            <element signature="e#2896#2982#0" expanded="true" />
-            <element signature="e#3177#3265#0" expanded="true" />
-            <element signature="e#3529#3608#0" expanded="true" />
-            <element signature="e#3717#3918#0" expanded="true" />
-            <element signature="e#4057#4135#0" expanded="true" />
-            <element signature="e#4296#4383#0" expanded="true" />
-            <element signature="e#4531#4614#0" expanded="true" />
-            <element signature="e#4766#4851#0" expanded="true" />
-            <element signature="e#5004#5092#0" expanded="true" />
-            <element signature="e#5243#5375#0" expanded="true" />
-            <element signature="e#13704#14858#0" expanded="true" />
-            <element signature="e#13813#14850#0" expanded="true" />
-            <element signature="e#14295#14605#0" expanded="true" />
-            <element signature="e#14702#14806#0" expanded="true" />
-            <element signature="e#15778#15986#0" expanded="true" />
-            <element signature="e#17483#17520#0" expanded="true" />
-            <element signature="e#18786#18803#0" expanded="true" />
-            <element signature="e#19136#19233#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/addmark/_common/components/actionbar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
           <folding />
         </state>
       </provider>
@@ -2187,6 +1427,77 @@
             <element signature="e#297#344#0" expanded="true" />
             <element signature="e#376#424#0" expanded="true" />
             <element signature="e#611#1044#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business_objects/dbms/financeiro/fin_apagar/fin_apagar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="176" column="46" selection-start-line="176" selection-start-column="46" selection-end-line="176" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/fin_lancamentos.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="524">
+          <caret line="372" column="9" selection-start-line="372" selection-start-column="9" selection-end-line="372" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/index.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-165">
+          <caret line="16" column="65" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
+          <folding>
+            <element signature="n#div#2;n#div#0;n#div#0;n#block#3;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="116" column="19" selection-start-line="116" selection-start-column="19" selection-end-line="116" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="84" column="49" selection-start-line="84" selection-start-column="49" selection-end-line="84" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tshark/client/v3/tshark.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="301" column="10" selection-start-line="301" selection-start-column="10" selection-end-line="301" selection-end-column="10" />
+          <folding>
+            <element signature="e#2058#2137#0" expanded="true" />
+            <element signature="e#2328#2413#0" expanded="true" />
+            <element signature="e#2619#2707#0" expanded="true" />
+            <element signature="e#2896#2982#0" expanded="true" />
+            <element signature="e#3177#3265#0" expanded="true" />
+            <element signature="e#3529#3608#0" expanded="true" />
+            <element signature="e#3717#3918#0" expanded="true" />
+            <element signature="e#4057#4135#0" expanded="true" />
+            <element signature="e#4296#4383#0" expanded="true" />
+            <element signature="e#4531#4614#0" expanded="true" />
+            <element signature="e#4766#4851#0" expanded="true" />
+            <element signature="e#5004#5092#0" expanded="true" />
+            <element signature="e#5243#5375#0" expanded="true" />
+            <element signature="e#11222#12259#0" expanded="true" />
+            <element signature="e#11704#12014#0" expanded="true" />
+            <element signature="e#12111#12215#0" expanded="true" />
+            <element signature="e#13187#13395#0" expanded="true" />
+            <element signature="e#14892#14929#0" expanded="true" />
+            <element signature="e#16195#16212#0" expanded="true" />
+            <element signature="e#16545#16642#0" expanded="true" />
           </folding>
         </state>
       </provider>
