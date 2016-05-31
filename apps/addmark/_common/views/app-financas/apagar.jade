@@ -43,14 +43,14 @@
 
             // Listagem
             .header Pagamentos Programados
-            .meta(data-modulo='dbms.financeiro.fin_apagar')
+            .meta
                 | Período: &nbsp;
-                a.ui.label(client='app periodo changeDe')
-                    | {periodo.de}
+                a.ui.basic.label(client='app periodo changeDe', data-modulo='dbms.financeiro.fin_apagar')
+                    | {periodo.de}&nbsp;&nbsp;&nbsp;
                     i.calendar.icon
                 |&nbsp; à &nbsp;
-                a.ui.label(client='app periodo changeAte')
-                    | {periodo.ate}
+                a.ui.basic.label(client='app periodo changeAte', data-modulo='dbms.financeiro.fin_apagar')
+                    | {periodo.ate}&nbsp;&nbsp;&nbsp;
                     i.calendar.icon
 
             .description

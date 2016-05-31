@@ -206,7 +206,6 @@ var CONSOLE_ON = true;
 
         //endregion
 
-        
     };
     
     /**
@@ -542,7 +541,7 @@ var CONSOLE_ON = true;
                 // Recupera modulo
                 var path  = id.split('.')
                     , mod = path.pop()
-                    , arq = "modulos/" + path.join('/') + '/' + mod + '/' + mod + ".js"
+                    , arq = "modulos/" + path.join('/') + '/' + mod + ".js"
                 ;
                 $.getScript(arq)
 
@@ -560,6 +559,7 @@ var CONSOLE_ON = true;
 
                     // Falhou
                     .fail(function (jqxhr, settings, exception) {
+
                         //alertify.error("API não reconhecida: '" + map + "'");
                     })
                 ;
@@ -665,6 +665,11 @@ var CONSOLE_ON = true;
      * @returns {*}
      */
     TShark.prototype.getObjPath = (base, path) => {
+        if (!path && typeof base == 'string'){
+            path = base;
+            base = app;
+        }
+
         var obj = base;
         if (typeof path == 'string'){
             path = path.indexOf('.') > -1 ? path.split('.') : path.split(' ');

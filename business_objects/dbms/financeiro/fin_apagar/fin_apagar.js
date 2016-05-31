@@ -12,6 +12,9 @@ function FinAPagar(){
 
     // Id
     this.id = 'fin_apagar';
+    
+    // Extends
+    this.extends = ['dbms', 'financeiro', 'fin_lancamentos'];
 
     // Map
     this.source = {
@@ -240,9 +243,17 @@ function FinAPagar(){
      * Evento chamado antes de rodar um select
      * @param prov Provider de dados
      * @param ctx Contexto de chamada
-     *
-     this.onSelect = function *(prov, ctx){
-
+     */
+    this.onSelect = function *(prov, ctx){
+        if (this.params['periodo']){
+            prov.where.push(
+                ["AND", 0, "dt_vencimento", ">=", "'" + this.params['periodo'].de + "'"]
+            );
+            prov.where.push(
+                ["AND", 0, "dt_vencimento", "<=", "'" + this.params['periodo'].ate + "'"]
+            );
+            prov['showSQL'] = 0;
+        }
     };
 
      /* */
@@ -415,10 +426,5 @@ function FinAPagar(){
 // Types
 const types = require('../../../../tshark/types');
 
-// Extende FinLancamentos
-var extend   = require('extend')
-    , parent = require('../fin_lancamentos/fin_lancamentos.js')
-;
-
 // Exporta
-module.exports = extend(true, parent, FinAPagar);
+module.exports = FinAPagar;

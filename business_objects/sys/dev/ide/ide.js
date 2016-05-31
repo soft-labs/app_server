@@ -509,8 +509,8 @@ function Ide(){
             this.params.app['cli'],
             'modulos',
             this.params.pack['owner'],
-            this.params.pack['pack'],
-            this.params.pack['mod']
+            this.params.pack['pack']//,
+           // this.params.pack['mod']
         ];
 
         paths.forEach(p => {

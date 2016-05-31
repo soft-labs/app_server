@@ -50,28 +50,6 @@ app = $.extend(true, app, {
     // Modo atual da aplicação
     mode: 'desenv',
 
-    // Período de data ativo
-    periodo:{
-        de : moment().subtract(7, 'days').format('DD/MM/YYYY'),
-        ate: moment().add(7, 'days').format('DD/MM/YYYY'),
-
-        changeDe: function(){
-            app.periodo.change(this, 'de');
-        },
-        changeAte: function(){
-            app.periodo.change(this, 'ate');
-        },
-        change: function(el, dt){
-            $(el)
-                .pickadate({
-                    container: '.app',
-                    onSet: function(ctx){
-                        app.periodo[dt] = moment(ctx.select).format('DD/MM/YYYY');
-                    }
-                });
-        }
-
-    },
 
     
     // Inicializador da aplicação
@@ -103,6 +81,23 @@ app = $.extend(true, app, {
     },
 
 
+    
+    //region :: Eventos globais
+    
+    /**
+     * Intercepta requisições de listagem para acrescentar o período do app
+     */
+    onBeforeList: function(el, settings){
+        tshark.send('periodo', {
+            de: moment(app.periodo.dt_de).format('YYYY-MM-DD'),
+            ate: moment(app.periodo.dt_ate).format('YYYY-MM-DD')
+        });
+        
+        // Libera ou não para continuar
+        return true;
+    },
+    
+    //endregion
     
 
     //region :: Estruturas da aplicação

@@ -388,10 +388,7 @@ TShark.prototype.initObj = function(path, context){
             + pack + '/'
             + bobj + '/'
             + bobj + '.js';
-        var obj = this.no_caching_require
-                ? reload(op)
-                : require(op)
-            ;
+        var obj = this.no_caching_require ? reload(op) : require(op);
 
         // Extende
         if (!obj['extended']) {
@@ -401,9 +398,21 @@ TShark.prototype.initObj = function(path, context){
         // Cria
         mod = new obj(path);
 
+        // Extends
+        mod.parent = false;
+        if (mod['extends']){
+            try {
+                mod.parent = this.initObj(mod['extends'], context);
+                mod.source.metadata = extend(true, mod.parent.source.metadata, mod.source.metadata);
+                
+            } catch (e){
+                log.erro(e, 'InitObj:extends => ' + mod['extends']);
+            }
+        }
+
         // Overwrite e customização
         context.state.config.flowPaths.down.forEach((path) => {
-            var arq = path + 'modulos/' + owner + '/' + pack + '/' + bobj + '/' + bobj + '.server.js'
+            var arq = path + 'modulos/' + owner + '/' + pack + '/' + '/' + bobj + '.server.js'
             try {
                 if (fs.existsSync(arq)) {
                     var overObj = new (require(arq))();
