@@ -1,0 +1,44 @@
+//
+   Created by Alessandro on 30/05/16.
+
+.ui.container.transition.hidden.app-clientes
+    .ui.fluid.card
+        .content
+
+
+            // Cabeçalho da Listagem
+            .header Clientes Cadastrados
+            .description
+
+                // Listagem
+                table.ui.striped.table
+                    thead
+                        tr
+                            th Razão Social
+                            th Telefone
+                            th Email
+                            th Site
+                            th Editar
+                    tbody
+                        tr(rv-each-item='dbms.empresas.emp_clientes.data.rows')
+                            td {item.parceiro}
+                            td {item.fone_empresa}
+                            td {item.email_empresa}
+                            td {item.site_empresa}
+                            td
+                                button.ui.icon.button(
+                                    rv-data-key='item.parceiros_key'
+                                    rv-server='dbms empresas emp_clientes edit'
+                                )
+                                    i.edit.icon
+#form_clientes.ui.modal
+    .header
+        i.big.browser.icon
+        |  Cadastrar Novo Cliente
+    div.content
+        .description#form_area_clientes
+    div.actions
+        div.ui.green.button.ok(
+        data-action='dbms empresas emp_clientes save',
+        ) Salvar Alterações
+        div.ui.orange.button.cancel Cancelar

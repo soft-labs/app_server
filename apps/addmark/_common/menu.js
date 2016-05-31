@@ -57,17 +57,17 @@ module.exports = {
                 {
                     label: "Clientes",
                     server: "dbms empresas emp_clientes list",
-                    area: "app-clientes"
+                    subarea: "app-clientes"
                 },
                 {
                     label: "Fornecedores",
                     server: "dbms empresas emp_fornecedores list",
-                    area: "app-contas"
+                    subarea: "app-contas"
                 },
                 {
                     label: "Bancos e Contas",
                     server: "dbms financeiro fin_contas list",
-                    area: "app-contas"
+                    subarea: "app-contas"
                 },
                 {
                     label: "Plano de Contas"
