@@ -20,17 +20,25 @@
                             th Site
                             th Editar
                     tbody
-                        tr(rv-each-item='dbms.empresas.emp_clientes.data.rows')
+                        tr(
+                            rv-each-item='dbms.empresas.emp_clientes.data.rows'
+                            rv-row-key='item.emp_clientes_key'
+                        )
                             td {item.parceiro}
                             td {item.fone_empresa}
                             td {item.email_empresa}
                             td {item.site_empresa}
                             td
                                 button.ui.icon.button(
-                                    rv-data-key='item.parceiros_key'
-                                    rv-server='dbms empresas emp_clientes edit'
+                                    rv-data-key='item.emp_clientes_key'
+                                    server='dbms empresas emp_clientes edit'
                                 )
                                     i.edit.icon
+
+    .ui.content.segment.meuteste.modal
+        label Teste
+
+
 #form_clientes.ui.modal
     .header
         i.big.browser.icon

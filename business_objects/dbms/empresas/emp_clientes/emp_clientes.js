@@ -57,6 +57,7 @@ function EmpClientes(){
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
                 size  : types.form.size.small,
+                autosave  : true,
                 external: [
 
                 ]

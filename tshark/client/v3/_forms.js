@@ -540,7 +540,7 @@ if(!alertify.choose){
         };
 
         if (ctrl['autosave']){
-            params['onblur'] = path.split('.').join(' ') + " save";
+            params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
         var input = setExtras($("<input>", params), ctrl);
@@ -572,7 +572,7 @@ if(!alertify.choose){
         };
 
         if (ctrl['autosave']){
-            params['onblur'] = path.split('.').join(' ') + " save";
+            params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
         var input = setExtras($("<input>", params), ctrl);
@@ -604,7 +604,7 @@ if(!alertify.choose){
         };
 
         if (ctrl['autosave']){
-            params['onblur'] = path.split('.').join(' ') + " save";
+            params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
         var input = setExtras($("<input>", params), ctrl);
@@ -636,7 +636,7 @@ if(!alertify.choose){
         };
 
         if (ctrl['autosave']){
-            params['onblur'] = path.split('.').join(' ') + " save";
+            params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
         var input = setExtras($("<input>", params), ctrl);
@@ -669,7 +669,7 @@ if(!alertify.choose){
         };
 
         if (ctrl['autosave']){
-            params['onblur'] = path.split('.').join(' ') + " save";
+            params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
         var input = setExtras($("<input>", params), ctrl);
@@ -700,7 +700,7 @@ if(!alertify.choose){
         };
 
         if (ctrl['autosave']){
-            params['onblur'] = path.split('.').join(' ') + " save";
+            params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
         var input = setExtras($("<input>", params), ctrl);
@@ -731,7 +731,7 @@ if(!alertify.choose){
         };
 
         if (ctrl['autosave']){
-            params['onblur'] = path.split('.').join(' ') + " save";
+            params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
         var input = setExtras($("<input>", params), ctrl);
@@ -762,7 +762,7 @@ if(!alertify.choose){
         };
 
         if (ctrl['autosave']){
-            params['onblur'] = path.split('.').join(' ') + " save";
+            params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
         var input = setExtras($("<input>", params), ctrl);
@@ -789,7 +789,7 @@ if(!alertify.choose){
             }
         ;
         if (ctrl['autosave']){
-            params['onblur'] = path.split('.').join(' ') + " save";
+            params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
         switch (ctrl['comp']) {
@@ -823,7 +823,7 @@ if(!alertify.choose){
             }
         ;
         if (ctrl['autosave']){
-            params['onchange'] = path.split('.').join(' ') + " save";
+            params['server-onchange'] = path.split('.').join(' ') + " save";
         }
 
         var check = setExtras($("<input>", params), ctrl);

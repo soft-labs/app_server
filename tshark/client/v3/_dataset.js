@@ -276,6 +276,10 @@ function Dataset (path, ref){
      * @param row
      */
     Dataset.prototype.setRow = function(key, row){
+        if (!row){
+            return tshark.erro('Row não definida em "setRow" - key: ' + key);
+        }
+        
         var ndx = this.index[key];
         if (ndx || ndx == 0) {
             $.extend(this.rows[ndx], row);

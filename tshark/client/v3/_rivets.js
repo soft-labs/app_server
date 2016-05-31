@@ -70,6 +70,7 @@ rivets.binders['row-key'] = {
             }
         };
         $(el).on('click', this.callback);
+        $(el).addClass('cursor');
     },
 
     unbind: function(el) {

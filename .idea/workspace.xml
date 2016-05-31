@@ -2,24 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9af883f-d607-471e-9364-120eb2596f34" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/softlabs/empresas/emp_clientes/emp_clientes.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/softlabs/enderecos/end_cidades/end_cidades.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/softlabs/financeiro/fin_apagar/fin_apagar.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/softlabs/financeiro/fin_areceber/fin_areceber.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/softlabs/financeiro/fin_contas/fin_contas.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/softlabs/financeiro/fin_lancamentos/fin_lancamentos.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/index.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/financeiro/fin_apagar/fin_apagar.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/financeiro/fin_apagar/fin_apagar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/sys/app/menu/menu.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/modulos/sys/app/menu/menu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes/emp_clientes.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes/emp_clientes.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/cadastros.jade" afterPath="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/cadastros.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade" afterPath="$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/views/app-financas/app-financas.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/views/app-financas/app-financas.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/views/app-home/app-home.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/views/app-home/app-home.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/views/index.jade" afterPath="$PROJECT_DIR$/apps/addmark/_common/views/index.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes.jade" afterPath="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business_objects/dbms/empresas/emp_clientes/emp_clientes.js" afterPath="$PROJECT_DIR$/business_objects/dbms/empresas/emp_clientes/emp_clientes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business_objects/dbms/parceiros/parc_fisicos/parc_fisicos.js" afterPath="$PROJECT_DIR$/business_objects/dbms/parceiros/parc_fisicos/parc_fisicos.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tshark/client/v3/_dataset.js" afterPath="$PROJECT_DIR$/tshark/client/v3/_dataset.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tshark/client/v3/_forms.js" afterPath="$PROJECT_DIR$/tshark/client/v3/_forms.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tshark/client/v3/tshark.js" afterPath="$PROJECT_DIR$/tshark/client/v3/tshark.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tshark/sql/_sql.js" afterPath="$PROJECT_DIR$/tshark/sql/_sql.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tshark/client/v3/_rivets.js" afterPath="$PROJECT_DIR$/tshark/client/v3/_rivets.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,40 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.jade" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/index.jade">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="51" column="57" selection-start-line="51" selection-start-column="57" selection-end-line="51" selection-end-column="57" />
-              <folding>
-                <element signature="n#div#2;n#div#0;n#div#0;n#block#3;n#!!top" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app-financas.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-financas/app-financas.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
-              <folding>
-                <element signature="e#139#147#0" expanded="true" />
-                <element signature="e#252#260#0" expanded="true" />
-                <element signature="e#379#407#0" expanded="true" />
-                <element signature="e#594#1248#0" expanded="true" />
-                <element signature="e#1325#2112#0" expanded="false" />
-                <element signature="e#1446#2105#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tshark.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="tshark.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tshark/client/v3/tshark.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="147" column="14" selection-start-line="147" selection-start-column="14" selection-end-line="147" selection-end-column="14" />
+            <state relative-caret-position="169">
+              <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
               <folding>
                 <element signature="e#2058#2137#0" expanded="true" />
                 <element signature="e#2328#2413#0" expanded="true" />
@@ -101,52 +63,95 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="clientes.jade" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes.jade">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="453">
+              <caret line="37" column="38" selection-start-line="37" selection-start-column="38" selection-end-line="37" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_rivets.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tshark/client/v3/_rivets.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="508">
+              <caret line="72" column="33" selection-start-line="72" selection-start-column="33" selection-end-line="72" selection-end-column="33" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#1622#1924#0" expanded="true" />
+                <element signature="e#2121#2162#0" expanded="true" />
+                <element signature="e#2379#2691#0" expanded="true" />
+                <element signature="e#2797#2908#0" expanded="true" />
+                <element signature="e#2960#3071#0" expanded="true" />
+                <element signature="e#3121#3199#0" expanded="true" />
+                <element signature="e#3251#3329#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="menu.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/modulos/sys/app/menu/menu.js">
+        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/menu.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-585">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app-cadastros.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/app-cadastros.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <element signature="e#315#376#0" expanded="true" />
-                <element signature="e#441#494#0" expanded="true" />
+                <element signature="e#140#148#0" expanded="true" />
+                <element signature="e#253#261#0" expanded="true" />
+                <element signature="e#380#408#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fin_apagar.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/financeiro/fin_apagar/fin_apagar.js">
+      <file leaf-file-name="emp_clientes.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes/emp_clientes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="93" column="25" selection-start-line="93" selection-start-column="25" selection-end-line="93" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="apagar.jade" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="45" column="59" selection-start-line="45" selection-start-column="59" selection-end-line="45" selection-end-column="59" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="63" column="31" selection-start-line="63" selection-start-column="29" selection-end-line="63" selection-end-column="31" />
+            <state relative-caret-position="303">
+              <caret line="145" column="45" selection-start-line="145" selection-start-column="45" selection-end-line="145" selection-end-column="45" />
               <folding>
-                <element signature="e#1333#1388#0" expanded="true" />
-                <element signature="e#1419#1475#0" expanded="true" />
-                <element signature="e#1509#1773#0" expanded="true" />
-                <element signature="e#1637#1743#0" expanded="true" />
-                <element signature="e#1844#2466#0" expanded="true" />
-                <element signature="e#2271#2448#0" expanded="false" />
+                <element signature="e#352#360#0" expanded="true" />
+                <element signature="e#368#394#0" expanded="true" />
+                <element signature="e#2644#2759#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_dataset.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tshark/client/v3/_dataset.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1602">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#1174#7838#0" expanded="true" />
+                <element signature="e#1245#1275#0" expanded="true" />
+                <element signature="e#6618#7122#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="emp_clientes.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/business_objects/dbms/empresas/emp_clientes/emp_clientes.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="54" column="52" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -154,11 +159,24 @@
       <file leaf-file-name="_forms.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tshark/client/v3/_forms.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="300" column="34" selection-start-line="300" selection-start-column="34" selection-end-line="300" selection-end-column="34" />
+            <state relative-caret-position="458">
+              <caret line="911" column="26" selection-start-line="911" selection-start-column="26" selection-end-line="911" selection-end-column="26" />
               <folding>
-                <element signature="e#12469#13234#0" expanded="true" />
-                <element signature="e#17895#18545#0" expanded="true" />
+                <element signature="e#2338#4944#0" expanded="true" />
+                <element signature="e#2787#4665#0" expanded="true" />
+                <element signature="e#6915#9618#0" expanded="true" />
+                <element signature="e#13830#14322#0" expanded="true" />
+                <element signature="e#14484#15128#0" expanded="true" />
+                <element signature="e#15292#15934#0" expanded="true" />
+                <element signature="e#16098#16850#0" expanded="true" />
+                <element signature="e#17016#17767#0" expanded="true" />
+                <element signature="e#17930#18587#0" expanded="true" />
+                <element signature="e#18750#19403#0" expanded="true" />
+                <element signature="e#19570#20138#0" expanded="true" />
+                <element signature="e#20308#21014#0" expanded="true" />
+                <element signature="e#21189#21738#0" expanded="true" />
+                <element signature="e#21897#22946#0" expanded="true" />
+                <element signature="e#24598#24813#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -187,10 +205,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/_common/js/3rd/pickadate.js/lib2/picker.js" />
-        <option value="$PROJECT_DIR$/_common/js/3rd/pickadate.js/lib/picker.js" />
-        <option value="$PROJECT_DIR$/_common/js/3rd/pickadate.js/lib/picker.time.js" />
-        <option value="$PROJECT_DIR$/_common/js/3rd/pickadate.js/lib/legacy.js" />
         <option value="$PROJECT_DIR$/_common/js/3rd/pickadate.js/lib/picker.date.js" />
         <option value="$PROJECT_DIR$/apps/_dev/test/index.js" />
         <option value="$PROJECT_DIR$/_common/js/3rd/lib/picker.js" />
@@ -215,8 +229,6 @@
         <option value="$PROJECT_DIR$/apps/addmark/_common/css/app.css" />
         <option value="$PROJECT_DIR$/business_objects/softlabs/empresas/emp_clientes/emp_clientes.js" />
         <option value="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_areceber/fin_receber.js" />
-        <option value="$PROJECT_DIR$/tshark/client/v3/_dataset.js" />
-        <option value="$PROJECT_DIR$/tshark/client/v3/_rivets.js" />
         <option value="$PROJECT_DIR$/tshark/client/v3/_api.js" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/views/login.jade" />
         <option value="$PROJECT_DIR$/_common/components/choose.js" />
@@ -227,7 +239,6 @@
         <option value="$PROJECT_DIR$/apps/addmark/_common/components/actionbar.js" />
         <option value="$PROJECT_DIR$/_common/components/areas.js" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/menu.js" />
-        <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/cadastros.jade" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/views/index.jade" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/modulos/sys/app/menu/menu.js" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-home/app-home.js" />
@@ -237,7 +248,14 @@
         <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade" />
         <option value="$PROJECT_DIR$/tshark/sql/_sql.js" />
         <option value="$PROJECT_DIR$/tshark/client/v3/tshark.js" />
+        <option value="$PROJECT_DIR$/business_objects/dbms/parceiros/parc_fisicos/parc_fisicos.js" />
+        <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/cadastros.jade" />
+        <option value="$PROJECT_DIR$/tshark/client/v3/_dataset.js" />
+        <option value="$PROJECT_DIR$/tshark/client/v3/_rivets.js" />
+        <option value="$PROJECT_DIR$/business_objects/dbms/empresas/emp_clientes/emp_clientes.js" />
         <option value="$PROJECT_DIR$/tshark/client/v3/_forms.js" />
+        <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes.jade" />
+        <option value="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes/emp_clientes.js" />
       </list>
     </option>
   </component>
@@ -701,7 +719,7 @@
       <workItem from="1464195806657" duration="47965000" />
       <workItem from="1464544368193" duration="1184000" />
       <workItem from="1464607546631" duration="27679000" />
-      <workItem from="1464696691083" duration="1749000" />
+      <workItem from="1464696691083" duration="5489000" />
     </task>
     <task id="LOCAL-00001" summary="Start">
       <created>1460666716795</created>
@@ -892,11 +910,18 @@
       <option name="project" value="LOCAL" />
       <updated>1464637024920</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Ajuste da definição de valor de action na APIs Server;&#10;Implementação de sql_fields em providers;&#10;Avanços no contas a pagar">
+      <created>1464698677619</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1464698677619</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="604450000" />
+    <option name="totallyTimeSpent" value="608190000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1440" height="873" extended-state="6" />
@@ -905,7 +930,7 @@
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26286116" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5121328" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5134443" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32738853" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24947146" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3263434" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -935,6 +960,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Start" />
     <MESSAGE value="Agora vai" />
     <MESSAGE value="gerador codigo" />
@@ -942,7 +968,8 @@
     <MESSAGE value="Addmark - Andamento&#10;Dreams - Andamento" />
     <MESSAGE value="Implementado Change em cascata;&#10;Implementado TRANSACTION" />
     <MESSAGE value="Implementado componentes&#10;Implementado áreas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementado componentes&#10;Implementado áreas" />
+    <MESSAGE value="Ajuste da definição de valor de action na APIs Server;&#10;Implementação de sql_fields em providers;&#10;Avanços no contas a pagar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajuste da definição de valor de action na APIs Server;&#10;Implementação de sql_fields em providers;&#10;Avanços no contas a pagar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -961,7 +988,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="507" />
+      <option name="time" value="509" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="NodeJSConfigurationType">
@@ -971,41 +998,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tshark/biz_object.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="581">
-          <caret line="532" column="27" selection-start-line="532" selection-start-column="27" selection-end-line="532" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tshark/sql/mysql.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="278" column="11" selection-start-line="278" selection-start-column="11" selection-end-line="278" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_common/js/3rd/moment/moment-with-locales.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4905">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/business_objects/dbms/financeiro/fin_apagar/_list.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/business_objects/softlabs2/financeiro/fin_apagar/_cards.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/business_objects/softlabs2/financeiro/fin_apagar/_list.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1073,6 +1065,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1087,6 +1080,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="326">
           <caret line="103" column="1" selection-start-line="103" selection-start-column="1" selection-end-line="103" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1122,13 +1116,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-465">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tshark/client/v3/_dataset.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="327" column="0" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1208,6 +1195,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#2132#2257#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1240,27 +1230,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/addmark/_common/modulos/softlabs/financeiro/fin_apagar/fin_apagar.js" />
-    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/menu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-207">
-          <caret line="42" column="36" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/cadastros.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tshark/client/v3/_rivets.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-567">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-home/app-home.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="508">
@@ -1281,8 +1250,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#315#376#0" expanded="true" />
-            <element signature="e#441#494#0" expanded="true" />
+            <element signature="e#315#376#0" expanded="false" />
+            <element signature="e#441#494#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1300,12 +1269,12 @@
         <state relative-caret-position="30">
           <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
           <folding>
-            <element signature="e#139#147#0" expanded="true" />
-            <element signature="e#252#260#0" expanded="true" />
-            <element signature="e#379#407#0" expanded="true" />
-            <element signature="e#594#1248#0" expanded="true" />
+            <element signature="e#139#147#0" expanded="false" />
+            <element signature="e#252#260#0" expanded="false" />
+            <element signature="e#379#407#0" expanded="false" />
+            <element signature="e#594#1248#0" expanded="false" />
             <element signature="e#1325#2112#0" expanded="false" />
-            <element signature="e#1446#2105#0" expanded="true" />
+            <element signature="e#1446#2105#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1325,11 +1294,11 @@
         <state relative-caret-position="660">
           <caret line="63" column="31" selection-start-line="63" selection-start-column="29" selection-end-line="63" selection-end-column="31" />
           <folding>
-            <element signature="e#1333#1388#0" expanded="true" />
-            <element signature="e#1419#1475#0" expanded="true" />
-            <element signature="e#1509#1773#0" expanded="true" />
-            <element signature="e#1637#1743#0" expanded="true" />
-            <element signature="e#1844#2466#0" expanded="true" />
+            <element signature="e#1333#1388#0" expanded="false" />
+            <element signature="e#1419#1475#0" expanded="false" />
+            <element signature="e#1509#1773#0" expanded="false" />
+            <element signature="e#1637#1743#0" expanded="false" />
+            <element signature="e#1844#2466#0" expanded="false" />
             <element signature="e#2271#2448#0" expanded="false" />
           </folding>
         </state>
@@ -1340,9 +1309,9 @@
         <state relative-caret-position="125">
           <caret line="233" column="4" selection-start-line="233" selection-start-column="4" selection-end-line="233" selection-end-column="4" />
           <folding>
-            <element signature="e#5672#5843#0" expanded="true" />
-            <element signature="e#9870#12869#0" expanded="true" />
-            <element signature="e#10277#12848#0" expanded="true" />
+            <element signature="e#5672#5843#0" expanded="false" />
+            <element signature="e#9870#12869#0" expanded="false" />
+            <element signature="e#10277#12848#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1355,21 +1324,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tshark/client/v3/_forms.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="300" column="34" selection-start-line="300" selection-start-column="34" selection-end-line="300" selection-end-column="34" />
-          <folding>
-            <element signature="e#12469#13234#0" expanded="true" />
-            <element signature="e#17895#18545#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tshark/client/v3/tshark.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="147" column="14" selection-start-line="147" selection-start-column="14" selection-end-line="147" selection-end-column="14" />
+        <state relative-caret-position="169">
+          <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
           <folding>
             <element signature="e#2058#2137#0" expanded="true" />
             <element signature="e#2328#2413#0" expanded="true" />
@@ -1390,6 +1348,125 @@
             <element signature="e#17396#17433#0" expanded="true" />
             <element signature="e#18699#18716#0" expanded="true" />
             <element signature="e#19049#19146#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business_objects/dbms/parceiros/parc_fisicos/parc_fisicos.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-87">
+          <caret line="32" column="60" selection-start-line="32" selection-start-column="60" selection-end-line="32" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/app-cadastros.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#140#148#0" expanded="true" />
+            <element signature="e#253#261#0" expanded="true" />
+            <element signature="e#380#408#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/menu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-585">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/cadastros.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tshark/client/v3/_rivets.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="508">
+          <caret line="72" column="33" selection-start-line="72" selection-start-column="33" selection-end-line="72" selection-end-column="33" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#1622#1924#0" expanded="true" />
+            <element signature="e#2121#2162#0" expanded="true" />
+            <element signature="e#2379#2691#0" expanded="true" />
+            <element signature="e#2797#2908#0" expanded="true" />
+            <element signature="e#2960#3071#0" expanded="true" />
+            <element signature="e#3121#3199#0" expanded="true" />
+            <element signature="e#3251#3329#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tshark/client/v3/_forms.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="458">
+          <caret line="911" column="26" selection-start-line="911" selection-start-column="26" selection-end-line="911" selection-end-column="26" />
+          <folding>
+            <element signature="e#2338#4944#0" expanded="true" />
+            <element signature="e#2787#4665#0" expanded="true" />
+            <element signature="e#6915#9618#0" expanded="true" />
+            <element signature="e#13830#14322#0" expanded="true" />
+            <element signature="e#14484#15128#0" expanded="true" />
+            <element signature="e#15292#15934#0" expanded="true" />
+            <element signature="e#16098#16850#0" expanded="true" />
+            <element signature="e#17016#17767#0" expanded="true" />
+            <element signature="e#17930#18587#0" expanded="true" />
+            <element signature="e#18750#19403#0" expanded="true" />
+            <element signature="e#19570#20138#0" expanded="true" />
+            <element signature="e#20308#21014#0" expanded="true" />
+            <element signature="e#21189#21738#0" expanded="true" />
+            <element signature="e#21897#22946#0" expanded="true" />
+            <element signature="e#24598#24813#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="37" column="38" selection-start-line="37" selection-start-column="38" selection-end-line="37" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business_objects/dbms/empresas/emp_clientes/emp_clientes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="54" column="52" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes/emp_clientes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="145" column="45" selection-start-line="145" selection-start-column="45" selection-end-line="145" selection-end-column="45" />
+          <folding>
+            <element signature="e#352#360#0" expanded="true" />
+            <element signature="e#368#394#0" expanded="true" />
+            <element signature="e#2644#2759#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tshark/client/v3/_dataset.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1602">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1174#7838#0" expanded="true" />
+            <element signature="e#1245#1275#0" expanded="true" />
+            <element signature="e#6618#7122#0" expanded="true" />
           </folding>
         </state>
       </provider>

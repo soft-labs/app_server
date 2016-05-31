@@ -32,7 +32,6 @@ tshark.modulos._add('dbms.empresas.emp_clientes', {
      * Chamado após a listagem de dados
      */
     onAfterList: function(response, next){
-
         app.actionbar.reset([
             {
                 icon: 'home icon',
@@ -132,8 +131,9 @@ tshark.modulos._add('dbms.empresas.emp_clientes', {
 
     /**
      * Chamado antes de requisitar uma interface de formulário
-     *
+     */
     onBeforeForm: function(el, settings){
+        this.send('form_place', '.meuteste');
 
         // Libera ou não para continuar
         return true;
@@ -141,9 +141,9 @@ tshark.modulos._add('dbms.empresas.emp_clientes', {
 
     /**
      * Chamado após receber qualquer das interfaces de formulário
-     *
+     */
     onAfterForm: function(response, next){
-
+        $('.meuteste').transition('fade up');
     },
 
     /* */

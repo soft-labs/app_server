@@ -33,7 +33,7 @@ function ParcFisicos(){
                     tipo: types.comp.int, label: 'Mes Nasc:'
                 }, 
                 ano_nasc: {
-                    tipo: types.comp.undefined, label: 'Ano Nasc:'
+                    tipo: types.comp.int, label: 'Ano Nasc:'
                 }, 
                 rg: {
                     tipo: types.comp.text, label: 'Rg:'
