@@ -96,21 +96,14 @@ function ParcEnderecosRel(){
                         
                     ]
                 },
-                1: { 
-                    from: ['dbms', 'parceiros', 'parceiros'],
-                    join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
-                    fields: [
-                        
-                    ]
-                },
-                2: { 
+                1: {
                     from: ['dbms', 'enderecos', 'enderecos'],
                     join: {source: 0, tipo: types.join.left, on: 'enderecos_key', where: ''},
                     fields: [
                         
                     ]
                 },
-                3: { 
+                2: {
                     from: ['dbms', 'enderecos', 'end_tipos'],
                     join: {source: 0, tipo: types.join.left, on: 'end_tipos_key', where: ''},
                     fields: [
@@ -118,12 +111,11 @@ function ParcEnderecosRel(){
                     ]
                 } 
             },
-            where: [ 
-                ['AND', 0, 'parceiros_key', types.where.check],
+            where: [
+                ['AND', 0, 'parceiros_key', types.where.get],
                 ['AND', 0, 'enderecos_key', types.where.check]
             ],
             order: [
-                ['0', 'parceiros_key', 'desc'],
                 ['0', 'enderecos_key', 'desc']
             ],
             search: [

@@ -19,6 +19,7 @@ block app_scripts
     // Areas
     script(type='application/javascript', src='views/app-home/app-home.js')
     script(type='application/javascript', src='views/app-financas/app-financas.js')
+    script(type='application/javascript', src='views/app-cadastros/app-cadastros.js')
 
 
 block content
@@ -77,6 +78,7 @@ block content
                     rv-server='item.server'
                     rv-client='item.client'
                     rv-data-area='item.area'
+                    rv-data-subarea='item.subarea'
                 )
                     i(rv-class='item.icon')
                     .content
@@ -94,7 +96,7 @@ block content
         .ui.container.app-integracoes.transition.hidden
             | Hello Integracoes
 
-        .ui.container.app-cadastros.transition.hidden
+        .ui.container.transition.hidden.app-cadastros
             include app-cadastros/cadastros
 
         .ui.container.app-sistema.transition.hidden

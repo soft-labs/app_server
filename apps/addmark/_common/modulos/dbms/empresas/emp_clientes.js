@@ -14,6 +14,24 @@ tshark.modulos._add('dbms.empresas.emp_clientes', {
      */
     init: function(){
 
+        // Instanciando
+        this.enderecos = new Dataset('dbms.parceiros.parc_enderecos_rel');
+        this.enderecos_eletronicos = new Dataset();
+        this.areceber = new Dataset();
+    },
+
+
+    /**
+     * Executa refresh nos datasets secundarios
+     */
+    refreshDataSet : function () {
+        var data = {
+            parceiros_key: this.data.row.parceiros_key
+        };
+
+        this.enderecos.load(data);
+        //this.enderecos_eletronicos.load('dbms parceiros parc_enderecos_rel');
+        //this.areceber.load('dbms parceiros parc_enderecos_rel');
     },
 
 
@@ -30,29 +48,8 @@ tshark.modulos._add('dbms.empresas.emp_clientes', {
 
      /**
      * Chamado após a listagem de dados
-     */
+     *
     onAfterList: function(response, next){
-        app.actionbar.reset([
-            {
-                icon: 'home icon',
-                title: 'Home',
-                description: 'Cockpit financeiro',
-                client: 'sys app menu click',
-                area: "app-home"
-            },
-            {
-                icon: 'users icon',
-                title: 'Clientes Cadastrados',
-                description: 'Listagem'
-            },
-            {
-                icon: 'add icon',
-                title: 'Novo Cliente',
-                description: 'Cadastrar Novo',
-                server: 'dbms empresa emp_clientes create',
-                active: 1
-            }
-        ]);
     },
 
     /* */
@@ -131,7 +128,7 @@ tshark.modulos._add('dbms.empresas.emp_clientes', {
 
     /**
      * Chamado antes de requisitar uma interface de formulário
-     */
+     *
     onBeforeForm: function(el, settings){
         this.send('form_place', '.meuteste');
 
@@ -141,7 +138,7 @@ tshark.modulos._add('dbms.empresas.emp_clientes', {
 
     /**
      * Chamado após receber qualquer das interfaces de formulário
-     */
+     *
     onAfterForm: function(response, next){
         $('.meuteste').transition('fade up');
     },
