@@ -96,15 +96,28 @@ Number.prototype.toFloat = function() {
  * @since 11/2014
  **/
 function isFloat(valor){
+    var floatRegex = /^-?\d+(?:[.,]\d*?)?$/;
+    if (!floatRegex.test(valor))
+        return false;
+
+    val = parseFloat(valor);
+    if (isNaN(valor))
+        return false;
+    return true;
+
+    /*
+    if (valor == 0){
+        return true;
+    }
     if (!valor) {
-        return 0;
+        return false;
     }
-    if (valor === true){
-        return 1;
-    }
+
+    return !isNaN(parseFloat(valor));
+
     /*if (typeof valor != "string") {
      return valor;
-     }*/
+     }*
 
     valor = valor.toString().replace(/[\s\$a-zA-Z]/gm, '') + '';
 
@@ -116,6 +129,7 @@ function isFloat(valor){
     }
     var f = parseFloat(keywords.join('') + (decimal ? '.' + decimal : ''));
     return !isNaN(f);
+    */
 }
 String.prototype.isFloat = function() {
     return isFloat(this);
@@ -356,7 +370,8 @@ Array.prototype.last = function(){
 
 /**
  * Executa pivoteamento de um array de objetos por um
- * dos campos dos objetos no array
+ * dos campos dos objetos no array e retorna
+ * o novo array agrupado
  *
  * Ex:
  *  res = [
@@ -394,13 +409,10 @@ Array.prototype.last = function(){
  *   ... e
  *
  *   res._stats = { sum: {valor: 53}, count: 4 }
- *
  * @param campo
- * @param order
- * @param desc
  * @returns {Array}
  */
-Array.prototype.pivot = function (campo, desc) {
+Array.prototype.pivot = function (campo) {
     var tipo, res = [], tmp = {}, first = true, sum = {}, count = 0, f;
     this.forEach(row => {
         var field = row[campo];
@@ -447,16 +459,69 @@ Array.prototype.pivot = function (campo, desc) {
     // Stats global
     res._stats = {sum: sum, count: res.length};
 
-    // Ordenação
-    var order_by = 'label';
-    if (typeof desc == 'string'){
-        order_by = desc;
-        desc = arguments[2];
+    // Retorna
+    return res;
+
+};
+
+
+/**
+ * Efetua agrupamento de acordo com parametros e retorna
+ * o novo array agrupado.
+ * Ex: {
+ *       field: 'historico',
+ *       order: {
+ *           group: {
+ *               by: '_stats.sum.valor_bruto',
+ *               desc: true
+ *           },
+ *           sub: {
+ *               by: 'dt_vencimento',
+ *               desc: true
+ *           }
+ *       }
+ *   }
+ * @params {object || string}
+ * @returns {Array}
+ */
+Array.prototype.groupBy = function (params) {
+    
+    // Ajusta params
+    if (!params) return [];
+    if (typeof params == 'string'){
+        var campo = params
+            , desc = arguments.length == 2 ? arguments[1] : true;
+
+        params = {
+            field: campo,
+            order: {
+                group: {
+                    by: 'label',
+                    desc: desc
+                },
+                sub: {
+                    by: campo,
+                    desc: desc
+                }
+            }
+        }
     }
 
-    // Retorna com sortBy
-    return res.sortBy(order_by, desc);
+    // Executa pivotamento
+    var data = this.pivot(params.field);
+
+    // Ordena agrupamento
+    data.sortBy(params.order.group.by, params.order.group.desc);
+    
+    // Ordena interno
+    data.forEach(row => {
+        row.values.sortBy(params.order.sub.by, params.order.sub.desc);
+    });
+
+    // Retorna
+    return data;
 };
+
 
 /**
  * Ordena um array de objetos por um de seus campos, tentando
@@ -535,20 +600,20 @@ function _sortDate(field, desc, a, b) {
     ;
 
     if (tmp1[0].length == 4){
-        dt1 = tmp1.join('');
-        dt2 = tmp2.join('');
+        dt1 = tmp1.join('-');
+        dt2 = tmp2.join('-');
 
     } else {
-        dt1 = tmp1.reverse().join('');
-        dt2 = tmp2.reverse().join('');
+        dt1 = tmp1.reverse().join('-');
+        dt2 = tmp2.reverse().join('-');
     }
 
 
-    if (dt1==dt2) return 0;
+    if (moment(dt1).isSame(dt2)) return 0;
     if (desc) {
-        return (dt1<dt2 ? 1 : -1);
+        return (moment(dt1).isBefore(dt2) ? 1 : -1);
     } else {
-        return (dt1<dt2 ? -1 : 1);
+        return (moment(dt1).isBefore(dt2) ? -1 : 1);
     }
 }
 

@@ -50,12 +50,13 @@ function FinAPagar(){
                 ]
             },
             linhas: [
-                {titulo: "Novo Pagamento"},
-                {space: 25, dt_documento: 22, dt_vencimento: 22, dt_lancamento: 22, numero: 20},
-                {parceiros_key: 75, valor_bruto: 25}
+                {titulo: "Informe:"},
+                {space: 10, valor_bruto: 25, dt_vencimento: 22, dt_documento: 22, numero: 20},
+                {cont_historicos_key: 40, parceiros_key: 60}
             ],
             ctrls: {
-
+                valor_bruto  : { label: "Valor a pagar: "},
+                parceiros_key: { label: "Fornecedor: "}
             }
         }
 
@@ -91,34 +92,41 @@ function FinAPagar(){
                     ]
                 },
                 3: {
+                    from: ['dbms', 'contabil', 'cont_historicos'],
+                    join: {source: 0, tipo: types.join.left, on: 'cont_historicos_key', where: ''},
+                    fields: [
+
+                    ]
+                },
+                4: {
                     from: ['dbms', 'empresas', 'empresas'],
                     join: {source: 0, tipo: types.join.left, on: 'empresas_key', where: ''},
                     fields: [
 
                     ]
                 },
-                4: {
+                5: {
                     from: ['dbms', 'financeiro', 'fin_contas'],
                     join: {source: 0, tipo: types.join.left, on: 'fin_contas_key', where: ''},
                     fields: [
 
                     ]
                 },
-                5: {
+                6: {
                     from: ['dbms', 'parceiros', 'parceiros'],
                     join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
                     fields: [
 
                     ]
                 },
-                6: {
+                7: {
                     from: ['dbms', 'contratos', 'contratos'],
                     join: {source: 0, tipo: types.join.left, on: 'contratos_key', where: ''},
                     fields: [
 
                     ]
                 },
-                7: {
+                8: {
                     from: ['dbms', 'movimentacoes', 'movimentacoes'],
                     join: {source: 0, tipo: types.join.left, on: 'movimentacoes_key', where: ''},
                     fields: [
@@ -138,7 +146,7 @@ function FinAPagar(){
                 {alias: 1, field: 'dt_documento',       param: types.search.maior_igual },
                 {alias: 1, field: 'dt_vencimento',      param: types.search.maior_igual },
                 {alias: 1, field: 'numero',             param: types.search.like_full },
-                {alias: 1, field: 'descricao',          param: types.search.like_full },
+                {alias: 3, field: 'historico',          param: types.search.like_full },
                 {alias: 1, field: 'complemento',        param: types.search.like_full },
                 {alias: 1, field: 'baixa_data',         param: types.search.maior_igual },
                 {alias: 1, field: 'baixa_bancaria',     param: types.search.maior_igual },

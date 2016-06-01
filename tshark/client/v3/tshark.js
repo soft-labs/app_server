@@ -353,6 +353,13 @@ var CONSOLE_ON = true;
                 })
             })
         ;
+        
+        $(ref).find('.tooltip').not('.binded')
+            .addClass('binded')
+            .tooltipster({
+                theme: 'tooltipster-light'
+            })
+        ;
     };
 
     /**

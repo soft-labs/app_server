@@ -25,7 +25,7 @@
 
             // Menu Listagem / Chart
             span.right.floated.ui.secondary.menu
-                .ui.labeled.icon.selection.dropdown.display.apagar
+                .ui.mini.labeled.icon.selection.dropdown.display.apagar
                     i
                     span.text
                     .menu
@@ -72,21 +72,33 @@
                                     rv-row-key='item.fin_lancamentos_key'
                                     data-action='dbms financeiro fin_apagar edit'
                                 )
-                                    .thirteen.wide.column
+                                    .eleven.wide.column
                                         | {item.parceiro} -
-                                        | {item.descricao}
-                                    .three.wide.right.aligned.cursor.column.app-despesa
-                                        | {item.valor_bruto | money}
+                                        | {item.historico}
 
-                                    // Popup do row
-                                    .ui.flowing.left.center.transition.hidden.popup
-                                        .ui.icon.menu
-                                            .item
-                                                i.gamepad.icon
-                                            .item
-                                                i.camera.icon
-                                            .item
-                                                i.play.icon
+                                    .two.wide.right.aligned.column
+                                        .ui.tooltip.app-apagar-tooltip-datas(
+                                            rv-data-dt_vencimento='item.dt_vencimento'
+                                            rv-data-dt_documento='item.dt_documento'
+                                            rv-data-dt_lancamento='item.dt_lancamento'
+                                        )
+                                            i.calendar.icon
+                                            | {item.dt_vencimento}
+
+                                    .three.wide.right.aligned.cursor.column.app-despesa
+                                        .ui.app-despesa-action
+                                            i.dollar.icon
+                                            | {item.valor_bruto | money}
+
+                                        // Popup do row
+                                        .ui.flowing.left.center.transition.hidden.popup
+                                            .ui.icon.menu
+                                                .item
+                                                    i.gamepad.icon
+                                                .item
+                                                    i.camera.icon
+                                                .item
+                                                    i.play.icon
 
                                 .row.app-grid-rows
                                     .thirteen.wide.right.aligned.column Subtotal:
@@ -99,14 +111,15 @@
 
 
 
-#form_apagar.ui.modal
+.ui.modal.app-apagar-form
     .header
         i.big.browser.icon
-        |  Lançamentos à Pagar
-    div.content
-        .description#form_area_apagar
+        .content Lançamentos à Pagar
+        .sub.header {dbms.financeiro.fin_apagar.formInfo}
+    div.content.dbms.financeiro.fin_apagar-form
+        .description
     div.actions
         div.ui.green.button.ok(
-            data-action='dbms financeiro fin_apagar save',
+            server='dbms financeiro fin_apagar save',
         ) Salvar Alterações
         div.ui.orange.button.cancel Cancelar

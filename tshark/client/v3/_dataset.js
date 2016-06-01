@@ -22,7 +22,7 @@ function Dataset (path, ref){
      */
     this.path = path || [];
     if (typeof this.path == 'string'){
-        this.path = this.path.split('.');
+        this.path = (this.path.indexOf('.') ?  this.path.split('.') : this.path.split('.'));
     }
 
     /**
@@ -94,8 +94,11 @@ function Dataset (path, ref){
             for (var a = 0; a < arguments.length; a++) {
                 var arg = arguments[a];
                 if (typeof arg == 'string') {
-                    var tmp = arg.split(' ');
-                    load_api = (this.path ? this.path.join("/") : '') + '/' + tmp.join('/');
+                    var tmp = (arg.indexOf('.') ? arg.split('.') : arg.split(' ')); // arg.split(' ');
+                    load_api = (tmp.length == 3
+                        ? tmp.join('/')
+                        : (this.path ? this.path.join("/") : '') + '/' + tmp.join('/')
+                    );
                     if (tmp.length == 1 || tmp.length == 4) {
                         method = 'post';
                     }
