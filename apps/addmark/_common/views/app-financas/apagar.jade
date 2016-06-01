@@ -75,7 +75,19 @@
                                     .thirteen.wide.column
                                         | {item.parceiro} -
                                         | {item.descricao}
-                                    .three.wide.column.right.aligned.app-despesa {item.valor_bruto | money}
+                                    .three.wide.right.aligned.cursor.column.app-despesa
+                                        | {item.valor_bruto | money}
+
+                                    // Popup do row
+                                    .ui.flowing.left.center.transition.hidden.popup
+                                        .ui.icon.menu
+                                            .item
+                                                i.gamepad.icon
+                                            .item
+                                                i.camera.icon
+                                            .item
+                                                i.play.icon
+
                                 .row.app-grid-rows
                                     .thirteen.wide.right.aligned.column Subtotal:
                                     .three.wide.column.right.aligned.app-despesa-sum {row._stats.sum.valor_bruto | money}
@@ -84,6 +96,8 @@
         .extra.content
             span.right.floated.app-despesa-footer-sum
                 | Total à Pagar: R$ {dbms.financeiro.fin_apagar.data.group._stats.sum.valor_bruto | money}
+
+
 
 #form_apagar.ui.modal
     .header

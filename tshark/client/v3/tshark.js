@@ -344,6 +344,15 @@ var CONSOLE_ON = true;
                 on: 'hover'
             })
         ;
+
+        $(ref).find('.pop-trigger').not('.binded')
+            .addClass('binded')
+            .each(function(){
+                $(this).popup({
+                    popup: $(this).data('popup')
+                })
+            })
+        ;
     };
 
     /**

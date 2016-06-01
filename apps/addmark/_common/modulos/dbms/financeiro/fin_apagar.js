@@ -76,6 +76,32 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
     },
 
 
+    //region :: Eventos
+
+    /**
+     * Chamado após a listagem de dados
+     */
+    onAfterList: function(response, next){
+        this.pivotData();
+
+        $('.column.app-despesa')
+            .popup({
+                position: 'bottom center',
+                inline: true,
+                on: 'click'
+            })
+        ;
+
+    },
+
+    /**
+     * Chamado após a execução de uma pesquisa
+     */
+    onAfterSearch: function(response, next){
+        this.pivotData();
+    },
+
+
     //region :: Eventos - List
 
     /**
@@ -85,13 +111,6 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
 
         // Libera ou não para continuar
         return true;
-    },
-
-    /**
-     * Chamado após a listagem de dados
-     */
-    onAfterList: function(response, next){
-        this.pivotData();
     },
 
     /* */
@@ -107,13 +126,6 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
 
         // Libera ou não para continuar
         return true;
-    },
-
-     /**
-     * Chamado após a execução de uma pesquisa
-     */
-    onAfterSearch: function(response, next){
-        this.pivotData();
     },
 
      /* */
@@ -277,7 +289,8 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
 
      /* */
     //endregion
-    
+
+    //endregion
     
     //region :: Regras de Negócio
 

@@ -48,6 +48,7 @@ app.areas.add('app-financas', {
                     active: 1
                 }
             ]);
+
         }
 
     },
