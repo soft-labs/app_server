@@ -25,7 +25,7 @@
 
             // Menu Listagem / Chart
             span.right.floated.ui.secondary.menu
-                .ui.labeled.icon.selection.dropdown.display.apagar
+                .ui.mini.labeled.icon.selection.dropdown.display.apagar
                     i
                     span.text
                     .menu
@@ -61,36 +61,65 @@
                 // Listagem
                 .ui.fluid.styled.accordion.non-exclusive.lista.apagar
                     span(rv-each-row='dbms.financeiro.fin_apagar.data.group')
-                        .active.title
+                        .title
                             i.dropdown.icon
                             | {row.label}
-                        .active.content
+                            .basic.label.app-despesa-title-sum {row._stats.sum.valor_bruto | money}
+                        .content
                             .ui.bottom.aligned.stackable.grid
                                 .row.cursor.app-grid-rows(
                                     rv-each-item='row.values'
-                                    rv-data-key='item.fin_lancamentos_key'
+                                    rv-row-key='item.fin_lancamentos_key'
                                     data-action='dbms financeiro fin_apagar edit'
                                 )
-                                    .thirteen.wide.column
+                                    .eleven.wide.column
                                         | {item.parceiro} -
-                                        | {item.descricao}
-                                    .three.wide.column.right.aligned.app-despesa {item.valor_bruto | money}
+                                        | {item.historico}
+
+                                    .two.wide.right.aligned.column
+                                        .ui.tooltip.app-apagar-tooltip-datas(
+                                            rv-data-dt_vencimento='item.dt_vencimento'
+                                            rv-data-dt_documento='item.dt_documento'
+                                            rv-data-dt_lancamento='item.dt_lancamento'
+                                        )
+                                            i.calendar.icon
+                                            | {item.dt_vencimento}
+
+                                    .three.wide.right.aligned.cursor.column.app-despesa
+                                        .ui.app-despesa-action
+                                            i.dollar.icon
+                                            | {item.valor_bruto | money}
+
+                                        // Popup do row
+                                        .ui.flowing.left.center.transition.hidden.popup
+                                            .ui.icon.menu
+                                                .item
+                                                    i.gamepad.icon
+                                                .item
+                                                    i.camera.icon
+                                                .item
+                                                    i.play.icon
+
                                 .row.app-grid-rows
-                                    .column.right.aligned.app-despesa-sum {row._stats.sum.valor_bruto | money}
+                                    .thirteen.wide.right.aligned.column Subtotal:
+                                    .three.wide.column.right.aligned.app-despesa-sum {row._stats.sum.valor_bruto | money}
 
 
         .extra.content
-            span.right.floated
+            span.right.floated.app-despesa-footer-sum
                 | Total à Pagar: R$ {dbms.financeiro.fin_apagar.data.group._stats.sum.valor_bruto | money}
 
-#form_apagar.ui.modal
+
+
+.ui.modal.app-apagar-form
     .header
         i.big.browser.icon
-        |  Lançamentos à Pagar
-    div.content
-        .description#form_area_apagar
+        .content Lançamentos à Pagar
+        .sub.header {dbms.financeiro.fin_apagar.formInfo}
+    div.content.dbms.financeiro.fin_apagar-form
+        .description
     div.actions
         div.ui.green.button.ok(
-            data-action='dbms financeiro fin_apagar save',
+            server='dbms financeiro fin_apagar save',
         ) Salvar Alterações
         div.ui.orange.button.cancel Cancelar

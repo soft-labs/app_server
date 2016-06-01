@@ -60,7 +60,7 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
             {value: 1, icon: 'icon tasks', label: 'Vencimento'},
             {value: 2, icon: 'icon tasks', label: 'Fornecedores'},
             {value: 3, icon: 'icon tasks', label: 'Situação'},
-            {value: 4, icon: 'icon tasks', label: 'Grupo'}
+            {value: 4, icon: 'icon tasks', label: 'Históricos'}
         ];
         
         $('.pivot.apagar')
@@ -75,6 +75,198 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
 
     },
 
+    /**
+     * Chamado após a listagem de dados
+     */
+    onAfterList: function(response, next){
+        this.pivotData();
+
+        $('.app-despesa-action')
+            .popup({
+                context: '.app',
+                position: 'bottom center',
+                inline: true,
+                on: 'click'
+            })
+        ;
+
+    },
+
+    /**
+     * Chamado após a execução de uma pesquisa
+     */
+    onAfterSearch: function(response, next){
+        this.pivotData();
+    },
+
+    /**
+     * Atualiza dados quando o periodo é mudado
+     */
+    onChangePeriodo: function(el, dt){
+        this.list();
+    },
+
+    /**
+     * Chamado antes de requisitar um form de edição no server
+     */
+     onBeforeEdit: function(el, settings){
+        this.formInfo = 'Edição de documento de despesa';
+
+        // Libera ou não para continuar
+        return true;
+    },
+
+    /**
+     * Chamado antes de requisitar um form de inserção no server
+     */
+     onBeforeCreate: function(el, settings){
+        this.formInfo = 'Geração de nova despesa';
+
+        // Libera ou não para continuar
+        return true;
+    },
+     
+    /**
+     * Chamado após receber qualquer das interfaces de formulário
+     */
+    onAfterForm: function(response, next){
+        $('.ui.modal.app-apagar-form')
+            .modal('show');
+    },
+
+
+    /**
+     * Executa o pivotamento de dados para os
+     * agrupamentos
+     */
+    pivotData: function(){
+        var p = $('.pivot.apagar').dropdown('get value');
+
+        switch (p){
+
+            case '2':
+                dbms.financeiro.fin_apagar.data.group = dbms.financeiro.fin_apagar.data.rows.groupBy({
+                    field: 'parceiro',
+                    order: {
+                        group: {
+                            by: '_stats.sum.valor_bruto',
+                            desc: true
+                        },
+                        sub: {
+                            by: 'valor_bruto',
+                            desc: true
+                        }
+                    }
+                });
+                break;
+
+            case '3':
+                dbms.financeiro.fin_apagar.data.group = dbms.financeiro.fin_apagar.data.rows.groupBy({
+                    field: 'lanc_status',
+                    order: {
+                        group: {
+                            by: '_stats.sum.valor_bruto',
+                            desc: true
+                        },
+                        sub: {
+                            by: 'valor_bruto',
+                            desc: true
+                        }
+                    }
+                });
+                break;
+
+            case '4':
+                dbms.financeiro.fin_apagar.data.group = dbms.financeiro.fin_apagar.data.rows.groupBy({
+                    field: 'historico',
+                    order: {
+                        group: {
+                            by: '_stats.sum.valor_bruto',
+                            desc: true
+                        },
+                        sub: {
+                            by: 'dt_vencimento',
+                            desc: false
+                        }
+                    }
+                });
+                break;
+
+            default:
+                dbms.financeiro.fin_apagar.data.group = dbms.financeiro.fin_apagar.data.rows.groupBy('dt_vencimento', false);
+                break;
+        }
+
+        // Ajusta os dados do gráfico de barras
+        dbms.financeiro.fin_apagar.setChartBarData();
+
+
+        dbms.financeiro.fin_apagar.setTooltips();
+
+
+    },
+
+    /**
+     * Alimenta o bar chart com dados
+     */
+    setChartBarData: function(){
+        app.charts.data.apagar.labels = [];
+        app.charts.data.apagar.datasets[0].data = [];
+
+        dbms.financeiro.fin_apagar.data.group.forEach(row => {
+            app.charts.data.apagar.labels.push(row.label);
+            app.charts.data.apagar.datasets[0].data.push(row._stats.sum.valor_bruto);
+        });
+
+        app.charts.reset('apagar');
+    },
+
+    /**
+     * Ajusta tooltips da listagem
+     */
+    setTooltips: function(){
+
+        $('.app-apagar-tooltip-datas').not('.tooltipstered')
+            .tooltipster({
+                position: 'left',
+                theme: 'tooltipster-shadow'
+            });
+
+        $('.app-apagar-tooltip-datas')
+            .each(function(){
+                $(this)
+                    .tooltipster('content', $(
+                        '<div class="ui relaxed divided list">' +
+                        '  <div class="item">' +
+                        '    <i class="calendar middle aligned icon"></i>' +
+                        '    <div class="content">' +
+                        '      <a class="header">Vencimento:</a>' +
+                        '      <div class="description">' + $(this).data('dt_vencimento') + '</div>' +
+                        '    </div>' +
+                        '  </div>' +
+                        '  <div class="item">' +
+                        '    <i class="calendar middle aligned icon"></i>' +
+                        '    <div class="content">' +
+                        '      <a class="header">' + $(this).data('dt_documento') + '</a>' +
+                        '      <div class="description">Data do Documento</div>' +
+                        '    </div>' +
+                        '  </div>' +
+                        '  <div class="item">' +
+                        '    <i class="calendar middle aligned icon"></i>' +
+                        '    <div class="content">' +
+                        '      <a class="header">' + $(this).data('dt_lancamento') + '</a>' +
+                        '      <div class="description">Data de Lançamento</div>' +
+                        '    </div>' +
+                        '  </div>' +
+                        '</div>')
+                    )
+            })
+        ;
+    }
+
+
+    //region :: Eventos
+
 
     //region :: Eventos - List
 
@@ -85,13 +277,6 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
 
         // Libera ou não para continuar
         return true;
-    },
-
-    /**
-     * Chamado após a listagem de dados
-     */
-    onAfterList: function(response, next){
-        this.pivotData();
     },
 
     /* */
@@ -109,28 +294,12 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
         return true;
     },
 
-     /**
-     * Chamado após a execução de uma pesquisa
-     */
-    onAfterSearch: function(response, next){
-        this.pivotData();
-    },
-
      /* */
     //endregion
 
 
     //region :: Eventos - Edit
 
-    /**
-     * Chamado antes de requisitar um form de edição no server
-     *
-    onBeforeEdit: function(el, settings){
-
-
-        // Libera ou não para continuar
-        return true;
-    },
 
      /**
      * Chamado após receber a interface de edição
@@ -145,15 +314,6 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
 
     //region :: Eventos - Create
 
-    /**
-     * Chamado antes de requisitar um form de inserção no server
-     *
-    onBeforeCreate: function(el, settings){
-
-
-        // Libera ou não para continuar
-        return true;
-    },
 
      /**
      * Chamado após receber a interface de inserção
@@ -175,13 +335,6 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
 
         // Libera ou não para continuar
         return true;
-    },
-
-    /**
-     * Chamado após receber qualquer das interfaces de formulário
-     *
-    onAfterForm: function(response, next){
-
     },
 
     /* */
@@ -277,61 +430,6 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
 
      /* */
     //endregion
-    
-    
-    //region :: Regras de Negócio
-
-    /**
-     * Executa o pivotamento de dados para os
-     * agrupamentos
-     */
-    pivotData: function(){
-        var p = $('.pivot.apagar').dropdown('get value');
-
-        switch (p){
-
-            case '2':
-                dbms.financeiro.fin_apagar.data.group = dbms.financeiro.fin_apagar.data.rows.pivot('parceiro', '_stats.sum.valor', true);
-                break;
-
-            case '3':
-                dbms.financeiro.fin_apagar.data.group = dbms.financeiro.fin_apagar.data.rows.pivot('lanc_status', '_stats.sum.valor', true);
-                break;
-
-            case '4':
-                dbms.financeiro.fin_apagar.data.group = dbms.financeiro.fin_apagar.data.rows.pivot('descricao', '_stats.sum.valor', true);
-                break;
-
-            default:
-                dbms.financeiro.fin_apagar.data.group = dbms.financeiro.fin_apagar.data.rows.pivot('dt_vencimento');
-                break;
-        }
-
-        // Ajusta os dados do gráfico de barras
-        dbms.financeiro.fin_apagar.setChartBarData();
-    },
-
-    /**
-     * Alimenta o bar chart com dados
-     */
-    setChartBarData: function(){
-        app.charts.data.apagar.labels = [];
-        app.charts.data.apagar.datasets[0].data = [];
-
-        dbms.financeiro.fin_apagar.data.group.forEach(row => {
-            app.charts.data.apagar.labels.push(row.label);
-            app.charts.data.apagar.datasets[0].data.push(row._stats.sum.valor_bruto);
-        });
-
-        app.charts.reset('apagar');
-    },
-
-    /**
-     * Atualiza dados quando o periodo é mudado
-     */
-    onChangePeriodo: function(el, dt){
-        this.list();
-    }
 
     //endregion
 

@@ -344,6 +344,22 @@ var CONSOLE_ON = true;
                 on: 'hover'
             })
         ;
+
+        $(ref).find('.pop-trigger').not('.binded')
+            .addClass('binded')
+            .each(function(){
+                $(this).popup({
+                    popup: $(this).data('popup')
+                })
+            })
+        ;
+        
+        $(ref).find('.tooltip').not('.binded')
+            .addClass('binded')
+            .tooltipster({
+                theme: 'tooltipster-light'
+            })
+        ;
     };
 
     /**
@@ -369,109 +385,6 @@ var CONSOLE_ON = true;
         ;
     };
 
-    //endregion
-
-
-    //region :: Binds
-
-    /**
-     * Executa um bind em uma área da interface, caso ela ainda 
-     * não tenha um bound.
-     * @param ref
-     * @param obj
-     * @param content
-     * @returns {*}
-     *
-    TShark.prototype.bind = function(ref, obj, content) {
-        var id = ref || 'body';
-
-        if (!this.bounded[id] || !this.bounded[id].bound) {
-            this.bounded[id] = {bound: false, html: $(id).html()};
-
-            // Atualiza layout
-            if (content) {
-                var container = (typeof content == 'string'
-                    ? id
-                    : $(id).find(content[0])
-                );
-                $(container)
-                    .empty()
-                    .append(typeof content == 'string'
-                        ? $(content)
-                        : content[1]
-                    );
-            }
-
-            // Novo bind
-            //this.bounded[id].bound = rivets.bind($(id), obj);
-
-            // Ajusta interface
-           // tshark.bindIntf();
-
-            // Retorna
-            return this.bounded[id];
-        } 
-    };
-
-    /**
-     * Refaz o bind de uma área, resetando o bind antigo caso 
-     * ele exista.
-     * @param ref
-     * @param obj
-     * @param content
-     *
-    TShark.prototype.rebind = function(ref, obj, content) {
-        var id = ref || 'body';
-
-        // Refresh se já existir
-        if (this.bounded[id]) {
-            this.bounded[id].bound.unbind();
-            this.bounded[id].bound = false;
-
-            $(id).html(this.bounded[id].html);
-        } 
-        
-        // Executa bind
-        return this.bind(ref, obj, content);
-    };
-
-    /**
-     * Restaura o template original da área de interface e refaz 
-     * o bind da área.
-     * @param ref
-     * @param obj
-     * @param replace
-     *
-    TShark.prototype.resetBind = function(ref, obj, replace){
-        var id = ref || 'body';
-
-        // Refresh se já existir
-        if (this.bounded[id]) {
-            $(id).html(this.bounded[id].html);
-        }
-
-        return this.rebind(ref, obj, replace);
-    };
-
-    /**
-     * Desfaz o bind de uma área, opcionalmente resetando template antigo.
-     * @param ref {string}
-     * @param reset {bool}
-     *
-    TShark.prototype.unbind = function(ref, reset) {
-        var id = ref || 'body';
-
-        // Desativa o bound
-        if (this.bounded[id]) {
-            this.bounded[id].bound.unbind();
-            this.bounded[id].bound = false;
-
-            if (reset) {
-                $(id).html(this.bounded[id].html);
-            }
-        }
-    };
-    /* */
     //endregion
 
 

@@ -307,6 +307,7 @@ if(!alertify.choose){
                 input = getMemo(ctrl, field, mod.path);
                 break;
 
+            case 'choose'    :
             case 'inpChoose'    :
                 input = getChoose(ctrl, field, mod.path);
                 break;

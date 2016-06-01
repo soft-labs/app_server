@@ -1,0 +1,18 @@
+//
+    Template default para: dbms.contabil.cont_historicos
+    Criado em Tue May 31 2016 14:32:48 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        th Cont Historicos
+        th Cont Determinação
+        th Ativo
+        th Historico
+        th Observações
+    tbody
+        tr(rv-each-row='dbms.contabil.[object Object].data.rows')
+            td {row.cont_historicos_key}
+            td {row.cont_determinacao_key}
+            td {row.ativo}
+            td {row.historico}
+            td {row.observacoes}

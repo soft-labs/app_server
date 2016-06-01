@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: fin_lancamentos.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:58:09 GMT-0300 (BRT)
+ * @since Tue May 31 2016 14:34:19 GMT-0300 (BRT)
  * @constructor
  */
 function FinLancamentos(){
@@ -21,28 +21,28 @@ function FinLancamentos(){
             label: 'competencia',
             fields: {
                 fin_lancamentos_key: {
-                    tipo: types.comp.key, label: 'Fin Lancamentos:'
+                    tipo: types.comp.key, label: 'Núm Interno:'
                 }, 
                 fin_lanc_origem_key: {
-                    tipo: types.comp.choose, label: 'Fin Lanc Origem:',
+                    tipo: types.comp.choose, label: 'Lançamento de Origem:',
                     data: { 
                         key: ['fin_lanc_origem_key'], 
-                        from: ['dbms', 'financeiro', 'fin_lancamentos'],
+                        from: ['dbms', 'financeiro', 'fin_lanc_origem'], 
                         template: '{fin_lanc_origem_key} - {fin_lanc_orige}', 
                         provider: '' 
                     } 
                 }, 
                 fin_lanc_destino_key: {
-                    tipo: types.comp.choose, label: 'Fin Lanc Destino:',
+                    tipo: types.comp.choose, label: 'Lançamento de Destino:',
                     data: { 
                         key: ['fin_lanc_destino_key'], 
-                        from: ['dbms', 'financeiro', 'fin_lancamentos'],
+                        from: ['dbms', 'financeiro', 'fin_lanc_destino'], 
                         template: '{fin_lanc_destino_key} - {fin_lanc_destin}', 
                         provider: '' 
                     } 
                 }, 
                 fin_lanc_tipos_key: {
-                    tipo: types.comp.choose, label: 'Fin Lanc Tipos:',
+                    tipo: types.comp.choose, label: 'Tipo de Lançamento:',
                     data: { 
                         key: ['fin_lanc_tipos_key'], 
                         from: ['dbms', 'financeiro', 'fin_lanc_tipos'], 
@@ -51,7 +51,7 @@ function FinLancamentos(){
                     } 
                 }, 
                 fin_lanc_status_key: {
-                    tipo: types.comp.choose, default: 1, label: 'Fin Lanc Status:',
+                    tipo: types.comp.choose, label: 'Situação:',
                     data: { 
                         key: ['fin_lanc_status_key'], 
                         from: ['dbms', 'financeiro', 'fin_lanc_status'], 
@@ -59,8 +59,17 @@ function FinLancamentos(){
                         provider: '' 
                     } 
                 }, 
+                cont_historicos_key: {
+                    tipo: types.comp.choose, label: 'Histórico:',
+                    data: { 
+                        key: ['cont_historicos_key'], 
+                        from: ['dbms', 'contabil', 'cont_historicos'], 
+                        template: '{cont_historicos_key} - {historico}', 
+                        provider: '' 
+                    } 
+                }, 
                 empresas_key: {
-                    tipo: types.comp.choose, label: 'Empresas:',
+                    tipo: types.comp.choose, label: 'Empresa:',
                     data: { 
                         key: ['empresas_key'], 
                         from: ['dbms', 'empresas', 'empresas'], 
@@ -69,7 +78,7 @@ function FinLancamentos(){
                     } 
                 }, 
                 fin_contas_key: {
-                    tipo: types.comp.choose, label: 'Fin Contas:',
+                    tipo: types.comp.choose, label: 'Conta Provisionada:',
                     data: { 
                         key: ['fin_contas_key'], 
                         from: ['dbms', 'financeiro', 'fin_contas'], 
@@ -78,7 +87,7 @@ function FinLancamentos(){
                     } 
                 }, 
                 parceiros_key: {
-                    tipo: types.comp.choose, label: 'Parceiros:',
+                    tipo: types.comp.choose, label: 'Parceiro:',
                     data: { 
                         key: ['parceiros_key'], 
                         from: ['dbms', 'parceiros', 'parceiros'], 
@@ -87,7 +96,7 @@ function FinLancamentos(){
                     } 
                 }, 
                 contratos_key: {
-                    tipo: types.comp.choose, label: 'Contratos:',
+                    tipo: types.comp.choose, label: 'Contrato Referente:',
                     data: { 
                         key: ['contratos_key'], 
                         from: ['dbms', 'contratos', 'contratos'], 
@@ -96,7 +105,7 @@ function FinLancamentos(){
                     } 
                 }, 
                 movimentacoes_key: {
-                    tipo: types.comp.choose, label: 'Movimentações:',
+                    tipo: types.comp.choose, label: 'Movimentação Origem:',
                     data: { 
                         key: ['movimentacoes_key'], 
                         from: ['dbms', 'movimentacoes', 'movimentacoes'], 
@@ -105,28 +114,28 @@ function FinLancamentos(){
                     } 
                 }, 
                 cancelado: {
-                    tipo: types.comp.int, default: 0, label: 'Cancelado:'
+                    tipo: types.comp.int, label: 'Cancelado:'
                 }, 
                 competencia: {
-                    tipo: types.comp.text, label: 'Competencia:'
+                    tipo: types.comp.text, label: 'Competência:'
                 }, 
                 dt_lancamento: {
-                    tipo: types.comp.timestamp, label: 'Dt Lancamento:'
+                    tipo: types.comp.datetime, default: 'NOW', label: 'Lançamento:'
                 }, 
                 dt_documento: {
-                    tipo: types.comp.date, default: 'NOW', label: 'Dt Documento:'
+                    tipo: types.comp.date, default: 'NOW', label: 'Data do Documento:'
                 }, 
                 dt_vencimento: {
-                    tipo: types.comp.date, default: 'NOW', label: 'Dt Vencimento:'
+                    tipo: types.comp.date, label: 'Vencimento:'
                 }, 
                 numero: {
-                    tipo: types.comp.text, label: 'Numero:'
+                    tipo: types.comp.text, label: 'Número:'
                 }, 
                 qtd_parcelas: {
-                    tipo: types.comp.int, default: 0, label: 'Qtd Parcelas:'
+                    tipo: types.comp.int, label: 'Parcelas:'
                 }, 
                 num_parcela: {
-                    tipo: types.comp.int, default: 0, label: 'Num Parcela:'
+                    tipo: types.comp.int, label: 'Núm. da Parcela:'
                 }, 
                 descricao: {
                     tipo: types.comp.text, label: 'Descrição:'
@@ -135,10 +144,10 @@ function FinLancamentos(){
                     tipo: types.comp.text, label: 'Complemento:'
                 }, 
                 valor_bruto: {
-                    tipo: types.comp.float, label: 'Valor Bruto:'
+                    tipo: types.comp.float, label: 'Valor:'
                 }, 
                 valor_desconto: {
-                    tipo: types.comp.float, label: 'Valor Desconto:'
+                    tipo: types.comp.float, label: 'Valor de Desconto:'
                 }, 
                 valor_baixa_previsto: {
                     tipo: types.comp.float, label: 'Valor Baixa Previsto:'
@@ -153,7 +162,7 @@ function FinLancamentos(){
                     tipo: types.comp.float, label: 'Multa:'
                 }, 
                 multa_em_moeda: {
-                    tipo: types.comp.int, label: 'Multa Em Mõeda:'
+                    tipo: types.comp.int, label: 'Multa Em Moeda:'
                 }, 
                 baixa_autorizada: {
                     tipo: types.comp.int, label: 'Baixa Autorizada:'
@@ -214,15 +223,15 @@ function FinLancamentos(){
             linhas: [
                 {titulo: "Informações de fin_lancamentos"},
                 {fin_lancamentos_key: 25, fin_lanc_origem_key: 25, fin_lanc_destino_key: 25, fin_lanc_tipos_key: 25}, 
-                {fin_lanc_status_key: 25, empresas_key: 25, fin_contas_key: 25, parceiros_key: 25}, 
-                {contratos_key: 25, movimentacoes_key: 25, cancelado: 25, competencia: 25}, 
-                {dt_lancamento: 25, dt_documento: 25, dt_vencimento: 25, numero: 25}, 
-                {qtd_parcelas: 25, num_parcela: 25, descricao: 25, complemento: 25}, 
-                {valor_bruto: 25, valor_desconto: 25, valor_baixa_previsto: 25, valor_baixa: 25}, 
-                {juros: 25, multa: 25, multa_em_moeda: 25, baixa_autorizada: 25}, 
-                {baixa_data: 25, baixa_bancaria: 25, baixa_multa: 25, baixa_juros: 25}, 
-                {baixa_desconto: 25, cancelamento_data: 25, cancelamento_motivo: 25, estorno_data: 25}, 
-                {estorno_motivo: 25, observacoes: 75}
+                {fin_lanc_status_key: 25, cont_historicos_key: 25, empresas_key: 25, fin_contas_key: 25}, 
+                {parceiros_key: 25, contratos_key: 25, movimentacoes_key: 25, cancelado: 25}, 
+                {competencia: 25, dt_lancamento: 25, dt_documento: 25, dt_vencimento: 25}, 
+                {numero: 25, qtd_parcelas: 25, num_parcela: 25, descricao: 25}, 
+                {complemento: 25, valor_bruto: 25, valor_desconto: 25, valor_baixa_previsto: 25}, 
+                {valor_baixa: 25, juros: 25, multa: 25, multa_em_moeda: 25}, 
+                {baixa_autorizada: 25, baixa_data: 25, baixa_bancaria: 25, baixa_multa: 25}, 
+                {baixa_juros: 25, baixa_desconto: 25, cancelamento_data: 25, cancelamento_motivo: 25}, 
+                {estorno_data: 25, estorno_motivo: 25, observacoes: 50}
             ],
             ctrls: {
                 competencia: {
@@ -264,34 +273,41 @@ function FinLancamentos(){
                     ]
                 },
                 3: {
+                    from: ['dbms', 'contabil', 'cont_historicos'],
+                    join: {source: 0, tipo: types.join.left, on: 'cont_historicos_key', where: ''},
+                    fields: [
+                        
+                    ]
+                },
+                4: {
                     from: ['dbms', 'empresas', 'empresas'],
                     join: {source: 0, tipo: types.join.left, on: 'empresas_key', where: ''},
                     fields: [
                         
                     ]
                 },
-                4: {
+                5: {
                     from: ['dbms', 'financeiro', 'fin_contas'],
                     join: {source: 0, tipo: types.join.left, on: 'fin_contas_key', where: ''},
                     fields: [
                         
                     ]
                 },
-                5: {
+                6: {
                     from: ['dbms', 'parceiros', 'parceiros'],
                     join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
                     fields: [
                         
                     ]
                 },
-                6: {
+                7: {
                     from: ['dbms', 'contratos', 'contratos'],
                     join: {source: 0, tipo: types.join.left, on: 'contratos_key', where: ''},
                     fields: [
                         
                     ]
                 },
-                7: {
+                8: {
                     from: ['dbms', 'movimentacoes', 'movimentacoes'],
                     join: {source: 0, tipo: types.join.left, on: 'movimentacoes_key', where: ''},
                     fields: [
@@ -306,16 +322,16 @@ function FinLancamentos(){
                 [0, 'competencia', 'asc']
             ],
             search: [
-                    {alias: 1, field: 'competencia',        param: types.search.like_full },
-                    {alias: 1, field: 'dt_documento',       param: types.search.maior_igual },
-                    {alias: 1, field: 'dt_vencimento',      param: types.search.maior_igual },
-                    {alias: 1, field: 'numero',             param: types.search.like_full },
-                    {alias: 1, field: 'descricao',          param: types.search.like_full },
-                    {alias: 1, field: 'complemento',        param: types.search.like_full },
-                    {alias: 1, field: 'baixa_data',         param: types.search.maior_igual },
-                    {alias: 1, field: 'baixa_bancaria',     param: types.search.maior_igual },
-                    {alias: 1, field: 'cancelamento_data',  param: types.search.maior_igual },
-                    {alias: 1, field: 'estorno_data',       param: types.search.maior_igual }
+                    {alias: 0, field: 'competencia',  param: types.search.like_full },
+                    {alias: 0, field: 'dt_documento',  param: types.search.maior_igual },
+                    {alias: 0, field: 'dt_vencimento',  param: types.search.maior_igual },
+                    {alias: 0, field: 'numero',  param: types.search.like_full },
+                    {alias: 0, field: 'descricao',  param: types.search.like_full },
+                    {alias: 0, field: 'complemento',  param: types.search.like_full },
+                    {alias: 0, field: 'baixa_data',  param: types.search.maior_igual },
+                    {alias: 0, field: 'baixa_bancaria',  param: types.search.maior_igual },
+                    {alias: 0, field: 'cancelamento_data',  param: types.search.maior_igual },
+                    {alias: 0, field: 'estorno_data',  param: types.search.maior_igual }
             ],
             limit: 250,
             showSQL: 0
@@ -340,6 +356,22 @@ function FinLancamentos(){
 
     //region :: Eventos
 
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     */
+    this.onSelect = function *(prov, ctx){
+        if (this.params['periodo']){
+            prov.where.push(
+                ["AND", 0, "dt_vencimento", ">=", "'" + this.params['periodo'].de + "'"]
+            );
+            prov.where.push(
+                ["AND", 0, "dt_vencimento", "<=", "'" + this.params['periodo'].ate + "'"]
+            );
+            prov['showSQL'] = 0;
+        }
+    };
 
     //region :: onGet
 
@@ -412,14 +444,6 @@ function FinLancamentos(){
 
     //region :: onSelect
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-     this.onSelect = function *(prov, ctx){
-
-    };
 
      /* */
     //endregion
