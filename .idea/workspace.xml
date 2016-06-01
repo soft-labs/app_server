@@ -2,63 +2,51 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9af883f-d607-471e-9364-120eb2596f34" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/comments/comments/cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/comments/comments/comments.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/comments/comments/list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/comments/comments_albuns_rel/cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/comments/comments_albuns_rel/comments_albuns_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/comments/comments_albuns_rel/list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/comments/comments_dreams_rel/cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/comments/comments_dreams_rel/comments_dreams_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/comments/comments_dreams_rel/list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/denuncy/denuncy/cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/denuncy/denuncy/denuncy.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/denuncy/denuncy/list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/denuncy/denuncy_albuns_rel/cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/denuncy/denuncy_albuns_rel/denuncy_albuns_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/denuncy/denuncy_albuns_rel/list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/denuncy/denuncy_dreams_rel/cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/denuncy/denuncy_dreams_rel/denuncy_dreams_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/denuncy/denuncy_dreams_rel/list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/dreams/dream_albuns/cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/dreams/dream_albuns/dream_albuns.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/dreams/dream_albuns/list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/dreams/dreams/cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/dreams/dreams/dreams.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/dreams/dreams/list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/user_contas/cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/user_contas/list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/user_contas/user_contas.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/user_devices/cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/user_devices/list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/user_devices/user_devices.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/users/cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/users/list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/users/users.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/users_dreams_rel/cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/users_dreams_rel/list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/users_dreams_rel/users_dreams_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/users_like_albuns_rel/cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/users_like_albuns_rel/list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/users_like_albuns_rel/users_like_albuns_rel.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/users_like_dreams_rel/cards.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/users_like_dreams_rel/list.jade" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/business_objects/dreams/users/users_like_dreams_rel/users_like_dreams_rel.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business_objects/dbms/_model/Softlabs.mwb" afterPath="$PROJECT_DIR$/business_objects/dbms/_model/Softlabs.mwb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/demo/map.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/images/browser-chrome.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/images/browser-firefox.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/images/browser-ie.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/images/browser-opera.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/images/browser-safari.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/images/favicon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/images/icons/icomoon.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/images/icons/icomoon.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/images/icons/icomoon.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/images/icons/icomoond41d.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/images/large-background.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/images/pattern-navy.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/images/social.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/images/spiderman.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/bower.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/css/themes/tooltipster-light.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/css/themes/tooltipster-noir.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/css/themes/tooltipster-punk.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/css/themes/tooltipster-shadow.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/css/tooltipster.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/demo/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/demo/reset.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/demo/style.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/css/prettify.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/css/reset.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/css/style.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/images/icons/icomoon.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/images/tooltipster.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/js/jquery.jgfeed.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/js/lang-css.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/js/prettify.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/doc/js/scripts.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/js/jquery.tooltipster.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/js/jquery.tooltipster.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_common/js/3rd/tooltipster/tooltipster.jquery.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_common/views/header.jade" afterPath="$PROJECT_DIR$/_common/views/header.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/components/periodo.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/components/periodo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/css/app.css" afterPath="$PROJECT_DIR$/apps/addmark/_common/css/app.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/financeiro/fin_apagar.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/financeiro/fin_apagar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade" afterPath="$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_apagar/fin_apagar.js" afterPath="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_apagar/fin_apagar.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/fin_lancamentos.js" afterPath="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/fin_lancamentos.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tshark/client/v3/_dataset.js" afterPath="$PROJECT_DIR$/tshark/client/v3/_dataset.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tshark/client/v3/_extends.js" afterPath="$PROJECT_DIR$/tshark/client/v3/_extends.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tshark/client/v3/tshark.js" afterPath="$PROJECT_DIR$/tshark/client/v3/tshark.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tshark/client/v3/_forms.js" afterPath="$PROJECT_DIR$/tshark/client/v3/_forms.js" />
     </list>
-    <ignored mask="workspace.xml" />
+    <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -105,11 +93,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_dataset.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="_dataset.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tshark/client/v3/_dataset.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="450">
-              <caret line="101" column="21" selection-start-line="101" selection-start-column="21" selection-end-line="101" selection-end-column="21" />
+              <caret line="101" column="61" selection-start-line="101" selection-start-column="61" selection-end-line="101" selection-end-column="61" />
               <folding>
                 <element signature="n#!!block;n#Dataset#0" expanded="true" />
               </folding>
@@ -142,9 +130,6 @@
               <folding>
                 <element signature="e#239#271#0" expanded="true" />
                 <element signature="e#1607#1628#0" expanded="true" />
-                <marker date="1464808680000" expanded="true" signature="790:1582" ph="{...}" />
-                <marker date="1464808680000" expanded="true" signature="834:1575" ph="{...}" />
-                <marker date="1464808680000" expanded="true" signature="1204:1413" ph="[...]" />
               </folding>
             </state>
           </provider>
@@ -153,8 +138,31 @@
       <file leaf-file-name="fin_lancamentos.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/fin_lancamentos.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1833">
-              <caret line="164" column="61" selection-start-line="164" selection-start-column="61" selection-end-line="164" selection-end-column="61" />
+            <state relative-caret-position="108">
+              <caret line="111" column="74" selection-start-line="111" selection-start-column="74" selection-end-line="111" selection-end-column="74" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_forms.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tshark/client/v3/_forms.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="317">
+              <caret line="309" column="19" selection-start-line="309" selection-start-column="19" selection-end-line="309" selection-end-column="19" />
+              <folding>
+                <element signature="e#21928#22977#0" expanded="true" />
+                <element signature="e#23123#24865#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="types.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tshark/types.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="61" column="3" selection-start-line="61" selection-start-column="3" selection-end-line="61" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -214,7 +222,6 @@
         <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/cadastros.jade" />
         <option value="$PROJECT_DIR$/tshark/client/v3/_rivets.js" />
         <option value="$PROJECT_DIR$/business_objects/dbms/empresas/emp_clientes/emp_clientes.js" />
-        <option value="$PROJECT_DIR$/tshark/client/v3/_forms.js" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes.jade" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes/emp_clientes.js" />
         <option value="$PROJECT_DIR$/business_objects/sys/dev/ide/ide.js" />
@@ -229,11 +236,12 @@
         <option value="$PROJECT_DIR$/_common/js/3rd/opentip/opentip.css" />
         <option value="$PROJECT_DIR$/tshark/client/v3/tshark.js" />
         <option value="$PROJECT_DIR$/_common/views/header.jade" />
-        <option value="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/fin_lancamentos.js" />
         <option value="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_apagar/fin_apagar.js" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/financeiro/fin_apagar.js" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade" />
         <option value="$PROJECT_DIR$/tshark/client/v3/_dataset.js" />
+        <option value="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/fin_lancamentos.js" />
+        <option value="$PROJECT_DIR$/tshark/client/v3/_forms.js" />
       </list>
     </option>
   </component>
@@ -540,6 +548,42 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="tshark">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app_server">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="tshark">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="client">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="v3">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app_server">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="business_objects">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
@@ -593,7 +637,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="4.4.1" />
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
-    <property name="last_opened_file_path" value="W:/_libs/_tshark/buffers/sql/sapdi.php" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea/workspace.xml" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="141" />
@@ -749,7 +793,7 @@
       <workItem from="1464544368193" duration="1184000" />
       <workItem from="1464607546631" duration="27679000" />
       <workItem from="1464696691083" duration="20897000" />
-      <workItem from="1464782350119" duration="17463000" />
+      <workItem from="1464782350119" duration="17996000" />
     </task>
     <task id="LOCAL-00001" summary="Start">
       <created>1460666716795</created>
@@ -975,11 +1019,18 @@
       <option name="project" value="LOCAL" />
       <updated>1464783063121</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Ajuste em dataset.load">
+      <created>1464810970463</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1464810970463</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="641061000" />
+    <option name="totallyTimeSpent" value="641594000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1440" height="873" extended-state="6" />
@@ -988,7 +1039,7 @@
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26286116" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48313254" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48271447" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32738853" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24947146" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3263434" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1029,7 +1080,8 @@
     <MESSAGE value="Ajuste da definição de valor de action na APIs Server;&#10;Implementação de sql_fields em providers;&#10;Avanços no contas a pagar" />
     <MESSAGE value="Reduzido o nível de pastas em modulos&#10;Implementado o componente periodo em addmark&#10;Implementado o envio de periodo em beforelist global em addmark&#10;" />
     <MESSAGE value="Ajustes na modelagem de contabil" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajustes na modelagem de contabil" />
+    <MESSAGE value="Ajuste em dataset.load" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajuste em dataset.load" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1058,13 +1110,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tshark/sql/_sql.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="233" column="4" selection-start-line="233" selection-start-column="4" selection-end-line="233" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/business_objects/dbms/parceiros/parc_fisicos/parc_fisicos.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-87">
@@ -1107,30 +1152,6 @@
             <element signature="e#2960#3071#0" expanded="false" />
             <element signature="e#3121#3199#0" expanded="false" />
             <element signature="e#3251#3329#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tshark/client/v3/_forms.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="911" column="26" selection-start-line="911" selection-start-column="26" selection-end-line="911" selection-end-column="26" />
-          <folding>
-            <element signature="e#2338#4944#0" expanded="false" />
-            <element signature="e#2787#4665#0" expanded="false" />
-            <element signature="e#6915#9618#0" expanded="false" />
-            <element signature="e#13830#14322#0" expanded="false" />
-            <element signature="e#14484#15128#0" expanded="false" />
-            <element signature="e#15292#15934#0" expanded="false" />
-            <element signature="e#16098#16850#0" expanded="false" />
-            <element signature="e#17016#17767#0" expanded="false" />
-            <element signature="e#17930#18587#0" expanded="false" />
-            <element signature="e#18750#19403#0" expanded="false" />
-            <element signature="e#19570#20138#0" expanded="false" />
-            <element signature="e#20308#21014#0" expanded="false" />
-            <element signature="e#21189#21738#0" expanded="false" />
-            <element signature="e#21897#22946#0" expanded="false" />
-            <element signature="e#24598#24813#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1408,24 +1429,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/fin_lancamentos.js">
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1833">
-          <caret line="164" column="61" selection-start-line="164" selection-start-column="61" selection-end-line="164" selection-end-column="61" />
+        <state relative-caret-position="558">
+          <caret line="117" column="20" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/business_objects/dbms/financeiro/fin_apagar/fin_apagar.js">
+    <entry file="file://$PROJECT_DIR$/tshark/client/v3/_dataset.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="52" column="34" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+        <state relative-caret-position="450">
+          <caret line="101" column="61" selection-start-line="101" selection-start-column="61" selection-end-line="101" selection-end-column="61" />
           <folding>
-            <element signature="e#239#271#0" expanded="true" />
-            <element signature="e#1607#1628#0" expanded="true" />
-            <marker date="1464808680000" expanded="true" signature="790:1582" ph="{...}" />
-            <marker date="1464808680000" expanded="true" signature="834:1575" ph="{...}" />
-            <marker date="1464808680000" expanded="true" signature="1204:1413" ph="[...]" />
+            <element signature="n#!!block;n#Dataset#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1445,21 +1462,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade">
+    <entry file="file://$PROJECT_DIR$/business_objects/dbms/financeiro/fin_apagar/fin_apagar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="117" column="20" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="20" />
+        <state relative-caret-position="735">
+          <caret line="52" column="34" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+          <folding>
+            <element signature="e#239#271#0" expanded="true" />
+            <element signature="e#1607#1628#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business_objects/dbms/financeiro/fin_lancamentos/fin_lancamentos.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="111" column="74" selection-start-line="111" selection-start-column="74" selection-end-line="111" selection-end-column="74" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tshark/client/v3/_dataset.js">
+    <entry file="file://$PROJECT_DIR$/tshark/client/v3/_forms.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="101" column="21" selection-start-line="101" selection-start-column="21" selection-end-line="101" selection-end-column="21" />
+        <state relative-caret-position="317">
+          <caret line="309" column="19" selection-start-line="309" selection-start-column="19" selection-end-line="309" selection-end-column="19" />
           <folding>
-            <element signature="n#!!block;n#Dataset#0" expanded="true" />
+            <element signature="e#21928#22977#0" expanded="true" />
+            <element signature="e#23123#24865#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tshark/types.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="61" column="3" selection-start-line="61" selection-start-column="3" selection-end-line="61" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>

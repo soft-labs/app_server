@@ -120,10 +120,10 @@ function FinLancamentos(){
                     tipo: types.comp.text, label: 'Competência:'
                 }, 
                 dt_lancamento: {
-                    tipo: types.comp.datetime, label: 'Lançamento:'
+                    tipo: types.comp.datetime, default: 'NOW', label: 'Lançamento:'
                 }, 
                 dt_documento: {
-                    tipo: types.comp.date, label: 'Data do Documento:'
+                    tipo: types.comp.date, default: 'NOW', label: 'Data do Documento:'
                 }, 
                 dt_vencimento: {
                     tipo: types.comp.date, label: 'Vencimento:'
