@@ -93,7 +93,7 @@ function ParcEndEletronicosRel(){
                     fields: [
                         
                     ]
-                }/*,
+                }/*, alessandro
                 2: {
                     from: ['dbms', 'enderecos', 'end_eletronicos'],
                     join: {source: 0, tipo: types.join.left, on: 'end_eletronicos_key', where: ''},
