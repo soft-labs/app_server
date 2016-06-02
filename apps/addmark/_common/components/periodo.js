@@ -2,10 +2,11 @@
  * Implementa período para o aplicativo
  */
 app.periodo = {
-    de      : moment().subtract(7, 'days').format('DD/MM/YYYY'),
-    ate     : moment().add(7, 'days').format('DD/MM/YYYY'),
-    dt_de   : moment().subtract(7, 'days'),
-    dt_ate  : moment().add(7, 'days'),
+    de      : moment().subtract(app.config.periodo.de, 'days').format('DD/MM/YYYY'),
+    ate     : moment().add(app.config.periodo.ate, 'days').format('DD/MM/YYYY'),
+    
+    dt_de   : moment().subtract(app.config.periodo.de, 'days'),
+    dt_ate  : moment().add(app.config.periodo.ate, 'days'),
 
     changeDe: function(){
         app.periodo.change(this, 'de');

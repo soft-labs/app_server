@@ -4,21 +4,17 @@
 
 table.ui.compact.striped.selectable.celled.table.choose-rows
     thead
-        th Fin Bancos
-        th Ativo
         th Codigo
         th Banco
         th Url
-        th Observações
     tbody
         tr.cursor(
             rv-each-row='choose.data.rows'
             rv-on-click='choose.select'
             rv-data-key='row.fin_bancos_key'
         )
-            td {row.fin_bancos_key}
-            td {row.ativo}
             td {row.codigo}
-            td {row.banco}
+            td
+                img.ui.avatar.image(rv-src="row.codigo | replace '_imgs/_logos/bancos/%s.png'")
+                | {row.banco}
             td {row.url}
-            td {row.observacoes}

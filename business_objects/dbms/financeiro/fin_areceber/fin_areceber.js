@@ -1,5 +1,5 @@
 /**
- * BusinessObject :: FinLancamentos à Receber
+ * BusinessObject :: FinLancamentos à Pagar
  *  Implementação de objeto de negócio: fin_lancamentos.
  *
  * Engine de aplicações - TShark.
@@ -11,7 +11,10 @@ function FinAReceber(){
     //region :: Definições do Objeto
 
     // Id
-    this.id = 'fin_apagar';
+    this.id = 'fin_areceber';
+
+    // Extends
+    this.extends = ['dbms', 'financeiro', 'fin_lancamentos'];
 
     // Map
     this.source = {
@@ -21,8 +24,22 @@ function FinAReceber(){
             label: 'competencia',
             fields: {
                 fin_lanc_tipos_key: {
-                    tipo: types.comp.int, default: 2, label: 'Tipo:'
-                }
+                    tipo: types.comp.int, default: 1, label: 'Tipo:'
+                },
+                cont_historicos_key: {
+                    data: {
+                        provider: 'receitas'
+                    }
+                },
+                parceiros_key: {
+                    tipo: types.comp.choose, label: 'Cliente:',
+                    data: {
+                        key: ['parceiros_key'],
+                        from: ['dbms', 'empresas', 'emp_clientes'],
+                        template: '{parceiro}',
+                        provider: ''
+                    }
+                },
             }
         }
     };
@@ -47,12 +64,17 @@ function FinAReceber(){
                 ]
             },
             linhas: [
-                {titulo: "Novo Recebimento"},
-                {space: 25, dt_documento: 22, dt_vencimento: 22, dt_lancamento: 22, numero: 20},
-                {parceiros_key: 75, valor_bruto: 25}
+                {titulo: "Informe os dados do lançamento:"},
+                {cont_historicos_key: 60, valor_bruto: 20, dt_vencimento: 20},
+                {numero: 20, fin_contas_key: 60, dt_documento: 20},
+                {parceiros_key: 60, complemento: 40},
             ],
             ctrls: {
-
+                valor_bruto     : { label: "Valor à pagar: "},
+                numero          : { label: "Número do Documento: "},
+                fin_lanc_tipos_key : {
+                    default: 1
+                }
             }
         }
 
@@ -68,7 +90,7 @@ function FinAReceber(){
         default: {
             sources: {
                 0: {
-                    from: ['dbms', 'financeiro', 'fin_lancamentos'],
+                    from: ['dbms', 'financeiro', 'fin_areceber'],
                     fields: [
 
                     ]
@@ -88,44 +110,58 @@ function FinAReceber(){
                     ]
                 },
                 3: {
+                    from: ['dbms', 'contabil', 'cont_historicos'],
+                    join: {source: 0, tipo: types.join.left, on: 'cont_historicos_key', where: ''},
+                    fields: [
+
+                    ]
+                },
+                4: {
                     from: ['dbms', 'empresas', 'empresas'],
                     join: {source: 0, tipo: types.join.left, on: 'empresas_key', where: ''},
                     fields: [
 
                     ]
                 },
-                4: {
+                5: {
                     from: ['dbms', 'financeiro', 'fin_contas'],
                     join: {source: 0, tipo: types.join.left, on: 'fin_contas_key', where: ''},
                     fields: [
 
                     ]
                 },
-                5: {
+                6: {
                     from: ['dbms', 'parceiros', 'parceiros'],
                     join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
                     fields: [
 
                     ]
                 },
-                6: {
+                7: {
                     from: ['dbms', 'contratos', 'contratos'],
                     join: {source: 0, tipo: types.join.left, on: 'contratos_key', where: ''},
                     fields: [
 
                     ]
                 },
-                7: {
+                8: {
                     from: ['dbms', 'movimentacoes', 'movimentacoes'],
                     join: {source: 0, tipo: types.join.left, on: 'movimentacoes_key', where: ''},
                     fields: [
 
                     ]
-                }
+                },
+                9: {
+                    from: ['dbms', 'financeiro', 'fin_bancos'],
+                    join: {source: 5, tipo: types.join.left, on: 'fin_bancos_key', where: ''},
+                    fields: [
+
+                    ]
+                },
             },
             where: [
-                ['AND', 0, 'fin_lanc_tipos_key', '=', '2'],
-                ['AND', 0, 'fin_lancamentos_key', types.where.check],
+                ['AND', 0, 'fin_lanc_tipos_key', "=", "2"],
+                ['AND', 0, 'fin_lancamentos_key', types.where.check]
             ],
             order: [
                 [0, 'competencia', 'asc']
@@ -135,7 +171,7 @@ function FinAReceber(){
                 {alias: 1, field: 'dt_documento',       param: types.search.maior_igual },
                 {alias: 1, field: 'dt_vencimento',      param: types.search.maior_igual },
                 {alias: 1, field: 'numero',             param: types.search.like_full },
-                {alias: 1, field: 'descricao',          param: types.search.like_full },
+                {alias: 3, field: 'historico',          param: types.search.like_full },
                 {alias: 1, field: 'complemento',        param: types.search.like_full },
                 {alias: 1, field: 'baixa_data',         param: types.search.maior_igual },
                 {alias: 1, field: 'baixa_bancaria',     param: types.search.maior_igual },
@@ -165,6 +201,14 @@ function FinAReceber(){
 
     //region :: Eventos
 
+    /**
+     * Evento chamado antes de rodar um select
+     * @param prov Provider de dados
+     * @param ctx Contexto de chamada
+     */
+    this.onSelect = function *(prov, ctx){
+        yield this.parent.onSelect(prov, ctx);
+    };
 
     //region :: onGet
 
@@ -173,61 +217,61 @@ function FinAReceber(){
      * @param ret Objeto de retorno
      * @param ctx Contexto de chamada
      *
-    this.onGet = function *(ret, ctx){
+     this.onGet = function *(ret, ctx){
 
     };
 
-    /**
+     /**
      * Evento chamado ao final de qualquer operação GET
      * @param ret Objeto de retorno
      *
-    this.onAfterGet = function *(ret, ctx){
-
-    };
-
-    /* */
-    //endregion
-
-    
-    //region :: onList
-    
-    /**
-     * Evento chamado na operação GET :: LIST
-     * @param ret Objeto de retorno
-     * @param ctx Contexto de chamada
-     *
-    this.onList = function *(ret, ctx){
-
-    };
-
-    /**
-     * Evento chamado ao final da operação GET :: LIST
-     * @param ret Objeto de retorno
-     *
-    this.onAfterList = function *(ret, ctx){
+     this.onAfterGet = function *(ret, ctx){
 
     };
 
      /* */
     //endregion
 
-    
+
+    //region :: onList
+
+    /**
+     * Evento chamado na operação GET :: LIST
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     *
+     this.onList = function *(ret, ctx){
+
+    };
+
+     /**
+     * Evento chamado ao final da operação GET :: LIST
+     * @param ret Objeto de retorno
+     *
+     this.onAfterList = function *(ret, ctx){
+
+    };
+
+     /* */
+    //endregion
+
+
     //region :: onSearch
-    
+
     /**
      * Evento chamado na operação GET :: SEARCH
      * @param ret Objeto de retorno
      * @param ctx Contexto de chamada
      *
-    this.onSearch = function *(ret, ctx){
+     this.onSearch = function *(ret, ctx){
 
     };
 
-    /**
+     /**
      * Evento chamado ao final da operação GET :: SEARCH
      * @param ret Objeto de retorno
      *
-    this.onAfterSearch = function *(ret, ctx){
+     this.onAfterSearch = function *(ret, ctx){
 
     };
 
@@ -237,16 +281,8 @@ function FinAReceber(){
 
     //region :: onSelect
 
-    /**
-     * Evento chamado antes de rodar um select
-     * @param prov Provider de dados
-     * @param ctx Contexto de chamada
-     *
-     this.onSelect = function *(prov, ctx){
 
-    };
-
-     /* */
+    /* */
     //endregion
 
 
@@ -272,7 +308,7 @@ function FinAReceber(){
      * @param ret Objeto de retorno
      * @param ctx Contexto de chamada
      *
-    this.onGetForm = function *(form, ctx){
+     this.onGetForm = function *(form, ctx){
 
     };
 
@@ -280,7 +316,7 @@ function FinAReceber(){
      * Evento chamado na recuperação de dados de um formulário
      * @param ret Objeto de retorno
      *
-    this.onGetFormData = function *(ret, get){
+     this.onGetFormData = function *(ret, get){
 
     };
 
@@ -289,21 +325,21 @@ function FinAReceber(){
 
 
     //region :: onEdit
-     
+
     /**
      * Evento chamado na operação GET :: EDIT
      * @param ret Objeto de retorno
      * @param ctx Contexto de chamada
      *
-    this.onEdit = function *(ret, ctx){
+     this.onEdit = function *(ret, ctx){
 
     };
 
-    /**
+     /**
      * Evento chamado ao final da operação GET :: EDIT
      * @param ret Objeto de retorno
      *
-    this.onAfterEdit = function *(ret, ctx){
+     this.onAfterEdit = function *(ret, ctx){
 
     };
 
@@ -318,15 +354,15 @@ function FinAReceber(){
      * @param ret Objeto de retorno
      * @param ctx Contexto de chamada
      *
-    this.onCreate = function *(ret, ctx){
+     this.onCreate = function *(ret, ctx){
 
     };
 
-    /**
+     /**
      * Evento chamado ao final da operação GET :: CREATE
      * @param ret Objeto de retorno
      *
-    this.onAfterCreate = function *(ret, ctx){
+     this.onAfterCreate = function *(ret, ctx){
 
     };
 
@@ -335,21 +371,21 @@ function FinAReceber(){
 
 
     //region :: onInsert
-     
+
     /**
      * Evento chamado na operação POST :: Insert
      * @param prov Provider de dados
      * @param ctx Contexto de chamada
      *
-    this.onInsert = function *(prov, ctx){
+     this.onInsert = function *(prov, ctx){
 
     };
 
-    /**
+     /**
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      *
-    this.onAfterInsert = function *(ret, ctx){
+     this.onAfterInsert = function *(ret, ctx){
 
     };
 
@@ -364,15 +400,15 @@ function FinAReceber(){
      * @param prov Provider de dados
      * @param ctx Contexto de chamada
      *
-    this.onUpdate = function *(prov, ctx){
+     this.onUpdate = function *(prov, ctx){
 
     };
 
-    /**
+     /**
      * Evento chamado ao final da operação PUT :: Update
      * @param ret Objeto de retorno
      *
-    this.onAfterUpdate = function *(ret, ctx){
+     this.onAfterUpdate = function *(ret, ctx){
 
     };
 
@@ -387,15 +423,15 @@ function FinAReceber(){
      * @param prov Provider de dados
      * @param ctx Contexto de chamada
      *
-    this.onDelete = function *(prov, ctx){
+     this.onDelete = function *(prov, ctx){
 
     };
 
-    /**
+     /**
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
      *
-    this.onAfterDelete = function *(ret, ctx){
+     this.onAfterDelete = function *(ret, ctx){
 
     };
 
@@ -410,16 +446,11 @@ function FinAReceber(){
     //region :: Regras de Negócio
 
     //endregion
-    
+
 }
 
 // Types
 const types = require('../../../../tshark/types');
 
-// Extende FinLancamentos
-var extend   = require('extend')
-    , parent = require('../fin_lancamentos/fin_lancamentos.js')
-;
-
 // Exporta
-module.exports = extend(true, parent, FinAReceber);
+module.exports = FinAReceber;

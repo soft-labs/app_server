@@ -4,17 +4,11 @@
 
 table.ui.compact.striped.selectable.celled.table.choose-rows
     thead
-        th Emp Fornecedores
-        th Parceiros
-        th Ativo
-        th Observações
+        th Fornecedores Cadastrados
     tbody
         tr.cursor(
             rv-each-row='choose.data.rows'
             rv-on-click='choose.select'
             rv-data-key='row.emp_fornecedores_key'
         )
-            td {row.emp_fornecedores_key}
-            td {row.parceiros_key}
-            td {row.ativo}
-            td {row.observacoes}
+            td {row.parceiro}

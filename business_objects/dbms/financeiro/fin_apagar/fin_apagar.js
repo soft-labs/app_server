@@ -35,7 +35,7 @@ function FinAPagar(){
                     tipo: types.comp.choose, label: 'Fornecedor:',
                     data: {
                         key: ['parceiros_key'],
-                        from: ['dbms', 'empresas', 'emp_clientes'],
+                        from: ['dbms', 'empresas', 'emp_fornecedores'],
                         template: '{parceiro}',
                         provider: ''
                     }

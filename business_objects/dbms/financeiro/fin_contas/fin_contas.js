@@ -24,11 +24,11 @@ function FinContas(){
                     tipo: types.comp.key, label: 'Fin Contas:'
                 }, 
                 fin_contas_tipos_key: {
-                    tipo: types.comp.choose, label: 'Fin Contas Tipos:',
+                    tipo: types.comp.choose, label: 'Tipo da Conta:',
                     data: { 
                         key: ['fin_contas_tipos_key'], 
                         from: ['dbms', 'financeiro', 'fin_contas_tipos'], 
-                        template: '{fin_contas_tipos_key} - {fin_contas_tipo}', 
+                        template: '{tipo_conta}',
                         provider: '' 
                     } 
                 }, 
@@ -37,7 +37,7 @@ function FinContas(){
                     data: { 
                         key: ['fin_bancos_key'], 
                         from: ['dbms', 'financeiro', 'fin_bancos'], 
-                        template: '{fin_bancos_key} - {fin_banco}', 
+                        template: '{banco}',
                         provider: '' 
                     } 
                 }, 
@@ -107,17 +107,18 @@ function FinContas(){
                 ]
             },
             linhas: [
-                {titulo: "Informações de fin_contas"},
-                {fin_contas_key: 25, fin_contas_tipos_key: 25, fin_bancos_key: 25, cont_plano_contas_key: 25}, 
+                //{titulo: "Informações de fin_contas"},
+                {fin_bancos_key: 30, conta: 20, agencia: 20, fin_contas_tipos_key: 30},
+                {gerente: 60, telefone: 40},
+                {observacoes: 100},
+
+                /*{fin_contas_key: 25, fin_contas_tipos_key: 25, fin_bancos_key: 25, cont_plano_contas_key: 25},
                 {ativo: 25, dia_corte: 25, dia_vencimento: 25, multa_cartao: 25}, 
                 {juros_cartao: 25, descricao: 25, conta: 25, agencia: 25}, 
-                {gerente: 25, telefone: 25, observacoes: 50}
+                {gerente: 25, telefone: 25, observacoes: 50}*/
             ],
             ctrls: {
-                conta: {
-                    extra_right: { class: '', tag: '' },
-                    extra_left:  { class: '', tag: '' }
-                }
+
             }
         }
 

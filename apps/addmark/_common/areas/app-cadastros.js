@@ -40,7 +40,7 @@ app.areas.add('app-cadastros', {
                     icon: 'home icon',
                     title: 'Home',
                     description: 'Cockpit financeiro',
-                    client: 'sys app menu click',
+                    client: 'app areas show',
                     area: "app-home"
                 },
                 {
@@ -90,7 +90,7 @@ app.areas.add('app-cadastros', {
                     icon: 'home icon',
                     title: 'Home',
                     description: 'Cockpit financeiro',
-                    client: 'sys app menu click',
+                    client: 'app areas show',
                     area: "app-home"
                 },
                 {
@@ -126,6 +126,43 @@ app.areas.add('app-cadastros', {
         }
     },
 
+
+    /**
+     * Subarea Contas
+     */
+    'app-contas':{
+
+        /**
+         * Chamado sempre que a área é exibida
+         */
+        onShow: function (area, subarea, data) {
+            app.actionbar.reset([
+                {
+                    icon: 'home icon',
+                    title: 'Home',
+                    description: 'Cockpit financeiro',
+                    client: 'app areas show',
+                    area: "app-home"
+                },
+                {
+                    icon: 'payment icon',
+                    title: 'Contas Bancárias',
+                    description: 'Gestão de Contas Financeiras',
+                    client:'app areas show',
+                    area:'app-cadastros',
+                    subarea:'app-contas'
+                },
+                {
+                    icon: 'add icon',
+                    title: 'Cadastrar Conta',
+                    description: 'Cadastrar nova conta',
+                    server: 'dbms financeiro fin_contas create',
+                    active: 1
+                }
+            ]);
+        },
+    },
+    
     // endregion
 
 });

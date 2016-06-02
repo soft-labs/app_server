@@ -70,9 +70,10 @@
                                 .row.cursor.app-grid-rows(
                                     rv-each-item='row.values'
                                     rv-row-key='item.fin_lancamentos_key'
-                                    data-action='dbms financeiro fin_apagar edit'
+
                                 )
                                     .eleven.wide.column
+                                        i.edit.icon(server='dbms financeiro fin_apagar edit', rv-row-key='item.fin_lancamentos_key')
                                         | {item.parceiro} -
                                         | {item.historico}
 
@@ -89,6 +90,7 @@
                                         .ui.app-despesa-action
                                             i.dollar.icon
                                             | {item.valor_bruto | money}
+                                            //i.settings.icon
 
                                         // Popup do row
                                         .ui.flowing.left.center.transition.hidden.popup

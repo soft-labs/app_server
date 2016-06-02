@@ -46,6 +46,13 @@ app = $.extend(true, app, {
         help    : '',
         icon    : 'circular settings icon'
     },
+    
+    config: {
+        periodo: {
+            de: 30,
+            ate: 30
+        }
+    },
 
     // Modo atual da aplicação
     mode: 'desenv',

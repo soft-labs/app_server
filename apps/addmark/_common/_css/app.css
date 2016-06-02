@@ -94,9 +94,25 @@ body{
 .app-receita{
     background: linear-gradient(to left, rgba(68, 197, 66, 0.07) 0%,rgba(129, 206, 105, 0.27) 100%) !important
 }
+.app-receita-title-header{
+    display: none !important;
+}
+.active .app-receita-title-header{
+    display: block;
+}
 .app-receita-sum{
     background: linear-gradient(to top, rgba(68,197,66,0.01) 54%,rgba(129,206,105,0.32) 120%)!important;
     border-top: 0px solid #B3ADAD;
+}
+.app-receita-title-sum{
+    color: #1F1E1E;
+    float: right;
+}
+.active .app-receita-title-sum{
+    opacity: 0.15;
+}
+.app-receita-footer-sum{
+    color: #1F1E1E;
 }
 
 
@@ -109,7 +125,6 @@ body{
 .active .app-despesa-title-header{
     display: block;
 }
-
 .app-despesa-sum{
     zbackground: linear-gradient(to top, rgba(236,59,5,0.01) 39%,rgba(241,53,11,0.32) 163%)!important;
     border-top: 1px solid #BDBDBD;

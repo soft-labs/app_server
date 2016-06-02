@@ -5,7 +5,7 @@
  * @copyright [== © 2016, Softlabs ==]
  * @link www.softlabs.com.br
  * @author Luiz Antonio B. Silva [Labs]
- * @since Sun May 29 2016 09:15:40 GMT-0300 (BRT)
+ * @since Sun May 29 2016 09:15:38 GMT-0300 (BRT)
  */
 tshark.modulos._add('dbms.financeiro.fin_areceber', {
 
@@ -14,7 +14,258 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
      */
     init: function(){
 
+        //region :: Chart / List
+
+        app.charts.add('areceber', 'chart_areceber', {
+            type: 'bar',
+            options: {
+                slegend: false,
+                ztitle: false
+            }
+        }, {
+            labels: [],
+            datasets: [{
+                type: 'bar',
+                label: 'Receitas',
+                backgroundColor: "#F7464A",
+                data: [],
+                borderColor: 'black',
+                borderWidth: 1
+            }]
+        });
+
+        this.displayOpts = [
+            {value: 1, icon: 'icon list',  label: 'Listagem'},
+            {value: 2, icon: 'icon bar chart', label: 'Gráfico'}
+        ];
+
+        $('.display.areceber')
+            .dropdown({
+                onChange: function(value, text, $choice){
+                    $('#chart_areceber')
+                        .transition(value == '1' ? 'hide' : 'show');
+                    $('.lista.areceber')
+                        .transition(value == '2' ? 'hide' : 'show');
+                }
+            })
+            .dropdown('set selected', 1);
+
+        //endregion
+
+        //region :: Pivot
+
+        this.data.group = [];
+
+        this.pivotOpts = [
+            {value: 1, icon: 'icon tasks', label: 'Vencimento'},
+            {value: 2, icon: 'icon tasks', label: 'Clientes'},
+            {value: 3, icon: 'icon tasks', label: 'Situação'},
+            {value: 4, icon: 'icon tasks', label: 'Históricos'}
+        ];
+
+        $('.pivot.areceber')
+            .dropdown({
+                onChange: function(value, text, $choice){
+                    dbms.financeiro.fin_areceber.pivotData();
+                }
+            })
+            .dropdown('set selected', 1);
+
+        //endregion
+
     },
+
+    /**
+     * Chamado após a listagem de dados
+     */
+    onAfterList: function(response, next){
+        this.pivotData();
+
+        $('.app-receita-action')
+            .popup({
+                context: '.app',
+                position: 'bottom center',
+                inline: true,
+                on: 'click'
+            })
+        ;
+
+    },
+
+    /**
+     * Chamado após a execução de uma pesquisa
+     */
+    onAfterSearch: function(response, next){
+        this.pivotData();
+    },
+
+    /**
+     * Atualiza dados quando o periodo é mudado
+     */
+    onChangePeriodo: function(el, dt){
+        this.list();
+    },
+
+    /**
+     * Chamado antes de requisitar um form de edição no server
+     */
+    onBeforeEdit: function(el, settings){
+        this.formInfo = 'Edição de documento de receita';
+
+        // Libera ou não para continuar
+        return true;
+    },
+
+    /**
+     * Chamado antes de requisitar um form de inserção no server
+     */
+    onBeforeCreate: function(el, settings){
+        this.formInfo = 'Provisionamento de Receita';
+
+        // Libera ou não para continuar
+        return true;
+    },
+
+    /**
+     * Chamado após receber qualquer das interfaces de formulário
+     */
+    onAfterForm: function(response, next){
+        $('.ui.modal.app-areceber-form')
+            .modal('show');
+    },
+
+
+    /**
+     * Executa o pivotamento de dados para os
+     * agrupamentos
+     */
+    pivotData: function(){
+        var p = $('.pivot.areceber').dropdown('get value');
+
+        switch (p){
+
+            case '2':
+                dbms.financeiro.fin_areceber.data.group = dbms.financeiro.fin_areceber.data.rows.groupBy({
+                    field: 'parceiro',
+                    order: {
+                        group: {
+                            by: '_stats.sum.valor_bruto',
+                            desc: true
+                        },
+                        sub: {
+                            by: 'valor_bruto',
+                            desc: true
+                        }
+                    }
+                });
+                break;
+
+            case '3':
+                dbms.financeiro.fin_areceber.data.group = dbms.financeiro.fin_areceber.data.rows.groupBy({
+                    field: 'lanc_status',
+                    order: {
+                        group: {
+                            by: '_stats.sum.valor_bruto',
+                            desc: true
+                        },
+                        sub: {
+                            by: 'valor_bruto',
+                            desc: true
+                        }
+                    }
+                });
+                break;
+
+            case '4':
+                dbms.financeiro.fin_areceber.data.group = dbms.financeiro.fin_areceber.data.rows.groupBy({
+                    field: 'historico',
+                    order: {
+                        group: {
+                            by: '_stats.sum.valor_bruto',
+                            desc: true
+                        },
+                        sub: {
+                            by: 'dt_vencimento',
+                            desc: false
+                        }
+                    }
+                });
+                break;
+
+            default:
+                dbms.financeiro.fin_areceber.data.group = dbms.financeiro.fin_areceber.data.rows.groupBy('dt_vencimento', false);
+                break;
+        }
+
+        // Ajusta os dados do gráfico de barras
+        dbms.financeiro.fin_areceber.setChartBarData();
+
+
+        dbms.financeiro.fin_areceber.setTooltips();
+
+
+    },
+
+    /**
+     * Alimenta o bar chart com dados
+     */
+    setChartBarData: function(){
+        app.charts.data.areceber.labels = [];
+        app.charts.data.areceber.datasets[0].data = [];
+
+        dbms.financeiro.fin_areceber.data.group.forEach(row => {
+            app.charts.data.areceber.labels.push(row.label);
+            app.charts.data.areceber.datasets[0].data.push(row._stats.sum.valor_bruto);
+        });
+
+        app.charts.reset('areceber');
+    },
+
+    /**
+     * Ajusta tooltips da listagem
+     */
+    setTooltips: function(){
+
+        $('.app-areceber-tooltip-datas').not('.tooltipstered')
+            .tooltipster({
+                position: 'left',
+                theme: 'tooltipster-shadow'
+            });
+
+        $('.app-areceber-tooltip-datas')
+            .each(function(){
+                $(this)
+                    .tooltipster('content', $(
+                        '<div class="ui relaxed divided list">' +
+                        '  <div class="item">' +
+                        '    <i class="calendar middle aligned icon"></i>' +
+                        '    <div class="content">' +
+                        '      <a class="header">Vencimento:</a>' +
+                        '      <div class="description">' + $(this).data('dt_vencimento') + '</div>' +
+                        '    </div>' +
+                        '  </div>' +
+                        '  <div class="item">' +
+                        '    <i class="calendar middle aligned icon"></i>' +
+                        '    <div class="content">' +
+                        '      <a class="header">' + $(this).data('dt_documento') + '</a>' +
+                        '      <div class="description">Data do Documento</div>' +
+                        '    </div>' +
+                        '  </div>' +
+                        '  <div class="item">' +
+                        '    <i class="calendar middle aligned icon"></i>' +
+                        '    <div class="content">' +
+                        '      <a class="header">' + $(this).data('dt_lancamento') + '</a>' +
+                        '      <div class="description">Data de Lançamento</div>' +
+                        '    </div>' +
+                        '  </div>' +
+                        '</div>')
+                    )
+            })
+        ;
+    }
+
+
+    //region :: Eventos
 
 
     //region :: Eventos - List
@@ -22,20 +273,13 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
     /**
      * Chamado antes de requisitar uma listagem no server
      *
-    onBeforeList: function(el, settings){
+     onBeforeList: function(el, settings){
 
         // Libera ou não para continuar
         return true;
     },
 
-    /**
-     * Chamado após a listagem de dados
-     *
-    onAfterList: function(response, next){
-
-    },
-
-    /* */
+     /* */
     //endregion
 
 
@@ -44,17 +288,10 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
     /**
      * Chamado antes de executar uma pesquisa no server
      *
-    onBeforeSearch: function(el, settings){
+     onBeforeSearch: function(el, settings){
 
         // Libera ou não para continuar
         return true;
-    },
-
-     /**
-     * Chamado após a execução de uma pesquisa
-     *
-    onAfterSearch: function(response, next){
-
     },
 
      /* */
@@ -63,47 +300,29 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
 
     //region :: Eventos - Edit
 
+
     /**
-     * Chamado antes de requisitar um form de edição no server
-     *
-    onBeforeEdit: function(el, settings){
-
-
-        // Libera ou não para continuar
-        return true;
-    },
-
-     /**
      * Chamado após receber a interface de edição
      *
-    onAfterEdit: function(response, next){
+     onAfterEdit: function(response, next){
 
     },
 
-    /* */
+     /* */
     //endregion
 
 
     //region :: Eventos - Create
 
+
     /**
-     * Chamado antes de requisitar um form de inserção no server
-     *
-    onBeforeCreate: function(el, settings){
-
-
-        // Libera ou não para continuar
-        return true;
-    },
-
-     /**
      * Chamado após receber a interface de inserção
      *
-    onAfterCreate: function(response, next){
+     onAfterCreate: function(response, next){
 
     },
 
-    /* */
+     /* */
     //endregion
 
 
@@ -112,20 +331,13 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
     /**
      * Chamado antes de requisitar uma interface de formulário
      *
-    onBeforeForm: function(el, settings){
+     onBeforeForm: function(el, settings){
 
         // Libera ou não para continuar
         return true;
     },
 
-    /**
-     * Chamado após receber qualquer das interfaces de formulário
-     *
-    onAfterForm: function(response, next){
-
-    },
-
-    /* */
+     /* */
     //endregion
 
 
@@ -134,7 +346,7 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
     /**
      * Chamado antes de enviar os dados de inserção ao server
      *
-    onBeforeInsert: function(el, settings){
+     onBeforeInsert: function(el, settings){
 
 
         // Libera ou não para continuar
@@ -144,11 +356,11 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
      /**
      * Chamado após a execução de um insert no server
      *
-    onAfterInsert: function(response, next){
+     onAfterInsert: function(response, next){
 
     },
 
-    /* */
+     /* */
     //endregion
 
 
@@ -157,7 +369,7 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
     /**
      * Chamado antes de enviar os dados de edição ao server
      *
-    onBeforeUpdate: function(el, settings){
+     onBeforeUpdate: function(el, settings){
 
 
         // Libera ou não para continuar
@@ -167,11 +379,11 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
      /**
      * Chamado após a execução de um update no server
      *
-    onAfterUpdate: function(response, next){
+     onAfterUpdate: function(response, next){
 
     },
 
-    /* */
+     /* */
     //endregion
 
 
@@ -180,21 +392,21 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
     /**
      * Chamado antes de enviar os dados de deleção ao server
      *
-    onBeforeDelete: function(el, settings){
+     onBeforeDelete: function(el, settings){
 
 
         // Libera ou não para continuar
         return true;
     },
 
-    /**
+     /**
      * Chamado após a execução de um delete no server
      *
-    onAfterDelete: function(response, next){
+     onAfterDelete: function(response, next){
 
     },
 
-    /* */
+     /* */
     //endregion
 
 
@@ -203,24 +415,21 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
     /**
      * Chamado antes de enviar qualquer operação de insert ou update ao server
      *
-    onBeforeSave: function(el, settings){
+     onBeforeSave: function(el, settings){
 
         // Libera ou não para continuar
         return true;
     },
 
-    /**
+     /**
      * Chamado após qualquer operação de insert ou update no server
      *
-    onAfterSave: function(response, next){
+     onAfterSave: function(response, next){
 
     },
 
      /* */
     //endregion
-    
-    
-    //region :: Regras de Negócio
 
     //endregion
 

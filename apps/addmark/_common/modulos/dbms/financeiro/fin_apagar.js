@@ -109,7 +109,7 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
     /**
      * Chamado antes de requisitar um form de edição no server
      */
-     onBeforeEdit: function(el, settings){
+    onBeforeEdit: function(el, settings){
         this.formInfo = 'Edição de documento de despesa';
 
         // Libera ou não para continuar
@@ -119,7 +119,7 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
     /**
      * Chamado antes de requisitar um form de inserção no server
      */
-     onBeforeCreate: function(el, settings){
+    onBeforeCreate: function(el, settings){
         this.formInfo = 'Geração de nova despesa';
 
         // Libera ou não para continuar

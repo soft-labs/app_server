@@ -68,7 +68,7 @@ app.areas.add('app-financas', {
                     client: 'app areas show',
                     area: "app-home"
                 },
-                {icon: 'payment icon', title: 'Contas à Pagar',
+                {icon: 'payment icon', title: 'Contas à Receber',
                     description: 'Gestão de Recebimentos'
                 },
                 {icon: 'add icon',     title: 'Lançar Recebimento',
