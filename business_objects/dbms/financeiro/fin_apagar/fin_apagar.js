@@ -56,7 +56,10 @@ function FinAPagar(){
             ],
             ctrls: {
                 valor_bruto  : { label: "Valor a pagar: "},
-                parceiros_key: { label: "Fornecedor: "}
+                parceiros_key: { label: "Fornecedor: "},
+                fin_lanc_tipos_key : {
+                    default: 1
+                }
             }
         }
 
