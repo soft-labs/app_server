@@ -1,0 +1,37 @@
+//
+   Created by Alessandro on 30/05/16.
+
+.ui.fluid.card
+    .content
+
+        // Cabeçalho da Listagem
+        .header Fornecedores Cadastrados
+        .description
+
+            // Listagem
+            table.ui.striped.table
+                thead
+                    tr
+                        th Razão Social
+                        th Telefone
+                        th Email
+                        th Site
+                        th Editar
+                tbody
+                    tr(
+                        rv-each-item='dbms.empresas.emp_fornecedores.data.rows'
+                        rv-row-key='item.emp_fornecedores_key'
+                        client-dblclick='app areas show'
+                        data-area='app-cadastros'
+                        data-subarea='app-fornecedores_detalhes'
+                    )
+                        td {item.parceiro}
+                        td {item.fone_empresa}
+                        td {item.email_empresa}
+                        td {item.site_empresa}
+                        td
+                            button.ui.icon.button(
+                                rv-data-key='item.emp_fornecedores_key'
+                                server='dbms empresas emp_fornecedores edit'
+                            )
+                                i.edit.icon

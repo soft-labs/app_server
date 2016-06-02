@@ -93,7 +93,21 @@ function EmpFornecedores(){
                     fields: [
                         
                     ]
-                } 
+                },
+                2: {
+                    from: ['dbms', 'parceiros', 'parc_juridicos'],
+                    join: {source: 1, tipo: types.join.left, on: 'parceiros_key', where: ''},
+                    fields: [
+
+                    ]
+                },
+                3: {
+                    from: ['dbms', 'parceiros', 'parc_fisicos'],
+                    join: {source: 1, tipo: types.join.left, on: 'parceiros_key', where: ''},
+                    fields: [
+
+                    ]
+                }
             },
             where: [ 
                 ['AND', 0, 'emp_fornecedores_key', types.where.check]

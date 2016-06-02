@@ -24,6 +24,8 @@ app.areas.add('app-cadastros', {
         return true;
     },
 
+    // region :: Sub Areas
+
     /**
      * Subarea Clientes
      */
@@ -60,7 +62,6 @@ app.areas.add('app-cadastros', {
         },
     },
 
-
     /**
      * Subarea Clientes-Detalhes
      */
@@ -73,5 +74,58 @@ app.areas.add('app-cadastros', {
             dbms.empresas.emp_clientes.refreshDataSet();
         }
     },
+
+
+    /**
+     * Subarea Fornecedores
+     */
+    'app-fornecedores':{
+
+        /**
+         * Chamado sempre que a área é exibida
+         */
+        onShow: function (area, subarea, data) {
+            app.actionbar.reset([
+                {
+                    icon: 'home icon',
+                    title: 'Home',
+                    description: 'Cockpit financeiro',
+                    client: 'sys app menu click',
+                    area: "app-home"
+                },
+                {
+                    icon: 'users icon',
+                    title: 'Fornecedores Cadastrados',
+                    description: 'Listagem',
+                    client:'app areas show',
+                    area:'app-cadastros',
+                    subarea:'app-fornecedores'
+                },
+                {
+                    icon: 'add icon',
+                    title: 'Novo Fornecedor',
+                    description: 'Cadastrar Novo',
+                    server: 'dbms empresa emp_fornecedores create',
+                    active: 1
+                }
+            ]);
+        },
+    },
+
+
+    /**
+     * Subarea Fornecedores-Detalhes
+     */
+    'app-fornecedores_detalhes':{
+
+        /**
+         * Chamado sempre que a área é exibida
+         */
+        onShow: function (area, subarea, data) {
+            dbms.empresas.emp_fornecedores.refreshDataSet();
+        }
+    },
+
+    // endregion
 
 });

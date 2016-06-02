@@ -62,7 +62,7 @@ module.exports = {
                 {
                     label: "Fornecedores",
                     server: "dbms empresas emp_fornecedores list",
-                    subarea: "app-contas"
+                    subarea: "app-fornecedores"
                 },
                 {
                     label: "Bancos e Contas",
