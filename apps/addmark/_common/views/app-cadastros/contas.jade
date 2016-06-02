@@ -1,25 +1,24 @@
 //
    Created by labs on 11/05/16.
 
-.ui.container.transition.hidden.app-contas
-    .ui.stackable.grid
-        .six.wide.column
-            h4.ui.dividing.header Contas Cadastradas
-            .ui.animated.selection.list
-                .item(
-                    rv-each-conta='softlabs.financeiro.fin_contas.data.rows'
-                    rv-row-key='conta.fin_contas_key'
-                    click='softlabs financeiro fin_contas edit'
-                )
-                    img.ui.avatar.image(rv-src="conta.codigo | replace 'imgs/_logos/bancos/%s.png'")
-                    .content
-                        .header Conta {conta.conta} / {conta.fin_bancos_key}
-                        .description {conta.banco} / Ag: {conta.agencia}
+.ui.stackable.grid
+    .six.wide.column
+        h4.ui.dividing.header Contas Cadastradas
+        .ui.animated.selection.list
+            .item(
+                rv-each-conta='softlabs.financeiro.fin_contas.data.rows'
+                rv-row-key='conta.fin_contas_key'
+                click='softlabs financeiro fin_contas edit'
+            )
+                img.ui.avatar.image(rv-src="conta.codigo | replace 'imgs/_logos/bancos/%s.png'")
+                .content
+                    .header Conta {conta.conta} / {conta.fin_bancos_key}
+                    .description {conta.banco} / Ag: {conta.agencia}
 
-        .ten.wide.column
-            .ui.segment
-                h2.ui.header
-                    i.payment.icon
-                    .content Contas Bancárias
-                    .sub.header Gestão das contas financeiras
-                .content.softlabs.financeiro.fin_contas-form
+    .ten.wide.column
+        .ui.segment
+            h2.ui.header
+                i.payment.icon
+                .content Contas Bancárias
+                .sub.header Gestão das contas financeiras
+            .content.softlabs.financeiro.fin_contas-form

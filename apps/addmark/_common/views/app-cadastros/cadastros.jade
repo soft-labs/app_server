@@ -1,6 +1,11 @@
 
 .ui.content.segment
 
-    include contas
-        
-    include clientes
+    .ui.container.transition.hidden.app-contas
+        include contas
+
+    .ui.container.transition.hidden.app-clientes
+        include clientes
+
+    .ui.container.transition.hidden.app-clientes_detalhes
+        include clientes_detalhes

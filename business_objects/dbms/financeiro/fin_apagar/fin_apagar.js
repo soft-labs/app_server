@@ -15,7 +15,7 @@ function FinAPagar(){
     
     // Extends
     this.extends = ['dbms', 'financeiro', 'fin_lancamentos'];
-
+    
     // Map
     this.source = {
         table: 'fin_lancamentos',

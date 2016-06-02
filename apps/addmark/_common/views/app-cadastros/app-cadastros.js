@@ -22,5 +22,56 @@ app.areas.add('app-cadastros', {
      */
     onClose: function(new_area, new_subarea, data){
         return true;
-    }
+    },
+
+    /**
+     * Subarea Clientes
+     */
+    'app-clientes':{
+
+        /**
+         * Chamado sempre que a área é exibida
+         */
+        onShow: function (area, subarea, data) {
+            app.actionbar.reset([
+                {
+                    icon: 'home icon',
+                    title: 'Home',
+                    description: 'Cockpit financeiro',
+                    client: 'sys app menu click',
+                    area: "app-home"
+                },
+                {
+                    icon: 'users icon',
+                    title: 'Clientes Cadastrados',
+                    description: 'Listagem',
+                    client:'app areas show',
+                    area:'app-cadastros',
+                    subarea:'app-clientes'
+                },
+                {
+                    icon: 'add icon',
+                    title: 'Novo Cliente',
+                    description: 'Cadastrar Novo',
+                    server: 'dbms empresa emp_clientes create',
+                    active: 1
+                }
+            ]);
+        },
+    },
+
+
+    /**
+     * Subarea Clientes-Detalhes
+     */
+    'app-clientes_detalhes':{
+
+        /**
+         * Chamado sempre que a área é exibida
+         */
+        onShow: function (area, subarea, data) {
+            dbms.empresas.emp_clientes.refreshDataSet();
+        }
+    },
+
 });

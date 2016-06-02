@@ -21,7 +21,7 @@ function EmpClientes(){
             label: '',
             fields: {
                 emp_clientes_key: {
-                    tipo: types.comp.key, label: 'Emp Clientes:'
+                    tipo: types.comp.key, label: 'Cliente:'
                 }, 
                 parceiros_key: {
                     tipo: types.comp.choose, label: 'Parceiros:',
@@ -33,7 +33,7 @@ function EmpClientes(){
                     } 
                 }, 
                 ativo: {
-                    tipo: types.comp.int, label: 'Ativo:'
+                    tipo: types.comp.check, label: 'Ativo'
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
@@ -58,9 +58,6 @@ function EmpClientes(){
                 state : types.form.state.ok,
                 size  : types.form.size.small,
                 autosave  : true,
-                external: [
-
-                ]
             },
             linhas: [
                 {titulo: "Informações de emp_clientes"},
