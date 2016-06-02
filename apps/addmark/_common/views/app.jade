@@ -1,0 +1,115 @@
+extends ../../../../_common/views/header
+
+// Título do app
+block title
+    title='Addmark - RetailPRO - Financeiro'
+
+
+// Estilos do app
+block app_css
+
+
+// Javascripts do app
+block app_scripts
+
+    // Componentes
+    script(type='application/javascript', src='components/actionbar.js')
+    script(type='application/javascript', src='components/periodo.js')
+
+    // Areas
+    script(type='application/javascript', src='areas/app-home.js')
+    script(type='application/javascript', src='areas/app-financas.js')
+    script(type='application/javascript', src='areas/app-cadastros.js')
+
+
+block content
+    .ui.content.app
+        img#logo_tshark.ui.image.cursor(src='_imgs/_logos/tshark.png')
+        .ui.padded.container.segment.app-header
+            h1.ui.header
+                img.app-logo-header(src='_imgs/_logos/cacaushow.png')
+                .content
+                    | Sistema Financeiro
+                    .sub.header
+                        | Gestão financeira | AddMark
+            .app-menu-trigger.ui.floated.right.secondary.menu
+                a.browse.item
+                    i.sidebar.icon
+                    | Menu
+
+            .app-menu-popup.ui.flowing.popup.bottom.left.transition.hidden
+                .ui.four.column.doubling.stackable.relaxed.equal.height.divided.grid
+                    .column(rv-each-menu='sys.app.menu.data.rows')
+                        h4.ui.header(style="white-space: nowrap;")
+                            i(rv-class='menu.icon')
+                            | {menu.label}
+                        .ui.link.list
+                            a.item(
+                                rv-each-submenu='menu.submenu'
+                                rv-server='submenu.server'
+
+                                client='app areas show'
+                                rv-data-area='menu.area'
+                                rv-data-subarea='submenu.subarea'
+                                rv-on-click='sys.app.menu.hideMenu'
+                                style="white-space: nowrap;"
+                            )
+                                i.angle.double.right.icon
+                                | {submenu.label}
+
+            .app-submenu-popup.ui.flowing.popup.transition.hidden
+                .ui.two.column.doubling.stackable.relaxed.equal.height.divided.grid
+                    .column(rv-each-menu='submenu')
+                        h4.ui.header(style="white-space: nowrap;")
+                            i(rv-class='menu.icon')
+                            label {menu.label}
+                        .ui.link.list
+                            .item.icon(rv-each-sub='menu.submenu', style="white-space: nowrap;")
+                                i.angle.double.right.icon
+                                | {sub.label}
+
+
+        // Barra global de botões
+        .ui.container.segment.app-bar
+            .ui.steps
+                .step.cursor(
+                    rv-each-item='actionbar.itens'
+                    rv-class-active='item.active'
+                    rv-server='item.server'
+                    rv-client='item.client'
+                    rv-data-area='item.area'
+                    rv-data-subarea='item.subarea'
+                )
+                    i(rv-class='item.icon')
+                    .content
+                        .title {item.title}
+                        .description {item.description}
+
+
+        // **** Cockpit **** //
+        .ui.container.transition.app-home
+            include app-home/home
+
+        .ui.container.app-financas.transition.hidden
+            include app-financas/financas
+
+        .ui.container.app-integracoes.transition.hidden
+            | Hello Integracoes
+
+        .ui.container.transition.hidden.app-cadastros
+            include app-cadastros/cadastros
+
+        .ui.container.app-sistema.transition.hidden
+            | Hello Sistema
+
+
+
+        #form.ui.modal
+            .header
+                i.big.browser.icon
+                |  {title}
+            div.content
+                .description#form_area Edicao
+            div.actions
+                div.ui.green.button.ok Salvar Alterações
+                div.ui.orange.button.cancel Cancelar

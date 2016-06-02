@@ -104,7 +104,7 @@ function *initCliente(ctx){
         }
 
         // Renderiza index
-        ctx.body = yield engine.render('index', ctx);
+        ctx.body = yield engine.render('app', ctx);
         
     }
 }
