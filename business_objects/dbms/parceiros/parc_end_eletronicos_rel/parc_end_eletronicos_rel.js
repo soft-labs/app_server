@@ -93,14 +93,7 @@ function ParcEndEletronicosRel(){
                     fields: [
                         
                     ]
-                }/*, 
-                2: {
-                    from: ['dbms', 'enderecos', 'end_eletronicos'],
-                    join: {source: 0, tipo: types.join.left, on: 'end_eletronicos_key', where: ''},
-                    fields: [
-
-                    ]
-                }*/
+                }
             },
             where: [ 
                 ['AND', 0, 'parceiros_key', types.where.get],
