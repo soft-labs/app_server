@@ -13,11 +13,11 @@ h3.ui.dividing.header Detalhe do Fornecedor
                     .description
                         p
                             label Tipo de Pessoa:
-                                label(rv-if='dbms.empresas.emp_fornecedores.data.row.juridico') Jurídica
-                                label(rv-unless='dbms.empresas.emp_fornecedores.data.row.juridico') Física
+                                label(rv-show='dbms.empresas.emp_fornecedores.data.row.is_juridico') Jurídica
+                                label(rv-show='dbms.empresas.emp_fornecedores.data.row.is_fisico') Física
                             br
-                            label(rv-if='dbms.empresas.emp_fornecedores.data.row.juridico') CPF: {dbms.empresas.emp_fornecedores.data.row.cpf}
-                            label(rv-unless='dbms.empresas.emp_fornecedores.data.row.juridico') CNPJ: {dbms.empresas.emp_fornecedores.data.row.cnpj}
+                            label(rv-show='dbms.empresas.emp_fornecedores.data.row.is_fisico') CPF: {dbms.empresas.emp_fornecedores.data.row.cpf}
+                            label(rv-show='dbms.empresas.emp_fornecedores.data.row.is_juridico') CNPJ: {dbms.empresas.emp_fornecedores.data.row.cnpj}
                             br
 
                             | Observações: {dbms.empresas.emp_fornecedores.data.row.observacoes}
@@ -31,7 +31,11 @@ h3.ui.dividing.header Detalhe do Fornecedor
                         a.meta {endereco.end_tipo}
                         .description
                             p
-                                | {endereco.endereco}, {endereco.numero}, {endereco.complemento}, {endereco.bairro}, BH, MG
+                                | {endereco.endereco}, {endereco.numero}, {endereco.complemento}, {endereco.bairro}
+                                button.ui.right.floated.button
+                                    | Remover
+                                buttton.ui.right.floated.primary.button(server='dbms enderecos enderecos edit', rv-row-key='endereco.enderecos_key')
+                                    | Editar
         .ui.segment
             h4.ui.dividing.header Endereços Eletrônicos
             .ui.items(rv-each-eletronico='dbms.empresas.emp_fornecedores.enderecos_eletronicos.rows')
@@ -41,6 +45,7 @@ h3.ui.dividing.header Detalhe do Fornecedor
                         .description
                             p
                                 | {eletronico.descricao}
+
 .ui.segment
     h4.ui.dividing.header Movimentações do Cliente
     label Movimentação 1
@@ -48,3 +53,23 @@ h3.ui.dividing.header Detalhe do Fornecedor
     label Movimentação 2
     br
     label Movimentação 3
+
+// Form popup de edição
+.ui.fornecedor_endereco-form
+
+    // Header
+    .ui.header
+        i.big.browser.icon
+        .content
+            | Dados do Endereço
+            .sub.header Endereço
+
+    // Form
+    div.content.dbms.enderecos.enderecos-form
+
+    // Botões
+    div.actions
+        div.ui.green.button.ok(
+        server='dbms enderecos enderecos save',
+        ) Salvar Alterações
+        div.ui.orange.button.cancel Cancelar

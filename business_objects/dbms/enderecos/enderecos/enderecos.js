@@ -21,10 +21,10 @@ function Enderecos(){
             label: 'endereco',
             fields: {
                 enderecos_key: {
-                    tipo: types.comp.key, label: 'Enderecos:'
+                    tipo: types.comp.key, label: 'Código:'
                 }, 
                 end_bairros_key: {
-                    tipo: types.comp.choose, label: 'End Bairros:',
+                    tipo: types.comp.choose, label: 'Bairro:',
                     data: { 
                         key: ['end_bairros_key'], 
                         from: ['dbms', 'enderecos', 'end_bairros'], 
@@ -33,7 +33,7 @@ function Enderecos(){
                     } 
                 }, 
                 end_cidades_key: {
-                    tipo: types.comp.choose, label: 'End Cidades:',
+                    tipo: types.comp.choose, label: 'Cidade:',
                     data: { 
                         key: ['end_cidades_key'], 
                         from: ['dbms', 'enderecos', 'end_cidades'], 
@@ -42,7 +42,7 @@ function Enderecos(){
                     } 
                 }, 
                 end_estados_key: {
-                    tipo: types.comp.choose, label: 'End Estados:',
+                    tipo: types.comp.choose, label: 'Estado:',
                     data: { 
                         key: ['end_estados_key'], 
                         from: ['dbms', 'enderecos', 'end_estados'], 
@@ -51,7 +51,7 @@ function Enderecos(){
                     } 
                 }, 
                 end_paises_key: {
-                    tipo: types.comp.choose, label: 'End Paises:',
+                    tipo: types.comp.choose, label: 'País:',
                     data: { 
                         key: ['end_paises_key'], 
                         from: ['dbms', 'enderecos', 'end_paises'], 
@@ -66,7 +66,7 @@ function Enderecos(){
                     tipo: types.comp.text, label: 'Endereco:'
                 }, 
                 numero: {
-                    tipo: types.comp.text, label: 'Numero:'
+                    tipo: types.comp.text, label: 'Número:'
                 }, 
                 complemento: {
                     tipo: types.comp.text, label: 'Complemento:'
@@ -94,7 +94,7 @@ function Enderecos(){
         // Form de update
         update:{
             _config: {
-                bounds: { width: 800, height: 450 },
+                bounds: { width: 800, height: 500 },
                 labels: types.form.lines.labels.ontop,
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
@@ -104,10 +104,11 @@ function Enderecos(){
                 ]
             },
             linhas: [
-                {titulo: "Informações de enderecos"},
-                {enderecos_key: 25, end_bairros_key: 25, end_cidades_key: 25, end_estados_key: 25}, 
-                {end_paises_key: 25, cep: 25, endereco: 25, numero: 25}, 
-                {complemento: 25, bairro: 25, localidade: 25, observacoes: 25}
+                {titulo: "Dados do Endereço"},
+                {enderecos_key: 10, cep: 10, end_estados_key: 40, end_cidades_key: 40},
+                {end_bairros_key: 40, end_paises_key: 10, endereco: 50},
+                {numero: 10,complemento: 20, bairro: 50,localidade: 20,},
+                {observacoes: 100}
             ],
             ctrls: {
                 endereco: {
