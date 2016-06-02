@@ -1,0 +1,56 @@
+h3.ui.dividing.header Detalhe do Cliente
+.ui.horizontal.segments
+    .ui.segment
+        h4.ui.dividing.header Dados Principais
+        .ui.items
+            .item
+                a.ui.small.image
+                    img(
+                        src='http://semantic-ui.com/images/wireframe/image.png'
+                    )
+                .content
+                    a.header {dbms.empresas.emp_clientes.data.row.parceiro}
+                    .description
+                        p
+                            label Tipo de Pessoa:
+                                label(rv-if='dbms.empresas.emp_clientes.data.row.juridico') Jurídica
+                                label(rv-unless='dbms.empresas.emp_clientes.data.row.juridico') Física
+                            br
+                            label(rv-if='dbms.empresas.emp_clientes.data.row.juridico') CNPJ: {dbms.empresas.emp_clientes.data.row.cnpj}
+                            label(rv-unless='dbms.empresas.emp_clientes.data.row.juridico') CPF: {dbms.empresas.emp_clientes.data.row.cpf}
+                            br
+
+                            | Observações: {dbms.empresas.emp_clientes.data.row.observacoes}
+
+    .ui.segment
+        .ui.segment
+            h4.ui.dividing.header Endereços Físicos
+            .ui.items(rv-each-endereco='dbms.empresas.emp_clientes.enderecos.rows')
+                .item
+                    .content
+                        a.meta {endereco.end_tipo}
+                        .description
+                            p
+                                | {endereco.endereco}, {endereco.numero}, {endereco.complemento}, {endereco.bairro}, BH, MG
+        .ui.segment
+            h4.ui.dividing.header Endereços Eletrônicos
+            .ui.items
+                .item
+                    .content
+                        a.meta Celular
+                        .description
+                            p
+                                | (31) 99431-3378
+                .item
+                    .content
+                        a.meta E-mail
+                        .description
+                            p
+                                | alessandrommagalhaes@gmail.com
+.ui.segment
+    h4.ui.dividing.header Movimentações do Cliente
+    label Teste Mov 1
+    br
+    label Teste Mov 2
+    br
+    label Teste Mov 3
