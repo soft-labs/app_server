@@ -48,7 +48,7 @@ function RhFuncRemuneracoes(){
                     tipo: types.comp.datetime, label: 'Dt Encerramento:'
                 }, 
                 valor: {
-                    tipo: types.comp.undefined, label: 'Valor:'
+                    tipo: types.comp.text, label: 'Valor:'
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'

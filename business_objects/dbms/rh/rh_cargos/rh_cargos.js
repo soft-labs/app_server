@@ -36,10 +36,10 @@ function RhCargos(){
                     tipo: types.comp.text, label: 'Cargo:'
                 }, 
                 remuneracao_min: {
-                    tipo: types.comp.undefined, label: 'Remuneração Min:'
+                    tipo: types.comp.text, label: 'Remuneração Min:'
                 }, 
                 remuneracao_max: {
-                    tipo: types.comp.undefined, label: 'Remuneração Max:'
+                    tipo: types.comp.text, label: 'Remuneração Max:'
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'

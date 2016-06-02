@@ -48,7 +48,7 @@ function Unidades(){
                     tipo: types.comp.text, label: 'Unidade:'
                 }, 
                 proporcao: {
-                    tipo: types.comp.undefined, label: 'Proporção:'
+                    tipo: types.comp.text, label: 'Proporção:'
                 }, 
                 padrao: {
                     tipo: types.comp.int, label: 'Padrão:'

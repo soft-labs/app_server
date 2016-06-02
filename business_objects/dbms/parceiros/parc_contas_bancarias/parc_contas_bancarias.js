@@ -39,7 +39,7 @@ function ParcContasBancarias(){
                     tipo: types.comp.text, label: 'Agencia:'
                 }, 
                 observacoes: {
-                    tipo: types.comp.undefined, label: 'Observações:'
+                    tipo: types.comp.text, label: 'Observações:'
                 }
             }
         }

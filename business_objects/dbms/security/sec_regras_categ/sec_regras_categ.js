@@ -27,7 +27,7 @@ function SecRegrasCateg(){
                     tipo: types.comp.text, label: 'Categoria:'
                 }, 
                 observacoes: {
-                    tipo: types.comp.undefined, label: 'Observações:'
+                    tipo: types.comp.text, label: 'Observações:'
                 }
             }
         }

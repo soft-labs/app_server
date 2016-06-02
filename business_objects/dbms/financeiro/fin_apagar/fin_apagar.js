@@ -30,7 +30,16 @@ function FinAPagar(){
                     data: {
                         provider: 'despesas'
                     }
-                }
+                },
+                parceiros_key: {
+                    tipo: types.comp.choose, label: 'Fornecedor:',
+                    data: {
+                        key: ['parceiros_key'],
+                        from: ['dbms', 'empresas', 'emp_clientes'],
+                        template: '{parceiro}',
+                        provider: ''
+                    }
+                },
             }
         }
     };
@@ -57,11 +66,11 @@ function FinAPagar(){
             linhas: [
                 {titulo: "Informe os dados do lançamento:"},
                 {cont_historicos_key: 60, valor_bruto: 20, dt_vencimento: 20},
-                {numero: 20, dt_documento: 20, parceiros_key: 60}
+                {numero: 20, fin_contas_key: 60, dt_documento: 20},
+                {parceiros_key: 60, complemento: 40},
             ],
             ctrls: {
                 valor_bruto     : { label: "Valor à pagar: "},
-                parceiros_key   : { label: "Fornecedor: "},
                 numero          : { label: "Número do Documento: "},
                 fin_lanc_tipos_key : {
                     default: 1
@@ -81,7 +90,7 @@ function FinAPagar(){
         default: {
             sources: {
                 0: {
-                    from: ['dbms', 'financeiro', 'fin_lancamentos'],
+                    from: ['dbms', 'financeiro', 'fin_apagar'],
                     fields: [
 
                     ]
@@ -141,7 +150,14 @@ function FinAPagar(){
                     fields: [
 
                     ]
-                }
+                },
+                9: {
+                    from: ['dbms', 'financeiro', 'fin_bancos'],
+                    join: {source: 5, tipo: types.join.left, on: 'fin_bancos_key', where: ''},
+                    fields: [
+
+                    ]
+                },
             },
             where: [
                 ['AND', 0, 'fin_lanc_tipos_key', "=", "1"],

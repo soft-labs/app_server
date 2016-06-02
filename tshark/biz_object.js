@@ -172,7 +172,7 @@ BizObject.prototype.get = function *(ctx){
     try {
 
         // Template:
-        ret.template = this.params['template'] || '_list';
+        var templID= this.params['template'] || '_list';
 
         // Evento onGet
         if (this['onGet']) {
@@ -193,19 +193,26 @@ BizObject.prototype.get = function *(ctx){
         }
 
         // Template
-        var templ = yield this.engine.render(this.path.asString + '/' + ret.template, ctx, 'modulos');
-        if (!this.params['_no_template_']) {
-            ret.layout = templ;
+        if (ret.template != '_no_template_') {
+            var templ = yield this.engine.render(this.path.asString + '/' + templID, ctx, 'modulos');
+            if (!this.params['_no_template_']) {
+                ret.layout = templ;
+                ret.template = templID;
+            }
         }
 
         // Fields em template
         this.params._fields = this.engine.parseFields(templ);
 
         // Recupera provider
-        var provId = (this.params['provider'] && this.params['provider']['id']
-            ? this.params['provider']['id']
-            : 'default'
-        );
+        var provId = 'default';
+        if (this.params['provider']) {
+            if (typeof this.params['provider'] == 'string'){
+                provId = this.params['provider'];
+            } else if (this.params['provider']['id']) {
+                provId = this.params['provider']['id'];
+            }
+        }
 
         // Recupera dados
         ret.data = yield this.select(ctx, provId);
@@ -402,24 +409,28 @@ BizObject.prototype.getProvider = function (provId, from, ctx){
                 }
 
                 // Recupera
-                try {
-                    var obj = require('business_objects/'
-                        + s_own + '/'
-                        + s_pck + '/'
-                        + s_tbl + '/'
-                        + s_tbl + '.js'
-                    );
-                    var m = new obj();
-                    provider.sources[s]['src'] = m.source;
-                } catch (e) {
-                    log.erro(e,
-                        'getProvider: ' + mod.path.asString + ' - ' + provId + '\n' +
-                        'business_objects/'
-                        + s_own + '/'
-                        + s_pck + '/'
-                        + s_tbl + '/'
-                        + s_tbl + '.js'
-                    );
+                var path = s_own + '/' + s_pck + '/' + s_tbl;
+                if (mod.path.asString == path){
+                    provider.sources[s]['src'] = mod.source;
+
+                } else {
+                    try {
+                        var obj = require('business_objects/'
+                            + path + '/'
+                            + s_tbl + '.js'
+                        );
+                        var m = new obj();
+                        provider.sources[s]['src'] = m.source;
+                    } catch (e) {
+                        log.erro(e,
+                            'getProvider: ' + mod.path.asString + ' - ' + provId + '\n' +
+                            'business_objects/'
+                            + s_own + '/'
+                            + s_pck + '/'
+                            + s_tbl + '/'
+                            + s_tbl + '.js'
+                        );
+                    }
                 }
             }
         } else {

@@ -81,7 +81,7 @@ function FinContas(){
                     tipo: types.comp.text, label: 'Telefone:'
                 }, 
                 observacoes: {
-                    tipo: types.comp.undefined, label: 'Observações:'
+                    tipo: types.comp.text, label: 'Observações:'
                 }
             }
         }

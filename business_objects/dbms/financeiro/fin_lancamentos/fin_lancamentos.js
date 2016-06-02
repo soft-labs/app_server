@@ -45,47 +45,47 @@ function FinLancamentos(){
                     }
                 },
                 fin_lanc_tipos_key: {
-                    tipo: types.comp.choose, label: 'Tipo de Lançamento:',
+                    tipo: types.comp.choose, default: 1, label: 'Tipo de Lançamento:',
                     data: {
                         key: ['fin_lanc_tipos_key'],
                         from: ['dbms', 'financeiro', 'fin_lanc_tipos'],
-                        template: '{fin_lanc_tipos_key} - {fin_lanc_tipo}',
+                        template: '{fin_lanc_tipo}',
                         provider: ''
                     }
                 },
                 fin_lanc_status_key: {
-                    tipo: types.comp.choose, label: 'Situação:',
+                    tipo: types.comp.choose, default: 1, label: 'Situação:',
                     data: {
                         key: ['fin_lanc_status_key'],
                         from: ['dbms', 'financeiro', 'fin_lanc_status'],
-                        template: '{fin_lanc_status_key} - {fin_lanc_statu}',
+                        template: '{fin_lanc_statu}',
                         provider: ''
                     }
                 },
                 cont_historicos_key: {
-                    tipo: types.comp.choose, label: 'Histórico:',
+                    tipo: types.comp.choose, default: 1, label: 'Histórico:',
                     data: {
                         key: ['cont_historicos_key'],
                         from: ['dbms', 'contabil', 'cont_historicos'],
-                        template: '{cont_historicos_key} - {historico}',
+                        template: '{historico}',
                         provider: ''
                     }
                 },
                 empresas_key: {
-                    tipo: types.comp.choose, label: 'Empresa:',
+                    tipo: types.comp.choose, default: 1, label: 'Empresa:',
                     data: {
                         key: ['empresas_key'],
                         from: ['dbms', 'empresas', 'empresas'],
-                        template: '{empresas_key} - {empresa}',
+                        template: '{empresa}',
                         provider: ''
                     }
                 },
                 fin_contas_key: {
-                    tipo: types.comp.choose, label: 'Conta Provisionada:',
+                    tipo: types.comp.choose, default: 1, label: 'Conta à Provisionar:',
                     data: {
                         key: ['fin_contas_key'],
                         from: ['dbms', 'financeiro', 'fin_contas'],
-                        template: '{fin_contas_key} - {fin_conta}',
+                        template: 'Conta: {conta} ({banco} - {agencia})',
                         provider: ''
                     }
                 },
@@ -94,7 +94,7 @@ function FinLancamentos(){
                     data: {
                         key: ['parceiros_key'],
                         from: ['dbms', 'parceiros', 'parceiros'],
-                        template: '{parceiros_key} - {parceiro}',
+                        template: '{parceiro}',
                         provider: ''
                     }
                 },
@@ -103,7 +103,7 @@ function FinLancamentos(){
                     data: {
                         key: ['contratos_key'],
                         from: ['dbms', 'contratos', 'contratos'],
-                        template: '{contratos_key} - {contrato}',
+                        template: '{contrato}',
                         provider: ''
                     }
                 },
@@ -112,12 +112,12 @@ function FinLancamentos(){
                     data: { 
                         key: ['movimentacoes_key'], 
                         from: ['dbms', 'movimentacoes', 'movimentacoes'], 
-                        template: '{movimentacoes_key} - {movimentacoe}', 
+                        template: '{movimentacao}',
                         provider: '' 
                     } 
                 }, 
                 cancelado: {
-                    tipo: types.comp.int, label: 'Cancelado:'
+                    tipo: types.comp.int, default: 0, label: 'Cancelado:'
                 }, 
                 competencia: {
                     tipo: types.comp.text, label: 'Competência:'

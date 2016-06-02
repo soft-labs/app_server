@@ -24,7 +24,7 @@ function Contabil(){
                     tipo: types.comp.key, label: 'Contabil:'
                 }, 
                 periodo: {
-                    tipo: types.comp.undefined, label: 'Periodo:'
+                    tipo: types.comp.text, label: 'Periodo:'
                 }, 
                 dt_inicio: {
                     tipo: types.comp.date, label: 'Dt Inicio:'

@@ -27,7 +27,7 @@ function SecPerfis(){
                     tipo: types.comp.text, label: 'Perfil:'
                 }, 
                 observacoes: {
-                    tipo: types.comp.undefined, label: 'Observações:'
+                    tipo: types.comp.text, label: 'Observações:'
                 }
             }
         }

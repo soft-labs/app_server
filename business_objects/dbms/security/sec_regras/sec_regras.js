@@ -42,7 +42,7 @@ function SecRegras(){
                     tipo: types.comp.text, label: 'Regra:'
                 }, 
                 observacoes: {
-                    tipo: types.comp.undefined, label: 'Observações:'
+                    tipo: types.comp.text, label: 'Observações:'
                 }
             }
         }

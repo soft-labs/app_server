@@ -497,7 +497,7 @@ $.fn.api.settings.api = {};
     TShark.prototype.list_before = function(sender, settings){
 
         // Seta template default
-        settings.data['template'] = '_cards';
+        settings.data['template'] = '_no_template_';
 
         // Libera
         return true;

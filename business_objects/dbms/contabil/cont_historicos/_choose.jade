@@ -4,8 +4,7 @@
 
 table.ui.compact.striped.selectable.celled.table.choose-rows
     thead
-        th Historico
-        th Observações
+        th Identificação do Lançamento
     tbody
         tr.cursor(
             rv-each-row='choose.data.rows'
@@ -13,4 +12,3 @@ table.ui.compact.striped.selectable.celled.table.choose-rows
             rv-data-key='row.cont_historicos_key'
         )
             td {row.historico}
-            td {row.observacoes}

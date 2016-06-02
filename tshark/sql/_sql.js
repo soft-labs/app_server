@@ -521,9 +521,11 @@ SQL.prototype._select = function *(provider, obj, meta){
     if (new_key){
         var row = {_key_: 'NEW_KEY'};
         for (var f in sqlParams.fields) {
+            var field = obj.source.metadata.fields[f] || sqlParams.meta[f];
+
             var val = ''
-                , tipo = sqlParams.meta[f]['tipo'] || {}
-                , def = sqlParams.meta[f]['default'] || tipo['default']
+                , tipo = field['tipo']    || {}
+                , def  = field['default'] || tipo['default']
                 , type = tipo['type']
             ;
             def = (typeof def == 'string' ? def.toUpperCase() : def);
