@@ -87,33 +87,33 @@ function ParcEndEletronicosRel(){
                         
                     ]
                 },
-                1: { 
-                    from: ['dbms', 'parceiros', 'parceiros'],
-                    join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
-                    fields: [
-                        
-                    ]
-                },
-                2: { 
+                1: {
                     from: ['dbms', 'enderecos', 'end_eletronicos'],
                     join: {source: 0, tipo: types.join.left, on: 'end_eletronicos_key', where: ''},
                     fields: [
                         
                     ]
-                } 
+                }/*,
+                2: {
+                    from: ['dbms', 'enderecos', 'end_eletronicos'],
+                    join: {source: 0, tipo: types.join.left, on: 'end_eletronicos_key', where: ''},
+                    fields: [
+
+                    ]
+                }*/
             },
             where: [ 
-                ['AND', 0, 'parceiros_key', types.where.check],
+                ['AND', 0, 'parceiros_key', types.where.get],
                 ['AND', 0, 'end_eletronicos_key', types.where.check]
             ],
             order: [
-                ['0', 'parceiros_key', 'desc'],
+                //['0', 'parceiros_key', 'desc'],
                 ['0', 'end_eletronicos_key', 'desc']
             ],
             search: [
             ],
             limit: 250,
-            showSQL: 0
+            showSQL: 10
         },
 
         update: {

@@ -16,7 +16,7 @@ tshark.modulos._add('dbms.empresas.emp_clientes', {
 
         // Instanciando
         this.enderecos = new Dataset('dbms.parceiros.parc_enderecos_rel');
-        this.enderecos_eletronicos = new Dataset();
+        this.enderecos_eletronicos = new Dataset('dbms.parceiros.parc_end_eletronicos_rel');
         this.areceber = new Dataset();
     },
 
@@ -30,7 +30,7 @@ tshark.modulos._add('dbms.empresas.emp_clientes', {
         };
 
         this.enderecos.load(data);
-        //this.enderecos_eletronicos.load('dbms parceiros parc_enderecos_rel');
+        this.enderecos_eletronicos.load(data);
         //this.areceber.load('dbms parceiros parc_enderecos_rel');
     },
 

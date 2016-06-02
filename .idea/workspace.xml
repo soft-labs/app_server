@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f9af883f-d607-471e-9364-120eb2596f34" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes/emp_clientes.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_fornecedores/emp_fornecedores.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/empresas/empresas.js" afterPath="" />
+    <list default="true" id="5a24f624-6cac-4e36-aa9b-3cf697033255" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/app-cadastros.js" afterPath="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/app-cadastros.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/cadastros.jade" afterPath="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/cadastros.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes.jade" afterPath="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/contas.jade" afterPath="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/contas.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/addmark/_common/views/index.jade" afterPath="$PROJECT_DIR$/apps/addmark/_common/views/index.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business_objects/dbms/empresas/emp_clientes/emp_clientes.js" afterPath="$PROJECT_DIR$/business_objects/dbms/empresas/emp_clientes/emp_clientes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_apagar/fin_apagar.js" afterPath="$PROJECT_DIR$/business_objects/dbms/financeiro/fin_apagar/fin_apagar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business_objects/dbms/parceiros/parc_enderecos_rel/parc_enderecos_rel.js" afterPath="$PROJECT_DIR$/business_objects/dbms/parceiros/parc_enderecos_rel/parc_enderecos_rel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business_objects/dbms/parceiros/parc_end_eletronicos_rel/parc_end_eletronicos_rel.js" afterPath="$PROJECT_DIR$/business_objects/dbms/parceiros/parc_end_eletronicos_rel/parc_end_eletronicos_rel.js" />
     </list>
-    <ignored mask="workspace.xml" />
+    <ignored path="app_server.iws" />
+    <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,54 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="app-financas.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-financas/app-financas.js">
+      <file leaf-file-name="clientes_detalhes.jade" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes_detalhes.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="549">
-              <caret line="83" column="3" selection-start-line="83" selection-start-column="3" selection-end-line="83" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="emp_clientes.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="parc_enderecos_rel.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/business_objects/dbms/parceiros/parc_enderecos_rel/parc_enderecos_rel.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="118" column="46" selection-start-line="118" selection-start-column="46" selection-end-line="118" selection-end-column="46" />
-              <folding>
-                <element signature="e#353#1707#0" expanded="false" />
-                <element signature="e#1732#1749#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="contas.jade" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/contas.jade">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cadastros.jade" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/cadastros.jade">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="57" />
+            <state relative-caret-position="459">
+              <caret line="27" column="81" selection-start-line="27" selection-start-column="81" selection-end-line="27" selection-end-column="81" />
               <folding />
             </state>
           </provider>
@@ -94,28 +43,28 @@
       <file leaf-file-name="app-cadastros.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/app-cadastros.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="72" column="53" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="53" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.jade" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/index.jade">
+      <file leaf-file-name="emp_clientes.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1003">
-              <caret line="59" column="65" selection-start-line="59" selection-start-column="65" selection-end-line="59" selection-end-column="65" />
+            <state relative-caret-position="544">
+              <caret line="32" column="44" selection-start-line="32" selection-start-column="44" selection-end-line="32" selection-end-column="44" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_dataset.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tshark/client/v3/_dataset.js">
+      <file leaf-file-name="parc_end_eletronicos_rel.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/business_objects/dbms/parceiros/parc_end_eletronicos_rel/parc_end_eletronicos_rel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1887">
-              <caret line="111" column="24" selection-start-line="111" selection-start-column="24" selection-end-line="111" selection-end-column="24" />
+            <state relative-caret-position="408">
+              <caret line="97" column="65" selection-start-line="97" selection-start-column="65" selection-end-line="97" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -144,7 +93,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/tshark/sql/mysql.js" />
         <option value="$PROJECT_DIR$/business_objects/dbms/movimentacoes/movimentacoes/movimentacoes.js" />
         <option value="$PROJECT_DIR$/tshark/client/v3/_extends.js" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/modulos/softlabs/financeiro/fin_apagar/fin_apagar.js" />
@@ -189,12 +137,13 @@
         <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/contas.jade" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/cadastros.jade" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes.jade" />
-        <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes_detalhes.jade" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-financas/app-financas.js" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/views/index.jade" />
         <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/app-cadastros.js" />
-        <option value="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes.js" />
         <option value="$PROJECT_DIR$/business_objects/dbms/parceiros/parc_enderecos_rel/parc_enderecos_rel.js" />
+        <option value="$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes_detalhes.jade" />
+        <option value="$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes.js" />
+        <option value="$PROJECT_DIR$/business_objects/dbms/parceiros/parc_end_eletronicos_rel/parc_end_eletronicos_rel.js" />
       </list>
     </option>
   </component>
@@ -265,7 +214,7 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
@@ -476,22 +425,73 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app_server">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
           </PATH>
-        </subPane>
-        <subPane subId="Client" />
-        <subPane subId="Project Files" />
-      </pane>
-      <pane id="Scratches" />
-      <pane id="ProjectPane">
-        <subPane>
           <PATH>
-            <PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app_server">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="business_objects">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app_server">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="business_objects">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="dbms">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app_server">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="business_objects">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="dbms">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="parceiros">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
+        <subPane subId="Client" />
+        <subPane subId="Project Files" />
       </pane>
+      <pane id="ProjectPane">
+        <subPane />
+      </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -499,7 +499,7 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Ignored.Files" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
+    <property name="js-jscs-nodeInterpreter" value="C:\Program Files (x86)\nodejs\node.exe" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="javascript.nodejs.core.library.configured.version" value="4.4.1" />
     <property name="JavaScriptPreferStrict" value="false" />
@@ -612,7 +612,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f9af883f-d607-471e-9364-120eb2596f34" name="Default" comment="" />
+      <changelist id="5a24f624-6cac-4e36-aa9b-3cf697033255" name="Default" comment="" />
       <created>1460666410935</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -664,6 +664,8 @@
       <workItem from="1464719926716" duration="3933000" />
       <workItem from="1464783314028" duration="18634000" />
       <workItem from="1464807980820" duration="3538000" />
+      <workItem from="1464868801379" duration="245000" />
+      <workItem from="1464869718306" duration="5000" />
     </task>
     <task id="LOCAL-00001" summary="Start">
       <created>1460666716795</created>
@@ -872,29 +874,29 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="644535000" />
+    <option name="totallyTimeSpent" value="648100000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2596726" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.512275" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3950893" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24925596" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3263434" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3065476" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="479" y="372" width="481" height="175" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32650447" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39869282" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -949,13 +951,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-home/app-home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="71" column="22" selection-start-line="71" selection-start-column="22" selection-end-line="71" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/addmark/_common/modulos/sys/app/menu/menu.js" />
     <entry file="file://$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/financeiro/fin_apagar/fin_apagar.js" />
     <entry file="file://$PROJECT_DIR$/tshark/sql/_sql.js">
@@ -1122,13 +1117,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/business_objects/dbms/empresas/emp_clientes/emp_clientes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="90" column="19" selection-start-line="90" selection-start-column="19" selection-end-line="90" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-financas/apagar.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -1147,9 +1135,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-178">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1164,7 +1149,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1179,7 +1163,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1003">
           <caret line="59" column="65" selection-start-line="59" selection-start-column="65" selection-end-line="59" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1187,22 +1170,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1887">
           <caret line="111" column="24" selection-start-line="111" selection-start-column="24" selection-end-line="111" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes_detalhes.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/contas.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1210,7 +1177,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1218,23 +1184,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="549">
           <caret line="83" column="3" selection-start-line="83" selection-start-column="3" selection-end-line="83" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/app-cadastros.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="72" column="53" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1242,10 +1191,52 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="379">
           <caret line="118" column="46" selection-start-line="118" selection-start-column="46" selection-end-line="118" selection-end-column="46" />
-          <folding>
-            <element signature="e#353#1707#0" expanded="false" />
-            <element signature="e#1732#1749#0" expanded="false" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/contas.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/clientes_detalhes.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="81" selection-start-line="27" selection-start-column="81" selection-end-line="27" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business_objects/dbms/empresas/emp_clientes/emp_clientes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/views/app-cadastros/app-cadastros.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/addmark/_common/modulos/dbms/empresas/emp_clientes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="44" selection-start-line="32" selection-start-column="44" selection-end-line="32" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business_objects/dbms/parceiros/parc_end_eletronicos_rel/parc_end_eletronicos_rel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="97" column="65" selection-start-line="97" selection-start-column="65" selection-end-line="97" selection-end-column="65" />
+          <folding />
         </state>
       </provider>
     </entry>
