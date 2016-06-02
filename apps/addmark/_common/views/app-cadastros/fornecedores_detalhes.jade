@@ -1,4 +1,4 @@
-h3.ui.dividing.header Detalhe do Cliente
+h3.ui.dividing.header Detalhe do Fornecedor
 .ui.horizontal.segments
     .ui.segment
         h4.ui.dividing.header Dados Principais
@@ -9,23 +9,23 @@ h3.ui.dividing.header Detalhe do Cliente
                         src='http://semantic-ui.com/images/wireframe/image.png'
                     )
                 .content
-                    a.header {dbms.empresas.emp_clientes.data.row.parceiro}
+                    a.header {dbms.empresas.emp_fornecedores.data.row.parceiro}
                     .description
                         p
                             label Tipo de Pessoa:
-                                label(rv-if='dbms.empresas.emp_clientes.data.row.juridico') Jurídica
-                                label(rv-unless='dbms.empresas.emp_clientes.data.row.juridico') Física
+                                label(rv-if='dbms.empresas.emp_fornecedores.data.row.juridico') Jurídica
+                                label(rv-unless='dbms.empresas.emp_fornecedores.data.row.juridico') Física
                             br
-                            label(rv-if='dbms.empresas.emp_clientes.data.row.juridico') CNPJ: {dbms.empresas.emp_clientes.data.row.cnpj}
-                            label(rv-unless='dbms.empresas.emp_clientes.data.row.juridico') CPF: {dbms.empresas.emp_clientes.data.row.cpf}
+                            label(rv-if='dbms.empresas.emp_fornecedores.data.row.juridico') CPF: {dbms.empresas.emp_fornecedores.data.row.cpf}
+                            label(rv-unless='dbms.empresas.emp_fornecedores.data.row.juridico') CNPJ: {dbms.empresas.emp_fornecedores.data.row.cnpj}
                             br
 
-                            | Observações: {dbms.empresas.emp_clientes.data.row.observacoes}
+                            | Observações: {dbms.empresas.emp_fornecedores.data.row.observacoes}
 
     .ui.segment
         .ui.segment
             h4.ui.dividing.header Endereços Físicos
-            .ui.items(rv-each-endereco='dbms.empresas.emp_clientes.enderecos.rows')
+            .ui.items(rv-each-endereco='dbms.empresas.emp_fornecedores.enderecos.rows')
                 .item
                     .content
                         a.meta {endereco.end_tipo}
@@ -34,7 +34,7 @@ h3.ui.dividing.header Detalhe do Cliente
                                 | {endereco.endereco}, {endereco.numero}, {endereco.complemento}, {endereco.bairro}, BH, MG
         .ui.segment
             h4.ui.dividing.header Endereços Eletrônicos
-            .ui.items(rv-each-eletronico='dbms.empresas.emp_clientes.enderecos_eletronicos.rows')
+            .ui.items(rv-each-eletronico='dbms.empresas.emp_fornecedores.enderecos_eletronicos.rows')
                 .item
                     .content
                         a.meta {eletronico.tipo}

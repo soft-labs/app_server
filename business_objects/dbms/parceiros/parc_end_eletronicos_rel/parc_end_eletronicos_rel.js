@@ -93,6 +93,13 @@ function ParcEndEletronicosRel(){
                     fields: [
                         
                     ]
+                },
+                2: {
+                    from: ['dbms', 'enderecos', 'end_eletronico_tipos'],
+                    join: {source: 1, tipo: types.join.left, on: 'end_eletronico_tipos_key', where: ''},
+                    fields: [
+
+                    ]
                 }
             },
             where: [ 
@@ -106,7 +113,7 @@ function ParcEndEletronicosRel(){
             search: [
             ],
             limit: 250,
-            showSQL: 10
+            showSQL: 0
         },
 
         update: {
