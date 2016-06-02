@@ -13,49 +13,65 @@ function Types(){
  * Tipos para configuração de form
  */
 Types.prototype.form = {
-    size: {
-        small       : 'small',        // defalt
-        large       : 'large'
-    },
-    lines:{
-        distribution: {
-            percent : 'percent',        // defalt
-            equal   : 'equal width'
-        },
-        labels:{
-            inline  : 'inline',
-            ontop   : 'ontop'           // defalt
+    get size() {
+        return {
+            small: 'small',        // defalt
+            large: 'large'
         }
     },
-    state: {
-        ok          : 'ok',             // defalt
-        loading     : 'loading',
-        disabled    : 'disabled',
-        success     : 'success',
-        error       : 'error',
-        warning     : 'warning'
+
+    get lines() {
+        return {
+            distribution: {
+                percent: 'percent',        // defalt
+                equal: 'equal width'
+            },
+            labels: {
+                inline: 'inline',
+                ontop: 'ontop'           // defalt
+            }
+        }
+    },
+
+    get state() {
+        return {
+            ok: 'ok',             // defalt
+            loading: 'loading',
+            disabled: 'disabled',
+            success: 'success',
+            error: 'error',
+            warning: 'warning'
+        }
     }
 };
 
 Types.prototype.ctrls = {
-    state:{
-        required    : 'required',
-        disabled    : 'disabled',
-        readonly    : 'readonly',
-        loading     : 'loading',
-        error       : 'error'
+    get state(){
+        return {
+            required    : 'required',
+            disabled    : 'disabled',
+            readonly    : 'readonly',
+            loading     : 'loading',
+            error       : 'error'
+        }
     },
-    size: {
-        mini        : 'mini',
-        small       : 'small',        // defalt
-        large       : 'large',
-        big         : 'big',
-        huge        : 'huge',
-        massive     : 'massive'
+
+    get size() {
+        return {
+            mini: 'mini',
+            small: 'small',        // defalt
+            large: 'large',
+            big: 'big',
+            huge: 'huge',
+            massive: 'massive'
+        }
     },
-    labels: {
-        inline      : 'inline',
-        ontop       : 'ontop'           // defalt
+
+    get labels() {
+        return {
+            inline: 'inline',
+            ontop: 'ontop'           // defalt
+        }
     }
 };
 
@@ -63,31 +79,98 @@ Types.prototype.ctrls = {
  * Tipos de componentes
  */
 Types.prototype.comp = {
-    key         : { type: 'int',        comp: 'inpInt',         default: 'NEW_KEY', disabled: true },
-    int         : { type: 'int',        comp: 'inpInt',         default: 0  },
 
-    text        : { type: 'string',     comp: 'inpText',        default: '' },
-    text_small  : { type: 'text',       comp: 'inpMemoShort',   default: '' },
-    text_big    : { type: 'text',       comp: 'inpMemo',        default: '' },
-    text_huge   : { type: 'text',       comp: 'inpMemoLong',    default: '' },
+    get key() {
+        return {type: 'int', comp: 'inpInt', default: 'NEW_KEY', disabled: true};
+    },
 
-    float       : { type: 'float',      comp: 'inpFloat',       default: '0,00' },
-    money       : { type: 'float',      comp: 'inpMoney',       default: '0,00' },
-    percent     : { type: 'float',      comp: 'inpPercent',     default: '0,00' },
+    get int() {
+        return {type: 'int', comp: 'inpInt', default: 0};
+    },
 
-    check       : { type: 'bool',       comp: 'inpCheckBox',    default: 0 },
-    slider      : { type: 'bool',       comp: 'inpSlider',      default: 0 },
-    toggle      : { type: 'bool',       comp: 'inpToggle',      default: 0 },
-    radio       : { type: 'string',     comp: 'inpRadio',       default: '' },
 
-    dropdown    : { type: 'string',     comp: 'inpDropdown',    default: '', multi: false },
-    list        : { type: 'string',     comp: 'inpList',        default: '', multi: false },
-    choose      : { type: 'string',     comp: 'inpChoose',      default: '', multi: false },
+    get text() {
+        return {type: 'string', comp: 'inpText', default: ''};
+    },
 
-    date        : { type: 'date',       comp: 'inpDate',        default: '' },
-    time        : { type: 'time',       comp: 'inpTime',        default: '' },
-    datetime    : { type: 'datetime',   comp: 'inpDateTime',    default: '' },
-    timestamp   : { type: 'datetime',   comp: 'inpDateTime',    default: 'NOW' },
+    get text_small() {
+        return {type: 'text', comp: 'inpMemoShort', default: ''};
+    },
+
+    get text_big() {
+        return {type: 'text', comp: 'inpMemo', default: ''};
+    },
+
+    get text_huge() {
+        return {type: 'text', comp: 'inpMemoLong', default: ''};
+    },
+
+
+    get float() {
+        return {type: 'float', comp: 'inpFloat', default: '0,00'};
+    },
+
+    get money() {
+        return {type: 'float', comp: 'inpMoney', default: '0,00'};
+    },
+
+    get percent() {
+        return {type: 'float', comp: 'inpPercent', default: '0,00'};
+    },
+
+
+    get check() {
+        return {type: 'bool', comp: 'inpCheckBox', default: 0};
+    },
+
+    get slider() {
+        return {type: 'bool', comp: 'inpSlider', default: 0};
+    },
+
+    get toggle() {
+        return {type: 'bool', comp: 'inpToggle', default: 0};
+    },
+
+    get radio() {
+        return {type: 'string', comp: 'inpRadio', default: ''};
+    },
+
+
+    get dropdown() {
+        return {type: 'string', comp: 'inpDropdown', default: '', multi: false};
+    },
+
+    get list() {
+        return {type: 'string', comp: 'inpList', default: '', multi: false};
+    },
+
+
+    get choose() {
+        return {type: 'string', comp: 'inpChoose', default: '', multi: false};
+    },
+
+
+    get chooselist() {
+        return {type: 'string', comp: 'inpChoose', default: '', multi: false};
+    },
+
+
+    get date() {
+        return {type: 'date', comp: 'inpDate', default: ''};
+    },
+
+    get time() {
+        return {type: 'time', comp: 'inpTime', default: ''};
+    },
+
+    get datetime() {
+        return {type: 'datetime', comp: 'inpDateTime', default: ''};
+    },
+
+    get timestamp() {
+        return {type: 'datetime', comp: 'inpDateTime', default: 'NOW'};
+    }
+
 };
 
 
@@ -197,8 +280,6 @@ Types.prototype.dataset = function (){
         }
     });
 };
-
-Types.prototype.test = '123';
 
 
 // Exporta

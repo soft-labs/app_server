@@ -307,7 +307,6 @@ if(!alertify.choose){
                 input = getMemo(ctrl, field, mod.path);
                 break;
 
-            case 'choose'    :
             case 'inpChoose'    :
                 input = getChoose(ctrl, field, mod.path);
                 break;
@@ -845,16 +844,18 @@ if(!alertify.choose){
      * @param field
      */
     function getChoose(ctrl, field, path) {
-        var inp = $('<div>', {class:"ui icon input"})
+        var inp = $('<div>', {
+                class:"ui icon input",
+                server: ctrl['data']['from'].join(' ') + ' choose',
+                'data-from': path,
+                'data-field': field
+        })
                 .append(
                     $('<input>', {
                         type: 'text',
                         readonly: 'on',
                         class: 'cursor',
                         'rv-template': path + ".data.row." + field + " | " + ctrl['data']['template'],
-                        'data-action': ctrl['data']['from'].join(' ') + ' choose',
-                        'data-from': path,
-                        'data-field': field
                     }),
                     $('<input>', {
                         type: 'hidden',
@@ -862,10 +863,7 @@ if(!alertify.choose){
                     })
                 )
                 .append($('<i>', {
-                    class: 'circular angle double up link icon',
-                    'data-action': ctrl['data']['from'].join(' ') + ' choose',
-                    'data-from': path,
-                    'data-field': field
+                    class: 'circular angle double up link icon'
                 }))
             ;
 

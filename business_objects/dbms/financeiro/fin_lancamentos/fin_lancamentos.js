@@ -6,6 +6,9 @@
  * @since Tue May 31 2016 14:34:19 GMT-0300 (BRT)
  * @constructor
  */
+// Types
+const types = require('../../../../tshark/types');
+
 function FinLancamentos(){
 
     //region :: Definições do Objeto
@@ -25,85 +28,85 @@ function FinLancamentos(){
                 }, 
                 fin_lanc_origem_key: {
                     tipo: types.comp.choose, label: 'Lançamento de Origem:',
-                    data: { 
-                        key: ['fin_lanc_origem_key'], 
-                        from: ['dbms', 'financeiro', 'fin_lanc_origem'], 
-                        template: '{fin_lanc_origem_key} - {fin_lanc_orige}', 
-                        provider: '' 
-                    } 
-                }, 
+                    data: {
+                        key: ['fin_lanc_origem_key'],
+                        from: ['dbms', 'financeiro', 'fin_lanc_origem'],
+                        template: '{fin_lanc_origem_key} - {fin_lanc_orige}',
+                        provider: ''
+                    }
+                },
                 fin_lanc_destino_key: {
                     tipo: types.comp.choose, label: 'Lançamento de Destino:',
-                    data: { 
-                        key: ['fin_lanc_destino_key'], 
-                        from: ['dbms', 'financeiro', 'fin_lanc_destino'], 
-                        template: '{fin_lanc_destino_key} - {fin_lanc_destin}', 
-                        provider: '' 
-                    } 
-                }, 
+                    data: {
+                        key: ['fin_lanc_destino_key'],
+                        from: ['dbms', 'financeiro', 'fin_lanc_destino'],
+                        template: '{fin_lanc_destino_key} - {fin_lanc_destin}',
+                        provider: ''
+                    }
+                },
                 fin_lanc_tipos_key: {
                     tipo: types.comp.choose, label: 'Tipo de Lançamento:',
-                    data: { 
-                        key: ['fin_lanc_tipos_key'], 
-                        from: ['dbms', 'financeiro', 'fin_lanc_tipos'], 
-                        template: '{fin_lanc_tipos_key} - {fin_lanc_tipo}', 
-                        provider: '' 
-                    } 
-                }, 
+                    data: {
+                        key: ['fin_lanc_tipos_key'],
+                        from: ['dbms', 'financeiro', 'fin_lanc_tipos'],
+                        template: '{fin_lanc_tipos_key} - {fin_lanc_tipo}',
+                        provider: ''
+                    }
+                },
                 fin_lanc_status_key: {
                     tipo: types.comp.choose, label: 'Situação:',
-                    data: { 
-                        key: ['fin_lanc_status_key'], 
-                        from: ['dbms', 'financeiro', 'fin_lanc_status'], 
-                        template: '{fin_lanc_status_key} - {fin_lanc_statu}', 
-                        provider: '' 
-                    } 
-                }, 
+                    data: {
+                        key: ['fin_lanc_status_key'],
+                        from: ['dbms', 'financeiro', 'fin_lanc_status'],
+                        template: '{fin_lanc_status_key} - {fin_lanc_statu}',
+                        provider: ''
+                    }
+                },
                 cont_historicos_key: {
                     tipo: types.comp.choose, label: 'Histórico:',
-                    data: { 
-                        key: ['cont_historicos_key'], 
-                        from: ['dbms', 'contabil', 'cont_historicos'], 
-                        template: '{cont_historicos_key} - {historico}', 
-                        provider: '' 
-                    } 
-                }, 
+                    data: {
+                        key: ['cont_historicos_key'],
+                        from: ['dbms', 'contabil', 'cont_historicos'],
+                        template: '{cont_historicos_key} - {historico}',
+                        provider: ''
+                    }
+                },
                 empresas_key: {
                     tipo: types.comp.choose, label: 'Empresa:',
-                    data: { 
-                        key: ['empresas_key'], 
-                        from: ['dbms', 'empresas', 'empresas'], 
-                        template: '{empresas_key} - {empresa}', 
-                        provider: '' 
-                    } 
-                }, 
+                    data: {
+                        key: ['empresas_key'],
+                        from: ['dbms', 'empresas', 'empresas'],
+                        template: '{empresas_key} - {empresa}',
+                        provider: ''
+                    }
+                },
                 fin_contas_key: {
                     tipo: types.comp.choose, label: 'Conta Provisionada:',
-                    data: { 
-                        key: ['fin_contas_key'], 
-                        from: ['dbms', 'financeiro', 'fin_contas'], 
-                        template: '{fin_contas_key} - {fin_conta}', 
-                        provider: '' 
-                    } 
-                }, 
+                    data: {
+                        key: ['fin_contas_key'],
+                        from: ['dbms', 'financeiro', 'fin_contas'],
+                        template: '{fin_contas_key} - {fin_conta}',
+                        provider: ''
+                    }
+                },
                 parceiros_key: {
                     tipo: types.comp.choose, label: 'Parceiro:',
-                    data: { 
-                        key: ['parceiros_key'], 
-                        from: ['dbms', 'parceiros', 'parceiros'], 
-                        template: '{parceiros_key} - {parceiro}', 
-                        provider: '' 
-                    } 
-                }, 
+                    data: {
+                        key: ['parceiros_key'],
+                        from: ['dbms', 'parceiros', 'parceiros'],
+                        template: '{parceiros_key} - {parceiro}',
+                        provider: ''
+                    }
+                },
                 contratos_key: {
                     tipo: types.comp.choose, label: 'Contrato Referente:',
-                    data: { 
-                        key: ['contratos_key'], 
-                        from: ['dbms', 'contratos', 'contratos'], 
-                        template: '{contratos_key} - {contrato}', 
-                        provider: '' 
-                    } 
-                }, 
+                    data: {
+                        key: ['contratos_key'],
+                        from: ['dbms', 'contratos', 'contratos'],
+                        template: '{contratos_key} - {contrato}',
+                        provider: ''
+                    }
+                },
                 movimentacoes_key: {
                     tipo: types.comp.choose, label: 'Movimentação Origem:',
                     data: { 
@@ -611,9 +614,6 @@ function FinLancamentos(){
     //endregion
     
 }
-
-// Types
-const types = require('../../../../tshark/types');
 
 // Exporta
 module.exports = FinLancamentos;
