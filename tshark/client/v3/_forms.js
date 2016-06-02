@@ -848,7 +848,8 @@ if(!alertify.choose){
                 class:"ui icon input",
                 server: ctrl['data']['from'].join(' ') + ' choose',
                 'data-from': path,
-                'data-field': field
+                'data-field': field,
+                'data-provider': ctrl['data']['provider'],
         })
                 .append(
                     $('<input>', {

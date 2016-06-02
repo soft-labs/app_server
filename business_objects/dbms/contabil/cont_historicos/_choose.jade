@@ -4,9 +4,6 @@
 
 table.ui.compact.striped.selectable.celled.table.choose-rows
     thead
-        th Cont Historicos
-        th Cont Determinação
-        th Ativo
         th Historico
         th Observações
     tbody
@@ -15,8 +12,5 @@ table.ui.compact.striped.selectable.celled.table.choose-rows
             rv-on-click='choose.select'
             rv-data-key='row.cont_historicos_key'
         )
-            td {row.cont_historicos_key}
-            td {row.cont_determinacao_key}
-            td {row.ativo}
             td {row.historico}
             td {row.observacoes}

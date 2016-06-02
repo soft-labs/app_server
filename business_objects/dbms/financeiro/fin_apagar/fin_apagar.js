@@ -25,6 +25,11 @@ function FinAPagar(){
             fields: {
                 fin_lanc_tipos_key: {
                     tipo: types.comp.int, default: 1, label: 'Tipo:'
+                },
+                cont_historicos_key: {
+                    data: {
+                        provider: 'despesas'
+                    }
                 }
             }
         }
@@ -50,13 +55,14 @@ function FinAPagar(){
                 ]
             },
             linhas: [
-                {titulo: "Informe:"},
-                {space: 10, valor_bruto: 25, dt_vencimento: 22, dt_documento: 22, numero: 20},
-                {cont_historicos_key: 40, parceiros_key: 60}
+                {titulo: "Informe os dados do lançamento:"},
+                {cont_historicos_key: 60, valor_bruto: 20, dt_vencimento: 20},
+                {numero: 20, dt_documento: 20, parceiros_key: 60}
             ],
             ctrls: {
-                valor_bruto  : { label: "Valor a pagar: "},
-                parceiros_key: { label: "Fornecedor: "},
+                valor_bruto     : { label: "Valor à pagar: "},
+                parceiros_key   : { label: "Fornecedor: "},
+                numero          : { label: "Número do Documento: "},
                 fin_lanc_tipos_key : {
                     default: 1
                 }

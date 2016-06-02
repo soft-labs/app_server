@@ -34,7 +34,10 @@ function ContHistoricos(){
                 }, 
                 ativo: {
                     tipo: types.comp.int, label: 'Ativo:'
-                }, 
+                },
+                tipo: {
+                    tipo: types.comp.int, label: 'Tipo:'
+                },
                 historico: {
                     tipo: types.comp.text, label: 'Historico:'
                 }, 
@@ -110,6 +113,66 @@ function ContHistoricos(){
             ],
             search: [
                     {alias: 0, field: 'historico',  param: types.search.like_full }
+            ],
+            limit: 250,
+            showSQL: 0
+        },
+
+        despesas: {
+            sources: {
+                0: {
+                    from: ['dbms', 'contabil', 'cont_historicos'],
+                    fields: [
+
+                    ]
+                },
+                1: {
+                    from: ['dbms', 'contabil', 'cont_determinacao'],
+                    join: {source: 0, tipo: types.join.left, on: 'cont_determinacao_key', where: ''},
+                    fields: [
+
+                    ]
+                }
+            },
+            where: [
+                ['AND', 0, 'cont_historicos_key', types.where.check],
+                ['AND', 0, 'tipo', '=', '2'],
+            ],
+            order: [
+                [0, 'historico', 'asc']
+            ],
+            search: [
+                {alias: 0, field: 'historico',  param: types.search.like_full }
+            ],
+            limit: 250,
+            showSQL: 0
+        },
+
+        receitas: {
+            sources: {
+                0: {
+                    from: ['dbms', 'contabil', 'cont_historicos'],
+                    fields: [
+
+                    ]
+                },
+                1: {
+                    from: ['dbms', 'contabil', 'cont_determinacao'],
+                    join: {source: 0, tipo: types.join.left, on: 'cont_determinacao_key', where: ''},
+                    fields: [
+
+                    ]
+                }
+            },
+            where: [
+                ['AND', 0, 'cont_historicos_key', types.where.check],
+                ['AND', 0, 'tipo', '=', '1'],
+            ],
+            order: [
+                [0, 'historico', 'asc']
+            ],
+            search: [
+                {alias: 0, field: 'historico',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
