@@ -1,0 +1,22 @@
+//
+    Template de seletor de opções em boxes de listagem, agrupamentos, etc...
+    ex:
+        +seletor('Visualizar...', 'dbms.financeiro.fin_apagar.displayOpts')(class='apagar')
+
+mixin seletor(title, modulo)
+    span.right.floated.ui.secondary.menu
+        .ui.labeled.icon.selection.dropdown&attributes(attributes)
+            i.edit.icon
+            span.text
+            .menu
+                .header
+                    i.options.icon
+                    = title
+                .divider
+                .item(
+                        rv-each-menu=modulo
+                        rv-data-value='menu.value'
+                        style="white-space: nowrap;"
+                    )
+                    i(rv-class='menu.icon')
+                    | {menu.label}

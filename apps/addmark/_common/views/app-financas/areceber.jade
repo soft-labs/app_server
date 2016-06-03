@@ -1,57 +1,24 @@
 //
    Created by labs on 11/05/16.
 
+include ../../templates/seletor
+include ../../templates/periodo
+
 .ui.container.transition.hidden.app-areceber
     .ui.fluid.card
         .content
 
             // Menu Agrupamento
-            span.right.floated.ui.secondary.menu
-                .ui.labeled.icon.selection.dropdown.pivot.areceber
-                    i
-                    span.text
-                    .menu
-                        .header
-                            i.options.icon
-                            | Agrupar por...
-                        .divider
-                        .item(
-                        rv-each-menu='dbms.financeiro.fin_areceber.pivotOpts'
-                        rv-data-value='menu.value'
-                        style="white-space: nowrap;"
-                        )
-                            i(rv-class='menu.icon')
-                            | {menu.label}
+            +seletor('Agrupar por...', 'dbms.financeiro.fin_areceber.pivotOpts')(class='pivot areceber')
 
             // Menu Listagem / Chart
-            span.right.floated.ui.secondary.menu
-                .ui.mini.labeled.icon.selection.dropdown.display.areceber
-                    i
-                    span.text
-                    .menu
-                        .header
-                            i.options.icon
-                            | Visualizar...
-                        .divider
-                        .item(
-                        rv-each-menu='dbms.financeiro.fin_areceber.displayOpts'
-                        rv-data-value='menu.value'
-                        style="white-space: nowrap;"
-                        )
-                            i(rv-class='menu.icon')
-                            | {menu.label}
+            +seletor('Visualizar...', 'dbms.financeiro.fin_areceber.displayOpts')(class='display areceber')
+
 
             // Área de trabalho
             .header Recebimentos Previstos
             .meta
-                | Período: &nbsp;
-                a.ui.basic.label(client='app periodo changeDe', data-modulo='dbms.financeiro.fin_areceber')
-                    | {periodo.de}&nbsp;&nbsp;&nbsp;
-                    i.calendar.icon
-                |&nbsp; à &nbsp;
-                a.ui.basic.label(client='app periodo changeAte', data-modulo='dbms.financeiro.fin_areceber')
-                    | {periodo.ate}&nbsp;&nbsp;&nbsp;
-                    i.calendar.icon
+                +periodo('dbms.financeiro.fin_areceber')
 
             .description
 
@@ -64,45 +31,35 @@
                         .title
                             i.dropdown.icon
                             | {row.label}
-                            .basic.label.app-receita-title-sum {row._stats.sum.valor_bruto | money}
+                            .basic.label.app-receita-title-sum R$ {row._stats.sum.valor_bruto | money}
                         .content
                             .ui.bottom.aligned.stackable.grid
                                 .row.cursor.app-grid-rows(
-                                rv-each-item='row.values'
-                                rv-row-key='item.fin_lancamentos_key'
-                                server-dblclick='dbms financeiro fin_areceber edit'
+                                    rv-each-item='row.values'
+                                    rv-row-key='item.fin_lancamentos_key'
                                 )
                                     .eleven.wide.column
+                                        i.edit.icon(server='dbms financeiro fin_apagar edit', rv-row-key='item.fin_lancamentos_key')
                                         | {item.parceiro} -
                                         | {item.historico}
 
                                     .two.wide.right.aligned.column
                                         .ui.tooltip.app-areceber-tooltip-datas(
-                                        rv-data-dt_vencimento='item.dt_vencimento'
-                                        rv-data-dt_documento='item.dt_documento'
-                                        rv-data-dt_lancamento='item.dt_lancamento'
+                                            rv-data-dt_vencimento='item.dt_vencimento'
+                                            rv-data-dt_documento='item.dt_documento'
+                                            rv-data-dt_lancamento='item.dt_lancamento'
                                         )
                                             i.calendar.icon
                                             | {item.dt_vencimento}
 
                                     .three.wide.right.aligned.cursor.column.app-receita
-                                        .ui.app-receita-action
-                                            i.dollar.icon
+                                        .ui.tooltip.app-areceber-tooltip-actions(rv-row-key='item.fin_lancamentos_key')
                                             | {item.valor_bruto | money}
 
-                                        // Popup do row
-                                        .ui.flowing.left.center.transition.hidden.popup
-                                            .ui.icon.menu
-                                                .item
-                                                    i.gamepad.icon
-                                                .item
-                                                    i.camera.icon
-                                                .item
-                                                    i.play.icon
 
                                 .row.app-grid-rows
                                     .thirteen.wide.right.aligned.column Subtotal:
-                                    .three.wide.column.right.aligned.app-receita-sum {row._stats.sum.valor_bruto | money}
+                                    .three.wide.column.right.aligned.app-receita-sum R$ {row._stats.sum.valor_bruto | money}
 
         // Footer
         .extra.content

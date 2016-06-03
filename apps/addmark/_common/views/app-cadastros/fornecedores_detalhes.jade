@@ -24,7 +24,7 @@ h3.ui.dividing.header Detalhe do Fornecedor
 
     .ui.segment
         .ui.segment
-            h4.ui.dividing.header Endereços Físicos
+            h4.ui.dividing.header Endereços
             .ui.items(rv-each-endereco='dbms.empresas.emp_fornecedores.enderecos.rows')
                 .item
                     .content
@@ -37,7 +37,7 @@ h3.ui.dividing.header Detalhe do Fornecedor
                                 buttton.ui.right.floated.primary.button(server='dbms enderecos enderecos edit', rv-row-key='endereco.enderecos_key')
                                     | Editar
         .ui.segment
-            h4.ui.dividing.header Endereços Eletrônicos
+            h4.ui.dividing.header Dados de Contato
             .ui.items(rv-each-eletronico='dbms.empresas.emp_fornecedores.enderecos_eletronicos.rows')
                 .item
                     .content
