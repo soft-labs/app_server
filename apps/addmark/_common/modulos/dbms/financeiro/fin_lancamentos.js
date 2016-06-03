@@ -16,8 +16,9 @@ tshark.modulos._add('dbms.financeiro.fin_lancamentos', {
         
         app.charts.data.forecast = [];
         
+        /*
         // Cria o chart forecast
-        /*app.charts.add('forecast', '#chartForecast', {
+        app.charts.add('forecast', '#chartForecast', {
             type: 'bar',
             data: app.charts.data.forecast,
             options: {
@@ -25,8 +26,8 @@ tshark.modulos._add('dbms.financeiro.fin_lancamentos', {
                 title: false,
                 legend: { position: 'bottom' }
             }
-        });*/
-
+        });
+        */
     },
 
 

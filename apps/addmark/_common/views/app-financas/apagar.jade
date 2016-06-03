@@ -1,57 +1,25 @@
 //
    Created by labs on 11/05/16.
 
+// Templates
+include ../../templates/seletor
+include ../../templates/periodo
+
 .ui.container.transition.hidden.app-apagar
     .ui.fluid.card
         .content
 
             // Menu Agrupamento
-            span.right.floated.ui.secondary.menu
-                .ui.labeled.icon.selection.dropdown.pivot.apagar
-                    i
-                    span.text
-                    .menu
-                        .header
-                            i.options.icon
-                            | Agrupar por...
-                        .divider
-                        .item(
-                           rv-each-menu='dbms.financeiro.fin_apagar.pivotOpts'
-                           rv-data-value='menu.value'
-                           style="white-space: nowrap;"
-                        )
-                            i(rv-class='menu.icon')
-                            | {menu.label}
+            +seletor('Agrupar por...', 'dbms.financeiro.fin_apagar.pivotOpts')(class='pivot apagar')
 
             // Menu Listagem / Chart
-            span.right.floated.ui.secondary.menu
-                .ui.mini.labeled.icon.selection.dropdown.display.apagar
-                    i
-                    span.text
-                    .menu
-                        .header
-                            i.options.icon
-                            | Visualizar...
-                        .divider
-                        .item(
-                            rv-each-menu='dbms.financeiro.fin_apagar.displayOpts'
-                            rv-data-value='menu.value'
-                            style="white-space: nowrap;"
-                        )
-                            i(rv-class='menu.icon')
-                            | {menu.label}
+            +seletor('Visualizar...', 'dbms.financeiro.fin_apagar.displayOpts')(class='display apagar')
+
 
             // Área de trabalho
             .header Pagamentos Programados
             .meta
-                | Período: &nbsp;
-                a.ui.basic.label(client='app periodo changeDe', data-modulo='dbms.financeiro.fin_apagar')
-                    | {periodo.de}&nbsp;&nbsp;&nbsp;
-                    i.calendar.icon
-                |&nbsp; à &nbsp;
-                a.ui.basic.label(client='app periodo changeAte', data-modulo='dbms.financeiro.fin_apagar')
-                    | {periodo.ate}&nbsp;&nbsp;&nbsp;
-                    i.calendar.icon
+                +periodo('dbms.financeiro.fin_apagar')
 
             .description
 
@@ -87,20 +55,8 @@
                                             | {item.dt_vencimento}
 
                                     .three.wide.right.aligned.cursor.column.app-despesa
-                                        .ui.app-despesa-action
-                                            i.dollar.icon
-                                            | {item.valor_bruto | money}
-                                            //i.settings.icon
-
-                                        // Popup do row
-                                        .ui.flowing.left.center.transition.hidden.popup
-                                            .ui.icon.menu
-                                                .item
-                                                    i.gamepad.icon
-                                                .item
-                                                    i.camera.icon
-                                                .item
-                                                    i.play.icon
+                                        .ui.tooltip.app-apagar-tooltip-actions(rv-row-key='item.fin_lancamentos_key')
+                                            | R$ {item.valor_bruto | money}
 
                                 .row.app-grid-rows
                                     .thirteen.wide.right.aligned.column Subtotal:

@@ -33,6 +33,44 @@ $(document).ready(function() {
 
 });
 
+
+//region :: Extra
+
+
+
+var rdVal = function(neg) {
+    var n = (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+    if (neg){
+        return (n > 0 ? n*-1 : n);
+    } else {
+        return (n < 0 ? n*-1 : n);
+    }
+};
+var randomColorFactor = function() {
+    return Math.round(Math.random() * 255);
+};
+
+
+var rec    = [rdVal(), rdVal(), rdVal(), rdVal(), rdVal(), rdVal()]
+    , desp = [rdVal(1), rdVal(1), rdVal(1), rdVal(1), rdVal(1), rdVal(1)]
+    , med  = []
+    , mr   = 0
+    , md   = 0
+    , liq  = 0
+    ;
+
+
+rec.forEach((v, i) => {
+    var n = (v + desp[i]);
+    mr += v;
+    md -= desp[i];
+    med.push(n);
+    liq += n;
+});
+
+//endregion
+
+
 /**
  * Implementação da interface da aplicação
  * @since 28/04/16
@@ -49,14 +87,13 @@ app = $.extend(true, app, {
     
     config: {
         periodo: {
-            de: 30,
-            ate: 30
+            min: 30,
+            max: 30
         }
     },
 
     // Modo atual da aplicação
     mode: 'desenv',
-
 
     
     // Inicializador da aplicação
@@ -163,49 +200,190 @@ app = $.extend(true, app, {
             ]
         }
         
-    }
+    },
 
 
     //endregion
 
 
 
-});
+    cockpit: {
+    
+    setPie: function(s){
 
+        var pie = app.areas['app-home'].charts[(s == 'receitas' ? 'pieRec' : 'piePagtos')];
+        pie.data.labels = [];
+        pie.data.datasets = [];
+        pie.data.datasets.push({data: [], backgroundColor: []});
 
+        var l = app.areas['app-home'].struct[s].data.length
+            , i = Math.random();
+        app.areas['app-home'].struct[s].data.forEach(r => {
+            pie.data.labels.push(r.label);
+            pie.data.datasets[0].data.push(r._stats.sum.valor);
+            pie.data.datasets[0].backgroundColor.push(randomColor());
 
-//region :: Extra
+        });
+        pie.update();
+    },
 
+    showChartDesp: function(){
+        $('.lista.despesas').transition('hide');
+        $('#piePagtos').transition('show');
+        $('#barPagtos').transition('show');
+    },
 
+    showListDesp: function(){
+        $('#piePagtos').transition('hide');
+        $('#barPagtos').transition('hide');
+        $('.lista.despesas').transition('show');
+    },
 
-var rdVal = function(neg) {
-    var n = (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-    if (neg){
-        return (n > 0 ? n*-1 : n);
-    } else {
-        return (n < 0 ? n*-1 : n);
+    showChartRec: function(){
+        $('.lista.receitas').transition('hide');
+        $('#pieRec').transition('show');
+        $('#barRec').transition('show');
+    },
+
+    showListRec: function(){
+        $('#barRec').transition('hide');
+        $('#pieRec').transition('hide');
+        $('.lista.receitas').transition('show');
+    },
+
+    // Repositório de dados do app
+        struct: {
+
+            forecast: {
+                result: liq,
+                labels: app.meses_array.slice(0,6),
+                datasets: [
+                    {
+                        type: 'line',
+                        label: 'Resultado: R$ ' + liq.formatMoney(),
+                        backgroundColor: "rgba(151,187,205,0.5)",
+                        data: med,
+                        borderColor: 'white',
+                        borderWidth: 2
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Receitas: R$ ' + mr.formatMoney(),
+                        backgroundColor: "rgba(100,53,201,0.8)",
+                        data: rec,
+                        borderColor: 'black',
+                        borderWidth: 1
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Despesas: R$ ' + md.formatMoney(),
+                        backgroundColor: '#F7464A',
+                        data: desp
+                    }
+                ]
+            },
+
+            impacto: {
+                labels: [
+                    "Segmento 1", "Segmento B", "Segmento Y", "Segmento 12",
+                    "Segmento 3", "Segmento 2", "Segmento X", "Segmento Alpha"
+                ],
+                datasets: [
+                    {
+                        label: "Receitas",
+                        backgroundColor: "rgba(179,181,198,0.2)",
+                        borderColor: "rgba(179,181,198,1)",
+                        pointBackgroundColor: "rgba(179,181,198,1)",
+                        pointBorderColor: "#fff",
+                        pointHoverBackgroundColor: "#fff",
+                        pointHoverBorderColor: "rgba(179,181,198,1)",
+                        data: [rdVal(), null, null, null, null, rdVal(), rdVal(), rdVal()]
+                    },
+                    {
+                        label: "Despesas",
+                        backgroundColor: "rgba(255,99,132,0.2)",
+                        borderColor: "rgba(255,99,132,1)",
+                        pointBackgroundColor: "rgba(255,99,132,1)",
+                        pointBorderColor: "#fff",
+                        pointHoverBackgroundColor: "#fff",
+                        pointHoverBorderColor: "rgba(255,99,132,1)",
+                        data: [rdVal(), rdVal(), rdVal(), rdVal(), rdVal(), rdVal(), rdVal(), rdVal()]
+                    }
+                ]
+            },
+
+            receitas: {
+                _raw: [
+                    {data: '08/05/2016', nome: 'Comercial Sampaio', historico: 'Grupo Um',      valor: '30.0'},
+                    {data: '08/05/2016', nome: 'Alfa Comunicação',  historico: 'Grupo Dois',    valor: '230.0'},
+                    {data: '09/05/2016', nome: 'Cliente Final',     historico: 'Grupo Um',      valor: '54.29'},
+                    {data: '10/05/2016', nome: 'Comercial Sampaio', historico: 'Grupo Seis',    valor: '25.90'},
+                    {data: '10/05/2016', nome: 'Cliente Final',     historico: 'Grupo Quatro',  valor: '5.90'},
+                    {data: '15/05/2016', nome: 'Visa',              historico: 'Grupo Dois',    valor: '950.90'}
+                ],
+                data: [],
+                pie: {labels: [], datasets: []},
+                options: [
+                    {label: 'Vencimento'},
+                    {label: 'Clientes'},
+                    {label: 'Grupo'}
+                ]
+            },
+
+            despesas: {
+                _raw: [
+                    {data: '13/05/2016', nome: 'Receita Federal',   historico: 'Grupo Alpha',   valor: '3145.90'},
+                    {data: '14/05/2016', nome: 'AES Eletropaulo',   historico: 'Grupo Beta',    valor: '245.90'},
+                    {data: '14/05/2016', nome: 'Vivo',              historico: 'Grupo Omega',   valor: '100.0'},
+                    {data: '14/05/2016', nome: 'João da Silva',     historico: 'Grupo Alpha',   valor: '34.12'},
+                    {data: '16/05/2016', nome: 'Industrias ACME',   historico: 'Grupo Beta',    valor: '48.90'},
+                    {data: '16/05/2016', nome: 'Rede Ampla',        historico: 'Grupo Teta',    valor: '67.0'},
+                    {data: '18/05/2016', nome: 'UNIMED',            historico: 'Grupo Omega',   valor: '200'},
+                    {data: '18/05/2016', nome: 'Prefeitura Municipal', historico: 'Grupo Teta', valor: '23.90'},
+                    {data: '19/05/2016', nome: 'Caluia Imports',    historico: 'Grupo Omega',   valor: '934.0'},
+                    {data: '21/05/2016', nome: 'Pai e Irmãos Ltda', historico: 'Grupo Alpha',   valor: '81.0'},
+                    {data: '25/05/2016', nome: 'Posto 5 Estrelas',  historico: 'Grupo Omega',   valor: '345.90'}
+                ],
+                data: [],
+                pie: {labels: [], datasets: []},
+                options: [
+                    {label: 'Vencimento'},
+                    {label: 'Fornecedores'},
+                    {label: 'Grupo'}
+                ]
+            },
+
+            desp_bar: {
+                labels: ['13/05/2016', '14/05/2016', '16/05/2016', '18/05/2016', '19/05/2016', '21/05/2016', '25/05/2016'],
+                datasets: [
+                    {
+                        type: 'bar',
+                        label: 'Despesas',
+                        backgroundColor: "#F7464A",
+                        data: ['3145.90', '380.02', '155.9', '223.90', '934.0', '81.0', '345.90'],
+                        borderColor: 'black',
+                        borderWidth: 1
+                    }
+                ]
+            },
+
+            rec_bar: {
+                labels: ['08/05/2016', '09/05/2016', '10/05/2016', '15/05/2016'],
+                datasets: [
+                    {
+                        type: 'bar',
+                        label: 'Receitas',
+                        backgroundColor: "rgba(100,53,201,0.8)",
+                        data: ['260.0', '54.29', '31.8', '5.90', '950.0'],
+                        borderColor: 'black',
+                        borderWidth: 1
+                    }
+                ]
+            }
+
+        }
     }
-};
-var randomColorFactor = function() {
-    return Math.round(Math.random() * 255);
-};
 
-
-var rec    = [rdVal(), rdVal(), rdVal(), rdVal(), rdVal(), rdVal()]
-    , desp = [rdVal(1), rdVal(1), rdVal(1), rdVal(1), rdVal(1), rdVal(1)]
-    , med  = []
-    , mr   = 0
-    , md   = 0
-    , liq  = 0
-    ;
-
-
-rec.forEach((v, i) => {
-    var n = (v + desp[i]);
-    mr += v;
-    md -= desp[i];
-    med.push(n);
-    liq += n;
 });
 
-//endregion
+

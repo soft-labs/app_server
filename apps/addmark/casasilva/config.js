@@ -51,19 +51,19 @@ module.exports = {
             tipo: 'mysql',
             conn: {
                 database: 'softlabs',
-                // host: 'localhost',
-                // port: '3347',
+                host: 'localhost',
                 user: 'root',
                 password: 'desenv123'
             }
         },
 
         // Base Casa Silva
-        casa_silva: {
+        amazon: {
             tipo: 'mysql',
             conn: {
-                database: 'v3_casasilva',
-                user: 'root',
+                database: 'softlabs_desenv',
+                host: 'app.horizonteazultec.com.br',
+                user: 'soft',
                 password: 'desenv123'
             }
         },

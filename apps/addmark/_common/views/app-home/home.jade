@@ -19,7 +19,7 @@
             rv-class-app-blue-box="cockpit.struct.forecast.result | isGreater '0'"
             rv-class-app-red-box="cockpit.struct.forecast.result | isLess '0'"
         )
-            canvas#chartForecast
+            canvas#chart_forecast
         .extra.content
             span.right.floated
                 | Resultado Projetado: R$ {cockpit.struct.forecast.result | numberFormat 2 ',' '.'}

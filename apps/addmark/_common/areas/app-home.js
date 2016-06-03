@@ -9,6 +9,49 @@ app.areas.add('app-home', {
     init: function(){
 
 
+        //region :: Charts
+        
+        // Forecast
+        app.charts.add('forecast', 'chart_forecast', {
+            type: 'bar',
+            options: {
+                slegend: false,
+                ztitle: false
+            }
+        }, {
+            result: liq,
+            labels: app.meses_array.slice(0,6),
+            datasets: [
+                {
+                    type: 'line',
+                    label: 'Resultado: R$ ' + liq.formatMoney(),
+                    backgroundColor: "rgba(151,187,205,0.5)",
+                    data: med,
+                    borderColor: 'white',
+                    borderWidth: 2
+                },
+                {
+                    type: 'bar',
+                    label: 'Receitas: R$ ' + mr.formatMoney(),
+                    backgroundColor: "rgba(100,53,201,0.8)",
+                    data: rec,
+                    borderColor: 'black',
+                    borderWidth: 1
+                },
+                {
+                    type: 'bar',
+                    label: 'Despesas: R$ ' + md.formatMoney(),
+                    backgroundColor: '#F7464A',
+                    data: desp
+                }
+            ]
+        });
+        
+        //endregion
+        
+        
+        
+
         this.charts = {};
 
 
@@ -228,14 +271,17 @@ app.areas.add('app-home', {
         switch (opt){
             case 0:
                 app.areas['app-home'].struct[s].data = app.areas['app-home'].struct[s]._raw.pivot('data');
+                app.cockpit.struct[s].data = app.areas['app-home'].struct[s]._raw.pivot('data');
                 break;
 
             case 1:
                 app.areas['app-home'].struct[s].data = app.areas['app-home'].struct[s]._raw.pivot('nome', '_stats.sum.valor', true);
+                app.cockpit.struct[s].data = app.areas['app-home'].struct[s]._raw.pivot('nome', '_stats.sum.valor', true);
                 break;
 
             case 2:
                 app.areas['app-home'].struct[s].data = app.areas['app-home'].struct[s]._raw.pivot('historico', '_stats.sum.valor', true);
+                app.cockpit.struct[s].data = app.areas['app-home'].struct[s]._raw.pivot('historico', '_stats.sum.valor', true);
                 break;
         }
 
@@ -285,4 +331,21 @@ app.areas.add('app-home', {
         $('.lista.receitas').transition('show');
     }
     
+});
+
+var rec    = [rdVal(), rdVal(), rdVal(), rdVal(), rdVal(), rdVal()]
+    , desp = [rdVal(1), rdVal(1), rdVal(1), rdVal(1), rdVal(1), rdVal(1)]
+    , med  = []
+    , mr   = 0
+    , md   = 0
+    , liq  = 0
+    ;
+
+
+rec.forEach((v, i) => {
+    var n = (v + desp[i]);
+    mr += v;
+    md -= desp[i];
+    med.push(n);
+    liq += n;
 });

@@ -60,7 +60,7 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
             {value: 1, icon: 'icon tasks', label: 'Vencimento'},
             {value: 2, icon: 'icon tasks', label: 'Fornecedores'},
             {value: 3, icon: 'icon tasks', label: 'Situação'},
-            {value: 4, icon: 'icon tasks', label: 'Históricos'}
+            {value: 4, icon: 'icon tasks', label: 'Destinação'}
         ];
         
         $('.pivot.apagar')
@@ -260,8 +260,63 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
                         '  </div>' +
                         '</div>')
                     )
-            })
-        ;
+            });
+
+        $('.app-apagar-tooltip-actions').not('.tooltipstered')
+            .tooltipster({
+                position: 'bottom',
+                interactive: true,
+                theme: 'tooltipster-shadow'
+            });
+
+        $('.app-apagar-tooltip-actions')
+            .each(function(){
+                $(this)
+                    .tooltipster('content',
+                        $('<div class="ui content"></div>')
+                            .append($('<div class="ui labeled icon menu"></div>')
+                                .append($(
+                                    '    <div class="cursor item">' +
+                                    '      <i class="money middle aligned icon"></i>' +
+                                    '      Dar Baixa ' +
+                                    '    </div>')//.api(tshark.api)
+                                )
+
+                                .append($(
+                                    '    <div class="cursor item">' +
+                                    '      <i class="cancel middle aligned icon"></i>' +
+                                    '      Cancelar ' +
+                                    '    </div>')//.api(tshark.api)
+                                )
+
+                                .append($(
+                                    '    <div class="cursor item" data-action="dbms financeiro fin_apagar edit" data-key="' + $(this).data('key') + '">' +
+                                    '      <i class="edit middle aligned icon"></i>' +
+                                    '      Alterar ' +
+                                    '    </div>')//.api(tshark.api)
+                                )
+                    ))
+
+/*
+                '    <div class="cursor item">' +
+                        '      <i class="money middle aligned icon"></i>' +
+                        '      Dar Baixa ' +
+                        '    </div>' +
+
+                        '    <div class="cursor item">' +
+                        '      <i class="cancel middle aligned icon" onclick="alert(1)"></i>' +
+                        '      Cancelar' +
+                        '    </div>' +
+
+                        '    <div class="cursor item" data-action="dbms financeiro fin_apagar edit" data-key="' + $(this).data('key') + '">' +
+                        '      <i class="edit middle aligned icon"></i>' +
+                        '      Alterar' +
+                        '    </div>' +
+
+                    ).api(tshark.api))*/
+
+            });
+
     }
 
 

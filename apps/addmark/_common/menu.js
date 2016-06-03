@@ -32,16 +32,16 @@ module.exports = {
 
         // Menu de integrações
         {
-            label: "Integrações",
+            label: "Operações",
             area: "app-integracoes",
             icon: "cloud download icon",
             submenu: [
                 {
                     label: "Operações de Loja"
                 },
-                {
+               /* {
                     label: "Cartões"
-                },
+                },*/
                 {
                     label: "Bancárias"
                 }

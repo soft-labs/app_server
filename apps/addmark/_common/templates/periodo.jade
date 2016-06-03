@@ -1,0 +1,15 @@
+//
+   Template para o seletor de períodos
+
+mixin periodo(modulo)
+    | Período: &nbsp;
+    a.ui.basic.label(client='app periodo changeDe', data-modulo=modulo)
+        | {periodo.de}&nbsp;&nbsp;&nbsp;
+        i.calendar.icon
+
+    | &nbsp; à &nbsp;
+
+    a.ui.basic.label(client='app periodo changeAte', data-modulo=modulo)
+        | {periodo.ate}&nbsp;&nbsp;&nbsp;
+        i.calendar.icon
+
