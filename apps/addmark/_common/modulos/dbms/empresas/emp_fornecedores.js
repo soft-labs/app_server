@@ -118,7 +118,6 @@ tshark.modulos._add('dbms.empresas.emp_fornecedores', {
      * Chamado após receber a interface de inserção
      *
     onAfterCreate: function(response, next){
-
     },
 
     /* */

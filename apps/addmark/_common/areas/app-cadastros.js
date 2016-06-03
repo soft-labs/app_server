@@ -72,6 +72,8 @@ app.areas.add('app-cadastros', {
          */
         onShow: function (area, subarea, data) {
             dbms.empresas.emp_clientes.refreshDataSet();
+            dbms.empresas.emp_clientes.data.row.is_juridico = dbms.empresas.emp_clientes.data.row.juridico == 1 ? true : false;
+            dbms.empresas.emp_clientes.data.row.is_fisico   = dbms.empresas.emp_clientes.data.row.juridico != 1 ? true : false;
         }
     },
 
@@ -123,6 +125,8 @@ app.areas.add('app-cadastros', {
          */
         onShow: function (area, subarea, data) {
             dbms.empresas.emp_fornecedores.refreshDataSet();
+            dbms.empresas.emp_fornecedores.data.row.is_juridico = dbms.empresas.emp_fornecedores.data.row.juridico == 1 ? true : false;
+            dbms.empresas.emp_fornecedores.data.row.is_fisico   = dbms.empresas.emp_fornecedores.data.row.juridico != 1 ? true : false;
         }
     },
 

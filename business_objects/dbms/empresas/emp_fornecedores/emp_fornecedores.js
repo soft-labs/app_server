@@ -118,7 +118,7 @@ function EmpFornecedores(){
             search: [
             ],
             limit: 250,
-            showSQL: 0
+            showSQL : 0
         },
 
         update: {
