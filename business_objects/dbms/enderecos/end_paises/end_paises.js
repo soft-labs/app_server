@@ -21,22 +21,22 @@ function EndPaises(){
             label: 'pais',
             fields: {
                 end_paises_key: {
-                    tipo: types.comp.key, label: 'End Paises:'
+                    tipo: types.comp.key, label: 'Código:'
                 }, 
                 ativo: {
-                    tipo: types.comp.int, label: 'Ativo:'
+                    tipo: types.comp.check, label: 'Ativo:', default:1
                 }, 
                 cod_siscomex: {
-                    tipo: types.comp.int, label: 'Cod Siscomex:'
+                    tipo: types.comp.int, label: 'Código Siscomex:'
                 }, 
                 cod_ibge: {
-                    tipo: types.comp.int, label: 'Cod Ibge:'
+                    tipo: types.comp.int, label: 'Código IBGE:'
                 }, 
                 sigla: {
                     tipo: types.comp.text, label: 'Sigla:'
                 }, 
                 pais: {
-                    tipo: types.comp.text, label: 'Pais:'
+                    tipo: types.comp.text, label: 'País:'
                 }, 
                 nacionalidade: {
                     tipo: types.comp.text, label: 'Nacionalidade:'
@@ -65,9 +65,9 @@ function EndPaises(){
                 ]
             },
             linhas: [
-                {titulo: "Informações de end_paises"},
-                {end_paises_key: 25, ativo: 25, cod_siscomex: 25, cod_ibge: 25}, 
-                {sigla: 25, pais: 25, nacionalidade: 50}
+                {titulo: "Dados do País"},
+                {ativo: 7, pais: 55, sigla: 10, cod_siscomex: 15, cod_ibge: 15},
+                {nacionalidade: 100}
             ],
             ctrls: {
                 pais: {

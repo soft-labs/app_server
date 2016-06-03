@@ -1,5 +1,5 @@
 /**
- * Área de finanças
+ * Área de Clientes
  */
 app.areas.add('app-cadastros', {
 

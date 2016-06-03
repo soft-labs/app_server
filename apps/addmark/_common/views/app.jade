@@ -20,6 +20,7 @@ block app_scripts
     script(type='application/javascript', src='areas/app-home.js')
     script(type='application/javascript', src='areas/app-financas.js')
     script(type='application/javascript', src='areas/app-cadastros.js')
+    script(type='application/javascript', src='areas/app-enderecos.js')
 
 
 block content
@@ -38,7 +39,7 @@ block content
                     | Menu
 
             .app-menu-popup.ui.flowing.popup.bottom.left.transition.hidden
-                .ui.four.column.doubling.stackable.relaxed.equal.height.divided.grid
+                .ui.five.column.doubling.stackable.relaxed.equal.height.divided.grid
                     .column(rv-each-menu='sys.app.menu.data.rows')
                         h4.ui.header(style="white-space: nowrap;")
                             i(rv-class='menu.icon')
@@ -98,6 +99,9 @@ block content
 
         .ui.container.transition.hidden.app-cadastros
             include app-cadastros/cadastros
+
+        .ui.container.transition.hidden.app-enderecos
+            include app-enderecos/enderecos
 
         .ui.container.app-sistema.transition.hidden
             | Hello Sistema

@@ -1,0 +1,57 @@
+//
+   Created by Alessandro on 30/05/16.
+
+.ui.fluid.card
+    .content
+
+        // Cabeçalho da Listagem
+        .header Países Cadastrados
+        .description
+
+            // Listagem
+            table.ui.striped.table
+                thead
+                    tr
+                        th País
+                        th Ativo
+                        th Sigla
+                        th Código Siscomex
+                        th Código IBGE
+                        th Remover
+                tbody
+                    tr(
+                    rv-each-item='dbms.enderecos.end_paises.data.rows'
+                    rv-row-key='item.end_paises_key'
+                    server-dblclick='dbms enderecos end_paises edit'
+                    )
+                        td {item.pais}
+                        td {item.ativo}
+                        td {item.sigla}
+                        td {item.cod_siscomex}
+                        td {item.cod_ibge}
+                        td
+                            button.ui.icon.button(
+                            rv-row-key='item.end_paises_key'
+                            server='dbms enderecos end_paises delete'
+                            )
+                                i.remove.icon
+
+// Form popup de edição
+.ui.modal.end_paises
+
+    // Header
+    .ui.header
+        i.big.browser.icon
+        .content
+            | Dados do País
+            .sub.header País
+
+    // Form
+    div.content.dbms.enderecos.end_paises-form
+
+    // Botões
+    div.actions
+        div.ui.green.button.ok(
+        server='dbms enderecos end_paises save',
+        ) Salvar Alterações
+        div.ui.orange.button.cancel Cancelar
