@@ -73,6 +73,7 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
 
         //endregion
 
+        this.list();
     },
 
     /**

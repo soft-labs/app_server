@@ -87,22 +87,26 @@
             .header Pagamentos Programados
             .meta Período 01/05/2016 à 25/05/2016
             .description
-                canvas.transition#piePagtos
+                canvas.transition.hidden#piePagtos
 
-                .ui.styled.accordion.non-exclusive.lista.despesas.transition.hidden
-                    span(rv-each-row='cockpit.struct.despesas.data')
-                        .active.title
-                            i.dropdown.icon
-                            | {row.label}
-                        .active.content
-                            .ui.bottom.aligned.stackable.grid
-                                .row.app-grid-rows(rv-each-item='row.values')
-                                    .thirteen.wide.column
-                                        | {item.nome} -
-                                        | {item.historico}
-                                    .three.wide.column.right.aligned.app-despesa {item.valor | numberFormat 2 ',' '.'}
-                                .row.app-grid-rows
-                                    .column.right.aligned.app-despesa {row._stats.sum.valor | numberFormat 2 ',' '.'}
+                // Listagem
+                +listFinanceiro(false)
+
+                //
+                    .ui.styled.accordion.non-exclusive.lista.despesas.transition.hidden
+                        span(rv-each-row='cockpit.struct.despesas.data')
+                            .active.title
+                                i.dropdown.icon
+                                | {row.label}
+                            .active.content
+                                .ui.bottom.aligned.stackable.grid
+                                    .row.app-grid-rows(rv-each-item='row.values')
+                                        .thirteen.wide.column
+                                            | {item.nome} -
+                                            | {item.historico}
+                                        .three.wide.column.right.aligned.app-despesa {item.valor | numberFormat 2 ',' '.'}
+                                    .row.app-grid-rows
+                                        .column.right.aligned.app-despesa {row._stats.sum.valor | numberFormat 2 ',' '.'}
 
 
         .extra.content
@@ -148,20 +152,24 @@
             .description
                 canvas.transition.hidden#pieRec
 
-                .ui.styled.accordion.non-exclusive.lista.receitas
-                    span(rv-each-row='cockpit.struct.receitas.data')
-                        .active.title
-                            i.dropdown.icon
-                            | {row.label}
-                        .active.content
-                            .ui.bottom.aligned.stackable.grid
-                                .row.app-grid-rows(rv-each-item='row.values')
-                                    .thirteen.wide.column
-                                        | {item.nome} -
-                                        | {item.historico}
-                                    .three.wide.column.right.aligned.app-receita {item.valor | numberFormat 2 ',' '.'}
-                                .row.app-grid-rows
-                                    .column.right.aligned.app-receita {row._stats.sum.valor | numberFormat 2 ',' '.'}
+                // Listagem
+                +listFinanceiro(true)
+
+                //
+                    .ui.styled.accordion.non-exclusive.lista.receitas
+                        span(rv-each-row='cockpit.struct.receitas.data')
+                            .active.title
+                                i.dropdown.icon
+                                | {row.label}
+                            .active.content
+                                .ui.bottom.aligned.stackable.grid
+                                    .row.app-grid-rows(rv-each-item='row.values')
+                                        .thirteen.wide.column
+                                            | {item.nome} -
+                                            | {item.historico}
+                                        .three.wide.column.right.aligned.app-receita {item.valor | numberFormat 2 ',' '.'}
+                                    .row.app-grid-rows
+                                        .column.right.aligned.app-receita {row._stats.sum.valor | numberFormat 2 ',' '.'}
 
         .extra.content
             .right.floated

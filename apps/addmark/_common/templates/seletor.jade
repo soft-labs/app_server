@@ -1,29 +1,43 @@
 //
     Template de seletor de opções em boxes de listagem, agrupamentos, etc...
     ex:
-        +seletor('Visualizar...', 'dbms.financeiro.fin_apagar.displayOpts')(class='apagar')
+        +seletor('Visualizar...', 'dbms.financeiro.fin_apagar.displayOpts')
+mixin seletor(title, itens)
 
-    135 base cadastros relatorios vendas etc...
+    // Trigger
+    .ui.right.floated.basic.button.inline.pop(
+            data-position='left center'
+            data-exclusive='true'
+            data-hoverable='true'
+        )
+            i.settings.icon
+            = title
 
-    135
-     50
+    // Popup
+    .ui.vertical.pointing.menu.popup.transition.hidden
+        a.item.cursor(
+            rv-each-menu=itens
+            rv-data-value='menu.value'
+            rv-client='menu.client'
+            rv-server='menu.server'
+            style="white-space: nowrap;"
+        )
+            i(rv-class='menu.icon')
+            | {menu.label}
+        .divider
 
-
-
-    300
-
-mixin seletor(classe, title, modulo)
+// old
     span.right.floated.ui.secondary.menu
         .ui.labeled.icon.selection.dropdown(class=classe)
             i
             span.text
-            .menu
+            .menu.popup.left.transition.hidden
                 .header
                     i.options.icon
                     = title
                 .divider
                 .item(
-                        rv-each-menu=modulo
+                        rv-each-menu=itens
                         rv-data-value='menu.value'
                         style="white-space: nowrap;"
                     )

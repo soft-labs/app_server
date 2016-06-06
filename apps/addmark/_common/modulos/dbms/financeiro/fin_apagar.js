@@ -35,20 +35,9 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
         });
 
         this.displayOpts = [
-            {value: 1, icon: 'icon list',  label: 'Listagem'},
-            {value: 2, icon: 'icon bar chart', label: 'Gráfico'}
+            {value: 1, icon: 'icon list',      label: 'Listagem', client: this.path + '.swapList'},
+            {value: 2, icon: 'icon bar chart', label: 'Gráfico', client: this.path + '.swapList'}
         ];
-
-        $('.display.apagar')
-            .dropdown({
-                onChange: function(value, text, $choice){
-                    $('#chart_apagar')
-                        .transition(value == '1' ? 'hide' : 'show');
-                    $('.lista.apagar')
-                        .transition(value == '2' ? 'hide' : 'show');
-                }
-            })
-            .dropdown('set selected', 1);
 
         //endregion
 
@@ -57,21 +46,15 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
         this.data.group = [];
         
         this.pivotOpts = [
-            {value: 1, icon: 'icon tasks', label: 'Vencimento'},
-            {value: 2, icon: 'icon tasks', label: 'Fornecedores'},
-            {value: 3, icon: 'icon tasks', label: 'Situação'},
-            {value: 4, icon: 'icon tasks', label: 'Destinação'}
+            {value: 1, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Vencimento'},
+            {value: 2, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Fornecedores'},
+            {value: 3, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Situação'},
+            {value: 4, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Destinação'}
         ];
-        
-        $('.pivot.apagar')
-            .dropdown({
-                onChange: function(value, text, $choice){
-                    dbms.financeiro.fin_apagar.pivotData();
-                }
-            })
-            .dropdown('set selected', 1);
-        
+
         //endregion
+
+        this.list();
 
     },
 
@@ -80,16 +63,6 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
      */
     onAfterList: function(response, next){
         this.pivotData();
-
-        $('.app-apagar-action')
-            .popup({
-                context: '.app',
-                position: 'bottom center',
-                inline: true,
-                on: 'click'
-            })
-        ;
-
     },
 
     /**
@@ -136,15 +109,26 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
 
 
     /**
+     * Alterna entre lista e gráfico
+     */
+    swapList: function(){
+        var value = $(this).data('value');
+        $('#chart_apagar')
+            .transition(value == '1' ? 'hide' : 'show');
+        $('.lista.apagar')
+            .transition(value == '2' ? 'hide' : 'show');
+    },
+
+    /**
      * Executa o pivotamento de dados para os
      * agrupamentos
      */
     pivotData: function(){
-        var p = $('.pivot.apagar').dropdown('get value');
+        var p = $(this).data('value');
 
         switch (p){
 
-            case '2':
+            case 2:
                 dbms.financeiro.fin_apagar.data.group = dbms.financeiro.fin_apagar.data.rows.groupBy({
                     field: 'parceiro',
                     order: {
@@ -160,7 +144,7 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
                 });
                 break;
 
-            case '3':
+            case 3:
                 dbms.financeiro.fin_apagar.data.group = dbms.financeiro.fin_apagar.data.rows.groupBy({
                     field: 'lanc_status',
                     order: {
@@ -176,7 +160,7 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
                 });
                 break;
 
-            case '4':
+            case 4:
                 dbms.financeiro.fin_apagar.data.group = dbms.financeiro.fin_apagar.data.rows.groupBy({
                     field: 'historico',
                     order: {
@@ -220,6 +204,8 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
 
         app.charts.reset('apagar');
     },
+
+
 
     /**
      * Ajusta tooltips da listagem

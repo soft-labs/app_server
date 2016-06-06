@@ -158,7 +158,9 @@ var CONSOLE_ON = true;
             ;
 
             var obj = tshark.getObjPath(window, api);
-            obj.call($(this), ev, data);
+            if (obj) {
+                obj.call($(this), ev, data);
+            }
         };
 
         $('[client]').not('.api-client-binded')
@@ -226,7 +228,7 @@ var CONSOLE_ON = true;
                 ref = $(ref);
             }
         }
-        
+
         // Bind Semantic
         $(ref).find('.ui.dropdown').not('.binded')
             .dropdown({
@@ -245,20 +247,20 @@ var CONSOLE_ON = true;
                         var obj = false;
                         if (typeof window[_onChange] == 'function'){
                             obj = window;
-                            
-                        } else if (dts){ 
+
+                        } else if (dts){
                             if (typeof dts[_onChange] == 'function'){
                                 obj = dts;
-                                
+
                             } else if (dts.ref && typeof dts.ref[_onChange] == 'function'){
                                 obj = dts.ref;
                             }
                         }
-                        
+
                         if (obj){
                             obj[_onChange].call(this, value, text, $choice)
                         }
-                            
+
                     }
                 }
             })
@@ -353,7 +355,24 @@ var CONSOLE_ON = true;
                 })
             })
         ;
-        
+
+        $(ref).find('.inline.long.pop').not('.binded')
+            .addClass('binded')
+            .each(function() {
+                $(this).popup($.extend({
+                    inline: true,
+                    delay: {hide: 1200}
+                }, $(this).data() || {}))
+            })
+        ;
+
+        $(ref).find('.pop').not('.binded')
+            .addClass('binded')
+            .each(function() {
+                $(this).popup($(this).data() || {})
+            })
+        ;
+
         $(ref).find('.tooltip').not('.binded')
             .addClass('binded')
             .tooltipster({
