@@ -13,6 +13,14 @@ tshark.modulos._add('dbms.enderecos.end_paises', {
      * Inicializa o menu
      */
     init: function(){
+
+
+    },
+
+    nao_pode_excluir : true,
+
+    OnChangeExclusao : function(){
+        alert(1);
     },
 
     //region :: Eventos - List

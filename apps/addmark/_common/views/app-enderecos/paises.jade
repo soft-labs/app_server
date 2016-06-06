@@ -3,38 +3,48 @@
 
 .ui.fluid.card
     .content
-
-        // Cabeçalho da Listagem
+        .ui.right.floated.horizontal.list
+            .item
+                .ui.action.input
+                    input#input_pesquisa(type='text' placeholder='Pesquisar...')
+                    button.ui.icon.button(
+                        server='dbms enderecos end_paises search'
+                        data-comp='#input_pesquisa'
+                        )
+                        i.search.icon
+            .item
+                i.big.settings.icon(rv-class-disabled='dbms.enderecos.end_paises.nao_pode_excluir')
         .header Países Cadastrados
-        .description
-
-            // Listagem
-            table.ui.striped.table
-                thead
-                    tr
-                        th País
-                        th Ativo
-                        th Sigla
-                        th Código Siscomex
-                        th Código IBGE
-                        th Remover
-                tbody
-                    tr(
+    .content
+        table.ui.selectable.table
+            thead
+                tr.cursor
+                    th Ativo
+                    th Sigla
+                    th País
+                    th Nacionalidade
+                    th
+            tbody
+                tr(
                     rv-each-item='dbms.enderecos.end_paises.data.rows'
                     rv-row-key='item.end_paises_key'
                     server-dblclick='dbms enderecos end_paises edit'
-                    )
-                        td {item.pais}
-                        td {item.ativo}
-                        td {item.sigla}
-                        td {item.cod_siscomex}
-                        td {item.cod_ibge}
-                        td
-                            button.ui.icon.button(
-                            rv-row-key='item.end_paises_key'
-                            server='dbms enderecos end_paises delete'
+                )
+                    td
+                       .ui.toggle.checkbox.checkbox_ativo
+                            input.check_ativo(
+                                type='checkbox'
+                                rv-checked='item.ativo'
+                                server='dbms enderecos end_paises update'
                             )
-                                i.remove.icon
+                    td {item.sigla}
+                    td {item.pais}
+                    td {item.nacionalidade}
+                    td
+                        .ui.checkbox
+                            input(
+                                type='checkbox'
+                            )
 
 // Form popup de edição
 .ui.modal.end_paises
@@ -47,7 +57,7 @@
             .sub.header País
 
     // Form
-    div.content.dbms.enderecos.end_paises-form
+    div.content.dbms.enderecos.end_paises-form-area
 
     // Botões
     div.actions

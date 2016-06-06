@@ -102,9 +102,9 @@ function EndPaises(){
                 [0, 'pais', 'asc']
             ],
             search: [
-                    {alias: 8, field: 'sigla',  param: types.search.like_full },
-                    {alias: 8, field: 'pais',  param: types.search.like_full },
-                    {alias: 8, field: 'nacionalidade',  param: types.search.like_full }
+                    {alias: 0, field: 'sigla',  param: types.search.like_full },
+                    {alias: 0, field: 'pais',  param: types.search.like_full },
+                    {alias: 0, field: 'nacionalidade',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -169,7 +169,6 @@ function EndPaises(){
      * @param ret Objeto de retorno
      *
     this.onAfterList = function *(ret, ctx){
-
     };
 
      /* */
