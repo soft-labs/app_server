@@ -46,8 +46,8 @@ module.exports = {
     // Conexões à repositórios de dados
     conexoes:{
 
-        // Base Default
-        default: {
+        // Localhost
+        zdefault: {
             tipo: 'mysql',
             conn: {
                 database: 'softlabs',
@@ -57,7 +57,18 @@ module.exports = {
             }
         },
 
-        // Base Casa Silva
+        // King Host
+        default: {
+            tipo: 'mysql',
+            conn: {
+                database: 'softlabs07',
+                host: 'mysql.softlabs.com.br',
+                user: 'softlabs07',
+                password: 'desenvsoft123'
+            }
+        },
+
+        // Amazon
         amazon: {
             tipo: 'mysql',
             conn: {

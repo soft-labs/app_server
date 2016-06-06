@@ -1,0 +1,24 @@
+//
+   Form popup de edição
+
+mixin popupForm(path, title, icon, subtitle, lblOk, lblCancel, apiOK, apiCancel)
+
+    .ui.modal(class=path + '-form')
+
+        // Header
+        .ui.header
+            i.big.icon(class=icon || 'browser')
+            .content
+                =title
+                .sub.header {dbms.financeiro.fin_areceber.forminfo}
+
+        // Form
+        div.content(class=path + '-form-area')
+
+        // Botões
+        div.actions
+            div.ui.green.button.ok(server=apiOK || path + ' save')
+                =lblOk || 'Salvar Alterações'
+
+            div.ui.orange.button.cancel(client=apiCancel || path + ' cancel')
+                =lblCancel || 'Cancelar'

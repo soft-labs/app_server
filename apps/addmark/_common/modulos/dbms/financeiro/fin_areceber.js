@@ -130,7 +130,7 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
      * Chamado após receber qualquer das interfaces de formulário
      */
     onAfterForm: function(response, next){
-        $('.ui.modal.app-areceber-form')
+        $('.ui.modal.' + this.path + '-form')
             .modal('show');
     },
 

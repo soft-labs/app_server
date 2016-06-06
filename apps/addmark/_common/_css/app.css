@@ -91,52 +91,52 @@ body{
 
 /***** Financas *****/
 
-.app-receita{
+.app-areceber{
     background: linear-gradient(to left, rgba(68, 197, 66, 0.07) 0%,rgba(129, 206, 105, 0.27) 100%) !important
 }
-.app-receita-title-header{
+.app-areceber-title-header{
     display: none !important;
 }
-.active .app-receita-title-header{
+.active .app-areceber-title-header{
     display: block;
 }
-.app-receita-sum{
+.app-areceber-sum{
     background: linear-gradient(to top, rgba(68,197,66,0.01) 54%,rgba(129,206,105,0.32) 120%)!important;
     border-top: 0px solid #B3ADAD;
 }
-.app-receita-title-sum{
+.app-areceber-title-sum{
     color: #1F1E1E;
     float: right;
 }
-.active .app-receita-title-sum{
+.active .app-areceber-title-sum{
     opacity: 0.15;
 }
-.app-receita-footer-sum{
+.app-areceber-footer-sum{
     color: #1F1E1E;
 }
 
 
-.app-despesa {
+.app-apagar {
     background: linear-gradient(to right, rgba(154, 69, 43, 0) 0%,rgba(229, 171, 158, 0.38) 100%)!important;
 }
-.app-despesa-title-header{
+.app-apagar-title-header{
     display: none !important;
 }
-.active .app-despesa-title-header{
+.active .app-apagar-title-header{
     display: block;
 }
-.app-despesa-sum{
+.app-apagar-sum{
     zbackground: linear-gradient(to top, rgba(236,59,5,0.01) 39%,rgba(241,53,11,0.32) 163%)!important;
     border-top: 1px solid #BDBDBD;
 }
-.app-despesa-title-sum{
+.app-apagar-title-sum{
     color: #1F1E1E;
     float: right;
 }
-.active .app-despesa-title-sum{
+.active .app-apagar-title-sum{
     opacity: 0.15;
 }
-.app-despesa-footer-sum{
+.app-apagar-footer-sum{
     color: #1F1E1E;
 }
 

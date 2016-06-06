@@ -81,7 +81,7 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
     onAfterList: function(response, next){
         this.pivotData();
 
-        $('.app-despesa-action')
+        $('.app-apagar-action')
             .popup({
                 context: '.app',
                 position: 'bottom center',
@@ -130,7 +130,7 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
      * Chamado após receber qualquer das interfaces de formulário
      */
     onAfterForm: function(response, next){
-        $('.ui.modal.app-apagar-form')
+        $('.ui.modal.' + this.path + '-form')
             .modal('show');
     },
 

@@ -1,0 +1,48 @@
+//
+   Created by labs on 04/06/16.
+
+mixin listFinanceiro(receita)
+    -
+        var mod = (receita ? 'areceber' : 'apagar');
+        var data = 'dbms.financeiro.fin_' + mod + '.data.group';
+
+    .ui.fluid.styled.accordion.non-exclusive.lista(class=mod)
+        span(rv-each-row=data)
+            .title
+                i.dropdown.icon
+                | {row.label}
+                .basic.label(class='app-' + mod + '-title-sum') R$ {row._stats.sum.valor_bruto | money}
+            .content
+                .ui.bottom.aligned.stackable.grid
+                    .row.cursor.app-grid-rows(
+                        rv-each-item='row.values'
+                        rv-row-key='item.fin_lancamentos_key'
+                    )
+                        .eleven.wide.column
+                            i.edit.icon(server='dbms financeiro fin_' + mod + ' edit', rv-row-key='item.fin_lancamentos_key')
+                            | {item.parceiro} -
+                            | {item.historico}
+
+                        .two.wide.right.aligned.column
+                            .ui.tooltip(
+                                class='app-' + mod + '-tooltip-datas'
+                                rv-data-dt_vencimento='item.dt_vencimento'
+                                rv-data-dt_documento='item.dt_documento'
+                                rv-data-dt_lancamento='item.dt_lancamento'
+                            )
+                                i.calendar.icon
+                                | {item.dt_vencimento}
+
+                        .three.wide.right.aligned.cursor.column(class='app-' + mod)
+                            .ui.tooltip(
+                                    class='app-' + mod + '-tooltip-actions'
+                                    rv-row-key='item.fin_lancamentos_key'
+                                )
+                                | {item.valor_bruto | money}
+
+
+                    .row.app-grid-rows
+                        .thirteen.wide.right.aligned.column Subtotal:
+                        .three.wide.column.right.aligned(class='app-' + mod + '-sum') R$ {row._stats.sum.valor_bruto | money}
+
+

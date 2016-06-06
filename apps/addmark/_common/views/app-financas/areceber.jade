@@ -3,16 +3,18 @@
 
 include ../../templates/seletor
 include ../../templates/periodo
+include ../../templates/popup_form
+include ../../templates/list_financeiro
 
 .ui.container.transition.hidden.app-areceber
     .ui.fluid.card
         .content
 
             // Menu Agrupamento
-            +seletor('Agrupar por...', 'dbms.financeiro.fin_areceber.pivotOpts')(class='pivot areceber')
+            +seletor('pivot areceber', 'Agrupar por...', 'dbms.financeiro.fin_areceber.pivotOpts')
 
             // Menu Listagem / Chart
-            +seletor('Visualizar...', 'dbms.financeiro.fin_areceber.displayOpts')(class='display areceber')
+            +seletor('display areceber', 'Visualizar...', 'dbms.financeiro.fin_areceber.displayOpts')
 
 
             // Área de trabalho
@@ -26,40 +28,43 @@ include ../../templates/periodo
                 canvas.transition.hidden#chart_areceber
 
                 // Listagem
-                .ui.fluid.styled.accordion.non-exclusive.lista.areceber
-                    span(rv-each-row='dbms.financeiro.fin_areceber.data.group')
-                        .title
-                            i.dropdown.icon
-                            | {row.label}
-                            .basic.label.app-receita-title-sum R$ {row._stats.sum.valor_bruto | money}
-                        .content
-                            .ui.bottom.aligned.stackable.grid
-                                .row.cursor.app-grid-rows(
-                                    rv-each-item='row.values'
-                                    rv-row-key='item.fin_lancamentos_key'
-                                )
-                                    .eleven.wide.column
-                                        i.edit.icon(server='dbms financeiro fin_apagar edit', rv-row-key='item.fin_lancamentos_key')
-                                        | {item.parceiro} -
-                                        | {item.historico}
+                +listFinanceiro(true)
 
-                                    .two.wide.right.aligned.column
-                                        .ui.tooltip.app-areceber-tooltip-datas(
-                                            rv-data-dt_vencimento='item.dt_vencimento'
-                                            rv-data-dt_documento='item.dt_documento'
-                                            rv-data-dt_lancamento='item.dt_lancamento'
-                                        )
-                                            i.calendar.icon
-                                            | {item.dt_vencimento}
+                //
+                    .ui.fluid.styled.accordion.non-exclusive.lista.areceber
+                        span(rv-each-row='dbms.financeiro.fin_areceber.data.group')
+                            .title
+                                i.dropdown.icon
+                                | {row.label}
+                                .basic.label.app-receita-title-sum R$ {row._stats.sum.valor_bruto | money}
+                            .content
+                                .ui.bottom.aligned.stackable.grid
+                                    .row.cursor.app-grid-rows(
+                                        rv-each-item='row.values'
+                                        rv-row-key='item.fin_lancamentos_key'
+                                    )
+                                        .eleven.wide.column
+                                            i.edit.icon(server='dbms financeiro fin_apagar edit', rv-row-key='item.fin_lancamentos_key')
+                                            | {item.parceiro} -
+                                            | {item.historico}
 
-                                    .three.wide.right.aligned.cursor.column.app-receita
-                                        .ui.tooltip.app-areceber-tooltip-actions(rv-row-key='item.fin_lancamentos_key')
-                                            | {item.valor_bruto | money}
+                                        .two.wide.right.aligned.column
+                                            .ui.tooltip.app-areceber-tooltip-datas(
+                                                rv-data-dt_vencimento='item.dt_vencimento'
+                                                rv-data-dt_documento='item.dt_documento'
+                                                rv-data-dt_lancamento='item.dt_lancamento'
+                                            )
+                                                i.calendar.icon
+                                                | {item.dt_vencimento}
+
+                                        .three.wide.right.aligned.cursor.column.app-receita
+                                            .ui.tooltip.app-areceber-tooltip-actions(rv-row-key='item.fin_lancamentos_key')
+                                                | {item.valor_bruto | money}
 
 
-                                .row.app-grid-rows
-                                    .thirteen.wide.right.aligned.column Subtotal:
-                                    .three.wide.column.right.aligned.app-receita-sum R$ {row._stats.sum.valor_bruto | money}
+                                    .row.app-grid-rows
+                                        .thirteen.wide.right.aligned.column Subtotal:
+                                        .three.wide.column.right.aligned.app-receita-sum R$ {row._stats.sum.valor_bruto | money}
 
         // Footer
         .extra.content
@@ -67,22 +72,9 @@ include ../../templates/periodo
                 | Total à Receber: R$ {dbms.financeiro.fin_areceber.data.group._stats.sum.valor_bruto | money}
 
 
-// Form popup de edição teste labs
-.ui.modal.app-areceber-form
+    // Form popup de edição teste labs
+    +popupForm(
+        'dbms financeiro fin_areceber',
+        'Lançamentos à Receber'
+    )
 
-    // Header
-    .ui.header
-        i.big.browser.icon
-        .content
-            | Lançamentos à Receber
-            .sub.header {dbms.financeiro.fin_areceber.formInfo}
-
-    // Form
-    div.content.dbms.financeiro.fin_areceber-form
-
-    // Botões
-    div.actions
-        div.ui.green.button.ok(
-        server='dbms financeiro fin_areceber save',
-        ) Salvar Alterações
-        div.ui.orange.button.cancel Cancelar

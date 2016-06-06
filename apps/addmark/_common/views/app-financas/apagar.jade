@@ -4,16 +4,18 @@
 // Templates
 include ../../templates/seletor
 include ../../templates/periodo
+include ../../templates/popup_form
+include ../../templates/list_financeiro
 
 .ui.container.transition.hidden.app-apagar
     .ui.fluid.card
         .content
 
             // Menu Agrupamento
-            +seletor('Agrupar por...', 'dbms.financeiro.fin_apagar.pivotOpts')(class='pivot apagar')
+            +seletor('pivot apagar', 'Agrupar por...', 'dbms.financeiro.fin_apagar.pivotOpts')
 
             // Menu Listagem / Chart
-            +seletor('Visualizar...', 'dbms.financeiro.fin_apagar.displayOpts')(class='display apagar')
+            +seletor('display apagar', 'Visualizar...', 'dbms.financeiro.fin_apagar.displayOpts')
 
 
             // Área de trabalho
@@ -27,40 +29,43 @@ include ../../templates/periodo
                 canvas.transition.hidden#chart_apagar
 
                 // Listagem
-                .ui.fluid.styled.accordion.non-exclusive.lista.apagar
-                    span(rv-each-row='dbms.financeiro.fin_apagar.data.group')
-                        .title
-                            i.dropdown.icon
-                            | {row.label}
-                            .basic.label.app-despesa-title-sum {row._stats.sum.valor_bruto | money}
-                        .content
-                            .ui.bottom.aligned.stackable.grid
-                                .row.cursor.app-grid-rows(
-                                    rv-each-item='row.values'
-                                    rv-row-key='item.fin_lancamentos_key'
+                +listFinanceiro(false)
 
-                                )
-                                    .eleven.wide.column
-                                        i.edit.icon(server='dbms financeiro fin_apagar edit', rv-row-key='item.fin_lancamentos_key')
-                                        | {item.parceiro} -
-                                        | {item.historico}
+                //
+                    .ui.fluid.styled.accordion.non-exclusive.lista.apagar
+                        span(rv-each-row='dbms.financeiro.fin_apagar.data.group')
+                            .title
+                                i.dropdown.icon
+                                | {row.label}
+                                .basic.label.app-despesa-title-sum {row._stats.sum.valor_bruto | money}
+                            .content
+                                .ui.bottom.aligned.stackable.grid
+                                    .row.cursor.app-grid-rows(
+                                        rv-each-item='row.values'
+                                        rv-row-key='item.fin_lancamentos_key'
 
-                                    .two.wide.right.aligned.column
-                                        .ui.tooltip.app-apagar-tooltip-datas(
-                                            rv-data-dt_vencimento='item.dt_vencimento'
-                                            rv-data-dt_documento='item.dt_documento'
-                                            rv-data-dt_lancamento='item.dt_lancamento'
-                                        )
-                                            i.calendar.icon
-                                            | {item.dt_vencimento}
+                                    )
+                                        .eleven.wide.column
+                                            i.edit.icon(server='dbms financeiro fin_apagar edit', rv-row-key='item.fin_lancamentos_key')
+                                            | {item.parceiro} -
+                                            | {item.historico}
 
-                                    .three.wide.right.aligned.cursor.column.app-despesa
-                                        .ui.tooltip.app-apagar-tooltip-actions(rv-row-key='item.fin_lancamentos_key')
-                                            | R$ {item.valor_bruto | money}
+                                        .two.wide.right.aligned.column
+                                            .ui.tooltip.app-apagar-tooltip-datas(
+                                                rv-data-dt_vencimento='item.dt_vencimento'
+                                                rv-data-dt_documento='item.dt_documento'
+                                                rv-data-dt_lancamento='item.dt_lancamento'
+                                            )
+                                                i.calendar.icon
+                                                | {item.dt_vencimento}
 
-                                .row.app-grid-rows
-                                    .thirteen.wide.right.aligned.column Subtotal:
-                                    .three.wide.column.right.aligned.app-despesa-sum {row._stats.sum.valor_bruto | money}
+                                        .three.wide.right.aligned.cursor.column.app-despesa
+                                            .ui.tooltip.app-apagar-tooltip-actions(rv-row-key='item.fin_lancamentos_key')
+                                                | R$ {item.valor_bruto | money}
+
+                                    .row.app-grid-rows
+                                        .thirteen.wide.right.aligned.column Subtotal:
+                                        .three.wide.column.right.aligned.app-despesa-sum {row._stats.sum.valor_bruto | money}
 
         // Footer
         .extra.content
@@ -68,22 +73,28 @@ include ../../templates/periodo
                 | Total à Pagar: R$ {dbms.financeiro.fin_apagar.data.group._stats.sum.valor_bruto | money}
 
 
-// Form popup de edição teste labs
-.ui.modal.app-apagar-form
+    // Form popup de edição teste labs
+    +popupForm(
+        'dbms financeiro fin_apagar',
+        'Lançamentos à Pagar'
+    )
 
-    // Header
-    .ui.header
-        i.big.browser.icon
-        .content
-            | Lançamentos à Pagar
-            .sub.header {dbms.financeiro.fin_apagar.formInfo}
+//
+    .ui.modal.app-apagar-form
 
-    // Form
-    div.content.dbms.financeiro.fin_apagar-form
+        // Header
+        .ui.header
+            i.big.browser.icon
+            .content
+                | Lançamentos à Pagar
+                .sub.header {dbms.financeiro.fin_apagar.formInfo}
 
-    // Botões
-    div.actions
-        div.ui.green.button.ok(
-            server='dbms financeiro fin_apagar save',
-        ) Salvar Alterações
-        div.ui.orange.button.cancel Cancelar
+        // Form
+        div.content.dbms.financeiro.fin_apagar-form
+
+        // Botões
+        div.actions
+            div.ui.green.button.ok(
+                server='dbms financeiro fin_apagar save',
+            ) Salvar Alterações
+            div.ui.orange.button.cancel Cancelar

@@ -595,7 +595,7 @@ $.fn.api.settings.api = {};
         if (response['layout']){
             var place = response['form_place']
                 ? response['form_place']
-                : '.' + mod.path + '-form'
+                : '.' + mod.path + '-form-area'
             ;
             response['formId'] = tshark.createForm(mod, response.layout, place);
         }
