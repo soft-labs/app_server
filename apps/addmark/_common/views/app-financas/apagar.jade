@@ -31,41 +31,6 @@ include ../../templates/list_financeiro
                 // Listagem
                 +listFinanceiro(false)
 
-                //
-                    .ui.fluid.styled.accordion.non-exclusive.lista.apagar
-                        span(rv-each-row='dbms.financeiro.fin_apagar.data.group')
-                            .title
-                                i.dropdown.icon
-                                | {row.label}
-                                .basic.label.app-despesa-title-sum {row._stats.sum.valor_bruto | money}
-                            .content
-                                .ui.bottom.aligned.stackable.grid
-                                    .row.cursor.app-grid-rows(
-                                        rv-each-item='row.values'
-                                        rv-row-key='item.fin_lancamentos_key'
-
-                                    )
-                                        .eleven.wide.column
-                                            i.edit.icon(server='dbms financeiro fin_apagar edit', rv-row-key='item.fin_lancamentos_key')
-                                            | {item.parceiro} -
-                                            | {item.historico}
-
-                                        .two.wide.right.aligned.column
-                                            .ui.tooltip.app-apagar-tooltip-datas(
-                                                rv-data-dt_vencimento='item.dt_vencimento'
-                                                rv-data-dt_documento='item.dt_documento'
-                                                rv-data-dt_lancamento='item.dt_lancamento'
-                                            )
-                                                i.calendar.icon
-                                                | {item.dt_vencimento}
-
-                                        .three.wide.right.aligned.cursor.column.app-despesa
-                                            .ui.tooltip.app-apagar-tooltip-actions(rv-row-key='item.fin_lancamentos_key')
-                                                | R$ {item.valor_bruto | money}
-
-                                    .row.app-grid-rows
-                                        .thirteen.wide.right.aligned.column Subtotal:
-                                        .three.wide.column.right.aligned.app-despesa-sum {row._stats.sum.valor_bruto | money}
 
         // Footer
         .extra.content
@@ -78,23 +43,3 @@ include ../../templates/list_financeiro
         'dbms financeiro fin_apagar',
         'Lançamentos à Pagar'
     )
-
-//
-    .ui.modal.app-apagar-form
-
-        // Header
-        .ui.header
-            i.big.browser.icon
-            .content
-                | Lançamentos à Pagar
-                .sub.header {dbms.financeiro.fin_apagar.formInfo}
-
-        // Form
-        div.content.dbms.financeiro.fin_apagar-form
-
-        // Botões
-        div.actions
-            div.ui.green.button.ok(
-                server='dbms financeiro fin_apagar save',
-            ) Salvar Alterações
-            div.ui.orange.button.cancel Cancelar

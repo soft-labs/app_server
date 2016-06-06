@@ -30,42 +30,6 @@ include ../../templates/list_financeiro
                 // Listagem
                 +listFinanceiro(true)
 
-                //
-                    .ui.fluid.styled.accordion.non-exclusive.lista.areceber
-                        span(rv-each-row='dbms.financeiro.fin_areceber.data.group')
-                            .title
-                                i.dropdown.icon
-                                | {row.label}
-                                .basic.label.app-receita-title-sum R$ {row._stats.sum.valor_bruto | money}
-                            .content
-                                .ui.bottom.aligned.stackable.grid
-                                    .row.cursor.app-grid-rows(
-                                        rv-each-item='row.values'
-                                        rv-row-key='item.fin_lancamentos_key'
-                                    )
-                                        .eleven.wide.column
-                                            i.edit.icon(server='dbms financeiro fin_apagar edit', rv-row-key='item.fin_lancamentos_key')
-                                            | {item.parceiro} -
-                                            | {item.historico}
-
-                                        .two.wide.right.aligned.column
-                                            .ui.tooltip.app-areceber-tooltip-datas(
-                                                rv-data-dt_vencimento='item.dt_vencimento'
-                                                rv-data-dt_documento='item.dt_documento'
-                                                rv-data-dt_lancamento='item.dt_lancamento'
-                                            )
-                                                i.calendar.icon
-                                                | {item.dt_vencimento}
-
-                                        .three.wide.right.aligned.cursor.column.app-receita
-                                            .ui.tooltip.app-areceber-tooltip-actions(rv-row-key='item.fin_lancamentos_key')
-                                                | {item.valor_bruto | money}
-
-
-                                    .row.app-grid-rows
-                                        .thirteen.wide.right.aligned.column Subtotal:
-                                        .three.wide.column.right.aligned.app-receita-sum R$ {row._stats.sum.valor_bruto | money}
-
         // Footer
         .extra.content
             span.right.floated.app-receita-footer-sum
