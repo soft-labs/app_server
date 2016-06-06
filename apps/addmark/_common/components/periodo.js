@@ -21,7 +21,7 @@ app.periodo = {
         $(el)
             .pickadate({
                 container: '.app',
-                selectMonths: true,
+                selectMonths: false,
                 
                 onSet: function(ctx){
                     app.periodo[dt] = moment(ctx.select).format('DD/MM/YYYY');

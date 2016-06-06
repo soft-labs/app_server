@@ -30,6 +30,14 @@ tshark.modulos._add('dbms.financeiro.fin_lancamentos', {
         */
     },
 
+    /**
+     * Atualiza dados quando o periodo é mudado
+     */
+    onChangePeriodo: function(el, dt){
+        dbms.financeiro.fin_apagar.list();
+        dbms.financeiro.fin_areceber.list();
+    },
+
 
     //region :: Eventos - List
 

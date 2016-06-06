@@ -451,7 +451,7 @@ $.fn.nag.settings = {
 
   namespace   : 'Nag',
 
-  // allows cookie to be overriden
+  // allows cookie to be overridden
   persist     : false,
 
   // set to zero to require manually dismissal, otherwise hides on its own
@@ -497,5 +497,12 @@ $.fn.nag.settings = {
   onHide: function() {}
 
 };
+
+// Adds easing
+$.extend( $.easing, {
+  easeOutQuad: function (x, t, b, c, d) {
+    return -c *(t/=d)*(t-2) + b;
+  }
+});
 
 })( jQuery, window, document );

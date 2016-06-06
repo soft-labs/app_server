@@ -232,7 +232,8 @@ TShark.prototype.modulo = function(path){
             : this.api['exec'] + api
         );
 
-        $('#_direct_api_helper_')
+        $('<button>')
+            .api(tshark.api)
             .data(data)
             .api('query');
     };

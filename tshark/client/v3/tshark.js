@@ -47,16 +47,6 @@ var CONSOLE_ON = true;
     TShark.prototype.init = function (options) {
         options = options || {};
 
-        // Elemento para chamadas de APIs genericas
-        var d = $("<div>", {
-            id: '_direct_api_helper_',
-            class: "ui hidden"
-        }).api(this.api);
-
-        $('body')
-            .append(d);
-
-
         // Registra módulos no init
         if(options['register']){
             this.register(options['register']);

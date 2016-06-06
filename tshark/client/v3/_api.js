@@ -203,7 +203,8 @@ $.fn.api.settings.api = {};
         data = data || {};
         
         data.action = api.trim();
-        $('#_direct_api_helper_')
+        $('<button>')
+            .api(tshark.api)
             .data(data)
             .api('query');
     };
@@ -318,6 +319,7 @@ $.fn.api.settings.api = {};
             settings.method = method = tshark.api_map[map][0];
             settings['_on_before_'] = false;
 
+            
         } else {
             tshark.register(path, function () {
                 $(el).api('query');
