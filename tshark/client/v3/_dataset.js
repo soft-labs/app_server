@@ -44,6 +44,31 @@ function Dataset (path, ref){
     this.index = {};
 
     /**
+     * Implementa mecanismo de informação de rows
+     * selecionados.
+     */
+    this.selected = {
+        keys: [],
+        rv: {
+            has_any: false,
+            has_one: false,
+            has_many: false
+        },
+        get has_any(){
+            this.rv.has_any = this.keys.length > 0;
+            return this.rv.has_any;
+        },
+        get has_one(){
+            this.rv.has_one = this.keys.length == 1;
+            return this.rv.has_one;
+        },
+        get has_many(){
+            this.rv.has_many = this.keys.length > 1;
+            return this.rv.has_many;
+        }
+    };
+
+    /**
      * Rows do dataset
      * @type {Array}
      */

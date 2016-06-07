@@ -3,7 +3,9 @@
 
 .ui.fluid.card
     .content
-        .ui.right.floated.horizontal.list
+        .ui.mini.compact.right.floated.secondary.menu
+            .item
+                | {dbms.enderecos.end_paises.data.selected.rv.has_any | not}
             .item
                 .ui.action.input
                     input#input_pesquisa(
@@ -12,13 +14,13 @@
                         server-onkeypress='dbms enderecos end_paises search'
                         data-comp='#input_pesquisa'
                     )
-                    button.ui.icon.button(
+                    button.ui.icon.button.cursor(
                             server='dbms enderecos end_paises search'
                             data-comp='#input_pesquisa'
                         )
                         i.search.icon
             .item
-                i.big.settings.icon(rv-class-disabled='dbms.enderecos.end_paises.nao_pode_excluir')
+                i.big.settings.icon(rv-class-disabled='dbms.enderecos.end_paises.data.selected.rv.has_any | not')
         .header Países Cadastrados
     .content
         table.ui.selectable.table
@@ -50,7 +52,8 @@
                         .ui.checkbox
                             input(
                                 type='checkbox'
-                                client-onchange='dbms enderecos end_paises OnChangeExclusao'
+                                rv-checked='item._selected_'
+                                rv-row-selected='item._selected_'
                             )
 
 // Form popup de edição

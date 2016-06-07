@@ -621,6 +621,9 @@ SQL.prototype._processResults = function *(sqlParams, results, obj, sql, meta){
         // Monta indice
         row._key_ = row[key];
         data.index[row._key_] = i;
+        
+        // Selected
+        row._selected_ = 0;
 
         // Em raros casos onde não houver fields pro sql, será forçado um '*', e
         // essa entrada aqui garantirá que todos os fields fiquem em lower

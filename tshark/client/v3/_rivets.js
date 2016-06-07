@@ -62,7 +62,7 @@ rivets.binders['row-key'] = {
     bind: function(el) {
         var self = this;
         this.callback = function() {
-            if (self['model'] && self.model['_dataset_']){
+            if (self['model'] && self.model.hasOwnProperty('_dataset_')){
                 try {
                     var dts = app[self.model._dataset_[0]][self.model._dataset_[1]][self.model._dataset_[2]].data;
                     dts.goTo($(this).data('key'));
@@ -79,6 +79,46 @@ rivets.binders['row-key'] = {
 
     routine: function(el, value) {
         $(el).data('key', value);
+    }
+};
+
+/**
+ * Binder para seleção de um row no dataset
+ *  Ex: div rv-row-key="row.map_filiais_key"
+ */
+rivets.binders['row-selected'] = {
+    bind: function(el) {
+        var self = this;
+        this.callback = function() {
+            if (self['model'] && self.model.hasOwnProperty('_dataset_') && self.model.hasOwnProperty('_selected_')){
+                try {
+                    var dts = app[self.model._dataset_[0]][self.model._dataset_[1]][self.model._dataset_[2]].data;
+
+                    if (self.model._selected_){
+                        dts.selected.keys.push(self.model._key_);
+                    } else {
+                        var i = dts.selected.keys.indexOf(self.model._key_);
+                        dts.selected.keys.remove(i, i);
+                    }
+
+                    dts.selected.rv.has_any  = dts.selected.keys.length > 0;
+                    dts.selected.rv.has_one  = dts.selected.keys.length == 1;
+                    dts.selected.rv.has_many = dts.selected.keys.length > 1;
+
+                    dts.goTo($(this).data('key'));
+                } catch (e){}
+            }
+        };
+        $(el).on('change', this.callback);
+        $(el).addClass('cursor');
+    },
+
+    unbind: function(el) {
+        $(el).off('change', this.callback);
+    },
+
+    routine: function(el, value) {
+        $(el).data('_selected_', value);
     }
 };
 

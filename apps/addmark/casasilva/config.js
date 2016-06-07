@@ -47,7 +47,7 @@ module.exports = {
     conexoes:{
 
         // Localhost
-        default: {
+        zdefault: {
             tipo: 'mysql',
             conn: {
                 database: 'softlabs',
@@ -58,7 +58,7 @@ module.exports = {
         },
 
         // King Host
-        zdefault: {
+        default: {
             tipo: 'mysql',
             conn: {
                 database: 'softlabs07',
