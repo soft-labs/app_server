@@ -379,12 +379,17 @@ TShark.prototype.modulo = function(path){
      * @returns {boolean}
      */
     TShark.prototype.modulo.prototype.save_before = function (sender, settings) {
+
+        // Passa valores
+        if (!this.data.row || !this.data.row['_key_']){
+            this.data.goTo($(sender).data('key'));
+        }
+
         if (!this.data.row){
             console.error(this.path + ': save_before -> data.row não definido');
             return false
         }
 
-        // Passa valores
         settings.data.row = this.data.row;
 
         // Insert
@@ -404,6 +409,14 @@ TShark.prototype.modulo = function(path){
         }
     };
 
+    TShark.prototype.modulo.prototype.insert_before = function (sender, settings) {
+        return this.save_before(sender, settings);
+    };
+
+    TShark.prototype.modulo.prototype.update_before = function (sender, settings) {
+        return this.save_before(sender, settings);
+    };
+    
     //endregion
 
     

@@ -15,7 +15,7 @@ tshark.modulos._add('dbms.financeiro.fin_lancamentos', {
     init: function(){
         
         app.charts.data.forecast = [];
-        
+
         /*
         // Cria o chart forecast
         app.charts.add('forecast', '#chartForecast', {
@@ -30,12 +30,20 @@ tshark.modulos._add('dbms.financeiro.fin_lancamentos', {
         */
     },
 
+    refreshFinanceiro: function(){
+        if (dbms.financeiro['fin_apagar']) {
+            dbms.financeiro.fin_apagar.list();
+        }
+        if (dbms.financeiro['fin_apagar']) {
+            dbms.financeiro.fin_apagar.list();
+        }
+    },
+
     /**
      * Atualiza dados quando o periodo é mudado
      */
     onChangePeriodo: function(el, dt){
-        dbms.financeiro.fin_apagar.list();
-        dbms.financeiro.fin_areceber.list();
+        this.refreshFinanceiro();
     },
 
 

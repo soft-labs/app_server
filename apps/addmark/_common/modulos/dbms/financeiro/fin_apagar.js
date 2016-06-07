@@ -35,8 +35,8 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
         });
 
         this.displayOpts = [
-            {value: 1, icon: 'icon list',      label: 'Listagem', client: this.path + '.swapList'},
-            {value: 2, icon: 'icon bar chart', label: 'Gráfico', client: this.path + '.swapList'}
+            {value: 1, icon: 'icon list',      client: this.path + '.swapList', label: 'Listagem'},
+            {value: 2, icon: 'icon bar chart', client: this.path + '.swapList', label: 'Gráfico'}
         ];
 
         //endregion
@@ -54,8 +54,8 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
 
         //endregion
 
+        // Liga
         this.list();
-
     },
 
     /**
@@ -114,6 +114,8 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
     swapList: function(){
         var value = $(this).data('value');
         $('#chart_apagar')
+            .transition(value == '1' ? 'hide' : 'show');
+        $('#pie_apagar')
             .transition(value == '1' ? 'hide' : 'show');
         $('.lista.apagar')
             .transition(value == '2' ? 'hide' : 'show');
@@ -182,7 +184,7 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
         }
 
         // Ajusta os dados do gráfico de barras
-        dbms.financeiro.fin_apagar.setChartBarData();
+        dbms.financeiro.fin_apagar.setChartData();
 
 
         dbms.financeiro.fin_apagar.setTooltips();
@@ -193,16 +195,31 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
     /**
      * Alimenta o bar chart com dados
      */
-    setChartBarData: function(){
-        app.charts.data.apagar.labels = [];
-        app.charts.data.apagar.datasets[0].data = [];
+    setChartData: function(){
 
+        // Monta dados
+        var labels = []
+            , data = []
+        ;
         dbms.financeiro.fin_apagar.data.group.forEach(row => {
-            app.charts.data.apagar.labels.push(row.label);
-            app.charts.data.apagar.datasets[0].data.push(row._stats.sum.valor_bruto);
+            labels.push(row.label);
+            data.push(row._stats.sum.valor_bruto);
         });
 
-        app.charts.reset('apagar');
+        // Gráfico de barras
+        if (app.charts.data['apagar']) {
+            app.charts.data.apagar.labels = labels;
+            app.charts.data.apagar.datasets[0].data = data;
+            app.charts.reset('apagar');
+        }
+
+        // Gráfico de pizza
+        if (app.charts.data['pie_apagar']) {
+            app.charts.data.pie_apagar.labels = labels;
+            app.charts.data.pie_apagar.datasets.data = data;
+            app.charts.reset('pie_apagar');
+        }
+
     },
 
 

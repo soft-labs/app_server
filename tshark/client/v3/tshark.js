@@ -120,7 +120,7 @@ var CONSOLE_ON = true;
         // Bind de APIs em change
         $('[server-onchange]').not('.api-binded')
             .api(this.change_api)
-            .addClass('api-binded')
+            .addClass('api-binded onchange-binded')
             .each(function(){
                 $(this).data('action', $(this).attr('server-onchange'));
             })
@@ -170,14 +170,14 @@ var CONSOLE_ON = true;
         $('[client-onblur]').not('.api-client-binded')
             .addClass('api-client-binded')
             .on('blur', function(ev) {
-                return funcClient.call($(this), 'client-blur', ev);
+                return funcClient.call($(this), 'client-onblur', ev);
             })
         ;
 
         $('[client-onchange]').not('.api-client-binded')
             .addClass('api-client-binded')
             .on('change', function(ev) {
-                return funcClient.call($(this), 'client-change', ev);
+                return funcClient.call($(this), 'client-onchange', ev);
             })
         ;
 
@@ -267,10 +267,11 @@ var CONSOLE_ON = true;
             .addClass('binded')
         ;
 
+        /* PRODUZ ERRO - checkbox() CRIADO NO ELEMENTO HTML ERRADO
         $(ref).find('[type=checkbox]').not('.binded')
             .checkbox()
             .addClass('binded')
-        ;
+        ;*/
 
         $(ref).find('.ui.accordion.non-exclusive').not('.binded')
             .accordion({

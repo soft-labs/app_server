@@ -1,37 +1,54 @@
 //
    Created by labs on 04/06/16.
 
-mixin listFinanceiro(receita)
-    -
-        var mod = (receita ? 'areceber' : 'apagar');
-        var data = 'dbms.financeiro.fin_' + mod + '.data.group';
+mixin listFinAPagar()
+    +_listFinanceiro('apagar', 'dbms.financeiro.fin_apagar.data.group')
 
+mixin listFinAReceber()
+    +_listFinanceiro('areceber', 'dbms.financeiro.fin_areceber.data.group')
+
+mixin listFinAPagarMini()
+    +_listFinanceiro('apagar', 'dbms.financeiro.fin_apagar.data.group', true)
+
+mixin listFinAReceberMini()
+    +_listFinanceiro('areceber', 'dbms.financeiro.fin_areceber.data.group', true)
+
+
+mixin _listFinanceiro(mod, dados, mini)
     .ui.fluid.styled.accordion.non-exclusive.lista(class=mod)
-        span(rv-each-row=data)
+        span(rv-each-row=dados)
             .title
-                i.dropdown.icon
+                //i.dropdown.icon
                 | {row.label}
                 .basic.label(class='app-' + mod + '-title-sum') R$ {row._stats.sum.valor_bruto | money}
             .content
-                .ui.bottom.aligned.stackable.grid
+                .ui.bottom.aligned.stackable.divided.grid
                     .row.cursor.app-grid-rows(
-                        rv-each-item='row.values'
-                        rv-row-key='item.fin_lancamentos_key'
-                    )
-                        .eleven.wide.column
-                            i.edit.icon(server='dbms financeiro fin_' + mod + ' edit', rv-row-key='item.fin_lancamentos_key')
-                            | {item.parceiro} -
-                            | {item.historico}
+                            rv-each-item='row.values'
+                            rv-row-key='item.fin_lancamentos_key'
+                        )
+                        - if (mini)
+                            .thirteen.wide.column
+                                i.edit.icon(server='dbms financeiro fin_' + mod + ' edit', rv-row-key='item.fin_lancamentos_key')
+                                | {item.historico}
 
-                        .two.wide.right.aligned.column
-                            .ui.tooltip(
-                                class='app-' + mod + '-tooltip-datas'
-                                rv-data-dt_vencimento='item.dt_vencimento'
-                                rv-data-dt_documento='item.dt_documento'
-                                rv-data-dt_lancamento='item.dt_lancamento'
-                            )
-                                i.calendar.icon
-                                | {item.dt_vencimento}
+                        - if (!mini)
+                            .five.wide.column
+                                i.edit.icon(server='dbms financeiro fin_' + mod + ' edit', rv-row-key='item.fin_lancamentos_key')
+                                | {item.historico}
+
+                            .six.wide.center.aligned.column
+                                | {item.parceiro}
+
+                            .two.wide.right.aligned.column
+                                .ui.tooltip(
+                                        class='app-' + mod + '-tooltip-datas'
+                                        rv-data-dt_vencimento='item.dt_vencimento'
+                                        rv-data-dt_documento='item.dt_documento'
+                                        rv-data-dt_lancamento='item.dt_lancamento'
+                                    )
+                                    i.calendar.icon
+                                    | {item.dt_vencimento}
 
                         .three.wide.right.aligned.cursor.column(class='app-' + mod)
                             .ui.tooltip(

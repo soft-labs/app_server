@@ -46,6 +46,23 @@ app.areas.add('app-home', {
                 }
             ]
         });
+
+        // Pie a pagar
+        app.charts.add('pie_apagar', 'pie_apagar', {
+            type: 'pie',
+            options: {
+                
+            }
+        }, {labels: [], datasets: []});
+        
+        // Pie a receber
+        app.charts.add('pie_areceber', 'pie_areceber', {
+            type: 'pie',
+            options: {
+                
+            }
+        }, {labels: [], datasets: []});
+        
         
         //endregion
         
@@ -70,28 +87,6 @@ app.areas.add('app-home', {
                         beginAtZero: true
                     }
                 }
-            }
-        });
-
-        // Pagamentos
-        ctx = document.getElementById("piePagtos").getContext("2d");
-        this.charts.piePagtos = new Chart(ctx, {
-            type: 'pie',
-            data: this.struct.despesas.pie,
-            options: {
-                slegend: false,
-                ztitle: false
-            }
-        });
-
-        // Receitas
-        ctx = document.getElementById("pieRec").getContext("2d");
-        this.charts.pieRec = new Chart(ctx, {
-            type: 'pie',
-            data: this.struct.receitas.pie,
-            options: {
-                slegend: false,
-                ztitle: false
             }
         });
 
@@ -285,52 +280,8 @@ app.areas.add('app-home', {
                 break;
         }
 
-        app.areas['app-home'].setPie(s);
-
-    },
-
-    setPie: function(s){
-
-        var pie = app.areas['app-home'].charts[(s == 'receitas' ? 'pieRec' : 'piePagtos')];
-        pie.data.labels = [];
-        pie.data.datasets = [];
-        pie.data.datasets.push({data: [], backgroundColor: []});
-
-        var l = app.areas['app-home'].struct[s].data.length
-            , i = Math.random();
-        app.areas['app-home'].struct[s].data.forEach(r => {
-            pie.data.labels.push(r.label);
-            pie.data.datasets[0].data.push(r._stats.sum.valor);
-            pie.data.datasets[0].backgroundColor.push(randomColor());
-
-        });
-        pie.update();
-    },
-
-    showChartDesp: function(){
-        $('.lista.despesas').transition('hide');
-        $('#piePagtos').transition('show');
-        $('#barPagtos').transition('show');
-    },
-
-    showListDesp: function(){
-        $('#piePagtos').transition('hide');
-        $('#barPagtos').transition('hide');
-        $('.lista.despesas').transition('show');
-    },
-
-    showChartRec: function(){
-        $('.lista.receitas').transition('hide');
-        $('#pieRec').transition('show');
-        $('#barRec').transition('show');
-    },
-
-    showListRec: function(){
-        $('#barRec').transition('hide');
-        $('#pieRec').transition('hide');
-        $('.lista.receitas').transition('show');
     }
-    
+
 });
 
 var rec    = [rdVal(), rdVal(), rdVal(), rdVal(), rdVal(), rdVal()]

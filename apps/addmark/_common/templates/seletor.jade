@@ -26,20 +26,27 @@ mixin seletor(title, itens)
             | {menu.label}
         .divider
 
-// old
-    span.right.floated.ui.secondary.menu
-        .ui.labeled.icon.selection.dropdown(class=classe)
-            i
-            span.text
-            .menu.popup.left.transition.hidden
-                .header
-                    i.options.icon
-                    = title
-                .divider
-                .item(
-                        rv-each-menu=itens
-                        rv-data-value='menu.value'
-                        style="white-space: nowrap;"
-                    )
-                    i(rv-class='menu.icon')
-                    | {menu.label}
+mixin seletorMenu(itens, icon)
+
+    // Trigger
+    a.item.inline.pop(
+            data-position='left center'
+            data-exclusive='true'
+            data-hoverable='true'
+        )
+        i.icon(
+            class=icon ? icon : 'options'
+        )
+
+    // Popup
+    .ui.vertical.pointing.menu.popup.transition.hidden
+        a.right.aligned.item.cursor(
+                rv-each-menu=itens
+                rv-data-value='menu.value'
+                rv-client='menu.client'
+                rv-server='menu.server'
+                style="white-space: nowrap;"
+            )
+            | {menu.label}
+            i(rv-class='menu.icon')
+        .divider

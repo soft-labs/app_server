@@ -34,11 +34,20 @@
 
 
     // **** Chart Impacto **** //
+    // Gráfico para demonstrar a composição das contas provisionadas
+        Exibir a distribuição de provisionamento a pagar e a a receber por contas
+        Grafico pizza ou barra
+
+        - Impostos vira Controle de retenções
+          - Quanto? Pra quem? Pra quando? Qual categoria? Conta de provisionamento?
+
+        - Taxas e fretes vira Despesas Acessórias, e, embora identico a retencoes, imlementar separado
+
     .ui.fluid.card
         .content
             //i.right.floated.warning.sign.icon
             .header Mapa de Impacto
-            .meta Principais Receitas e Despesas do Período
+                .meta Principais Receitas e Despesas do Período
         .description.app-no-border(
             rv-class-app-blue-box="cockpit.struct.forecast.result | isGreater '0'"
             rv-class-app-red-box="cockpit.struct.forecast.result | isLess '0'"
@@ -58,22 +67,29 @@
     // **** Despesas **** //
     .ui.card
         .content
-            span.right.floated.ui.secondary.menu
-                i.cursor.external.icon(
-                    server='dbms financeiro fin_apagar list'
-                    area='app-financas'
-                    subarea='app-apagar'
-                )
+            .ui.mini.compact.right.floated.secondary.menu
 
+                // Menu Agrupamento
+                +seletorMenu('dbms.financeiro.fin_apagar.pivotOpts', 'tasks')
+
+                // Menu Listagem / Chart
+                +seletorMenu('dbms.financeiro.fin_apagar.displayOpts', 'pie chart')
+
+                // Popup
+                a.item
+                    i.cursor.external.icon(
+                        client='app areas show'
+                        data-area='app-financas'
+                        data-subarea='app-apagar'
+                    )
 
             .header Pagamentos Programados
             .meta &nbsp;&nbsp;Período {periodo.de} à {periodo.ate}
             .description
-                canvas.transition.hidden#piePagtos
+                canvas.transition.hidden#pie_apagar
 
                 // Listagem
-                +listFinanceiro(false)
-
+                +listFinAPagarMini()
 
         .extra.content
             span.right.floated
@@ -84,41 +100,29 @@
     // **** Receitas **** //
     .ui.card
         .content
-            span.right.floated.ui.secondary.menu
-                .ui.dropdown.item
-                    i.options.icon
-                    span.text Vencimento
-                    .menu
-                        .item(
-                            rv-each-menu='cockpit.struct.receitas.options'
-                            rv-on-click='cockpit.popSubmenu'
-                            rv-data-key='menu._index_'
-                            data-sub='receitas'
-                            style="white-space: nowrap;"
-                        )
-                            i(rv-class='menu.icon')
-                            span.text {menu.label}
+            .ui.mini.compact.right.floated.secondary.menu
 
-            span.right.floated.ui.secondary.menu
-                .ui.dropdown.item
-                    span.text
-                        i.pie.list.icon
-                        | Listagem
-                    .menu
-                        .active.item(rv-on-click='cockpit.showListRec')
-                            i.list.icon
-                            span.text Listagem
-                        .item(rv-on-click='cockpit.showChartRec')
-                            i.pie.chart.icon
-                            span.text Gráficos
+                // Menu Agrupamento
+                +seletorMenu('dbms.financeiro.fin_areceber.pivotOpts', 'tasks')
+
+                // Menu Listagem / Chart
+                +seletorMenu('dbms.financeiro.fin_areceber.displayOpts', 'pie chart')
+
+                // Popup
+                a.item
+                    i.cursor.external.icon(
+                        client='app areas show'
+                        data-area='app-financas'
+                        data-subarea='app-areceber'
+                    )
 
             .header Recebimentos Programados
             .meta &nbsp;&nbsp;Período {periodo.de} à {periodo.ate}
             .description
-                canvas.transition.hidden#pieRec
+                canvas.transition.hidden#pie_areceber
 
                 // Listagem
-                +listFinanceiro(true)
+                +listFinAReceberMini()
 
 
         .extra.content

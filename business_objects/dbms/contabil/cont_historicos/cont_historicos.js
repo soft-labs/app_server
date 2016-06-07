@@ -39,7 +39,7 @@ function ContHistoricos(){
                     tipo: types.comp.int, label: 'Tipo:'
                 },
                 historico: {
-                    tipo: types.comp.text, label: 'Historico:'
+                    tipo: types.comp.text, label: 'Categoria:'
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'

@@ -35,20 +35,9 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
         });
 
         this.displayOpts = [
-            {value: 1, icon: 'icon list',  label: 'Listagem'},
-            {value: 2, icon: 'icon bar chart', label: 'Gráfico'}
+            {value: 1, icon: 'icon list',      client: this.path + '.swapList', label: 'Listagem'},
+            {value: 2, icon: 'icon bar chart', client: this.path + '.swapList', label: 'Gráfico'}
         ];
-
-        $('.display.areceber')
-            .dropdown({
-                onChange: function(value, text, $choice){
-                    $('#chart_areceber')
-                        .transition(value == '1' ? 'hide' : 'show');
-                    $('.lista.areceber')
-                        .transition(value == '2' ? 'hide' : 'show');
-                }
-            })
-            .dropdown('set selected', 1);
 
         //endregion
 
@@ -57,22 +46,15 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
         this.data.group = [];
 
         this.pivotOpts = [
-            {value: 1, icon: 'icon tasks', label: 'Vencimento'},
-            {value: 2, icon: 'icon tasks', label: 'Clientes'},
-            {value: 3, icon: 'icon tasks', label: 'Situação'},
-            {value: 4, icon: 'icon tasks', label: 'Origem'}
+            {value: 1, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Vencimento'},
+            {value: 2, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Clientes'},
+            {value: 3, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Situação'},
+            {value: 4, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Origem'}
         ];
-
-        $('.pivot.areceber')
-            .dropdown({
-                onChange: function(value, text, $choice){
-                    dbms.financeiro.fin_areceber.pivotData();
-                }
-            })
-            .dropdown('set selected', 1);
 
         //endregion
 
+        // Liga
         this.list();
     },
 
@@ -136,16 +118,30 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
     },
 
 
+
+    /**
+     * Alterna entre lista e gráfico
+     */
+    swapList: function(){
+        var value = $(this).data('value');
+        $('#chart_areceber')
+            .transition(value == '1' ? 'hide' : 'show');
+        $('#pie_areceber')
+            .transition(value == '1' ? 'hide' : 'show');
+        $('.lista.areceber')
+            .transition(value == '2' ? 'hide' : 'show');
+    },
+
     /**
      * Executa o pivotamento de dados para os
      * agrupamentos
      */
     pivotData: function(){
-        var p = $('.pivot.areceber').dropdown('get value');
+        var p = $(this).data('value');
 
         switch (p){
 
-            case '2':
+            case 2:
                 dbms.financeiro.fin_areceber.data.group = dbms.financeiro.fin_areceber.data.rows.groupBy({
                     field: 'parceiro',
                     order: {
@@ -161,7 +157,7 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
                 });
                 break;
 
-            case '3':
+            case 3:
                 dbms.financeiro.fin_areceber.data.group = dbms.financeiro.fin_areceber.data.rows.groupBy({
                     field: 'lanc_status',
                     order: {
@@ -177,7 +173,7 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
                 });
                 break;
 
-            case '4':
+            case 4:
                 dbms.financeiro.fin_areceber.data.group = dbms.financeiro.fin_areceber.data.rows.groupBy({
                     field: 'historico',
                     order: {

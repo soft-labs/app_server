@@ -420,7 +420,7 @@ Array.prototype.pivot = function (campo) {
         if (!tmp[field]){
             tmp[field] = {
                 _stats: {sum: {}, count: 0},
-                label: field,
+                label: field || '(Não definido)',
                 values: []
             };
         }

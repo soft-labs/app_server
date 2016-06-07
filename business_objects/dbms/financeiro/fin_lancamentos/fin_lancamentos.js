@@ -63,7 +63,7 @@ function FinLancamentos(){
                     }
                 },
                 cont_historicos_key: {
-                    tipo: types.comp.choose, default: 1, label: 'Histórico:',
+                    tipo: types.comp.choose, default: 1, label: 'Categoria:',
                     data: {
                         key: ['cont_historicos_key'],
                         from: ['dbms', 'contabil', 'cont_historicos'],

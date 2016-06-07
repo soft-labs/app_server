@@ -31,20 +31,21 @@
                     server-dblclick='dbms enderecos end_paises edit'
                 )
                     td
-                       .ui.toggle.checkbox.checkbox_ativo
-                            input.check_ativo(
-                                type='checkbox'
+                       .ui.toggle.checkbox
+                            input(
+                                type="checkbox"
                                 rv-checked='item.ativo'
-                                server='dbms enderecos end_paises update'
+                                rv-row-key='item.end_paises_key'
+                                server-onchange='dbms enderecos end_paises update'
                             )
-                    td {item.sigla}
+                    td {item.sigla} {item.ativo}
                     td {item.pais}
                     td {item.nacionalidade}
                     td
                         .ui.checkbox
                             input(
                                 type='checkbox'
-                                client='dbms enderecos end_paises OnChangeExclusao'
+                                client-onchange='dbms enderecos end_paises OnChangeExclusao'
                             )
 
 // Form popup de edição
