@@ -20,7 +20,7 @@ tshark.modulos._add('dbms.enderecos.end_paises', {
     nao_pode_excluir : true,
 
     OnChangeExclusao : function(){
-        alert(1);
+        alert(2);
     },
 
     //region :: Eventos - List

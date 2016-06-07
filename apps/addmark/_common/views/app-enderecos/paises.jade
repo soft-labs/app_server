@@ -19,11 +19,11 @@
         table.ui.selectable.table
             thead
                 tr.cursor
-                    th Ativo
-                    th Sigla
-                    th País
-                    th Nacionalidade
-                    th
+                    th.one.wide Ativo
+                    th.two.wide Sigla
+                    th.three.wide País
+                    th.nine.wide Nacionalidade
+                    th.one.wide
             tbody
                 tr(
                     rv-each-item='dbms.enderecos.end_paises.data.rows'
@@ -44,6 +44,7 @@
                         .ui.checkbox
                             input(
                                 type='checkbox'
+                                client='dbms enderecos end_paises OnChangeExclusao'
                             )
 
 // Form popup de edição
