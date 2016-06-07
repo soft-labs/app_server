@@ -417,15 +417,15 @@ SQL.prototype._parseSearch = function(sqlParams, query){
             case 'LIKE FULL':
                 var abre = " ( ";
                 qry.forEach(function (q) {
-                    if (q.length > 3) {
+                    //if (q.length > 3) {
                         sql += glue + abre + 'tb' + param.alias + '.' + param.field + " LIKE '%" + q + "%'";
                         glue = ' OR ';
                         abre = "";
-                    }
+                    //}
                 });
-                if (orig.length > 3) {
+                //if (orig.length > 3) {
                     sql += glue + 'tb' + param.alias + '.' + param.field + " LIKE '%" + orig + "%'";
-                }
+                //}
                 sql += abre ? "" : " ) ";
                 break;
 

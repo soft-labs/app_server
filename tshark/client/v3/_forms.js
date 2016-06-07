@@ -204,12 +204,12 @@ if(!alertify.choose){
             // Bind global do var app com o .app
             //tshark.appBound.update();
 
-            tshark.bindIntf(place);
+            tshark.initSemantic(place);
             
             place.data('_bound', rivets.bind(place, app));
 
-            tshark.bindIntf(place);
-            tshark.bindAPIs(place);
+            tshark.initSemantic(place);
+            tshark.initAPIs(place);
         }
     };
 

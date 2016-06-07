@@ -62,7 +62,7 @@ TShark.prototype.api_map = {
 
     // Comando de layout    | Verbo       | URL
     list    :               ['GET',       '/'],
-    search  :               ['GET',       '/?query={query}'],
+    search  :               ['GET',       '/'], //?query={query}'],
     get     :               ['GET',       '/{key}'],
     
     create  :               ['GET',       '/new'],
@@ -171,7 +171,7 @@ $.fn.api.settings.api = {};
     };
 
     /**
-     * API acionada em dbl clicks
+     * API acionada em dblclicks
      */
     TShark.prototype.dblclick_api = $.extend(true, {
         on: 'dblclick'
@@ -185,10 +185,18 @@ $.fn.api.settings.api = {};
     }, TShark.prototype.api);
     
     /**
-     * API acionada em blur
+     * API acionada em onchange
      */
     TShark.prototype.change_api = $.extend(true, {
         on: 'change'
+    }, TShark.prototype.api);
+
+    /**
+     * API acionada em onkeydown
+     */
+    TShark.prototype.keypress_api = $.extend(true, {
+        on: 'keyup',
+        throttle: 900
     }, TShark.prototype.api);
     
     
@@ -381,10 +389,10 @@ $.fn.api.settings.api = {};
 
 
         // Bind das APIs
-        tshark.bindAPIs();
+        tshark.initAPIs();
 
         // Liga Semantic
-        tshark.bindIntf();
+        tshark.initSemantic();
 
         // Bind global do var app com o .app
         //tshark._bindData();
@@ -543,12 +551,15 @@ $.fn.api.settings.api = {};
      * @since 15/03/16
      */
     TShark.prototype.search_before = function (sender, settings) {
-        var id = $(sender).data('comp');
-        settings.throttle = 600;
-        $(sender).data('query', (id && $(id)
+        var id    = $(sender).data('comp')
+            , txt = (id && $(id)
                 ? $(id).val()
                 : $(sender).val()
-        ));
+            )
+        ;
+
+        settings.data = settings.data || {};
+        settings.data.query = txt;
 
         // Libera
         return true;

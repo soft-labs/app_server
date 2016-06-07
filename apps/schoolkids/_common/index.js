@@ -67,7 +67,7 @@ app = $.extend(true, app, {
      */
     resetAppBar: function(itens){
         this.appbar = itens;
-        tshark.bindAPIs('.app-bar');
+        tshark.initAPIs('.app-bar');
     },
     
 

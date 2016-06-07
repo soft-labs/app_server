@@ -9,7 +9,7 @@ app.actionbar = {
          */
         reset: function(itens){
         app.actionbar.itens = itens;
-        tshark.bindAPIs('.app-bar');
+        tshark.initAPIs('.app-bar');
     }
 
 };

@@ -149,8 +149,8 @@ function Dataset (path, ref){
                 }
 
                 // Ajusta binds
-                tshark.bindAPIs();
-                tshark.bindIntf();
+                tshark.initAPIs();
+                tshark.initSemantic();
 
                 // ShowSQL
                 if (res.data['sql']){

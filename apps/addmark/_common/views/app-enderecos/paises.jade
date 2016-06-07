@@ -6,10 +6,15 @@
         .ui.right.floated.horizontal.list
             .item
                 .ui.action.input
-                    input#input_pesquisa(type='text' placeholder='Pesquisar...')
-                    button.ui.icon.button(
-                        server='dbms enderecos end_paises search'
+                    input#input_pesquisa(
+                        type='text'
+                        placeholder='Pesquisar...'
+                        server-onkeypress='dbms enderecos end_paises search'
                         data-comp='#input_pesquisa'
+                    )
+                    button.ui.icon.button(
+                            server='dbms enderecos end_paises search'
+                            data-comp='#input_pesquisa'
                         )
                         i.search.icon
             .item

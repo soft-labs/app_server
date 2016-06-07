@@ -56,10 +56,10 @@ var CONSOLE_ON = true;
         this._bindData();
 
         // Bind das APIs
-        this.bindAPIs();
+        this.initAPIs();
         
         // Liga Semantic
-        this.bindIntf();
+        this.initSemantic();
 
     };
 
@@ -77,7 +77,7 @@ var CONSOLE_ON = true;
      * Ativa APIs em ref
      * @param ref
      */
-    TShark.prototype.bindAPIs = function (ref) {
+    TShark.prototype.initAPIs = function (ref) {
         ref = '.app';
         
         //region :: Bind de APIs Server
@@ -91,20 +91,20 @@ var CONSOLE_ON = true;
         ;
 
         // Bind de APIs em click
-        $('[server-click]').not('.api-binded')
+        $('[server-onclick]').not('.api-binded')
             .api(this.api)
             .addClass('cursor api-binded')
             .each(function(){
-                $(this).data('action', $(this).attr('server-click'));
+                $(this).data('action', $(this).attr('server-onclick'));
             })
         ;
 
         // Bind de APIs em dblclick
-        $('[server-dblclick]').not('.api-binded')
+        $('[server-ondblclick]').not('.api-binded')
             .api(this.dblclick_api)
             .addClass('cursor api-binded')
             .each(function(){
-                $(this).data('action', $(this).attr('server-dblclick'));
+                $(this).data('action', $(this).attr('server-ondblclick'));
             })
         ;
 
@@ -120,9 +120,18 @@ var CONSOLE_ON = true;
         // Bind de APIs em change
         $('[server-onchange]').not('.api-binded')
             .api(this.change_api)
-            .addClass('api-binded onchange-binded')
+            .addClass('api-binded')
             .each(function(){
                 $(this).data('action', $(this).attr('server-onchange'));
+            })
+        ;
+
+        // Bind de APIs em keydown
+        $('[server-onkeypress]').not('.api-binded')
+            .api(this.keypress_api)
+            .addClass('api-binded')
+            .each(function(){
+                $(this).data('action', $(this).attr('server-onkeypress'));
             })
         ;
         
@@ -160,10 +169,10 @@ var CONSOLE_ON = true;
             })
         ;
 
-        $('[client-dblclick]').not('.api-client-binded')
+        $('[client-ondblclick]').not('.api-client-binded')
             .addClass('cursor api-client-binded')
             .on('dblclick', function(ev) {
-                return funcClient.call($(this), 'client-dblclick', ev);
+                return funcClient.call($(this), 'client-ondblclick', ev);
             })
         ;
 
@@ -181,16 +190,16 @@ var CONSOLE_ON = true;
             })
         ;
 
-        $('[client-onkeydown]').not('.api-client-binded')
+        $('[client-onkeypress]').not('.api-client-binded')
             .addClass('api-client-binded')
-            .on('keydown', function(ev){
-                return funcClient.call($(this), 'client-onkeydown', ev);
+            .on('keyup', function(ev){
+                return funcClient.call($(this), 'client-onkeypress', ev);
             })
         ;
 
         $('[client-onenter]').not('.api-client-binded')
             .addClass('api-client-binded')
-            .on('keydown', function(ev){
+            .on('keyup', function(ev){
                 if (ev.keyCode != 13) return;
                 return funcClient.call($(this), 'client-onenter', ev);
             })
@@ -204,7 +213,7 @@ var CONSOLE_ON = true;
      * Ativa o semantic em ref
      * @since 06/10/15
      */
-    TShark.prototype.bindIntf = function (ref) {
+    TShark.prototype.initSemantic = function (ref) {
         if (!ref) {
             ref = '.app';
 
