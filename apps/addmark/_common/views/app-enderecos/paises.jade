@@ -5,8 +5,6 @@
     .content
         .ui.mini.compact.right.floated.secondary.menu
             .item
-                | {dbms.enderecos.end_paises.data.selected.rv.has_any | not}
-            .item
                 .ui.action.input
                     input#input_pesquisa(
                         type='text'
@@ -45,7 +43,7 @@
                                 rv-row-key='item.end_paises_key'
                                 server-onchange='dbms enderecos end_paises update'
                             )
-                    td {item.sigla} {item.ativo}
+                    td {item.sigla}
                     td {item.pais}
                     td {item.nacionalidade}
                     td
