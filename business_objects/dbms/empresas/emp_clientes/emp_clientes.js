@@ -83,13 +83,13 @@ function EmpClientes(){
         default: {
             sources: {
                 0: {
-                    from: ['dbms', 'empresas', 'emp_clientes'],
+                    from: ['dbms', 'parceiros', 'parceiros'],
                     fields: [
                         
                     ]
                 },
-                1: { 
-                    from: ['dbms', 'parceiros', 'parceiros'],
+                1: {
+                    from: ['dbms', 'empresas', 'emp_clientes'],
                     join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
                     fields: [
                         
@@ -97,24 +97,24 @@ function EmpClientes(){
                 },
                 2: {
                     from: ['dbms', 'parceiros', 'parc_juridicos'],
-                    join: {source: 1, tipo: types.join.left, on: 'parceiros_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
                     fields: [
 
                     ]
                 },
                 3: {
                     from: ['dbms', 'parceiros', 'parc_fisicos'],
-                    join: {source: 1, tipo: types.join.left, on: 'parceiros_key', where: ''},
+                    join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
                     fields: [
 
                     ]
                 }
             },
             where: [ 
-                ['AND', 0, 'emp_clientes_key', types.where.check]
+                ['AND', 1, 'emp_clientes_key', types.where.check]
             ],
             order: [
-                ['0', 'emp_clientes_key', 'desc']
+                ['1', 'emp_clientes_key', 'desc']
             ],
             search: [
             ],
