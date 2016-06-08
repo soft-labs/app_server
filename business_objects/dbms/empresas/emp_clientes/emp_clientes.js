@@ -13,9 +13,6 @@ function EmpClientes(){
     // Id
     this.id = 'emp_clientes';
 
-    // Extends
-    this.extends = ['dbms', 'parceiros', 'parceiros'];
-
     // Map
     this.source = {
         table: 'emp_clientes',
@@ -40,28 +37,14 @@ function EmpClientes(){
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
-                },
-
-
-                parceiro: {
-                    tipo: types.comp.text, label: 'Parceiro:'
-                },
-                end_paises_key: {
-                    tipo: types.comp.choose, label: 'País:',
-                    data: {
-                        key: ['end_paises_key'],
-                        from: ['dbms', 'enderecos', 'end_paises'],
-                        template: '{end_paises_key} - {end_pais}',
-                        provider: ''
-                    }
-                },
+                }
             }
         }
     };
-    
+
     //endregion
 
-    
+
     //region :: Forms
 
     this.forms = {
@@ -74,14 +57,17 @@ function EmpClientes(){
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
                 size  : types.form.size.small,
-                autosave  : false,
+                autosave  : true,
+                external: [
+                    ['dbms', 'parceiros', 'parceiros']
+                ]
             },
             linhas: [
-                {titulo: "Dados Principais"},
-                {ativo: 5, parceiro: 50,end_paises_key: 45, }
+                {titulo: "Informações de emp_clientes"},
+                {emp_clientes_key: 25, parceiros_key: 25, ativo: 25, observacoes: 25}
             ],
             ctrls: {
-                
+
             }
         }
 
@@ -97,38 +83,38 @@ function EmpClientes(){
         default: {
             sources: {
                 0: {
-                    from: ['dbms', 'parceiros', 'parceiros'],
+                    from: ['dbms', 'empresas', 'emp_clientes'],
                     fields: [
-                        
+
                     ]
                 },
                 1: {
-                    from: ['dbms', 'empresas', 'emp_clientes'],
+                    from: ['dbms', 'parceiros', 'parceiros'],
                     join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
                     fields: [
-                        
+
                     ]
                 },
                 2: {
                     from: ['dbms', 'parceiros', 'parc_juridicos'],
-                    join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
+                    join: {source: 1, tipo: types.join.left, on: 'parceiros_key', where: ''},
                     fields: [
 
                     ]
                 },
                 3: {
                     from: ['dbms', 'parceiros', 'parc_fisicos'],
-                    join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
+                    join: {source: 1, tipo: types.join.left, on: 'parceiros_key', where: ''},
                     fields: [
 
                     ]
                 }
             },
-            where: [ 
-                ['AND', 1, 'emp_clientes_key', types.where.check]
+            where: [
+                ['AND', 0, 'emp_clientes_key', types.where.check]
             ],
             order: [
-                ['1', 'emp_clientes_key', 'desc']
+                ['0', 'emp_clientes_key', 'desc']
             ],
             search: [
             ],
@@ -146,6 +132,18 @@ function EmpClientes(){
                 },
                 1: {
                     from: ['dbms', 'empresas', 'emp_clientes'],
+                    where: [
+
+                    ]
+                },
+                2: {
+                    from: ['dbms', 'parceiros', 'parc_fisicos'],
+                    where: [
+
+                    ]
+                },
+                3: {
+                    from: ['dbms', 'parceiros', 'parc_juridicos'],
                     where: [
 
                     ]

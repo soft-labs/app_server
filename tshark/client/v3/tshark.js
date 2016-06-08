@@ -266,11 +266,19 @@ var CONSOLE_ON = true;
             .addClass('binded')
         ;
 
+        // Tabs
+        $(ref).find('.tabular.menu .item').not('.binded')
+            .tab()
+            .addClass('binded')
+        ;
+
+        // Menu
         $(ref).find('.ui.menu.item').not('.binded')
             .state()
             .addClass('binded')
         ;
 
+        // Checkbox
         $(ref).find('.checkbox').not('.binded')
             .checkbox()
             .addClass('binded')
@@ -282,18 +290,21 @@ var CONSOLE_ON = true;
             .addClass('binded')
         ;*/
 
-        $(ref).find('.ui.accordion.non-exclusive').not('.binded')
+        // Acordion multiplos open
+        $(ref).find('.ui.accordion.multiple').not('.binded')
             .accordion({
                 exclusive: false
             })
             .addClass('binded')
         ;
 
+        // Acordion open exclusivo
         $(ref).find('.ui.accordion').not('.binded')
             .accordion()
             .addClass('binded')
         ;
 
+        // Datepicker
         var dateObj = {
             container: '.app',
             format: 'dd/mm/yyyy',
@@ -320,6 +331,7 @@ var CONSOLE_ON = true;
             .addClass('binded')
         ;
 
+        // Popup
         $(ref).find('[data-help]').not('.binded')
             .each(function(){
                 $(this).attr('data-content', $(this).data('help'));
