@@ -236,10 +236,10 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
         });
 
         // Gráfico de barras
-        if (app.charts.data['bar_receber']) {
-            app.charts.data['bar_receber'].labels = labels;
-            app.charts.data['bar_receber'].datasets[0].data = data;
-            app.charts.reset('bar_receber');
+        if (app.charts.data['bar_areceber']) {
+            app.charts.data['bar_areceber'].labels = labels;
+            app.charts.data['bar_areceber'].datasets[0].data = data;
+            app.charts.reset('bar_areceber');
         }
 
         // Gráfico de pizza
