@@ -13,6 +13,9 @@ function EmpClientes(){
     // Id
     this.id = 'emp_clientes';
 
+    // Extends
+    this.extends = ['dbms', 'parceiros', 'parceiros'];
+
     // Map
     this.source = {
         table: 'emp_clientes',
@@ -122,11 +125,29 @@ function EmpClientes(){
         update: {
             sources: {
                 0: {
-                    from: ['dbms', 'empresas', 'emp_clientes'],
+                    from: ['dbms', 'parceiros', 'parceiros'],
                     where: [
                         
                     ]
-                }
+                },
+                1: {
+                    from: ['dbms', 'empresas', 'emp_clientes'],
+                    where: [
+
+                    ]
+                },
+                2: {
+                    from: ['dbms', 'parceiros', 'parc_fisicos'],
+                    where: [
+
+                    ]
+                },
+                3: {
+                    from: ['dbms', 'parceiros', 'parc_juridicos'],
+                    where: [
+
+                    ]
+                },
             },
             showSQL: 0
         }

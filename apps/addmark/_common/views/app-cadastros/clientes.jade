@@ -1,4 +1,7 @@
 
+// Templates
+include ../../templates/popup_form
+
 .ui.fluid.card
     .content
         .ui.mini.compact.right.floated.secondary.menu
@@ -38,3 +41,9 @@
                         td {item.fone_empresa}
                         td {item.email_empresa}
                         td {item.site_empresa}
+
+    // Form popup de edição
+    +popupForm(
+        'dbms empresas emp_clientes',
+        'Dados do Cliente'
+    )
