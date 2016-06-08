@@ -27,13 +27,13 @@ function ParcJuridicos(){
                     tipo: types.comp.text, label: 'Razão Social:'
                 }, 
                 cnpj: {
-                    tipo: types.comp.text, label: 'Cnpj:'
+                    tipo: types.comp.text, label: 'CNPJ:'
                 }, 
                 insc_estadual: {
-                    tipo: types.comp.text, label: 'Insc Estadual:'
+                    tipo: types.comp.text, label: 'Inscrição Estadual:'
                 }, 
                 insc_municipal: {
-                    tipo: types.comp.text, label: 'Insc Municipal:'
+                    tipo: types.comp.text, label: 'Inscrição Municipal:'
                 }, 
                 fone_empresa: {
                     tipo: types.comp.text, label: 'Fone Empresa:'

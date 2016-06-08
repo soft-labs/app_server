@@ -36,16 +36,16 @@ function ParcFisicos(){
                     tipo: types.comp.int, label: 'Ano Nasc:'
                 }, 
                 rg: {
-                    tipo: types.comp.text, label: 'Rg:'
+                    tipo: types.comp.text, label: 'RG:'
                 }, 
                 cpf: {
-                    tipo: types.comp.text, label: 'Cpf:'
+                    tipo: types.comp.text, label: 'CPF:'
                 }, 
                 sexo: {
                     tipo: types.comp.text, label: 'Sexo:'
                 }, 
                 est_civil: {
-                    tipo: types.comp.text, label: 'Est Civil:'
+                    tipo: types.comp.text, label: 'Estado Civil:'
                 }, 
                 profissao: {
                     tipo: types.comp.text, label: 'Profissão:'

@@ -24,7 +24,7 @@ function Parceiros(){
                     tipo: types.comp.key, label: 'Parceiros:'
                 }, 
                 end_paises_key: {
-                    tipo: types.comp.choose, label: 'End Paises:',
+                    tipo: types.comp.choose, label: 'País:',
                     data: { 
                         key: ['end_paises_key'], 
                         from: ['dbms', 'enderecos', 'end_paises'], 
@@ -33,7 +33,7 @@ function Parceiros(){
                     } 
                 }, 
                 parc_contas_key: {
-                    tipo: types.comp.choose, label: 'Parc Contas:',
+                    tipo: types.comp.choose, label: 'Conta:',
                     data: { 
                         key: ['parc_contas_key'], 
                         from: ['dbms', 'parceiros', 'parc_contas'], 
@@ -42,7 +42,7 @@ function Parceiros(){
                     } 
                 }, 
                 cont_plano_contas_key: {
-                    tipo: types.comp.choose, label: 'Cont Plano Contas:',
+                    tipo: types.comp.choose, label: 'Plano de Contas:',
                     data: { 
                         key: ['cont_plano_contas_key'], 
                         from: ['dbms', 'contabil', 'cont_plano_contas'], 
@@ -51,7 +51,7 @@ function Parceiros(){
                     } 
                 }, 
                 cont_centro_resultados_key: {
-                    tipo: types.comp.choose, label: 'Cont Centro Resultados:',
+                    tipo: types.comp.choose, label: 'Centro de Resultados:',
                     data: { 
                         key: ['cont_centro_resultados_key'], 
                         from: ['dbms', 'contabil', 'cont_centro_resultados'], 
@@ -60,10 +60,10 @@ function Parceiros(){
                     } 
                 }, 
                 juridico: {
-                    tipo: types.comp.int, label: 'Juridico:'
+                    tipo: types.comp.int, label: 'Tipo de Pessoa:'
                 }, 
                 codigo: {
-                    tipo: types.comp.text, label: 'Codigo:'
+                    tipo: types.comp.text, label: 'Código:'
                 }, 
                 parceiro: {
                     tipo: types.comp.text, label: 'Parceiro:'
@@ -75,13 +75,13 @@ function Parceiros(){
                     tipo: types.comp.date, label: 'Dt Foto:'
                 }, 
                 limite_credito: {
-                    tipo: types.comp.float, label: 'Limite Credito:'
+                    tipo: types.comp.float, label: 'Limite de Credito:'
                 }, 
                 limite_compromisso: {
-                    tipo: types.comp.float, label: 'Limite Compromisso:'
+                    tipo: types.comp.float, label: 'Limite de Compromisso:'
                 }, 
                 limite_desconto: {
-                    tipo: types.comp.float, label: 'Limite Desconto:'
+                    tipo: types.comp.float, label: 'Limite de Desconto:'
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
