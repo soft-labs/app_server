@@ -611,6 +611,11 @@ $.fn.api.settings.api = {};
                 : '.' + mod.path + '-form-area'
             ;
             response['formId'] = tshark.createForm(mod, response.layout, place);
+
+            if ($('.ui.modal.' + mod.path + '-form').length) {
+                $('.ui.modal.' + mod.path + '-form')
+                    .modal('show');
+            }
         }
 
         if (response['data']){

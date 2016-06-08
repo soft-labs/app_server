@@ -206,6 +206,15 @@ app = $.extend(true, app, {
     //endregion
 
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     cockpit: {
     

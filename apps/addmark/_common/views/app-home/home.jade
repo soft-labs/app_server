@@ -73,7 +73,7 @@
                 +seletorMenu('dbms.financeiro.fin_apagar.pivotOpts', 'tasks')
 
                 // Menu Listagem / Chart
-                +seletorMenu('dbms.financeiro.fin_apagar.displayOpts', 'pie chart')
+                    +seletorMenu('dbms.financeiro.fin_apagar.displayOpts', 'pie chart')
 
                 // Popup
                 a.item
@@ -86,7 +86,7 @@
             .header Pagamentos Programados
             .meta &nbsp;&nbsp;Período {periodo.de} à {periodo.ate}
             .description
-                canvas.transition.hidden#pie_apagar
+                canvas.transition#pie_apagar
 
                 // Listagem
                 +listFinAPagarMini()
@@ -106,7 +106,7 @@
                 +seletorMenu('dbms.financeiro.fin_areceber.pivotOpts', 'tasks')
 
                 // Menu Listagem / Chart
-                +seletorMenu('dbms.financeiro.fin_areceber.displayOpts', 'pie chart')
+                    +seletorMenu('dbms.financeiro.fin_areceber.displayOpts', 'pie chart')
 
                 // Popup
                 a.item
@@ -119,7 +119,7 @@
             .header Recebimentos Programados
             .meta &nbsp;&nbsp;Período {periodo.de} à {periodo.ate}
             .description
-                canvas.transition.hidden#pie_areceber
+                canvas.transition#pie_areceber
 
                 // Listagem
                 +listFinAReceberMini()

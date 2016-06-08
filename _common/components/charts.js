@@ -7,9 +7,9 @@ app.charts = {
     data: {},
 
     // Acrescenta um gráfico
-    add: function(id, canvas, opts, data){
+    add: function(id, opts, data){
         try {
-            var ctx = document.getElementById(canvas).getContext("2d");
+            var ctx = document.getElementById(id).getContext("2d");
             if (app.charts[id]) {
                 app.charts[id].destroy();
             }

@@ -122,11 +122,17 @@ function EmpClientes(){
         update: {
             sources: {
                 0: {
+                    from: ['dbms', 'parceiros', 'parceiros'],
+                    where: [
+
+                    ]
+                },
+                0: {
                     from: ['dbms', 'empresas', 'emp_clientes'],
                     where: [
                         
                     ]
-                }
+                },
             },
             showSQL: 0
         }

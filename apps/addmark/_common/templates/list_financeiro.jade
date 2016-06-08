@@ -1,21 +1,21 @@
 //
    Created by labs on 04/06/16.
 
-mixin listFinAPagar()
-    +_listFinanceiro('apagar', 'dbms.financeiro.fin_apagar.data.group')
+mixin listFinAPagar(classe)
+    +_listFinanceiro('apagar', 'dbms.financeiro.fin_apagar.data.group', classe)
 
 mixin listFinAReceber()
-    +_listFinanceiro('areceber', 'dbms.financeiro.fin_areceber.data.group')
+    +_listFinanceiro('areceber', 'dbms.financeiro.fin_areceber.data.group', classe)
 
-mixin listFinAPagarMini()
-    +_listFinanceiro('apagar', 'dbms.financeiro.fin_apagar.data.group', true)
+mixin listFinAPagarMini(classe)
+    +_listFinanceiro('apagar', 'dbms.financeiro.fin_apagar.data.group', classe, true)
 
-mixin listFinAReceberMini()
-    +_listFinanceiro('areceber', 'dbms.financeiro.fin_areceber.data.group', true)
+mixin listFinAReceberMini(classe)
+    +_listFinanceiro('areceber', 'dbms.financeiro.fin_areceber.data.group', classe, true)
 
 
-mixin _listFinanceiro(mod, dados, mini)
-    .ui.fluid.styled.accordion.non-exclusive.lista(class=mod)
+mixin _listFinanceiro(mod, dados, mini, classe)
+    .ui.fluid.styled.accordion.non-exclusive.lista(class=mod + ' ' + classe)
         span(rv-each-row=dados)
             .title
                 //i.dropdown.icon
