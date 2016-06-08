@@ -13,9 +13,6 @@ function EmpClientes(){
     // Id
     this.id = 'emp_clientes';
 
-    // Extends
-    this.extends = ['dbms', 'parceiros', 'parceiros'];
-
     // Map
     this.source = {
         table: 'emp_clientes',
@@ -75,14 +72,15 @@ function EmpClientes(){
                 state : types.form.state.ok,
                 size  : types.form.size.small,
                 autosave  : false,
+                //external: ['dbms','parceiros','parceiros']
             },
             linhas: [
                 {titulo: "Dados Principais"},
-                {ativo: 5, parceiro: 50,end_paises_key: 45, }
+                {ativo: 10, parceiro: 50,end_paises_key: 40, }
             ],
             ctrls: {
                 
-            }
+            },
         }
 
     };
@@ -97,13 +95,13 @@ function EmpClientes(){
         default: {
             sources: {
                 0: {
-                    from: ['dbms', 'parceiros', 'parceiros'],
+                    from: ['dbms', 'empresas', 'emp_clientes'],
                     fields: [
                         
                     ]
                 },
                 1: {
-                    from: ['dbms', 'empresas', 'emp_clientes'],
+                    from: ['dbms', 'parceiros', 'parceiros'],
                     join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
                     fields: [
                         
@@ -111,14 +109,14 @@ function EmpClientes(){
                 },
                 2: {
                     from: ['dbms', 'parceiros', 'parc_juridicos'],
-                    join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
+                    join: {source: 1, tipo: types.join.left, on: 'parceiros_key', where: ''},
                     fields: [
 
                     ]
                 },
                 3: {
                     from: ['dbms', 'parceiros', 'parc_fisicos'],
-                    join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
+                    join: {source: 1, tipo: types.join.left, on: 'parceiros_key', where: ''},
                     fields: [
 
                     ]
