@@ -15,7 +15,7 @@ mixin listFinAReceberMini(classe)
 
 
 mixin _listFinanceiro(mod, dados, mini, classe)
-    .ui.fluid.styled.accordion.non-exclusive.lista(class=mod + ' ' + classe)
+    .ui.fluid.styled.accordion.multiple.lista(class=mod + ' ' + classe)
         span(rv-each-row=dados)
             .title
                 //i.dropdown.icon

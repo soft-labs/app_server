@@ -23,8 +23,24 @@ h3.ui.dividing.header Detalhe do Cliente
                             | Observações: {dbms.empresas.emp_clientes.data.row.observacoes}
 
     .ui.segment
-        .ui.segment
-            h4.ui.dividing.header Endereços
+
+        // Tab itens
+        .ui.top.attached.tabular.menu
+            a.active.item(data-tab='tab1') Dados de Contato
+            a.item(data-tab='tab2') Endereços
+
+        // Tab área
+        .ui.bottom.attached.active.tab.segment(data-tab='tab1')
+            // h4.ui.dividing.header Dados de Contato
+            .ui.items(rv-each-eletronico='dbms.empresas.emp_clientes.enderecos_eletronicos.rows')
+                .item
+                    .content
+                        a.meta {eletronico.tipo}
+                        .description
+                            p  {eletronico.descricao}
+
+        .ui.bottom.attached.tab.segment(data-tab='tab2')
+            //h4.ui.dividing.header Endereços
             .ui.items(rv-each-endereco='dbms.empresas.emp_clientes.enderecos.rows')
                 .item
                     .content
@@ -36,15 +52,8 @@ h3.ui.dividing.header Detalhe do Cliente
                                     | Remover
                                 buttton.ui.right.floated.primary.button(server='dbms enderecos enderecos edit', rv-row-key='endereco.enderecos_key')
                                     | Editar
-        .ui.segment
-            h4.ui.dividing.header Dados de Contato
-            .ui.items(rv-each-eletronico='dbms.empresas.emp_clientes.enderecos_eletronicos.rows')
-                .item
-                    .content
-                        a.meta {eletronico.tipo}
-                        .description
-                            p
-                                | {eletronico.descricao}
+
+
 .ui.segment
     h4.ui.dividing.header Movimentações do Cliente
     label Movimentação 1
