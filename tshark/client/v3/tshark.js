@@ -153,7 +153,7 @@ var CONSOLE_ON = true;
 
         var funcClient = function(key, ev){
             var api = $(this).attr(key)
-                , data = $(this).data()
+                , data = ev.currentTarget ? JSON.parse(JSON.stringify(ev.currentTarget.dataset)) : $(this).data()
             ;
 
             var obj = tshark.getObjPath(window, api);

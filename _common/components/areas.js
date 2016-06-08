@@ -46,7 +46,7 @@ app.areas = {
     show: function(area, subarea, data){
         
         if (typeof area != 'string'){
-            data    = $(this).data();
+            data    = $.extend({}, subarea);
             area    = data['area'];
             subarea = data['subarea'];
         }

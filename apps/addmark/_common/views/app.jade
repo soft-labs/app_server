@@ -50,7 +50,7 @@ block content
                                 rv-server='submenu.server'
 
                                 client='app areas show'
-                                rv-data-area='menu.area'
+                                rv-data-area='submenu.area | or menu.area'
                                 rv-data-subarea='submenu.subarea'
                                 rv-on-click='sys.app.menu.hideMenu'
                                 style="white-space: nowrap;"

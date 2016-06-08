@@ -83,8 +83,7 @@ rivets.binders['row-key'] = {
 };
 
 /**
- * Binder para seleção de um row no dataset
- *  Ex: div rv-row-key="row.map_filiais_key"
+ * Binder para implementação de _selected_
  */
 rivets.binders['row-selected'] = {
     bind: function(el) {

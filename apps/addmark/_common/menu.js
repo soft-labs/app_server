@@ -83,7 +83,8 @@ module.exports = {
             submenu: [
                 {
                     label: "Cockpit",
-                    area: "app-home"
+                    area: "app-home",
+                    subarea: "",
                 },
                 {
                     label: "Configurações"
