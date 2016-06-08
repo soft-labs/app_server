@@ -10,17 +10,44 @@
 tshark.modulos._add('dbms.financeiro.fin_apagar', {
 
     /**
-     * Inicializa o menu
+     * Inicialização
      */
     init: function(){
 
-        //region :: Chart / List
+        // Swap de tela
+        this.displayOpts = [
+            {value: 1, icon: 'icon list',      client: this.path + '.swapList', label: 'Listagem'},
+            {value: 2, icon: 'icon bar chart', client: this.path + '.swapList', label: 'Gráfico'}
+        ];
 
-        app.charts.add('apagar', 'chart_apagar', {
+        // Opções de agrupamento
+        this.pivotOpts = [
+            {value: 1, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Vencimento'},
+            {value: 2, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Fornecedores'},
+            {value: 3, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Situação'},
+            {value: 4, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Destinação'}
+        ];
+
+        //region :: Gráficos
+
+        // Pizza
+        app.charts.add('pie_apagar', {
+            type: 'pie',
+            options: {
+
+            }
+        }, {
+            labels: [], 
+            datasets: [
+                {data: [], backgroundColor: [], hoverBackgroundColor:[] 
+            }
+        ]});
+
+        // Barra
+        app.charts.add('bar_apagar', {
             type: 'bar',
             options: {
-                slegend: false,
-                ztitle: false
+                
             }
         }, {
             labels: [],
@@ -32,31 +59,16 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
                 borderColor: 'black',
                 borderWidth: 1
             }]
-        });
-
-        this.displayOpts = [
-            {value: 1, icon: 'icon list',      client: this.path + '.swapList', label: 'Listagem'},
-            {value: 2, icon: 'icon bar chart', client: this.path + '.swapList', label: 'Gráfico'}
-        ];
+        });        
 
         //endregion
 
-        //region :: Pivot
-
-        this.data.group = [];
-        
-        this.pivotOpts = [
-            {value: 1, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Vencimento'},
-            {value: 2, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Fornecedores'},
-            {value: 3, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Situação'},
-            {value: 4, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Destinação'}
-        ];
-
-        //endregion
-
-        // Liga
+        // Carrega dados
         this.list();
     },
+
+    
+    //region :: Eventos Aplicados
 
     /**
      * Chamado após a listagem de dados
@@ -101,19 +113,23 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
      
     /**
      * Chamado após receber qualquer das interfaces de formulário
-     */
+     *
     onAfterForm: function(response, next){
         $('.ui.modal.' + this.path + '-form')
             .modal('show');
-    },
+    },*/
 
+    //endregion
+
+
+    //region :: Funções de interface
 
     /**
      * Alterna entre lista e gráfico
      */
     swapList: function(){
         var value = $(this).data('value');
-        $('#chart_apagar')
+        $('#bar_apagar')
             .transition(value == '1' ? 'hide' : 'show');
         $('#pie_apagar')
             .transition(value == '1' ? 'hide' : 'show');
@@ -188,8 +204,7 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
 
 
         dbms.financeiro.fin_apagar.setTooltips();
-
-
+        
     },
 
     /**
@@ -198,31 +213,35 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
     setChartData: function(){
 
         // Monta dados
-        var labels = []
-            , data = []
+        var labels  = []
+            , data  = []
+            , color = []
         ;
         dbms.financeiro.fin_apagar.data.group.forEach(row => {
             labels.push(row.label);
             data.push(row._stats.sum.valor_bruto);
+            color.push(randomColor());
         });
 
         // Gráfico de barras
-        if (app.charts.data['apagar']) {
-            app.charts.data.apagar.labels = labels;
-            app.charts.data.apagar.datasets[0].data = data;
-            app.charts.reset('apagar');
+        if (app.charts.data['bar_apagar']) {
+            app.charts.data['bar_apagar'].labels = labels;
+            app.charts.data['bar_apagar'].datasets[0].data = data;
+            app.charts.reset('bar_apagar');
         }
 
         // Gráfico de pizza
         if (app.charts.data['pie_apagar']) {
-            app.charts.data.pie_apagar.labels = labels;
-            app.charts.data.pie_apagar.datasets.data = data;
+            app.charts.data['pie_apagar'].labels = labels;
+            app.charts.data['pie_apagar'].datasets[0] = {
+                data: data,
+                backgroundColor: color,
+                hoverBackgroundColor: color
+            };
             app.charts.reset('pie_apagar');
         }
 
     },
-
-
 
     /**
      * Ajusta tooltips da listagem
@@ -322,8 +341,10 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
 
     }
 
+    //endregion
+    
 
-    //region :: Eventos
+    //region :: Eventos disponíveis
 
 
     //region :: Eventos - List

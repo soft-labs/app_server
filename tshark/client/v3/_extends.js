@@ -681,8 +681,11 @@ function getObjPath(base, path){
 
 
 function randomColor() {
-    var max = 0xffffff;
-    return '#' + Math.round( Math.random() * max ).toString( 16 );
+    var max = 0xffffff
+        , cor = '#' + Math.round( Math.random() * max ).toString( 16 )
+    ;
+
+    return cor + (cor.length < 7 ? 'F' : '');
 };
 
 

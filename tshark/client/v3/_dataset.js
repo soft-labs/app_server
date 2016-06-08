@@ -80,6 +80,12 @@ function Dataset (path, ref){
     this.row = {};
 
     /**
+     * Agrupamento de dados por groupBy (pivot)
+     * @type {Array}
+     */
+    this.group = [];
+    
+    /**
      * Página atual no server
      * @type {number}
      */

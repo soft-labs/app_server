@@ -10,13 +10,28 @@
 tshark.modulos._add('dbms.financeiro.fin_areceber', {
 
     /**
-     * Inicializa o menu
+     * Inicialização
      */
     init: function(){
 
-        //region :: Chart / List
+        // Swap de tela
+        this.displayOpts = [
+            {value: 1, icon: 'icon list',      client: this.path + '.swapList', label: 'Listagem'},
+            {value: 2, icon: 'icon bar chart', client: this.path + '.swapList', label: 'Gráfico'}
+        ];
 
-        app.charts.add('areceber', 'chart_areceber', {
+        // Opções de agrupamento
+        this.pivotOpts = [
+            {value: 1, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Vencimento'},
+            {value: 2, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Clientes'},
+            {value: 3, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Situação'},
+            {value: 4, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Origem'}
+        ];
+
+        //region :: Gráficos
+
+        // Barra
+        app.charts.add('bar_areceber', {
             type: 'bar',
             options: {
                 slegend: false,
@@ -34,29 +49,27 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
             }]
         });
 
-        this.displayOpts = [
-            {value: 1, icon: 'icon list',      client: this.path + '.swapList', label: 'Listagem'},
-            {value: 2, icon: 'icon bar chart', client: this.path + '.swapList', label: 'Gráfico'}
-        ];
+        // Pizza
+        app.charts.add('pie_areceber', {
+            type: 'pie',
+            options: {
+
+            }
+        }, {
+            labels: [],
+            datasets: [
+                {data: [], backgroundColor: [], hoverBackgroundColor:[]}
+            ]}
+        );
 
         //endregion
 
-        //region :: Pivot
-
-        this.data.group = [];
-
-        this.pivotOpts = [
-            {value: 1, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Vencimento'},
-            {value: 2, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Clientes'},
-            {value: 3, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Situação'},
-            {value: 4, icon: 'icon tasks', client: this.path + '.pivotData', label: 'Origem'}
-        ];
-
-        //endregion
-
-        // Liga
+        // Carrega dados
         this.list();
     },
+
+
+    //region :: Eventos Aplicados
 
     /**
      * Chamado após a listagem de dados
@@ -111,20 +124,23 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
 
     /**
      * Chamado após receber qualquer das interfaces de formulário
-     */
+     *
     onAfterForm: function(response, next){
         $('.ui.modal.' + this.path + '-form')
             .modal('show');
-    },
+    },*/
+
+    //endregion
 
 
-
+    //region :: Funções de Interface
+    
     /**
      * Alterna entre lista e gráfico
      */
     swapList: function(){
         var value = $(this).data('value');
-        $('#chart_areceber')
+        $('#bar_areceber')
             .transition(value == '1' ? 'hide' : 'show');
         $('#pie_areceber')
             .transition(value == '1' ? 'hide' : 'show');
@@ -195,7 +211,7 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
         }
 
         // Ajusta os dados do gráfico de barras
-        dbms.financeiro.fin_areceber.setChartBarData();
+        dbms.financeiro.fin_areceber.setChartData();
 
 
         dbms.financeiro.fin_areceber.setTooltips();
@@ -206,16 +222,36 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
     /**
      * Alimenta o bar chart com dados
      */
-    setChartBarData: function(){
-        app.charts.data.areceber.labels = [];
-        app.charts.data.areceber.datasets[0].data = [];
+    setChartData: function(){
 
+        // Monta dados
+        var labels  = []
+            , data  = []
+            , color = []
+        ;
         dbms.financeiro.fin_areceber.data.group.forEach(row => {
-            app.charts.data.areceber.labels.push(row.label);
-            app.charts.data.areceber.datasets[0].data.push(row._stats.sum.valor_bruto);
+            labels.push(row.label);
+            data.push(row._stats.sum.valor_bruto);
+            color.push(randomColor());
         });
 
-        app.charts.reset('areceber');
+        // Gráfico de barras
+        if (app.charts.data['bar_receber']) {
+            app.charts.data['bar_receber'].labels = labels;
+            app.charts.data['bar_receber'].datasets[0].data = data;
+            app.charts.reset('bar_receber');
+        }
+
+        // Gráfico de pizza
+        if (app.charts.data['pie_areceber']) {
+            app.charts.data['pie_areceber'].labels = labels;
+            app.charts.data['pie_areceber'].datasets[0] = {
+                data: data,
+                backgroundColor: color,
+                hoverBackgroundColor: color
+            };
+            app.charts.reset('pie_areceber');
+        }
     },
 
     /**
@@ -318,8 +354,10 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
 
     }
 
+    //endregion
+    
 
-    //region :: Eventos
+    //region :: Eventos Disponíveis
 
 
     //region :: Eventos - List
