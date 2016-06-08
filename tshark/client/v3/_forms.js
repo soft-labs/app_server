@@ -126,15 +126,31 @@ if(!alertify.choose){
 
                     // Linhas do tab
                     layout.tabs[f].forEach(tab => {
-                        tabs.push($("<a>", {class: active + " item", "data-tab": f + "_" + t}).html(tab['label']));
-                        areas.push($("<div>", {class: "ui bottom attached tab segment " + active, "data-tab": f + "_" + t}));
+                        var a = $("<a>", {class: active + " item", "data-tab": f + "_" + t}).html(tab['label'])
+                            , d = $("<div>", {class: "ui bottom attached tab segment " + active, "data-tab": f + "_" + t})
+                        ;
+
+                        if (tab.hasOwnProperty('hidden')){
+                            if (typeof tab['hidden'] == 'object'){
+                                var h = mod.path + ".data.row." + tab.hidden['field'] + (
+                                    tab.hidden['cond']
+                                        ? ' | ' + tab.hidden['cond']
+                                        : ''
+                                );
+                                $(a).attr('rv-hide', h);
+                                $(d).attr('rv-hide', h);
+                            }
+                        }
+
                         tab['linhas'].forEach(tlinha => {
-                            areas[areas.length-1]
-                                .append(
-                                    processLinhas(tlinha, inline, width, icon)
-                                )
-                            ;
+                            d.append(
+                                processLinhas(tlinha, inline, width, icon)
+                            );
                         });
+
+                        tabs.push(a);
+                        areas.push(d);
+
                         active = '';
                         t++;
                     });
