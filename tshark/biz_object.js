@@ -94,52 +94,53 @@ BizObject.prototype.getForm = function *(provider, ctx){
 
         var self = this;
         form['ctrls'] = form['ctrls'] || {};
-        form.linhas.forEach(function (linha) {
+
+        // Processamento de linhas
+        var processLinha = function(linha){
             for (var ctrl in linha) {
 
                 // Pega o comp no meta e ajusta tipo
                 var comp = (meta.fields[ctrl]
-                    ? extend(meta.fields[ctrl], meta.fields[ctrl]['tipo'])
-                    : {}
+                        ? extend(meta.fields[ctrl], meta.fields[ctrl]['tipo'])
+                        : {}
                 );
 
+                // Componentes especiais
                 if (ctrl == 'space') {
                     comp = {
                         type: 'space', comp: 'space'
-                    }
+                    };
                 }
 
-                // Se o comp tá sobreescrito em ctrls
-                if (form.ctrls[ctrl]) {
-                    extend(true, comp, form.ctrls[ctrl]);
-                    if (form.ctrls[ctrl]['tipo']) {
-                        extend(true, comp, form.ctrls[ctrl]['tipo'] || {});
-                    }
+                // tabs
+                if (form['tabs'] && form.tabs[ctrl]){
+                    form.tabs[ctrl].forEach(tab => {
+                        tab.linhas.forEach(l => {
+                            processLinha(l);
+                        })
+                    });
+                    comp = false;
                 }
 
-                // Comp com dataset
-                /*if (comp['data']){
-                 var mod = self.getObjViaFrom(req, comp['data']['from']);
+                if (comp) {
 
-                 // Recupera provider
-                 var prov = mod.getProvider({
-                 query: {
-                 provider: {id: comp['data']['provider']}
-                 }
-                 });
+                    // Se o comp tá sobreescrito em ctrls
+                    if (form.ctrls[ctrl]) {
+                        extend(true, comp, form.ctrls[ctrl]);
+                        if (form.ctrls[ctrl]['tipo']) {
+                            extend(true, comp, form.ctrls[ctrl]['tipo'] || {});
+                        }
+                    }
 
-                 // Recupera dados
-                 if (prov) {
-                 var ds = mod.getDataSource(req);
-                 var r = ds.load(prov, req);
-                 comp.data['rows'] = r;
-                 }
-                 }*/
-
-                // Entrega
-                delete(comp['tipo']);
-                form.ctrls[ctrl] = comp;
+                    // Entrega
+                    delete(comp['tipo']);
+                    form.ctrls[ctrl] = comp;
+                }
             }
+        };
+
+        form.linhas.forEach(function (linha) {
+            processLinha(linha);
         });
 
         //endregion

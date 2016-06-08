@@ -107,6 +107,94 @@ if(!alertify.choose){
         ;
 
         // Processa as linhas
+        var processLinhas = function(l, inline, width, icon){
+            var linha = $("<div>", {class: inline + " fields", style: 'white-space: nowrap;'});
+            for (var f in l){
+                var f_class = (width == 'percent' ? getWidth(l[f]) + " wide " : " ")
+                    , field = $("<div>", {
+                    class: f_class + " field "
+                });
+
+                // Tabs
+                if (layout['tabs'] && layout.tabs[f]){
+                    var tab_header  = $("<div>", {class: "ui top attached tabular menu"})
+                        , tabs = []
+                        , areas = []
+                        , active = 'active'
+                        , t = 0
+                    ;
+
+                    // Linhas do tab
+                    layout.tabs[f].forEach(tab => {
+                        tabs.push($("<a>", {class: active + " item", "data-tab": f + "_" + t}).html(tab['label']));
+                        areas.push($("<div>", {class: "ui bottom attached tab segment " + active, "data-tab": f + "_" + t}));
+                        tab['linhas'].forEach(tlinha => {
+                            areas[areas.length-1]
+                                .append(
+                                    processLinhas(tlinha, inline, width, icon)
+                                )
+                            ;
+                        });
+                        active = '';
+                        t++;
+                    });
+
+                    tabs.forEach(tab => {
+                        tab_header.append(tab);
+                    });
+                    field.append(tab_header);
+                    areas.forEach(area => {
+                        field.append(area);
+                    });
+
+                    linha.append(field);
+
+                // Componentes
+                } else {
+
+                    // Título
+                    if (f == 'titulo' || f == 'icon') {
+                        if (f == 'icon') continue;
+
+                        icon = (l['icon'] ? '<i class="' + l['icon'] + ' icon"></i>' : '');
+                        form.append($("<h4>", {class: "ui dividing header"}).html(icon + l[f]));
+                        return '';
+
+                    // Componentes
+                    } else {
+                        var ctrl = layout.ctrls[f];
+                        if (ctrl['label']) {
+                            icon = (ctrl['icon'] ? '<i class="' + ctrl['icon'] + ' icon"></i>' : '');
+                            field.append(
+                                $("<label>", {'title': ctrl['help']})
+                                    .html(icon + ' ' + ctrl['label'])
+                            );
+                        }
+
+                        ctrl['autosave'] = f_config['autosave'];
+
+                        // Processa um comp
+                        field.append(getComp(ctrl, f, mod));
+
+                        if (ctrl.hasOwnProperty('hidden')){
+                            if (typeof ctrl['hidden'] == 'object'){
+                                $(field).attr('rv-hide', mod.path + ".data.row." + ctrl.hidden['field'] + (
+                                        ctrl.hidden['cond']
+                                            ? ' | ' + ctrl.hidden['cond']
+                                            : ''
+                                    )
+                                );
+                            }
+                        }
+
+                        linha.append(field);
+                    }
+                }
+            }
+            return linha;
+        };
+
+        // Processa layout
         layout.linhas.forEach((l) => {
             var l_config = {};
             if (l['_config']){
@@ -117,47 +205,10 @@ if(!alertify.choose){
                 , inline    = config['labels']
                 , width     = config['comps']
                 , icon      = ''
-                ;
+            ;
 
             // Processa os comps em uma linha
-            var linha = $("<div>", {class: inline + " fields", style: 'white-space: nowrap;'});
-            for (var f in l){
-
-                // Título
-                if (f == 'titulo' || f == 'icon'){
-                    if (f == 'icon') continue;
-
-                    icon = (l['icon'] ? '<i class="' + l['icon'] + ' icon"></i>': '');
-                    form.append($("<h4>", {class: "ui dividing header"}).html(icon + l[f]));
-
-                    // Componentes
-                } else {
-                    var ctrl = layout.ctrls[f]
-                        , f_class = (width == 'percent' ? getWidth(l[f]) + " wide " : " ")
-                        ;
-
-                    // Área do comp
-                    var field = $("<div>", {
-                        class: f_class + " field "
-                    });
-
-                    if (ctrl['label']) {
-                        icon = (ctrl['icon'] ? '<i class="' + ctrl['icon'] + ' icon"></i>': '');
-                        field.append(
-                            $("<label>", {'title': ctrl['help']})
-                                .html(icon + ' ' + ctrl['label'])
-                        );
-                    }
-
-                    ctrl['autosave'] = f_config['autosave'];
-
-                    // Processa um comp
-                    field.append(getComp(ctrl, f, mod));
-
-                    linha.append(field);
-                }
-            }
-            form.append(linha);
+            form.append(processLinhas(l, inline, width, icon));
         });
 
         // Registra
@@ -467,7 +518,7 @@ if(!alertify.choose){
      * @param input
      * @param ctrl
      */
-    function setExtras(input, ctrl){
+    function setExtras(input, ctrl, path){
 
         // State
         if (ctrl['state']) {
@@ -499,6 +550,17 @@ if(!alertify.choose){
             $(input).addClass(ctrl['size']);
         }
 
+        if (ctrl.hasOwnProperty('disabled')){
+            if (typeof ctrl['disabled'] == 'object'){
+                $(input).attr('rv-disabled', path + ".data.row." + ctrl.disabled['field'] + (
+                        ctrl.disabled['cond']
+                            ? ' | ' + ctrl.disabled['cond']
+                            : ''
+                    )
+                );
+            }
+        }
+
         return input;
     }
 
@@ -510,11 +572,11 @@ if(!alertify.choose){
      * @param path
      * @returns {*}
      */
-    function getSpace(ctrl, field){
-        var input = $("<input>", {
+    function getSpace(ctrl, field, path){
+        var input = setExtras($("<input>", {
             type: "hidden",
             class: "ui fluid"
-        }, ctrl);
+        }, ctrl, path));
 
         // Extra
         if (ctrl['extra_left'] || ctrl['extra_right']) {
@@ -543,7 +605,7 @@ if(!alertify.choose){
             params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
-        var input = setExtras($("<input>", params), ctrl);
+        var input = setExtras($("<input>", params), ctrl, path);
 
         // Extra
         if (ctrl['extra_left'] || ctrl['extra_right']) {
@@ -575,7 +637,7 @@ if(!alertify.choose){
             params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
-        var input = setExtras($("<input>", params), ctrl);
+        var input = setExtras($("<input>", params), ctrl, path);
 
         // Extra
         if (ctrl['extra_left'] || ctrl['extra_right']) {
@@ -607,7 +669,7 @@ if(!alertify.choose){
             params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
-        var input = setExtras($("<input>", params), ctrl);
+        var input = setExtras($("<input>", params), ctrl, path);
 
         // Extra
         if (ctrl['extra_left'] || ctrl['extra_right']) {
@@ -639,7 +701,7 @@ if(!alertify.choose){
             params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
-        var input = setExtras($("<input>", params), ctrl);
+        var input = setExtras($("<input>", params), ctrl, path);
 
         // Extra
         ctrl['extra_right'] = ctrl['extra_right'] || "<div class='ui label'>R$</div>";
@@ -672,7 +734,7 @@ if(!alertify.choose){
             params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
-        var input = setExtras($("<input>", params), ctrl);
+        var input = setExtras($("<input>", params), ctrl, path);
 
         // Extra
         ctrl['extra_right'] = ctrl['extra_right'] || "<div class='ui label'>%</div>";
@@ -703,7 +765,7 @@ if(!alertify.choose){
             params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
-        var input = setExtras($("<input>", params), ctrl);
+        var input = setExtras($("<input>", params), ctrl, path);
 
         // Extra
         ctrl['extra_right'] = ctrl['extra_right'] || "<i class='circular calendar icon' />";
@@ -734,7 +796,7 @@ if(!alertify.choose){
             params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
-        var input = setExtras($("<input>", params), ctrl);
+        var input = setExtras($("<input>", params), ctrl, path);
 
         // Extra
         ctrl['extra_right'] = ctrl['extra_right'] || "<i class='circular wait icon' />";
@@ -765,7 +827,7 @@ if(!alertify.choose){
             params['server-onblur'] = path.split('.').join(' ') + " save";
         }
 
-        var input = setExtras($("<input>", params), ctrl);
+        var input = setExtras($("<input>", params), ctrl, path);
 
         // Extra
         if (ctrl['extra_left'] || ctrl['extra_right']) {
@@ -797,7 +859,7 @@ if(!alertify.choose){
             case 'inpMemo'      : params.rows = 6;  break;
             case 'inpMemoLong'  : params.rows = 12; break;
         }
-        var memo = setExtras($("<textarea>", params), ctrl);
+        var memo = setExtras($("<textarea>", params), ctrl, path);
 
         // Extra
         if (ctrl['extra_left'] || ctrl['extra_right']) {
@@ -826,7 +888,7 @@ if(!alertify.choose){
             params['server-onchange'] = path.split('.').join(' ') + " save";
         }
 
-        var check = setExtras($("<input>", params), ctrl);
+        var check = setExtras($("<input>", params), ctrl, path);
 
         // Extra
         //if (ctrl['extra_left'] || ctrl['extra_right']) {
@@ -852,12 +914,12 @@ if(!alertify.choose){
                 'data-provider': ctrl['data']['provider'],
         })
                 .append(
-                    $('<input>', {
+                    setExtras($('<input>', {
                         type: 'text',
                         readonly: 'on',
                         class: 'cursor',
                         'rv-template': path + ".data.row." + field + " | " + ctrl['data']['template'],
-                    }),
+                    }), ctrl, path),
                     $('<input>', {
                         type: 'hidden',
                         'rv-value': path + ".data.row." + field

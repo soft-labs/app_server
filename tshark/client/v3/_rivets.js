@@ -176,7 +176,7 @@ rivets.binders['client-*'] = function(el, value) {
 
 //region :: Formatadores
 
-rivets.formatters.concat = function(value) {
+rivets.formatters.concat    = function(value) {
     var sep = arguments[1]
         , args = Array.prototype.slice.call(arguments, 2)
         ;
@@ -184,11 +184,11 @@ rivets.formatters.concat = function(value) {
     return args.join(sep);
 };
 
-rivets.formatters.replace = function(value){
+rivets.formatters.replace   = function(value){
     return arguments[1].replace('%s', value);
 };
 
-rivets.formatters.template = function(value){
+rivets.formatters.template  = function(value){
     var txt = this.options.formatters[0];
     if (txt){
         var val = txt.replace(/{(\w+)}/g, function(n,k){
@@ -199,21 +199,21 @@ rivets.formatters.template = function(value){
     return arguments[1].replace('%s', value);
 };
 
-rivets.formatters.mais = function(value) {
+rivets.formatters.mais      = function(value) {
     var args = Array.prototype.slice.call(arguments, 1);
     return toFloat(value) + (args.reduce(function(a, b) {
             return toFloat(a) + toFloat(b);
         }, 0));
 };
 
-rivets.formatters.menos = function(value) {
+rivets.formatters.menos     = function(value) {
     var args = Array.prototype.slice.call(arguments, 1);
     return toFloat(value) - (args.reduce(function(a, b) {
             return toFloat(a) + toFloat(b);
         }, 0));
 };
 
-rivets.formatters.plus = function(value) {
+rivets.formatters.plus      = function(value) {
     var args = Array.prototype.slice.call(arguments, 1)
         , mult = args.reduce(function(a, b) {
             return toFloat(a) * (toFloat(b) ? toFloat(b) : 1);
@@ -222,16 +222,51 @@ rivets.formatters.plus = function(value) {
     return mult;
 };
 
-rivets.formatters.money = function(value){
+rivets.formatters.money     = function(value){
     return (value != undefined ? value.toMoney() : '');
 };
 
-rivets.formatters.float = function(value){
+rivets.formatters.float     = function(value){
     return (value != undefined ? value.toFloat() : '');
 };
 
-rivets.formatters.int = function(value){
+rivets.formatters.int       = function(value){
     return (value != undefined ? value.toInt() : '');
+};
+
+rivets.formatters.igualA    = function(value) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return (value == args[0]);
+};
+rivets.formatters.maiorQue  = function(value) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return (toFloat(value) > toFloat(args[0]));
+};
+rivets.formatters.menorQue  = function(value) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return (toFloat(value) < toFloat(args[0]));
+};
+rivets.formatters.diffDe    = function(value) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return (value != args[0]);
+};
+
+rivets.formatters.in        = function(value) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return (args.indexOf(value) > -1);
+};
+rivets.formatters.notIn     = function(value) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return (args.indexOf(value) == -1);
+};
+
+rivets.formatters.or        = function(value) {
+    return (arguments[0] ? arguments[0] : arguments[1]);
+};
+
+rivets.formatters.not       = function(value) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return !value;
 };
 
 rivets.formatters.menorQueZero = function(value){
@@ -250,31 +285,12 @@ rivets.formatters.clearIfEmptyOrZero = function(value){
     return (value == "" || value == "0" || value == "0,00" ? null : value);
 };
 
-rivets.formatters.igualA = function(value) {
-    var args = Array.prototype.slice.call(arguments, 1);
-    return (value == args[0]);
-};
-rivets.formatters.diffDe = function(value) {
-    var args = Array.prototype.slice.call(arguments, 1);
-    return (value != args[0]);
+rivets.formatters.isFalse = function(value){
+    return (!value || value == "" || value == "0" || value == "0,00");
 };
 
-rivets.formatters.in = function(value) {
-    var args = Array.prototype.slice.call(arguments, 1);
-    return (args.indexOf(value) > -1);
-};
-rivets.formatters.notIn = function(value) {
-    var args = Array.prototype.slice.call(arguments, 1);
-    return (args.indexOf(value) == -1);
-};
-
-rivets.formatters.or = function(value) {
-    return (arguments[0] ? arguments[0] : arguments[1]);
-};
-
-rivets.formatters.not = function(value) {
-    var args = Array.prototype.slice.call(arguments, 1);
-    return !value;
+rivets.formatters.isTrue = function(value){
+    return (value && (value != "0" && value != "0,00"));
 };
 
 //endregion

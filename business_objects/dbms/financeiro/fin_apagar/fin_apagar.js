@@ -65,16 +65,63 @@ function FinAPagar(){
             },
             linhas: [
                 {titulo: "Informe os dados do lançamento:"},
-                {cont_historicos_key: 60, valor_bruto: 20, dt_vencimento: 20},
-                {numero: 20, fin_contas_key: 60, dt_documento: 20},
-                {parceiros_key: 60, complemento: 40},
+                {cont_historicos_key: 80, valor_bruto: 20, dt_vencimento: 20},
+                {tab_teste: 100},
+                {complemento: 100}
             ],
+            tabs: {
+                tab_teste: [
+                    {
+                        label: 'Um Label',
+                        linhas: [
+                            {numero: 20, fin_contas_key: 60, dt_documento: 20}
+                        ]
+                    },
+                    {
+                        label: 'Outro',
+                        hidden: {
+                            field: 'numero', cond: 'isFalse'
+                        },
+                        linhas: [
+                            {parceiros_key: 100}
+                        ]
+                    }
+                ]
+            },
             ctrls: {
-                valor_bruto     : { label: "Valor à pagar: "},
-                numero          : { label: "Número do Documento: "},
+                numero : {
+                    label: "Número do Documento:"
+                },
                 fin_lanc_tipos_key : {
                     default: 1
+                },
+
+                dt_vencimento : {
+                    disabled: 1
+                },
+
+                valor_bruto: {
+                    label: "Valor à pagar:",
+                    hidden: {
+                        field: 'numero', cond: 'isFalse'
+                    }
+                },
+                /*complemento: {
+                    tipo: types.comp.dropdown,
+                    data: {
+                        label: 'value',
+                        rows: [
+                            {complemento: 1, value: 'Masculino'},
+                            {complemento: 2, value: 'Feminino'}
+                        ],
+                    }
+                },*/
+                dt_documento: {
+                    hidden: {
+                        field: 'numero', cond: 'maiorQue 3'
+                    }
                 }
+
             }
         }
 
