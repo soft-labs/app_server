@@ -55,7 +55,7 @@ app.areas.add('app-cadastros', {
                     icon: 'add icon',
                     title: 'Novo Cliente',
                     description: 'Cadastrar Novo',
-                    server: 'dbms empresa emp_clientes create',
+                    server: 'dbms empresas emp_clientes create',
                     active: 1
                 }
             ]);

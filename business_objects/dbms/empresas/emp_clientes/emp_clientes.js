@@ -40,14 +40,28 @@ function EmpClientes(){
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
-                }
+                },
+
+
+                parceiro: {
+                    tipo: types.comp.text, label: 'Parceiro:'
+                },
+                end_paises_key: {
+                    tipo: types.comp.choose, label: 'País:',
+                    data: {
+                        key: ['end_paises_key'],
+                        from: ['dbms', 'enderecos', 'end_paises'],
+                        template: '{end_paises_key} - {end_pais}',
+                        provider: ''
+                    }
+                },
             }
         }
     };
-
+    
     //endregion
 
-
+    
     //region :: Forms
 
     this.forms = {
@@ -60,11 +74,11 @@ function EmpClientes(){
                 comps : types.form.lines.distribution.percent,
                 state : types.form.state.ok,
                 size  : types.form.size.small,
-                autosave  : true,
+                autosave  : false,
             },
             linhas: [
-                {titulo: "Informações de emp_clientes"},
-                {emp_clientes_key: 25, parceiros_key: 25, ativo: 25, observacoes: 25}
+                {titulo: "Dados Principais"},
+                {ativo: 5, parceiro: 50,end_paises_key: 45, }
             ],
             ctrls: {
                 
@@ -127,23 +141,11 @@ function EmpClientes(){
                 0: {
                     from: ['dbms', 'parceiros', 'parceiros'],
                     where: [
-                        
+
                     ]
                 },
                 1: {
                     from: ['dbms', 'empresas', 'emp_clientes'],
-                    where: [
-
-                    ]
-                },
-                2: {
-                    from: ['dbms', 'parceiros', 'parc_fisicos'],
-                    where: [
-
-                    ]
-                },
-                3: {
-                    from: ['dbms', 'parceiros', 'parc_juridicos'],
                     where: [
 
                     ]

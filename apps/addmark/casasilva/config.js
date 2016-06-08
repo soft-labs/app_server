@@ -57,8 +57,19 @@ module.exports = {
             }
         },
 
-        // King Host
+        // Mac
         default: {
+            tipo: 'mysql',
+            conn: {
+                database: 'softlabs',
+                host: '192.168.25.2',
+                user: 'root',
+                password: 'desenv123'
+            }
+        },
+        
+        // King Host
+        xdefault: {
             tipo: 'mysql',
             conn: {
                 database: 'softlabs07',
