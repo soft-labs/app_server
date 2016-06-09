@@ -24,7 +24,7 @@ function EndEletronicoTipos(){
                     tipo: types.comp.key, label: 'End Eletronico Tipos:'
                 }, 
                 tipo: {
-                    tipo: types.comp.text, label: 'Tipo:'
+                    tipo: types.comp.text, label: 'Tipo de Endereço Eletrônico:'
                 }
             }
         }
@@ -50,8 +50,8 @@ function EndEletronicoTipos(){
                 ]
             },
             linhas: [
-                {titulo: "Informações de end_eletronico_tipos"},
-                {end_eletronico_tipos_key: 25, tipo: 75}
+                {titulo: "Tipo de Endereço Eletrônico"},
+                {tipo: 100}
             ],
             ctrls: {
                 tipo: {

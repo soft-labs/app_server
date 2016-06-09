@@ -24,7 +24,7 @@ function EndTipos(){
                     tipo: types.comp.key, label: 'End Tipos:'
                 }, 
                 end_tipo: {
-                    tipo: types.comp.text, label: 'End Tipo:'
+                    tipo: types.comp.text, label: 'Tipo de Endereço:'
                 }
             }
         }
@@ -50,8 +50,8 @@ function EndTipos(){
                 ]
             },
             linhas: [
-                {titulo: "Informações de end_tipos"},
-                {end_tipos_key: 25, end_tipo: 75}
+                {titulo: "Tipo de Endereço"},
+                {end_tipo: 100}
             ],
             ctrls: {
                 end_tipo: {
