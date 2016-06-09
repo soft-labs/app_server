@@ -525,7 +525,7 @@ SQL.prototype._select = function *(provider, obj, meta){
 
             var val = ''
                 , tipo = field['tipo']    || {}
-                , def  = field['default'] || tipo['default']
+                , def  = field.hasOwnProperty('default') ? field['default'] : tipo['default']
                 , type = tipo['type']
             ;
             def = (typeof def == 'string' ? def.toUpperCase() : def);
@@ -533,13 +533,13 @@ SQL.prototype._select = function *(provider, obj, meta){
             // Monta valores
             switch (type) {
                 case 'int':
-                    val = def || 0;
+                    val = def;
                     break;
 
                 case 'float':
                 case 'money':
                 case 'percent':
-                    val = def || 0;
+                    val = def;
                     break;
 
                 case 'date':
@@ -771,14 +771,21 @@ SQL.prototype.change = function *(op, source, obj) {
         sql += this.db.parseWhere(source['where'], obj.params);
 
     } else {
-        sql += ' (' + fields + ' ) ';
-        sql += '\n    VALUES (' + values + ') ';
+        if (values) {
+            sql += ' (' + fields + ' ) ';
+            sql += '\n    VALUES (' + values + ') ';
+        } else {
+            sql = '';
+        }
     }
 
     // Executa
-    results = yield this.db._exec(sql, obj);
-    return yield this.db.processChangeResults(op, results, obj);
-    
+    if (sql) {
+        results = yield this.db._exec(sql, obj);
+        return yield this.db.processChangeResults(op, results, obj);
+    } else {
+        return false;
+    }
 };
 
 /**

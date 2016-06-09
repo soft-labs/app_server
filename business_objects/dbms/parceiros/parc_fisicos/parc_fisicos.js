@@ -21,25 +21,28 @@ function ParcFisicos(){
             label: 'apelido',
             fields: {
                 parceiros_key: {
-                    tipo: types.comp.key, label: 'Parceiros:'
+                    tipo: types.comp.int, label: 'Parceiros:'
                 }, 
                 apelido: {
                     tipo: types.comp.text, label: 'Apelido:'
                 }, 
                 dia_nasc: {
-                    tipo: types.comp.int, label: 'Dia Nasc:'
-                }, 
+                    tipo: types.comp.int, label: 'Dia Nasc:',
+                    default:''
+                },
                 mes_nasc: {
-                    tipo: types.comp.int, label: 'Mes Nasc:'
+                    tipo: types.comp.int, label: 'Mes Nasc:',
+                    default:''
                 }, 
                 ano_nasc: {
-                    tipo: types.comp.int, label: 'Ano Nasc:'
+                    tipo: types.comp.int, label: 'Ano Nasc:',
+                    default:''
                 }, 
                 rg: {
-                    tipo: types.comp.text, label: 'RG:'
+                    tipo: types.comp.text, label: 'Nº Documento:'
                 }, 
                 cpf: {
-                    tipo: types.comp.text, label: 'CPF:'
+                    tipo: types.comp.text, label: 'Nº Documento:'
                 }, 
                 sexo: {
                     tipo: types.comp.text, label: 'Sexo:'

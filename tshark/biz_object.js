@@ -538,12 +538,15 @@ BizObject.prototype.change = function *(op, ctx){
                         res.result = yield dts.insert(source, mod);
 
                         // Propaga
-                        if (res.result){
+                        if (res.result)
+                        {
                             var key = source.src.metadata.key;
                             res['insert'] = res['insert'] || {};
                             res.insert[key] = res.result;
                             ctx.request.body.row[key] = res.result;
-                        } else {
+                        }
+                        else
+                        {
                             dts.rollback();
                             return {result: false};
                         }
