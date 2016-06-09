@@ -37,7 +37,25 @@ function EmpClientesRel(){
                         template: '{emp_clientes_key} - {emp_cliente}', 
                         provider: '' 
                     } 
-                }, 
+                },
+                cont_plano_contas_key: {
+                    tipo: types.comp.choose, label: 'Plano de Contas:',
+                    data: {
+                        key: ['cont_plano_contas_key'],
+                        from: ['dbms', 'contabil', 'cont_plano_contas'],
+                        template: '{cont_plano_contas_key} - {cont_plano_conta}',
+                        provider: ''
+                    }
+                },
+                cont_centro_resultados_key: {
+                    tipo: types.comp.choose, label: 'Centro de Resultados:',
+                    data: {
+                        key: ['cont_centro_resultados_key'],
+                        from: ['dbms', 'contabil', 'cont_centro_resultados'],
+                        template: '{cont_centro_resultados_key} - {cont_centro_resultado}',
+                        provider: ''
+                    }
+                },
                 ativo: {
                     tipo: types.comp.int, label: 'Ativo:'
                 }, 

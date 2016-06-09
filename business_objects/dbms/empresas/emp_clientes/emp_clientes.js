@@ -177,6 +177,11 @@ function EmpClientes(){
                 ]
             },
             linhas: [
+                {titulo:"Dados Principais"},
+                {parceiro: 60},
+
+
+
                 {tabs:100},
             ],
             tabs: {
@@ -191,7 +196,7 @@ function EmpClientes(){
                     {
                         label: 'Finanças',
                         linhas: [
-                            {parc_contas_key: 35, cont_plano_contas_key: 35, cont_centro_resultados_key: 35 },
+                            {parc_contas_key: 35, /*cont_plano_contas_key: 35, cont_centro_resultados_key: 35*/ },
                             {limite_credito: 35, limite_compromisso:35,limite_desconto: 35}
                         ]
                     },
