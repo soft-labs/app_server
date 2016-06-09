@@ -540,16 +540,13 @@ BizObject.prototype.change = function *(op, ctx){
                         // Propaga
                         if (res.result)
                         {
-                            var key = source.src.metadata.key;
-                            res['insert'] = res['insert'] || {};
-                            res.insert[key] = res.result;
-                            ctx.request.body.row[key] = res.result;
-                        }
-                        else
-                        {
-                            dts.rollback();
-                            return {result: false};
-                        }
+                            if (res.result != '_empty_values_') {
+                                var key = source.src.metadata.key;
+                                res['insert'] = res['insert'] || {};
+                                res.insert[key] = res.result;
+                                ctx.request.body.row[key] = res.result;
+                            }
+                        } 
                         break;
 
                     case 'update' :
@@ -561,6 +558,12 @@ BizObject.prototype.change = function *(op, ctx){
                         break;
                 }
 
+                // Rollback em caso de falha
+                if (!res.result){
+                    yield dts.rollback();
+                    return {result: false};
+                }
+                
                 if (mod['onAfter' + evento]) {
                     yield mod['onAfter' + evento](res, ctx);
                 }

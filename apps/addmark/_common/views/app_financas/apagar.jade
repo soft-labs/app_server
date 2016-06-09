@@ -17,7 +17,6 @@ include ../../templates/list_financeiro
             // Menu Listagem / Chart
             +seletor('Visualizar...', 'dbms.financeiro.fin_apagar.displayOpts')
 
-
             // Área de trabalho
             .header Pagamentos Programados
             .meta
@@ -34,6 +33,12 @@ include ../../templates/list_financeiro
 
         // Footer
         .extra.content
+            .ui.green.left.floated.labeled.icon.button(
+                server='dbms financeiro fin_apagar create'
+            )
+                i.plus.icon
+                | Lançar Pagamento
+
             span.right.floated.app_apagar-footer-sum
                 | Total à Pagar: R$ {dbms.financeiro.fin_apagar.data.group._stats.sum.valor_bruto | money}
 

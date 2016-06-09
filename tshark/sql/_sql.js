@@ -763,6 +763,11 @@ SQL.prototype.change = function *(op, source, obj) {
                 v = ',';
             }
         }
+        
+        // Não existem valores para inserção ou update
+        if (!values){
+            return '_empty_values_';
+        }
     }
 
     // Processa where
@@ -771,21 +776,14 @@ SQL.prototype.change = function *(op, source, obj) {
         sql += this.db.parseWhere(source['where'], obj.params);
 
     } else {
-        if (values) {
-            sql += ' (' + fields + ' ) ';
-            sql += '\n    VALUES (' + values + ') ';
-        } else {
-            sql = '';
-        }
+        sql += ' (' + fields + ' ) ';
+        sql += '\n    VALUES (' + values + ') ';
     }
 
     // Executa
-    if (sql) {
-        results = yield this.db._exec(sql, obj);
-        return yield this.db.processChangeResults(op, results, obj);
-    } else {
-        return false;
-    }
+    results = yield this.db._exec(sql, obj);
+    return yield this.db.processChangeResults(op, results, obj);
+    
 };
 
 /**

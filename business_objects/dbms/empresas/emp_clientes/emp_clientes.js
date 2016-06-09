@@ -170,30 +170,24 @@ function EmpClientes(){
 
                     ]
                 },
-                /*1: {
-                    from: ['dbms', 'parceiros', 'parc_fisicos'],
-                    where: [
-
-                    ]
-                },*/
                 1: {
-                    from: ['dbms', 'parceiros', 'parc_juridicos'],
-                    where: [
-
-                    ]
-                },
-                2: {
                     from: ['dbms', 'empresas', 'emp_clientes'],
                     where: [
 
                     ]
                 },
-                3: {
+                2: {
                     from: ['dbms', 'enderecos', 'enderecos'],
                     where: [
 
                     ]
                 },
+                3: {
+                    from: ['dbms', 'parceiros', 'parc_enderecos_rel'],
+                    where: [
+
+                    ]
+                }
             },
             showSQL: 0
         }

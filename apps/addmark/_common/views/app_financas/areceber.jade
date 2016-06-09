@@ -32,6 +32,12 @@ include ../../templates/list_financeiro
 
         // Footer
         .extra.content
+            .ui.green.left.floated.labeled.icon.button(
+                server='dbms financeiro fin_areceber create'
+            )
+                i.plus.icon
+                | Lançar Recebimento
+
             span.right.floated.app_areceber-footer-sum
                 | Total à Receber: R$ {dbms.financeiro.fin_areceber.data.group._stats.sum.valor_bruto | money}
 
