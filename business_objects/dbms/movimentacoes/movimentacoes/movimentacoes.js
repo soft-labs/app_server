@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: movimentacoes.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:58:34 GMT-0300 (BRT)
+ * @since Thu Jun 09 2016 10:57:12 GMT-0300 (BRT)
  * @constructor
  */
 function Movimentacoes(){
@@ -23,6 +23,15 @@ function Movimentacoes(){
                 movimentacoes_key: {
                     tipo: types.comp.key, label: 'Movimentações:'
                 }, 
+                mov_tipos_key: {
+                    tipo: types.comp.choose, label: 'Mov Tipos:',
+                    data: { 
+                        key: ['mov_tipos_key'], 
+                        from: ['dbms', 'movimentacoes', 'mov_tipos'], 
+                        template: '{mov_tipos_key} - {mov_tipo}', 
+                        provider: '' 
+                    } 
+                }, 
                 mov_origem_key: {
                     tipo: types.comp.choose, label: 'Mov Origem:',
                     data: { 
@@ -38,15 +47,6 @@ function Movimentacoes(){
                         key: ['mov_destino_key'], 
                         from: ['dbms', 'movimentacoes', 'mov_destino'], 
                         template: '{mov_destino_key} - {mov_destin}', 
-                        provider: '' 
-                    } 
-                }, 
-                mov_tipos_key: {
-                    tipo: types.comp.choose, label: 'Mov Tipos:',
-                    data: { 
-                        key: ['mov_tipos_key'], 
-                        from: ['dbms', 'movimentacoes', 'mov_tipos'], 
-                        template: '{mov_tipos_key} - {mov_tipo}', 
                         provider: '' 
                     } 
                 }, 
@@ -101,24 +101,6 @@ function Movimentacoes(){
                         key: ['contratos_key'], 
                         from: ['dbms', 'contratos', 'contratos'], 
                         template: '{contratos_key} - {contrato}', 
-                        provider: '' 
-                    } 
-                }, 
-                cont_centros_resultado_key: {
-                    tipo: types.comp.choose, label: 'Cont Centros Resultado:',
-                    data: { 
-                        key: ['cont_centros_resultado_key'], 
-                        from: ['dbms', 'contabil', 'cont_centros_resultado'], 
-                        template: '{cont_centros_resultado_key} - {cont_centros_resultad}', 
-                        provider: '' 
-                    } 
-                }, 
-                cont_plano_contas_key: {
-                    tipo: types.comp.choose, label: 'Cont Plano Contas:',
-                    data: { 
-                        key: ['cont_plano_contas_key'], 
-                        from: ['dbms', 'contabil', 'cont_plano_contas'], 
-                        template: '{cont_plano_contas_key} - {cont_plano_conta}', 
                         provider: '' 
                     } 
                 }, 
@@ -231,7 +213,7 @@ function Movimentacoes(){
                     tipo: types.comp.text_big, label: 'Doc Fiscal Extra:'
                 }, 
                 doc_fiscal_file: {
-                    tipo: types.comp.text, label: 'Doc Fiscal File:'
+                    tipo: types.comp.text_big, label: 'Doc Fiscal File:'
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
@@ -261,18 +243,17 @@ function Movimentacoes(){
             },
             linhas: [
                 {titulo: "Informações de movimentacoes"},
-                {movimentacoes_key: 25, mov_origem_key: 25, mov_destino_key: 25, mov_tipos_key: 25}, 
+                {movimentacoes_key: 25, mov_tipos_key: 25, mov_origem_key: 25, mov_destino_key: 25}, 
                 {mov_status_key: 25, empresas_key: 25, parceiros_key: 25, emp_clientes_key: 25}, 
-                {emp_fornecedores_key: 25, contratos_key: 25, cont_centros_resultado_key: 25, cont_plano_contas_key: 25}, 
-                {emp_dep_origem_key: 25, emp_dep_destino_key: 25, competencia: 25, dt_lancamento: 25}, 
-                {dt_documento: 25, dt_vencimento: 25, numero: 25, valor_bruto: 25}, 
-                {valor_frete: 25, valor_seguro: 25, valor_desconto: 25, valor_imp_ii: 25}, 
-                {valor_imp_ipi: 25, valor_imp_pis: 25, valor_imp_cofins: 25, valor_imp_icms: 25}, 
-                {valor_imp_icmsst: 25, valor_out_desp: 25, valor_liquido: 25, multa: 25}, 
-                {multa_em_moeda: 25, juros: 25, doc_fiscal_tipo: 25, doc_fiscal_data: 25}, 
-                {doc_fiscal_caixa: 25, doc_fiscal_num_equip: 25, doc_fiscal_numero: 25, doc_fiscal_serie: 25}, 
-                {doc_fiscal_subserie: 25, doc_fiscal_modelo: 25, doc_fiscal_chave: 25, doc_fiscal_extra: 25}, 
-                {doc_fiscal_file: 25, observacoes: 75}
+                {emp_fornecedores_key: 25, contratos_key: 25, emp_dep_origem_key: 25, emp_dep_destino_key: 25}, 
+                {competencia: 25, dt_lancamento: 25, dt_documento: 25, dt_vencimento: 25}, 
+                {numero: 25, valor_bruto: 25, valor_frete: 25, valor_seguro: 25}, 
+                {valor_desconto: 25, valor_imp_ii: 25, valor_imp_ipi: 25, valor_imp_pis: 25}, 
+                {valor_imp_cofins: 25, valor_imp_icms: 25, valor_imp_icmsst: 25, valor_out_desp: 25}, 
+                {valor_liquido: 25, multa: 25, multa_em_moeda: 25, juros: 25}, 
+                {doc_fiscal_tipo: 25, doc_fiscal_data: 25, doc_fiscal_caixa: 25, doc_fiscal_num_equip: 25}, 
+                {doc_fiscal_numero: 25, doc_fiscal_serie: 25, doc_fiscal_subserie: 25, doc_fiscal_modelo: 25}, 
+                {doc_fiscal_chave: 25, doc_fiscal_extra: 25, doc_fiscal_file: 25, observacoes: 25}
             ],
             ctrls: {
                 competencia: {
@@ -300,22 +281,22 @@ function Movimentacoes(){
                     ]
                 },
                 1: { 
+                    from: ['dbms', 'movimentacoes', 'mov_tipos'],
+                    join: {source: 0, tipo: types.join.left, on: 'mov_tipos_key', where: ''},
+                    fields: [
+                        
+                    ]
+                },
+                2: { 
                     from: ['dbms', 'movimentacoes', 'mov_origem'],
                     join: {source: 0, tipo: types.join.left, on: 'mov_origem_key', where: ''},
                     fields: [
                         
                     ]
                 },
-                2: { 
+                3: { 
                     from: ['dbms', 'movimentacoes', 'mov_destino'],
                     join: {source: 0, tipo: types.join.left, on: 'mov_destino_key', where: ''},
-                    fields: [
-                        
-                    ]
-                },
-                3: { 
-                    from: ['dbms', 'movimentacoes', 'mov_tipos'],
-                    join: {source: 0, tipo: types.join.left, on: 'mov_tipos_key', where: ''},
                     fields: [
                         
                     ]
@@ -363,27 +344,13 @@ function Movimentacoes(){
                     ]
                 },
                 10: { 
-                    from: ['dbms', 'contabil', 'cont_centros_resultado'],
-                    join: {source: 0, tipo: types.join.left, on: 'cont_centros_resultado_key', where: ''},
-                    fields: [
-                        
-                    ]
-                },
-                11: { 
-                    from: ['dbms', 'contabil', 'cont_plano_contas'],
-                    join: {source: 0, tipo: types.join.left, on: 'cont_plano_contas_key', where: ''},
-                    fields: [
-                        
-                    ]
-                },
-                12: { 
                     from: ['dbms', 'empresas', 'emp_dep_origem'],
                     join: {source: 0, tipo: types.join.left, on: 'emp_dep_origem_key', where: ''},
                     fields: [
                         
                     ]
                 },
-                13: { 
+                11: { 
                     from: ['dbms', 'empresas', 'emp_dep_destino'],
                     join: {source: 0, tipo: types.join.left, on: 'emp_dep_destino_key', where: ''},
                     fields: [

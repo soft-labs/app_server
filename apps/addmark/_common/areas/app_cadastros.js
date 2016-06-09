@@ -1,7 +1,7 @@
 /**
  * Área de Clientes
  */
-app.areas.add('app-cadastros', {
+app.areas.add('app_cadastros', {
 
     /**
      * Chamado na inicialização da area
@@ -29,7 +29,7 @@ app.areas.add('app-cadastros', {
     /**
      * Subarea Clientes
      */
-    'app-clientes':{
+    'app_clientes':{
 
         /**
          * Chamado sempre que a área é exibida
@@ -41,15 +41,15 @@ app.areas.add('app-cadastros', {
                     title: 'Home',
                     description: 'Cockpit financeiro',
                     client: 'app areas show',
-                    area: "app-home"
+                    area: "app_home"
                 },
                 {
                     icon: 'users icon',
                     title: 'Clientes Cadastrados',
                     description: 'Listagem',
                     client:'app areas show',
-                    area:'app-cadastros',
-                    subarea:'app-clientes'
+                    area:'app_cadastros',
+                    subarea:'app_clientes'
                 },
                 {
                     icon: 'add icon',
@@ -65,7 +65,7 @@ app.areas.add('app-cadastros', {
     /**
      * Subarea Clientes-Detalhes
      */
-    'app-clientes_detalhes':{
+    'app_clientes_detalhes':{
 
         /**
          * Chamado sempre que a área é exibida
@@ -81,7 +81,7 @@ app.areas.add('app-cadastros', {
     /**
      * Subarea Fornecedores
      */
-    'app-fornecedores':{
+    'app_fornecedores':{
 
         /**
          * Chamado sempre que a área é exibida
@@ -93,15 +93,15 @@ app.areas.add('app-cadastros', {
                     title: 'Home',
                     description: 'Cockpit financeiro',
                     client: 'app areas show',
-                    area: "app-home"
+                    area: "app_home"
                 },
                 {
                     icon: 'users icon',
                     title: 'Fornecedores Cadastrados',
                     description: 'Listagem',
                     client:'app areas show',
-                    area:'app-cadastros',
-                    subarea:'app-fornecedores'
+                    area:'app_cadastros',
+                    subarea:'app_fornecedores'
                 },
                 {
                     icon: 'add icon',
@@ -118,7 +118,7 @@ app.areas.add('app-cadastros', {
     /**
      * Subarea Fornecedores-Detalhes
      */
-    'app-fornecedores_detalhes':{
+    'app_fornecedores_detalhes':{
 
         /**
          * Chamado sempre que a área é exibida
@@ -134,7 +134,7 @@ app.areas.add('app-cadastros', {
     /**
      * Subarea Contas
      */
-    'app-contas':{
+    'app_contas':{
 
         /**
          * Chamado sempre que a área é exibida
@@ -146,15 +146,15 @@ app.areas.add('app-cadastros', {
                     title: 'Home',
                     description: 'Cockpit financeiro',
                     client: 'app areas show',
-                    area: "app-home"
+                    area: "app_home"
                 },
                 {
                     icon: 'payment icon',
                     title: 'Contas Bancárias',
                     description: 'Gestão de Contas Financeiras',
                     client:'app areas show',
-                    area:'app-cadastros',
-                    subarea:'app-contas'
+                    area:'app_cadastros',
+                    subarea:'app_contas'
                 },
                 {
                     icon: 'add icon',

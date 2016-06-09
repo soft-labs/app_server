@@ -1,0 +1,61 @@
+//
+   Created by Labs on 09/06/16.
+
+.ui.container.transition.hidden.app_automod
+    .ui.fluid.card
+        .content
+            .ui.mini.compact.right.floated.secondary.menu
+
+                .item
+                    .ui.action.input
+                        input#input_pesquisa(
+                            type='text'
+                            placeholder='Pesquisar...'
+                            rv-server-onkeypress="automod.mod.path_str | append ' search'"
+                            data-comp='#input_pesquisa'
+                        )
+                        button.ui.icon.button.cursor(
+                                rv-server="automod.mod.path_str | append ' search'"
+                                data-comp='#input_pesquisa'
+                            )
+                            i.search.icon
+                .item
+                    button.ui.green.labeled.icon.button(
+                            rv-server='automod.mod.api.create'
+                        )
+                        i.plus.icon
+                        | Acrescentar
+
+                .item
+                    button.ui.red.labeled.icon.button(
+                        rv-class-disabled='automod.mod.data.selected.rv.has_any | not'
+                        rv-server='automod.mod.api.delete'
+                    )
+                        i.minus.icon
+                        | Remover
+
+            .header {automod.item.label}
+            .meta {automod.item.info}
+
+        .extra.content
+            .ui(rv-class="automod.mod.path_str | append '-list-area ui'")
+
+    // Form popup de edição
+    .ui.modal(rv-class="automod.mod.path_str | append '-form ui modal'")
+
+        // Header
+        .ui.header
+            i.big.icon(rv-class="automod.item.icon | append ' big icon'")
+            .content {automod.item.label}
+                .sub.header {automod.item.info}
+
+        // Form
+        div.content(rv-class="automod.mod.path_str | append '-form-area content'")
+
+        // Botões
+        div.actions
+            div.ui.green.button.ok(rv-server='automod.mod.api.save')
+                | Salvar Alterações
+
+            div.ui.orange.button.cancel(rv-client='automod.mod.api.cancel')
+                | Cancelar

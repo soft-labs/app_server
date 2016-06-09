@@ -29,7 +29,7 @@ tshark.modulos._add('sys.app.menu', {
         });
 
         // Armazena a última área aberta / inicializa com home
-        this.old_area = 'app-home';
+        this.old_area = 'app_home';
 
         this.old_subarea = '';
 

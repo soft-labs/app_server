@@ -6,7 +6,7 @@ include ../../templates/periodo
 include ../../templates/popup_form
 include ../../templates/list_financeiro
 
-.ui.container.transition.hidden.app-areceber
+.ui.container.transition.hidden.app_areceber
     .ui.fluid.card
         .content
 
@@ -32,7 +32,7 @@ include ../../templates/list_financeiro
 
         // Footer
         .extra.content
-            span.right.floated.app-receita-footer-sum
+            span.right.floated.app_areceber-footer-sum
                 | Total à Receber: R$ {dbms.financeiro.fin_areceber.data.group._stats.sum.valor_bruto | money}
 
 

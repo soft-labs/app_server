@@ -7,7 +7,7 @@ include ../../templates/periodo
 include ../../templates/popup_form
 include ../../templates/list_financeiro
 
-.ui.container.transition.hidden.app-apagar
+.ui.container.transition.hidden.app_apagar
     .ui.fluid.card
         .content
 
@@ -34,7 +34,7 @@ include ../../templates/list_financeiro
 
         // Footer
         .extra.content
-            span.right.floated.app-despesa-footer-sum
+            span.right.floated.app_apagar-footer-sum
                 | Total à Pagar: R$ {dbms.financeiro.fin_apagar.data.group._stats.sum.valor_bruto | money}
 
 

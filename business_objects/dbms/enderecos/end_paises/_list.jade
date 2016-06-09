@@ -2,21 +2,39 @@
     Template default para: dbms.enderecos.end_paises
     Criado em Sun May 29 2016 08:57:57 GMT-0300 (BRT)
 
-table.ui.compact.striped.celled.table
+table.ui.selectable.table
     thead
-        th End Paises
-        th Ativo
-        th Cod Siscomex
-        th Cod Ibge
-        th Sigla
-        th Pais
-        th Nacionalidade
+        tr.cursor
+            th.one.wide Ativo
+            th.two.wide Sigla
+            th.three.wide País
+            th.nine.wide Nacionalidade
+            th.one.wide
     tbody
-        tr(rv-each-row='dbms.enderecos.[object Object].data.rows')
-            td {row.end_paises_key}
-            td {row.ativo}
-            td {row.cod_siscomex}
-            td {row.cod_ibge}
-            td {row.sigla}
-            td {row.pais}
-            td {row.nacionalidade}
+        tr(
+            rv-each-item='dbms.enderecos.end_paises.data.rows'
+            rv-row-key='item.end_paises_key'
+        )
+            td
+                .ui.toggle.checkbox
+                    input(
+                        type="checkbox"
+                        rv-checked='item.ativo'
+                        rv-row-key='item.end_paises_key'
+                        server-onchange='dbms enderecos end_paises update'
+                    )
+            td {item.sigla}
+            td(
+                rv-row-key='item.end_paises_key'
+                server='dbms enderecos end_paises edit'
+            )
+                i.edit.icon
+                | {item.pais}
+            td {item.nacionalidade}
+            td
+                .ui.checkbox
+                    input(
+                    type='checkbox'
+                        rv-checked='item._selected_'
+                        rv-row-selected='item._selected_'
+                    )

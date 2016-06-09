@@ -156,7 +156,10 @@ var CONSOLE_ON = true;
                 , data = ev.currentTarget ? JSON.parse(JSON.stringify(ev.currentTarget.dataset)) : $(this).data()
             ;
 
-            var obj = tshark.getObjPath(window, api);
+            var obj = tshark.getObjPath(app, api);
+            if (!obj){
+                obj = tshark.getObjPath(window, api);
+            }
             if (obj) {
                 obj.call($(this), ev, data);
             }
@@ -450,6 +453,10 @@ var CONSOLE_ON = true;
     TShark.prototype.getMod = function (path) {
         if (typeof path != 'string'){
             path = path.join('.');
+        } else {
+            if (path.indexOf('.') == -1){
+                path = path.split(' ').join('.');
+            }
         }
         return this.modulos[path];
     };
@@ -475,7 +482,10 @@ var CONSOLE_ON = true;
         }
 
         paths.forEach(id => {
-
+            if (id.indexOf('.') == -1){
+                id = id.split(' ').join('.');
+            }
+            
             // Ajusta path
             var obj = this.modulos[id];
 
@@ -609,19 +619,24 @@ var CONSOLE_ON = true;
      * @returns {*}
      */
     TShark.prototype.getObjPath = (base, path) => {
-        if (!path && typeof base == 'string'){
-            path = base;
-            base = app;
-        }
+        try {
+            if (!path && typeof base == 'string') {
+                path = base;
+                base = app;
+            }
 
-        var obj = base;
-        if (typeof path == 'string'){
-            path = path.indexOf('.') > -1 ? path.split('.') : path.split(' ');
+            var obj = base;
+            if (typeof path == 'string') {
+                path = path.indexOf('.') > -1 ? path.split('.') : path.split(' ');
+            }
+            path.forEach((p) => {
+                obj = obj[p];
+            });
+            return obj;
+
+        } catch (e) {
+            return false;
         }
-        path.forEach((p) => {
-            obj = obj[p];
-        });
-        return obj;
     };
     
     //endregion

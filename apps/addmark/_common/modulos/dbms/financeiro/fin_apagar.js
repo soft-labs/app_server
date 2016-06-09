@@ -248,13 +248,13 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
      */
     setTooltips: function(){
 
-        $('.app-apagar-tooltip-datas').not('.tooltipstered')
+        $('.app_apagar-tooltip-datas').not('.tooltipstered')
             .tooltipster({
                 position: 'left',
                 theme: 'tooltipster-shadow'
             });
 
-        $('.app-apagar-tooltip-datas')
+        $('.app_apagar-tooltip-datas')
             .each(function(){
                 $(this)
                     .tooltipster('content', $(
@@ -284,14 +284,14 @@ tshark.modulos._add('dbms.financeiro.fin_apagar', {
                     )
             });
 
-        $('.app-apagar-tooltip-actions').not('.tooltipstered')
+        $('.app_apagar-tooltip-actions').not('.tooltipstered')
             .tooltipster({
                 position: 'bottom',
                 interactive: true,
                 theme: 'tooltipster-shadow'
             });
 
-        $('.app-apagar-tooltip-actions')
+        $('.app_apagar-tooltip-actions')
             .each(function(){
                 $(this)
                     .tooltipster('content',

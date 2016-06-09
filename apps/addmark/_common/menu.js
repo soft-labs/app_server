@@ -7,22 +7,22 @@ module.exports = {
         // Menu de finanças
         {
             label: "Finanças",
-            area: "app-financas",
+            area: "app_financas",
             icon: "line chart icon",
             submenu: [
                 {
                     label: "Fluxo de Caixa",
-                    subarea: 'app-caixa'
+                    subarea: 'app_caixa'
                 },
                 {
                     label: "Contas à Pagar",
                     server: "dbms financeiro fin_apagar list",
-                    subarea: 'app-apagar'
+                    subarea: 'app_apagar'
                 },
                 {
                     label: "Contas à Receber",
                     server: "dbms financeiro fin_areceber list",
-                    subarea: 'app-areceber'
+                    subarea: 'app_areceber'
                 },
                 {
                     label: "Resultados"
@@ -33,7 +33,7 @@ module.exports = {
         // Menu de integrações
         {
             label: "Operações",
-            area: "app-integracoes",
+            area: "app_integracoes",
             icon: "cloud download icon",
             submenu: [
                 {
@@ -51,23 +51,23 @@ module.exports = {
         // Menu de cadastros
         {
             label: "Cadastros",
-            area: "app-cadastros",
+            area: "app_cadastros",
             icon: "edit icon",
             submenu: [
                 {
                     label: "Clientes",
                     server: "dbms empresas emp_clientes list",
-                    subarea: "app-clientes"
+                    subarea: "app_clientes"
                 },
                 {
                     label: "Fornecedores",
                     server: "dbms empresas emp_fornecedores list",
-                    subarea: "app-fornecedores"
+                    subarea: "app_fornecedores"
                 },
                 {
                     label: "Bancos e Contas",
                     server: "dbms financeiro fin_contas list",
-                    subarea: "app-contas"
+                    subarea: "app_contas"
                 },
                 {
                     label: "Plano de Contas"
@@ -78,16 +78,17 @@ module.exports = {
         // Menu de Sistema
         {
             label: "Sistema",
-            area: "app-sistema",
+            area: "app_sistema",
             icon: "options icon",
             submenu: [
                 {
                     label: "Cockpit",
-                    area: "app-home",
-                    subarea: "",
+                    area: "app_home",
+                    subarea: ""
                 },
                 {
-                    label: "Configurações"
+                    label: "Configurações",
+                    subarea: "app_configuracoes"
                 },
                 {
                     label: "Segurança"
@@ -102,13 +103,13 @@ module.exports = {
         // Menu de Endereços
         {
             label: "Endereços",
-            area: "app-enderecos",
+            area: "app_enderecos",
             icon: "marker icon",
             submenu: [
                 {
                     label: "Países",
                     server: "dbms enderecos end_paises list",
-                    subarea: "app-paises"
+                    subarea: "app_paises"
                 },
                 {
                     label: "Estados"

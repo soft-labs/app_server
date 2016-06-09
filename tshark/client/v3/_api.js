@@ -527,7 +527,7 @@ $.fn.api.settings.api = {};
 
             var place = response['list_place']
                 ? response['list_place']
-                : '.' + mod.path + '-list'
+                : '.' + mod.path + '-list-area'
             ;
             tshark.putLayout(response.layout, place);
         }

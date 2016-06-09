@@ -259,13 +259,13 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
      */
     setTooltips: function(){
 
-        $('.app-areceber-tooltip-datas').not('.tooltipstered')
+        $('.app_areceber-tooltip-datas').not('.tooltipstered')
             .tooltipster({
                 position: 'left',
                 theme: 'tooltipster-shadow'
             });
 
-        $('.app-areceber-tooltip-datas')
+        $('.app_areceber-tooltip-datas')
             .each(function(){
                 $(this)
                     .tooltipster('content', $(
@@ -297,14 +297,14 @@ tshark.modulos._add('dbms.financeiro.fin_areceber', {
         ;
 
 
-        $('.app-areceber-tooltip-actions').not('.tooltipstered')
+        $('.app_areceber-tooltip-actions').not('.tooltipstered')
             .tooltipster({
                 position: 'bottom',
                 interactive: true,
                 theme: 'tooltipster-shadow'
             });
 
-        $('.app-areceber-tooltip-actions')
+        $('.app_areceber-tooltip-actions')
             .each(function(){
                 $(this)
                     .tooltipster('content',

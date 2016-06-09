@@ -100,7 +100,7 @@ app = $.extend(true, app, {
     init: function () {
 
         // Áreas ativas
-        app.areas.init('app-home');
+        app.areas.init('app_home');
 
         // Ativa o menu principal
         $('.app-menu-trigger')
@@ -122,6 +122,66 @@ app = $.extend(true, app, {
             })
         ;
 
+        
+        //region :: Automod
+
+        this.automod.setAreas('app_sistema', 'app_automod');
+        
+        this.automod.add([
+            {
+                label: "Tipos de Movimentação",
+                info: "Configura os tipos de lançamentos do sistema",
+                path: "dbms movimentacoes mov_tipos",
+            },
+            {
+                label: "Categorias de Lançamentos",
+                info: "Gestão das categorias de lançamento e distribuições contábeis",
+                path: "dbms contabil cont_historicos",
+            },
+            {
+                label: "Categorias de Contas Gerenciais",
+                info: "Cadastro das categorias de contas gerenciais",
+                path: "dbms contabil cont_categorias",
+            },
+            {
+                label: "Contas Gerenciais",
+                info: "Cadastro das contas gerenciais",
+                path: "dbms contabil cont_plano_contas",
+            },
+            {
+                label: "Centros de Resultado",
+                info: "Cadastro dos centros de resultado",
+                path: "dbms contabil cont_centro_resultados",
+            },
+            {
+                label: "Tipos de Endereço",
+                info: "Cadastro de tipos de endereço",
+                path: "dbms enderecos end_tipos",
+            },
+            {
+                label: "Endereços Eletrônicos",
+                info: "Cadastro de tipos de endereços eletrônicos",
+                path: "dbms enderecos end_eletronico_tipos",
+            },
+            {
+                label: "Países",
+                info: "Cadastro de Países",
+                path: "dbms enderecos end_paises",
+            },
+            {
+                label: "Cidades",
+                info: "Cadastro de Cidades",
+                path: "dbms enderecos end_cidades",
+            },
+            {
+                label: "Bairros",
+                info: "Cadastro de Bairros",
+                path: "dbms enderecos end_bairros",
+            }
+            
+        ]);
+        
+        //endregion
     },
 
 
@@ -220,14 +280,14 @@ app = $.extend(true, app, {
     
     setPie: function(s){
 
-        var pie = app.areas['app-home'].charts[(s == 'receitas' ? 'pieRec' : 'piePagtos')];
+        var pie = app.areas['app_home'].charts[(s == 'receitas' ? 'pieRec' : 'piePagtos')];
         pie.data.labels = [];
         pie.data.datasets = [];
         pie.data.datasets.push({data: [], backgroundColor: []});
 
-        var l = app.areas['app-home'].struct[s].data.length
+        var l = app.areas['app_home'].struct[s].data.length
             , i = Math.random();
-        app.areas['app-home'].struct[s].data.forEach(r => {
+        app.areas['app_home'].struct[s].data.forEach(r => {
             pie.data.labels.push(r.label);
             pie.data.datasets[0].data.push(r._stats.sum.valor);
             pie.data.datasets[0].backgroundColor.push(randomColor());

@@ -1,7 +1,7 @@
 /**
  * Área de Endereços
  */
-app.areas.add('app-enderecos', {
+app.areas.add('app_enderecos', {
 
     /**
      * Chamado na inicialização da area
@@ -29,7 +29,7 @@ app.areas.add('app-enderecos', {
     /**
      * Subarea Países
      */
-    'app-paises':{
+    'app_paises':{
 
         /**
          * Chamado sempre que a área é exibida
@@ -41,15 +41,15 @@ app.areas.add('app-enderecos', {
                     title: 'Home',
                     description: 'Cockpit financeiro',
                     client: 'app areas show',
-                    area: "app-home"
+                    area: "app_home"
                 },
                 {
                     icon: 'marker icon',
                     title: 'Países Cadastrados',
                     description: 'Listagem',
                     client:'app areas show',
-                    area:'app-enderecos',
-                    subarea:'app-paises'
+                    area:'app_enderecos',
+                    subarea:'app_paises'
                 },
                 {
                     icon: 'add icon',

@@ -53,24 +53,22 @@ BizObject.prototype.getForm = function *(provider, ctx){
                 ? this.params['form']['id']
                 : 'update'
         );
-        form = this.forms[formId];
-        if (!form) {
-            return false;
-        }
-
-
+        form = extend(true, {}, this.forms[formId]);
+        
         //region :: Ajusta config
 
-        form['_config'] = form['_config'] || {};
-        form._config['bounds'] = form._config['bounds'] || {width: 800, height: 450};
-        form._config['labels'] = form._config['labels'] || types.form.lines.labels.ontop;
-        form._config['comps']  = form._config['comps'] || types.form.lines.distribution.percent;
-        form._config['state']  = form._config['state'] || types.form.state.loading;
-        form._config['size']   = form._config['size'] || types.form.size.small;
-        form._config['external'] = form._config['external'] || [];
+        if (form) {
+            form['_config'] = form['_config'] || {};
+            form._config['bounds'] = form._config['bounds'] || {width: 800, height: 450};
+            form._config['labels'] = form._config['labels'] || types.form.lines.labels.ontop;
+            form._config['comps'] = form._config['comps'] || types.form.lines.distribution.percent;
+            form._config['state'] = form._config['state'] || types.form.state.loading;
+            form._config['size'] = form._config['size'] || types.form.size.small;
+            form._config['external'] = form._config['external'] || [];
 
-        if (this.params['autosave']) {
-            form._config['autosave'] = true;
+            if (this.params['autosave']) {
+                form._config['autosave'] = true;
+            }
         }
 
         //endregion
@@ -78,6 +76,10 @@ BizObject.prototype.getForm = function *(provider, ctx){
         // Evento onGetForm
         if (this['onGetForm']) {
             yield this.onGetForm(form, ctx);
+        }
+
+        if (!form) {
+            return false;
         }
 
         // region :: Ajusta Ctrls

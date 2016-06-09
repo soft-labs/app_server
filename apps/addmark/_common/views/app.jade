@@ -17,10 +17,11 @@ block app_scripts
     script(type='application/javascript', src='components/periodo.js')
 
     // Areas
-    script(type='application/javascript', src='areas/app-home.js')
-    script(type='application/javascript', src='areas/app-financas.js')
-    script(type='application/javascript', src='areas/app-cadastros.js')
-    script(type='application/javascript', src='areas/app-enderecos.js')
+    script(type='application/javascript', src='areas/app_home.js')
+    script(type='application/javascript', src='areas/app_financas.js')
+    script(type='application/javascript', src='areas/app_cadastros.js')
+    script(type='application/javascript', src='areas/app_sistema.js')
+    script(type='application/javascript', src='areas/app_enderecos.js')
 
 
 block content
@@ -88,32 +89,22 @@ block content
 
 
         // **** Cockpit **** //
-        .ui.container.transition.app-home
-            include app-home/home
+        .ui.container.transition.app_home
+            include app_home/home
 
-        .ui.container.app-financas.transition.hidden
-            include app-financas/financas
+        .ui.container.app_financas.transition.hidden
+            include app_financas/financas
 
-        .ui.container.app-integracoes.transition.hidden
+        .ui.container.app_integracoes.transition.hidden
             | Hello Integracoes
 
-        .ui.container.transition.hidden.app-cadastros
-            include app-cadastros/cadastros
+        .ui.container.transition.hidden.app_cadastros
+            include app_cadastros/cadastros
 
-        .ui.container.transition.hidden.app-enderecos
-            include app-enderecos/enderecos
+        .ui.container.transition.hidden.app_enderecos
+            include app_enderecos/enderecos
 
-        .ui.container.app-sistema.transition.hidden
-            | Hello Sistema
+        .ui.container.app_sistema.transition.hidden
+            include app_sistema/sistema
 
 
-
-        #form.ui.modal
-            .header
-                i.big.browser.icon
-                |  {title}
-            div.content
-                .description#form_area Edicao
-            div.actions
-                div.ui.green.button.ok Salvar Alterações
-                div.ui.orange.button.cancel Cancelar

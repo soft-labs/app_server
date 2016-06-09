@@ -25,6 +25,8 @@ TShark.prototype.modulo = function(path){
      * @type {*|string}
      */
     this.path = path || '';
+    
+    this.path_str = path.split('.').join(' ');
 
     /**
      * Função de init, implementada em overwrite em modulos filhos

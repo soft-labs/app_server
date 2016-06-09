@@ -176,6 +176,11 @@ rivets.binders['client-*'] = function(el, value) {
 
 //region :: Formatadores
 
+rivets.formatters.append    = function(value) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return value + args.join(' ');
+};
+
 rivets.formatters.concat    = function(value) {
     var sep = arguments[1]
         , args = Array.prototype.slice.call(arguments, 2)
@@ -183,6 +188,7 @@ rivets.formatters.concat    = function(value) {
     args.unshift(value);
     return args.join(sep);
 };
+
 
 rivets.formatters.replace   = function(value){
     return arguments[1].replace('%s', value);

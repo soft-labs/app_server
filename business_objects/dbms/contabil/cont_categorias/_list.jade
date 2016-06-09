@@ -2,11 +2,28 @@
     Template default para: dbms.contabil.cont_categorias
     Criado em Sun May 29 2016 08:57:35 GMT-0300 (BRT)
 
-table.ui.compact.striped.celled.table
+table.ui.selectable.table
     thead
-        th Cont Categorias
-        th Cont Categoria
+        tr.cursor
+            th.one.wide Código
+            th.fourteen.wide Categoria
+            th.one.wide
     tbody
-        tr(rv-each-row='dbms.contabil.[object Object].data.rows')
-            td {row.cont_categorias_key}
-            td {row.cont_categoria}
+        tr(
+            rv-each-row='dbms.contabil.cont_categorias.data.rows'
+            rv-row-key='row.cont_categorias_key'
+        )
+            td(class='center aligned') {row.cont_categorias_key}
+            td(
+                    rv-row-key='row.cont_categorias_key'
+                    server='dbms contabil cont_categorias edit'
+                )
+                i.edit.icon
+                |  {row.cont_categoria}
+            td
+                .ui.checkbox
+                    input(
+                    type='checkbox'
+                    rv-checked='row._selected_'
+                    rv-row-selected='row._selected_'
+                    )

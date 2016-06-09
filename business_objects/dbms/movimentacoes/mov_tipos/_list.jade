@@ -1,122 +1,114 @@
 //
     Template default para: dbms.movimentacoes.mov_tipos
-    Criado em Sun May 29 2016 08:58:34 GMT-0300 (BRT)
+    Criado em Thu Jun 09 2016 10:57:12 GMT-0300 (BRT)
 
 table.ui.compact.striped.celled.table
     thead
         th Mov Tipos
+        th Mov Tipos Categorias
+        th Mov Customizada
         th Codigo
         th Mov Tipo
-        th Gera Credito
-        th Gera Debito
-        th Gera Entrada
-        th Gera Saida
-        th Mod Origem
-        th Mod Destino
-        th Observações
-        th Val Estoq Entrada
-        th Val Estoq Saida
-        th Val Ent Destino
-        th Val Ent Origem
-        th Val Rateios Templates
-        th Val Cont Plano Contas
-        th Val Fin Contas Credito
-        th Val Fin Contas Debito
-        th Val Dia Vencimento
-        th Lbl Valor Liquido
-        th Lbl Valor Bruto
-        th Lbl Dt Vencimento
-        th Lbl Estoq Entrada
-        th Lbl Estoq Saida
-        th Lbl Fin Contas Credito
-        th Lbl Fin Contas Debito
-        th Lbl Descrição
-        th Exibe Cfop
-        th Exibe Mov Itens Valor
-        th Exibe Mov Itens
-        th Exibe Plano Contas
-        th Exibe Rateio
-        th Exibe Desconto
-        th Exibe Multa Juros
-        th Exibe Dt Entrada
-        th Exibe Responsavel Destino
-        th Exibe Responsavel Origem
-        th Intf Height
-        th Intf Width
-        th Intf Focus
-        th Intf Label
-        th After Finalizar
-        th Finaliza Ao Criar
-        th Requer Observações
+        th Mov Info
+        th Mov Icon
+        th Mov Help
+        th Parceiro Tipo
+        th Paceiro Label
+        th Parceiro Show
+        th Parceiro Fixo
+        th Cont Historico Label
+        th Dt Lancamento Show
+        th Dt Lancamento Label
+        th Dt Documento Show
+        th Dt Documento Label
+        th Dt Vencimento Show
+        th Dt Vencimento Label
+        th Dt Competencia Show
+        th Movimenta Itens
+        th Itens Valor Show
+        th Itens Gera Entrada
+        th Itens Deposito Entrada Show
+        th Itens Deposito Entrada Label
+        th Itens Deposito Entrada
+        th Itens Entrada Produção
+        th Itens Gera Saida
+        th Itens Deposito Saida Show
+        th Itens Deposito Saida Label
+        th Itens Deposito Saida
+        th Itens Saida Produção
+        th Movimenta Financeiro
+        th Fin Gera Receita
+        th Fin Gera Despesa
+        th Fin Recorrencia Show
+        th Fin Parcelamentos Show
+        th Fin Desp Acessorias Show
+        th Fin Multa Juros Show
+        th Fin Desconto Show
+        th Fin Taxas Show
+        th Fin Valor Bruto Label
+        th Fin Valor Liquido Label
+        th Fin Conta Provisionamento Show
+        th Fin Conta Provisionamento Tipo
+        th Fin Conta Provisionamento Label
+        th Fin Conta Provisionamento
+        th Fin Conta Provisionamento Fixa
+        th Importar Mesmo Parceiro
         th Importar Mov Tipos
-        th Importar Filtro Entidade
-        th Mod Destino Label
-        th Mod Origem Label
-        th Gera Lanc Ent Destino
-        th Gera Lanc Ao Criar
-        th Gera Parcelamentos
-        th Gera Mensalidades
-        th Gera Impostos
-        th Gera Saida Produção
-        th Gera Entrada Produção
-        th Mov Customizada
-        th Mov Tipos Categorias
+        th Observações Show
+        th Observações Label
+        th Observações
     tbody
         tr(rv-each-row='dbms.movimentacoes.[object Object].data.rows')
             td {row.mov_tipos_key}
+            td {row.mov_tipos_categorias_key}
+            td {row.mov_customizada}
             td {row.codigo}
             td {row.mov_tipo}
-            td {row.gera_credito}
-            td {row.gera_debito}
-            td {row.gera_entrada}
-            td {row.gera_saida}
-            td {row.mod_origem}
-            td {row.mod_destino}
-            td {row.observacoes}
-            td {row.val_estoq_entrada_key}
-            td {row.val_estoq_saida_key}
-            td {row.val_ent_destino_key}
-            td {row.val_ent_origem_key}
-            td {row.val_rateios_templates_key}
-            td {row.val_cont_plano_contas_key}
-            td {row.val_fin_contas_credito_key}
-            td {row.val_fin_contas_debito_key}
-            td {row.val_dia_vencimento}
-            td {row.lbl_valor_liquido}
-            td {row.lbl_valor_bruto}
-            td {row.lbl_dt_vencimento}
-            td {row.lbl_estoq_entrada_key}
-            td {row.lbl_estoq_saida_key}
-            td {row.lbl_fin_contas_credito_key}
-            td {row.lbl_fin_contas_debito_key}
-            td {row.lbl_descricao}
-            td {row.exibe_cfop}
-            td {row.exibe_mov_itens_valor}
-            td {row.exibe_mov_itens}
-            td {row.exibe_plano_contas}
-            td {row.exibe_rateio}
-            td {row.exibe_desconto}
-            td {row.exibe_multa_juros}
-            td {row.exibe_dt_entrada}
-            td {row.exibe_responsavel_destino}
-            td {row.exibe_responsavel_origem}
-            td {row.intf_height}
-            td {row.intf_width}
-            td {row.intf_focus}
-            td {row.intf_label}
-            td {row.after_finalizar}
-            td {row.finaliza_ao_criar}
-            td {row.requer_observacoes}
+            td {row.mov_info}
+            td {row.mov_icon}
+            td {row.mov_help}
+            td {row.parceiro_tipo}
+            td {row.paceiro_label}
+            td {row.parceiro_show}
+            td {row.parceiro_fixo}
+            td {row.cont_historico_label}
+            td {row.dt_lancamento_show}
+            td {row.dt_lancamento_label}
+            td {row.dt_documento_show}
+            td {row.dt_documento_label}
+            td {row.dt_vencimento_show}
+            td {row.dt_vencimento_label}
+            td {row.dt_competencia_show}
+            td {row.movimenta_itens}
+            td {row.itens_valor_show}
+            td {row.itens_gera_entrada}
+            td {row.itens_deposito_entrada_show}
+            td {row.itens_deposito_entrada_label}
+            td {row.itens_deposito_entrada_key}
+            td {row.itens_entrada_producao}
+            td {row.itens_gera_saida}
+            td {row.itens_deposito_saida_show}
+            td {row.itens_deposito_saida_label}
+            td {row.itens_deposito_saida_key}
+            td {row.itens_saida_producao}
+            td {row.movimenta_financeiro}
+            td {row.fin_gera_receita}
+            td {row.fin_gera_despesa}
+            td {row.fin_recorrencia_show}
+            td {row.fin_parcelamentos_show}
+            td {row.fin_desp_acessorias_show}
+            td {row.fin_multa_juros_show}
+            td {row.fin_desconto_show}
+            td {row.fin_taxas_show}
+            td {row.fin_valor_bruto_label}
+            td {row.fin_valor_liquido_label}
+            td {row.fin_conta_provisionamento_show}
+            td {row.fin_conta_provisionamento_tipo_key}
+            td {row.fin_conta_provisionamento_label}
+            td {row.fin_conta_provisionamento_key}
+            td {row.fin_conta_provisionamento_fixa}
+            td {row.importar_mesmo_parceiro}
             td {row.importar_mov_tipos_key}
-            td {row.importar_filtro_entidade}
-            td {row.mod_destino_label}
-            td {row.mod_origem_label}
-            td {row.gera_lanc_ent_destino}
-            td {row.gera_lanc_ao_criar}
-            td {row.gera_parcelamentos}
-            td {row.gera_mensalidades}
-            td {row.gera_impostos}
-            td {row.gera_saida_producao}
-            td {row.gera_entrada_producao}
-            td {row.mov_customizada}
-            td {row.mov_tipos_categorias_key}
+            td {row.observacoes_show}
+            td {row.observacoes_label}
+            td {row.observacoes}

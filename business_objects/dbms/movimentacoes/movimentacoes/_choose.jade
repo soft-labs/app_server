@@ -1,21 +1,19 @@
 //
     Template choose para: dbms.movimentacoes.movimentacoes
-    Criado em Sun May 29 2016 08:58:34 GMT-0300 (BRT)
+    Criado em Thu Jun 09 2016 10:57:12 GMT-0300 (BRT)
 
 table.ui.compact.striped.selectable.celled.table.choose-rows
     thead
         th Movimentações
+        th Mov Tipos
         th Mov Origem
         th Mov Destino
-        th Mov Tipos
         th Mov Status
         th Empresas
         th Parceiros
         th Emp Clientes
         th Emp Fornecedores
         th Contratos
-        th Cont Centros Resultado
-        th Cont Plano Contas
         th Emp Dep Origem
         th Emp Dep Destino
         th Competencia
@@ -57,17 +55,15 @@ table.ui.compact.striped.selectable.celled.table.choose-rows
             rv-data-key='row.movimentacoes_key'
         )
             td {row.movimentacoes_key}
+            td {row.mov_tipos_key}
             td {row.mov_origem_key}
             td {row.mov_destino_key}
-            td {row.mov_tipos_key}
             td {row.mov_status_key}
             td {row.empresas_key}
             td {row.parceiros_key}
             td {row.emp_clientes_key}
             td {row.emp_fornecedores_key}
             td {row.contratos_key}
-            td {row.cont_centros_resultado_key}
-            td {row.cont_plano_contas_key}
             td {row.emp_dep_origem_key}
             td {row.emp_dep_destino_key}
             td {row.competencia}

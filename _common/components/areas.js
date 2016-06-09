@@ -111,9 +111,22 @@ app.areas = {
         //endregion
 
         return true;
+    },
+    
+    hide: function(){
+        if (app.areas.active.area) {
+            $('.' + app.areas.active.area).transition('hide');
+            if (app.areas.active.subarea) {
+                $('.' + app.areas.active.subarea).transition('hide');
+            }
+        }
+        
+        app.areas.active.area = false;
+        app.areas.active.subarea = false;
     }
+}
 
-};
+;
 
 
 // Fim da carga do browser

@@ -7,7 +7,7 @@ module.exports = {
         // Menu de finanças
         {
             label: "Finanças",
-            area: "app-financas",
+            area: "app_financas",
             icon: "line chart icon",
             submenu: [
                 {
@@ -37,12 +37,12 @@ module.exports = {
                 {
                     label: "Contas à Pagar",
                     api: "dbms financeiro fin_apagar list",
-                    area: 'app-apagar'
+                    area: 'app_apagar'
                 },
                 {
                     label: "Contas à Receber",
                     api: "dbms financeiro fin_areceber list",
-                    area: 'app-areceber'
+                    area: 'app_areceber'
                 },
                 {
                     label: "Resultados"
@@ -71,23 +71,23 @@ module.exports = {
         // Menu de cadastros
         {
             label: "Cadastros",
-            area: "app-cadastros",
+            area: "app_cadastros",
             icon: "edit icon",
             submenu: [
                 {
                     label: "Clientes",
                     api: "softlabs empresas emp_clientes create",
-                    area: "app-contas"
+                    area: "app_contas"
                 },
                 {
                     label: "Fornecedores",
                     api: "softlabs empresas emp_fornecedores list",
-                    area: "app-contas"
+                    area: "app_contas"
                 },
                 {
                     label: "Bancos e Contas",
                     api: "softlabs financeiro fin_contas list",
-                    area: "app-contas"
+                    area: "app_contas"
                 },
                 {
                     label: "Plano de Contas"
@@ -103,7 +103,7 @@ module.exports = {
             submenu: [
                 {
                     label: "Cockpit",
-                    area: "app-home"
+                    area: "app_home"
                 },
                 {
                     label: "Configurações"

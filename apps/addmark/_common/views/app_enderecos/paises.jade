@@ -1,0 +1,80 @@
+//
+   Created by Alessandro on 30/05/16.
+
+    .ui.fluid.card
+        .content
+            .ui.mini.compact.right.floated.secondary.menu
+                .item
+                    .ui.action.input
+                        input#input_pesquisa(
+                            type='text'
+                            placeholder='Pesquisar...'
+                            server-onkeypress='dbms enderecos end_paises search'
+                            data-comp='#input_pesquisa'
+                        )
+                        button.ui.icon.button.cursor(
+                                server='dbms enderecos end_paises search'
+                                data-comp='#input_pesquisa'
+                            )
+                            i.search.icon
+                .item
+                    i.big.settings.icon(rv-class-disabled='dbms.enderecos.end_paises.data.selected.rv.has_any | not')
+            .header Países Cadastrados
+        .content
+    //
+        table.ui.selectable.table
+            thead
+                tr.cursor
+                    th.one.wide Ativo
+                    th.two.wide Sigla
+                    th.three.wide País
+                    th.nine.wide Nacionalidade
+                    th.one.wide
+            tbody
+                tr(
+                    rv-each-item='dbms.enderecos.end_paises.data.rows'
+                    rv-row-key='item.end_paises_key'
+                )
+                    td
+                       .ui.toggle.checkbox
+                            input(
+                                type="checkbox"
+                                rv-checked='item.ativo'
+                                rv-row-key='item.end_paises_key'
+                                server-onchange='dbms enderecos end_paises update'
+                            )
+                    td {item.sigla}
+                    td(
+                        rv-row-key='item.end_paises_key'
+                        server='dbms enderecos end_paises edit'
+                    )
+                        i.edit.icon
+                        | {item.pais}
+                    td {item.nacionalidade}
+                    td
+                        .ui.checkbox
+                            input(
+                                type='checkbox'
+                                rv-checked='item._selected_'
+                                rv-row-selected='item._selected_'
+                            )
+
+// Form popup de edição
+    .ui.modal.zend_paises
+
+        // Header
+        .ui.header
+            i.big.browser.icon
+            .content
+                | Dados do País
+                .sub.header País
+
+        // Form
+        div.content.dbms.enderecos.zend_paises-form-area
+
+        // Botões
+        div.actions
+            div.ui.green.button.ok(
+            server='dbms enderecos end_paises save',
+            ) Salvar Alterações
+            div.ui.orange.button.cancel Cancelar

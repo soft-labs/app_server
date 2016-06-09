@@ -7,7 +7,7 @@ module.exports = {
         // Menu de finanças
         {
             label: "Tickets",
-            area: "app-financas",
+            area: "app_financas",
             icon: "line chart icon",
             submenu: [
                 {
@@ -66,7 +66,7 @@ module.exports = {
         // Menu de cadastros
         {
             label: "Cadastros",
-            area: "app-cadastros",
+            area: "app_cadastros",
             icon: "edit icon",
             submenu: [
                 {
@@ -93,7 +93,7 @@ module.exports = {
             submenu: [
                 {
                     label: "Cockpit",
-                    area: "app-home"
+                    area: "app_home"
                 },
                 {
                     label: "Configurações"

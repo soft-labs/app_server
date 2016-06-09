@@ -1,7 +1,7 @@
 /**
  * Área de finanças
  */
-app.areas.add('app-financas', {
+app.areas.add('app_financas', {
 
     /**
      * Chamado na inicialização da area
@@ -27,7 +27,7 @@ app.areas.add('app-financas', {
     /**
      * Subarea Contas a pagar
      */
-    'app-apagar':{
+    'app_apagar':{
 
         /**
          * Chamado sempre que a área é exibida
@@ -37,7 +37,7 @@ app.areas.add('app-financas', {
                 {icon: 'home icon',    title: 'Home',
                     description: 'Cockpit financeiro',
                     client: 'app areas show',
-                    area: "app-home"
+                    area: "app_home"
                 },
                 {icon: 'payment icon', title: 'Contas à Pagar',
                     description: 'Gestão de Gastos e Despesas'
@@ -56,7 +56,7 @@ app.areas.add('app-financas', {
     /**
      * Subarea Contas a receber
      */
-    'app-areceber':{
+    'app_areceber':{
 
         /**
          * Chamado sempre que a área é exibida
@@ -66,7 +66,7 @@ app.areas.add('app-financas', {
                 {icon: 'home icon',    title: 'Home',
                     description: 'Cockpit financeiro',
                     client: 'app areas show',
-                    area: "app-home"
+                    area: "app_home"
                 },
                 {icon: 'payment icon', title: 'Contas à Receber',
                     description: 'Gestão de Recebimentos'

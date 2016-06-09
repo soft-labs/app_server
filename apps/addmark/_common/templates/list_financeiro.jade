@@ -20,7 +20,7 @@ mixin _listFinanceiro(mod, dados, mini, classe)
             .title
                 //i.dropdown.icon
                 | {row.label}
-                .basic.label(class='app-' + mod + '-title-sum') R$ {row._stats.sum.valor_bruto | money}
+                .basic.label(class='app_' + mod + '-title-sum') R$ {row._stats.sum.valor_bruto | money}
             .content
                 .ui.bottom.aligned.stackable.divided.grid
                     .row.cursor.app-grid-rows(
@@ -42,7 +42,7 @@ mixin _listFinanceiro(mod, dados, mini, classe)
 
                             .two.wide.right.aligned.column
                                 .ui.tooltip(
-                                        class='app-' + mod + '-tooltip-datas'
+                                        class='app_' + mod + '-tooltip-datas'
                                         rv-data-dt_vencimento='item.dt_vencimento'
                                         rv-data-dt_documento='item.dt_documento'
                                         rv-data-dt_lancamento='item.dt_lancamento'
@@ -50,9 +50,9 @@ mixin _listFinanceiro(mod, dados, mini, classe)
                                     i.calendar.icon
                                     | {item.dt_vencimento}
 
-                        .three.wide.right.aligned.cursor.column(class='app-' + mod)
+                        .three.wide.right.aligned.cursor.column(class='app_' + mod)
                             .ui.tooltip(
-                                    class='app-' + mod + '-tooltip-actions'
+                                    class='app_' + mod + '-tooltip-actions'
                                     rv-row-key='item.fin_lancamentos_key'
                                 )
                                 | {item.valor_bruto | money}
@@ -60,6 +60,6 @@ mixin _listFinanceiro(mod, dados, mini, classe)
 
                     .row.app-grid-rows
                         .thirteen.wide.right.aligned.column Subtotal:
-                        .three.wide.column.right.aligned(class='app-' + mod + '-sum') R$ {row._stats.sum.valor_bruto | money}
+                        .three.wide.column.right.aligned(class='app_' + mod + '-sum') R$ {row._stats.sum.valor_bruto | money}
 
 
