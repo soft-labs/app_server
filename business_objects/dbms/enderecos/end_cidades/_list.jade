@@ -2,15 +2,30 @@
     Template default para: dbms.enderecos.end_cidades
     Criado em Sun May 29 2016 08:57:57 GMT-0300 (BRT)
 
-table.ui.compact.striped.celled.table
+table.ui.selectable.table
     thead
-        th End Cidades
-        th End Estados
-        th Ibge
-        th Cidade
+        tr.cursor
+            th.three.wide Estado
+            th.ten.wide Cidade
+            th.two.wide Código IBGE
+            th.one.wide
     tbody
-        tr(rv-each-row='dbms.enderecos.[object Object].data.rows')
-            td {row.end_cidades_key}
-            td {row.end_estados_key}
+        tr(
+            rv-each-row='dbms.enderecos.end_cidades.data.rows'
+            rv-row-key='row.end_cidades_key'
+        )
+            td {row.estado}
+            td(
+                rv-row-key='row.end_cidades_key'
+                server='dbms enderecos end_cidades edit'
+            )
+                i.edit.icon
+                |  {row.cidade}
             td {row.ibge}
-            td {row.cidade}
+            td
+                .ui.checkbox
+                    input(
+                    type='checkbox'
+                    rv-checked='row._selected_'
+                    rv-row-selected='row._selected_'
+                    )

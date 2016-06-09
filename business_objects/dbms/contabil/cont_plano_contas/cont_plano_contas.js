@@ -24,7 +24,7 @@ function ContPlanoContas(){
                     tipo: types.comp.key, label: 'Cont Plano Contas:'
                 }, 
                 cont_categorias_key: {
-                    tipo: types.comp.choose, label: 'Cont Categorias:',
+                    tipo: types.comp.choose, label: 'Categoria da Conta:',
                     data: { 
                         key: ['cont_categorias_key'], 
                         from: ['dbms', 'contabil', 'cont_categorias'], 
@@ -45,13 +45,13 @@ function ContPlanoContas(){
                     tipo: types.comp.text, label: ' Integração:'
                 }, 
                 ativo: {
-                    tipo: types.comp.int, label: 'Ativo:'
+                    tipo: types.comp.check, label: 'Ativo:'
                 }, 
                 codigo: {
-                    tipo: types.comp.text, label: 'Codigo:'
+                    tipo: types.comp.text, label: 'Código:'
                 }, 
                 plano_conta: {
-                    tipo: types.comp.text, label: 'Plano Conta:'
+                    tipo: types.comp.text, label: 'Plano de Conta:'
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
@@ -80,9 +80,10 @@ function ContPlanoContas(){
                 ]
             },
             linhas: [
-                {titulo: "Informações de cont_plano_contas"},
-                {cont_plano_contas_key: 25, cont_categorias_key: 25, parent_key: 25, _integracao: 25}, 
-                {ativo: 25, codigo: 25, plano_conta: 25, observacoes: 25}
+                {titulo: "Informações da Conta Gerencial"},
+                {ativo: 10, cont_categorias_key: 30, codigo: 20, parent_key: 40},
+                {_integracao: 30, plano_conta: 20},
+                { observacoes: 100}
             ],
             ctrls: {
                 plano_conta: {

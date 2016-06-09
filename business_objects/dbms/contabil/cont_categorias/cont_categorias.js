@@ -24,7 +24,7 @@ function ContCategorias(){
                     tipo: types.comp.key, label: 'Cont Categorias:'
                 }, 
                 cont_categoria: {
-                    tipo: types.comp.text, label: 'Cont Categoria:'
+                    tipo: types.comp.text, label: 'Categoria:'
                 }
             }
         }
@@ -50,8 +50,8 @@ function ContCategorias(){
                 ]
             },
             linhas: [
-                {titulo: "Informações de cont_categorias"},
-                {cont_categorias_key: 25, cont_categoria: 75}
+                {titulo: "Dados da Categoria de Contas"},
+                {cont_categoria: 100}
             ],
             ctrls: {
                 cont_categoria: {

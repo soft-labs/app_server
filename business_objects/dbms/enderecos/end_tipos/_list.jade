@@ -2,11 +2,28 @@
     Template default para: dbms.enderecos.end_tipos
     Criado em Sun May 29 2016 08:57:57 GMT-0300 (BRT)
 
-table.ui.compact.striped.celled.table
+table.ui.selectable.table
     thead
-        th End Tipos
-        th End Tipo
+        tr.cursor
+            th.one.wide Código
+            th.fourteen.wide Tipo de Endereço
+            th.one.wide
     tbody
-        tr(rv-each-row='dbms.enderecos.[object Object].data.rows')
-            td {row.end_tipos_key}
-            td {row.end_tipo}
+        tr(
+            rv-each-row='dbms.enderecos.end_tipos.data.rows'
+            rv-row-key='row.end_tipos_key'
+        )
+            td(class='center aligned') {row.end_tipos_key}
+            td(
+                rv-row-key='row.end_tipos_key'
+                server='dbms enderecos end_tipos edit'
+            )
+                i.edit.icon
+                |  {row.end_tipo}
+            td
+                .ui.checkbox
+                    input(
+                    type='checkbox'
+                    rv-checked='row._selected_'
+                    rv-row-selected='row._selected_'
+                    )
