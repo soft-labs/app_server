@@ -40,25 +40,7 @@ function Parceiros(){
                         template: '{parc_contas_key} - {parc_conta}', 
                         provider: '' 
                     } 
-                }, 
-                cont_plano_contas_key: {
-                    tipo: types.comp.choose, label: 'Plano de Contas:',
-                    data: { 
-                        key: ['cont_plano_contas_key'], 
-                        from: ['dbms', 'contabil', 'cont_plano_contas'], 
-                        template: '{cont_plano_contas_key} - {cont_plano_conta}', 
-                        provider: '' 
-                    } 
-                }, 
-                cont_centro_resultados_key: {
-                    tipo: types.comp.choose, label: 'Centro de Resultados:',
-                    data: { 
-                        key: ['cont_centro_resultados_key'], 
-                        from: ['dbms', 'contabil', 'cont_centro_resultados'], 
-                        template: '{cont_centro_resultados_key} - {cont_centro_resultado}', 
-                        provider: '' 
-                    } 
-                }, 
+                },
                 juridico: {
                     tipo: types.comp.int, label: 'Tipo de Pessoa:'
                 }, 
@@ -111,8 +93,8 @@ function Parceiros(){
             },
             linhas: [
                 {titulo: "Informações de parceiros"},
-                {parceiros_key: 25, end_paises_key: 25, parc_contas_key: 25, cont_plano_contas_key: 25}, 
-                {cont_centro_resultados_key: 25, juridico: 25, codigo: 25, parceiro: 25}, 
+                {parceiros_key: 25, end_paises_key: 25, parc_contas_key: 25},
+                {juridico: 25, codigo: 25, parceiro: 25},
                 {foto: 25, dt_foto: 25, limite_credito: 25, limite_compromisso: 25}, 
                 {limite_desconto: 25, observacoes: 75}
             ],
@@ -155,20 +137,6 @@ function Parceiros(){
                         
                     ]
                 },
-                3: { 
-                    from: ['dbms', 'contabil', 'cont_plano_contas'],
-                    join: {source: 0, tipo: types.join.left, on: 'cont_plano_contas_key', where: ''},
-                    fields: [
-                        
-                    ]
-                },
-                4: { 
-                    from: ['dbms', 'contabil', 'cont_centro_resultados'],
-                    join: {source: 0, tipo: types.join.left, on: 'cont_centro_resultados_key', where: ''},
-                    fields: [
-                        
-                    ]
-                } 
             },
             where: [ 
                 ['AND', 0, 'parceiros_key', types.where.check]
