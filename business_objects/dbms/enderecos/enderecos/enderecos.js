@@ -23,21 +23,24 @@ function Enderecos(){
                 enderecos_key: {
                     tipo: types.comp.key, label: 'Código:'
                 }, 
-                end_bairros_key: {
+                /*end_bairros_key: {
                     tipo: types.comp.choose, label: 'Bairro:',
                     data: { 
                         key: ['end_bairros_key'], 
                         from: ['dbms', 'enderecos', 'end_bairros'], 
-                        template: '{end_bairros_key} - {end_bairro}', 
+                        template: '{end_bairros_key} - {bairrobairro}',
                         provider: '' 
                     } 
-                }, 
+                },*/
+                end_bairros_key: {
+                    tipo: types.comp.int, label: 'Bairro:',
+                },
                 end_cidades_key: {
                     tipo: types.comp.choose, label: 'Cidade:',
                     data: { 
                         key: ['end_cidades_key'], 
                         from: ['dbms', 'enderecos', 'end_cidades'], 
-                        template: '{end_cidades_key} - {end_cidade}', 
+                        template: '{end_cidades_key} - {cidade}',
                         provider: '' 
                     } 
                 }, 
@@ -46,7 +49,7 @@ function Enderecos(){
                     data: { 
                         key: ['end_estados_key'], 
                         from: ['dbms', 'enderecos', 'end_estados'], 
-                        template: '{end_estados_key} - {end_estado}', 
+                        template: '{end_estados_key} - {estado}',
                         provider: '' 
                     } 
                 }, 
@@ -60,10 +63,10 @@ function Enderecos(){
                     } 
                 }, 
                 cep: {
-                    tipo: types.comp.text, label: 'Cep:'
+                    tipo: types.comp.text, label: 'CEP:'
                 }, 
                 endereco: {
-                    tipo: types.comp.text, label: 'Endereco:'
+                    tipo: types.comp.text, label: 'Logradouro:'
                 }, 
                 numero: {
                     tipo: types.comp.text, label: 'Número:'

@@ -21,13 +21,13 @@ function ParcJuridicos(){
             label: 'razao_social',
             fields: {
                 parceiros_key: {
-                    tipo: types.comp.key, label: 'Parceiros:'
+                    tipo: types.comp.int, label: 'Parceiros:'
                 }, 
                 razao_social: {
                     tipo: types.comp.text, label: 'Razão Social:'
                 }, 
                 cnpj: {
-                    tipo: types.comp.text, label: 'CNPJ:'
+                    tipo: types.comp.text, label: 'Nº Documento:'
                 }, 
                 insc_estadual: {
                     tipo: types.comp.text, label: 'Inscrição Estadual:'
