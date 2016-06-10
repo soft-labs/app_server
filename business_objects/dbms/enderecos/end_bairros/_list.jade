@@ -2,13 +2,28 @@
     Template default para: dbms.enderecos.end_bairros
     Criado em Sun May 29 2016 08:57:57 GMT-0300 (BRT)
 
-table.ui.compact.striped.celled.table
+table.ui.selectable.table
     thead
-        th End Bairros
-        th End Cidades
-        th Bairro
+        tr.cursor
+            th.eight.wide Cidade
+            th.seven.wide Bairro
+            th.one.wide
     tbody
-        tr(rv-each-row='dbms.enderecos.[object Object].data.rows')
-            td {row.end_bairros_key}
-            td {row.end_cidades_key}
-            td {row.bairro}
+        tr(
+            rv-each-row='dbms.enderecos.end_bairros.data.rows'
+            rv-row-key='row.end_bairros_key'
+        )
+            td {row.cidade}
+            td(
+                rv-row-key='row.end_bairros_key'
+                server='dbms enderecos end_bairros edit'
+            )
+                i.edit.icon
+                |  {row.bairro}
+            td
+                .ui.checkbox
+                    input(
+                    type='checkbox'
+                    rv-checked='row._selected_'
+                    rv-row-selected='row._selected_'
+                    )
