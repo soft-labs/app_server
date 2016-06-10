@@ -70,11 +70,13 @@ rivets.binders['row-key'] = {
             }
         };
         $(el).on('click', this.callback);
+        $(el).on('change', this.callback);
         $(el).addClass('cursor');
     },
 
     unbind: function(el) {
         $(el).off('click', this.callback);
+        $(el).off('change', this.callback);
     },
 
     routine: function(el, value) {
