@@ -8,35 +8,41 @@ app.automod = {
     mod: '',
 
     /**
-     * Acrescenta itens ao componente
-     * [
-     *      {
-     *           label: "Tipos de Movimentação",
-     *           info: "Configura os tipos de lançamentos do sistema",
-     *           path: "dbms movimentacoes mov_tipos",
-     *       },
-     * ]
-     * @param itens
-     */
-    add: function(itens) {
-        itens.forEach(item => {
-            item.icon = item['icon'] || '';
-            item.info = item['info'] || '';
-            this.itens.push(item);
-        })
-    },
-
-    /**
-     * Seta as áreas onde serão exibidos os modulos
+     * Inicializa componente e configura as áreas 
+     * onde serão exibidos os modulos
      * @param area
      * @param subarea
      */
-    setAreas: function(area, subarea){
-        this.area = area;
-        this.subarea = subarea;
+    init: function(opts){
+        this.area    = opts['area'];
+        this.subarea = opts['subarea'];
+        this.icon    = opts['icon'] || 'settings';
+        if (opts['itens']){
+            opts['itens'].forEach(item => {
+                this.add(item);
+            });
+        }
     },
 
+    /**
+     * Acrescenta itens ao componente
+     * {
+     *    label: "Tipos de Movimentação",
+     *    info: "Configura os tipos de lançamentos do sistema",
+     *    icon: "payment",
+     *    path: "dbms movimentacoes mov_tipos",
+     * }
+     * @param itens
+     */
+    add: function(item) {
+        item.icon = item['icon'] || this.icon;
+        item.info = item['info'] || '';
+        this.itens.push(item);
+    },
 
+    /**
+     * Exibe um mod
+     */
     show: function(){
         var d = $(this).data()
             , ndx = d['index']
@@ -57,7 +63,7 @@ app.automod = {
             }
         }
     },
-
+    
     _show: function(data){
         app.areas.hide();
         app.automod.mod.list({template: '_list'});

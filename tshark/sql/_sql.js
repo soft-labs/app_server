@@ -703,6 +703,7 @@ SQL.prototype.change = function *(op, source, obj) {
         , key    = source['key'] || source.src.metadata.key
         , fields = ''
         , values = ''
+        , upd    = ''
         , v = ''
     ;
 
@@ -752,13 +753,9 @@ SQL.prototype.change = function *(op, source, obj) {
                 }
 
                 // SQL
-                if (op == 'upd') {
-                    sql += '\n    ' + v + ' ' + f + " = " + value + " ";
-
-                } else {
-                    fields += v + ' ' + f;
-                    values += v + " " + value + " ";
-                }
+                upd    += '\n    ' + v + ' ' + f + " = " + value + " ";
+                fields += v + ' ' + f;
+                values += v + " " + value + " ";
 
                 v = ',';
             }
@@ -772,7 +769,7 @@ SQL.prototype.change = function *(op, source, obj) {
 
     // Processa where
     if (op != 'ins') {
-        sql += '\n  WHERE ' + key + " = '" + obj.params.row[key] + "' ";
+        sql += upd + '\n  WHERE ' + key + " = '" + obj.params.row[key] + "' ";
         sql += this.db.parseWhere(source['where'], obj.params);
 
     } else {

@@ -24,13 +24,11 @@ function EndCidades(){
                     tipo: types.comp.key, label: 'End Cidades:'
                 }, 
                 end_estados_key: {
-                    tipo: types.comp.choose, label: 'Estado:',
-                    data: { 
-                        key: ['end_estados_key'], 
-                        from: ['dbms', 'enderecos', 'end_estados'], 
-                        template: '{end_estados_key} - {estado}',
-                        provider: '' 
-                    } 
+                    tipo: types.comp.dropdown, label: 'Estado:',
+                    data: {
+                        label: 'estado',
+                        from: ['dbms', 'enderecos', 'end_estados'],
+                    }
                 }, 
                 ibge: {
                     tipo: types.comp.text, label: 'Código IBGE:'
@@ -105,8 +103,8 @@ function EndCidades(){
                 [0, 'cidade', 'asc']
             ],
             search: [
-                    {alias: 3, field: 'ibge',  param: types.search.like_full },
-                    {alias: 3, field: 'cidade',  param: types.search.like_full }
+                    {alias: 0, field: 'ibge',  param: types.search.like_full },
+                    {alias: 0, field: 'cidade',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -121,7 +119,7 @@ function EndCidades(){
                     ]
                 }
             },
-            showSQL: 0
+            showSQL: 1
         }
 
     };

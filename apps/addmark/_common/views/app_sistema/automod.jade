@@ -8,15 +8,15 @@
 
                 .item
                     .ui.action.input
-                        input#input_pesquisa(
+                        input#automod_search(
                             type='text'
                             placeholder='Pesquisar...'
                             rv-server-onkeypress="automod.mod.path_str | append ' search'"
-                            data-comp='#input_pesquisa'
+                            data-comp='#automod_search'
                         )
                         button.ui.icon.button.cursor(
                                 rv-server="automod.mod.path_str | append ' search'"
-                                data-comp='#input_pesquisa'
+                                data-comp='#automod_search'
                             )
                             i.search.icon
                 .item

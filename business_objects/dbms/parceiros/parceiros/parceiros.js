@@ -121,7 +121,6 @@ function Parceiros(){
                 naturalidade: {
                     tipo: types.comp.text, label: 'Naturalidade:'
                 },
-                
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
                 }
