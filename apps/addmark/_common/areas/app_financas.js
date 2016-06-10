@@ -39,11 +39,11 @@ app.areas.add('app_financas', {
                     client: 'app areas show',
                     area: "app_home"
                 },
-                {icon: 'payment icon', title: 'Contas à Pagar',
-                    description: 'Gestão de Gastos e Despesas'
+                {icon: 'red payment icon', title: 'Contas à Pagar',
+                    description: 'Gestão de Gastos e Despesas',
                 },
                 {icon: 'add icon',     title: 'Lançar Pagamento',
-                    description: 'Cadastrar nova conta',
+                    description: 'Cadastrar nova conta à pagar',
                     server: 'dbms financeiro fin_apagar create',
                     active: 1
                 }
@@ -68,11 +68,11 @@ app.areas.add('app_financas', {
                     client: 'app areas show',
                     area: "app_home"
                 },
-                {icon: 'payment icon', title: 'Contas à Receber',
+                {icon: 'green payment icon', title: 'Contas à Receber',
                     description: 'Gestão de Recebimentos'
                 },
-                {icon: 'add icon',     title: 'Lançar Recebimento',
-                    description: 'Cadastrar novo recebimento',
+                {icon: 'edit icon',     title: 'Lançar Recebimento',
+                    description: 'Cadastrar nova conta à receber',
                     server: 'dbms financeiro fin_areceber create',
                     active: 1
                 }

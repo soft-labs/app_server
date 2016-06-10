@@ -98,26 +98,7 @@ module.exports = {
                     server: "sys app security logout"
                 }
             ]
-        },
-
-        // Menu de Endereços
-        {
-            label: "Endereços",
-            area: "app_enderecos",
-            icon: "marker icon",
-            submenu: [
-                {
-                    label: "Países",
-                    server: "dbms enderecos end_paises list",
-                    subarea: "app_paises"
-                },
-                {
-                    label: "Estados"
-                },
-                {
-                    label: "Cidades"
-                }
-            ]
         }
+        
     ]
 };

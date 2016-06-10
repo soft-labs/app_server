@@ -703,6 +703,7 @@ SQL.prototype.change = function *(op, source, obj) {
         , key    = source['key'] || source.src.metadata.key
         , fields = ''
         , values = ''
+        , upd    = ''
         , v = ''
     ;
 
@@ -752,40 +753,34 @@ SQL.prototype.change = function *(op, source, obj) {
                 }
 
                 // SQL
-                if (op == 'upd') {
-                    sql += '\n    ' + v + ' ' + f + " = " + value + " ";
-
-                } else {
-                    fields += v + ' ' + f;
-                    values += v + " " + value + " ";
-                }
+                upd    += '\n    ' + v + ' ' + f + " = " + value + " ";
+                fields += v + ' ' + f;
+                values += v + " " + value + " ";
 
                 v = ',';
             }
+        }
+        
+        // Não existem valores para inserção ou update
+        if (!values){
+            return '_empty_values_';
         }
     }
 
     // Processa where
     if (op != 'ins') {
-        sql += '\n  WHERE ' + key + " = '" + obj.params.row[key] + "' ";
+        sql += upd + '\n  WHERE ' + key + " = '" + obj.params.row[key] + "' ";
         sql += this.db.parseWhere(source['where'], obj.params);
 
     } else {
-        if (values) {
-            sql += ' (' + fields + ' ) ';
-            sql += '\n    VALUES (' + values + ') ';
-        } else {
-            sql = '';
-        }
+        sql += ' (' + fields + ' ) ';
+        sql += '\n    VALUES (' + values + ') ';
     }
 
     // Executa
-    if (sql) {
-        results = yield this.db._exec(sql, obj);
-        return yield this.db.processChangeResults(op, results, obj);
-    } else {
-        return false;
-    }
+    results = yield this.db._exec(sql, obj);
+    return yield this.db.processChangeResults(op, results, obj);
+    
 };
 
 /**

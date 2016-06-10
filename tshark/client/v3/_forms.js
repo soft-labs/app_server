@@ -233,10 +233,7 @@ if(!alertify.choose){
 
         // Coloca na tela
         if (place){
-
             tshark.putLayout(form, place);
-
-           // rivets.bind($(f_id), app);
         }
 
         // Retorna
@@ -271,7 +268,7 @@ if(!alertify.choose){
             // Bind global do var app com o .app
             //tshark.appBound.update();
 
-            tshark.initSemantic(place);
+        //    tshark.initSemantic(place);
             
             place.data('_bound', rivets.bind(place, app));
 
@@ -381,11 +378,6 @@ if(!alertify.choose){
             case 'dropdown'     :
             case 'inpDropdown'  :
                 input = getDropdown(ctrl, field, mod.path);
-
-                mod.form.comps[field] = new Dataset(ctrl.data.from);
-                if (ctrl['data']['rows']){
-                    mod.form.comps[field].reset(ctrl['data']);
-                }
                 break;
 
             case 'inpList'      :
@@ -408,19 +400,6 @@ if(!alertify.choose){
                 ctrl['placeholder'] = 'componente desconhecido';
                 input = getInput(ctrl, field, mod.path);
         }
-
-        /*
-        if (ctrl['data']){
-            mod.form.comps[field] = new Dataset(ctrl.data.from);
-            if (ctrl['data']['rows']){
-                mod.form.comps[field].reset(ctrl['data']);
-                
-            } else {
-                mod.form.comps[field].load({
-                    fields: parseFields(ctrl.data['template'])
-                });
-            }
-        }*/
 
         return input;
     }
@@ -957,12 +936,28 @@ if(!alertify.choose){
      * @param path
      */
     function getDropdown(ctrl, field, path){
-       return $('<div>', {class: 'ui fluid search selection dropdown binded', style: 'line-height: 0.9em !important; min-height: 0px'})
+        var search  = ctrl['data']['from'] ? 'search' : ''
+            , menu  = $('<div>', {class: 'menu'})
+            , label = ctrl['data']['label']
+        ;
+
+        // Itens combo (não dataset)
+        if (ctrl['data']['rows']){
+            ctrl['data']['rows'].forEach(row => {
+                menu.append(
+                    $('<div>', {
+                        class: 'item',
+                        'rv-data-value': row[field]
+                    }).html(row[ctrl['data']['label']])
+                )
+            });
+        }
+
+        return $('<div>', {class: 'ui fluid ' + search + ' selection dropdown binded', style: 'line-height: 0.9em !important; min-height: 0px'})
            .append(
                $('<input>', {
                    type: 'hidden',
-                   'rv-value': path + ".data.row." + field,
-                //   'onchange': path.split('.').join(' ') + " save"
+                   'rv-value': path + ".data.row." + field
                })
            )
            .append(
@@ -971,35 +966,29 @@ if(!alertify.choose){
            .append(
                $('<div>', {
                    class: 'text',
-                   'rv-text': path + ".data.row." + ctrl['data']['label']
-               }).html('{' + path + ".data.row." + ctrl['data']['label'] + '}')
+                   'rv-text': path + ".data.row." + label
+               }).html('{' + path + ".data.row." + label + '}')
            )
            .append(
-               $('<div>', {class: 'menu'})
-               .append(
-                   $('<div>', {
-                       class: 'item',
-                       'rv-each-row'  : path + 'form.comps.' + field + '.rows',
-                       'rv-data-value': 'row.' + field
-                   }).html('{row.' + ctrl['data']['label'] + '}')
-               )
+               menu
            ).dropdown({
-               apiSettings: {
-                   throttle: 600,
-                   url: '/comps/dropdown/' + ctrl['data']['from'].join('/') + '/{query}',
-                   data: {
-                       label: ctrl['data']['label'],
-                       provider: ctrl['data']['provider']
-                   }
-               },
-               onChange: function (value, text, selectedItem){
-                   var mod = tshark.getMod(path);
-                   mod.data.row[field] = value;
-                   if (ctrl['autosave']) {
-                       mod.save();
-                   }
-               }
-           });
+                apiSettings: ctrl['data']['from'] ? {
+                    throttle: 600,
+                    url: '/comps/dropdown/' + ctrl['data']['from'].join('/') + '/{query}',
+                    data: {
+                        label: label,
+                        provider: ctrl['data']['provider']
+                    }
+                } : {},
+                onChange: function (value, text, selectedItem) {
+                    var mod = tshark.getMod(path);
+                    mod.data.row[field] = value;
+                    mod.data.row[label] = text;
+                    if (ctrl['autosave']) {
+                        mod.save();
+                    }
+                }
+            });
     }
 
 

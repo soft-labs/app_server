@@ -44,15 +44,15 @@ var tshark = tshark || new TShark()
  *
  *  Atributos HTML para APIs server
  *              server=""
- *        server-click=""
- *     server-dblclick=""
+ *      server-onclick=""
+ *   server-ondblclick=""
  *       server-onblur=""
  *     server-onchange=""
  *
  *  Atributos HTML para APIs client
  *              client=""
- *        client-click=""
- *     client-dblclick=""
+ *      client-onclick=""
+ *   client-ondblclick=""
  *       client-onblur=""
  *     client-onchange=""
  *    client-onkeydown=""

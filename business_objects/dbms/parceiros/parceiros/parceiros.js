@@ -64,7 +64,63 @@ function Parceiros(){
                 }, 
                 limite_desconto: {
                     tipo: types.comp.float, label: 'Limite de Desconto:'
-                }, 
+                },
+
+                razao_social: {
+                    tipo: types.comp.text, label: 'Razão Social:'
+                },
+                cnpj: {
+                    tipo: types.comp.text, label: 'Nº Documento:'
+                },
+                insc_estadual: {
+                    tipo: types.comp.text, label: 'Inscrição Estadual:'
+                },
+                insc_municipal: {
+                    tipo: types.comp.text, label: 'Inscrição Municipal:'
+                },
+                fone_empresa: {
+                    tipo: types.comp.text, label: 'Fone Empresa:'
+                },
+                email_empresa: {
+                    tipo: types.comp.text, label: 'Email Empresa:'
+                },
+                site_empresa: {
+                    tipo: types.comp.text_big, label: 'Site Empresa:'
+                },
+
+                apelido: {
+                    tipo: types.comp.text, label: 'Apelido:'
+                },
+                dia_nasc: {
+                    tipo: types.comp.int, label: 'Dia Nasc:',
+                    default:''
+                },
+                mes_nasc: {
+                    tipo: types.comp.int, label: 'Mes Nasc:',
+                    default:''
+                },
+                ano_nasc: {
+                    tipo: types.comp.int, label: 'Ano Nasc:',
+                    default:''
+                },
+                rg: {
+                    tipo: types.comp.text, label: 'Nº Documento:'
+                },
+                cpf: {
+                    tipo: types.comp.text, label: 'Nº Documento:'
+                },
+                sexo: {
+                    tipo: types.comp.text, label: 'Sexo:'
+                },
+                est_civil: {
+                    tipo: types.comp.text, label: 'Estado Civil:'
+                },
+                profissao: {
+                    tipo: types.comp.text, label: 'Profissão:'
+                },
+                naturalidade: {
+                    tipo: types.comp.text, label: 'Naturalidade:'
+                },
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
                 }

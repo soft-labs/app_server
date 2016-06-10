@@ -231,7 +231,7 @@ var CONSOLE_ON = true;
             }
         }
 
-        // Bind Semantic
+        // Dropdown não form
         $(ref).find('.ui.dropdown').not('.binded')
             .dropdown({
                 onChange: function(value, text, $choice){

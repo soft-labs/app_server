@@ -78,9 +78,9 @@ app.areas.add('app_home', {
      */
     onShow: function(){
         app.actionbar.reset([
-            {icon: 'add icon', title: 'Contas à Pagar',   description: 'Gestão de Gastos e Despesas',  client: 'app areas show', area: 'app_financas', subarea: 'app_apagar'},
-            {icon: 'add icon', title: 'Contas à Receber', description: 'Gestão de Recebimentos',       client: 'app areas show', area: 'app_financas', subarea: 'app_areceber'},
-            {icon: 'add icon', title: 'Fluxo de Caixa',   description: 'Gestão do Fluxo de Caixa'}
+            {icon: 'red payment icon', title: 'Contas à Pagar',   description: 'Gestão de Gastos e Despesas',  client: 'app areas show', area: 'app_financas', subarea: 'app_apagar'},
+            {icon: 'green payment icon', title: 'Contas à Receber', description: 'Gestão de Recebimentos',       client: 'app areas show', area: 'app_financas', subarea: 'app_areceber'},
+            {icon: 'blue line chart icon', title: 'Fluxo de Caixa',   description: 'Gestão do Fluxo de Caixa'}
         ]);
     },
 
