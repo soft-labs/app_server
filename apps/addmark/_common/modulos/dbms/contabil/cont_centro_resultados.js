@@ -59,9 +59,9 @@ tshark.modulos._add('dbms.contabil.cont_centro_resultados', {
 
      /**
      * Chamado após a execução de uma pesquisa
-     *
+     */
     onAfterSearch: function(response, next){
-
+        this.data.group = this.data.rows.parentTree('codigo');
     },
 
      /* */

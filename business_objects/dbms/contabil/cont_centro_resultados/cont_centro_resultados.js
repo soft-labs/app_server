@@ -24,7 +24,7 @@ function ContCentroResultados(){
                     tipo: types.comp.key, label: 'Cont Centro Resultados:'
                 }, 
                 parent_key: {
-                    tipo: types.comp.choose, label: 'Parent:',
+                    tipo: types.comp.choose, label: 'Centro de Resultado Relacionado:',
                     data: { 
                         key: ['cont_centro_resultados_key'],
                         from: ['dbms', 'contabil', 'cont_centro_resultados'],
@@ -36,13 +36,13 @@ function ContCentroResultados(){
                     tipo: types.comp.text, label: ' Integração:'
                 }, 
                 ativo: {
-                    tipo: types.comp.int, label: 'Ativo:'
+                    tipo: types.comp.check, label: 'Ativo:', default:1
                 }, 
                 codigo: {
-                    tipo: types.comp.text, label: 'Codigo:'
+                    tipo: types.comp.text, label: 'Código:'
                 }, 
                 centro_resultado: {
-                    tipo: types.comp.text, label: 'Centro Resultado:'
+                    tipo: types.comp.text, label: 'Centro de Resultado:'
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
@@ -71,9 +71,10 @@ function ContCentroResultados(){
                 ]
             },
             linhas: [
-                {titulo: "Informações de cont_centro_resultados"},
-                {cont_centro_resultados_key: 25, parent_key: 25, _integracao: 25, ativo: 25}, 
-                {codigo: 25, centro_resultado: 25, observacoes: 50}
+                {titulo: "Dados do Centro de Resultado"},
+                {ativo: 9,codigo: 15,centro_resultado: 80, },
+                {parent_key: 50,_integracao: 50 },
+                {observacoes: 100}
             ],
             ctrls: {
                 centro_resultado: {

@@ -4,23 +4,13 @@
 
 table.ui.compact.striped.selectable.celled.table.choose-rows
     thead
-        th Cont Centro Resultados
-        th Parent
-        th  Integração
-        th Ativo
-        th Codigo
-        th Centro Resultado
-        th Observações
+        th Código
+        th Centro de Resultado
     tbody
         tr.cursor(
             rv-each-row='choose.data.rows'
             rv-on-click='choose.select'
             rv-data-key='row.cont_centro_resultados_key'
         )
-            td {row.cont_centro_resultados_key}
-            td {row.parent_key}
-            td {row._integracao}
-            td {row.ativo}
             td {row.codigo}
             td {row.centro_resultado}
-            td {row.observacoes}
