@@ -5,23 +5,24 @@
 table.ui.selectable.table
     thead
         tr.cursor
-            th.three.wide Estado
-            th.ten.wide Cidade
             th.two.wide Código IBGE
+            th.ten.wide Cidade
+            th.three.wide Estado
             th.one.wide
     tbody
         tr(
             rv-each-row='dbms.enderecos.end_cidades.data.rows'
             rv-row-key='row.end_cidades_key'
         )
-            td {row.estado}
+            td {row.ibge}
+
             td(
                 rv-row-key='row.end_cidades_key'
                 server='dbms enderecos end_cidades edit'
             )
                 i.edit.icon
                 |  {row.cidade}
-            td {row.ibge}
+            td {row.estado}
             td
                 .ui.checkbox
                     input(

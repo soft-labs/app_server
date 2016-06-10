@@ -24,14 +24,14 @@ function EndBairros(){
                     tipo: types.comp.key, label: 'End Bairros:'
                 }, 
                 end_cidades_key: {
-                    tipo: types.comp.choose, label: 'End Cidades:',
+                    tipo: types.comp.choose, label: 'Cidade:',
                     data: { 
                         key: ['end_cidades_key'], 
                         from: ['dbms', 'enderecos', 'end_cidades'], 
-                        template: '{end_cidades_key} - {end_cidade}', 
+                        template: '{end_cidades_key} - {cidade}',
                         provider: '' 
                     } 
-                }, 
+                },
                 bairro: {
                     tipo: types.comp.text, label: 'Bairro:'
                 }
@@ -59,8 +59,8 @@ function EndBairros(){
                 ]
             },
             linhas: [
-                {titulo: "Informações de end_bairros"},
-                {end_bairros_key: 25, end_cidades_key: 25, bairro: 50}
+                {titulo: "Dados do Bairro"},
+                {end_cidades_key: 50, bairro: 50}
             ],
             ctrls: {
                 bairro: {
@@ -102,7 +102,8 @@ function EndBairros(){
                 [0, 'bairro', 'asc']
             ],
             search: [
-                    {alias: 1, field: 'bairro',  param: types.search.like_full }
+                    {alias: 0, field: 'bairro',  param: types.search.like_full },
+                    {alias: 1, field: 'cidade',  param: types.search.like_full },
             ],
             limit: 250,
             showSQL: 0

@@ -17,12 +17,6 @@ tshark.modulos._add('dbms.enderecos.end_paises', {
 
     },
 
-    nao_pode_excluir : true,
-
-    OnChangeExclusao : function(){
-        alert(2);
-    },
-
     //region :: Eventos - List
 
     /**
@@ -165,7 +159,6 @@ tshark.modulos._add('dbms.enderecos.end_paises', {
      * Chamado antes de enviar os dados de edição ao server
      *
     onBeforeUpdate: function(el, settings){
-
 
         // Libera ou não para continuar
         return true;
