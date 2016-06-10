@@ -104,10 +104,11 @@ function EndCidades(){
             ],
             search: [
                     {alias: 0, field: 'ibge',  param: types.search.like_full },
-                    {alias: 0, field: 'cidade',  param: types.search.like_full }
+                    {alias: 0, field: 'cidade',  param: types.search.like_full },
+                    {alias: 1, field: 'estado',  param: types.search.like_full }
             ],
             limit: 250,
-            showSQL: 0
+            showSQL: 1
         },
 
         update: {
@@ -119,7 +120,7 @@ function EndCidades(){
                     ]
                 }
             },
-            showSQL: 1
+            showSQL: 0
         }
 
     };

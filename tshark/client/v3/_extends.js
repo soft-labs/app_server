@@ -523,6 +523,51 @@ Array.prototype.groupBy = function (params) {
 };
 
 
+Array.prototype.parentTree = function(field, desc){
+    var res = this.slice()
+        , tree = []
+        , index = {}
+    ;
+
+    // Monta árvore
+    res.forEach(item => {
+        var row = JSON.parse(JSON.stringify(item));
+
+        index[row['_key_']] = row;
+        index[row['_key_']].sub = [];
+
+        if (row['parent_key']){
+            if (!index[row['parent_key']]){
+                index[row['parent_key']] = {sub: []};
+            }
+            index[row['parent_key']].sub.push(row);
+
+        } else {
+            tree.push(index[row['_key_']]);
+        }
+    });
+
+    // Sort
+    if (field){
+        var sortSub = function(sub){
+            sub.sortBy(field, desc);
+            sub.forEach(s => {
+                if (s.sub.length){
+                    sortSub(s.sub);
+                }
+            });
+        };
+        tree.forEach(s => {
+            if (s.sub.length){
+                sortSub(s.sub);
+            }
+        });
+    }
+    
+    // Retorna
+    return tree;
+};
+
 /**
  * Ordena um array de objetos por um de seus campos, tentando
  * adivinhar o tipo correto para efetuar o sort.

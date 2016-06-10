@@ -2,21 +2,52 @@
     Template default para: dbms.contabil.cont_centro_resultados
     Criado em Sun May 29 2016 08:57:35 GMT-0300 (BRT)
 
-table.ui.compact.striped.celled.table
-    thead
-        th Cont Centro Resultados
-        th Parent
-        th  Integração
-        th Ativo
-        th Codigo
-        th Centro Resultado
-        th Observações
-    tbody
-        tr(rv-each-row='dbms.contabil.[object Object].data.rows')
-            td {row.cont_centro_resultados_key}
-            td {row.parent_key}
-            td {row._integracao}
-            td {row.ativo}
-            td {row.codigo}
-            td {row.centro_resultado}
-            td {row.observacoes}
+.ui.fluid.accordion
+    span.ident(rv-each-nvl0='dbms.contabil.cont_centro_resultados.data.group')
+        .title.active
+            i.cursor.circular.edit.icon(server='dbms contabil cont_centro_resultados edit', rv-row-key='nvl0.cont_centro_resultados_key')
+            | {nvl0.codigo} - {nvl0.centro_resultado}
+        .content.active
+
+            .styled.accordion
+                span.ident(rv-each-nvl1='nvl0.sub')
+                    .title.active
+                        i.cursor.edit.icon(
+                            server='dbms contabil cont_centro_resultados edit'
+                            rv-row-key='nvl1.cont_centro_resultados_key'
+                            )
+                        | &nbsp;&nbsp; {nvl1.codigo} - {nvl1.centro_resultado}
+                    .content.active
+
+                        .styled.accordion
+                            span.ident(rv-each-nvl2='nvl1.sub')
+                                .title.active
+                                    i.cursor.circular.edit.icon(server='dbms contabil cont_centro_resultados edit', rv-row-key='nvl2.cont_centro_resultados_key')
+                                    | {nvl2.codigo} - {nvl2.centro_resultado}
+                                .content.active
+
+                                    .styled.accordion
+                                        span.ident(rv-each-nvl3='nvl2.sub')
+                                            .title.active
+                                                i.cursor.circular.edit.icon(server='dbms contabil cont_centro_resultados edit', rv-row-key='nvl3.cont_centro_resultados_key')
+                                                | {nvl3.codigo} - {nvl3.centro_resultado}
+
+//
+    table.ui.compact.striped.celled.table
+        thead
+            th Cont Centro Resultados
+            th Parent
+            th  Integração
+            th Ativo
+            th Codigo
+            th Centro Resultado
+            th Observações
+        tbody
+            tr(rv-each-row='dbms.contabil.cont_centro_resultados.data.rows')
+                td {row.cont_centro_resultados_key}
+                td {row.parent_key}
+                td {row._integracao}
+                td {row.ativo}
+                td {row.codigo}
+                td {row.centro_resultado}
+                td {row.observacoes}

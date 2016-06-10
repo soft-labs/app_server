@@ -26,9 +26,9 @@ function ContCentroResultados(){
                 parent_key: {
                     tipo: types.comp.choose, label: 'Parent:',
                     data: { 
-                        key: ['parent_key'], 
-                        from: ['dbms', '', 'parent'], 
-                        template: '{parent_key} - {paren}', 
+                        key: ['cont_centro_resultados_key'],
+                        from: ['dbms', 'contabil', 'cont_centro_resultados'],
+                        template: '{codigo} - {centro_resultado}',
                         provider: '' 
                     } 
                 }, 
@@ -99,25 +99,17 @@ function ContCentroResultados(){
                     fields: [
                         
                     ]
-                },
-                1: { 
-                    from: ['dbms', '', 'parent'],
-                    join: {source: 0, tipo: types.join.left, on: 'parent_key', where: ''},
-                    fields: [
-                        
-                    ]
-                } 
+                }
             },
             where: [ 
                 ['AND', 0, 'cont_centro_resultados_key', types.where.check]
             ],
             order: [
-                [0, 'centro_resultado', 'asc']
+                [0, 'cont_centro_resultados_key', 'asc']
             ],
             search: [
-                    {alias: 1, field: '_integracao',  param: types.search.like_full },
-                    {alias: 1, field: 'codigo',  param: types.search.like_full },
-                    {alias: 1, field: 'centro_resultado',  param: types.search.like_full }
+                    {alias: 0, field: 'codigo',  param: types.search.like_full },
+                    {alias: 0, field: 'centro_resultado',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0

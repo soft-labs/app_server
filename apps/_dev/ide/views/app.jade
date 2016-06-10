@@ -118,25 +118,28 @@ block content
                                 | Objetos de Negócio na Biblioteca
 
                             .ui.segment.height
+
                                 .ui.accordion
                                     .ident(rv-each-o='bizobj.rows')
                                         .title
                                             i.circular.folder.icon
                                             |{o.id}
                                         .content
+
                                             .accordion
                                                 .ident(rv-each-pack='o.sub')
                                                     .title
                                                         i.cubes.icon
                                                         |{pack.id}
                                                     .content
+
                                                         .accordion
                                                             .ident(rv-each-mod='pack.sub')
                                                                 .title
                                                                     i.settings.icon
                                                                     |{mod.id}
-
                                                                 .content
+
                                                                     .accordion
                                                                         .ident(rv-each-arq='mod.sub')
                                                                             .title(rv-if="arq.ext | eq '.js'",
