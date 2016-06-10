@@ -4,25 +4,15 @@
 
 table.ui.compact.striped.selectable.celled.table.choose-rows
     thead
-        th Cont Plano Contas
-        th Cont Categorias
-        th Parent
-        th  Integração
-        th Ativo
         th Codigo
-        th Plano Conta
-        th Observações
+        th Conta Gerencial
+        th Categoria da Conta
     tbody
         tr.cursor(
             rv-each-row='choose.data.rows'
             rv-on-click='choose.select'
             rv-data-key='row.cont_plano_contas_key'
         )
-            td {row.cont_plano_contas_key}
-            td {row.cont_categorias_key}
-            td {row.parent_key}
-            td {row._integracao}
-            td {row.ativo}
             td {row.codigo}
             td {row.plano_conta}
-            td {row.observacoes}
+            td {row.categoria}
