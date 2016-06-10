@@ -25,7 +25,10 @@ function EndTipos(){
                 }, 
                 end_tipo: {
                     tipo: types.comp.text, label: 'Tipo de Endereço:'
-                }
+                },
+                ativo: {
+                    tipo: types.comp.check, label: 'Ativo:', default:1
+                },
             }
         }
     };
@@ -51,7 +54,7 @@ function EndTipos(){
             },
             linhas: [
                 {titulo: "Tipo de Endereço"},
-                {end_tipo: 100}
+                {ativo: 10,end_tipo: 90}
             ],
             ctrls: {
                 end_tipo: {
@@ -86,7 +89,7 @@ function EndTipos(){
                 [0, 'end_tipo', 'asc']
             ],
             search: [
-                    {alias: 9, field: 'end_tipo',  param: types.search.like_full }
+                    {alias: 0, field: 'end_tipo',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0

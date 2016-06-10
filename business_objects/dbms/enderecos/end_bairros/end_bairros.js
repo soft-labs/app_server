@@ -31,7 +31,7 @@ function EndBairros(){
                         template: '{end_cidades_key} - {cidade}',
                         provider: '' 
                     } 
-                }, 
+                },
                 bairro: {
                     tipo: types.comp.text, label: 'Bairro:'
                 }
@@ -102,7 +102,8 @@ function EndBairros(){
                 [0, 'bairro', 'asc']
             ],
             search: [
-                    {alias: 1, field: 'bairro',  param: types.search.like_full }
+                    {alias: 0, field: 'bairro',  param: types.search.like_full },
+                    {alias: 1, field: 'cidade',  param: types.search.like_full },
             ],
             limit: 250,
             showSQL: 0

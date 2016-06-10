@@ -25,7 +25,10 @@ function EndEletronicoTipos(){
                 }, 
                 tipo: {
                     tipo: types.comp.text, label: 'Tipo de Endereço Eletrônico:'
-                }
+                },
+                ativo: {
+                    tipo: types.comp.check, label: 'Ativo:', default:1
+                },
             }
         }
     };
@@ -51,7 +54,7 @@ function EndEletronicoTipos(){
             },
             linhas: [
                 {titulo: "Tipo de Endereço Eletrônico"},
-                {tipo: 100}
+                {ativo: 10,tipo: 90}
             ],
             ctrls: {
                 tipo: {
@@ -86,7 +89,7 @@ function EndEletronicoTipos(){
                 [0, 'tipo', 'asc']
             ],
             search: [
-                    {alias: 5, field: 'tipo',  param: types.search.like_full }
+                    {alias: 0, field: 'tipo',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0

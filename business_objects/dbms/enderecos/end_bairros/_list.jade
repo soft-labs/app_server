@@ -5,21 +5,21 @@
 table.ui.selectable.table
     thead
         tr.cursor
-            th.eight.wide Cidade
             th.seven.wide Bairro
+            th.eight.wide Cidade
             th.one.wide
     tbody
         tr(
             rv-each-row='dbms.enderecos.end_bairros.data.rows'
             rv-row-key='row.end_bairros_key'
         )
-            td {row.cidade}
             td(
                 rv-row-key='row.end_bairros_key'
                 server='dbms enderecos end_bairros edit'
             )
                 i.edit.icon
                 |  {row.bairro}
+            td {row.cidade}
             td
                 .ui.checkbox
                     input(

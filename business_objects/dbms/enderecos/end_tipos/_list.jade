@@ -6,7 +6,8 @@ table.ui.selectable.table
     thead
         tr.cursor
             th.one.wide Código
-            th.fourteen.wide Tipo de Endereço
+            th.two.wide Ativo
+            th.twelve.wide Tipo de Endereço
             th.one.wide
     tbody
         tr(
@@ -14,6 +15,14 @@ table.ui.selectable.table
             rv-row-key='row.end_tipos_key'
         )
             td(class='center aligned') {row.end_tipos_key}
+            td
+                .ui.toggle.checkbox
+                    input(
+                        type="checkbox"
+                        rv-checked='row.ativo'
+                        rv-row-key='row.end_tipos_key'
+                        server-onchange='dbms enderecos end_tipos update'
+                    )
             td(
                 rv-row-key='row.end_tipos_key'
                 server='dbms enderecos end_tipos edit'
