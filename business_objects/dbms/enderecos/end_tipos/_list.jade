@@ -5,16 +5,14 @@
 table.ui.selectable.table
     thead
         tr.cursor
-            th.one.wide Código
             th.two.wide Ativo
-            th.twelve.wide Tipo de Endereço
+            th.thirteen.wide Tipo de Endereço
             th.one.wide
     tbody
         tr(
             rv-each-row='dbms.enderecos.end_tipos.data.rows'
             rv-row-key='row.end_tipos_key'
         )
-            td(class='center aligned') {row.end_tipos_key}
             td
                 .ui.toggle.checkbox
                     input(

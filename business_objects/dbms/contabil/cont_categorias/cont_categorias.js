@@ -25,6 +25,9 @@ function ContCategorias(){
                 }, 
                 cont_categoria: {
                     tipo: types.comp.text, label: 'Categoria:'
+                },
+                ativo: {
+                    tipo: types.comp.check, label: 'Ativo:'
                 }
             }
         }
@@ -51,7 +54,7 @@ function ContCategorias(){
             },
             linhas: [
                 {titulo: "Dados da Categoria de Contas"},
-                {cont_categoria: 100}
+                {ativo:10,cont_categoria: 90}
             ],
             ctrls: {
                 cont_categoria: {

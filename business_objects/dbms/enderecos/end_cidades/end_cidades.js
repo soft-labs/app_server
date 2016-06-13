@@ -108,7 +108,7 @@ function EndCidades(){
                     {alias: 1, field: 'estado',  param: types.search.like_full }
             ],
             limit: 250,
-            showSQL: 1
+            showSQL: 0
         },
 
         update: {

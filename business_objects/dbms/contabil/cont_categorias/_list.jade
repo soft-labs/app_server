@@ -5,15 +5,22 @@
 table.ui.selectable.table
     thead
         tr.cursor
-            th.one.wide Código
-            th.fourteen.wide Categoria
+            th.two.wide Código
+            th.thirteen.wide Categoria
             th.one.wide
     tbody
         tr(
             rv-each-row='dbms.contabil.cont_categorias.data.rows'
             rv-row-key='row.cont_categorias_key'
         )
-            td(class='center aligned') {row.cont_categorias_key}
+            td
+                .ui.toggle.checkbox
+                    input(
+                        type="checkbox"
+                        rv-checked='row.ativo'
+                        rv-row-key='row.cont_categorias_key'
+                        server-onchange='dbms contabil cont_categorias update'
+                    )
             td(
                 rv-row-key='row.cont_categorias_key'
                 server='dbms contabil cont_categorias edit'
