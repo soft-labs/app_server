@@ -244,7 +244,13 @@ Types.prototype.where = {
      * será gerada uma clausula where que retora FALSE ( AND 1 = 2 )
      * @type { string }
      */
-    get     : 'get'
+    get     : 'get',
+
+    /**
+     * In irá verificar se existem valores para o field, e irá criar 
+     * uma clausula where IN ('')
+     */
+    in      : 'in'
 };
 
 /**

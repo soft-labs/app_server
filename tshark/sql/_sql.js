@@ -161,12 +161,13 @@ SQL.prototype._parseProvider = function(provider, obj){
     }
 
     // Processa order
-    var tmp = '';
+    var tmp = '', v = '';
     sqlParams.order.forEach((order) => {
-        tmp += '\n      ' + (typeof order == 'string' 
+        tmp += '\n      ' + v + (typeof order == 'string'
             ? order 
             : 'tb' + order[0] + '.' + order[1] + ' ' + order[2]
         );
+        v = ', ';
     });
     sqlParams.order = tmp;
 
@@ -379,16 +380,24 @@ SQL.prototype._parseWhere = function(whereParams, params){
                     , val   = params[where[2]]
                 ;
 
-                if (val == 'NEW_KEY' || (!val && flag.toUpperCase() == 'GET')){
-                    val = -999;
-                }
-
-                if (val){
-                    where.push('=');
-                    where.push("'" + val + "'");
+                if (flag.toUpperCase() == 'IN'){
+                    if (val && val.length){
+                        where.push(' IN ');
+                        where.push("('" + val.join("', '") + "')");
+                    }
 
                 } else {
-                    where = [];
+                    if (val == 'NEW_KEY' || (!val && flag.toUpperCase() == 'GET')) {
+                        val = -999;
+                    }
+
+                    if (val) {
+                        where.push('=');
+                        where.push("'" + val + "'");
+
+                    } else {
+                        where = [];
+                    }
                 }
             }
 
