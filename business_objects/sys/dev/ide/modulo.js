@@ -17,6 +17,18 @@ tshark.modulos._add('_OWNER_._PACK_._MOD_', {
     },
 
 
+    //region :: Eventos Aplicados
+
+    //endregion
+
+    
+    //region :: Regras de Negócio
+
+    //endregion
+
+    
+    //region :: Eventos Disponíveis
+    
     //region :: Eventos - List
 
     /**
@@ -218,9 +230,6 @@ tshark.modulos._add('_OWNER_._PACK_._MOD_', {
 
      /* */
     //endregion
-    
-    
-    //region :: Regras de Negócio
 
     //endregion
 

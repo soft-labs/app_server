@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: contr_faturamentos.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:20 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:54:49 GMT-0300 (BRT)
  * @constructor
  */
 function ContrFaturamentos(){
@@ -122,7 +122,7 @@ function ContrFaturamentos(){
                 [0, 'descricao', 'asc']
             ],
             search: [
-                    {alias: 2, field: 'descricao',  param: types.search.like_full }
+                    {alias: 0, field: 'descricao',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -145,7 +145,17 @@ function ContrFaturamentos(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -389,10 +399,6 @@ function ContrFaturamentos(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

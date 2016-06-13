@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: items.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:56:39 GMT-0300 (BRT)
  * @constructor
  */
 function Items(){
@@ -168,7 +168,17 @@ function Items(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -412,10 +422,6 @@ function Items(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

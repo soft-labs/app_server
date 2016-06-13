@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_dre_plano_contas_rel.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:35 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:55:41 GMT-0300 (BRT)
  * @constructor
  */
 function ContDrePlanoContasRel(){
@@ -119,7 +119,7 @@ function ContDrePlanoContasRel(){
                 [0, 'operacao', 'asc']
             ],
             search: [
-                    {alias: 7, field: 'operacao',  param: types.search.like_full }
+                    {alias: 0, field: 'operacao',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -142,7 +142,17 @@ function ContDrePlanoContasRel(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -386,10 +396,6 @@ function ContDrePlanoContasRel(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

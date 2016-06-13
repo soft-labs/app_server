@@ -1,6 +1,6 @@
 //
     Template default para: dbms.orcamentos.orc_valores
-    Criado em Sun May 29 2016 08:58:43 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:56:52 GMT-0300 (BRT)
 
 table.ui.compact.striped.celled.table
     thead
@@ -12,7 +12,7 @@ table.ui.compact.striped.celled.table
         th Valor
         th Observações
     tbody
-        tr(rv-each-row='dbms.orcamentos.[object Object].data.rows')
+        tr(rv-each-row='dbms.orcamentos.orc_valores.data.rows')
             td {row.orc_periodos_key}
             td {row.cont_centros_resultado_key}
             td {row.cont_plano_contas_key}

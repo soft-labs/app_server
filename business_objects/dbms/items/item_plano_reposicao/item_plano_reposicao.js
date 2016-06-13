@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_plano_reposicao.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:56:39 GMT-0300 (BRT)
  * @constructor
  */
 function ItemPlanoReposicao(){
@@ -102,8 +102,8 @@ function ItemPlanoReposicao(){
                 [0, 'descricao', 'asc']
             ],
             search: [
-                    {alias: 17, field: 'descricao',  param: types.search.like_full },
-                    {alias: 17, field: 'tipo_intervalo',  param: types.search.like_full }
+                    {alias: 0, field: 'descricao',  param: types.search.like_full },
+                    {alias: 0, field: 'tipo_intervalo',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -126,7 +126,17 @@ function ItemPlanoReposicao(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -370,10 +380,6 @@ function ItemPlanoReposicao(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

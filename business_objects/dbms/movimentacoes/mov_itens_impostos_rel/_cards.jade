@@ -1,8 +1,8 @@
 //
     Template default para: dbms.movimentacoes.mov_itens_impostos_rel
-    Criado em Sun May 29 2016 08:58:34 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:54:12 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='dbms.movimentacoes.[object Object].data.rows')
+.ui.fluid.card(rv-each-row='dbms.movimentacoes.mov_itens_impostos_rel.data.rows')
     .content
         .header {row.mov_itens_key} - {row.aliquota}
         .meta Keys: mov_itens_key, impostos_key
@@ -10,11 +10,11 @@
 
     .extra.content
         span.left.floated.button
-            button.ui.orange.icon.mini.button(data-action='dbms movimentacoes [object Object] edit', rv-data-key='row.mov_itens_key')
+            button.ui.orange.icon.mini.button(data-action='dbms movimentacoes mov_itens_impostos_rel edit', rv-data-key='row.mov_itens_key')
                 i.edit.icon
                 | Editar
 
         span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='dbms movimentacoes [object Object] delete', rv-data-key='row.mov_itens_key')
+            button.ui.red.icon.mini.button(rv-data-action='dbms movimentacoes mov_itens_impostos_rel delete', rv-data-key='row.mov_itens_key')
                 i.delete.icon
                 | Remover

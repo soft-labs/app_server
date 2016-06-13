@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_ident_tipos.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:56:39 GMT-0300 (BRT)
  * @constructor
  */
 function ItemIdentTipos(){
@@ -89,7 +89,7 @@ function ItemIdentTipos(){
                 [0, 'ident_tipo', 'asc']
             ],
             search: [
-                    {alias: 11, field: 'ident_tipo',  param: types.search.like_full }
+                    {alias: 0, field: 'ident_tipo',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -112,7 +112,17 @@ function ItemIdentTipos(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -356,10 +366,6 @@ function ItemIdentTipos(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

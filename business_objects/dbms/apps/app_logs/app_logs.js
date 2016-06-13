@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_logs.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:54:31 GMT-0300 (BRT)
  * @constructor
  */
 function AppLogs(){
@@ -151,10 +151,10 @@ function AppLogs(){
                 [0, 'log', 'asc']
             ],
             search: [
-                    {alias: 12, field: 'log',  param: types.search.like_full },
-                    {alias: 12, field: 'modulo',  param: types.search.like_full },
-                    {alias: 12, field: 'cliente',  param: types.search.like_full },
-                    {alias: 12, field: 'ip',  param: types.search.like_full }
+                    {alias: 0, field: 'log',  param: types.search.like_full },
+                    {alias: 0, field: 'modulo',  param: types.search.like_full },
+                    {alias: 0, field: 'cliente',  param: types.search.like_full },
+                    {alias: 0, field: 'ip',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -177,7 +177,17 @@ function AppLogs(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -421,10 +431,6 @@ function AppLogs(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

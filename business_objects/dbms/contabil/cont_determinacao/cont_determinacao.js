@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_determinacao.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:35 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:55:41 GMT-0300 (BRT)
  * @constructor
  */
 function ContDeterminacao(){
@@ -333,8 +333,8 @@ function ContDeterminacao(){
                 ['0', 'cont_determinacao_key', 'desc']
             ],
             search: [
-                    {alias: 2, field: 'dt_inicio',  param: types.search.maior_igual },
-                    {alias: 2, field: 'dt_final',  param: types.search.maior_igual }
+                    {alias: 0, field: 'dt_inicio',  param: types.search.maior_igual },
+                    {alias: 0, field: 'dt_final',  param: types.search.maior_igual }
             ],
             limit: 250,
             showSQL: 0
@@ -357,7 +357,17 @@ function ContDeterminacao(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -601,10 +611,6 @@ function ContDeterminacao(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

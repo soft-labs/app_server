@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: emp_setores.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:48 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:56:11 GMT-0300 (BRT)
  * @constructor
  */
 function EmpSetores(){
@@ -122,7 +122,7 @@ function EmpSetores(){
                 [0, 'setor', 'asc']
             ],
             search: [
-                    {alias: 11, field: 'setor',  param: types.search.like_full }
+                    {alias: 0, field: 'setor',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -145,7 +145,17 @@ function EmpSetores(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -389,10 +399,6 @@ function EmpSetores(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

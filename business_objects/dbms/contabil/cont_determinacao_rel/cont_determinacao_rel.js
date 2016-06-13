@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_determinacao_rel.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:35 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:55:41 GMT-0300 (BRT)
  * @constructor
  */
 function ContDeterminacaoRel(){
@@ -149,7 +149,17 @@ function ContDeterminacaoRel(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -393,10 +403,6 @@ function ContDeterminacaoRel(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

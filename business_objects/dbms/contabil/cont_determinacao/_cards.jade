@@ -1,8 +1,8 @@
 //
     Template default para: dbms.contabil.cont_determinacao
-    Criado em Sun May 29 2016 08:57:35 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:55:41 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='dbms.contabil.[object Object].data.rows')
+.ui.fluid.card(rv-each-row='dbms.contabil.cont_determinacao.data.rows')
     .content
         .header {row.cont_determinacao_key} - {row.cont_determinacao_key}
         .meta Keys: conta_receitas_key, conta_despesas_key, conta_diferencas_key, cont_credito_compras_key, conta_credito_venda_key, conta_venda_gratis_key, conta_compra_gratis_key, conta_cmv_key, conta_estoque_key, conta_estoque_transito_key, conta_estoque_perdas_key, emp_depositos_key, item_categorias_key, item_categ_sub_key, items_key
@@ -10,11 +10,11 @@
 
     .extra.content
         span.left.floated.button
-            button.ui.orange.icon.mini.button(data-action='dbms contabil [object Object] edit', rv-data-key='row.cont_determinacao_key')
+            button.ui.orange.icon.mini.button(data-action='dbms contabil cont_determinacao edit', rv-data-key='row.cont_determinacao_key')
                 i.edit.icon
                 | Editar
 
         span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='dbms contabil [object Object] delete', rv-data-key='row.cont_determinacao_key')
+            button.ui.red.icon.mini.button(rv-data-action='dbms contabil cont_determinacao delete', rv-data-key='row.cont_determinacao_key')
                 i.delete.icon
                 | Remover

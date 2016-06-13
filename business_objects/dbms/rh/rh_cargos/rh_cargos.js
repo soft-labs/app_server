@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: rh_cargos.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:59:15 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:57:11 GMT-0300 (BRT)
  * @constructor
  */
 function RhCargos(){
@@ -36,10 +36,10 @@ function RhCargos(){
                     tipo: types.comp.text, label: 'Cargo:'
                 }, 
                 remuneracao_min: {
-                    tipo: types.comp.text, label: 'Remuneração Min:'
+                    tipo: types.comp.undefined, label: 'Remuneração Min:'
                 }, 
                 remuneracao_max: {
-                    tipo: types.comp.text, label: 'Remuneração Max:'
+                    tipo: types.comp.undefined, label: 'Remuneração Max:'
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
@@ -135,7 +135,17 @@ function RhCargos(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -379,10 +389,6 @@ function RhCargos(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

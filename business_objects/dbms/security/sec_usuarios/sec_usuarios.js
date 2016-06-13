@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: sec_usuarios.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:59:22 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:57:24 GMT-0300 (BRT)
  * @constructor
  */
 function SecUsuarios(){
@@ -144,12 +144,12 @@ function SecUsuarios(){
                 [0, 'usuario', 'asc']
             ],
             search: [
-                    {alias: 4, field: 'usuario',  param: types.search.like_full },
-                    {alias: 4, field: 'senha',  param: types.search.like_full },
-                    {alias: 4, field: 'nome',  param: types.search.like_full },
-                    {alias: 4, field: 'telefone',  param: types.search.like_full },
-                    {alias: 4, field: 'email',  param: types.search.like_full },
-                    {alias: 4, field: 'expira_em',  param: types.search.maior_igual }
+                    {alias: 0, field: 'usuario',  param: types.search.like_full },
+                    {alias: 0, field: 'senha',  param: types.search.like_full },
+                    {alias: 0, field: 'nome',  param: types.search.like_full },
+                    {alias: 0, field: 'telefone',  param: types.search.like_full },
+                    {alias: 0, field: 'email',  param: types.search.like_full },
+                    {alias: 0, field: 'expira_em',  param: types.search.maior_igual }
             ],
             limit: 250,
             showSQL: 0
@@ -172,7 +172,17 @@ function SecUsuarios(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -416,10 +426,6 @@ function SecUsuarios(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

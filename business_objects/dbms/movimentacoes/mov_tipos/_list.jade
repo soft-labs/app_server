@@ -1,114 +1,172 @@
 //
     Template default para: dbms.movimentacoes.mov_tipos
-    Criado em Thu Jun 09 2016 10:57:12 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:54:12 GMT-0300 (BRT)
 
-table.ui.compact.striped.celled.table
-    thead
-        th Mov Tipos
-        th Mov Tipos Categorias
-        th Mov Customizada
-        th Codigo
-        th Mov Tipo
-        th Mov Info
-        th Mov Icon
-        th Mov Help
-        th Parceiro Tipo
-        th Paceiro Label
-        th Parceiro Show
-        th Parceiro Fixo
-        th Cont Historico Label
-        th Dt Lancamento Show
-        th Dt Lancamento Label
-        th Dt Documento Show
-        th Dt Documento Label
-        th Dt Vencimento Show
-        th Dt Vencimento Label
-        th Dt Competencia Show
-        th Movimenta Itens
-        th Itens Valor Show
-        th Itens Gera Entrada
-        th Itens Deposito Entrada Show
-        th Itens Deposito Entrada Label
-        th Itens Deposito Entrada
-        th Itens Entrada Produção
-        th Itens Gera Saida
-        th Itens Deposito Saida Show
-        th Itens Deposito Saida Label
-        th Itens Deposito Saida
-        th Itens Saida Produção
-        th Movimenta Financeiro
-        th Fin Gera Receita
-        th Fin Gera Despesa
-        th Fin Recorrencia Show
-        th Fin Parcelamentos Show
-        th Fin Desp Acessorias Show
-        th Fin Multa Juros Show
-        th Fin Desconto Show
-        th Fin Taxas Show
-        th Fin Valor Bruto Label
-        th Fin Valor Liquido Label
-        th Fin Conta Provisionamento Show
-        th Fin Conta Provisionamento Tipo
-        th Fin Conta Provisionamento Label
-        th Fin Conta Provisionamento
-        th Fin Conta Provisionamento Fixa
-        th Importar Mesmo Parceiro
-        th Importar Mov Tipos
-        th Observações Show
-        th Observações Label
-        th Observações
-    tbody
-        tr(rv-each-row='dbms.movimentacoes.[object Object].data.rows')
-            td {row.mov_tipos_key}
-            td {row.mov_tipos_categorias_key}
-            td {row.mov_customizada}
-            td {row.codigo}
-            td {row.mov_tipo}
-            td {row.mov_info}
-            td {row.mov_icon}
-            td {row.mov_help}
-            td {row.parceiro_tipo}
-            td {row.paceiro_label}
-            td {row.parceiro_show}
-            td {row.parceiro_fixo}
-            td {row.cont_historico_label}
-            td {row.dt_lancamento_show}
-            td {row.dt_lancamento_label}
-            td {row.dt_documento_show}
-            td {row.dt_documento_label}
-            td {row.dt_vencimento_show}
-            td {row.dt_vencimento_label}
-            td {row.dt_competencia_show}
-            td {row.movimenta_itens}
-            td {row.itens_valor_show}
-            td {row.itens_gera_entrada}
-            td {row.itens_deposito_entrada_show}
-            td {row.itens_deposito_entrada_label}
-            td {row.itens_deposito_entrada_key}
-            td {row.itens_entrada_producao}
-            td {row.itens_gera_saida}
-            td {row.itens_deposito_saida_show}
-            td {row.itens_deposito_saida_label}
-            td {row.itens_deposito_saida_key}
-            td {row.itens_saida_producao}
-            td {row.movimenta_financeiro}
-            td {row.fin_gera_receita}
-            td {row.fin_gera_despesa}
-            td {row.fin_recorrencia_show}
-            td {row.fin_parcelamentos_show}
-            td {row.fin_desp_acessorias_show}
-            td {row.fin_multa_juros_show}
-            td {row.fin_desconto_show}
-            td {row.fin_taxas_show}
-            td {row.fin_valor_bruto_label}
-            td {row.fin_valor_liquido_label}
-            td {row.fin_conta_provisionamento_show}
-            td {row.fin_conta_provisionamento_tipo_key}
-            td {row.fin_conta_provisionamento_label}
-            td {row.fin_conta_provisionamento_key}
-            td {row.fin_conta_provisionamento_fixa}
-            td {row.importar_mesmo_parceiro}
-            td {row.importar_mov_tipos_key}
-            td {row.observacoes_show}
-            td {row.observacoes_label}
-            td {row.observacoes}
+.ui.fluid.accordion.multiple.tree
+    span(rv-each-row='dbms.movimentacoes.mov_tipos.data.group')
+        .title
+            | {categ.tipos_categoria}
+            .ui.divider
+        .content.active
+            .ui.bottom.aligned.stackable.divided.grid
+                .row.cursor.app-grid-rows(
+                    rv-each-item='row.values'
+                    rv-row-key='item.mov_tipos_key'
+                )
+                    - if (mini)
+                    .thirteen.wide.column
+                        i.edit.icon(server='dbms financeiro fin_' + mod + ' edit', rv-row-key='item.fin_lancamentos_key')
+                        | {item.historico}
+
+                    - if (!mini)
+                    .five.wide.column
+                        i.edit.icon(server='dbms financeiro fin_' + mod + ' edit', rv-row-key='item.fin_lancamentos_key')
+                        | {item.historico}
+
+                    .six.wide.center.aligned.column
+                        | {item.parceiro}
+
+                    .two.wide.right.aligned.column
+                        .ui.tooltip(
+                        class='app_' + mod + '-tooltip-datas'
+                        rv-data-dt_vencimento='item.dt_vencimento'
+                        rv-data-dt_documento='item.dt_documento'
+                        rv-data-dt_lancamento='item.dt_lancamento'
+                        )
+                            i.calendar.icon
+                            | {item.dt_vencimento}
+
+                    .three.wide.right.aligned.cursor.column(class='app_' + mod)
+                        .ui.tooltip(
+                        class='app_' + mod + '-tooltip-actions'
+                        rv-row-key='item.fin_lancamentos_key'
+                        )
+                            | {item.valor_bruto | money}
+
+
+                .row.app-grid-rows
+                    .thirteen.wide.right.aligned.column Subtotal:
+                    .three.wide.column.right.aligned(class='app_' + mod + '-sum') R$ {row._stats.sum.valor_bruto | money}
+
+
+            .accordion
+                span(rv-each-nvl1='nvl0.sub')
+                    .title.active
+                        i.cursor.edit.icon(
+                        server='dbms contabil cont_centro_resultados edit'
+                        rv-row-key='nvl1.cont_centro_resultados_key'
+                        )
+                        | &nbsp;&nbsp; {nvl1.codigo} - {nvl1.centro_resultado}
+                        .ui.divider
+
+//
+    table.ui.compact.striped.celled.table
+        thead
+            th Mov Tipos
+            th Mov Tipos Categorias
+            th Mov Customizada
+            th Codigo
+            th Mov Tipo
+            th Mov Info
+            th Mov Icon
+            th Mov Help
+            th Parceiro Tipo
+            th Paceiro Label
+            th Parceiro Show
+            th Parceiro Fixo
+            th Cont Historico Label
+            th Dt Lancamento Show
+            th Dt Lancamento Label
+            th Dt Documento Show
+            th Dt Documento Label
+            th Dt Vencimento Show
+            th Dt Vencimento Label
+            th Dt Competencia Show
+            th Movimenta Itens
+            th Itens Valor Show
+            th Itens Gera Entrada
+            th Itens Deposito Entrada Show
+            th Itens Deposito Entrada Label
+            th Itens Deposito Entrada
+            th Itens Entrada Produção
+            th Itens Gera Saida
+            th Itens Deposito Saida Show
+            th Itens Deposito Saida Label
+            th Itens Deposito Saida
+            th Itens Saida Produção
+            th Movimenta Financeiro
+            th Fin Gera Receita
+            th Fin Gera Despesa
+            th Fin Recorrencia Show
+            th Fin Parcelamentos Show
+            th Fin Desp Acessorias Show
+            th Fin Multa Juros Show
+            th Fin Desconto Show
+            th Fin Taxas Show
+            th Fin Valor Bruto Label
+            th Fin Valor Liquido Label
+            th Fin Conta Provisionamento Show
+            th Fin Conta Provisionamento Tipo
+            th Fin Conta Provisionamento Label
+            th Fin Conta Provisionamento
+            th Fin Conta Provisionamento Fixa
+            th Importar Mesmo Parceiro
+            th Importar Mov Tipos
+            th Observações Show
+            th Observações Label
+            th Observações
+        tbody
+            tr(rv-each-row='dbms.movimentacoes.mov_tipos.data.rows')
+                td {row.mov_tipos_key}
+                td {row.mov_tipos_categorias_key}
+                td {row.mov_customizada}
+                td {row.codigo}
+                td {row.mov_tipo}
+                td {row.mov_info}
+                td {row.mov_icon}
+                td {row.mov_help}
+                td {row.parceiro_tipo}
+                td {row.paceiro_label}
+                td {row.parceiro_show}
+                td {row.parceiro_fixo}
+                td {row.cont_historico_label}
+                td {row.dt_lancamento_show}
+                td {row.dt_lancamento_label}
+                td {row.dt_documento_show}
+                td {row.dt_documento_label}
+                td {row.dt_vencimento_show}
+                td {row.dt_vencimento_label}
+                td {row.dt_competencia_show}
+                td {row.movimenta_itens}
+                td {row.itens_valor_show}
+                td {row.itens_gera_entrada}
+                td {row.itens_deposito_entrada_show}
+                td {row.itens_deposito_entrada_label}
+                td {row.itens_deposito_entrada_key}
+                td {row.itens_entrada_producao}
+                td {row.itens_gera_saida}
+                td {row.itens_deposito_saida_show}
+                td {row.itens_deposito_saida_label}
+                td {row.itens_deposito_saida_key}
+                td {row.itens_saida_producao}
+                td {row.movimenta_financeiro}
+                td {row.fin_gera_receita}
+                td {row.fin_gera_despesa}
+                td {row.fin_recorrencia_show}
+                td {row.fin_parcelamentos_show}
+                td {row.fin_desp_acessorias_show}
+                td {row.fin_multa_juros_show}
+                td {row.fin_desconto_show}
+                td {row.fin_taxas_show}
+                td {row.fin_valor_bruto_label}
+                td {row.fin_valor_liquido_label}
+                td {row.fin_conta_provisionamento_show}
+                td {row.fin_conta_provisionamento_tipo_key}
+                td {row.fin_conta_provisionamento_label}
+                td {row.fin_conta_provisionamento_key}
+                td {row.fin_conta_provisionamento_fixa}
+                td {row.importar_mesmo_parceiro}
+                td {row.importar_mov_tipos_key}
+                td {row.observacoes_show}
+                td {row.observacoes_label}
+                td {row.observacoes}

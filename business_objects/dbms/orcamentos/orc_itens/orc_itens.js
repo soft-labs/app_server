@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: orc_itens.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:58:43 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:56:52 GMT-0300 (BRT)
  * @constructor
  */
 function OrcItens(){
@@ -148,8 +148,8 @@ function OrcItens(){
                 ['0', 'orc_itens_key', 'desc']
             ],
             search: [
-                    {alias: 1, field: 'dt_inicio',  param: types.search.maior_igual },
-                    {alias: 1, field: 'dt_final',  param: types.search.maior_igual }
+                    {alias: 0, field: 'dt_inicio',  param: types.search.maior_igual },
+                    {alias: 0, field: 'dt_final',  param: types.search.maior_igual }
             ],
             limit: 250,
             showSQL: 0
@@ -172,7 +172,17 @@ function OrcItens(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -416,10 +426,6 @@ function OrcItens(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_integ_itens.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:54:31 GMT-0300 (BRT)
  * @constructor
  */
 function AppIntegItens(){
@@ -125,12 +125,12 @@ function AppIntegItens(){
                 [0, 'modulo', 'asc']
             ],
             search: [
-                    {alias: 11, field: 'modulo',  param: types.search.like_full },
-                    {alias: 11, field: 'tabela',  param: types.search.like_full },
-                    {alias: 11, field: 'key_field',  param: types.search.like_full },
-                    {alias: 11, field: 'key_value',  param: types.search.like_full },
-                    {alias: 11, field: 'ref_externa',  param: types.search.like_full },
-                    {alias: 11, field: 'observacoes',  param: types.search.like_full }
+                    {alias: 0, field: 'modulo',  param: types.search.like_full },
+                    {alias: 0, field: 'tabela',  param: types.search.like_full },
+                    {alias: 0, field: 'key_field',  param: types.search.like_full },
+                    {alias: 0, field: 'key_value',  param: types.search.like_full },
+                    {alias: 0, field: 'ref_externa',  param: types.search.like_full },
+                    {alias: 0, field: 'observacoes',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -153,7 +153,17 @@ function AppIntegItens(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -397,10 +407,6 @@ function AppIntegItens(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

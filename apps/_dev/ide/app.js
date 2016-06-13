@@ -241,6 +241,19 @@ app = $.extend(true, app, {
         });
     },
 
+    /**
+     * Refresh dos módulos depois que cria package
+     * @param response
+     */
+    onAfterCreatePackage: function(mod, response){
+        if (response) {
+            app.bizobj.load('listModulos');
+            app.package.id = '';
+            app.package.modulos.clear();
+            alertify.success('Package criado com sucesso!');
+        }
+    },
+
     //endregion
 
 

@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_diario_contas.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:35 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:55:41 GMT-0300 (BRT)
  * @constructor
  */
 function ContDiarioContas(){
@@ -190,10 +190,10 @@ function ContDiarioContas(){
                 [0, 'historico', 'asc']
             ],
             search: [
-                    {alias: 4, field: 'historico',  param: types.search.like_full },
-                    {alias: 4, field: 'ref1',  param: types.search.like_full },
-                    {alias: 4, field: 'ref2',  param: types.search.like_full },
-                    {alias: 4, field: 'ref3',  param: types.search.like_full }
+                    {alias: 0, field: 'historico',  param: types.search.like_full },
+                    {alias: 0, field: 'ref1',  param: types.search.like_full },
+                    {alias: 0, field: 'ref2',  param: types.search.like_full },
+                    {alias: 0, field: 'ref3',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -216,7 +216,17 @@ function ContDiarioContas(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -460,10 +470,6 @@ function ContDiarioContas(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

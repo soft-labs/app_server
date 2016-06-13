@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_lotes.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:56:39 GMT-0300 (BRT)
  * @constructor
  */
 function ItemLotes(){
@@ -109,11 +109,11 @@ function ItemLotes(){
                 [0, 'lote', 'asc']
             ],
             search: [
-                    {alias: 13, field: 'dt_valid_de',  param: types.search.maior_igual },
-                    {alias: 13, field: 'dt_valid_ate',  param: types.search.maior_igual },
-                    {alias: 13, field: 'lote',  param: types.search.like_full },
-                    {alias: 13, field: 'lote_id_de',  param: types.search.like_full },
-                    {alias: 13, field: 'lote_id_ate',  param: types.search.like_full }
+                    {alias: 0, field: 'dt_valid_de',  param: types.search.maior_igual },
+                    {alias: 0, field: 'dt_valid_ate',  param: types.search.maior_igual },
+                    {alias: 0, field: 'lote',  param: types.search.like_full },
+                    {alias: 0, field: 'lote_id_de',  param: types.search.like_full },
+                    {alias: 0, field: 'lote_id_ate',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -136,7 +136,17 @@ function ItemLotes(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -380,10 +390,6 @@ function ItemLotes(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

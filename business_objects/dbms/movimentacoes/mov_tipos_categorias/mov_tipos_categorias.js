@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: mov_tipos_categorias.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:58:34 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:54:12 GMT-0300 (BRT)
  * @constructor
  */
 function MovTiposCategorias(){
@@ -89,7 +89,7 @@ function MovTiposCategorias(){
                 [0, 'tipos_categoria', 'asc']
             ],
             search: [
-                    {alias: 7, field: 'tipos_categoria',  param: types.search.like_full }
+                    {alias: 0, field: 'tipos_categoria',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -112,7 +112,17 @@ function MovTiposCategorias(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -356,10 +366,6 @@ function MovTiposCategorias(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

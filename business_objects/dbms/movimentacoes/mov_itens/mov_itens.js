@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: mov_itens.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:58:34 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:54:12 GMT-0300 (BRT)
  * @constructor
  */
 function MovItens(){
@@ -222,8 +222,8 @@ function MovItens(){
                 [0, 'ncm', 'asc']
             ],
             search: [
-                    {alias: 2, field: 'ncm',  param: types.search.like_full },
-                    {alias: 2, field: 'ean_gtin',  param: types.search.like_full }
+                    {alias: 0, field: 'ncm',  param: types.search.like_full },
+                    {alias: 0, field: 'ean_gtin',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -246,7 +246,17 @@ function MovItens(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -490,10 +500,6 @@ function MovItens(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

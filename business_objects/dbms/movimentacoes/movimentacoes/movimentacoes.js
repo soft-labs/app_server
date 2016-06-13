@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: movimentacoes.
  *
  * Engine de aplicações - TShark.
- * @since Thu Jun 09 2016 10:57:12 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:54:12 GMT-0300 (BRT)
  * @constructor
  */
 function Movimentacoes(){
@@ -400,7 +400,17 @@ function Movimentacoes(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -644,10 +654,6 @@ function Movimentacoes(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

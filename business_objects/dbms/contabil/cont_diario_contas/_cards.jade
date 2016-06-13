@@ -1,8 +1,8 @@
 //
     Template default para: dbms.contabil.cont_diario_contas
-    Criado em Sun May 29 2016 08:57:35 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:55:41 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='dbms.contabil.[object Object].data.rows')
+.ui.fluid.card(rv-each-row='dbms.contabil.cont_diario_contas.data.rows')
     .content
         .header {row.cont_diario_contas_key} - {row.historico}
         .meta Keys: empresas_key, cont_plano_contas_key, movimentacoes_key, fin_lancamentos_key, fin_baixas_key
@@ -10,11 +10,11 @@
 
     .extra.content
         span.left.floated.button
-            button.ui.orange.icon.mini.button(data-action='dbms contabil [object Object] edit', rv-data-key='row.cont_diario_contas_key')
+            button.ui.orange.icon.mini.button(data-action='dbms contabil cont_diario_contas edit', rv-data-key='row.cont_diario_contas_key')
                 i.edit.icon
                 | Editar
 
         span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='dbms contabil [object Object] delete', rv-data-key='row.cont_diario_contas_key')
+            button.ui.red.icon.mini.button(rv-data-action='dbms contabil cont_diario_contas delete', rv-data-key='row.cont_diario_contas_key')
                 i.delete.icon
                 | Remover

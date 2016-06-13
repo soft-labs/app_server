@@ -1,8 +1,8 @@
 //
     Template default para: dbms.rh.rh_cargos_habilidades_rel
-    Criado em Sun May 29 2016 08:59:15 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:57:11 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='dbms.rh.[object Object].data.rows')
+.ui.fluid.card(rv-each-row='dbms.rh.rh_cargos_habilidades_rel.data.rows')
     .content
         .header {row.rh_cargos_key} - {row.mandatoria}
         .meta Keys: rh_cargos_key, rh_habilidades_key
@@ -10,11 +10,11 @@
 
     .extra.content
         span.left.floated.button
-            button.ui.orange.icon.mini.button(data-action='dbms rh [object Object] edit', rv-data-key='row.rh_cargos_key')
+            button.ui.orange.icon.mini.button(data-action='dbms rh rh_cargos_habilidades_rel edit', rv-data-key='row.rh_cargos_key')
                 i.edit.icon
                 | Editar
 
         span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='dbms rh [object Object] delete', rv-data-key='row.rh_cargos_key')
+            button.ui.red.icon.mini.button(rv-data-action='dbms rh rh_cargos_habilidades_rel delete', rv-data-key='row.rh_cargos_key')
                 i.delete.icon
                 | Remover

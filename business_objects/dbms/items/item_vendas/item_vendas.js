@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_vendas.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:56:39 GMT-0300 (BRT)
  * @constructor
  */
 function ItemVendas(){
@@ -346,10 +346,10 @@ function ItemVendas(){
                 [0, 'item_venda', 'asc']
             ],
             search: [
-                    {alias: 20, field: 'item_venda',  param: types.search.like_full },
-                    {alias: 20, field: 'cod_barras',  param: types.search.like_full },
-                    {alias: 20, field: 'foto_peq',  param: types.search.like_full },
-                    {alias: 20, field: 'foto_grande',  param: types.search.like_full }
+                    {alias: 0, field: 'item_venda',  param: types.search.like_full },
+                    {alias: 0, field: 'cod_barras',  param: types.search.like_full },
+                    {alias: 0, field: 'foto_peq',  param: types.search.like_full },
+                    {alias: 0, field: 'foto_grande',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -372,7 +372,17 @@ function ItemVendas(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -616,10 +626,6 @@ function ItemVendas(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

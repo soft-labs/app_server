@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: rh_cargos_emp_setores_rel.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:59:15 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:57:11 GMT-0300 (BRT)
  * @constructor
  */
 function RhCargosEmpSetoresRel(){
@@ -133,7 +133,17 @@ function RhCargosEmpSetoresRel(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -377,10 +387,6 @@ function RhCargosEmpSetoresRel(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

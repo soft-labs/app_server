@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: unidades.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:59:27 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:57:32 GMT-0300 (BRT)
  * @constructor
  */
 function Unidades(){
@@ -48,7 +48,7 @@ function Unidades(){
                     tipo: types.comp.text, label: 'Unidade:'
                 }, 
                 proporcao: {
-                    tipo: types.comp.text, label: 'Proporção:'
+                    tipo: types.comp.undefined, label: 'Proporção:'
                 }, 
                 padrao: {
                     tipo: types.comp.int, label: 'Padrão:'
@@ -162,7 +162,17 @@ function Unidades(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -406,10 +416,6 @@ function Unidades(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

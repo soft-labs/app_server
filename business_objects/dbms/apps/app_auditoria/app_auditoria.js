@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_auditoria.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:54:31 GMT-0300 (BRT)
  * @constructor
  */
 function AppAuditoria(){
@@ -176,7 +176,17 @@ function AppAuditoria(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -420,10 +430,6 @@ function AppAuditoria(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

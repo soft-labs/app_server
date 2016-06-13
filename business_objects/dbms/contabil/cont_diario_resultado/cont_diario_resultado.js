@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_diario_resultado.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:35 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:55:41 GMT-0300 (BRT)
  * @constructor
  */
 function ContDiarioResultado(){
@@ -190,10 +190,10 @@ function ContDiarioResultado(){
                 [0, 'historico', 'asc']
             ],
             search: [
-                    {alias: 5, field: 'historico',  param: types.search.like_full },
-                    {alias: 5, field: 'ref1',  param: types.search.like_full },
-                    {alias: 5, field: 'ref2',  param: types.search.like_full },
-                    {alias: 5, field: 'ref3',  param: types.search.like_full }
+                    {alias: 0, field: 'historico',  param: types.search.like_full },
+                    {alias: 0, field: 'ref1',  param: types.search.like_full },
+                    {alias: 0, field: 'ref2',  param: types.search.like_full },
+                    {alias: 0, field: 'ref3',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -216,7 +216,17 @@ function ContDiarioResultado(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -460,10 +470,6 @@ function ContDiarioResultado(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

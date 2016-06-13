@@ -311,20 +311,6 @@ function Ide(){
                 }
 
 
-                var sv = search ? ",\n" : "\n";
-                switch (types.getByField(_type)){
-                    case 'text':
-                        first_varchar_field = first_varchar_field || _field;
-                        search += sv + "                    {alias: " + m + ", field: '" + _field + "',  param: types.search.like_full }";
-                        break;
-
-                    case 'date':
-                        search += sv + "                    {alias: " + m + ", field: '" + _field + "',  param: types.search.maior_igual }";
-                        break;
-
-                }
-
-
                 // Fields
                 fields += v +
 '\n                ' + _field + ': {' +
@@ -368,6 +354,18 @@ function Ide(){
                     j++;
                 }
 
+                var sv = search ? ",\n" : "\n";
+                switch (types.getByField(_type)){
+                    case 'text':
+                        first_varchar_field = first_varchar_field || _field;
+                        search += sv + "                    {alias: 0, field: '" + _field + "',  param: types.search.like_full }";
+                        break;
+
+                    case 'date':
+                        search += sv + "                    {alias: 0, field: '" + _field + "',  param: types.search.maior_igual }";
+                        break;
+
+                }
 
                 // Linhas
                 if (w == 100) {
@@ -434,18 +432,18 @@ function Ide(){
             jade  = '//';
             jade += '\n    Template default para: ' + owner + '.' + pack + '.' + mod['name'];
             jade += '\n    Criado em ' + hoje + '\n';
-            jade += "\n.ui.fluid.card(rv-each-row='" + owner + '.' + pack + '.' + mod + ".data.rows')";
+            jade += "\n.ui.fluid.card(rv-each-row='" + owner + '.' + pack + '.' + mod['name'] + ".data.rows')";
             jade += '\n    .content';
             jade += '\n        .header {row.' + key[0] + '} - {row.' + (lbl_field ? lbl_field : first_no_key_field) + '}';
             jade += '\n        .meta Keys: ' + (keys.length ? keys.join(', ') : ' - sem dependências -');
             jade += '\n        .description\n';
             jade += '\n    .extra.content';
             jade += '\n        span.left.floated.button';
-            jade += "\n            button.ui.orange.icon.mini.button(data-action='" + owner + ' ' + pack + ' ' + mod + " edit', rv-data-key='row." + key[0] + "')";
+            jade += "\n            button.ui.orange.icon.mini.button(data-action='" + owner + ' ' + pack + ' ' + mod['name'] + " edit', rv-data-key='row." + key[0] + "')";
             jade += "\n                i.edit.icon";
             jade += "\n                | Editar\n";
             jade += '\n        span.right.floated.button';
-            jade += "\n            button.ui.red.icon.mini.button(rv-data-action='" + owner + ' ' + pack + ' ' + mod + " delete', rv-data-key='row." + key[0] + "')";
+            jade += "\n            button.ui.red.icon.mini.button(rv-data-action='" + owner + ' ' + pack + ' ' + mod['name'] + " delete', rv-data-key='row." + key[0] + "')";
             jade += "\n                i.delete.icon";
             jade += "\n                | Remover\n";
             fs.writeFileSync(mod_dir + '/' + '_cards.jade', jade);
@@ -459,7 +457,7 @@ function Ide(){
                 jade += '\n        th ' + lbl;
             });
             jade += '\n    tbody';
-            jade += "\n        tr(rv-each-row='" + owner + '.' + pack + '.' + mod + ".data.rows')";
+            jade += "\n        tr(rv-each-row='" + owner + '.' + pack + '.' + mod['name'] + ".data.rows')";
             arr_fields.forEach(lbl => {
                 jade += '\n            td {row.' + lbl + '}';
             });
@@ -487,6 +485,9 @@ function Ide(){
 
         }
 
+        return {
+            result: 1
+        };
     };
 
     

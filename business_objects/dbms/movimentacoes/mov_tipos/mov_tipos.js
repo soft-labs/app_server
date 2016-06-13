@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: mov_tipos.
  *
  * Engine de aplicações - TShark.
- * @since Thu Jun 09 2016 10:57:12 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:54:12 GMT-0300 (BRT)
  * @constructor
  */
 function MovTipos(){
@@ -287,8 +287,8 @@ function MovTipos(){
                         
                     ]
                 },
-                2: { 
-                    from: ['dbms', 'movimentacoes', 'itens_deposito_entrada'],
+                /*2: {
+                    from: ['dbms', 'items', 'itens_deposito_entrada'],
                     join: {source: 0, tipo: types.join.left, on: 'itens_deposito_entrada_key', where: ''},
                     fields: [
                         
@@ -321,7 +321,7 @@ function MovTipos(){
                     fields: [
                         
                     ]
-                } 
+                } */
             },
             where: [ 
                 ['AND', 0, 'mov_tipos_key', types.where.check]
@@ -330,22 +330,22 @@ function MovTipos(){
                 [0, 'codigo', 'asc']
             ],
             search: [
-                    {alias: 1, field: 'codigo',  param: types.search.like_full },
-                    {alias: 1, field: 'mov_tipo',  param: types.search.like_full },
-                    {alias: 1, field: 'mov_info',  param: types.search.like_full },
-                    {alias: 1, field: 'mov_icon',  param: types.search.like_full },
-                    {alias: 1, field: 'parceiro_tipo',  param: types.search.like_full },
-                    {alias: 1, field: 'paceiro_label',  param: types.search.like_full },
-                    {alias: 1, field: 'cont_historico_label',  param: types.search.like_full },
-                    {alias: 1, field: 'dt_lancamento_label',  param: types.search.like_full },
-                    {alias: 1, field: 'dt_documento_label',  param: types.search.like_full },
-                    {alias: 1, field: 'dt_vencimento_label',  param: types.search.like_full },
-                    {alias: 1, field: 'itens_deposito_entrada_label',  param: types.search.like_full },
-                    {alias: 1, field: 'itens_deposito_saida_label',  param: types.search.like_full },
-                    {alias: 1, field: 'fin_valor_bruto_label',  param: types.search.like_full },
-                    {alias: 1, field: 'fin_valor_liquido_label',  param: types.search.like_full },
-                    {alias: 1, field: 'fin_conta_provisionamento_label',  param: types.search.like_full },
-                    {alias: 1, field: 'observacoes_label',  param: types.search.like_full }
+                    {alias: 0, field: 'codigo',  param: types.search.like_full },
+                    {alias: 0, field: 'mov_tipo',  param: types.search.like_full },
+                    {alias: 0, field: 'mov_info',  param: types.search.like_full },
+                    {alias: 0, field: 'mov_icon',  param: types.search.like_full },
+                    {alias: 0, field: 'parceiro_tipo',  param: types.search.like_full },
+                    {alias: 0, field: 'paceiro_label',  param: types.search.like_full },
+                    {alias: 0, field: 'cont_historico_label',  param: types.search.like_full },
+                    {alias: 0, field: 'dt_lancamento_label',  param: types.search.like_full },
+                    {alias: 0, field: 'dt_documento_label',  param: types.search.like_full },
+                    {alias: 0, field: 'dt_vencimento_label',  param: types.search.like_full },
+                    {alias: 0, field: 'itens_deposito_entrada_label',  param: types.search.like_full },
+                    {alias: 0, field: 'itens_deposito_saida_label',  param: types.search.like_full },
+                    {alias: 0, field: 'fin_valor_bruto_label',  param: types.search.like_full },
+                    {alias: 0, field: 'fin_valor_liquido_label',  param: types.search.like_full },
+                    {alias: 0, field: 'fin_conta_provisionamento_label',  param: types.search.like_full },
+                    {alias: 0, field: 'observacoes_label',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -368,7 +368,17 @@ function MovTipos(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -612,10 +622,6 @@ function MovTipos(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

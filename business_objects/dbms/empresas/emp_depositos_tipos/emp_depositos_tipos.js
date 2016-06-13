@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: emp_depositos_tipos.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:48 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:56:11 GMT-0300 (BRT)
  * @constructor
  */
 function EmpDepositosTipos(){
@@ -86,7 +86,7 @@ function EmpDepositosTipos(){
                 [0, 'tipo', 'asc']
             ],
             search: [
-                    {alias: 5, field: 'tipo',  param: types.search.like_full }
+                    {alias: 0, field: 'tipo',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -109,7 +109,17 @@ function EmpDepositosTipos(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -353,10 +363,6 @@ function EmpDepositosTipos(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

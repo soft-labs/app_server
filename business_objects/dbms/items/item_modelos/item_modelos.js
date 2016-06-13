@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_modelos.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:56:39 GMT-0300 (BRT)
  * @constructor
  */
 function ItemModelos(){
@@ -102,7 +102,7 @@ function ItemModelos(){
                 [0, 'modelo', 'asc']
             ],
             search: [
-                    {alias: 16, field: 'modelo',  param: types.search.like_full }
+                    {alias: 0, field: 'modelo',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -125,7 +125,17 @@ function ItemModelos(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -369,10 +379,6 @@ function ItemModelos(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

@@ -1,8 +1,8 @@
 //
     Template default para: dbms.orcamentos.orc_periodos
-    Criado em Sun May 29 2016 08:58:43 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:56:52 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='dbms.orcamentos.[object Object].data.rows')
+.ui.fluid.card(rv-each-row='dbms.orcamentos.orc_periodos.data.rows')
     .content
         .header {row.orc_periodos_key} - {row.periodo}
         .meta Keys: orcamentos_key, sec_alterado_por_key
@@ -10,11 +10,11 @@
 
     .extra.content
         span.left.floated.button
-            button.ui.orange.icon.mini.button(data-action='dbms orcamentos [object Object] edit', rv-data-key='row.orc_periodos_key')
+            button.ui.orange.icon.mini.button(data-action='dbms orcamentos orc_periodos edit', rv-data-key='row.orc_periodos_key')
                 i.edit.icon
                 | Editar
 
         span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='dbms orcamentos [object Object] delete', rv-data-key='row.orc_periodos_key')
+            button.ui.red.icon.mini.button(rv-data-action='dbms orcamentos orc_periodos delete', rv-data-key='row.orc_periodos_key')
                 i.delete.icon
                 | Remover

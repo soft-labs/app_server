@@ -6,8 +6,6 @@ block title
 
 // Áreas do app
 block app_scripts
-    script(type='application/javascript', src='cockpit.js')
-    script(type='application/javascript', src='configuracoes.js')
 
 block content
     .ui.segment.bg.app
@@ -18,7 +16,7 @@ block content
                 .content
                     |   {info.titulo}
                     .sub.header {info.desc}
-                img.ui.tiny.right.top.floated.image(src="imgs/_logos/tshark.png", style="margin-top: -13px;")
+                img.ui.tiny.right.top.floated.image(src="_imgs/_logos/tshark.png", style="margin-top: -13px;")
 
 
             .form.ui#obj

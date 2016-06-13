@@ -1,6 +1,6 @@
 //
     Template default para: dbms.contabil.cont_diario_contas
-    Criado em Sun May 29 2016 08:57:35 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:55:41 GMT-0300 (BRT)
 
 table.ui.compact.striped.celled.table
     thead
@@ -19,7 +19,7 @@ table.ui.compact.striped.celled.table
         th Ref3
         th Observações
     tbody
-        tr(rv-each-row='dbms.contabil.[object Object].data.rows')
+        tr(rv-each-row='dbms.contabil.cont_diario_contas.data.rows')
             td {row.cont_diario_contas_key}
             td {row.empresas_key}
             td {row.cont_plano_contas_key}

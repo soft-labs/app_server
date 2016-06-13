@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_esfera_governo.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:35 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:55:41 GMT-0300 (BRT)
  * @constructor
  */
 function ContEsferaGoverno(){
@@ -86,7 +86,7 @@ function ContEsferaGoverno(){
                 [0, 'esfera', 'asc']
             ],
             search: [
-                    {alias: 9, field: 'esfera',  param: types.search.like_full }
+                    {alias: 0, field: 'esfera',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -109,7 +109,17 @@ function ContEsferaGoverno(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -353,10 +363,6 @@ function ContEsferaGoverno(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

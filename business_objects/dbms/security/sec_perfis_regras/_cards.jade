@@ -1,8 +1,8 @@
 //
     Template default para: dbms.security.sec_perfis_regras
-    Criado em Sun May 29 2016 08:59:22 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:57:24 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='dbms.security.[object Object].data.rows')
+.ui.fluid.card(rv-each-row='dbms.security.sec_perfis_regras.data.rows')
     .content
         .header {row.sec_perfis_key} - {row.sec_perfis_key}
         .meta Keys:  - sem dependências -
@@ -10,11 +10,11 @@
 
     .extra.content
         span.left.floated.button
-            button.ui.orange.icon.mini.button(data-action='dbms security [object Object] edit', rv-data-key='row.sec_perfis_key')
+            button.ui.orange.icon.mini.button(data-action='dbms security sec_perfis_regras edit', rv-data-key='row.sec_perfis_key')
                 i.edit.icon
                 | Editar
 
         span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='dbms security [object Object] delete', rv-data-key='row.sec_perfis_key')
+            button.ui.red.icon.mini.button(rv-data-action='dbms security sec_perfis_regras delete', rv-data-key='row.sec_perfis_key')
                 i.delete.icon
                 | Remover

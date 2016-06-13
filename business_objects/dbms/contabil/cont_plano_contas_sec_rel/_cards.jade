@@ -1,8 +1,8 @@
 //
     Template default para: dbms.contabil.cont_plano_contas_sec_rel
-    Criado em Sun May 29 2016 08:57:35 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:55:41 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='dbms.contabil.[object Object].data.rows')
+.ui.fluid.card(rv-each-row='dbms.contabil.cont_plano_contas_sec_rel.data.rows')
     .content
         .header {row.cont_plano_contas_key} - {row.visualiza}
         .meta Keys: cont_plano_contas_key, sec_usuarios_key
@@ -10,11 +10,11 @@
 
     .extra.content
         span.left.floated.button
-            button.ui.orange.icon.mini.button(data-action='dbms contabil [object Object] edit', rv-data-key='row.cont_plano_contas_key')
+            button.ui.orange.icon.mini.button(data-action='dbms contabil cont_plano_contas_sec_rel edit', rv-data-key='row.cont_plano_contas_key')
                 i.edit.icon
                 | Editar
 
         span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='dbms contabil [object Object] delete', rv-data-key='row.cont_plano_contas_key')
+            button.ui.red.icon.mini.button(rv-data-action='dbms contabil cont_plano_contas_sec_rel delete', rv-data-key='row.cont_plano_contas_key')
                 i.delete.icon
                 | Remover

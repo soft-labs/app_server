@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: unid_grupos.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:59:27 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:57:32 GMT-0300 (BRT)
  * @constructor
  */
 function UnidGrupos(){
@@ -89,7 +89,7 @@ function UnidGrupos(){
                 [0, 'grupo', 'asc']
             ],
             search: [
-                    {alias: 1, field: 'grupo',  param: types.search.like_full }
+                    {alias: 0, field: 'grupo',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -112,7 +112,17 @@ function UnidGrupos(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -356,10 +366,6 @@ function UnidGrupos(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

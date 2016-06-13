@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: rh_func_habilidades_rel.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:59:15 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:57:11 GMT-0300 (BRT)
  * @constructor
  */
 function RhFuncHabilidadesRel(){
@@ -124,8 +124,8 @@ function RhFuncHabilidadesRel(){
                 ['0', 'rh_habilidades_key', 'desc']
             ],
             search: [
-                    {alias: 6, field: 'dt_adquirida',  param: types.search.maior_igual },
-                    {alias: 6, field: 'dt_planejada',  param: types.search.maior_igual }
+                    {alias: 0, field: 'dt_adquirida',  param: types.search.maior_igual },
+                    {alias: 0, field: 'dt_planejada',  param: types.search.maior_igual }
             ],
             limit: 250,
             showSQL: 0
@@ -148,7 +148,17 @@ function RhFuncHabilidadesRel(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -392,10 +402,6 @@ function RhFuncHabilidadesRel(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

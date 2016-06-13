@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_aut_requisicoes.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:54:31 GMT-0300 (BRT)
  * @constructor
  */
 function AppAutRequisicoes(){
@@ -144,7 +144,7 @@ function AppAutRequisicoes(){
                 [0, 'observacoes', 'asc']
             ],
             search: [
-                    {alias: 6, field: 'observacoes',  param: types.search.like_full }
+                    {alias: 0, field: 'observacoes',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -167,7 +167,17 @@ function AppAutRequisicoes(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -411,10 +421,6 @@ function AppAutRequisicoes(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

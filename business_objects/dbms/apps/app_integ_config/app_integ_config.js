@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_integ_config.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:54:31 GMT-0300 (BRT)
  * @constructor
  */
 function AppIntegConfig(){
@@ -112,13 +112,13 @@ function AppIntegConfig(){
                 [0, 'config', 'asc']
             ],
             search: [
-                    {alias: 10, field: 'config',  param: types.search.like_full },
-                    {alias: 10, field: 'host',  param: types.search.like_full },
-                    {alias: 10, field: 'user',  param: types.search.like_full },
-                    {alias: 10, field: 'pwd',  param: types.search.like_full },
-                    {alias: 10, field: 'api_remota',  param: types.search.like_full },
-                    {alias: 10, field: 'modulo',  param: types.search.like_full },
-                    {alias: 10, field: 'api_modulo',  param: types.search.like_full }
+                    {alias: 0, field: 'config',  param: types.search.like_full },
+                    {alias: 0, field: 'host',  param: types.search.like_full },
+                    {alias: 0, field: 'user',  param: types.search.like_full },
+                    {alias: 0, field: 'pwd',  param: types.search.like_full },
+                    {alias: 0, field: 'api_remota',  param: types.search.like_full },
+                    {alias: 0, field: 'modulo',  param: types.search.like_full },
+                    {alias: 0, field: 'api_modulo',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -141,7 +141,17 @@ function AppIntegConfig(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -385,10 +395,6 @@ function AppIntegConfig(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

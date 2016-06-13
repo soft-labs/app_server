@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_autorizacoes.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:54:31 GMT-0300 (BRT)
  * @constructor
  */
 function AppAutorizacoes(){
@@ -96,8 +96,8 @@ function AppAutorizacoes(){
                 [0, 'autorizacao', 'asc']
             ],
             search: [
-                    {alias: 1, field: 'autorizacao',  param: types.search.like_full },
-                    {alias: 1, field: 'modulo',  param: types.search.like_full }
+                    {alias: 0, field: 'autorizacao',  param: types.search.like_full },
+                    {alias: 0, field: 'modulo',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -120,7 +120,17 @@ function AppAutorizacoes(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -364,10 +374,6 @@ function AppAutorizacoes(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

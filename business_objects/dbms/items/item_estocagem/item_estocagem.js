@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_estocagem.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:56:39 GMT-0300 (BRT)
  * @constructor
  */
 function ItemEstocagem(){
@@ -154,9 +154,9 @@ function ItemEstocagem(){
                 [0, 'localizacao', 'asc']
             ],
             search: [
-                    {alias: 5, field: 'localizacao',  param: types.search.like_full },
-                    {alias: 5, field: 'dt_ultima_entrada',  param: types.search.maior_igual },
-                    {alias: 5, field: 'dt_ultima_saida',  param: types.search.maior_igual }
+                    {alias: 0, field: 'localizacao',  param: types.search.like_full },
+                    {alias: 0, field: 'dt_ultima_entrada',  param: types.search.maior_igual },
+                    {alias: 0, field: 'dt_ultima_saida',  param: types.search.maior_igual }
             ],
             limit: 250,
             showSQL: 0
@@ -179,7 +179,17 @@ function ItemEstocagem(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -423,10 +433,6 @@ function ItemEstocagem(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

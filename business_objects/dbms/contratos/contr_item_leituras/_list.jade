@@ -1,6 +1,6 @@
 //
     Template default para: dbms.contratos.contr_item_leituras
-    Criado em Sun May 29 2016 08:57:20 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:54:49 GMT-0300 (BRT)
 
 table.ui.compact.striped.celled.table
     thead
@@ -10,7 +10,7 @@ table.ui.compact.striped.celled.table
         th Observações
         th Contr Item Apontadores
     tbody
-        tr(rv-each-row='dbms.contratos.[object Object].data.rows')
+        tr(rv-each-row='dbms.contratos.contr_item_leituras.data.rows')
             td {row.contr_item_leituras_key}
             td {row.dt_leitura}
             td {row.leitura}

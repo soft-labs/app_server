@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_logs_tipos.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:54:31 GMT-0300 (BRT)
  * @constructor
  */
 function AppLogsTipos(){
@@ -86,7 +86,7 @@ function AppLogsTipos(){
                 [0, 'log_tipo', 'asc']
             ],
             search: [
-                    {alias: 13, field: 'log_tipo',  param: types.search.like_full }
+                    {alias: 0, field: 'log_tipo',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -109,7 +109,17 @@ function AppLogsTipos(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -353,10 +363,6 @@ function AppLogsTipos(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

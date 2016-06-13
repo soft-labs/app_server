@@ -1,6 +1,6 @@
 //
     Template default para: dbms.movimentacoes.mov_itens_impostos_rel
-    Criado em Sun May 29 2016 08:58:34 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:54:12 GMT-0300 (BRT)
 
 table.ui.compact.striped.celled.table
     thead
@@ -11,7 +11,7 @@ table.ui.compact.striped.celled.table
         th Base Isenta
         th Observações
     tbody
-        tr(rv-each-row='dbms.movimentacoes.[object Object].data.rows')
+        tr(rv-each-row='dbms.movimentacoes.mov_itens_impostos_rel.data.rows')
             td {row.mov_itens_key}
             td {row.impostos_key}
             td {row.aliquota}

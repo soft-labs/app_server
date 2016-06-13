@@ -1,12 +1,12 @@
 //
     Template default para: dbms.apps.app_config_empresas_rel
-    Criado em Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:54:31 GMT-0300 (BRT)
 
 table.ui.compact.striped.celled.table
     thead
         th App Config
         th Empresas
     tbody
-        tr(rv-each-row='dbms.apps.[object Object].data.rows')
+        tr(rv-each-row='dbms.apps.app_config_empresas_rel.data.rows')
             td {row.app_config_key}
             td {row.empresas_key}

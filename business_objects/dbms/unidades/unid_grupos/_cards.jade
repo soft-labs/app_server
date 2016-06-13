@@ -1,8 +1,8 @@
 //
     Template default para: dbms.unidades.unid_grupos
-    Criado em Sun May 29 2016 08:59:27 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:57:32 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='dbms.unidades.[object Object].data.rows')
+.ui.fluid.card(rv-each-row='dbms.unidades.unid_grupos.data.rows')
     .content
         .header {row.unid_grupos_key} - {row.grupo}
         .meta Keys:  - sem dependências -
@@ -10,11 +10,11 @@
 
     .extra.content
         span.left.floated.button
-            button.ui.orange.icon.mini.button(data-action='dbms unidades [object Object] edit', rv-data-key='row.unid_grupos_key')
+            button.ui.orange.icon.mini.button(data-action='dbms unidades unid_grupos edit', rv-data-key='row.unid_grupos_key')
                 i.edit.icon
                 | Editar
 
         span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='dbms unidades [object Object] delete', rv-data-key='row.unid_grupos_key')
+            button.ui.red.icon.mini.button(rv-data-action='dbms unidades unid_grupos delete', rv-data-key='row.unid_grupos_key')
                 i.delete.icon
                 | Remover

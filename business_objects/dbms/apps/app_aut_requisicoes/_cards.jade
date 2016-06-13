@@ -1,8 +1,8 @@
 //
     Template default para: dbms.apps.app_aut_requisicoes
-    Criado em Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:54:31 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='dbms.apps.[object Object].data.rows')
+.ui.fluid.card(rv-each-row='dbms.apps.app_aut_requisicoes.data.rows')
     .content
         .header {row.app_aut_requisicoes_key} - {row.observacoes}
         .meta Keys: app_aut_regras_key, app_autorizadores_key, sec_usuarios_key
@@ -10,11 +10,11 @@
 
     .extra.content
         span.left.floated.button
-            button.ui.orange.icon.mini.button(data-action='dbms apps [object Object] edit', rv-data-key='row.app_aut_requisicoes_key')
+            button.ui.orange.icon.mini.button(data-action='dbms apps app_aut_requisicoes edit', rv-data-key='row.app_aut_requisicoes_key')
                 i.edit.icon
                 | Editar
 
         span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='dbms apps [object Object] delete', rv-data-key='row.app_aut_requisicoes_key')
+            button.ui.red.icon.mini.button(rv-data-action='dbms apps app_aut_requisicoes delete', rv-data-key='row.app_aut_requisicoes_key')
                 i.delete.icon
                 | Remover

@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: rh_func_remuneracoes.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:59:15 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:57:11 GMT-0300 (BRT)
  * @constructor
  */
 function RhFuncRemuneracoes(){
@@ -48,7 +48,7 @@ function RhFuncRemuneracoes(){
                     tipo: types.comp.datetime, label: 'Dt Encerramento:'
                 }, 
                 valor: {
-                    tipo: types.comp.text, label: 'Valor:'
+                    tipo: types.comp.undefined, label: 'Valor:'
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
@@ -147,7 +147,17 @@ function RhFuncRemuneracoes(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -391,10 +401,6 @@ function RhFuncRemuneracoes(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

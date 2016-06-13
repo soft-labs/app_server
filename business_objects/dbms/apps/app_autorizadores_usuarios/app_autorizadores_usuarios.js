@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_autorizadores_usuarios.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:54:31 GMT-0300 (BRT)
  * @constructor
  */
 function AppAutorizadoresUsuarios(){
@@ -110,7 +110,17 @@ function AppAutorizadoresUsuarios(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -354,10 +364,6 @@ function AppAutorizadoresUsuarios(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

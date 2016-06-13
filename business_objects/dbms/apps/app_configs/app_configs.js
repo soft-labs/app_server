@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: app_configs.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:54:31 GMT-0300 (BRT)
  * @constructor
  */
 function AppConfigs(){
@@ -99,9 +99,9 @@ function AppConfigs(){
                 [0, 'config', 'asc']
             ],
             search: [
-                    {alias: 7, field: 'code',  param: types.search.like_full },
-                    {alias: 7, field: 'config',  param: types.search.like_full },
-                    {alias: 7, field: 'valor',  param: types.search.like_full }
+                    {alias: 0, field: 'code',  param: types.search.like_full },
+                    {alias: 0, field: 'config',  param: types.search.like_full },
+                    {alias: 0, field: 'valor',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -124,7 +124,17 @@ function AppConfigs(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -368,10 +378,6 @@ function AppConfigs(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

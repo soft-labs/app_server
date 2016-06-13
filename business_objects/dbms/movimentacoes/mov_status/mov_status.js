@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: mov_status.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:58:34 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:54:12 GMT-0300 (BRT)
  * @constructor
  */
 function MovStatus(){
@@ -86,7 +86,7 @@ function MovStatus(){
                 [0, 'mov_status', 'asc']
             ],
             search: [
-                    {alias: 5, field: 'mov_status',  param: types.search.like_full }
+                    {alias: 0, field: 'mov_status',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -109,7 +109,17 @@ function MovStatus(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -353,10 +363,6 @@ function MovStatus(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: sec_regras.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:59:22 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:57:24 GMT-0300 (BRT)
  * @constructor
  */
 function SecRegras(){
@@ -42,7 +42,7 @@ function SecRegras(){
                     tipo: types.comp.text, label: 'Regra:'
                 }, 
                 observacoes: {
-                    tipo: types.comp.text, label: 'Observações:'
+                    tipo: types.comp.undefined, label: 'Observações:'
                 }
             }
         }
@@ -112,8 +112,8 @@ function SecRegras(){
                 [0, 'regra', 'asc']
             ],
             search: [
-                    {alias: 2, field: 'codigo',  param: types.search.like_full },
-                    {alias: 2, field: 'regra',  param: types.search.like_full }
+                    {alias: 0, field: 'codigo',  param: types.search.like_full },
+                    {alias: 0, field: 'regra',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -136,7 +136,17 @@ function SecRegras(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -380,10 +390,6 @@ function SecRegras(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

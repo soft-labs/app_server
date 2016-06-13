@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_historicos_resultados_rel.
  *
  * Engine de aplicações - TShark.
- * @since Tue May 31 2016 14:32:48 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:55:41 GMT-0300 (BRT)
  * @constructor
  */
 function ContHistoricosResultadosRel(){
@@ -136,7 +136,17 @@ function ContHistoricosResultadosRel(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -380,10 +390,6 @@ function ContHistoricosResultadosRel(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

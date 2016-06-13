@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: rh_habilidades.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:59:15 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:57:11 GMT-0300 (BRT)
  * @constructor
  */
 function RhHabilidades(){
@@ -92,8 +92,8 @@ function RhHabilidades(){
                 [0, 'habilidade', 'asc']
             ],
             search: [
-                    {alias: 8, field: 'codigo',  param: types.search.like_full },
-                    {alias: 8, field: 'habilidade',  param: types.search.like_full }
+                    {alias: 0, field: 'codigo',  param: types.search.like_full },
+                    {alias: 0, field: 'habilidade',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -116,7 +116,17 @@ function RhHabilidades(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -360,10 +370,6 @@ function RhHabilidades(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

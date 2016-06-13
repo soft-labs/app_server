@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: item_ident_veiculos.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:56:39 GMT-0300 (BRT)
  * @constructor
  */
 function ItemIdentVeiculos(){
@@ -92,8 +92,8 @@ function ItemIdentVeiculos(){
                 [0, 'placa', 'asc']
             ],
             search: [
-                    {alias: 12, field: 'placa',  param: types.search.like_full },
-                    {alias: 12, field: 'chassi',  param: types.search.like_full }
+                    {alias: 0, field: 'placa',  param: types.search.like_full },
+                    {alias: 0, field: 'chassi',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -116,7 +116,17 @@ function ItemIdentVeiculos(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -360,10 +370,6 @@ function ItemIdentVeiculos(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

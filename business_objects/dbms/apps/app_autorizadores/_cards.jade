@@ -1,8 +1,8 @@
 //
     Template default para: dbms.apps.app_autorizadores
-    Criado em Sun May 29 2016 08:57:02 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:54:31 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='dbms.apps.[object Object].data.rows')
+.ui.fluid.card(rv-each-row='dbms.apps.app_autorizadores.data.rows')
     .content
         .header {row.app_autorizadores_key} - {row.autorizadores}
         .meta Keys:  - sem dependências -
@@ -10,11 +10,11 @@
 
     .extra.content
         span.left.floated.button
-            button.ui.orange.icon.mini.button(data-action='dbms apps [object Object] edit', rv-data-key='row.app_autorizadores_key')
+            button.ui.orange.icon.mini.button(data-action='dbms apps app_autorizadores edit', rv-data-key='row.app_autorizadores_key')
                 i.edit.icon
                 | Editar
 
         span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='dbms apps [object Object] delete', rv-data-key='row.app_autorizadores_key')
+            button.ui.red.icon.mini.button(rv-data-action='dbms apps app_autorizadores delete', rv-data-key='row.app_autorizadores_key')
                 i.delete.icon
                 | Remover

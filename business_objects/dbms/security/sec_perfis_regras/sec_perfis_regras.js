@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: sec_perfis_regras.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:59:22 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:57:24 GMT-0300 (BRT)
  * @constructor
  */
 function SecPerfisRegras(){
@@ -110,7 +110,17 @@ function SecPerfisRegras(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -354,10 +364,6 @@ function SecPerfisRegras(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

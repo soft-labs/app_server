@@ -1,8 +1,8 @@
 //
     Template default para: dbms.empresas.emp_depositos
-    Criado em Sun May 29 2016 08:57:48 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:56:11 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='dbms.empresas.[object Object].data.rows')
+.ui.fluid.card(rv-each-row='dbms.empresas.emp_depositos.data.rows')
     .content
         .header {row.emp_depositos_key} - {row.deposito}
         .meta Keys: empresas_key, emp_depositos_tipos_key, cont_centro_resultados_key, enderecos_key
@@ -10,11 +10,11 @@
 
     .extra.content
         span.left.floated.button
-            button.ui.orange.icon.mini.button(data-action='dbms empresas [object Object] edit', rv-data-key='row.emp_depositos_key')
+            button.ui.orange.icon.mini.button(data-action='dbms empresas emp_depositos edit', rv-data-key='row.emp_depositos_key')
                 i.edit.icon
                 | Editar
 
         span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='dbms empresas [object Object] delete', rv-data-key='row.emp_depositos_key')
+            button.ui.red.icon.mini.button(rv-data-action='dbms empresas emp_depositos delete', rv-data-key='row.emp_depositos_key')
                 i.delete.icon
                 | Remover

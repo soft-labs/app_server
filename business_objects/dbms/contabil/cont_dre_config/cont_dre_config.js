@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: cont_dre_config.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:57:35 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:55:41 GMT-0300 (BRT)
  * @constructor
  */
 function ContDreConfig(){
@@ -92,7 +92,7 @@ function ContDreConfig(){
                 [0, 'agrupador', 'asc']
             ],
             search: [
-                    {alias: 6, field: 'agrupador',  param: types.search.like_full }
+                    {alias: 0, field: 'agrupador',  param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -115,7 +115,17 @@ function ContDreConfig(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -359,10 +369,6 @@ function ContDreConfig(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

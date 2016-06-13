@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: rh_folhas_ponto.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:59:15 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:57:11 GMT-0300 (BRT)
  * @constructor
  */
 function RhFolhasPonto(){
@@ -118,7 +118,7 @@ function RhFolhasPonto(){
                 [0, 'ponto', 'asc']
             ],
             search: [
-                    {alias: 4, field: 'ponto',  param: types.search.maior_igual }
+                    {alias: 0, field: 'ponto',  param: types.search.maior_igual }
             ],
             limit: 250,
             showSQL: 0
@@ -141,7 +141,17 @@ function RhFolhasPonto(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -385,10 +395,6 @@ function RhFolhasPonto(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

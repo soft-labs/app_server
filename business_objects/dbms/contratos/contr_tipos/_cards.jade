@@ -1,8 +1,8 @@
 //
     Template default para: dbms.contratos.contr_tipos
-    Criado em Sun May 29 2016 08:57:20 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:54:49 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='dbms.contratos.[object Object].data.rows')
+.ui.fluid.card(rv-each-row='dbms.contratos.contr_tipos.data.rows')
     .content
         .header {row.contr_tipos_key} - {row.tipo}
         .meta Keys:  - sem dependências -
@@ -10,11 +10,11 @@
 
     .extra.content
         span.left.floated.button
-            button.ui.orange.icon.mini.button(data-action='dbms contratos [object Object] edit', rv-data-key='row.contr_tipos_key')
+            button.ui.orange.icon.mini.button(data-action='dbms contratos contr_tipos edit', rv-data-key='row.contr_tipos_key')
                 i.edit.icon
                 | Editar
 
         span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='dbms contratos [object Object] delete', rv-data-key='row.contr_tipos_key')
+            button.ui.red.icon.mini.button(rv-data-action='dbms contratos contr_tipos delete', rv-data-key='row.contr_tipos_key')
                 i.delete.icon
                 | Remover

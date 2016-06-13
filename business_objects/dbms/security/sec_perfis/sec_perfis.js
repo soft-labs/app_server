@@ -3,7 +3,7 @@
  *  Implementação de objeto de negócio: sec_perfis.
  *
  * Engine de aplicações - TShark.
- * @since Sun May 29 2016 08:59:22 GMT-0300 (BRT)
+ * @since Mon Jun 13 2016 08:57:24 GMT-0300 (BRT)
  * @constructor
  */
 function SecPerfis(){
@@ -27,7 +27,7 @@ function SecPerfis(){
                     tipo: types.comp.text, label: 'Perfil:'
                 }, 
                 observacoes: {
-                    tipo: types.comp.text, label: 'Observações:'
+                    tipo: types.comp.undefined, label: 'Observações:'
                 }
             }
         }
@@ -112,7 +112,17 @@ function SecPerfis(){
     //endregion
 
 
-    //region :: Eventos
+    //region :: Eventos Aplicados
+
+    //endregion
+
+
+    //region :: Regras de Negócio
+
+    //endregion
+    
+
+    //region :: Eventos Disponívels
 
 
     //region :: onGet
@@ -356,10 +366,6 @@ function SecPerfis(){
     //endregion
 
 
-    //region :: Regras de Negócio
-
-    //endregion
-    
 }
 
 // Types

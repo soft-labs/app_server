@@ -1,8 +1,8 @@
 //
     Template default para: dbms.items.item_modelos
-    Criado em Sun May 29 2016 08:58:25 GMT-0300 (BRT)
+    Criado em Mon Jun 13 2016 08:56:39 GMT-0300 (BRT)
 
-.ui.fluid.card(rv-each-row='dbms.items.[object Object].data.rows')
+.ui.fluid.card(rv-each-row='dbms.items.item_modelos.data.rows')
     .content
         .header {row.item_modelos_key} - {row.modelo}
         .meta Keys: item_marcas_key
@@ -10,11 +10,11 @@
 
     .extra.content
         span.left.floated.button
-            button.ui.orange.icon.mini.button(data-action='dbms items [object Object] edit', rv-data-key='row.item_modelos_key')
+            button.ui.orange.icon.mini.button(data-action='dbms items item_modelos edit', rv-data-key='row.item_modelos_key')
                 i.edit.icon
                 | Editar
 
         span.right.floated.button
-            button.ui.red.icon.mini.button(rv-data-action='dbms items [object Object] delete', rv-data-key='row.item_modelos_key')
+            button.ui.red.icon.mini.button(rv-data-action='dbms items item_modelos delete', rv-data-key='row.item_modelos_key')
                 i.delete.icon
                 | Remover
