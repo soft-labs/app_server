@@ -384,6 +384,8 @@ SQL.prototype._parseWhere = function(whereParams, params){
                     if (val && val.length){
                         where.push(' IN ');
                         where.push("('" + val.join("', '") + "')");
+                    } else {
+                        where = [];
                     }
 
                 } else {
