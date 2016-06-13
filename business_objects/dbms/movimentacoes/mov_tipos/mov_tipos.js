@@ -54,12 +54,15 @@ function MovTipos(){
 
                 mov_info: {
                     tipo: types.comp.text, label: 'Informações:'
-                }, 
+                },
                 mov_icon: {
                     tipo: types.comp.text, label: 'Ícone:'
-                }, 
+                },
                 mov_help: {
                     tipo: types.comp.text_big, label: 'Informações de Ajuda ao Usuário:'
+                },
+                cont_historico_label: {
+                    tipo: types.comp.text, label: 'Label do Histórico:'
                 },
 
                 //endregion
@@ -67,10 +70,18 @@ function MovTipos(){
                 //region :: Aba Parceiros
 
                 parceiro_tipo: {
-                    tipo: types.comp.text, label: 'Tipo de Parceiro:'
-                }, 
+                    tipo:  types.comp.dropdown,
+                    label: 'Tipo de Parceiro',
+                    data: {
+                        label: 'value',
+                        rows: [
+                                {parceiro_tipo: 'dbms empresas emp_clientes', value: 'Cliente'},
+                                {parceiro_tipo: 'dbms empresas emp_fornecedores', value: 'Fornecedor'},
+                        ]
+                    }
+                },
                 paceiro_label: {
-                    tipo: types.comp.text, label: 'Label Parceiro:'
+                    tipo: types.comp.text, label: 'Parceiro Label:'
                 }, 
                 parceiro_show: {
                     tipo: types.comp.check, label: 'Mostrar Parceiro:'
@@ -87,19 +98,19 @@ function MovTipos(){
                     tipo: types.comp.check, label: 'Mostrar Data de Lançamento:'
                 }, 
                 dt_lancamento_label: {
-                    tipo: types.comp.text, label: 'Data de Lançamento Label:'
+                    tipo: types.comp.text, label: 'Label Data de Lançamento:'
                 }, 
                 dt_documento_show: {
                     tipo: types.comp.check, label: 'Mostrar Data do Documento:'
                 }, 
                 dt_documento_label: {
-                    tipo: types.comp.text, label: 'Data do Documento Label:'
+                    tipo: types.comp.text, label: 'Label Data do Documento:'
                 }, 
                 dt_vencimento_show: {
                     tipo: types.comp.check, label: 'Mostrar Data de Vencimento:'
                 }, 
                 dt_vencimento_label: {
-                    tipo: types.comp.text, label: 'Data de Vencimento Label:'
+                    tipo: types.comp.text, label: 'Label Data de Vencimento:'
                 }, 
                 dt_competencia_show: {
                     tipo: types.comp.check, label: 'Mostrar Data de Competência:'
@@ -119,13 +130,13 @@ function MovTipos(){
                     tipo: types.comp.check, label: 'Itens Geram Entrada:'
                 }, 
                 itens_deposito_entrada_show: {
-                    tipo: types.comp.check, label: 'Mostrar Deposito de Entrada:'
+                    tipo: types.comp.check, label: 'Mostrar Depósito de Entrada:'
                 }, 
                 itens_deposito_entrada_label: {
-                    tipo: types.comp.text, label: 'Deposito de Entrada Label:'
+                    tipo: types.comp.text, label: 'Label Depósito de Entrada:'
                 }, 
                 itens_deposito_entrada_key: {
-                    tipo: types.comp.choose, label: 'Itens Deposito Entrada:',
+                    tipo: types.comp.choose, label: 'Itens Depósito Entrada:',
                     data: { 
                         key: ['itens_deposito_entrada_key'], 
                         from: ['dbms', 'movimentacoes', 'itens_deposito_entrada'], 
@@ -140,13 +151,13 @@ function MovTipos(){
                     tipo: types.comp.check, label: 'Itens Geram Saída:'
                 }, 
                 itens_deposito_saida_show: {
-                    tipo: types.comp.check, label: 'Mostrar Deposito de Saída:'
+                    tipo: types.comp.check, label: 'Mostrar Depósito de Saída:'
                 }, 
                 itens_deposito_saida_label: {
-                    tipo: types.comp.text, label: 'Deposito de Saída Label:'
+                    tipo: types.comp.text, label: 'Label Depósito de Saída:'
                 }, 
                 itens_deposito_saida_key: {
-                    tipo: types.comp.choose, label: 'Itens Deposito Saida:',
+                    tipo: types.comp.choose, label: 'Itens Depósito Saida:',
                     data: { 
                         key: ['itens_deposito_saida_key'], 
                         from: ['dbms', 'movimentacoes', 'itens_deposito_saida'], 
@@ -156,7 +167,12 @@ function MovTipos(){
                 }, 
                 itens_saida_producao: {
                     tipo: types.comp.check, label: 'Itens Saída Produção:'
-                }, 
+                },
+
+                // endregion
+
+                // region :: Aba Financeiro
+
                 movimenta_financeiro: {
                     tipo: types.comp.check, label: 'Movimenta Financeiro:'
                 }, 
@@ -185,10 +201,10 @@ function MovTipos(){
                     tipo: types.comp.check, label: 'Mostrar Taxas :'
                 }, 
                 fin_valor_bruto_label: {
-                    tipo: types.comp.text, label: 'Valor Bruto Label:'
+                    tipo: types.comp.text, label: 'Label Valor Bruto:'
                 }, 
                 fin_valor_liquido_label: {
-                    tipo: types.comp.text, label: 'Valor Líquido Label:'
+                    tipo: types.comp.text, label: 'Label Valor Líquido:'
                 }, 
                 fin_conta_provisionamento_show: {
                     tipo: types.comp.check, label: 'Mostrar Conta de Provisionamento:'
@@ -203,7 +219,7 @@ function MovTipos(){
                     } 
                 }, 
                 fin_conta_provisionamento_label: {
-                    tipo: types.comp.text, label: 'Conta de Provisionamento Label:'
+                    tipo: types.comp.text, label: 'Label Conta de Provisionamento:'
                 }, 
                 fin_conta_provisionamento_key: {
                     tipo: types.comp.choose, label: 'Conta de Provisionamento:',
@@ -234,14 +250,11 @@ function MovTipos(){
                         provider: ''
                     }
                 },
-                cont_historico_label: {
-                    tipo: types.comp.text, label: 'Cont Historico Label:'
-                },
                 observacoes_show: {
                     tipo: types.comp.check, label: 'Mostrar Observações:'
                 }, 
                 observacoes_label: {
-                    tipo: types.comp.text, label: 'Observações Label:'
+                    tipo: types.comp.text, label: 'Label Observações:'
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
@@ -283,7 +296,7 @@ function MovTipos(){
                         label: 'Geral',
                         linhas: [
                             {titulo: "Configurações gerais da movimentação"},
-                            {mov_info: 80, mov_icon: 20},
+                            {mov_info: 50, mov_icon: 20,cont_historico_label: 30},
                             {mov_help: 100}
                         ]
                     },
@@ -311,25 +324,28 @@ function MovTipos(){
                             {itens_valor_show: 25},
                             {itens_gera_entrada: 25,itens_gera_saida: 25},
                             {itens_deposito_entrada_show: 25, itens_deposito_saida_show: 25,},
-                            {itens_deposito_entrada_label: 25, itens_deposito_entrada_key: 25, itens_entrada_producao: 25, },
-                            {itens_deposito_saida_label: 25, itens_deposito_saida_key: 25, itens_saida_producao: 25},
+                            {itens_entrada_producao: 25,itens_saida_producao: 25},
+                            {itens_deposito_entrada_label: 25,itens_deposito_saida_label: 25},
+                            {itens_deposito_entrada_key: 25,itens_deposito_saida_key: 25},
                         ]
                     },
                     {
                         label: 'Financeiro',
                         linhas: [
                             {titulo: "Configurações financeiras da movimentação"},
-                            {movimenta_financeiro: 25, fin_gera_receita: 25, fin_gera_despesa: 25, fin_recorrencia_show: 25},
-                            {fin_parcelamentos_show: 25, fin_desp_acessorias_show: 25, fin_multa_juros_show: 25, fin_desconto_show: 25},
-                            {fin_taxas_show: 25, fin_valor_bruto_label: 25, fin_valor_liquido_label: 25, fin_conta_provisionamento_show: 25},
-                            {fin_conta_provisionamento_tipo_key: 25, fin_conta_provisionamento_label: 25, fin_conta_provisionamento_key: 25, fin_conta_provisionamento_fixa: 25},
+                            {movimenta_financeiro: 25,},
+                            {fin_gera_receita: 25, fin_gera_despesa: 25,fin_parcelamentos_show: 25,fin_recorrencia_show: 25},
+                            {fin_desp_acessorias_show: 25, fin_multa_juros_show: 25, fin_desconto_show: 25,fin_taxas_show: 25,},
+                            {fin_conta_provisionamento_show: 25},
+                            {fin_conta_provisionamento_label: 25,fin_conta_provisionamento_tipo_key: 25,fin_conta_provisionamento_fixa: 25,fin_conta_provisionamento_key: 25},
+                            {fin_valor_bruto_label: 25, fin_valor_liquido_label: 25},
                         ]
                     },
                     {
                         label: 'Outros',
                         linhas: [
                             {titulo: "Outras configurações"},
-                            {cont_historico_label: 20, importar_mesmo_parceiro: 20, importar_mov_tipos_key: 20, observacoes_show: 20, observacoes_label: 20},
+                            {importar_mesmo_parceiro: 30, importar_mov_tipos_key: 25, observacoes_show: 20, observacoes_label: 25},
                             {observacoes: 100}
                         ]
                     },
@@ -377,15 +393,154 @@ function MovTipos(){
                 //endregion
 
                 // region :: Aba de Itens
+
+                itens_valor_show: {
+                    disabled: {
+                        field: 'movimenta_itens', cond: 'isFalse'
+                    }
+                },
+                itens_gera_entrada: {
+                    disabled: {
+                        field: 'movimenta_itens', cond: 'isFalse'
+                    }
+                },
+                itens_gera_saida: {
+                    disabled: {
+                        field: 'movimenta_itens', cond: 'isFalse'
+                    }
+                },
+                itens_deposito_entrada_show: {
+                    disabled: {
+                        field: 'movimenta_itens', cond: 'isFalse'
+                    }
+                },
+                itens_deposito_saida_show: {
+                    disabled: {
+                        field: 'movimenta_itens', cond: 'isFalse'
+                    }
+                },
+                itens_deposito_saida_show: {
+                    disabled: {
+                        field: 'movimenta_itens', cond: 'isFalse'
+                    }
+                },
+                itens_entrada_producao: {
+                    disabled: {
+                        field: 'movimenta_itens', cond: 'isFalse'
+                    }
+                },
+                itens_saida_producao: {
+                    disabled: {
+                        field: 'movimenta_itens', cond: 'isFalse'
+                    }
+                },
+                itens_deposito_entrada_label: {
+                    disabled: {
+                        field: 'movimenta_itens', cond: 'isFalse'
+                    }
+                },
+                itens_deposito_saida_label: {
+                    disabled: {
+                        field: 'movimenta_itens', cond: 'isFalse'
+                    }
+                },
+
                 /*
-                {titulo: "Configurações dos itens da movimentação"},
-                {movimenta_itens: 25, itens_valor_show: 25, itens_gera_entrada: 25, itens_deposito_entrada_show: 25},
-                {itens_deposito_entrada_label: 25, itens_deposito_entrada_key: 25, itens_entrada_producao: 25, itens_gera_saida: 25},
-                {itens_deposito_saida_show: 25, itens_deposito_saida_label: 25, itens_deposito_saida_key: 25, itens_saida_producao: 25},
-                */
+                 {movimenta_itens: 25},
+                 {itens_valor_show: 25},
+                 {itens_gera_entrada: 25,itens_gera_saida: 25},
+                 {itens_deposito_entrada_show: 25, itens_deposito_saida_show: 25,},
+                 {itens_entrada_producao: 25,itens_saida_producao: 25},
+                 {itens_deposito_entrada_label: 25,itens_deposito_saida_label: 25},
+                 {itens_deposito_entrada_key: 25,itens_deposito_saida_key: 25},
+                 */
 
                 // endregion
 
+                // region :: Aba de Financeiro
+
+                itens_valor_show: {
+                    disabled: {
+                        field: 'movimenta_financeiro', cond: 'isFalse'
+                    }
+                },
+                fin_gera_receita: {
+                    disabled: {
+                        field: 'movimenta_financeiro', cond: 'isFalse'
+                    }
+                },
+                fin_gera_despesa: {
+                    disabled: {
+                        field: 'movimenta_financeiro', cond: 'isFalse'
+                    }
+                },
+                fin_parcelamentos_show: {
+                    disabled: {
+                        field: 'movimenta_financeiro', cond: 'isFalse'
+                    }
+                },
+                fin_recorrencia_show: {
+                    disabled: {
+                        field: 'movimenta_financeiro', cond: 'isFalse'
+                    }
+                },
+                fin_desp_acessorias_show: {
+                    disabled: {
+                        field: 'movimenta_financeiro', cond: 'isFalse'
+                    }
+                },
+                fin_multa_juros_show: {
+                    disabled: {
+                        field: 'movimenta_financeiro', cond: 'isFalse'
+                    }
+                },
+                fin_desconto_show: {
+                    disabled: {
+                        field: 'movimenta_financeiro', cond: 'isFalse'
+                    }
+                },
+                fin_taxas_show: {
+                    disabled: {
+                        field: 'movimenta_financeiro', cond: 'isFalse'
+                    }
+                },
+                fin_conta_provisionamento_show: {
+                    disabled: {
+                        field: 'movimenta_financeiro', cond: 'isFalse'
+                    }
+                },
+                fin_conta_provisionamento_label: {
+                    disabled: {
+                        field: 'fin_conta_provisionamento_show', cond: 'isFalse'
+                    }
+                },
+                fin_conta_provisionamento_tipo_key: {
+                    disabled: {
+                        field: 'fin_conta_provisionamento_show', cond: 'isFalse'
+                    }
+                },
+                fin_conta_provisionamento_fixa: {
+                    disabled: {
+                        field: 'fin_conta_provisionamento_show', cond: 'isFalse'
+                    }
+                },
+                fin_conta_provisionamento_key: {
+                    disabled: {
+                        field: 'fin_conta_provisionamento_fixa', cond: 'isFalse'
+                    }
+                },
+                fin_valor_bruto_label: {
+                    disabled: {
+                        field: 'movimenta_financeiro', cond: 'isFalse'
+                    }
+                },
+                fin_valor_liquido_label: {
+                    disabled: {
+                        field: 'movimenta_financeiro', cond: 'isFalse'
+                    }
+                },
+
+                //endregion
             }
         }
 
