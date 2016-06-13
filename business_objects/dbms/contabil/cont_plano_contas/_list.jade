@@ -2,23 +2,69 @@
     Template default para: dbms.contabil.cont_plano_contas
     Criado em Sun May 29 2016 08:57:35 GMT-0300 (BRT)
 
-table.ui.compact.striped.celled.table
-    thead
-        th Cont Plano Contas
-        th Cont Categorias
-        th Parent
-        th  Integração
-        th Ativo
-        th Codigo
-        th Plano Conta
-        th Observações
-    tbody
-        tr(rv-each-row='dbms.contabil.[object Object].data.rows')
-            td {row.cont_plano_contas_key}
-            td {row.cont_categorias_key}
-            td {row.parent_key}
-            td {row._integracao}
-            td {row.ativo}
-            td {row.codigo}
-            td {row.plano_conta}
-            td {row.observacoes}
+.ui.fluid.accordion.multiple.tree
+    span(rv-each-nvl0='dbms.contabil.cont_plano_contas.data.group')
+        .title.active
+            i.cursor.edit.icon(server='dbms contabil cont_plano_contas edit', rv-row-key='nvl0.cont_plano_contas_key')
+            | {nvl0.codigo} - {nvl0.plano_conta}
+            .ui.divider
+        .content.active
+
+            .accordion(rv-each-nvl1='nvl0.sub')
+                .title.active
+                    i.cursor.edit.icon(
+                    server='dbms contabil cont_plano_contas edit'
+                    rv-row-key='nvl1.cont_plano_contas_key'
+                    )
+                    | &nbsp;&nbsp; {nvl1.codigo} - {nvl1.plano_conta}
+                    .ui.divider
+                .content.active
+
+                    .accordion(rv-each-nvl2='nvl1.sub')
+                        .title.active
+                            i.cursor.edit.icon(
+                            server='dbms contabil cont_plano_contas edit'
+                            rv-row-key='nvl2.cont_plano_contas_key'
+                            )
+                            | {nvl2.codigo} - {nvl2.plano_conta}
+                            .ui.divider
+                        .content.active
+
+                            .accordion(rv-each-nvl3='nvl2.sub')
+                                .title.active
+                                    i.cursor.edit.icon(
+                                    server='dbms contabil cont_plano_contas edit'
+                                    rv-row-key='nvl3.cont_plano_contas_key'
+                                    )
+                                    | {nvl3.codigo} - {nvl3.plano_conta}
+                                    .ui.divider
+                                .content.active
+
+                                    .accordion(rv-each-nvl4='nvl3.sub')
+                                        .title.active
+                                            i.cursor.edit.icon(
+                                            server='dbms contabil cont_plano_contas edit'
+                                            rv-row-key='nvl4.cont_plano_contas_key'
+                                            )
+                                            | {nvl4.codigo} - {nvl4.plano_conta}
+                                            .ui.divider
+                                        .content.active
+
+                                            .accordion(rv-each-nvl5='nvl4.sub')
+                                                .title.active
+                                                    i.cursor.edit.icon(
+                                                    server='dbms contabil cont_plano_contas edit'
+                                                    rv-row-key='nvl5.cont_plano_contas_key'
+                                                    )
+                                                    | {nvl5.codigo} - {nvl5.plano_conta}
+                                                    .ui.divider
+                                                .content.active
+
+                                                    .accordion(rv-each-nvl6='nvl5.sub')
+                                                        .title.active
+                                                            i.cursor.edit.icon(
+                                                            server='dbms contabil cont_plano_contas edit'
+                                                            rv-row-key='nvl6.cont_plano_contas_key'
+                                                            )
+                                                            | {nvl6.codigo} - {nvl6.plano_conta}
+                                                            .ui.divider
