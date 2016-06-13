@@ -172,8 +172,9 @@ if(!alertify.choose){
                         if (f == 'icon') continue;
 
                         icon = (l['icon'] ? '<i class="' + l['icon'] + ' icon"></i>' : '');
-                        form.append($("<h4>", {class: "ui dividing header"}).html(icon + l[f]));
-                        return '';
+                        //form.append($("<h4>", {class: "ui dividing header"}).html(icon + l[f]));
+                        linha.append($("<h4>", {class: "ui dividing header"}).html(icon + l[f]));
+                        return linha;
 
                     // Componentes
                     } else {

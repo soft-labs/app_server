@@ -92,7 +92,7 @@ function ContCategorias(){
                     {alias: 0, field: 'cont_categoria',  param: types.search.like_full }
             ],
             limit: 250,
-            showSQL: 1
+            showSQL: 0
         },
 
         update: {

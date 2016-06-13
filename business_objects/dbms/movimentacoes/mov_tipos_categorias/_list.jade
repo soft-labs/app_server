@@ -1,14 +1,36 @@
 //
     Template default para: dbms.movimentacoes.mov_tipos_categorias
-    Criado em Mon Jun 13 2016 08:54:12 GMT-0300 (BRT)
+    Criado em Sun May 29 2016 08:57:57 GMT-0300 (BRT)
 
-table.ui.compact.striped.celled.table
+table.ui.selectable.table
     thead
-        th Mov Tipos Categorias
-        th Tipos Categoria
-        th Observações
+        tr.cursor
+            th.two.wide Ativo
+            th.thirteen.wide Categoria
+            th.one.wide
     tbody
-        tr(rv-each-row='dbms.movimentacoes.mov_tipos_categorias.data.rows')
-            td {row.mov_tipos_categorias_key}
-            td {row.tipos_categoria}
-            td {row.observacoes}
+        tr(
+        rv-each-row='dbms.movimentacoes.mov_tipos_categorias.data.rows'
+        rv-row-key='row.mov_tipos_categorias_key'
+        )
+            td
+                .ui.toggle.checkbox
+                    input(
+                    type="checkbox"
+                    rv-checked='row.ativo'
+                    rv-row-key='row.mov_tipos_categorias_key'
+                    server-onchange='dbms movimentacoes mov_tipos_categorias update'
+                    )
+            td(
+            rv-row-key='row.mov_tipos_categorias_key'
+            server='dbms movimentacoes mov_tipos_categorias edit'
+            )
+                i.edit.icon
+                |  {row.tipos_categoria}
+            td
+                .ui.checkbox
+                    input(
+                    type='checkbox'
+                    rv-checked='row._selected_'
+                    rv-row-selected='row._selected_'
+                    )

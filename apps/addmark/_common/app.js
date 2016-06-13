@@ -136,6 +136,11 @@ app = $.extend(true, app, {
                     path: "dbms movimentacoes mov_tipos",
                 },
                 {
+                    label: "Categorias de Tipo de Movimentação",
+                    info: "Gestão das categorias de tipo de movimentações",
+                    path: "dbms movimentacoes mov_tipos_categorias",
+                },
+                {
                     label: "Categorias de Lançamentos",
                     info: "Gestão das categorias de lançamento e distribuições contábeis",
                     path: "dbms contabil cont_historicos",

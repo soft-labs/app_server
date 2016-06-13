@@ -4,9 +4,8 @@
 
 table.ui.compact.striped.selectable.celled.table.choose-rows
     thead
-        th Mov Tipos Categorias
-        th Tipos Categoria
-        th Observações
+        th Código
+        th Categoria
     tbody
         tr.cursor(
             rv-each-row='choose.data.rows'
@@ -15,4 +14,3 @@ table.ui.compact.striped.selectable.celled.table.choose-rows
         )
             td {row.mov_tipos_categorias_key}
             td {row.tipos_categoria}
-            td {row.observacoes}

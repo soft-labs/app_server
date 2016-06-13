@@ -24,8 +24,11 @@ function MovTiposCategorias(){
                     tipo: types.comp.key, label: 'Mov Tipos Categorias:'
                 }, 
                 tipos_categoria: {
-                    tipo: types.comp.text, label: 'Tipos Categoria:'
-                }, 
+                    tipo: types.comp.text, label: 'Categoria:'
+                },
+                ativo: {
+                    tipo: types.comp.check, label: 'Ativo:'
+                },
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
                 }
@@ -53,8 +56,9 @@ function MovTiposCategorias(){
                 ]
             },
             linhas: [
-                {titulo: "Informações de mov_tipos_categorias"},
-                {mov_tipos_categorias_key: 25, tipos_categoria: 25, observacoes: 50}
+                {titulo: "Dados da Categoria de Tipo de Movimentação"},
+                {ativo:10,tipos_categoria: 90},
+                {observacoes: 100}
             ],
             ctrls: {
                 tipos_categoria: {
