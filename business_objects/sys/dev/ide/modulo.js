@@ -22,7 +22,7 @@ tshark.modulos._add('_OWNER_._PACK_._MOD_', {
     //endregion
 
     
-    //region :: Regras de Negócio
+    //region :: Regras de Interface
 
     //endregion
 

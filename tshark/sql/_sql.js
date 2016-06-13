@@ -535,50 +535,53 @@ SQL.prototype._select = function *(provider, obj, meta){
     if (new_key){
         var row = {_key_: 'NEW_KEY'};
         for (var f in sqlParams.fields) {
-            var field = obj.source.metadata.fields[f] || sqlParams.meta[f];
 
-            var val = ''
-                , tipo = field['tipo']    || {}
-                , def  = field.hasOwnProperty('default') ? field['default'] : tipo['default']
-                , type = tipo['type']
-            ;
-            def = (typeof def == 'string' ? def.toUpperCase() : def);
+            if (f != '__as__') {
+                var field = obj.source.metadata.fields[f] || sqlParams.meta[f];
 
-            // Monta valores
-            switch (type) {
-                case 'int':
-                    val = def;
-                    break;
+                var val = ''
+                    , tipo = field['tipo'] || {}
+                    , def = field.hasOwnProperty('default') ? field['default'] : tipo['default']
+                    , type = tipo['type']
+                    ;
+                def = (typeof def == 'string' ? def.toUpperCase() : def);
 
-                case 'float':
-                case 'money':
-                case 'percent':
-                    val = def;
-                    break;
+                // Monta valores
+                switch (type) {
+                    case 'int':
+                        val = def;
+                        break;
 
-                case 'date':
-                    if (def == 'NOW' || def == 'DATE' || def == 'HOJE') {
-                        val = moment().format("DD/MM/YYYY");
-                    }
-                    break;
+                    case 'float':
+                    case 'money':
+                    case 'percent':
+                        val = def;
+                        break;
 
-                case 'time':
-                    if (def == 'NOW' || def == 'DATE' || def == 'HOJE') {
-                        val = moment().format("HH:mm:ss");
-                    }
-                    break;
+                    case 'date':
+                        if (def == 'NOW' || def == 'DATE' || def == 'HOJE') {
+                            val = moment().format("DD/MM/YYYY");
+                        }
+                        break;
 
-                case 'timestamp':
-                case 'datetime':
-                    if (def == 'NOW' || def == 'DATE' || def == 'HOJE') {
-                        val = moment().format("DD/MM/YYYY HH:mm:ss");
-                    }
-                    break;
+                    case 'time':
+                        if (def == 'NOW' || def == 'DATE' || def == 'HOJE') {
+                            val = moment().format("HH:mm:ss");
+                        }
+                        break;
 
-                default:
-                    val = (def ? def : val);
+                    case 'timestamp':
+                    case 'datetime':
+                        if (def == 'NOW' || def == 'DATE' || def == 'HOJE') {
+                            val = moment().format("DD/MM/YYYY HH:mm:ss");
+                        }
+                        break;
+
+                    default:
+                        val = (def ? def : val);
+                }
+                row[f] = (val == 'NEW_KEY' ? '' : val);
             }
-            row[f] = (val == 'NEW_KEY' ? '' : val);
         }
 
         data.rows.push(row);

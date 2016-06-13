@@ -203,12 +203,15 @@ function Dataset (path, ref){
         this.index = data['index'] || false;
         this.row   = {};
 
-        if (!this.index){
-            this.index = {};
-            for (var i = 0; i < this.rows.length; i++){
-                this.index[i] = i;
-            }
+        this.index = {};
+        for (var i = 0; i < this.rows.length; i++){
+            this.index[i] = i;
+            this.rows[i]['_dataset_'] = this.path;
         }
+        
+        /*if (!this.index){
+            
+        }*/
 
         // ShowSQL
         if (data['sql']){

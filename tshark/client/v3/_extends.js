@@ -511,12 +511,14 @@ Array.prototype.groupBy = function (params) {
     var data = this.pivot(params.field);
 
     // Ordena agrupamento
-    data.sortBy(params.order.group.by, params.order.group.desc);
-    
+    data.sortBy('label', (params.order ? params.order['desc'] : true));
+
     // Ordena interno
-    data.forEach(row => {
-        row.values.sortBy(params.order.sub.by, params.order.sub.desc);
-    });
+    if (params['order'] && params.order['sub'] && params.order.sub['by']){
+        data.forEach(row => {
+            row.values.sortBy(params.order.sub.by, params.order.sub['desc']);
+        });
+    }
 
     // Retorna
     return data;
@@ -718,9 +720,9 @@ function _sortByText(field, desc, a, b) {
 
     if (aa == bb) return 0;
     if (desc) {
-        return (aa < bb ? -1 : 1);
-    } else {
         return (aa > bb ? -1 : 1);
+    } else {
+        return (aa < bb ? -1 : 1);
     }
 }
 
