@@ -244,12 +244,13 @@ function Movimentacoes(){
             linhas: [
                 {titulo: "Informações de movimentacoes"},
 
-                {numero: 15, dt_documento: 20, dt_lancamento: 20, dt_vencimento: 20, competencia: 15},
-
-
+                {numero: 15, dt_documento: 20, dt_lancamento: 20, dt_vencimento: 20, competencia: 15, mov_status_key: 10},
+                {empresas_key: 25, parceiros_key: 25, emp_clientes_key: 25},
+                
+                {titulo: "Informações Financeiras"},
                 {valor_bruto: 25, valor_frete: 25, valor_seguro: 25},
 
-                {mov_status_key: 25, empresas_key: 25, parceiros_key: 25, emp_clientes_key: 25},
+                
 
                 {movimentacoes_key: 25, mov_tipos_key: 25, mov_origem_key: 25, mov_destino_key: 25},
                 {emp_fornecedores_key: 25, contratos_key: 25, emp_dep_origem_key: 25, emp_dep_destino_key: 25},
