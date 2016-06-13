@@ -380,9 +380,9 @@ SQL.prototype._parseWhere = function(whereParams, params){
                     , val   = params[where[2]]
                 ;
 
-                if (flag.toUpperCase() == 'IN'){
+                if (flag.toUpperCase() == 'IN' || flag.toUpperCase() == 'NOT IN'){
                     if (val && val.length){
-                        where.push(' IN ');
+                        where.push(' ' + flag.toUpperCase() + ' ');
                         where.push("('" + val.join("', '") + "')");
                     } else {
                         where = [];

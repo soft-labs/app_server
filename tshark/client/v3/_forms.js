@@ -109,7 +109,8 @@ if(!alertify.choose){
         var processLinhas = function(l, inline, width, icon){
             var linha = $("<div>", {class: inline + " fields", style: 'white-space: nowrap;'});
             for (var f in l){
-                var f_class = (width == 'percent' ? getWidth(l[f]) + " wide " : " ")
+                var w = getWidth(l[f])
+                    , f_class = (width == 'percent' ? (w ? w : 'sixteen') + " wide " : " ")
                     , field = $("<div>", {
                     class: f_class + " field "
                 });
@@ -172,8 +173,8 @@ if(!alertify.choose){
                         if (f == 'icon') continue;
 
                         icon = (l['icon'] ? '<i class="' + l['icon'] + ' icon"></i>' : '');
-                        //form.append($("<h4>", {class: "ui dividing header"}).html(icon + l[f]));
-                        linha.append($("<h4>", {class: "ui dividing header"}).html(icon + l[f]));
+                        field.append($("<h4>", {class: "ui dividing header"}).html(icon + l[f]));
+                        linha.append(field);
                         return linha;
 
                     // Componentes

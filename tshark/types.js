@@ -250,7 +250,13 @@ Types.prototype.where = {
      * In irá verificar se existem valores para o field, e irá criar 
      * uma clausula where IN ('')
      */
-    in      : 'in'
+    in      : 'in',
+
+    /**
+     * Not_In irá verificar se existem valores para o field, e irá criar 
+     * uma clausula where NOT IN ('')
+     */
+    not_in      : 'not_in',
 };
 
 /**

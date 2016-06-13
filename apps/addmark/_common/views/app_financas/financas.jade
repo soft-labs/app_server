@@ -1,5 +1,6 @@
 // Templates
 include ../../templates/popup_mov_tipo
+include ../../templates/popup_form
 
 .ui.content.segment
 
@@ -11,3 +12,9 @@ include ../../templates/popup_mov_tipo
 
 
     +popupMovTipo
+
+    // Form popup de edição
+    +popupForm(
+        'dbms movimentacoes movimentacoes',
+        'Movimentação'
+    )

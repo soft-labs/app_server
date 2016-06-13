@@ -3,30 +3,31 @@
 
 mixin popupMovTipo(title, icon, subtitle, lblOk, lblCancel, apiOK, apiCancel)
 
-    .ui.middle.aligned.raised.text.container.segment.modal(class='dbms movimentacoes mov_tipos-list')
+    .ui.long.basic.modal(class='dbms movimentacoes mov_tipos-list')
+        .ui.middle.aligned.raised.text.container.segment
+            .ui.header
+                i.big.icon(class=icon || 'tasks')
+                .content
+                    =title || 'Selecione a Movimentação'
+                    .sub.header
+                        =subtitle
 
-        .ui.header
-            i.big.icon(class=icon || 'tasks')
-            .content
-                =title || 'Selecione a Movimentação'
-                .sub.header
-                    =subtitle
+            .ui.fluid.accordion.multiple(rv-each-row='dbms.movimentacoes.mov_tipos.data.group')
+                .title.active
+                    i.dropdown.icon
+                    | {row.label}
 
-        .ui.fluid.accordion.multiple(rv-each-row='dbms.movimentacoes.mov_tipos.data.group')
-            .title.active
-                i.dropdown.icon
-                | {row.label}
-
-            .content.active
-                .ui.small.very.relaxed.divided.selection.list
-                    .item(
-                        rv-each-item='row.values'
-                        rv-row-key='item.mov_tipos_key'
-                    )
-                        i.sign.out.middle.aligned.icon
-                        .content
-                            a.header(server='dbms movimentacoes mov_tipos save')
-                                | {item.codigo} - {item.mov_tipo}
-                            .description
-                                span(rv-text='item.mov_info | or item.tipos_categoria')
-            .ui.divider
+                .content.active
+                    .ui.small.very.relaxed.divided.selection.list
+                        .item(
+                            rv-each-item='row.values'
+                            rv-row-key='item.mov_tipos_key'
+                            client='dbms movimentacoes movimentacoes launch'
+                        )
+                            i.sign.out.middle.aligned.icon
+                            .content
+                                a.header(server='dbms movimentacoes mov_tipos save')
+                                    | {item.codigo} - {item.mov_tipo}
+                                .description
+                                    span(rv-text='item.mov_info | or item.tipos_categoria')
+                .ui.divider
