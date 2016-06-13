@@ -141,34 +141,34 @@ function Movimentacoes(){
                     tipo: types.comp.float, label: 'Valor Bruto:'
                 }, 
                 valor_frete: {
-                    tipo: types.comp.float, label: 'Valor Frete:'
+                    tipo: types.comp.float, label: 'Frete:'
                 }, 
                 valor_seguro: {
-                    tipo: types.comp.float, label: 'Valor Seguro:'
+                    tipo: types.comp.float, label: 'Seguro:'
                 }, 
                 valor_desconto: {
-                    tipo: types.comp.float, label: 'Valor Desconto:'
+                    tipo: types.comp.float, label: 'Desconto:'
                 }, 
                 valor_imp_ii: {
-                    tipo: types.comp.float, label: 'Valor Imp Ii:'
+                    tipo: types.comp.float, label: 'II:'
                 }, 
                 valor_imp_ipi: {
-                    tipo: types.comp.float, label: 'Valor Imp Ipi:'
+                    tipo: types.comp.float, label: 'IPI:'
                 }, 
                 valor_imp_pis: {
-                    tipo: types.comp.float, label: 'Valor Imp Pis:'
+                    tipo: types.comp.float, label: 'PIS:'
                 }, 
                 valor_imp_cofins: {
-                    tipo: types.comp.float, label: 'Valor Imp Cofins:'
+                    tipo: types.comp.float, label: 'Cofins:'
                 }, 
                 valor_imp_icms: {
-                    tipo: types.comp.float, label: 'Valor Imp Icms:'
+                    tipo: types.comp.float, label: 'ICMS:'
                 }, 
                 valor_imp_icmsst: {
-                    tipo: types.comp.float, label: 'Valor Imp Icmsst:'
+                    tipo: types.comp.float, label: 'ICMS ST:'
                 }, 
                 valor_out_desp: {
-                    tipo: types.comp.float, label: 'Valor Out Desp:'
+                    tipo: types.comp.float, label: 'Outras Despesas:'
                 }, 
                 valor_liquido: {
                     tipo: types.comp.float, label: 'Valor Liquido:'
@@ -177,7 +177,15 @@ function Movimentacoes(){
                     tipo: types.comp.float, label: 'Multa:'
                 }, 
                 multa_em_moeda: {
-                    tipo: types.comp.int, label: 'Multa Em Mõeda:'
+                    tipo: types.comp.dropdown, default: 1, label: 'Tipo de Multa:',
+                    data: {
+                        label: 'tipo',
+                        rows: [
+                            {muta_em_moeda: 1, tipo: 'Monetária'},
+                            {muta_em_moeda: 0, tipo: 'Juros'},
+                        ]
+                    }
+
                 }, 
                 juros: {
                     tipo: types.comp.float, label: 'Juros:'
@@ -243,30 +251,47 @@ function Movimentacoes(){
             },
             linhas: [
                 {titulo: "Informações de movimentacoes"},
-
                 {numero: 15, dt_documento: 20, dt_lancamento: 20, dt_vencimento: 20, competencia: 15, mov_status_key: 10},
-                {empresas_key: 25, parceiros_key: 25, emp_clientes_key: 25},
-                
-                {titulo: "Informações Financeiras"},
-                {valor_bruto: 25, valor_frete: 25, valor_seguro: 25},
-
-                
-
-                {movimentacoes_key: 25, mov_tipos_key: 25, mov_origem_key: 25, mov_destino_key: 25},
-                {emp_fornecedores_key: 25, contratos_key: 25, emp_dep_origem_key: 25, emp_dep_destino_key: 25},
-                {valor_desconto: 25, valor_imp_ii: 25, valor_imp_ipi: 25, valor_imp_pis: 25},
-                {valor_imp_cofins: 25, valor_imp_icms: 25, valor_imp_icmsst: 25, valor_out_desp: 25}, 
-                {valor_liquido: 25, multa: 25, multa_em_moeda: 25, juros: 25}, 
-                
-                {doc_fiscal_tipo: 25, doc_fiscal_data: 25, doc_fiscal_caixa: 25, doc_fiscal_num_equip: 25}, 
-                {doc_fiscal_numero: 25, doc_fiscal_serie: 25, doc_fiscal_subserie: 25, doc_fiscal_modelo: 25}, 
-                {doc_fiscal_chave: 25, doc_fiscal_extra: 25, doc_fiscal_file: 25, observacoes: 25}
+                {empresas_key: 30, parceiros_key: 55, contratos_key: 25},
+                {tabs: 100}
             ],
+            tabs: {
+                tabs: [
+                    {
+                        label: 'Informações Financeiras',
+                        linhas: [
+                            {valor_bruto: 25, valor_desconto: 25, multa: 25, multa_em_moeda: 25, juros: 25, valor_liquido: 25},
+                            {valor_frete: 25, valor_seguro: 25, valor_out_desp: 25},
+
+                            {titulo: "Impostos"},
+                            {valor_imp_ii: 15, valor_imp_ipi: 15, valor_imp_pis: 15, valor_imp_cofins: 15, valor_imp_icms: 15, valor_imp_icmsst: 15},
+                        ]
+                    },
+                    {
+                        label: 'Ítens',
+                        linhas: [
+                            {titulo: "Depósitos"},
+                            {emp_dep_origem_key: 50, emp_dep_destino_key: 50},
+                        ]
+                    },
+                    {
+                        label: 'Documento Fiscal',
+                        linhas: [
+                            {doc_fiscal_tipo: 25, doc_fiscal_data: 25, doc_fiscal_caixa: 25, doc_fiscal_num_equip: 25},
+                            {doc_fiscal_numero: 25, doc_fiscal_serie: 25, doc_fiscal_subserie: 25, doc_fiscal_modelo: 25},
+                            {doc_fiscal_chave: 25, doc_fiscal_extra: 25, doc_fiscal_file: 25},
+                        ]
+                    },
+                    {
+                        label: 'Observações',
+                        linhas: [
+                            {observacoes: 100},
+                        ]
+                    }
+                ]
+            },
+
             ctrls: {
-                competencia: {
-                    extra_right: { class: '', tag: '' },
-                    extra_left:  { class: '', tag: '' }
-                }
             }
         }
 
