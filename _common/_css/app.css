@@ -79,6 +79,10 @@
     margin-top: -1px !important;
 }
 
+.accordion.tree .accordion {
+    padding-left: 27px;
+    margin: -8px;
+}
 
 
 /***** Helpers de borda *****/

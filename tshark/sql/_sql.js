@@ -246,6 +246,20 @@ SQL.prototype._parseFields = function(sqlParams, prov, ctx_fields, meta_fields, 
         // Fields mapeados
     }
 
+    // Alias Fields
+    if (prov['alias_fields'] && util.isArray(prov['alias_fields'])){
+        prov['alias_fields'].forEach(function(f){
+
+            if (!sqlParams.fields['__as__']) {
+                sqlParams.fields['__as__'] = [];
+            }
+            sqlParams.fields['__as__'].push(alias + '.' + f.field + ' as ' + f.as);
+
+        }, this);
+
+        // Fields mapeados
+    }
+
     // Fields de função
     if (prov['fields'] && util.isArray(prov['fields'])) {
         prov['fields'].forEach(function (f) {

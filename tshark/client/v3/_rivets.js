@@ -128,17 +128,37 @@ rivets.binders['row-selected'] = {
  * Substituiu o que estiver em chaves por entradas no objeto de bind.
  * Ex:  "rv-template-value=data.row | '{banco_key} - {banco}'"
  */
-rivets.binders['template'] = function(el, value) {
-    var txt = this.options.formatters[0];
-    if (txt){
-        var model = this.model;
-        var val = txt.replace(/{(\w+)}/g, function(n,k){
-            return model[k];
-        });
-        if ($(el).is('input')) {
-            $(el).val(val);
-        } else {
-            $(el).html(val);
+rivets.binders['template'] = {
+    bind: function(el) {
+        var self = this;
+        this.callback = function() {
+            if (self['model'] && self.model.hasOwnProperty('_dataset_')){
+                try {
+                    var dts = app[self.model._dataset_[0]][self.model._dataset_[1]][self.model._dataset_[2]].data;
+                    // dts.goTo($(this).data('key'));
+                } catch (e){}
+            }
+        };
+        $(el).on('change', this.callback);
+        $(el).addClass('cursor');
+    },
+
+    unbind: function(el) {
+        $(el).off('change', this.callback);
+    },
+
+    routine: function(el, value) {
+        var txt = this.options.formatters[0];
+        if (txt){
+            var model = this.model;
+            var val = txt.replace(/{(\w+)}/g, function(n,k){
+                return model[k];
+            });
+            if ($(el).is('input')) {
+                $(el).val(val);
+            } else {
+                $(el).html(val);
+            }
         }
     }
 };

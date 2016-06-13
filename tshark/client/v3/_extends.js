@@ -524,32 +524,40 @@ Array.prototype.groupBy = function (params) {
 
 
 Array.prototype.parentTree = function(field, desc){
-    var res = this.slice()
-        , tree = []
+    var res = this.slice().sortByFloat('parent')
+        , tree  = []
         , index = {}
-    ;
+        , d     = 1
+        ;
 
     // Monta árvore
     res.forEach(item => {
         var row = JSON.parse(JSON.stringify(item));
 
-        index[row['_key_']] = row;
-        index[row['_key_']].sub = [];
+        if (index[row['_key_']]){
+            index[row['_key_']] = $.extend(index[row['_key_']], row);
+        } else {
+            index[row['_key_']] = row;
+            index[row['_key_']].sub = [];
+        }
 
         if (row['parent_key']){
             if (!index[row['parent_key']]){
                 index[row['parent_key']] = {sub: []};
             }
-            index[row['parent_key']].sub.push(row);
+            index[row['parent_key']].sub.push(index[row['_key_']]);
 
         } else {
             tree.push(index[row['_key_']]);
         }
     });
 
+    tree.depth = 1;
+
     // Sort
     if (field){
         var sortSub = function(sub){
+            d++;
             sub.sortBy(field, desc);
             sub.forEach(s => {
                 if (s.sub.length){
@@ -558,12 +566,16 @@ Array.prototype.parentTree = function(field, desc){
             });
         };
         tree.forEach(s => {
+            d = 0;
             if (s.sub.length){
                 sortSub(s.sub);
             }
+            if (tree.depth < d){
+                tree.depth = d;
+            }
         });
     }
-    
+
     // Retorna
     return tree;
 };

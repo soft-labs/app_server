@@ -11,12 +11,6 @@ app.choose =  {
     // Dataset que ele aponta
     target: '',
 
-    // campo que ele altera
-    //key: '',
-
-    // template de exibição
-    //template: '',
-
     // Elemento que chamou o choose
     element: '',
 
@@ -26,15 +20,31 @@ app.choose =  {
         // Ajusta o dataset
         var row   = app.choose.data.getRow($(this).data('key'))
             , fld = $(app.choose.element).data('field')
-            ;
+            , map = $(app.choose.element).data('map')
+        ;
 
-        var ignore = ['_first_', '_last_', '_index_', '_key_', '_rv', '_dataset_', '__proto__'];
-        for (var r in row){
-            if (r != fld && typeof r != 'function' && ignore.indexOf(r) == -1){
-                app.choose.target.row[r] = row[r];
+        // Fields mapeados
+        if (map){
+            var f = fld;
+            for (var m in map){
+                if (map[m] != fld) {
+                    app.choose.target.row[map[m]] = row[m];
+                } else {
+                    f = m;
+                }
             }
+            app.choose.target.row[fld] = row[f];
+
+        // Todos
+        } else {
+            var ignore = ['_first_', '_last_', '_index_', '_key_', '_rv', '_dataset_', '__proto__'];
+            for (var r in row) {
+                if (r != fld && typeof r != 'function' && ignore.indexOf(r) == -1) {
+                    app.choose.target.row[r] = row[r];
+                }
+            }
+            app.choose.target.row[fld] = row[fld];
         }
-        app.choose.target.row[fld] = row[fld];
 
         // Fecha o dialogo
         if (app.choose.dialog) {

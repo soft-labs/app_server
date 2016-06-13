@@ -2,52 +2,77 @@
     Template default para: dbms.contabil.cont_centro_resultados
     Criado em Sun May 29 2016 08:57:35 GMT-0300 (BRT)
 
-.ui.fluid.accordion
-    span.ident(rv-each-nvl0='dbms.contabil.cont_centro_resultados.data.group')
+.ui.fluid.accordion.tree
+    span
+
+    span(rv-each-nvl0='dbms.contabil.cont_centro_resultados.data.group')
         .title.active
             i.cursor.edit.icon(server='dbms contabil cont_centro_resultados edit', rv-row-key='nvl0.cont_centro_resultados_key')
             | {nvl0.codigo} - {nvl0.centro_resultado}
+            .ui.divider
         .content.active
 
-            .styled.accordion
-                span.ident(rv-each-nvl1='nvl0.sub')
+            .accordion
+                span(rv-each-nvl1='nvl0.sub')
                     .title.active
                         i.cursor.edit.icon(
                             server='dbms contabil cont_centro_resultados edit'
                             rv-row-key='nvl1.cont_centro_resultados_key'
                             )
                         | &nbsp;&nbsp; {nvl1.codigo} - {nvl1.centro_resultado}
+                        .ui.divider
                     .content.active
 
-                        .styled.accordion
-                            span.ident(rv-each-nvl2='nvl1.sub')
+                        .accordion
+                            span(rv-each-nvl2='nvl1.sub')
                                 .title.active
-                                    i.cursor.edit.icon(server='dbms contabil cont_centro_resultados edit', rv-row-key='nvl2.cont_centro_resultados_key')
+                                    i.cursor.edit.icon(
+                                        server='dbms contabil cont_centro_resultados edit'
+                                        rv-row-key='nvl2.cont_centro_resultados_key'
+                                    )
                                     | {nvl2.codigo} - {nvl2.centro_resultado}
+                                    .ui.divider
                                 .content.active
 
-                                    .styled.accordion
-                                        span.ident(rv-each-nvl3='nvl2.sub')
+                                    .accordion
+                                        span(rv-each-nvl3='nvl2.sub')
                                             .title.active
-                                                i.cursor.edit.icon(server='dbms contabil cont_centro_resultados edit', rv-row-key='nvl3.cont_centro_resultados_key')
+                                                i.cursor.edit.icon(
+                                                    server='dbms contabil cont_centro_resultados edit'
+                                                    rv-row-key='nvl3.cont_centro_resultados_key'
+                                                )
                                                 | {nvl3.codigo} - {nvl3.centro_resultado}
+                                                .ui.divider
+                                            .content.active
 
-//
-    table.ui.compact.striped.celled.table
-        thead
-            th Cont Centro Resultados
-            th Parent
-            th  Integração
-            th Ativo
-            th Codigo
-            th Centro Resultado
-            th Observações
-        tbody
-            tr(rv-each-row='dbms.contabil.cont_centro_resultados.data.rows')
-                td {row.cont_centro_resultados_key}
-                td {row.parent_key}
-                td {row._integracao}
-                td {row.ativo}
-                td {row.codigo}
-                td {row.centro_resultado}
-                td {row.observacoes}
+                                                .accordion
+                                                    span(rv-each-nvl4='nvl3.sub')
+                                                        .title.active
+                                                            i.cursor.edit.icon(
+                                                                server='dbms contabil cont_centro_resultados edit'
+                                                                rv-row-key='nvl4.cont_centro_resultados_key'
+                                                            )
+                                                            | {nvl4.codigo} - {nvl4.centro_resultado}
+                                                            .ui.divider
+                                                        .content.active
+
+                                                            .accordion
+                                                                span(rv-each-nvl5='nvl4.sub')
+                                                                    .title.active
+                                                                        i.cursor.edit.icon(
+                                                                        server='dbms contabil cont_centro_resultados edit'
+                                                                        rv-row-key='nvl5.cont_centro_resultados_key'
+                                                                        )
+                                                                        | {nvl5.codigo} - {nvl5.centro_resultado}
+                                                                        .ui.divider
+                                                                    .content.active
+
+                                                                        .accordion
+                                                                            span(rv-each-nvl6='nvl5.sub')
+                                                                                .title.active
+                                                                                    i.cursor.edit.icon(
+                                                                                    server='dbms contabil cont_centro_resultados edit'
+                                                                                    rv-row-key='nvl6.cont_centro_resultados_key'
+                                                                                    )
+                                                                                    | {nvl6.codigo} - {nvl6.centro_resultado}
+                                                                                    .ui.divider

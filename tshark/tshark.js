@@ -313,6 +313,7 @@ TShark.prototype.getConnection = function *(ctx, id){
 
         // Retorna cache
         if (this.pool[appId][cacheId]) {
+            yield this.pool[appId][cacheId].checkConnection(connParams);
             return this.pool[appId][cacheId];
 
         // Abre conexão

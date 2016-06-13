@@ -17,13 +17,20 @@ tshark.modulos._add('dbms.contabil.cont_centro_resultados', {
     },
 
     
-    //region :: Eventos Disponíveis
+    //region :: Eventos Aplicados
 
     /**
      * Chamado após a listagem de dados
      */
     onAfterList: function(response, next){
         this.data.group = this.data.rows.parentTree('codigo');
+    },
+
+    /**
+     * Chamado após qualquer operação de insert ou update no server
+     */
+    onAfterSave: function(response, next){
+        this.list({template: '_list'});
     },
      
     //endregion
@@ -214,13 +221,6 @@ tshark.modulos._add('dbms.contabil.cont_centro_resultados', {
 
         // Libera ou não para continuar
         return true;
-    },
-
-    /**
-     * Chamado após qualquer operação de insert ou update no server
-     *
-    onAfterSave: function(response, next){
-
     },
 
      /* */

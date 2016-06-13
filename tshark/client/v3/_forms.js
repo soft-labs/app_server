@@ -907,7 +907,7 @@ if(!alertify.choose){
                 'data-from': path,
                 'data-field': field,
                 'data-provider': ctrl['data']['provider'],
-        })
+            }).data('map', ctrl['data']['map'] || ctrl['data']['mapfields'])
                 .append(
                     setExtras($('<input>', {
                         type: 'text',
@@ -1004,7 +1004,7 @@ if(!alertify.choose){
      * Retorna um dropdown
      * @param ctrl
      * @param field
-     */
+     *
     function getSelect(ctrl, field, path){
         return simpleSelect(ctrl, field, path);
         //return selSelection(ctrl, field, path);
@@ -1049,7 +1049,7 @@ if(!alertify.choose){
      * @param ctrl
      * @param field
      * @returns {*|jQuery|HTMLElement}
-     */
+     *
     function simpleSelect(ctrl, field, path){
         var
             val  = (ctrl.data['key'] ? ctrl.data['key'] : field)
@@ -1080,7 +1080,7 @@ if(!alertify.choose){
      * @param ctrl
      * @param field
      * @returns {*|jQuery|HTMLElement}
-     */
+     *
     function extraSelect(ctrl, field, path){
         var
             val   = (ctrl.data['key'] ? ctrl.data['key'] : field)
@@ -1120,7 +1120,7 @@ if(!alertify.choose){
             );
         return select;
     }
-
+    */
 
 })($);
 

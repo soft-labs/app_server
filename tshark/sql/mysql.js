@@ -23,6 +23,16 @@ function *MySql(connParams){
     return this;
 }
 
+/**
+ * Verifica conexão ao banco
+ * @param connParams
+ */
+MySql.prototype.checkConnection = function *(connParams){
+    if (this.conn.state != 'authenticated'){
+        this.conn = mysql.createConnection(connParams.conn);
+    }
+};
+
 //region :: Includes
 
 var driver  = require('./_sql')

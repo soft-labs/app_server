@@ -26,10 +26,15 @@ function ContCentroResultados(){
                 parent_key: {
                     tipo: types.comp.choose, label: 'Centro de Resultado Relacionado:',
                     data: { 
-                        key: ['cont_centro_resultados_key'],
+                        key: ['parent_key'],
                         from: ['dbms', 'contabil', 'cont_centro_resultados'],
-                        template: '{codigo} - {centro_resultado}',
-                        provider: '' 
+                        template: '{parent_codigo} - {parent_centro_resultado}',
+                        provider: '',
+                        mapfields: {
+                            cont_centro_resultados_key: 'parent_key',
+                            codigo: 'parent_codigo',
+                            centro_resultado: 'parent_centro_resultado'
+                        }
                     } 
                 }, 
                 _integracao: {
@@ -72,15 +77,12 @@ function ContCentroResultados(){
             },
             linhas: [
                 {titulo: "Dados do Centro de Resultado"},
-                {ativo: 9,codigo: 15,centro_resultado: 80, },
+                {ativo: 9,codigo: 15,centro_resultado: 80 },
                 {parent_key: 50,_integracao: 50 },
                 {observacoes: 100}
             ],
             ctrls: {
-                centro_resultado: {
-                    extra_right: { class: '', tag: '' },
-                    extra_left:  { class: '', tag: '' }
-                }
+
             }
         }
 
@@ -100,6 +102,15 @@ function ContCentroResultados(){
                     fields: [
                         
                     ]
+                },
+                1: {
+                    from: ['dbms', 'contabil', 'cont_centro_resultados'],
+                    join: {source: 0, tipo: types.join.left, on: ['cont_centro_resultados_key', 'parent_key'], where: ''},
+                    alias_fields: [
+                        {field: 'codigo', as: 'parent_codigo'},
+                        {field: 'centro_resultado', as: 'parent_centro_resultado'},
+                    ],
+
                 }
             },
             where: [ 

@@ -85,6 +85,9 @@ app.areas.add('app_sistema', {
                     active: 1
                 }
             ]);
+
+            // Reseta campo search
+            $('#automod_search').val('');
         },
     },
 
