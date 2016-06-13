@@ -89,10 +89,10 @@ function ContCategorias(){
                 [0, 'cont_categoria', 'asc']
             ],
             search: [
-                    {alias: 13, field: 'cont_categoria',  param: types.search.like_full }
+                    {alias: 0, field: 'cont_categoria',  param: types.search.like_full }
             ],
             limit: 250,
-            showSQL: 0
+            showSQL: 1
         },
 
         update: {

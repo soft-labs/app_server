@@ -511,7 +511,17 @@ Array.prototype.groupBy = function (params) {
     var data = this.pivot(params.field);
 
     // Ordena agrupamento
-    data.sortBy('label', (params.order ? params.order['desc'] : true));
+    if (params['order']) {
+        if (params.order['group'] && params.order.group['by']) {
+            data.sortBy(params.order.group.by, params.order.group.desc);
+        } else {
+            data.sortBy('label', params.order['desc']);
+        }
+    } else {
+        data.sortBy('label');
+    }
+
+    // Ordena agrupamento
 
     // Ordena interno
     if (params['order'] && params.order['sub'] && params.order.sub['by']){

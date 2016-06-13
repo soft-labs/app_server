@@ -345,8 +345,9 @@ $.fn.api.settings.api = {};
      * @since 06/10/15
      * @private
      */
-    function callback(response) {
-        var func    = response.callback
+    function callback(_response) {
+        var response = $.extend(true, {}, _response)
+            , func  = response.callback
             , id    = response.path.join('.')
             , mod   = tshark.getMod(id)
         ;
@@ -756,11 +757,15 @@ $.fn.api.settings.api = {};
     TShark.prototype.choose_callback = function (mod, response) {
 
         if (response['data']) {
+            if (app.choose.bound){
+                app.choose.bound.unbind();
+            }
             app.choose.data.reset(response['data']);
         }
         
         if (response['layout']) {
             app.choose.dialog = alertify.choose(response.layout);
+            app.choose.bound = rivets.bind($('.choose-rows'), app);
         }
 
     };

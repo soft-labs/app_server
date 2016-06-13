@@ -26,8 +26,7 @@ function ContPlanoContas(){
                 cont_categorias_key: {
                     tipo: types.comp.choose, label: 'Categoria da Conta:',
                     data: { 
-                        key: ['cont_categorias_key'],
-                        from: ['dbms', 'contabil', 'cont_categorias'], 
+                        from: ['dbms', 'contabil', 'cont_categorias'],
                         template: '{cont_categorias_key} - {cont_categoria}',
                         provider: '' 
                     } 
@@ -35,7 +34,6 @@ function ContPlanoContas(){
                 parent_key: {
                     tipo: types.comp.choose, label: 'Conta Gerencial Relacionada:',
                     data: {
-                        key: ['parent_key'],
                         from: ['dbms', 'contabil', 'cont_plano_contas'],
                         template: '{parent_codigo} - {parent_plano_conta}',
                         provider: '',
@@ -135,7 +133,7 @@ function ContPlanoContas(){
                 ['AND', 0, 'cont_plano_contas_key', types.where.check]
             ],
             order: [
-                [0, 'plano_conta', 'asc']
+                [0, 'codigo', 'asc']
             ],
             search: [
                     {alias: 0, field: '_integracao',  param: types.search.like_full },

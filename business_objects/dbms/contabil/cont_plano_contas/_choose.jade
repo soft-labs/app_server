@@ -11,8 +11,8 @@ table.ui.compact.striped.selectable.celled.table.choose-rows
         tr.cursor(
             rv-each-row='choose.data.rows'
             rv-on-click='choose.select'
-            rv-data-key='row.cont_plano_contas_key'
+            rv-row-key='row.cont_plano_contas_key'
         )
             td {row.codigo}
-            td {row.plano_conta}
+            td {row.plano_conta} - {row.cont_plano_contas_key}
             td {row.categoria}

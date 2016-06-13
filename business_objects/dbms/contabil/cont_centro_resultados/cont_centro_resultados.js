@@ -117,7 +117,7 @@ function ContCentroResultados(){
                 ['AND', 0, 'cont_centro_resultados_key', types.where.check]
             ],
             order: [
-                [0, 'cont_centro_resultados_key', 'asc']
+                [0, 'codigo', 'asc']
             ],
             search: [
                     {alias: 0, field: 'codigo',  param: types.search.like_full },

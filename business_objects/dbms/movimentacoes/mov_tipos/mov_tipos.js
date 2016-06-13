@@ -31,7 +31,10 @@ function MovTipos(){
                         template: '{mov_tipos_categorias_key} - {mov_tipos_categoria}', 
                         provider: '' 
                     } 
-                }, 
+                },
+                ativo: {
+                    tipo: types.comp.check, label: 'Ativo:'
+                },
                 mov_customizada: {
                     tipo: types.comp.int, label: 'Mov Customizada:'
                 }, 

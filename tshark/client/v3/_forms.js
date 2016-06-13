@@ -69,7 +69,6 @@ if(!alertify.choose){
             prepare:function(){
                 $(this.elements.dialog).css('height', '80%');
                 this.setContent('<div class="ui segment">' + this.message + '</div>');
-                rivets.bind($('.choose-rows'), app);
             },
             build: function(){
                 this.setHeader($(this.elements.content).find('table')[0]);

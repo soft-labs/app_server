@@ -197,25 +197,30 @@ function Dataset (path, ref){
      * @param data
      */
     Dataset.prototype.reset = function (data) {
-        this.key   = data['key']   || '';
-        this.rows  = data['rows']  || [];
-        this.page  = data['page']  || -1;
-        this.index = data['index'] || false;
+        var _data = $.extend(true, {}, data);
+        this.key   = _data['key']   || '';
+        this.rows  = [];
+        this.rows  = _data['rows']  || [];
+        this.page  = _data['page']  || -1;
+        this.index = _data['index'] || false;
         this.row   = {};
 
-        this.index = {};
+        if (!this.index){
+            this.index = {};
+            for (var i = 0; i < this.rows.length; i++){
+                this.index[i] = i;
+            }
+        }
+
+        // LEVAR ISSO PRO SERVER !!!!
         for (var i = 0; i < this.rows.length; i++){
-            this.index[i] = i;
             this.rows[i]['_dataset_'] = this.path;
         }
-        
-        /*if (!this.index){
-            
-        }*/
+
 
         // ShowSQL
-        if (data['sql']){
-            console.log(data['sql'])
+        if (_data['sql']){
+            console.log(_data['sql'])
         }
     };
 
