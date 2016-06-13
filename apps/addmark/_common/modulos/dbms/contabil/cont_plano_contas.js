@@ -25,6 +25,20 @@ tshark.modulos._add('dbms.contabil.cont_plano_contas', {
     onAfterList: function(response, next){
         this.data.group = this.data.rows.parentTree('codigo');
     },
+
+    /**
+     * Chamado após qualquer operação de insert ou update no server
+     */
+    onAfterSave: function(response, next){
+        this.list({template: '_list'});
+    },
+
+    /**
+     * Chamado após a execução de uma pesquisa
+     */
+    onAfterSearch: function(response, next){
+        this.data.group = this.data.rows.parentTree('codigo');
+    },
      
     //endregion
     
@@ -55,13 +69,6 @@ tshark.modulos._add('dbms.contabil.cont_plano_contas', {
 
         // Libera ou não para continuar
         return true;
-    },
-
-     /**
-     * Chamado após a execução de uma pesquisa
-     */
-    onAfterSearch: function(response, next){
-        this.data.group = this.data.rows.parentTree('codigo');
     },
 
      /* */

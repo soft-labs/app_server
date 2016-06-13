@@ -32,6 +32,13 @@ tshark.modulos._add('dbms.contabil.cont_centro_resultados', {
     onAfterSave: function(response, next){
         this.list({template: '_list'});
     },
+
+    /**
+     * Chamado após a execução de uma pesquisa
+     */
+    onAfterSearch: function(response, next){
+        this.data.group = this.data.rows.parentTree('codigo');
+    },
      
     //endregion
     
@@ -64,12 +71,7 @@ tshark.modulos._add('dbms.contabil.cont_centro_resultados', {
         return true;
     },
 
-     /**
-     * Chamado após a execução de uma pesquisa
-     */
-    onAfterSearch: function(response, next){
-        this.data.group = this.data.rows.parentTree('codigo');
-    },
+
 
      /* */
     //endregion
