@@ -450,9 +450,11 @@ function MovTipos(){
                 } */
             },
             where: [ 
-                ['AND', 0, 'mov_tipos_key', types.where.check]
+                ['AND', 0, 'mov_tipos_key', types.where.check],
+                ['AND', 0, 'mov_tipos_categorias_key', types.where.in],
             ],
             order: [
+                [1, 'tipos_categoria', 'asc'],
                 [0, 'codigo', 'asc']
             ],
             search: [

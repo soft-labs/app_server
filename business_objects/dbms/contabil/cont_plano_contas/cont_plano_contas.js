@@ -140,7 +140,7 @@ function ContPlanoContas(){
                     {alias: 0, field: 'codigo',  param: types.search.like_full },
                     {alias: 0, field: 'plano_conta',  param: types.search.like_full }
             ],
-            limit: 250,
+            limit: 500,
             showSQL: 0
         },
 

@@ -34,7 +34,7 @@ BizObject.prototype.getReturnObj = function (){
         status: 200,
         success: true,
         path: this.path.asArray,
-        layout: { },
+        //layout: { },
         data: []
     }, this.params);
 };

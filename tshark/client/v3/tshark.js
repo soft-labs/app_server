@@ -218,7 +218,7 @@ var CONSOLE_ON = true;
      */
     TShark.prototype.initSemantic = function (ref) {
         if (!ref) {
-            ref = '.app';
+            ref = 'body';
 
         } else {
             if (typeof ref == 'string') {

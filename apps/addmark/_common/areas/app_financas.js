@@ -44,7 +44,7 @@ app.areas.add('app_financas', {
                 },
                 {icon: 'add icon',     title: 'Lançar Pagamento',
                     description: 'Cadastrar nova conta à pagar',
-                    server: 'dbms movimentacoes mov_tipos list',
+                    client: 'dbms movimentacoes mov_tipos listAPagar',
                     active: 1
                 }
             ]);

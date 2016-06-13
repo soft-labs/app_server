@@ -20,12 +20,17 @@ $(document).ready(function() {
 
     // Inicializa TShark
     tshark.init({
+
+        // Módulos que precisam estar disponívels do início
         register: [
             'sys.app.menu',
             'dbms.financeiro.fin_apagar',
             'dbms.financeiro.fin_areceber',
-            'dbms.financeiro.fin_lancamentos'
+            'dbms.financeiro.fin_lancamentos',
+            'dbms.movimentacoes.mov_tipos',
+            'dbms.movimentacoes.movimentacoes',
         ]
+        
     });
 
     // Inicializa o app
