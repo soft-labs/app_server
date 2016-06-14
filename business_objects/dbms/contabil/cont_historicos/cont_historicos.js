@@ -78,12 +78,13 @@ function ContHistoricos(){
             linhas: [
                 {titulo: "Informações da Categoria de Lançamento"},
                 {ativo: 9, historico: 50, cont_determinacao_key: 30,tipo: 15,},
-                {observacoes: 100},
-                {template:100}
+                {template: 100}
             ],
             ctrls: {
                 template: {
-                    id: '.list-cont_hist_rel',
+                    id: 'teste-labs',
+                    html:  '<b>OI</b>',
+                    tipo: types.comp.template
                 }
             }
         }

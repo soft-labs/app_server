@@ -169,8 +169,12 @@ Types.prototype.comp = {
 
     get timestamp() {
         return {type: 'datetime', comp: 'inpDateTime', default: 'NOW'};
-    }
+    },
 
+
+    get template() {
+        return {type: 'html', comp: 'inpTemplate', default: ''};
+    }
 };
 
 

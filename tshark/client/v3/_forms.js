@@ -392,6 +392,10 @@ if(!alertify.choose){
                 input = getCheck(ctrl, field, mod.path);
                 break;
 
+            case 'inpTemplate':
+                input = getTemplate(ctrl, field);
+                break;
+
             case 'space':
                 input = getSpace(ctrl, field);
                 break;
@@ -568,11 +572,29 @@ if(!alertify.choose){
      * @param path
      * @returns {*}
      */
+    function getTemplate(ctrl, field, path){
+        var input = setExtras($("<div>", {
+            class: "ui fluid container " + ctrl['id']
+        }), ctrl, path);
+
+        input.html(ctrl['html']);
+        
+        // Retorna
+        return input;
+    }
+    
+    /**
+     * Input de texto
+     * @param ctrl
+     * @param field
+     * @param path
+     * @returns {*}
+     */
     function getSpace(ctrl, field, path){
         var input = setExtras($("<input>", {
             type: "hidden",
             class: "ui fluid"
-        }, ctrl, path));
+        }), ctrl, path);
 
         // Extra
         if (ctrl['extra_left'] || ctrl['extra_right']) {
