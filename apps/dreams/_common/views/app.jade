@@ -2,17 +2,27 @@ extends ../../../../_common/views/header
 
 // Título do app
 block title
-    title='Dreams App Server'
+    title='Dreams - Administração'
 
-// Áreas do app
+
+// Estilos do app
+block app_css
+
+
+// Javascripts do app
 block app_scripts
+
+    // Componentes
+
+    // Areas
+
 
 block content
     .ui.content.app
 
         .ui.padded.container.segment.app-header
             h1.ui.header
-                img.app-logo-header(src='imgs/_logos/dreams.png')
+                img.app-logo-header(src='_imgs/_logos/dreams.png')
                 .content
                     | Dreams App Server
                     .sub.header
@@ -51,28 +61,36 @@ block content
                     | Validação de Chamadas de API
                 .field
                     .fields
-                        .three.wide.field
+                        .four.wide.field
                             select.ui.fluid.dropdown(rv-on-change='updateVerb')
-                                option(value='') Selecione a API...
+                                option(value='') API...
                                 option(
                                     rv-each-row='struct.apis'
                                     rv-value='row._index_'
                                     rv-text='row.label'
                                 )
-                        .three.wide.field
+                        .four.wide.field
                             select.ui.fluid.dropdown#verb
-                                option(value='') Selecione o verbo...
+                                option(value='') Verbo...
                                 option(
                                     rv-each-row='struct.verb'
                                     rv-value='row._index_'
                                     rv-text='row.label'
                                 )
 
-                        .five.wide.field
+                        .six.wide.field
                             input#url(type='text', placeholder='/dreams/', rv-value='struct.url')
 
-                        .three.wide.field
+                        .two.wide.field
+                            input#key(type='text', placeholder='key')
+
+                .field
+                    .fields
+                        .seven.wide.field
                             input#params(type='text', placeholder='params')
+
+                        .seven.wide.field
+                            input#token(type='text', placeholder='token')
 
                         .two.wide.field
                             .ui.green.button(rv-on-click='callAPI') Testar
@@ -83,7 +101,7 @@ block content
                 | Resultado
 
             // Listagem
-            #listagem.two.cards.ui(style='height: 300px; overflow: scroll;')
+            #listagem.two.cards.ui(style='height: 350px; overflow: scroll;')
 
         // Janela central
         #lists.ui.modal

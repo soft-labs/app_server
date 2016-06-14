@@ -32,6 +32,21 @@ module.exports = {
         mode: 'softlabs.security'
     },
 
+    // Conexões à repositórios de dados
+    conexoes:{
+
+        // Base Default
+        default: {
+            tipo: 'mysql',
+            conn: {
+                database: 'dreams',
+                user: 'root',
+                password: 'desenv123'
+            }
+        }
+
+    },
+    
     // Auditoria nivel aplicativo
     auditing: {
 

@@ -100,8 +100,9 @@ app.engine = new (require('./tshark/tshark'))(app, true);
 /**
  * Roteamento de APIs de business objects
  */
-app.use(app.engine.router.routes());
-
+for (var r in app.engine.routers) {
+    app.use(app.engine.routers[r].routes());
+}
 
 /**
  * Roteamento da aplicação

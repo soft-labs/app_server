@@ -191,7 +191,7 @@ function Movimentacoes(){
                     tipo: types.comp.float, label: 'Juros:'
                 }, 
                 doc_fiscal_tipo: {
-                    tipo: types.comp.text, label: 'Doc Fiscal Tipo:'
+                    tipo: types.comp.text, label: 'Doc Fiscal Tipo:'    
                 }, 
                 doc_fiscal_data: {
                     tipo: types.comp.date, label: 'Doc Fiscal Data:'

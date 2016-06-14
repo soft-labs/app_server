@@ -685,7 +685,7 @@ SQL.prototype._processResults = function *(sqlParams, results, obj, sql, meta){
 
 
         if (onGetRow) {
-            yield onGetRow(row);
+            obj.onGetRow(row);
         }
 
         data.rows.push(row);

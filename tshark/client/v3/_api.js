@@ -74,6 +74,9 @@ TShark.prototype.api_map = {
 
     save    :               ['POST',      '/'],
     exec    :               ['POST',      '/{func}'],
+    
+    post    :               ['POST',      '/'],
+    put     :               ['PUT',       '/'],
 
 
     // Comandos internos    | Verbo       | URL
@@ -114,6 +117,17 @@ $.fn.api.settings.api = {};
             } else {
                 return false;
             }
+        },
+
+        /**
+         * Ajusta a API dinamicamente.
+         * Contexo 'this': elemento DOM originador da chamada
+         */
+        beforeXHR: function (xhr) {
+            if (app['onBeforeXHR']) {
+                app['onBeforeXHR'].call(app, xhr);
+            }
+            return xhr;
         },
 
         /**
@@ -310,6 +324,12 @@ $.fn.api.settings.api = {};
                 settings['_no_template_'] = true;
             }
 
+            var router = app.router;
+            if (d.hasOwnProperty('router')){
+                router = d['router'];
+                delete(d['router']);
+            }
+
             // Ajusta dados
             delete(d['moduleApi']);
             delete(d['action']);
@@ -320,11 +340,11 @@ $.fn.api.settings.api = {};
             
             // Ajusta dados no tshark
             tshark._send(settings);
-            
+
             // Ajusta settings
-            settings.dataType = 'JSON';
-            settings.url = 'tshark/' + api.join('/') + tshark.api_map[map][1];
+            settings.url    = router + '/' + api.join('/') + tshark.api_map[map][1];
             settings.method = method = tshark.api_map[map][0];
+            settings.dataType = 'JSON';
             settings['_on_before_'] = false;
 
             
@@ -347,11 +367,15 @@ $.fn.api.settings.api = {};
      */
     function callback(_response) {
         var response = $.extend(true, {}, _response)
-            , func  = response.callback
-            , id    = response.path.join('.')
-            , mod   = tshark.getMod(id)
+            , func  = response['callback']
+            , id    = response['path'] ? response['path'].join('.') : ''
+            , mod   = id ? tshark.getMod(id) : ''
         ;
 
+        // onResponse
+        onCallback('on', 'response', mod, response);
+        
+        // Específicos
         if (mod && func) {
 
             // onCallback - forms
@@ -414,7 +438,7 @@ $.fn.api.settings.api = {};
         var Func = func.capitalize();
 
         // onCallback - módulo | assinatura function(response, defCallback) | this == mod
-        if (mod[prefix + Func]) {
+        if (mod && mod[prefix + Func]) {
             mod[prefix + Func].call(mod, response, function () {
 
                 // Permite ao módulo chamar o onCallback no app - chain
