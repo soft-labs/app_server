@@ -123,52 +123,52 @@ function Movimentacoes(){
                     } 
                 }, 
                 competencia: {
-                    tipo: types.comp.text, label: 'Competencia:'
+                    tipo: types.comp.text, label: 'Competência:'
                 }, 
                 dt_lancamento: {
-                    tipo: types.comp.datetime, label: 'Dt Lancamento:'
+                    tipo: types.comp.datetime, label: 'Data de Lançamento:'
                 }, 
                 dt_documento: {
-                    tipo: types.comp.date, label: 'Dt Documento:'
+                    tipo: types.comp.date, label: 'Data do Documento:'
                 }, 
                 dt_vencimento: {
-                    tipo: types.comp.date, label: 'Dt Vencimento:'
+                    tipo: types.comp.date, label: 'Data de Vencimento:'
                 }, 
                 numero: {
-                    tipo: types.comp.text, label: 'Numero:'
+                    tipo: types.comp.text, label: 'Número:'
                 }, 
                 valor_bruto: {
                     tipo: types.comp.float, label: 'Valor Bruto:'
                 }, 
                 valor_frete: {
-                    tipo: types.comp.float, label: 'Valor Frete:'
+                    tipo: types.comp.float, label: 'Frete:'
                 }, 
                 valor_seguro: {
-                    tipo: types.comp.float, label: 'Valor Seguro:'
+                    tipo: types.comp.float, label: 'Seguro:'
                 }, 
                 valor_desconto: {
-                    tipo: types.comp.float, label: 'Valor Desconto:'
+                    tipo: types.comp.float, label: 'Desconto:'
                 }, 
                 valor_imp_ii: {
-                    tipo: types.comp.float, label: 'Valor Imp Ii:'
+                    tipo: types.comp.float, label: 'II:'
                 }, 
                 valor_imp_ipi: {
-                    tipo: types.comp.float, label: 'Valor Imp Ipi:'
+                    tipo: types.comp.float, label: 'IPI:'
                 }, 
                 valor_imp_pis: {
-                    tipo: types.comp.float, label: 'Valor Imp Pis:'
+                    tipo: types.comp.float, label: 'PIS:'
                 }, 
                 valor_imp_cofins: {
-                    tipo: types.comp.float, label: 'Valor Imp Cofins:'
+                    tipo: types.comp.float, label: 'Cofins:'
                 }, 
                 valor_imp_icms: {
-                    tipo: types.comp.float, label: 'Valor Imp Icms:'
+                    tipo: types.comp.float, label: 'ICMS:'
                 }, 
                 valor_imp_icmsst: {
-                    tipo: types.comp.float, label: 'Valor Imp Icmsst:'
+                    tipo: types.comp.float, label: 'ICMS ST:'
                 }, 
                 valor_out_desp: {
-                    tipo: types.comp.float, label: 'Valor Out Desp:'
+                    tipo: types.comp.float, label: 'Outras Despesas:'
                 }, 
                 valor_liquido: {
                     tipo: types.comp.float, label: 'Valor Liquido:'
@@ -177,7 +177,15 @@ function Movimentacoes(){
                     tipo: types.comp.float, label: 'Multa:'
                 }, 
                 multa_em_moeda: {
-                    tipo: types.comp.int, label: 'Multa Em Mõeda:'
+                    tipo: types.comp.dropdown, default: 1, label: 'Tipo de Multa:',
+                    data: {
+                        label: 'tipo',
+                        rows: [
+                            {muta_em_moeda: 1, tipo: 'Monetária'},
+                            {muta_em_moeda: 0, tipo: 'Juros'},
+                        ]
+                    }
+
                 }, 
                 juros: {
                     tipo: types.comp.float, label: 'Juros:'
@@ -243,23 +251,47 @@ function Movimentacoes(){
             },
             linhas: [
                 {titulo: "Informações de movimentacoes"},
-                {movimentacoes_key: 25, mov_tipos_key: 25, mov_origem_key: 25, mov_destino_key: 25}, 
-                {mov_status_key: 25, empresas_key: 25, parceiros_key: 25, emp_clientes_key: 25}, 
-                {emp_fornecedores_key: 25, contratos_key: 25, emp_dep_origem_key: 25, emp_dep_destino_key: 25}, 
-                {competencia: 25, dt_lancamento: 25, dt_documento: 25, dt_vencimento: 25}, 
-                {numero: 25, valor_bruto: 25, valor_frete: 25, valor_seguro: 25}, 
-                {valor_desconto: 25, valor_imp_ii: 25, valor_imp_ipi: 25, valor_imp_pis: 25}, 
-                {valor_imp_cofins: 25, valor_imp_icms: 25, valor_imp_icmsst: 25, valor_out_desp: 25}, 
-                {valor_liquido: 25, multa: 25, multa_em_moeda: 25, juros: 25}, 
-                {doc_fiscal_tipo: 25, doc_fiscal_data: 25, doc_fiscal_caixa: 25, doc_fiscal_num_equip: 25}, 
-                {doc_fiscal_numero: 25, doc_fiscal_serie: 25, doc_fiscal_subserie: 25, doc_fiscal_modelo: 25}, 
-                {doc_fiscal_chave: 25, doc_fiscal_extra: 25, doc_fiscal_file: 25, observacoes: 25}
+                {numero: 15, dt_documento: 20, dt_lancamento: 20, dt_vencimento: 20, competencia: 15, mov_status_key: 10},
+                {empresas_key: 30, parceiros_key: 55, contratos_key: 25},
+                {tabs: 100}
             ],
+            tabs: {
+                tabs: [
+                    {
+                        label: 'Informações Financeiras',
+                        linhas: [
+                            {valor_bruto: 25, valor_desconto: 25, multa: 25, multa_em_moeda: 25, juros: 25, valor_liquido: 25},
+                            {valor_frete: 25, valor_seguro: 25, valor_out_desp: 25},
+
+                            {titulo: "Impostos"},
+                            {valor_imp_ii: 15, valor_imp_ipi: 15, valor_imp_pis: 15, valor_imp_cofins: 15, valor_imp_icms: 15, valor_imp_icmsst: 15},
+                        ]
+                    },
+                    {
+                        label: 'Ítens',
+                        linhas: [
+                            {titulo: "Depósitos"},
+                            {emp_dep_origem_key: 50, emp_dep_destino_key: 50},
+                        ]
+                    },
+                    {
+                        label: 'Documento Fiscal',
+                        linhas: [
+                            {doc_fiscal_tipo: 25, doc_fiscal_data: 25, doc_fiscal_caixa: 25, doc_fiscal_num_equip: 25},
+                            {doc_fiscal_numero: 25, doc_fiscal_serie: 25, doc_fiscal_subserie: 25, doc_fiscal_modelo: 25},
+                            {doc_fiscal_chave: 25, doc_fiscal_extra: 25, doc_fiscal_file: 25},
+                        ]
+                    },
+                    {
+                        label: 'Observações',
+                        linhas: [
+                            {observacoes: 100},
+                        ]
+                    }
+                ]
+            },
+
             ctrls: {
-                competencia: {
-                    extra_right: { class: '', tag: '' },
-                    extra_left:  { class: '', tag: '' }
-                }
             }
         }
 
@@ -287,76 +319,41 @@ function Movimentacoes(){
                         
                     ]
                 },
-                2: { 
-                    from: ['dbms', 'movimentacoes', 'mov_origem'],
-                    join: {source: 0, tipo: types.join.left, on: 'mov_origem_key', where: ''},
-                    fields: [
-                        
-                    ]
-                },
-                3: { 
-                    from: ['dbms', 'movimentacoes', 'mov_destino'],
-                    join: {source: 0, tipo: types.join.left, on: 'mov_destino_key', where: ''},
-                    fields: [
-                        
-                    ]
-                },
-                4: { 
+                2: {
                     from: ['dbms', 'movimentacoes', 'mov_status'],
                     join: {source: 0, tipo: types.join.left, on: 'mov_status_key', where: ''},
                     fields: [
                         
                     ]
                 },
-                5: { 
+                3: {
                     from: ['dbms', 'empresas', 'empresas'],
                     join: {source: 0, tipo: types.join.left, on: 'empresas_key', where: ''},
                     fields: [
                         
                     ]
                 },
-                6: { 
+                4: {
                     from: ['dbms', 'parceiros', 'parceiros'],
                     join: {source: 0, tipo: types.join.left, on: 'parceiros_key', where: ''},
                     fields: [
                         
                     ]
                 },
-                7: { 
+                5: {
                     from: ['dbms', 'empresas', 'emp_clientes'],
                     join: {source: 0, tipo: types.join.left, on: 'emp_clientes_key', where: ''},
                     fields: [
                         
                     ]
                 },
-                8: { 
+                6: {
                     from: ['dbms', 'empresas', 'emp_fornecedores'],
                     join: {source: 0, tipo: types.join.left, on: 'emp_fornecedores_key', where: ''},
                     fields: [
                         
                     ]
                 },
-                9: { 
-                    from: ['dbms', 'contratos', 'contratos'],
-                    join: {source: 0, tipo: types.join.left, on: 'contratos_key', where: ''},
-                    fields: [
-                        
-                    ]
-                },
-                10: { 
-                    from: ['dbms', 'empresas', 'emp_dep_origem'],
-                    join: {source: 0, tipo: types.join.left, on: 'emp_dep_origem_key', where: ''},
-                    fields: [
-                        
-                    ]
-                },
-                11: { 
-                    from: ['dbms', 'empresas', 'emp_dep_destino'],
-                    join: {source: 0, tipo: types.join.left, on: 'emp_dep_destino_key', where: ''},
-                    fields: [
-                        
-                    ]
-                } 
             },
             where: [ 
                 ['AND', 0, 'movimentacoes_key', types.where.check]
@@ -401,6 +398,105 @@ function Movimentacoes(){
 
 
     //region :: Eventos Aplicados
+
+    /**
+     * Evento chamado na recuperação de um formulário
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     */
+    this.onGetForm = function *(form, ctx){
+
+        // Pega mov_tipo
+        var mov_tipo = this.params['mov_tipo']
+            , config = {
+                show:{
+                    parceiros_key   : ['parceiro_show'],
+                    dt_lancamento   : ['dt_lancamento_show'],
+                    dt_vencimento   : ['dt_vencimento_show', 'movimenta_financeiro'],
+                    dt_documento    : ['dt_documento_show'],
+                    competencia     : ['dt_competencia_show', 'movimenta_financeiro'],
+
+                    emp_dep_origem_key  : ['movimenta_itens', 'itens_gera_saida', 'itens_deposito_saida_show'],
+                    emp_dep_destino_key : ['movimenta_itens', 'itens_gera_entrada', 'itens_deposito_entrada_show'],
+
+                    valor_bruto         : ['movimenta_financeiro'],
+                    valor_liquido       : ['movimenta_financeiro'],
+                    multa               : ['movimenta_financeiro', 'fin_multa_juros_show'],
+                    multa_em_moeda      : ['movimenta_financeiro', 'fin_multa_juros_show'],
+                    juros               : ['movimenta_financeiro', 'fin_multa_juros_show'],
+                    valor_frete         : ['movimenta_financeiro', 'fin_desp_acessorias_show'],
+                    valor_seguro        : ['movimenta_financeiro', 'fin_desp_acessorias_show'],
+                    valor_out_desp      : ['movimenta_financeiro', 'fin_desp_acessorias_show'],
+                    valor_desconto      : ['movimenta_financeiro', 'fin_desconto_show'],
+                    valor_imp_ii        : ['movimenta_financeiro', 'fin_taxas_show'],
+                    valor_imp_ipi       : ['movimenta_financeiro', 'fin_taxas_show'],
+                    valor_imp_pis       : ['movimenta_financeiro', 'fin_taxas_show'],
+                    valor_imp_cofins    : ['movimenta_financeiro', 'fin_taxas_show'],
+                    valor_imp_icms      : ['movimenta_financeiro', 'fin_taxas_show'],
+                    valor_imp_icmsst    : ['movimenta_financeiro', 'fin_taxas_show'],
+
+                    fin_contas_key      : ['movimenta_financeiro', 'fin_contas_show'],
+                    fin_contas_tipo_key : ['movimenta_financeiro', 'fin_contas_show'],
+
+                    observacoes         : ['observacoes_show']
+                },
+
+                label: {
+                    parceiros_key       : 'paceiro_label',
+                    dt_lancamento       : 'dt_lancamento_label',
+                    dt_vencimento       : 'dt_vencimento_label',
+                    dt_documento        : 'dt_documento_label',
+
+                    cont_historicos__key: 'cont_historico_label',
+
+                    emp_dep_origem_key  : 'itens_deposito_saida_label',
+                    emp_dep_destino_key : 'itens_deposito_entrada_label',
+
+                    valor_bruto         : 'fin_valor_bruto_label',
+                    valor_liquido       : 'fin_valor_liquido_label',
+                    fin_contas_key      : 'fin_contas_label',
+
+                    observacoes         : 'observacoes_label'
+                },
+
+                fixo: {
+                    parceiros_key       : 'parceiro_fixo',
+                    fin_contas_key      : 'fin_contas_fixo'
+                }
+            }
+        ;
+
+        if (!mov_tipo){
+
+        }
+
+        // Exibe ou não
+        for (var f in config.show){
+            form.ctrls[f] = form.ctrls[f] || {};
+            config.show[f].forEach(check => {
+                if (!parseInt(mov_tipo[check])){
+                    form.ctrls[f]['_remove_'] = true;
+                }
+            });
+        }
+
+        // Labels
+        for (var f in config.label) {
+            if (mov_tipo[config.label[f]]) {
+                form.ctrls[f]['label'] = mov_tipo[config.label[f]];
+            }
+        }
+            
+        
+        /*{
+            { fin_recorrencia_show: 25},
+            {fin_parcelamentos_show: 25},
+        }*/
+        
+
+        return true;
+
+    };
 
     //endregion
 
@@ -514,14 +610,6 @@ function Movimentacoes(){
 
     //region :: onGetForm
 
-    /**
-     * Evento chamado na recuperação de um formulário
-     * @param ret Objeto de retorno
-     * @param ctx Contexto de chamada
-     *
-    this.onGetForm = function *(form, ctx){
-
-    };
 
      /**
      * Evento chamado na recuperação de dados de um formulário

@@ -134,9 +134,15 @@ BizObject.prototype.getForm = function *(provider, ctx){
                         }
                     }
 
+                    // Exclui
+                    if (comp['_remove_']){
+                        delete(linha[ctrl]);
+                        
                     // Entrega
-                    delete(comp['tipo']);
-                    form.ctrls[ctrl] = comp;
+                    } else {
+                        delete(comp['tipo']);
+                        form.ctrls[ctrl] = comp;
+                    }
                 }
             }
         };
