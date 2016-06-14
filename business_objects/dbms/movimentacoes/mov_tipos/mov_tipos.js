@@ -209,10 +209,10 @@ function MovTipos(){
                 fin_contas_show: {
                     tipo: types.comp.check, label: 'Mostrar Conta de Provisionamento:'
                 }, 
-                fin_contas_tipo_key: {
+                fin_contas_tipos_key: {
                     tipo: types.comp.choose, label: 'Tipo de Conta de Provisionamento:',
                     data: { 
-                        key: ['fin_contas_tipo_key'], 
+                        key: ['fin_contas_tipos_key'], 
                         from: ['dbms', 'financeiro', 'fin_contas_tipos'],
                         template: '{fin_contas_tipos_key} - {tipo_conta}',
                         provider: '' 
@@ -336,7 +336,7 @@ function MovTipos(){
                             {fin_gera_receita: 25, fin_gera_despesa: 25,fin_parcelamentos_show: 25,fin_recorrencia_show: 25},
                             {fin_desp_acessorias_show: 25, fin_multa_juros_show: 25, fin_desconto_show: 25,fin_taxas_show: 25,},
                             {fin_contas_show: 25},
-                            {fin_contas_label: 25,fin_contas_tipo_key: 25,fin_contas_fixa: 25,fin_contas_key: 25},
+                            {fin_contas_label: 25,fin_contas_tipos_key: 25,fin_contas_fixa: 25,fin_contas_key: 25},
                             {fin_valor_bruto_label: 25, fin_valor_liquido_label: 25},
                         ]
                     },
@@ -498,7 +498,7 @@ function MovTipos(){
                         field: 'fin_contas_show', cond: 'isFalse'
                     }
                 },
-                fin_contas_tipo_key: {
+                fin_contas_tipos_key: {
                     disabled: {
                         field: 'fin_contas_show', cond: 'isFalse'
                     }
@@ -558,15 +558,15 @@ function MovTipos(){
                     fields: [
 
                     ]
-                },/*
+                },
                 3: {
                     from: ['dbms', 'financeiro', 'fin_contas_tipos'],
-                    join: {source: 2, tipo: types.join.left, on: 'fin_contas_tipo_key', where: ''},
+                    join: {source: 2, tipo: types.join.left, on: 'fin_contas_tipos_key', where: ''},
                     fields: [
 
                     ]
                 },
-
+                /*
                 2: {
                     from: ['dbms', 'items', 'itens_deposito_entrada'],
                     join: {source: 0, tipo: types.join.left, on: 'itens_deposito_entrada_key', where: ''},
