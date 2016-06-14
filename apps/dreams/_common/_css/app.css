@@ -15,7 +15,7 @@
     content: "";
     opacity: 0.4;
     position: absolute;
-    background-image: url("../imgs/_intf/bgdreams2.png");
+    background-image: url("../_imgs/_intf/bgdreams2.png");
     background-size: 61%;
     background-position: center;
 }
@@ -28,7 +28,7 @@
 }
 #login:before {
     content: "";
-    background-image: url("../imgs/_intf/login1.png");
+    background-image: url("../_imgs/_intf/login1.png");
     position: absolute;
     width: 100%;
     height: 100%;

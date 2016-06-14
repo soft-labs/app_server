@@ -7,7 +7,18 @@
  * @constructor
  */
 function TShark(app, no_cache){
-    this.router = router;
+
+    // Roteadores registrados
+    this.routers = {
+
+        // Default
+        ts_router: require('./routers/ts_router.js'),
+        ts_comps : require('./routers/ts_comps.js'),
+
+        // Especiais
+        dreams   : require('./routers/dreams.js')
+    };
+
     this.pool = {conn:{}, map: {}};
     this.app = app;
     this.no_caching_require = no_cache;
@@ -16,9 +27,7 @@ function TShark(app, no_cache){
 
 //region :: Includes
 
-const router    = require('koa-router')()
-    // , koaBody   = require('koa-body')
-    , extend    = require('extend')
+const extend    = require('extend')
     , fs        = require('fs-extra')
     , util      = require('util')
     , jade      = require('jade')
@@ -27,6 +36,7 @@ const router    = require('koa-router')()
     , cookies   = require('tshark/cookie.js')
     , log       = require('tshark/_log.js')
     , types     = require('tshark/types.js')
+    , apn       = require('apn')
 ;
 
 // endregion
@@ -450,394 +460,101 @@ TShark.prototype.initObj = function(path, context){
 };
 
 
-//region :: Roteamentos e entradas de APIs
-
-
-/**
- * Registra o inicio de um roteamento
- */
-router.use(function *timeLog(next) {
-    try {
-        var tmp = this.captures[0].split('/').slice(3);
-        this.state.api = {
-            url: this.originalUrl,
-            call: tmp[tmp.length - 1],
-            path: tmp,
-            params: extend(true, this.request.query || {}, this.request.body || {})
-        };
-    } catch (e){
-        log.erro(e, 'timelog');
-    }
-    
-    yield next;
-});
+//region :: Funções Globais
 
 /**
- * Validação de chamadas de API
- */
-router.use(function *(next) {
-    var ok = false;
-
-    try {
-        // Se pedir com educação
-        if (this.state.api.path[0] == 'sys' &&
-            this.state.api.path[1] == 'app' &&
-            this.state.api.path[2] == 'security' &&
-            this.state.api.path[3] == 'login') {
-
-            var tmp = this.req.headers.referer.split('/').slice(-2);
-            this.state.config = this.app.context.clientes[tmp[0]][tmp[1]];
-
-            ok = true;
-        }
-
-        // Token
-        if (this.req.headers['token']) {
-
-            // Validar o token de acesso aqui
-
-            ok = true;
-        }
-
-        // Senão...
-        if (!ok) {
-            var user_key = cookies.getLoggedUser(this);
-
-            // You shall not pass!
-            if (!user_key || !this.app.context.running[user_key]) {
-                this.throw(404, 'Not Found');
-
-                // Multipass!!
-            } else {
-                this.state.user_key = user_key;
-                this.state.config = this.app.context.running[user_key];
-                ok = true
-            }
-        }
-    
-    } catch (e){
-        log.erro(e, 'TShark Router - validação');
-    }
-    
-    if (ok){
-        yield next;
-    } else {
-        this.throw(404, 'Not Found');
-    }
-});
-
-
-/**
- * Entrada de API :: GET
- *   Oferece suporte para apis:
- *    - get  | url: owner/pack/mod                       | Lista todos os registros do mod
- *    - get  | url: owner/pack/mod?query='teste um dois' | Filtra os registros do mod por query
- *    - get  | url: owner/pack/mod/123                   | Retorna o registro id=123
- *    - get  | url: owner/pack/mod/new                   | Retorna um form para pré inserção
- *    - get  | url: owner/pack/mod/123/edit              | Retorna um form para edição do registro id=123
- * @since 21/02/16
- */
-router.get(/^\/(\w+)\/tshark\/.*$/, function *(next) {
-    try {
-
-        /**
-         * Instancia o módulo
-         * @type BizObject
-         */
-        var mod = this.app.engine.initObj(this.state.api.path, this)
-            , len = this.state.api.path.length
-            ;
-
-        // Form de edição
-        if (len == 5) {
-            this.state.api.call = 'edit';
-            mod.params['key'] = this.state.api.path[3];
-            this.body = yield mod.form(this);
-
-        } else {
-
-            // Form de inserção
-            if (len == 4 && this.state.api.path[3] == 'new') {
-                this.state.api.call = 'create';
-                mod.params['key'] = 'NEW_KEY';
-                this.body = yield mod.form(this);
-
-                // Listagem
-            } else {
-                this.state.api.call = (this.request.query['query']
-                        ? 'search'
-                        : len == 4 && this.state.api.path[3]
-                        ? 'get'
-                        : 'list'
-                );
-                if (len == 4) {
-                    mod.params['key'] = this.state.api.path[3];
-                }
-                this.body = yield mod.get(this);
-
-                if (mod.params['template'] && mod.params['template'] == '_choose') {
-                    this.state.api.call = 'choose';
-                }
-            }
-        }
-    
-    } catch (e){
-        log.erro(e);
-    }
-    
-    /**
-     * Finaliza
-     */
-    yield next;
-});
-
-/**
- * Entrada de API :: POST
- *   Oferece suporte para apis:
- *    - insert  | url: owner/pack/mod                    | Insere um novo registro no mod
- *    - exec    | url: owner/pack/mod/getStats           | Executa uma função definida no mod
- * 11/04/16
- */
-router.post(/^\/(\w+)\/tshark\/.*/, function *(next) {
-    try {
-
-        /**
-         * Instancia o módulo
-         * @type BizObject
-         */
-        var mod = this.app.engine.initObj(this.state.api.path, this)
-            , len = this.state.api.path.length
-            ;
-
-        // Execução de função
-        if (len = 4) {
-            var func = this.state.api.call;
-            if (!func) {
-                func = this.state.api.call = 'insert';
-            }
-
-            /**
-             * Executa a função no objeto
-             */
-            try {
-                var res = yield mod[func](this);
-                if (typeof res != 'object') {
-                    this.body = {
-                        result: res
-                    };
-                } else {
-                    this.body = res;
-                }
-            } catch (e) {
-                console.log(e);
-            }
-        }
-    } catch (e){
-        log.erro(e);
-    }
-    
-    /**
-     * Finaliza
-     */
-    yield next;
-
-});
-
-/**
- * Entrada de API :: PUT
- *   Oferece suporte para apis:
- *    - update  | url: owner/pack/mod/123                 | Atualiza um registro no mod
- * 25/04/16
- */
-router.put(/^\/(\w+)\/tshark\/.*/, function *(next) {
-    try {
-        
-        /**
-         * Instancia o módulo
-         * @type BizObject
-         */
-        var mod = this.app.engine.initObj(this.state.api.path, this)
-            , len = this.state.api.path.length
-            ;
-
-        // Execução de função
-        this.state.api.call = 'update';
-        this.body = yield mod.update(this);
-    
-    } catch (e){
-        log.erro(e);
-    }
-    
-    /**
-     * Finaliza
-     */
-    yield next;
-
-});
-
-/**
- * Entrada de API :: DELETE
- *   Oferece suporte para apis:
- *    - delete  | url: owner/pack/mod/123                 | Remove um registro no mod
- * 25/04/16
- */
-router.delete(/^\/(\w+)\/tshark\/.*/, function *(next) {
-    try {
-        
-        /**
-         * Instancia o módulo
-         * @type BizObject
-         */
-        var mod = this.app.engine.initObj(this.state.api.path, this)
-            , len = this.state.api.path.length
-            ;
-
-        // Execução de função
-        this.state.api.call = 'delete';
-        mod.params['key'] = this.state.api.path[3];
-        this.body = yield mod.delete(this);
-    
-    } catch (e){
-        log.erro(e);
-    }
-    
-    /**
-     * Finaliza
-     */
-    yield next;
-
-});
-
-
-/**
- * Finaliza a chamada
- * @since 31/03/16
- */
-router.get(/^\/(\w+)\/tshark\/.*$/, function *(next) {
-    endRoute(this);
-});
-router.post(/^\/(\w+)\/tshark\/.*$/, function *(next) {
-    endRoute(this);
-});
-router.put(/^\/(\w+)\/tshark\/.*$/, function *(next) {
-    endRoute(this);
-});
-router.delete(/^\/(\w+)\/tshark\/.*$/, function *(next) {
-    endRoute(this);
-});
-
-/**
- * Registra o fim de um roteamento
+ * Envio de push
+ * @param pack
  * @param ctx
  */
-function endRoute(ctx){
+TShark.prototype.sendPush = function *(ctx, pack){
+    try {
+        var devices = this.initObj(["users", "user_devices"], ctx);
 
-    // Ajusta o pacote de retorno
-    ctx.body = ctx.body || {};
-    ctx.body['callback'] = ctx.state.api.call;
-    ctx.body['path'] = ctx.state.api.path.splice(0, 3);
+        // IOS
+        if (pack['ios']) {
+            var data = yield devices.select(ctx, 'default', {
+                where: [
+                    ["AND", 0, "users_key", "IN", "(" + pack['to_users'].join(',') + ")"],
+                    ["AND", 0, "ios", "=", "1"]
+                ]
+            });
 
-    // Fecha
-   // console.log('Time finish: ', Date.now());
+            var note = new apn.Notification();
+            note.expiry = Math.floor(Date.now() / 1000) + 3600; // 1 hora
+            note.badge = pack['ios']['badge'] || 1;
+            note.sound = pack['ios']['sound'] || "ping.aiff";
+            note.alert = pack['ios']['alert'];
+            note.payload = {'messageFrom': 'Dreams'};
 
-}
+            data.rows.forEach(row => {
+                var device = new apn.Device(row['token']);
+                console.log(note.alert);
+                this.apnConn.pushNotification(note, device);
+            })
+        }
 
-//endregion
-
-
-
-//region :: Roteamento de componentes
+    } catch (e){
+        console.log(e.message);
+    }
+};
 
 /**
- * Entrada de API :: GET
- *   Oferece suporte para apis:
- *    - get  | url: owner/pack/mod                       | Lista todos os registros do mod
- *    - get  | url: owner/pack/mod?query='teste um dois' | Filtra os registros do mod por query
- *    - get  | url: owner/pack/mod/123                   | Retorna o registro id=123
- *    - get  | url: owner/pack/mod/new                   | Retorna um form para pré inserção
- *    - get  | url: owner/pack/mod/123/edit              | Retorna um form para edição do registro id=123
- * @since 21/02/16
+ * Salva imagem em base64
+ * @param path
+ * @param data
+ * @returns {string|*}
  */
-router.get(/\/comps\/dropdown\/(\w+)\/(\w+)\/(\w+)/, function *(next) {
+TShark.prototype.saveBase64Image = function(path, data) {
     try {
-        
-        /**
-         * Instancia o módulo
-         * @type BizObject
-         */
-        var mod = this.app.engine.initObj(this.state.api.path, this)
-            , opts = {
-                success: true,
-                results: []
-            }
-            , label = mod.source.metadata['label']
+        var img = this.decodeBase64Image(data)
+            , ext = 'png'
             ;
 
-        mod.params['query'] = decodeURIComponent(this.state.api.path[3]);
+        switch (img.type) {
+            case 'image/jpeg':
+                ext = 'jpg';
+                break;
 
-        // Recupera dados
-        var data = yield mod.select(this, mod.params.provider || 'default', {
-            sources: {
-                0: {
-                    fields: [label, mod.params.label.replace(/\W/g, '')]
-                }
-            },
-            search: [
-                {alias: 0, field: label, param: types.search.like_full}
-            ],
-            showSQL: false
-        });
+            default:
+                ext = 'png';
+        }
+        path += '.' + ext;
+        fs.writeFile(path, img.data);
+        return path;
 
-        data.rows.forEach(r => {
-            opts.results.push({
-                name: r[label],
-                value: r[mod.source.metadata['key']]
-            })
-        });
-        this.body = opts;
-        
     } catch (e){
-        log.erro(e);
+        log.erro(e, 'Imagem: '+path);
     }
-    
-    /**
-     * Finaliza
-     */
-    //yield next;
-});
+};
 
+/**
+ * Recompoe uma imagem base64
+ * @param dataString
+ * @returns {*}
+ */
+TShark.prototype.decodeBase64Image = function(dataString) {
+    var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/)
+        , response = {}
+        ;
+
+    if (matches) {
+        if (matches.length !== 3) {
+            return new Error('String base64 inválida');
+        }
+
+        response.type = matches[1];
+        response.data = new Buffer(matches[2], 'base64');
+    } else {
+        response.type = 'image/png';
+        response.data = new Buffer(dataString, 'base64');
+    }
+
+    return response;
+};
 
 //endregion
 
-
-
-//region :: Controle de erros
-/*
-router.use(function errorLog(err, req, res, next) {
-    var r = {
-        status: 500,
-        error: err.message,
-        stack: err.stack
-    };
-    console.error(r);
-
-   // if (app.get('env') !== 'development') {
-   //     r.stack = '';
-  //  }
-
-    res.send(r);
-});
-
-
-// catch 404 and forward to error handler
-router.use(function (err, req, res, next) {
-    var err = new Error('TSHARK Not Found');
-    err.status = 404;
-    next(err);
-});
-
-*/
-//endregion
 
 
 // Exporta

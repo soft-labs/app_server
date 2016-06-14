@@ -380,7 +380,7 @@ BizObject.prototype.getProvider = function (provId, from, ctx){
 
         if (typeof provId == 'string') {
             if (from) {
-                mod = tshark.initObj(from, ctx);
+                mod = this.engine.initObj(from, ctx);
             }
 
             // Pega o provider

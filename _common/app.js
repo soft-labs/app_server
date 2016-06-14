@@ -59,6 +59,11 @@ var app  = {
      * Indicador da carga
      */
     loaded: false,
+
+    /**
+     * Entrada de router
+     */
+    router: 'tshark',
     
     /**
      * Dataset global do app
