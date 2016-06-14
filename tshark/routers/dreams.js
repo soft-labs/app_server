@@ -207,7 +207,9 @@ router.post('/mobile/dreams/*', function *(next) {
         // Executa a função no objeto
         try {
             res = yield mod[func](this);
-
+            if (res.success){
+                status = 200;
+            }
         } catch (e) {
             console.log(e);
         }
