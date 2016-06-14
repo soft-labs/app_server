@@ -1,41 +1,41 @@
 //
     Template default para: dbms.movimentacoes.mov_tipos
-    Criado em Mon Jun 13 2016 08:54:12 GMT-0300 (BRT)
+    Criado em Sun May 29 2016 08:57:57 GMT-0300 (BRT)
 
-.ui.fluid.accordion.multiple(rv-each-row='dbms.movimentacoes.mov_tipos.data.group')
-    .ui.divider
-    .title.active
-        i.dropdown.icon
-        | {row.label}
-    .content.active
-        .ui.bottom.aligned.stackable.fluid.divided.grid
-            .row.cursor(
-                rv-each-item='row.values'
-                rv-row-key='item.mov_tipos_key'
-            )
-                .one.wide.column
-                    .ui.toggle.checkbox
-                        input(
-                            type="checkbox"
-                            rv-checked='item.ativo'
-                            rv-row-key='item.mov_tipos_key'
-                            server-onchange='dbms movimentacoes mov_tipos update'
-                        )
+table.ui.selectable.table
+    thead
+        tr.cursor
+            th.two.wide Ativo
+            th.two.wide Código
+            th.six.wide Tipo de Movimentação
+            th.five.wide Categoria
+            th.one.wide
+    tbody
+        tr(
+            rv-each-row='dbms.movimentacoes.mov_tipos.data.rows'
+            rv-row-key='row.mov_tipos_key'
+        )
 
-                .two.wide.center.aligned.column
-                    | {item.codigo}
-
-                .twelve.wide.column
-                    i.edit.icon(
-                        rv-row-key='item.mov_tipos_key'
-                        server='dbms movimentacoes mov_tipos edit'
+            td
+                .ui.toggle.checkbox
+                    input(
+                    type="checkbox"
+                    rv-checked='row.ativo'
+                    rv-row-key='row.mov_tipos_key'
+                    server-onchange='dbms movimentacoes mov_tipos update'
                     )
-                    | {item.mov_tipo}
-
-                .one.wide.center.aligned.column
-                    .ui.checkbox
-                        input(
-                            type='checkbox'
-                            rv-checked='item._selected_'
-                            rv-row-selected='item._selected_'
-                        )
+            td(
+            rv-row-key='row.mov_tipos_key'
+            server='dbms movimentacoes mov_tipos edit'
+            )
+                i.edit.icon
+                |  {row.codigo}
+            td {row.mov_tipo}
+            td {row.tipos_categoria}
+            td
+                .ui.checkbox
+                    input(
+                    type='checkbox'
+                    rv-checked='row._selected_'
+                    rv-row-selected='row._selected_'
+                    )

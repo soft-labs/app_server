@@ -166,7 +166,10 @@ function ContDeterminacao(){
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
-                }
+                },
+                descricao: {
+                    tipo: types.comp.text, label: 'Descrição:'
+                },
             }
         }
     };
@@ -219,7 +222,7 @@ function ContDeterminacao(){
                     fields: [
                         
                     ]
-                },
+                },/*
                 1: { 
                     from: ['dbms', '', 'conta_receitas'],
                     join: {source: 0, tipo: types.join.left, on: 'conta_receitas_key', where: ''},
@@ -324,7 +327,7 @@ function ContDeterminacao(){
                     fields: [
                         
                     ]
-                } 
+                } */
             },
             where: [ 
                 ['AND', 0, 'cont_determinacao_key', types.where.check]

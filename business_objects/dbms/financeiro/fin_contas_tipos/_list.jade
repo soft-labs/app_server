@@ -1,14 +1,36 @@
 //
     Template default para: dbms.financeiro.fin_contas_tipos
-    Criado em Sun May 29 2016 08:58:09 GMT-0300 (BRT)
+    Criado em Sun May 29 2016 08:57:57 GMT-0300 (BRT)
 
-table.ui.compact.striped.celled.table
+table.ui.selectable.table
     thead
-        th Fin Contas Tipos
-        th Tipo Conta
-        th Observações
+        tr.cursor
+            th.two.wide Ativo
+            th.thirteen.wide Tipo de Conta de Provisionamento
+            th.one.wide
     tbody
-        tr(rv-each-row='dbms.financeiro.[object Object].data.rows')
-            td {row.fin_contas_tipos_key}
-            td {row.tipo_conta}
-            td {row.observacoes}
+        tr(
+        rv-each-row='dbms.financeiro.fin_contas_tipos.data.rows'
+        rv-row-key='row.fin_contas_tipos_key'
+        )
+            td
+                .ui.toggle.checkbox
+                    input(
+                        type="checkbox"
+                        rv-checked='row.ativo'
+                        rv-row-key='row.fin_contas_tipos_key'
+                        server-onchange='dbms financeiro fin_contas_tipos update'
+                    )
+            td(
+            rv-row-key='row.fin_contas_tipos_key'
+            server='dbms financeiro fin_contas_tipos edit'
+            )
+                i.edit.icon
+                |  {row.tipo_conta}
+            td
+                .ui.checkbox
+                    input(
+                        type='checkbox'
+                        rv-checked='row._selected_'
+                        rv-row-selected='row._selected_'
+                    )
