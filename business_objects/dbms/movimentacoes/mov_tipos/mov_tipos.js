@@ -206,31 +206,31 @@ function MovTipos(){
                 fin_valor_liquido_label: {
                     tipo: types.comp.text, label: 'Label Valor Líquido:'
                 }, 
-                fin_conta_provisionamento_show: {
+                fin_contas_show: {
                     tipo: types.comp.check, label: 'Mostrar Conta de Provisionamento:'
                 }, 
-                fin_conta_provisionamento_tipo_key: {
+                fin_contas_tipo_key: {
                     tipo: types.comp.choose, label: 'Tipo de Conta de Provisionamento:',
                     data: { 
-                        key: ['fin_conta_provisionamento_tipo_key'], 
-                        from: ['dbms', 'financeiro', 'fin_conta_provisionamento_tipo'], 
-                        template: '{fin_conta_provisionamento_tipo_key} - {fin_conta_provisionamento_tip}', 
+                        key: ['fin_contas_tipo_key'], 
+                        from: ['dbms', 'financeiro', 'fin_contas_tipos'],
+                        template: '{fin_contas_tipos_key} - {tipo_conta}',
                         provider: '' 
                     } 
                 }, 
-                fin_conta_provisionamento_label: {
+                fin_contas_label: {
                     tipo: types.comp.text, label: 'Label Conta de Provisionamento:'
                 }, 
-                fin_conta_provisionamento_key: {
+                fin_contas_key: {
                     tipo: types.comp.choose, label: 'Conta de Provisionamento:',
                     data: { 
-                        key: ['fin_conta_provisionamento_key'], 
+                        key: ['fin_contas_key'], 
                         from: ['dbms', 'financeiro', 'fin_contas'],
                         template: '{fin_contas_key} - {conta}',
                         provider: '' 
                     } 
                 }, 
-                fin_conta_provisionamento_fixa: {
+                fin_contas_fixa: {
                     tipo: types.comp.check, label: 'Conta de Provisionamento Fixa:'
                 },
 
@@ -323,8 +323,7 @@ function MovTipos(){
                             {movimenta_itens: 25},
                             {itens_valor_show: 25},
                             {itens_gera_entrada: 25,itens_gera_saida: 25},
-                            {itens_deposito_entrada_show: 25, itens_deposito_saida_show: 25,},
-                            {itens_entrada_producao: 25,itens_saida_producao: 25},
+                            {itens_deposito_entrada_show: 25, itens_deposito_saida_show: 25,itens_entrada_producao: 25,itens_saida_producao: 25},
                             {itens_deposito_entrada_label: 25,itens_deposito_saida_label: 25},
                             {itens_deposito_entrada_key: 25,itens_deposito_saida_key: 25},
                         ]
@@ -336,8 +335,8 @@ function MovTipos(){
                             {movimenta_financeiro: 25,},
                             {fin_gera_receita: 25, fin_gera_despesa: 25,fin_parcelamentos_show: 25,fin_recorrencia_show: 25},
                             {fin_desp_acessorias_show: 25, fin_multa_juros_show: 25, fin_desconto_show: 25,fin_taxas_show: 25,},
-                            {fin_conta_provisionamento_show: 25},
-                            {fin_conta_provisionamento_label: 25,fin_conta_provisionamento_tipo_key: 25,fin_conta_provisionamento_fixa: 25,fin_conta_provisionamento_key: 25},
+                            {fin_contas_show: 25},
+                            {fin_contas_label: 25,fin_contas_tipo_key: 25,fin_contas_fixa: 25,fin_contas_key: 25},
                             {fin_valor_bruto_label: 25, fin_valor_liquido_label: 25},
                         ]
                     },
@@ -489,29 +488,29 @@ function MovTipos(){
                         field: 'movimenta_financeiro', cond: 'isFalse'
                     }
                 },
-                fin_conta_provisionamento_show: {
+                fin_contas_show: {
                     disabled: {
                         field: 'movimenta_financeiro', cond: 'isFalse'
                     }
                 },
-                fin_conta_provisionamento_label: {
+                fin_contas_label: {
                     disabled: {
-                        field: 'fin_conta_provisionamento_show', cond: 'isFalse'
+                        field: 'fin_contas_show', cond: 'isFalse'
                     }
                 },
-                fin_conta_provisionamento_tipo_key: {
+                fin_contas_tipo_key: {
                     disabled: {
-                        field: 'fin_conta_provisionamento_show', cond: 'isFalse'
+                        field: 'fin_contas_show', cond: 'isFalse'
                     }
                 },
-                fin_conta_provisionamento_fixa: {
+                fin_contas_fixa: {
                     disabled: {
-                        field: 'fin_conta_provisionamento_show', cond: 'isFalse'
+                        field: 'fin_contas_show', cond: 'isFalse'
                     }
                 },
-                fin_conta_provisionamento_key: {
+                fin_contas_key: {
                     disabled: {
-                        field: 'fin_conta_provisionamento_fixa', cond: 'isFalse'
+                        field: 'fin_contas_fixa', cond: 'isFalse'
                     }
                 },
                 fin_valor_bruto_label: {
@@ -553,7 +552,22 @@ function MovTipos(){
                         
                     ]
                 },
-                /*2: {
+                2: {
+                    from: ['dbms', 'financeiro', 'fin_contas'],
+                    join: {source: 0, tipo: types.join.left, on: 'fin_contas_key', where: ''},
+                    fields: [
+
+                    ]
+                },/*
+                3: {
+                    from: ['dbms', 'financeiro', 'fin_contas_tipos'],
+                    join: {source: 2, tipo: types.join.left, on: 'fin_contas_tipo_key', where: ''},
+                    fields: [
+
+                    ]
+                },
+
+                2: {
                     from: ['dbms', 'items', 'itens_deposito_entrada'],
                     join: {source: 0, tipo: types.join.left, on: 'itens_deposito_entrada_key', where: ''},
                     fields: [
@@ -563,20 +577,6 @@ function MovTipos(){
                 3: { 
                     from: ['dbms', 'movimentacoes', 'itens_deposito_saida'],
                     join: {source: 0, tipo: types.join.left, on: 'itens_deposito_saida_key', where: ''},
-                    fields: [
-                        
-                    ]
-                },
-                4: { 
-                    from: ['dbms', 'financeiro', 'fin_conta_provisionamento_tipo'],
-                    join: {source: 0, tipo: types.join.left, on: 'fin_conta_provisionamento_tipo_key', where: ''},
-                    fields: [
-                        
-                    ]
-                },
-                5: { 
-                    from: ['dbms', 'financeiro', 'fin_conta_provisionamento'],
-                    join: {source: 0, tipo: types.join.left, on: 'fin_conta_provisionamento_key', where: ''},
                     fields: [
                         
                     ]
@@ -601,7 +601,8 @@ function MovTipos(){
             search: [
                     {alias: 0, field: 'codigo',  param: types.search.like_full },
                     {alias: 0, field: 'mov_tipo',  param: types.search.like_full },
-                    {alias: 0, field: 'mov_info',  param: types.search.like_full },
+                    {alias: 1, field: 'tipos_categoria',  param: types.search.like_full },
+                    /*{alias: 0, field: 'mov_info',  param: types.search.like_full },
                     {alias: 0, field: 'mov_icon',  param: types.search.like_full },
                     {alias: 0, field: 'parceiro_tipo',  param: types.search.like_full },
                     {alias: 0, field: 'paceiro_label',  param: types.search.like_full },
@@ -613,8 +614,8 @@ function MovTipos(){
                     {alias: 0, field: 'itens_deposito_saida_label',  param: types.search.like_full },
                     {alias: 0, field: 'fin_valor_bruto_label',  param: types.search.like_full },
                     {alias: 0, field: 'fin_valor_liquido_label',  param: types.search.like_full },
-                    {alias: 0, field: 'fin_conta_provisionamento_label',  param: types.search.like_full },
-                    {alias: 0, field: 'observacoes_label',  param: types.search.like_full }
+                    {alias: 0, field: 'fin_contas_label',  param: types.search.like_full },
+                    {alias: 0, field: 'observacoes_label',  param: types.search.like_full }*/
             ],
             limit: 250,
             showSQL: 0

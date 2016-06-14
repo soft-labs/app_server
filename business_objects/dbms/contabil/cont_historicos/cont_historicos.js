@@ -24,19 +24,27 @@ function ContHistoricos(){
                     tipo: types.comp.key, label: 'Cont Historicos:'
                 }, 
                 cont_determinacao_key: {
-                    tipo: types.comp.choose, label: 'Cont Determinação:',
+                    tipo: types.comp.choose, label: 'Determinação:',
                     data: { 
                         key: ['cont_determinacao_key'], 
                         from: ['dbms', 'contabil', 'cont_determinacao'], 
-                        template: '{cont_determinacao_key} - {cont_determinaca}', 
+                        template: '{cont_determinacao_key} - {descricao}',
                         provider: '' 
                     } 
                 }, 
                 ativo: {
-                    tipo: types.comp.int, label: 'Ativo:'
+                    tipo: types.comp.check, label: 'Ativo:', default:1
                 },
                 tipo: {
-                    tipo: types.comp.int, label: 'Tipo:'
+                    tipo: types.comp.dropdown,
+                    data: {
+                        label: 'value',
+                        rows: [
+                            {tipo:1 ,value : 'Tipo Um'},
+                            {tipo:1 ,value : 'Tipo Dois'},
+                        ]
+                    },
+                    label: 'Tipo:'
                 },
                 historico: {
                     tipo: types.comp.text, label: 'Categoria:'
@@ -68,8 +76,8 @@ function ContHistoricos(){
                 ]
             },
             linhas: [
-                {titulo: "Informações de cont_historicos"},
-                {cont_historicos_key: 25, cont_determinacao_key: 25, ativo: 25, historico: 25}, 
+                {titulo: "Informações da Categoria de Lançamento"},
+                {ativo: 9, historico: 50, cont_determinacao_key: 30,tipo: 15,},
                 {observacoes: 100}
             ],
             ctrls: {

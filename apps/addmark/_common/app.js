@@ -146,6 +146,11 @@ app = $.extend(true, app, {
                     path: "dbms movimentacoes mov_tipos_categorias",
                 },
                 {
+                    label: "Tipos de Contas de Provisionamento",
+                    info: "Gestão dos tipos de contas de provisionamento",
+                    path: "dbms financeiro fin_contas_tipos",
+                },
+                {
                     label: "Categorias de Lançamentos",
                     info: "Gestão das categorias de lançamento e distribuições contábeis",
                     path: "dbms contabil cont_historicos",

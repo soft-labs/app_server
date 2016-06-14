@@ -28,7 +28,10 @@ function FinContasTipos(){
                 }, 
                 observacoes: {
                     tipo: types.comp.text_big, label: 'Observações:'
-                }
+                },
+                ativo: {
+                    tipo: types.comp.check, label: 'Ativo:', default:1
+                },
             }
         }
     };
@@ -53,8 +56,9 @@ function FinContasTipos(){
                 ]
             },
             linhas: [
-                {titulo: "Informações de fin_contas_tipos"},
-                {fin_contas_tipos_key: 25, tipo_conta: 25, observacoes: 50}
+                {titulo: "Dados do Tipo de Conta de Provisionamento"},
+                {ativo: 10, tipo_conta: 90},
+                {observacoes: 100}
             ],
             ctrls: {
                 tipo_conta: {
