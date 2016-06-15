@@ -1,18 +1,41 @@
 //
     Template default para: dbms.contabil.cont_historicos
-    Criado em Tue May 31 2016 14:32:48 GMT-0300 (BRT)
+    Criado em Sun May 29 2016 08:57:57 GMT-0300 (BRT)
 
-table.ui.compact.striped.celled.table
+table.ui.selectable.table
     thead
-        th Cont Historicos
-        th Cont Determinação
-        th Ativo
-        th Historico
-        th Observações
+        tr.cursor
+            th.two.wide Ativo
+            th.seven.wide Categoria
+            th.four.wide Determinação
+            th.two.wide Tipo
+            th.one.wide
     tbody
-        tr(rv-each-row='dbms.contabil.[object Object].data.rows')
-            td {row.cont_historicos_key}
-            td {row.cont_determinacao_key}
-            td {row.ativo}
-            td {row.historico}
-            td {row.observacoes}
+        tr(
+        rv-each-row='dbms.contabil.cont_historicos.data.rows'
+        rv-row-key='row.cont_historicos_key'
+        )
+
+            td
+                .ui.toggle.checkbox
+                    input(
+                    type="checkbox"
+                    rv-checked='row.ativo'
+                    rv-row-key='row.cont_historicos_key'
+                    server-onchange='dbms contabil cont_historicos update'
+                    )
+            td(
+            rv-row-key='row.cont_historicos_key'
+            server='dbms contabil cont_historicos edit'
+            )
+                i.edit.icon
+                |  {row.historico}
+            td {row.descricao}
+            td {row.tipo}
+            td
+                .ui.checkbox
+                    input(
+                    type='checkbox'
+                    rv-checked='row._selected_'
+                    rv-row-selected='row._selected_'
+                    )
