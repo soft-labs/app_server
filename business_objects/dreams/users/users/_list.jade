@@ -1,0 +1,50 @@
+//
+    Template default para: dbms.enderecos.end_tipos
+    Criado em Sun May 29 2016 08:57:57 GMT-0300 (BRT)
+
+table.ui.selectable.table
+    thead
+        tr.cursor
+            th.one.wide Ativo
+            th.one.wide Banido
+            th.six.wide Usuário
+            th.seven.wide Nome
+            th.one.wide
+    tbody
+        tr(
+            rv-each-row='dreams.users.users.data.rows'
+            rv-row-key='row.users_key'
+        )
+            td
+                .ui.toggle.checkbox
+                    input(
+                        type="checkbox"
+                        rv-checked='row._active'
+                        rv-row-key='row.users_key'
+                        server-onchange='dreams users users update'
+                    )
+            td
+                .ui.toggle.checkbox
+                    input(
+                        type="checkbox"
+                        rv-checked='row._banned'
+                        rv-row-key='row.users_key'
+                        server-onchange='dreams users users update'
+                    )
+            td(
+                rv-row-key='row.users_key'
+                server='dreams users users edit'
+            )
+                i.edit.icon
+                |  {row.username}
+
+            td
+                | {row.firstname} {row.lastname}
+
+            td
+                .ui.checkbox
+                    input(
+                        type='checkbox'
+                        rv-checked='row._selected_'
+                        rv-row-selected='row._selected_'
+                    )

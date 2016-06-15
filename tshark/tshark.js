@@ -12,15 +12,15 @@ function TShark(app, no_cache){
     this.routers = {
 
         // Default
-        ts_router: require('./routers/ts_router.js'),
-        ts_comps : require('./routers/ts_comps.js'),
+        ts_router: require('./routers/_default.js'),
+        ts_comps : require('./routers/_comps.js'),
 
         // Especiais
         dreams   : require('./routers/dreams.js')
     };
 
     this.pool = {conn:{}, map: {}};
-    this.app = app;
+    this.app  = app;
     this.no_caching_require = no_cache;
 }
 

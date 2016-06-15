@@ -962,6 +962,9 @@ if(!alertify.choose){
         var search  = ctrl['data']['from'] ? 'search' : ''
             , menu  = $('<div>', {class: 'menu'})
             , label = ctrl['data']['label']
+            , itobj = {class: 'text'}
+            , val   = ''
+            , lbl   = ''
         ;
 
         // Itens combo (não dataset)
@@ -970,11 +973,19 @@ if(!alertify.choose){
                 menu.append(
                     $('<div>', {
                         class: 'item',
-                        'rv-data-value': row[field]
+                        'data-value': row[field],
+                        'data-path': path
                     }).html(row[ctrl['data']['label']])
                 )
             });
+        } else {
+            itobj['rv-text'] = path + ".data.row." + label;
         }
+
+        try {
+            var m = tshark.getMod(path);
+            val = m.data.row[field];
+        } catch (e){}
 
         return $('<div>', {class: 'ui fluid ' + search + ' selection dropdown binded', style: 'line-height: 0.9em !important; min-height: 0px'})
            .append(
@@ -987,10 +998,7 @@ if(!alertify.choose){
                $('<i>', {class: 'dropdown icon'})
            )
            .append(
-               $('<div>', {
-                   class: 'text',
-                   'rv-text': path + ".data.row." + label
-               }).html('{' + path + ".data.row." + label + '}')
+               $('<div>', itobj).html('{' + path + ".data.row." + label + '}')
            )
            .append(
                menu
@@ -1006,12 +1014,12 @@ if(!alertify.choose){
                 onChange: function (value, text, selectedItem) {
                     var mod = tshark.getMod(path);
                     mod.data.row[field] = value;
-                    mod.data.row[label] = text;
+                   // mod.data.row[label] = text;
                     if (ctrl['autosave']) {
                         mod.save();
                     }
                 }
-            });
+            }).dropdown('set selected', val);
     }
 
 

@@ -311,14 +311,14 @@ MySql.prototype.processChangeResults = function *(op, results, obj){
     var ok = false;
 
     if (results){
-        if (op == 'upd'){
-            ok = results['changedRows'];
-        } else {
-            ok = results['insertId']
+        switch (op){
+            case 'ins': return results['insertId'];
+            case 'upd': return results['changedRows'];
+            case 'del': return results['affectedRows'];
         }
     }
 
-    return ok;
+    return false;
     
 };
 

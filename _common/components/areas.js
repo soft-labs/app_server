@@ -15,8 +15,7 @@ app.areas = {
      * @param subarea
      */
     init: function(area, subarea){
-        app.areas.active.area = area;
-        app.areas.active.subarea = subarea;
+        this.show(area, subarea);
     },
 
     /**
