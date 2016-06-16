@@ -25,6 +25,16 @@ const _         = require('underscore')
 // region :: Métodos internos
 
 /**
+ * Proxy para initObj em tshark
+ * @param path
+ * @param context
+ * @returns {BizObject}
+ */
+BizObject.prototype.initObj = function (path, context) {
+    return this.engine.initObj(path, context);
+};
+
+/**
  * Retorna um objeto de resposta padrão
  * @param api
  * @returns {{status: number, success: boolean, layout: {}, data: Array}}

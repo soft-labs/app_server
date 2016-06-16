@@ -46,6 +46,26 @@ module.exports = {
         }
 
     },
+
+    // Server push
+    pushserver: {
+        url:  "localhost",
+        port: "8000",
+        ios: {
+            cert: "apps/dreams/_common/cert/dev/cert.pem",
+            key: "apps/dreams/_common/cert/dev/key.pem",
+            pass: "Dr3@m$#T3@m",
+        }
+    },
+
+    email: {
+        user     : "noreply@dreamsteam.com.br",
+        password : "Dreamsteam8",
+        host     : "email-ssl.com.br",
+        port     : "987",
+        dreams   : "noreply@dreamsteam.com.br",
+        ssl      : true
+    },
     
     // Auditoria nivel aplicativo
     auditing: {

@@ -27,9 +27,11 @@ var
         // Usuários
         'users'         : {mod: 'dreams/users/users',                  provider: 'mobile'},
         'profile'       : {mod: 'dreams/users/users',                  provider: 'profile'},
-        'follow'        : {mod: 'dreams/users/user_follow',            provider: 'default'},
+        'dreamers'      : {mod: 'dreams/users/users',                  provider: 'dreamers'},
+        'following'     : {mod: 'dreams/users/user_follow',            provider: 'default'},
         'followall'     : {mod: 'dreams/users/user_follow',            provider: 'default'},
         'followers'     : {mod: 'dreams/users/user_followers',         provider: 'default'},
+        'users_suggested': {mod: 'dreams/users/users',                 provider: 'users_suggested'},
 
         // Sonhos
         'dreams'        : {mod: 'dreams/dreams/dreams',                provider: 'mobile'},
@@ -140,7 +142,7 @@ router.get('/mobile/dreams/*', function *(next) {
         , mod    = this.app.engine.initObj(map.mod.split('/'), this)
         , status = 204 // Nenhum resultado disponível
         , res    = {
-            success: 0
+            success: 1
         }
     ;
 

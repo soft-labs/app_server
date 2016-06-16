@@ -7,7 +7,21 @@
  * @constructor
  */
 function UserDevices(){
+    
+    // Conexão para push IOS
+    var  apn = require('apn');
 
+    /**
+     * Inicialização
+     */
+    this.init = function(ctx) {
+        this.apnConn = new apn.Connection({
+            cert: this.context.clientes.dreams.mobile.pushserver.ios.cert,
+            key : this.context.clientes.dreams.mobile.pushserver.ios.key,
+            passphrase: this.context.clientes.dreams.mobile.pushserver.ios.pass
+        });
+    };
+    
     //region :: Definições do Objeto
 
     // Id
@@ -276,6 +290,41 @@ function UserDevices(){
 
 
     //region :: Regras de Negócio
+
+    
+    /**
+     * Envia notificações ao usuário
+     */
+    this.sendPush = function *(ctx, pack){
+        try {
+
+            // IOS
+            if (pack['ios']) {
+                var data = yield this.select(ctx, 'default', {
+                    where: [
+                        ["AND", 0, "users_key", "IN", "(" + pack['to_users'].join(',') + ")"],
+                        ["AND", 0, "ios", "=", "1"]
+                    ]
+                });
+
+                var note = new apn.Notification();
+                note.expiry = Math.floor(Date.now() / 1000) + 3600; // 1 hora
+                note.badge = pack['ios']['badge'] || 1;
+                note.sound = pack['ios']['sound'] || "ping.aiff";
+                note.alert = pack['ios']['alert'];
+                note.payload = {'messageFrom': 'Dreams'};
+
+                data.rows.forEach(row => {
+                    var device = new apn.Device(row['token']);
+                    console.log(note.alert);
+                    this.apnConn.pushNotification(note, device);
+                })
+            }
+
+        } catch (e){
+            console.log(e.message);
+        }
+    };
 
     //endregion
     

@@ -19,7 +19,7 @@ function UserFollower(){
     this.source = {
         table: 'user_follower',
         metadata: {
-            key: ['users_key', 'follower_key'],
+            key: 'users_key',
             fields: {
                 users_key: {
                     tipo: types.comp.dropdown, label: 'Usuário:',
@@ -86,37 +86,46 @@ function UserFollower(){
 
         default: {
             sources: {
-                0: {
-                    from: ['dreams', 'users', 'user_followers'],
-                    fields: [
-                        '_accept'
-                    ]
-                },
-                1: { // Este user
+                0: {// Este user
                     from: ['dreams', 'users', 'users'],
+                    fields: ['_none_']
+                },
+                1: {
+                    from: ['dreams', 'users', 'user_follow'],
                     join: {source: 0, tipo: types.join.inner, on: 'users_key', where: ''},
-                    fields: [ ]
+                    force_fields: [ '_accept' ]
                 },
                 2: { // Followers
                     from: ['dreams', 'users', 'users'],
-                    join: {source: 0, tipo: types.join.inner, on: ['users_key', 'follower_key'], where: ''},
-                    fields: [
-                        'users_key', '_public', // '_to_come_true', '_comming_true', '_came_true',
-                        // '_me_too'
-                        'username', 'firstname', 'lastname', 'img_profile'
+                    join: {source: 1, tipo: types.join.inner, on: ['users_key', 'follower_key'], where: ''},
+                    force_fields: [
+                        'users_key', '_public', 'username', 'firstname', 'lastname', 'img_profile'
+                    ],
+                    sql_fields: [
+                        ' (SELECT COUNT(r.users_key)  ' +
+                        '    FROM users_dreams_rel r' +
+                        '    INNER JOIN dreams d ON (r.dreams_key = d.dreams_key)' +
+                        '  WHERE d.users_key = tb0.users_key' +
+                        '    AND r.users_key = tb2.users_key' +
+                        '    AND r._accept = 1' +
+                        '    AND d._active = 1' +
+                        '    AND d._banned <> 1' +
+                        ') as dreaming_with_me'
                     ]
                 }
             },
-            where: [ 
-                ['AND', 1, '_token', types.where.check],
-                ['AND', 0, '_accept', '=', '1'],
-                ['AND', 0, 'follower_key', types.where.check],
+            where: [
+                ['AND', 0, '_token', types.where.get],
+                ['AND', 1, '_accept', '=', '1'],
             ],
             order: [
-                ['2', 'firstname', 'desc']
+                ['2', 'firstname', 'desc'],
+                ['2', 'username', 'desc']
             ],
-            search: [ 
-                
+            search: [
+                {alias: 2, field: 'username',   param: types.search.like_full },
+                {alias: 2, field: 'firstname',  param: types.search.like_full },
+                {alias: 2, field: 'lastname',   param: types.search.like_full }
             ],
             limit: 250,
             showSQL: 0
@@ -135,6 +144,100 @@ function UserFollower(){
             showSQL: 0
         }
 
+    };
+
+    //endregion
+
+
+    //region :: Eventos
+
+    /**
+     * Evento chamado para processamento customizado de
+     * cada row em um select
+     * @param row
+     */
+    this.onGetRow = function (row){
+        if (this.params['_mobile_']) {
+            delete(row['_key_']);
+            delete(row['_selected_']);
+        }
+    };
+
+    /**
+     * Evento chamado na operação POST :: Insert
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     */
+    this.onInsert = function *(prov, ctx){
+
+        // Pega o usuário pelo token
+        var data = yield this.select(ctx, 'profile', false, ['dreams', 'users', 'users'])
+            , users_key
+            , _accept = 0
+        ;
+
+        if (data.rows.length) {
+            users_key = data.rows[0]['users_key'];
+        }
+
+        // Verifica se o perfil do cara que ira me seguir é público
+        data = yield this.select(ctx, 'default', {
+            where: [
+                ['AND', 0, 'users_key', '=', this.params.row['follower_key']]
+            ]
+        }, ['dreams', 'users', 'users']);
+
+        if (data.rows.length) {
+            _accept = data.rows[0]['_public'];
+        }
+
+        this.params.row['users_key'] = users_key;
+        this.params.row['_accept'] = _accept;
+    };
+
+    /**
+     * Push de follower
+     * @param ret Objeto de retorno
+     */
+    this.onAfterUpdate = function *(ret, ctx){
+        if (this.params.row['_accept']) {
+            var profile = yield this.select(ctx, 'profile', false, ['dreams', 'users', 'users'])
+                , follower = yield this.select(ctx, 'default', {
+                    where: [
+                        ['AND', 0, 'users_key', '=', this.params.row['follower_key']]
+                    ]
+                }, ['dreams', 'users', 'users'])
+                ;
+
+            var msg = profile.rows[0]['firstname'] + (profile.rows[0]['lastname'] ? ' ' + profile.rows[0]['lastname'] : '');
+            msg += profile.rows[0]['_public'] ? " começou a" : " quer";
+            msg += " te seguir";
+
+            // Push de comentar o sonho
+            var devices = this.initObj(["dreams", "users", "user_devices"], ctx);
+            yield devices.sendPush(ctx, {
+                to_users: [profile.rows[0]['users_key']],
+                expire: 1,
+                android: {
+                    data: {
+                        message: msg
+                    }
+                },
+                ios: {
+                    alert: msg
+                }
+            });
+        }
+    };
+
+    /**
+     * Evento chamado na operação DELETE :: Delete
+     * @param ret Objeto de retorno
+     * @param ctx Contexto de chamada
+     */
+    this.onDelete = function *(prov, ctx){
+        prov.sources[0].key = 'follower_key';
+        this.params.row['follower_key'] = this.params.row['users_key,follower_key'];
     };
 
     //endregion
@@ -235,40 +338,6 @@ function UserFollower(){
      this.onAfterCreate = function *(ret){
 
     };
-     
-    /**
-     * Evento chamado na operação POST :: Insert
-     * @param ret Objeto de retorno
-     * @param ctx Contexto de chamada
-     */
-    this.onInsert = function *(prov, ctx){
-
-        // Pega o usuário pelo token
-        var data = yield this.select(ctx, 'profile', false, ['dreams', 'users', 'users'])
-            , users_key
-            , _accept = 0
-        ;
-
-        if (data.rows.length) {
-            users_key = data.rows[0]['users_key'];
-        }
-
-        // Verifica se o perfil do cara que ira me seguir é público
-        data = yield this.select(ctx, 'default', {
-            where: [
-                ['AND', 0, 'users_key', '=', this.params.row['follower_key']]
-            ]
-        }, ['users', 'users']);
-
-        if (data.rows.length) {
-            _accept = data.rows[0]['_public'];
-        }
-
-        this.params.row['users_key'] = users_key;
-        this.params.row['_accept'] = _accept;
-
-
-    };
 
     /**
      * Evento chamado ao final da operação POST :: Insert
@@ -285,50 +354,6 @@ function UserFollower(){
      *
      this.onUpdate = function *(ret, ctx){
 
-    };
-
-    /**
-     * Push de follower
-     * @param ret Objeto de retorno
-     */
-    this.onAfterUpdate = function *(ret, ctx){
-        if (this.params.row['_accept']) {
-            var profile = yield this.select(ctx, 'profile', false, ['dreams', 'users', 'users'])
-                , follower = yield this.select(ctx, 'default', {
-                    where: [
-                        ['AND', 0, 'users_key', '=', this.params.row['follower_key']]
-                    ]
-                }, ['users', 'users'])
-                ;
-
-            var msg = profile.rows[0]['firstname'] + (profile.rows[0]['lastname'] ? ' ' + profile.rows[0]['lastname'] : '');
-            msg += profile.rows[0]['_public'] ? " começou a" : " quer";
-            msg += " te seguir";
-
-            // Push de comentar o sonho
-            yield this.engine.sendPush(ctx, {
-                to_users: [profile.rows[0]['users_key']],
-                expire: 1,
-                android: {
-                    data: {
-                        message: msg
-                    }
-                },
-                ios: {
-                    alert: msg
-                }
-            });
-        }
-    };
-
-    /**
-     * Evento chamado na operação DELETE :: Delete
-     * @param ret Objeto de retorno
-     * @param ctx Contexto de chamada
-     */
-     this.onDelete = function *(prov, ctx){
-         prov.sources[0].key = 'follower_key';
-         this.params.row['follower_key'] = this.params.row['users_key,follower_key'];
     };
 
     /**

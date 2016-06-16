@@ -139,59 +139,105 @@ function Users(){
 
     //region :: Providers
 
+    var _sql_fields_profile = [
+        ' (SELECT COUNT(dreams_key) FROM dreams WHERE users_key = tb0.users_key AND _status = 1) as to_come_true',
+        ' (SELECT COUNT(dreams_key) FROM dreams WHERE users_key = tb0.users_key AND _status = 2) as coming_true',
+        ' (SELECT COUNT(dreams_key) FROM dreams WHERE users_key = tb0.users_key AND _status = 3) as came_true',
+
+        ' (SELECT COUNT(follower_key) FROM user_follower WHERE follower_key = tb0.users_key AND _accept = 1) as following',
+        ' (SELECT COUNT(follower_key) FROM user_follower WHERE follower_key = tb0.users_key AND _accept = 0) as pending_following',
+        ' (SELECT COUNT(users_key)    FROM user_follower WHERE users_key = tb0.users_key    AND _accept = 1) as followers',
+        ' (SELECT COUNT(users_key)    FROM user_follower WHERE users_key = tb0.users_key    AND _accept = 0) as pending_followers',
+
+        ' (SELECT COUNT(users_key)  FROM users_dreams_rel WHERE users_key = tb0.users_key)       as dreaming_too',
+        ' (SELECT COUNT(r.users_key)  ' +
+        '    FROM users_dreams_rel r' +
+        '    INNER JOIN dreams d ON (r.dreams_key = d.dreams_key)' +
+        '  WHERE d.users_key = tb0.users_key ' +
+        '    AND _active = 1' +
+        '    AND _banned <> 1' +
+        ') as dreaming_with_me'
+    ];
+
+    this.default = {
+        fields: {
+            profile: [
+                'users_key', '_public', '_pending_pwd', '_token',
+                'username', 'password', 'email', 'facebook_id', 'instagram_id', 'twitter_id',
+                'firstname', 'lastname', 'gender', 'birthday',
+                'img_profile', 'img_background', 'img_background_dreams_gallery'
+            ],
+            dreamers: [
+                'users_key', '_public', 'username', 'firstname', 'lastname', 'img_profile'
+            ],
+            sql_fields_profile: _sql_fields_profile,
+            sql_fields: _sql_fields_profile.concat([
+
+                ' (COALESCE(' +
+                '    (SELECT _accept ' +
+                '         FROM user_follower f ' +
+                '        INNER JOIN users u ON (f.users_key = u.users_key)' +
+                "        WHERE f.follower_key = tb0.users_key " +
+                "          AND u._token = '_WHERE_CHECK_[_token]'" +
+                '    ), -1) + 1)  as follower_status_rel',
+
+                ' (COALESCE(' +
+                '     (SELECT _accept' +
+                '        FROM user_follower f ' +
+                '       INNER JOIN users u ON (f.follower_key = u.users_key)' +
+                "       WHERE f.users_key = tb0.users_key " +
+                "         AND u._token = '_WHERE_CHECK_[_token]'" +
+                '    ), -1) +1)  as following_status_rel'
+
+            ])
+        },
+        search: [
+            {alias: 0, field: 'username',   param: types.search.like_full },
+            {alias: 0, field: 'firstname',  param: types.search.like_full },
+            {alias: 0, field: 'lastname',   param: types.search.like_full },
+            {alias: 0, field: 'facebook_id',  param: types.search.like_full },
+            {alias: 0, field: 'instagram_id', param: types.search.like_full },
+            {alias: 0, field: 'twitter_id',   param: types.search.like_full }
+        ],
+        order: [
+            ['0', 'firstname', 'asc'],
+            ['0', 'username', 'asc']
+        ]
+    };
+
     this.providers = {
 
         default  : {
             sources: {
                 0: {
                     from: ['dreams', 'users', 'users'],
-                    fields: [
-
-                    ]
+                    fields: []
                 }
             },
             where: [ 
                 ['AND', 0, 'users_key', types.where.check]
             ],
-            order: [
-                ['0', 'users_key', 'desc']
-            ],
-            search: [
-                {alias: 0, field: 'username',  param: types.search.like_full },
-                {alias: 0, field: 'firstname',  param: types.search.like_full },
-                {alias: 0, field: 'lastname',  param: types.search.like_full }
-                
-            ],
+            order: this.default.order,
+            search: this.default.search,
             limit: 250,
             showSQL: 0
         },
 
-        mobile  : {
+        mobile   : {
             sources: {
                 0: {
                     from: ['dreams', 'users', 'users'],
-                    force_fields: [
-                        'users_key', '_public', '_active', '_banned', '_pending_pwd',
-                        '_creation_date', '_deactivation_date', '_token', '_locale', 'username', 'password',
-                        'email', 'facebook_id', 'instagram_id', 'twitter_id',
-                        'firstname', 'lastname', 'gender', 'birthday',
-                        'img_profile', 'img_background', 'img_background_dreams_gallery'
-                    ]
+                    force_fields: this.default.fields.profile
                 }
             },
             where: [
-                ['AND', 0, 'users_key', types.where.check],
+                ['AND', 0, 'users_key',  types.where.check],
                 ['AND', 0, '_suggested', types.where.check]
             ],
             order: [
                 ['0', 'users_key', 'desc']
             ],
-            search: [
-                {alias: 0, field: 'username',  param: types.search.like_full },
-                {alias: 0, field: 'firstname',  param: types.search.like_full },
-                {alias: 0, field: 'lastname',  param: types.search.like_full }
-
-            ],
+            search: this.default.search,
             limit: 250,
             showSQL: 0
         },
@@ -200,27 +246,15 @@ function Users(){
             sources: {
                 0: {
                     from: ['dreams', 'users', 'users'],
-                    force_fields: [
-                        'users_key', '_public', '_pending_pwd', '_token',
-                        'username', 'password', 'email', 'facebook_id', 'instagram_id', 'twitter_id',
-                        'firstname', 'lastname', 'gender', 'birthday',
-                        'img_profile', 'img_background', 'img_background_dreams_gallery'
-                    ]
+                    force_fields: this.default.fields.profile
                 }
             },
             where: [
                 ['AND', 0, '_active', '=', 1],
                 ['AND', 0, '_banned', '<>', 1]
             ],
-            order: [
-                ['0', 'users_key', 'desc']
-            ],
-            search: [
-                {alias: 0, field: 'username',  param: types.search.like_full },
-                {alias: 0, field: 'firstname',  param: types.search.like_full },
-                {alias: 0, field: 'lastname',  param: types.search.like_full }
-
-            ],
+            order: this.default.order,
+            search: this.default.search,
             limit: 250,
             showSQL: 0
         },
@@ -246,12 +280,7 @@ function Users(){
             order: [
                 ['0', 'users_key', 'desc']
             ],
-            search: [
-                {alias: 0, field: 'username',  param: types.search.like_full },
-                {alias: 0, field: 'firstname',  param: types.search.like_full },
-                {alias: 0, field: 'lastname',  param: types.search.like_full }
-
-            ],
+            search: this.default.search,
             limit: 250,
             showSQL: 0
         },
@@ -260,84 +289,87 @@ function Users(){
             sources: {
                 0: {
                     from: ['dreams', 'users', 'users'],
-                    force_fields: [
-                        'users_key', '_public', '_active', '_banned', '_pending_pwd',
-                        '_creation_date', '_deactivation_date', 'username', 'password',
-                        'email', 'facebook_id', 'instagram_id', 'twitter_id',
-                        'firstname', 'lastname', 'gender', 'birthday',
-                        'img_profile', 'img_background', 'img_background_dreams_gallery'
-                    ]
+                    force_fields: this.default.fields.profile,
+                    sql_fields: this.default.fields.sql_fields_profile
                 }
             },
             where: [
                 ['AND', 0, '_token', types.where.get]
             ],
-            order: [
-                ['0', 'users_key', 'desc']
-            ],
-            search: [
-                {alias: 0, field: 'username',  param: types.search.like_full },
-                {alias: 0, field: 'firstname',  param: types.search.like_full },
-                {alias: 0, field: 'lastname',  param: types.search.like_full }
-
-            ],
+            order: this.default.order,
+            search: this.default.search,
             limit: 250,
             showSQL: 0
         },
 
-        follower : {
+        dreamers : {
             sources: {
                 0: {
                     from: ['dreams', 'users', 'users'],
-                    force_fields: [
-                        'users_key', '_public', 'username', 'firstname', 'lastname', 'img_profile'
-                    ]
+                    force_fields: this.default.fields.dreamers,
+                    sql_fields: this.default.fields.sql_fields
                 }
             },
             where: [
-                ['AND', 0, '_token', types.where.check],
+                ['AND', 0, '_token',    types.where.not],
+                ['AND', 0, 'users_key', types.where.check],
                 ['AND', 0, '_active', '=', 1],
                 ['AND', 0, '_banned', '<>', 1]
             ],
-            order: [
-                ['0', 'users_key', 'desc']
-            ],
-            search: [
-                {alias: 0, field: 'username',  param: types.search.like_full },
-                {alias: 0, field: 'firstname',  param: types.search.like_full },
-                {alias: 0, field: 'lastname',  param: types.search.like_full }
-
-            ],
+            order: this.default.order,
+            search: this.default.search,
             limit: 250,
             showSQL: 0
         },
 
-        following: {
+        users_suggested : {
             sources: {
                 0: {
                     from: ['dreams', 'users', 'users'],
-                    force_fields: [
-                        'users_key', '_public', 'username', 'firstname', 'lastname', 'img_profile'
-                    ]
+                    force_fields: this.default.fields.dreamers,
+                    sql_fields: this.default.fields.sql_fields
                 }
             },
             where: [
-                ['AND', 0, '_token', types.where.check],
+                ['AND', 0, '_token',    types.where.not],
+                ['AND', 0, 'users_key', types.where.check],
+                ['AND', 0, '_suggested', '=', 1],
                 ['AND', 0, '_active', '=', 1],
                 ['AND', 0, '_banned', '<>', 1]
             ],
-            order: [
-                ['0', 'users_key', 'desc']
-            ],
-            search: [
-                {alias: 0, field: 'username',  param: types.search.like_full },
-                {alias: 0, field: 'firstname',  param: types.search.like_full },
-                {alias: 0, field: 'lastname',  param: types.search.like_full }
-
-            ],
+            order: this.default.order,
+            search: this.default.search,
             limit: 250,
             showSQL: 0
         },
+
+
+        /**
+         * Criar nova api
+         *   OK users_suggested
+         *      'users_key', '_public', 'username', 'firstname', 'lastname', 'img_profile'
+         *      nova flag 'status_rel'
+         *        0 => Se não há relacionamento com o usuário sugerido
+         *        1 => Se não há relacionamento com o usuário pendente
+         *        2 => Se ja há relacionamento com o usuário sugerido
+         *
+         *   OK - dreamers
+         *      params pesuisa igual users
+         *      acrescenta flags de status_rek
+         *      acrescenta contadores come_true
+         *      acrescenta seguindo / seguidor
+         *
+         *   OK - profile = acima
+         *
+         *
+         *
+         *  Ajustar path de salvar img
+         *
+         *  OK - Acrescentar ids de redes sociais em consulta global
+         *  
+         *  Acrescentar array de users_key ao criar sonho para gerar dreamers de uma so vez
+         *
+         */
 
         update   : {
             sources: {
@@ -429,7 +461,7 @@ function Users(){
      * @param ret Objeto de retorno
      */
     this.onAfterInsert = function *(ret, ctx){
-        this.params['_token'] = ret['token'] = this.params.row['_token'];
+        this.params['_token'] = ret['_token'] = this.params.row['_token'];
         this.params['users_key'] = this.params.row['users_key'] = ret['result'];
 
         // Salva imagens
@@ -688,20 +720,20 @@ function Users(){
         // Imagem de profile
         if (img_profile && (img_profile.length > 1000) && this.params.row['users_key']){
             var img = this.engine.saveBase64Image(
-                "web/imgs/users/p_" + this.params.row['users_key'],
+                "dreams/_imgs/users/p_" + this.params.row['users_key'],
                 img_profile
             );
-            this.params.row['img_profile'] = img.substr(4);
+            this.params.row['img_profile'] = img.substr(7);
             ok = true;
         }
 
         // Imagem de profile
         if (img_background && (img_background.length > 1000) && this.params.row['users_key']){
             var img = this.engine.saveBase64Image(
-                "web/imgs/users/b_" + this.params.row['users_key'],
+                "dreams/_imgs/users/b_" + this.params.row['users_key'],
                 img_background
             );
-            this.params.row['img_background'] = img.substr(4);
+            this.params.row['img_background'] = img.substr(7);
             ok = true;
         }
 
@@ -711,6 +743,7 @@ function Users(){
     //endregion
     
 }
+
 
 // Types
 const types = require('../../../../tshark/types');

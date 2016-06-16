@@ -775,10 +775,10 @@ function Dreams(){
 
         if (img_cover && this.params.row['dreams_key']){
             var img = this.engine.saveBase64Image(
-                "web/imgs/dreams/c_" + this.params.row['dreams_key'],
+                "dreams/_imgs/dreams/c_" + this.params.row['dreams_key'],
                 img_cover
             );
-            this.params.row['img_cover'] = img.substr(4);
+            this.params.row['img_cover'] = img.substr(7);
         }
     };
     

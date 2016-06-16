@@ -105,6 +105,7 @@ app = $.extend(true, app, {
             {
                 id   : 'login',
                 label: 'Login',
+                info : '',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'}
                 ]
@@ -126,8 +127,24 @@ app = $.extend(true, app, {
                 ]
             },
             {
-                id   : 'follow',
-                label: 'Follow',
+                id   : 'users_suggested',
+                label: 'Users Suggested',
+                verbs: [
+                    {op: 'list',    label: 'GET  "\\"'},
+                ]
+            },
+            {
+                id   : 'dreamers',
+                label: 'Dreamers',
+                verbs: [
+                    {op: 'list',    label: 'GET  "\\"'},
+                    {op: 'put',     label: 'PUT  "\\"'},
+                    {op: 'post',    label: 'POST "\\"'},
+                ]
+            },
+            {
+                id   : 'following',
+                label: 'Following',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'},
                     {op: 'post',    label: 'POST "\\"'},

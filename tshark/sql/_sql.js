@@ -387,26 +387,38 @@ SQL.prototype._parseWhere = function(whereParams, params){
                     , val   = params[where[2]]
                 ;
 
-                if (flag.toUpperCase() == 'IN' || flag.toUpperCase() == 'NOT IN'){
-                    if (val && val.length){
-                        where.push(' ' + flag.toUpperCase() + ' ');
-                        where.push("('" + val.join("', '") + "')");
-                    } else {
-                        where = [];
-                    }
+                switch (flag.toUpperCase()){
+                    case 'IN':
+                    case 'NOT IN':
+                        if (val && val.length) {
+                            where.push(' ' + flag.toUpperCase() + ' ');
+                            where.push("('" + val.join("', '") + "')");
+                        } else {
+                            where = [];
+                        }
+                        break;
 
-                } else {
-                    if (val == 'NEW_KEY' || (!val && flag.toUpperCase() == 'GET')) {
-                        val = -999;
-                    }
+                    case 'NOT':
+                        if (val && val.length) {
+                            where.push(' <> ');
+                            where.push("'" + val + "'");
+                        } else {
+                            where = [];
+                        }
+                        break;
 
-                    if (val) {
-                        where.push('=');
-                        where.push("'" + val + "'");
+                    default:
+                        if (val == 'NEW_KEY' || (!val && flag.toUpperCase() == 'GET')) {
+                            val = -999;
+                        }
 
-                    } else {
-                        where = [];
-                    }
+                        if (val) {
+                            where.push('=');
+                            where.push("'" + val + "'");
+
+                        } else {
+                            where = [];
+                        }
                 }
             }
 
@@ -422,6 +434,31 @@ SQL.prototype._parseWhere = function(whereParams, params){
     return sql;
 };
 
+
+/**
+ * Processa where
+ * @param params { {} }
+ */
+SQL.prototype.parseWhereTags = function(sql, params){
+
+    var
+        reg = {
+            re_get  : /_WHERE_GET_\[(\w+)\]/g,
+            re_check: /_WHERE_CHECK_\[(\w+)\]/g
+        }
+        , m
+    ;
+
+    for (var r in reg) {
+        m = reg[r].exec(sql);
+        if (m && m[1]){
+            sql = sql.replace(reg[r], params[m[1]]);
+        }
+    }
+
+
+    return sql;
+};
 
 /**
  * Processa req.query e alimenta search
@@ -608,6 +645,7 @@ SQL.prototype._select = function *(provider, obj, meta){
     // Normal
     } else {
         sql = sql || this.db.parseSQL(sqlParams, obj);
+        sql = this.parseWhereTags(sql, obj.params);
         
         var results = yield this.db._exec(sql, obj);
         

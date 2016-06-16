@@ -249,6 +249,13 @@ Types.prototype.where = {
      * @type { string }
      */
     get     : 'get',
+    
+    /**
+     * Not irá verificar se o valor do campo está disponível, e estiver
+     * será gerada uma clausula where que exclui o valor: AND tb0.teste_key <> '[valor em ambiente de "teste_key"]'
+     * @type { string }
+     */
+    not     : 'not',
 
     /**
      * In irá verificar se existem valores para o field, e irá criar 

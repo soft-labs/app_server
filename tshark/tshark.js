@@ -451,6 +451,11 @@ TShark.prototype.initObj = function(path, context){
         mod.state = context.state;
         mod.params = extend(true, context.request.query || {}, context.request.body || {});
         
+        // Init
+        if (mod['init'] && typeof mod.init == 'function'){
+            mod.init(context);
+        }
+        
     } catch (e){
         log.erro(e);
     }
@@ -461,43 +466,6 @@ TShark.prototype.initObj = function(path, context){
 
 
 //region :: Funções Globais
-
-/**
- * Envio de push
- * @param pack
- * @param ctx
- */
-TShark.prototype.sendPush = function *(ctx, pack){
-    try {
-        var devices = this.initObj(["users", "user_devices"], ctx);
-
-        // IOS
-        if (pack['ios']) {
-            var data = yield devices.select(ctx, 'default', {
-                where: [
-                    ["AND", 0, "users_key", "IN", "(" + pack['to_users'].join(',') + ")"],
-                    ["AND", 0, "ios", "=", "1"]
-                ]
-            });
-
-            var note = new apn.Notification();
-            note.expiry = Math.floor(Date.now() / 1000) + 3600; // 1 hora
-            note.badge = pack['ios']['badge'] || 1;
-            note.sound = pack['ios']['sound'] || "ping.aiff";
-            note.alert = pack['ios']['alert'];
-            note.payload = {'messageFrom': 'Dreams'};
-
-            data.rows.forEach(row => {
-                var device = new apn.Device(row['token']);
-                console.log(note.alert);
-                this.apnConn.pushNotification(note, device);
-            })
-        }
-
-    } catch (e){
-        console.log(e.message);
-    }
-};
 
 /**
  * Salva imagem em base64

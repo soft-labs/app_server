@@ -312,7 +312,7 @@ MySql.prototype.processChangeResults = function *(op, results, obj){
 
     if (results){
         switch (op){
-            case 'ins': return results['insertId'];
+            case 'ins': return results['insertId'] || results['affectedRows'];
             case 'upd': return results['changedRows'];
             case 'del': return results['affectedRows'];
         }
