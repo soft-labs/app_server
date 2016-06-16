@@ -407,7 +407,7 @@ function Dreams(){
                     from: ['dreams', 'users', 'users'],
                     join: {source: 0, tipo: types.join.left, on: 'users_key', where: ''},
                     fields: [
-
+                        '_none_'
                     ]
                 }
             },
@@ -440,7 +440,7 @@ function Dreams(){
                     from: ['dreams', 'users', 'users'],
                     join: {source: 0, tipo: types.join.left, on: 'users_key', where: ''},
                     fields: [
-
+                        '_none_'
                     ]
                 }
             },
@@ -474,7 +474,7 @@ function Dreams(){
                     from: ['dreams', 'users', 'users'],
                     join: {source: 0, tipo: types.join.left, on: 'users_key', where: ''},
                     fields: [
-
+                        '_none_'
                     ]
                 }
             },
@@ -503,13 +503,6 @@ function Dreams(){
                     from: ['dreams', 'dreams', 'dreams'],
                     force_fields: this.def_fields
                 },
-                1: {
-                    from: ['dreams', 'users', 'users'],
-                    join: {source: 0, tipo: types.join.left, on: 'users_key', where: ''},
-                    fields: [
-
-                    ]
-                }
             },
             where: [
                 ['AND', 0, '_active', '=', '1'],
@@ -567,6 +560,7 @@ function Dreams(){
         if (this.params['_mobile_']) {
             delete(row['_key_']);
             delete(row['_selected_']);
+            delete(row['_deleted_']);
         }
     };
 
