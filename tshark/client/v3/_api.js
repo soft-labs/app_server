@@ -639,6 +639,9 @@ $.fn.api.settings.api = {};
 
             if ($('.ui.modal.' + mod.path + '-form').length) {
                 $('.ui.modal.' + mod.path + '-form')
+                    .modal({
+                        allowMultiple: true
+                    })
                     .modal('show');
             }
         }
