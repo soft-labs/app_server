@@ -141,14 +141,7 @@ function Dreams(){
      */
     this.def_fields = [
         'dreams_key', 'users_key', 'owner_key',
-        '_creation_date',
-        // '_comments', '_likes', '_albuns', '_dreamers'
-        '_status', 'description', 'img_cover'
-
-
-        /*'_active', '_banned',
-         '_last_changed_date', '_exclusion_date', '_coming_true_date', '_came_true_date',
-         '_privacy'*/
+        '_creation_date', '_status', 'description', 'img_cover'
     ];
 
     /**
@@ -584,7 +577,19 @@ function Dreams(){
      * Evento chamado ao final da operação POST :: Insert
      * @param ret Objeto de retorno
      */
-    this.onAfterInsert = function *(ret){
+    this.onAfterInsert = function *(ret, ctx){
+        if (this.params['dreamers']){
+            if (typeof this.params.dreamers == 'string'){
+                this.params.dreamers = this.params.dreamers.split(',');
+            }
+            var rel = this.initObj(['dreams', 'users', 'users_dreams_rel'], ctx);
+            for (var u = 0; u < this.params.dreamers.length; u++){
+                rel.params.row.users_key = this.params.dreamers[u];
+                yield rel.insert(ctx);
+            }
+        }
+
+
         var ok = yield this.saveDreamImage();
         if (ok){
             yield this.update(ctx);
@@ -769,7 +774,7 @@ function Dreams(){
 
         if (img_cover && this.params.row['dreams_key']){
             var img = this.engine.saveBase64Image(
-                "dreams/_imgs/dreams/c_" + this.params.row['dreams_key'],
+                "apps/dreams/_common/_imgs/dreams/c_" + this.params.row['dreams_key'],
                 img_cover
             );
             this.params.row['img_cover'] = img.substr(7);

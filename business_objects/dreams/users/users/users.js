@@ -720,7 +720,7 @@ function Users(){
         // Imagem de profile
         if (img_profile && (img_profile.length > 1000) && this.params.row['users_key']){
             var img = this.engine.saveBase64Image(
-                "dreams/_imgs/users/p_" + this.params.row['users_key'],
+                "apps/dreams/_common/_imgs/users/p_" + this.params.row['users_key'],
                 img_profile
             );
             this.params.row['img_profile'] = img.substr(7);
@@ -730,7 +730,7 @@ function Users(){
         // Imagem de profile
         if (img_background && (img_background.length > 1000) && this.params.row['users_key']){
             var img = this.engine.saveBase64Image(
-                "dreams/_imgs/users/b_" + this.params.row['users_key'],
+                "apps/dreams/_common/_imgs/users/b_" + this.params.row['users_key'],
                 img_background
             );
             this.params.row['img_background'] = img.substr(7);
