@@ -29,6 +29,7 @@ $(document).ready(function() {
             'dbms.financeiro.fin_lancamentos',
             'dbms.movimentacoes.mov_tipos',
             'dbms.movimentacoes.movimentacoes',
+            'dbms.contabil.cont_historicos_resultados_rel'
         ]
         
     });

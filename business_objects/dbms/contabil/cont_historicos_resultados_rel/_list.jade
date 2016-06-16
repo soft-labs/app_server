@@ -1,14 +1,44 @@
-//
-    Template default para: dbms.contabil.cont_historicos_resultados_rel
-    Criado em Mon Jun 13 2016 08:55:41 GMT-0300 (BRT)
-
-table.ui.compact.striped.celled.table
+table.ui.selectable.table
     thead
-        th Cont Historicos
-        th Cont Centro Resultados
-        th Percentual
+        th.ten.wide Centro de Resultados
+        th.four.wide Percentual
+        th.two.wide Remover
     tbody
-        tr(rv-each-row='dbms.contabil.cont_historicos_resultados_rel.data.rows')
-            td {row.cont_historicos_key}
-            td {row.cont_centro_resultados_key}
-            td {row.percentual}
+        tr(
+            rv-each-row='dbms.contabil.cont_historicos_resultados_rel.data.rows'
+            rv-row-key='row.end_tipos_key'
+            rv-hide='row._deleted_'
+        )
+            td {row.codigo} - {row.centro_resultado}
+            td {row.percentual}%
+            td
+                button.mini.circular.ui.red.icon.button
+                    i.icon.delete
+
+.ui.mini.compact.left.floated.secondary.menu
+
+    .item
+        button.ui.green.labeled.icon.button(
+            server='dbms contabil cont_historicos_resultados_rel create'
+        )
+            i.plus.icon
+            | Acrescentar
+
+.ui.modal(class='dbms contabil cont_historicos_resultados_rel-form')
+
+    // Header
+    .ui.header
+        i.big.icon(class='browser')
+        .content
+            | Centro de Resultados
+
+    // Form
+    div.content(class='dbms contabil cont_historicos_resultados_rel-form-area')
+
+    // Botões
+    div.actions
+        div.ui.green.button.ok()
+            | Salvar Alterações
+
+        div.ui.orange.button.cancel()
+            | Cancelar

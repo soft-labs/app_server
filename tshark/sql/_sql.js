@@ -639,6 +639,9 @@ SQL.prototype._select = function *(provider, obj, meta){
             }
         }
 
+        row._selected_ = 0;
+        row._deleted_ = 0;
+
         data.rows.push(row);
         return data;
 
@@ -697,6 +700,7 @@ SQL.prototype._processResults = function *(sqlParams, results, obj, sql, meta){
         
         // Selected
         row._selected_ = 0;
+        row._deleted_ = 0;
 
         // Em raros casos onde não houver fields pro sql, será forçado um '*', e
         // essa entrada aqui garantirá que todos os fields fiquem em lower
@@ -853,7 +857,6 @@ SQL.prototype.change = function *(op, source, obj) {
     // Executa
     results = yield this.db._exec(sql, obj);
     return yield this.db.processChangeResults(op, results, obj);
-    
 };
 
 /**

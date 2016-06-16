@@ -477,7 +477,7 @@ function FinAPagar(){
     /**
      * Evento chamado ao final da operação DELETE :: Delete
      * @param ret Objeto de retorno
-     *
+     */
     this.onAfterDelete = function *(ret, ctx){
 
     };

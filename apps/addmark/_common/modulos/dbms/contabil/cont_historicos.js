@@ -22,7 +22,7 @@ tshark.modulos._add('dbms.contabil.cont_historicos', {
      * Chamado após receber qualquer das interfaces de formulário
      */
     onAfterForm: function(response, next){
-        alert(1);
+        dbms.contabil.cont_historicos_resultados_rel.list({template:'_list'});
     },
 
     /**
@@ -169,9 +169,10 @@ tshark.modulos._add('dbms.contabil.cont_historicos', {
 
     /**
      * Chamado antes de enviar os dados de edição ao server
-     *
+     */
     onBeforeUpdate: function(el, settings){
 
+        tshark.send({'subrow':dbms.contabil.cont_historicos_resultados_rel.data.rows});
 
         // Libera ou não para continuar
         return true;

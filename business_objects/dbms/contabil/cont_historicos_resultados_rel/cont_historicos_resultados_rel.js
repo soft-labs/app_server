@@ -30,16 +30,17 @@ function ContHistoricosResultadosRel(){
                     } 
                 }, 
                 cont_centro_resultados_key: {
-                    tipo: types.comp.key, label: 'Cont Centro Resultados:',
-                    data: { 
+                    //tipo: types.comp.key, label: 'Centro de Resultados:',
+                    tipo: types.comp.choose, label: 'Centro de Resultados:',
+                    data: {
                         key: ['cont_centro_resultados_key'], 
                         from: ['dbms', 'contabil', 'cont_centro_resultados'], 
-                        template: '{cont_centro_resultados_key} - {cont_centro_resultado}', 
+                        template: '{codigo} - {centro_resultado}',
                         provider: '' 
                     } 
                 }, 
                 percentual: {
-                    tipo: types.comp.float, label: 'Percentual:'
+                    tipo: types.comp.percent, label: 'Percentual:'
                 }
             }
         }
@@ -65,8 +66,8 @@ function ContHistoricosResultadosRel(){
                 ]
             },
             linhas: [
-                {titulo: "Informações de cont_historicos_resultados_rel"},
-                {cont_historicos_key: 25, cont_centro_resultados_key: 25, percentual: 50}
+                {titulo: "Divisão por Centro de Resultado"},
+                {cont_centro_resultados_key: 70, percentual: 30}
             ],
             ctrls: {
                 
@@ -103,7 +104,7 @@ function ContHistoricosResultadosRel(){
                     fields: [
                         
                     ]
-                } 
+                }
             },
             where: [ 
                 ['AND', 0, 'cont_historicos_key', types.where.check],

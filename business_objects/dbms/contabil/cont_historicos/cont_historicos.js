@@ -41,7 +41,7 @@ function ContHistoricos(){
                         label: 'value',
                         rows: [
                             {tipo:1 ,value : 'Tipo Um'},
-                            {tipo:1 ,value : 'Tipo Dois'},
+                            {tipo:2 ,value : 'Tipo Dois'},
                         ]
                     },
                     label: 'Tipo:'
@@ -78,12 +78,29 @@ function ContHistoricos(){
             linhas: [
                 {titulo: "Informações da Categoria de Lançamento"},
                 {ativo: 9, historico: 50, cont_determinacao_key: 30,tipo: 15,},
-                {template: 100}
+                {tabs:100},
             ],
+            tabs: {
+                tabs:
+                    [
+                        {
+                            label: 'Centro de Resultados',
+                            linhas: [
+                                {titulo: "Centros de Resultados da Categoria"},
+                                {template: 100}
+                            ]
+                        },
+                        {
+                            label: 'Observações',
+                            linhas: [
+                                {observacoes: 100}
+                            ]
+                        },
+                    ]
+            },
             ctrls: {
                 template: {
-                    id: 'teste-labs',
-                    html:  '<b>OI</b>',
+                    id: 'dbms contabil cont_historicos_resultados_rel-list-area',
                     tipo: types.comp.template
                 }
             }
@@ -411,10 +428,35 @@ function ContHistoricos(){
 
     /**
      * Evento chamado ao final da operação PUT :: Update
-     * @param ret Objeto de retorno
-     *
+     * @param ret Objeto de r   etorno
+     */
     this.onAfterUpdate = function *(ret, ctx){
+        var cont_historicos_key = this.params.key;
+        var subrow = this.params.subrow;
+        var obj_hist_rel = this.engine.initObj(['dbms','contabil','cont_historicos_resultados_rel'],ctx);
 
+
+        for( var row in subrow )
+        {
+            subrow[row]['cont_historicos_key'] = cont_historicos_key;
+            obj_hist_rel.params.row = subrow[row];
+            yield obj_hist_rel.insert(ctx);
+        }
+
+        /*
+        subrow.forEach(function(row){
+            row['cont_historicos_key'] = cont_historicos_key;
+            obj_hist_rel.params.row = row;
+            yield obj_hist_rel.insert(ctx);
+        });
+        /**/
+        /*
+        subrow.forEach((row) => {
+            row['cont_historicos_key'] = cont_historicos_key;
+            obj_hist_rel.params.row = row;
+            yield obj_hist_rel.insert(ctx);
+        });
+        /**/
     };
 
      /* */
