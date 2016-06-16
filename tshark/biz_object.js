@@ -496,7 +496,7 @@ BizObject.prototype.select = function *(ctx, provider, params, from){
 BizObject.prototype.change = function *(op, ctx){
     var dts = yield this.engine.getConnection(ctx)
         , res = {
-            result: false
+            success: false
         }
     ;
 
@@ -541,33 +541,33 @@ BizObject.prototype.change = function *(op, ctx){
                         }
 
                         // Insere
-                        res.result = yield dts.insert(source, mod);
+                        res.success = yield dts.insert(source, mod);
 
                         // Propaga
-                        if (res.result)
+                        if (res.success)
                         {
-                            if (res.result != '_empty_values_') {
+                            if (res.success != '_empty_values_') {
                                 var key = source.src.metadata.key;
                                 res['insert'] = res['insert'] || {};
-                                res.insert[key] = res.result;
-                                ctx.request.body.row[key] = res.result;
+                                res.insert[key] = res.success;
+                                ctx.request.body.row[key] = res.success;
                             }
                         } 
                         break;
 
                     case 'update' :
-                        res.result = yield dts.update(source, mod);
+                        res.success = yield dts.update(source, mod);
                         break;
 
                     case 'delete' :
-                        res.result = yield dts.delete(source, mod);
+                        res.success = yield dts.delete(source, mod);
                         break;
                 }
 
                 // Rollback em caso de falha
-                if (!res.result){
+                if (!res.success){
                     yield dts.rollback();
-                    return {result: false};
+                    return {success: false};
                 }
                 
                 if (mod['onAfter' + evento]) {

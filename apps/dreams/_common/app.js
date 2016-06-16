@@ -42,6 +42,9 @@ app = $.extend(true, app, {
     // Inicializador da aplicação
     init: function () {
 
+        // Áreas ativas
+        app.areas.init('app_home', 'app_apis');
+
         // Ativa o menu principal
         $('.app-menu-trigger')
             .popup({
@@ -52,6 +55,31 @@ app = $.extend(true, app, {
             })
         ;
 
+        //region :: Automod
+
+        this.automod.init({
+            area    : 'app_home',
+            subarea : 'app_automod',
+            icon    : 'settings',
+            itens: [
+                {
+                    label: "Usuários",
+                    info: "Administração de usuários cadastrados no Dreams",
+                    icon: "left floated big users icon",
+                    path: "dreams users users"
+                },
+                {
+                    label: "Sonhos",
+                    info: "Gestão dos sonhos cadastrados",
+                    icon: "left floated big cloud icon",
+                    path: "dreams dreams dreams"
+                }
+            ]
+        });
+
+        //endregion
+        
+        
         // Dataset do app
         this.data = new Dataset();
         
@@ -93,8 +121,8 @@ app = $.extend(true, app, {
                 label: 'Profile',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'},
-                    {op: 'edit',    label: 'PUT  "\\"'},
-                    {op: 'create',  label: 'POST "\\"'},
+                    {op: 'put',     label: 'PUT  "\\"'},
+                    {op: 'post',    label: 'POST "\\"'},
                 ]
             },
             {
@@ -102,7 +130,7 @@ app = $.extend(true, app, {
                 label: 'Follow',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'},
-                    {op: 'create',  label: 'POST "\\"'},
+                    {op: 'post',    label: 'POST "\\"'},
                     {op: 'delete',  label: 'DELETE "\\id"'}
                 ]
             },
@@ -110,7 +138,7 @@ app = $.extend(true, app, {
                 id   : 'followall',
                 label: 'FollowAll',
                 verbs: [
-                    {op: 'insert',  label: 'POST "\\"'},
+                    {op: 'post',    label: 'POST "\\"'},
                 ]
             },
             {
@@ -118,7 +146,7 @@ app = $.extend(true, app, {
                 label: 'Followers',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'},
-                    {op: 'edit',    label: 'PUT  "\\"'},
+                    {op: 'put',     label: 'PUT  "\\"'},
                     {op: 'delete',  label: 'DELETE "\\id"'}
                 ]
             },
@@ -129,10 +157,8 @@ app = $.extend(true, app, {
                 label: 'MyDreams',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'},
-                    {op: 'search',  label: 'GET  "\\?query=params"'},
-                    {op: 'get',     label: 'GET  "\\id"'},
-                    {op: 'create',  label: 'POST "\\"'},
-                    {op: 'edit',    label: 'PUT  "\\id"'},
+                    {op: 'post',    label: 'POST "\\"'},
+                    {op: 'put',     label: 'PUT  "\\id"'},
                     {op: 'delete',  label: 'DELETE "\\id"'}
                 ]
             },
@@ -157,8 +183,8 @@ app = $.extend(true, app, {
                 label: 'DreamToo',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'},
-                    {op: 'create',  label: 'POST "\\"'},
-                    {op: 'edit',    label: 'PUT  "\\id"'},
+                    {op: 'post',    label: 'POST "\\"'},
+                    {op: 'put',     label: 'PUT  "\\id"'},
                     {op: 'delete',  label: 'DELETE "\\id"'}
                 ]
             },
@@ -175,27 +201,28 @@ app = $.extend(true, app, {
                 id   : 'tocometrue',
                 label: 'To Come True',
                 verbs: [
-                    {op: 'list',    label: 'GET  "\\"'},
-                    {op: 'search',  label: 'GET  "\\?query=params"'},
-                    {op: 'get',     label: 'GET  "\\id"'},
+                    {op: 'list',    label: 'GET  "\\"'}
                 ]
             },
             {
                 id   : 'comingtrue',
                 label: 'Coming True',
                 verbs: [
-                    {op: 'list',    label: 'GET  "\\"'},
-                    {op: 'search',  label: 'GET  "\\?query=params"'},
-                    {op: 'get',     label: 'GET  "\\id"'},
+                    {op: 'list',    label: 'GET  "\\"'}
                 ]
             },
             {
                 id   : 'cametrue',
                 label: 'CameTrue',
                 verbs: [
-                    {op: 'list',    label: 'GET  "\\"'},
-                    {op: 'search',  label: 'GET  "\\?query=params"'},
-                    {op: 'get',     label: 'GET  "\\id"'},
+                    {op: 'list',    label: 'GET  "\\"'}
+                ]
+            },
+            {
+                id   : 'suggested',
+                label: 'Suggested',
+                verbs: [
+                    {op: 'list',    label: 'GET  "\\"'}
                 ]
             },
             
@@ -204,10 +231,8 @@ app = $.extend(true, app, {
                 label: 'DreamComments',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'},
-                    {op: 'search',  label: 'GET  "\\?query=params"'},
-                    {op: 'get',     label: 'GET  "\\id"'},
-                    {op: 'create',  label: 'POST "\\"'},
-                    {op: 'edit',    label: 'PUT  "\\id"'},
+                    {op: 'post',    label: 'POST "\\"'},
+                    {op: 'put',     label: 'PUT  "\\id"'},
                     {op: 'delete',  label: 'DELETE "\\id"'}
                 ]
             },
@@ -216,7 +241,7 @@ app = $.extend(true, app, {
                 label: 'DreamLikes',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'},
-                    {op: 'create',  label: 'POST "\\"'},
+                    {op: 'post',    label: 'POST "\\"'},
                     {op: 'delete',  label: 'DELETE "\\id"'}
                 ]
             },
@@ -226,9 +251,8 @@ app = $.extend(true, app, {
                 label: 'Album',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'},
-                    {op: 'get',     label: 'GET  "\\id"'},
-                    {op: 'edit',    label: 'PUT  "\\id"'},
-                    {op: 'create',  label: 'POST "\\"'},
+                    {op: 'put',     label: 'PUT  "\\id"'},
+                    {op: 'post',    label: 'POST "\\"'},
                     {op: 'delete',  label: 'DELETE "\\id"'}
                 ]
             },
@@ -237,10 +261,8 @@ app = $.extend(true, app, {
                 label: 'AlbumComments',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'},
-                    {op: 'search',  label: 'GET  "\\?query=params"'},
-                    {op: 'get',     label: 'GET  "\\id"'},
-                    {op: 'create',  label: 'POST "\\"'},
-                    {op: 'edit',    label: 'PUT  "\\id"'},
+                    {op: 'post',    label: 'POST "\\"'},
+                    {op: 'put',     label: 'PUT  "\\id"'},
                     {op: 'delete',  label: 'DELETE "\\id"'}
                 ]
             },
@@ -249,8 +271,8 @@ app = $.extend(true, app, {
                 label: 'AlbumLikes',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'},
-                    {op: 'create',  label: 'POST "\\"'},
-                    {op: 'edit',    label: 'PUT  "\\id"'},
+                    {op: 'post',    label: 'POST "\\"'},
+                    {op: 'put',     label: 'PUT  "\\id"'},
                     {op: 'delete',  label: 'DELETE "\\id"'}
                 ]
             },
@@ -260,10 +282,8 @@ app = $.extend(true, app, {
                 label: 'Denuncy',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'},
-                    {op: 'search',  label: 'GET  "\\?query=params"'},
-                    {op: 'get',     label: 'GET  "\\id"'},
-                    {op: 'create',  label: 'POST "\\"'},
-                    {op: 'edit',    label: 'PUT  "\\id"'}
+                    {op: 'post',    label: 'POST "\\"'},
+                    {op: 'put',     label: 'PUT  "\\id"'}
                 ]
             },
             
@@ -273,10 +293,8 @@ app = $.extend(true, app, {
                 label: 'Dreams (API Global)',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'},
-                    {op: 'search',  label: 'GET  "\\?query=params"'},
-                    {op: 'get',     label: 'GET  "\\id"'},
-                    {op: 'create',  label: 'POST "\\"'},
-                    {op: 'edit',    label: 'PUT  "\\id"'},
+                    {op: 'post',    label: 'POST "\\"'},
+                    {op: 'put',     label: 'PUT  "\\id"'},
                     {op: 'delete',  label: 'DELETE "\\id"'}
                 ]
             },            
@@ -285,10 +303,8 @@ app = $.extend(true, app, {
                 label: 'User (API Global)',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'},
-                    {op: 'search',  label: 'GET  "\\?query=params"'},
-                    {op: 'get',     label: 'GET  "\\id"'},
-                    {op: 'create',  label: 'POST "\\"'},
-                    {op: 'edit',    label: 'PUT  "\\id"'},
+                    {op: 'post',    label: 'POST "\\"'},
+                    {op: 'put',     label: 'PUT  "\\id"'},
                     {op: 'delete',  label: 'DELETE "\\id"'}
                 ]
             }
@@ -335,7 +351,7 @@ app = $.extend(true, app, {
      * @param mod
      * @param response
      */
-    onAfterForm: function(mod, response){
+    zonAfterForm: function(mod, response){
 
         // Bind
         tshark.rebind(                              // Rebind pq a cada form o módulo de origem de dados pode ter mudado
@@ -354,7 +370,7 @@ app = $.extend(true, app, {
     /**
      *
      */
-    onBeforeInsert: function(el, settings){
+    zonBeforeInsert: function(el, settings){
 
         var p = $('#params').val();
         if (!p) return true;
@@ -376,7 +392,7 @@ app = $.extend(true, app, {
         return true;
     },
 
-    onBeforeUpdate: function(el, settings) {
+    zonBeforeUpdate: function(el, settings) {
         settings.data.row['img_profile'] = extra_data['img_profile'];
         return true;
     },
@@ -384,7 +400,7 @@ app = $.extend(true, app, {
     /**
      * Centraliza a exibição de mensagens de update e insert.
      */
-    onAfterSave: function(mod, response, next){
+    zonAfterSave: function(mod, response, next){
         if (response['result']){
             alertify.success('Operação executada com sucesso!');
             $('#listagem')
@@ -445,16 +461,22 @@ app = $.extend(true, app, {
         tshark.send(q);
 
         switch (api){
-            case 'get':
-            case 'edit':
-            case 'list':
+            case 'put':
             case 'delete':
+                tshark.send('row', q);
+                tshark.send('key', k);
                 api += ' ' + k;
                 break;
 
-            case 'zforgotpwd':
-                tshark.call('dreams users forgotpwd');
-                return;
+            case 'post':
+                tshark.send('row', q);
+                break;
+
+            case 'get':
+            case 'edit':
+            case 'list':
+                api += ' ' + k;
+                break;
 
             case 'followall':
                 tshark.call('dreams users followall');

@@ -6,58 +6,40 @@ module.exports = {
 
         // Menu de Usuários
         {
-            label: "Dreamers",
-            area: "app-dreamers",
-            icon: "users icon",
-            submenu: [
-                {
-                    label: "Visualizar"
-                },
-                {
-                    label: "Banidos"
-                },
-                {
-                    label: "???"
-                }
-            ]
-        },
-
-        // Menu de Sonhos
-        {
-            label: "Dreams",
-            area: "app-dreams",
-            icon: "cloud icon",
-            submenu: [
-                {
-                    label: "Visualizar"
-                },
-                {
-                    label: "Sugeridos"
-                },
-                {
-                    label: "???"
-                }
-            ]
-        },
-
-
-        // Menu de Sistema
-        {
             label: "Sistema",
-            area: "app-sistema",
+            area: "app_home",
             icon: "options icon",
             submenu: [
                 {
+                    label: "Sonhos",
+                    icon: "cloud icon",
+                    client: 'app.automod.show',
+                    index: '1'
+                },
+                {
+                    label: "Usuários",
+                    icon: "users icon",
+                    client: 'app.automod.show',
+                    index: '0'
+                },
+                {
                     label: "APIs",
+                    icon: "terminal icon",
+                    subarea: "app_apis"
                 },
                 {
-                    label: "Configurações"
+                    label: "Configurações",
+                    icon: "settings icon",
+                    subarea: "app_config"
                 },
                 {
-                    label: "Acesso"
+                    label: "Acesso",
+                    icon: "protect icon",
+                    subarea: "app_acesso"
                 },
                 {
                     label: "Sair do Sistema",
+                    icon: "log out icon",
                     api: "sys app security logout"
                 }
             ]

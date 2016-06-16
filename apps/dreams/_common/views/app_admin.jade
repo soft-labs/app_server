@@ -1,0 +1,20 @@
+//
+   Created by labs on 15/06/16.
+
+.ui.container.transition.hidden.app_admin
+    .ui.centered.cards
+        .card(
+            rv-each-mod='automod.itens'
+        )
+            .content
+                i(rv-class="mod.icon | or 'left floated big settings icon'")
+                .header
+                    | {mod.label}
+                .meta {mod.info}
+
+            .ui.bottom.attached.button(
+                client='app.automod.show'
+                rv-data-index='mod._index_'
+            )
+                i.edit.icon
+                | Acessar

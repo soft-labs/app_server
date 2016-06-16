@@ -70,13 +70,13 @@ TShark.prototype.api_map = {
 
     insert  :               ['POST',      '/'],
     update  :               ['PUT',       '/{key}'],
-    delete  :               ['DELETE',    '/{key}'],
 
     save    :               ['POST',      '/'],
     exec    :               ['POST',      '/{func}'],
     
     post    :               ['POST',      '/'],
-    put     :               ['PUT',       '/'],
+    put     :               ['PUT',       '/{key}'],
+    delete  :               ['DELETE',    '/{key}'],
 
 
     // Comandos internos    | Verbo       | URL
@@ -259,18 +259,27 @@ $.fn.api.settings.api = {};
             , map   = api.pop()
             , path  = api.join('.')
             , Func  = map.capitalize()
+            , api_url = ''
+            , key   = ''
         ;
 
+        if (!isNaN(map)){
+            key = map;
+            map = api.pop();
+        }
+
         // Ajusta função
-        if (!tshark.api_map[map]){
+        if (!tshark.api_map[map] && isNaN(map)){
             $(el).data('func', map);
             map = 'exec';
         }
 
-        if (!tshark.api_map[map]) {
+        if (!tshark.api_map[map] && isNaN(map)) {
             alertify.error("API não reconhecida: '" + map + "'");
             return false;
         }
+
+        api_url = key ? '/' + key : tshark.api_map[map][1];
 
         // Só roda em modulo registrado
         if (tshark.isRegistered(path)) {
@@ -342,7 +351,7 @@ $.fn.api.settings.api = {};
             tshark._send(settings);
 
             // Ajusta settings
-            settings.url    = router + '/' + api.join('/') + tshark.api_map[map][1];
+            settings.url    = router + '/' + api.join('/') + api_url;
             settings.method = method = tshark.api_map[map][0];
             settings.dataType = 'JSON';
             settings['_on_before_'] = false;

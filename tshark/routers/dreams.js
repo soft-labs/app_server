@@ -16,29 +16,31 @@ const router  = require('koa-router')()
 ;
 
 var
+
     // Mapa de APIs dinâmicas
     apiMap = {
 
         // Login
         'login'         : {mod: 'dreams/users/users',                  provider: 'login'},
-        'forgotpwd'     : {mod: 'dreams/users/users',                  exec: 'forgotPwd'},
+        'forgotpwd'     : {mod: 'dreams/users/users',                  exec    : 'forgotPwd'},
 
         // Usuários
-        'users'         : {mod: 'dreams/users/users',                  provider: 'default'},
+        'users'         : {mod: 'dreams/users/users',                  provider: 'mobile'},
         'profile'       : {mod: 'dreams/users/users',                  provider: 'profile'},
         'follow'        : {mod: 'dreams/users/user_follow',            provider: 'default'},
         'followall'     : {mod: 'dreams/users/user_follow',            provider: 'default'},
         'followers'     : {mod: 'dreams/users/user_followers',         provider: 'default'},
 
         // Sonhos
-        'dreams'        : {mod: 'dreams/dreams/dreams',                provider: 'default'},
+        'dreams'        : {mod: 'dreams/dreams/dreams',                provider: 'mobile'},
         'mydreams'      : {mod: 'dreams/dreams/dreams',                provider: 'mydreams'},
         'feedall'       : {mod: 'dreams/dreams/dreams',                provider: 'feedall'},
         'feedfollowing' : {mod: 'dreams/dreams/dreams',                provider: 'feedfollowing'},
-        'dreamtoo'      : {mod: 'dreams/users/users_dreams_rel',       provider: 'default'},
+        'dreamtoo'      : {mod: 'dreams/dreams/dreams',                provider: 'dreamtoo'},
         'tocometrue'    : {mod: 'dreams/dreams/dreams',                provider: 'tocometrue'},
         'comingtrue'    : {mod: 'dreams/dreams/dreams',                provider: 'comingtrue'},
         'cametrue'      : {mod: 'dreams/dreams/dreams',                provider: 'cametrue'},
+        'suggested'     : {mod: 'dreams/dreams/dreams',                provider: 'suggested'},
 
         'albuns'        : {mod: 'dreams/dreams/dream_albuns',          provider: 'default'},
         'albumcomments' : {mod: 'dreams/comments/comments_albuns_rel', provider: 'default'},
@@ -47,17 +49,16 @@ var
         'dreamcomments' : {mod: 'dreams/comments/comments_dreams_rel', provider: 'default'},
         'dreamlikes'    : {mod: 'dreams/users/users_like_dreams_rel',  provider: 'default'},
 
-
         'denuncy'       : {mod: 'dreams/denuncy/denuncy',              provider: 'default'},
         'dreamdenuncy'  : {mod: 'dreams/denuncy/denuncy_dreams_rel',   provider: 'default'},
         'albumdenuncy'  : {mod: 'dreams/denuncy/denuncy_albuns_rel',   provider: 'default'}
     }
 
     // Token de segurança
-    , security_token = 'b778b0aad2ceda1b1577a77ba1f295e14fce706b33d17469cf477194f76a633a'
+    , security_token    = 'b778b0aad2ceda1b1577a77ba1f295e14fce706b33d17469cf477194f76a633a'
 
     // Retorno de status
-    , send_http_status = true
+    , send_http_status  = false
 ;
 
 /**
@@ -145,6 +146,10 @@ router.get('/mobile/dreams/*', function *(next) {
 
     if (mod) {
         mod.params['_mobile_'] = true;
+        if (this.state.api.path[3]) {
+            mod.params[mod.source.metadata.key] = this.state.api.path[3];
+        }
+        
         this.state.api.call = this.request.query['query'] ? 'search' : 'list';
 
         if (!mod.params['provider']) {
@@ -227,102 +232,48 @@ router.post('/mobile/dreams/*', function *(next) {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-function *old(){
-        // Form de edição
-        if (len == 5 && ctx.state.api.path[4] == 'edit') {
-            ctx.state.api.call = 'edit';
-            mod.params['key'] = ctx.state.api.path[3];
-            ctx.body = yield mod.form(ctx);
-
-        } else {
-
-            // Form de inserção
-            if (len == 4 && ctx.state.api.path[3] == 'new') {
-                ctx.state.api.call = 'create';
-                mod.params['key'] = 'NEW_KEY';
-                ctx.body = yield mod.form(ctx);
-
-                // Listagem
-            } else {
-                ctx.state.api.call = (ctx.request.query['query']
-                        ? 'search'
-                        : len == 4 && ctx.state.api.path[3]
-                        ? 'get'
-                        : 'list'
-                );
-                if (len == 4) {
-                    mod.params['key'] = ctx.state.api.path[3];
-                }
-                if (!mod.params['provider']) {
-                    mod.params['provider'] = {}
-                }
-
-                if (!mod.params['provider']['id']) {
-                    mod.params['provider']['id'] = ctx.app.context.config.apiMap[ctx.state.api.path[2]].provider;
-                }
-
-                /*
-                 mod.params['provider'] = {
-                 id: mod.params['provider'] ? mod.params['provider'] : ctx.app.context.config.apiMap[ctx.state.api.path[2]].provider
-                 };*
-
-                if (ctx.app.context.config.apiMap[ctx.state.api.path[2]]['exec']){
-                    var func = ctx.app.context.config.apiMap[ctx.state.api.path[2]]['exec'];
-                    ctx.body = yield mod[func](ctx);
-
-                } else {
-                    ctx.body = yield mod.get(ctx);
-                }
-            }
-        }
-    }
-}*/
-
 /**
  * Entrada de API :: PUT
  *   Oferece suporte para apis:
  *    - update  | url: owner/pack/mod/123                 | Atualiza um registro no mod
  * 25/04/16
  */
-router.put(/^\/api\/dreams\/.*/, function *(next) {
+router.put('/mobile/dreams/*', function *(next) {
 
     /**
      * Instancia o módulo
      * @type BizObject
      */
-    var mod   = this.app.engine.initObj(this.state.api.path, this)
-        , len = this.state.api.path.length
-        ;
+    var api      = this.state.api.path[2]
+        , map    = apiMap[api]
+        , mod    = this.app.engine.initObj(map.mod.split('/'), this)
+        , status = 417 // Falhou
+        , res    = {
+            success: 0
+        }
+    ;
 
     if (mod) {
-        // Execução de função
         this.state.api.call = 'update';
-        this.body = yield mod.update(this);
+        mod.params.key = this.state.api.path[3];
+        res = yield mod.update(this);
+        if (res.success){
+            status = 200;
+        }
     }
 
-    /**
-     * Finaliza
-     */
-    yield next;
+    // Status
+    if (send_http_status) {
+        this.response.status = status;
+    } else {
+        res['status'] = status;
+    }
+
+    // Retorna
+    this.body = res;
 
 });
+
 
 /**
  * Entrada de API :: DELETE
@@ -330,30 +281,42 @@ router.put(/^\/api\/dreams\/.*/, function *(next) {
  *    - delete  | url: owner/pack/mod/123                 | Remove um registro no mod
  * 25/04/16
  */
-router.delete(/^\/api\/dreams\/.*/, function *(next) {
+router.delete('/mobile/dreams/*', function *(next) {
 
     /**
      * Instancia o módulo
      * @type BizObject
      */
-    var mod   = this.app.engine.initObj(this.state.api.path, this)
-        , len = this.state.api.path.length
-        ;
+    var api      = this.state.api.path[2]
+        , map    = apiMap[api]
+        , mod    = this.app.engine.initObj(map.mod.split('/'), this)
+        , status = 417 // Falhou
+        , res    = {
+            success: 0
+        }
+    ;
 
     if (mod) {
-        // Execução de função
         this.state.api.call = 'delete';
-        mod.params['key'] = this.state.api.path[3];
-        this.body = yield mod.delete(this);
+        mod.params.key = this.state.api.path[3];
+        res = yield mod.delete(this);
+        if (res.success){
+            status = 200;
+        }
     }
 
-    /**
-     * Finaliza
-     */
-    yield next;
+    // Status
+    if (send_http_status) {
+        this.response.status = status;
+    } else {
+        res['status'] = status;
+    }
+
+    // Retorna
+    this.body = res;
 
 });
 
 
-
+// Exporta router
 module.exports = router;

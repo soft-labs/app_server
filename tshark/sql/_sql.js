@@ -194,40 +194,47 @@ SQL.prototype._parseFields = function(sqlParams, prov, ctx_fields, meta_fields, 
 
         // Fields mapeados
     } else {
-        var all = true; //sqlParams.fields == '*';
-        if (all){
-           // sqlParams.fields = [];
+        var none = false;
+        if (prov['fields'] && prov['fields'][0]){
+            none = (prov['fields'][0] == '_none_' || prov['fields'][0] == '_exclude_');
         }
-        for (var f in meta_fields){
 
-            // Primeiro a chegar entra
-            if (!sqlParams.fields[f]) {
-                var ok = all;
+        if (!none) {
+            var all = true; //sqlParams.fields == '*';
+            if (all) {
+                // sqlParams.fields = [];
+            }
+            for (var f in meta_fields) {
 
-                // Acrescenta _key
-                if (f.substr(-4) == '_key') {
-                    ok = true;
-                }
+                // Primeiro a chegar entra
+                if (!sqlParams.fields[f]) {
+                    var ok = all;
 
-                // Select all em fields
-                if (prov['fields'] && (prov['fields'] == '*' || prov['fields'][0] == '*')) {
-                    ok = true;
-                }
+                    // Acrescenta _key
+                    if (f.substr(-4) == '_key') {
+                        ok = true;
+                    }
 
-                // Explicitamente requisitado
-                if (prov['fields'] && prov['fields'].indexOf(f) > -1) {
-                    ok = true;
-                    prov['fields'][prov['fields'].indexOf(f)] = null;
-                }
+                    // Select all em fields
+                    if (prov['fields'] && (prov['fields'] == '*' || prov['fields'][0] == '*')) {
+                        ok = true;
+                    }
 
-                // Em contexto
-                if (ctx_fields.indexOf(f) > -1){
-                    ok = true;
-                }
+                    // Explicitamente requisitado
+                    if (prov['fields'] && prov['fields'].indexOf(f) > -1) {
+                        ok = true;
+                        prov['fields'][prov['fields'].indexOf(f)] = null;
+                    }
 
-                if (ok) {
-                    sqlParams.fields[f] = alias;
-                    sqlParams.meta[f] = meta_fields[f];
+                    // Em contexto
+                    if (ctx_fields.indexOf(f) > -1) {
+                        ok = true;
+                    }
+
+                    if (ok) {
+                        sqlParams.fields[f] = alias;
+                        sqlParams.meta[f] = meta_fields[f];
+                    }
                 }
             }
         }

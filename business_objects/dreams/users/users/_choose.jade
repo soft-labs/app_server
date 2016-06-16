@@ -1,0 +1,18 @@
+//
+    Template choose para: dbms.enderecos.end_tipos
+    Criado em Sun May 29 2016 08:57:57 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    thead
+        th Código
+        th Usuário
+        th Nome
+    tbody
+        tr.cursor(
+            rv-each-row='choose.data.rows'
+            rv-on-click='choose.select'
+            rv-data-key='row.users_key'
+        )
+            td {row.users_key}
+            td {row.username}
+            td {row.firstname} {row.lastname}
