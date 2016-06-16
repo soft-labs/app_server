@@ -431,32 +431,32 @@ function ContHistoricos(){
      * @param ret Objeto de r   etorno
      */
     this.onAfterUpdate = function *(ret, ctx){
+
         var cont_historicos_key = this.params.key;
+
+        //buscando todos subrows no client dataset
         var subrow = this.params.subrow;
+
+        //instanciando o objeto do módulo m:n
         var obj_hist_rel = this.engine.initObj(['dbms','contabil','cont_historicos_resultados_rel'],ctx);
 
-
+        //percorrendo cada subrow
         for( var row in subrow )
         {
-            subrow[row]['cont_historicos_key'] = cont_historicos_key;
-            obj_hist_rel.params.row = subrow[row];
-            yield obj_hist_rel.insert(ctx);
+            //se não tiver o código do histórico, é insert
+            if( subrow[row]['cont_historicos_key'] == "" )
+            {
+                subrow[row]['cont_historicos_key'] = cont_historicos_key;
+                obj_hist_rel.params.row = subrow[row];
+                yield obj_hist_rel.insert(ctx);
+            }
+            //senão update
+            else
+            {
+                obj_hist_rel.params.row = subrow[row];
+                yield obj_hist_rel.update(ctx);
+            }
         }
-
-        /*
-        subrow.forEach(function(row){
-            row['cont_historicos_key'] = cont_historicos_key;
-            obj_hist_rel.params.row = row;
-            yield obj_hist_rel.insert(ctx);
-        });
-        /**/
-        /*
-        subrow.forEach((row) => {
-            row['cont_historicos_key'] = cont_historicos_key;
-            obj_hist_rel.params.row = row;
-            yield obj_hist_rel.insert(ctx);
-        });
-        /**/
     };
 
      /* */

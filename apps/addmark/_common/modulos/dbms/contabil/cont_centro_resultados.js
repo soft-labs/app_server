@@ -15,7 +15,6 @@ tshark.modulos._add('dbms.contabil.cont_centro_resultados', {
     init: function(){
 
     },
-
     
     //region :: Eventos Aplicados
 

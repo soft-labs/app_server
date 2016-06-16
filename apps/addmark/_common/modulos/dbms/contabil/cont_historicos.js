@@ -22,7 +22,24 @@ tshark.modulos._add('dbms.contabil.cont_historicos', {
      * Chamado após receber qualquer das interfaces de formulário
      */
     onAfterForm: function(response, next){
-        dbms.contabil.cont_historicos_resultados_rel.list({template:'_list'});
+        var key = response.key;
+        dbms.contabil.cont_historicos_resultados_rel.list({template:'_list',cont_historicos_key:key});
+    },
+
+    /**
+     * Chamado após receber a interface de edição
+     *
+     onAfterEdit: function(response, next){
+        var key = response.key;
+        dbms.contabil.cont_historicos_resultados_rel.list({template:'_list',cont_historicos_key:key});
+    },
+
+     /**
+     * Chamado após receber a interface de inserção
+     *
+     onAfterCreate: function(response, next){
+        var key = response.key;
+        dbms.contabil.cont_historicos_resultados_rel.list({template:'_list',cont_historicos_key:key});
     },
 
     /**
@@ -93,13 +110,6 @@ tshark.modulos._add('dbms.contabil.cont_historicos', {
         return true;
     },
 
-     /**
-     * Chamado após receber a interface de edição
-     *
-    onAfterEdit: function(response, next){
-
-    },
-
     /* */
     //endregion
 
@@ -114,13 +124,6 @@ tshark.modulos._add('dbms.contabil.cont_historicos', {
 
         // Libera ou não para continuar
         return true;
-    },
-
-     /**
-     * Chamado após receber a interface de inserção
-     *
-    onAfterCreate: function(response, next){
-
     },
 
     /* */

@@ -6,13 +6,26 @@ table.ui.selectable.table
     tbody
         tr(
             rv-each-row='dbms.contabil.cont_historicos_resultados_rel.data.rows'
-            rv-row-key='row.end_tipos_key'
             rv-hide='row._deleted_'
         )
             td {row.codigo} - {row.centro_resultado}
-            td {row.percentual}%
             td
-                button.mini.circular.ui.red.icon.button
+                .ui.right.labeled.input
+                    input(
+                        type='text'
+                        class='ui fluid'
+                        onkeyup='tshark.mask.float(this)'
+                        onclick='tshark.mask.float(this)'
+                        rv-value='row.percentual'
+                        style='text-align:right'
+                    )
+                    .ui.label %
+
+            td
+                button.mini.circular.ui.red.icon.button(
+                    rv-row-key='row.cont_centro_resultados_key'
+                    client='dbms contabil cont_centro_resultados remover'
+                )
                     i.icon.delete
 
 .ui.mini.compact.left.floated.secondary.menu

@@ -846,7 +846,23 @@ SQL.prototype.change = function *(op, source, obj) {
 
     // Processa where
     if (op != 'ins') {
-        sql += upd + '\n  WHERE ' + key + " = '" + obj.params.row[key] + "' ";
+
+        sql += upd + '\n  WHERE ';
+
+        if( typeof key == 'string' )
+        {
+            sql += key + " = '" + obj.params.row[key] + "' ";
+        }
+        else
+        {
+            var and = "";
+
+            key.forEach(k => {
+                sql += and + k + " = '" + obj.params.row[k] + "' ";
+                and = ' AND ';
+            })
+        }
+
         sql += this.db.parseWhere(source['where'], obj.params);
 
     } else {
