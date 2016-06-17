@@ -89,13 +89,13 @@ block content
 
 
         // **** Cockpit **** //
-        .ui.container.transition.app_home
+        .ui.container.transition.hidden.app_home
             include app_home/home
 
-        .ui.container.app_financas.transition.hidden
+        .ui.container.transition.hidden.app_financas
             include app_financas/financas
 
-        .ui.container.app_integracoes.transition.hidden
+        .ui.container.transition.hidden.app_integracoes
             | Hello Integracoes
 
         .ui.container.transition.hidden.app_cadastros
@@ -104,7 +104,7 @@ block content
         .ui.container.transition.hidden.app_enderecos
             include app_enderecos/enderecos
 
-        .ui.container.app_sistema.transition.hidden
+        .ui.container.transition.hidden.app_sistema
             include app_sistema/sistema
 
 

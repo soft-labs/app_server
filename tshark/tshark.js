@@ -340,7 +340,7 @@ TShark.prototype.getConnection = function *(ctx, id){
             }
 
             // mapeia
-            this.pool[appId][cacheId] = yield new db(connParams);
+            this.pool[appId][cacheId] = yield new db(connParams, ctx.state.config.conexoes.drivers[connParams.tipo]);
             return this.pool[appId][cacheId];
                 
         }

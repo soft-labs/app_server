@@ -117,16 +117,51 @@ if(!alertify.choose){
 
                 // Tabs
                 if (layout['tabs'] && layout.tabs[f]){
-                    var tab_header  = $("<div>", {class: "ui top attached tabular menu"})
+                    var _tab = layout.tabs[f]
+                        , _tab_style = _tab['style'] || 'clean'
+                        , _tab_itens = _tab['itens'] || _tab
+                        , t_class
+                        , i_color = 'violet'
+                    ;
+
+                    switch (_tab_style){
+                        case 'clean':
+                            t_class = 'small pointing tabular secondary menu';
+                            i_color = 'violet';
+                            break;
+
+                        case 'small':
+                            t_class = 'small pointing secondary menu';
+                            i_color = 'violet';
+                            break;
+
+                        case 'pointing':
+                            t_class = 'small pointing menu';
+                            i_color = 'violet';
+                            break;
+
+                        case 'button':
+                            t_class = 'small menu';
+                            i_color = 'violet';
+                            break;
+
+                        case 'old':
+                            t_class = 'mini tabular menu';
+                            i_color = '';
+                            break;
+
+                    }
+                    
+                    var tab_header  = $("<div>", {class: "ui top attached " + t_class})
                         , tabs = []
                         , areas = []
-                        , active = 'active'
+                        , active = 'active '
                         , t = 0
                     ;
 
                     // Linhas do tab
-                    layout.tabs[f].forEach(tab => {
-                        var a = $("<a>", {class: active + " item", "data-tab": f + "_" + t}).html(tab['label'])
+                    _tab_itens.forEach(tab => {
+                        var a = $("<a>", {class: active + i_color + " item", "data-tab": f + "_" + t}).html(tab['label'])
                             , d = $("<div>", {class: "ui bottom attached tab segment " + active, "data-tab": f + "_" + t})
                         ;
 

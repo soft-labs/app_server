@@ -76,6 +76,21 @@ Types.prototype.ctrls = {
 };
 
 /**
+ * Estilos de tab
+ */
+Types.prototype.tab = {
+    get style(){
+        return {
+            clean   : 'clean',
+            small   : 'small',
+            pointing: 'pointing',
+            button  : 'button',
+            old     : 'old'
+        }
+    }    
+}
+
+/**
  * Tipos de componentes
  */
 Types.prototype.comp = {

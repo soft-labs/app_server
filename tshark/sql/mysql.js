@@ -6,13 +6,18 @@
  * @param connParams Parâmetros de conexão
  * @constructor
  */
-function *MySql(connParams){
+function *MySql(connParams, driverParams){
 
     /**
      * Driver de acesso a bancos SQL
      * @type {SQL}
      */
     this.driver = new driver(this);
+
+    /**
+     * Parametros específicos à conexão
+     */
+    this.driverParams = driverParams;
 
     // Inicializa
     this.driver.init(connParams);
@@ -191,7 +196,7 @@ function formatDateTimeIn(value, format){
  * @returns {string}
  */
 MySql.prototype.formatDateIn = function(value){
-    return formatDateTimeIn(value, '%d/%m/%Y');
+    return formatDateTimeIn(value, this.driverParams.date);
 };
 
 /**
@@ -200,7 +205,7 @@ MySql.prototype.formatDateIn = function(value){
  * @returns {string}
  */
 MySql.prototype.formatDateTimeIn = function(value){
-    return formatDateTimeIn(value, '%d/%m/%Y %H:%i:%s');
+    return formatDateTimeIn(value, this.driverParams.datetime);
 };
 
 //endregion

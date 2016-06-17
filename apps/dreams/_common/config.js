@@ -36,6 +36,14 @@ module.exports = {
     conexoes:{
 
         // Base Default
+        drivers: {
+            mysql: {
+                date    : '%Y/%m/%d',
+                datetime: '%Y/%m/%d %H:%i:%s'
+            }
+        },
+        
+        // Base Default
         default: {
             tipo: 'mysql',
             conn: {

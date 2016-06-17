@@ -81,7 +81,7 @@ function ContHistoricos(){
                 {tabs:100},
             ],
             tabs: {
-                tabs:
+                tabs: 
                     [
                         {
                             label: 'Centro de Resultados',

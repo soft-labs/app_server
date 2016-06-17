@@ -568,9 +568,10 @@ function Dreams(){
             this.params.row['users_key'] = data.rows[0]['users_key'];
         }
 
-        this.params.img_cover = this.params.row['img_cover'];
-        this.params.row['img_cover'] = '';
-
+        if (this.params.row) {
+            this.params.img_cover = this.params.row['img_cover'];
+            this.params.row['img_cover'] = '';
+        }
     };
 
     /**

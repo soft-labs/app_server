@@ -6,7 +6,7 @@
  * @param connParams Parâmetros de conexão
  * @constructor
  */
-function *SQLServer(connParams){
+function *SQLServer(connParams, driverParams){
 
     /**
      * Driver de acesso a bancos SQL
@@ -16,6 +16,11 @@ function *SQLServer(connParams){
 
     // Inicializa
     this.driver.init(connParams);
+
+    /**
+     * Parametros específicos à conexão
+     */
+    this.driverParams = driverParams;
 
     // Pool de conexões
     this.pool = yield tedium.createConnectionPool(
