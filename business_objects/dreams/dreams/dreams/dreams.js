@@ -39,7 +39,25 @@ function Dreams(){
                         template: '{username}',
                         provider: '' 
                     } 
-                }, 
+                },
+                dream_categorias_key: {
+                    tipo: types.comp.choose, label: 'Categoria:',
+                    data: {
+                        key: ['dream_categorias_key'],
+                        from: ['dreams', 'dreams', 'dream_categorias'],
+                        template: '{category}',
+                        provider: ''
+                    }
+                },
+                dream_subcategorias_key: {
+                    tipo: types.comp.choose, label: 'Sub Categoria:',
+                    data: {
+                        key: ['dream_subcategorias_key'],
+                        from: ['dreams', 'dreams', 'dream_subcategorias'],
+                        template: '{subcategory}',
+                        provider: ''
+                    }
+                },
                 _privacy: {
                     tipo: types.comp.dropdown, label: 'Privacidade:',
                     data: {
@@ -120,6 +138,7 @@ function Dreams(){
                 {titulo: "Informações do Sonho"},
                 {_active: 10, _banned: 10, _sponsor: 10, _status: 20, _privacy: 20, owner_key: 40},
                 {description: 60, users_key: 40},
+                {_sponsor: 10, dream_categorias_key: 45, dream_subcategorias_key: 45},
                 {_creation_date: 30, _coming_true_date: 30, _came_true_date: 30},
                 {img_cover: 100}
             ],
@@ -162,16 +181,34 @@ function Dreams(){
                     fields: [
                         
                     ]
+                },
+                2: {
+                    from: ['dreams', 'dreams', 'dream_categorias'],
+                    join: {source: 0, tipo: types.join.left, on: 'dream_categorias_key', where: ''},
+                    fields: [
+
+                    ]
+                },
+                3: {
+                    from: ['dreams', 'dreams', 'dream_subcategorias'],
+                    join: {source: 0, tipo: types.join.left, on: 'dream_subcategorias_key', where: ''},
+                    fields: [
+
+                    ]
                 }
             },
             where: [ 
-                ['AND', 0, 'dreams_key', types.where.check]
+                ['AND', 0, 'dreams_key', types.where.check],
+                ['AND', 0, 'dream_categorias_key', types.where.check],
+                ['AND', 0, 'dream_subcategorias_key', types.where.check],
             ],
             order: [
                 ['0', 'dreams_key', 'desc']
             ],
             search: [
-                {alias: 0, field: 'description',  param: types.search.like_full }
+                {alias: 0, field: 'description',  param: types.search.like_full },
+                {alias: 2, field: 'category',  param: types.search.like_full },
+                {alias: 3, field: 'subcategory',  param: types.search.like_full },
             ],
             limit: 250,
             showSQL: 0
@@ -194,9 +231,10 @@ function Dreams(){
             },
             where: [ 
                 ['AND', 0, 'dreams_key', types.where.check],
+                ['AND', 0, 'dream_categorias_key', types.where.check],
+                ['AND', 0, 'dream_subcategorias_key', types.where.check],
                 ['AND', 0, '_active',     '=', '1'],
                 ['AND', 0, '_banned',    '<>', '1'],
-                ['AND', 0, '_sponsor', '<>', '1']
             ],
             order: [
                 ['0', 'dreams_key', 'desc']
@@ -225,9 +263,10 @@ function Dreams(){
             },
             where: [
                 ['AND', 0, 'dreams_key', types.where.check],
+                ['AND', 0, 'dream_categorias_key', types.where.check],
+                ['AND', 0, 'dream_subcategorias_key', types.where.check],
                 ['AND', 0, '_active',     '=', '1'],
                 ['AND', 0, '_banned',    '<>', '1'],
-                ['AND', 0, '_sponsor', '<>', '1'],
                 ['AND', 0, '_privacy', 'IN', "('P', 'C')"]
             ],
             order: [
@@ -270,11 +309,12 @@ function Dreams(){
             },
             where: [
                 ['AND', 0, 'dreams_key', types.where.check],
+                ['AND', 0, 'dream_categorias_key', types.where.check],
+                ['AND', 0, 'dream_subcategorias_key', types.where.check],
                 ['AND', 3, '_token', types.where.get],
                 ['AND', 2, '_accept', '=', '1'],
                 ['AND', 0, '_active',     '=', '1'],
                 ['AND', 0, '_banned',    '<>', '1'],
-                ['AND', 0, '_sponsor', '<>', '1'],
                 "AND (tb0._privacy IN ('P', 'C', 'F')" +
                 " OR (tb0._privacy = 'S' " +
                 "     AND tb3.users_key IN (" +
@@ -306,10 +346,11 @@ function Dreams(){
             },
             where: [
                 ['AND', 0, 'dreams_key', types.where.check],
+                ['AND', 0, 'dream_categorias_key', types.where.check],
+                ['AND', 0, 'dream_subcategorias_key', types.where.check],
                 ['AND', 0, '_privacy', '=', "'C'"],
                 ['AND', 0, '_active',  '=',  '1'],
-                ['AND', 0, '_banned',  '<>', '1'],
-                ['AND', 0, '_sponsor', '<>', '1']
+                ['AND', 0, '_banned',  '<>', '1']
             ],
             order: [
                 ['0', 'dreams_key', 'asc']
@@ -342,7 +383,9 @@ function Dreams(){
             },
             where: [
                 ['AND', 1, '_token', types.where.get],
-                ['AND', 0, 'dreams_key', types.where.check]
+                ['AND', 0, 'dreams_key', types.where.check],
+                    ['AND', 0, 'dream_categorias_key', types.where.check],
+                ['AND', 0, 'dream_subcategorias_key', types.where.check],
             ],
             order: [
                 ['0', 'dreams_key', 'asc']
@@ -376,7 +419,9 @@ function Dreams(){
                 }
             },
             where: [
-                ['AND', 0, 'dreams_key', types.where.get]
+                ['AND', 0, 'dreams_key', types.where.get],
+                ['AND', 0, 'dream_categorias_key', types.where.check],
+                ['AND', 0, 'dream_subcategorias_key', types.where.check],
             ],
             order: [
                 ['2', 'username', 'asc']
@@ -407,6 +452,8 @@ function Dreams(){
             where: [
                 ['AND', 1, '_token', types.where.get],
                 ['AND', 0, 'dreams_key', types.where.check],
+                ['AND', 0, 'dream_categorias_key', types.where.check],
+                ['AND', 0, 'dream_subcategorias_key', types.where.check],
                 ['AND', 0, '_status', '=', '1'],
                 ['AND', 0, '_active', '=', '1'],
                 ['AND', 0, '_banned', '<>', '1']
@@ -440,6 +487,8 @@ function Dreams(){
             where: [
                 ['AND', 1, '_token', types.where.get],
                 ['AND', 0, 'dreams_key', types.where.check],
+                ['AND', 0, 'dream_categorias_key', types.where.check],
+                ['AND', 0, 'dream_subcategorias_key', types.where.check],
                 ['AND', 0, '_status', '=', '2'],
                 ['AND', 0, '_active',     '=', '1'],
                 ['AND', 0, '_banned',    '<>', '1']
@@ -474,6 +523,8 @@ function Dreams(){
             where: [
                 ['AND', 1, '_token', types.where.get],
                 ['AND', 0, 'dreams_key', types.where.check],
+                ['AND', 0, 'dream_categorias_key', types.where.check],
+                ['AND', 0, 'dream_subcategorias_key', types.where.check],
                 ['AND', 0, '_status', '=', '3'],
                 ['AND', 0, '_active',     '=', '1'],
                 ['AND', 0, '_banned',    '<>', '1']
@@ -498,6 +549,8 @@ function Dreams(){
                 },
             },
             where: [
+                ['AND', 0, 'dream_categorias_key', types.where.check],
+                ['AND', 0, 'dream_subcategorias_key', types.where.check],
                 ['AND', 0, '_active', '=', '1'],
                 ['AND', 0, '_banned', '<>', '1'],
                 ['AND', 0, '_sponsor', '=', '1']

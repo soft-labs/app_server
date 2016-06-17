@@ -73,6 +73,18 @@ app = $.extend(true, app, {
                     info: "Gestão dos sonhos cadastrados",
                     icon: "left floated big cloud icon",
                     path: "dreams dreams dreams"
+                },
+                {
+                    label: "Categorias",
+                    info: "Gestão das categorias de sonhos sugeridos",
+                    icon: "left floated big tag icon",
+                    path: "dreams dreams dream_categorias"
+                },
+                {
+                    label: "Sonhos",
+                    info: "Gestão das sub categorias dos sonhos sugeridos",
+                    icon: "left floated tags cloud icon",
+                    path: "dreams dreams dream_subcategorias"
                 }
             ]
         });
@@ -240,6 +252,26 @@ app = $.extend(true, app, {
                 label: 'Suggested',
                 verbs: [
                     {op: 'list',    label: 'GET  "\\"'}
+                ]
+            },
+            {
+                id   : 'category',
+                label: 'Category',
+                verbs: [
+                    {op: 'list',    label: 'GET  "\\"'},
+                    {op: 'post',    label: 'POST "\\"'},
+                    {op: 'put',     label: 'PUT  "\\id"'},
+                    {op: 'delete',  label: 'DELETE "\\id"'}
+                ]
+            },
+            {
+                id   : 'subcategory',
+                label: 'SubCategory',
+                verbs: [
+                    {op: 'list',    label: 'GET  "\\"'},
+                    {op: 'post',    label: 'POST "\\"'},
+                    {op: 'put',     label: 'PUT  "\\id"'},
+                    {op: 'delete',  label: 'DELETE "\\id"'}
                 ]
             },
             

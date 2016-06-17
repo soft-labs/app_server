@@ -43,6 +43,8 @@ var
         'comingtrue'    : {mod: 'dreams/dreams/dreams',                provider: 'comingtrue'},
         'cametrue'      : {mod: 'dreams/dreams/dreams',                provider: 'cametrue'},
         'suggested'     : {mod: 'dreams/dreams/dreams',                provider: 'suggested'},
+        'category'      : {mod: 'dreams/dreams/dream_categorias',      provider: 'default'},
+        'subcategory'   : {mod: 'dreams/dreams/dream_subcategorias',   provider: 'default'},
 
         'albuns'        : {mod: 'dreams/dreams/dream_albuns',          provider: 'default'},
         'albumcomments' : {mod: 'dreams/comments/comments_albuns_rel', provider: 'default'},
