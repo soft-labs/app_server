@@ -101,8 +101,8 @@ function DreamSubcategorias(){
                 1: {
                     from: ['dreams', 'dreams', 'dream_categorias'],
                     join: {source: 0, tipo: types.join.left, on: 'dream_categorias_key', where: ''},
-                    fields: [
-
+                    alias_fields: [
+                        {field: 'num_order', as: 'categ_order'}
                     ]
                 }
             },
