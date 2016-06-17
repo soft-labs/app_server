@@ -579,6 +579,7 @@ function Dreams(){
      * @param ret Objeto de retorno
      */
     this.onAfterInsert = function *(ret, ctx){
+        this.params['dreams_key'] = this.params.row['dreams_key'] = ret.insert['dreams_key'];
         if (this.params['dreamers']){
             if (typeof this.params.dreamers == 'string'){
                 this.params.dreamers = this.params.dreamers.split(',');
@@ -778,8 +779,10 @@ function Dreams(){
                 "apps/dreams/_common/_imgs/dreams/c_" + this.params.row['dreams_key'],
                 img_cover
             );
-            this.params.row['img_cover'] = img.substr(7);
+            this.params.row['img_cover'] = img.substr(20);
+            ok = true;
         }
+        return ok;
     };
     
     //endregion

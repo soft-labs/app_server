@@ -462,7 +462,7 @@ function Users(){
      */
     this.onAfterInsert = function *(ret, ctx){
         this.params['_token'] = ret['_token'] = this.params.row['_token'];
-        this.params['users_key'] = this.params.row['users_key'] = ret['result'];
+        this.params['users_key'] = this.params.row['users_key'] = ret.insert['users_key'];
 
         // Salva imagens
         var ok = yield this.saveUserImages();
@@ -723,7 +723,7 @@ function Users(){
                 "apps/dreams/_common/_imgs/users/p_" + this.params.row['users_key'],
                 img_profile
             );
-            this.params.row['img_profile'] = img.substr(7);
+            this.params.row['img_profile'] = img.substr(20);
             ok = true;
         }
 
@@ -733,7 +733,7 @@ function Users(){
                 "apps/dreams/_common/_imgs/users/b_" + this.params.row['users_key'],
                 img_background
             );
-            this.params.row['img_background'] = img.substr(7);
+            this.params.row['img_background'] = img.substr(20);
             ok = true;
         }
 
