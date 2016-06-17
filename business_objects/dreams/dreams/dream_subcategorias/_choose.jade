@@ -1,0 +1,21 @@
+//
+    Template choose para: dreams.dreams.dream_categorias
+    Criado em Fri Jun 17 2016 15:44:50 GMT-0300 (BRT)
+
+table.ui.compact.striped.selectable.celled.table.choose-rows
+    theadtr.cursor
+        th.one.wide Ordem
+        th.six.wide Categoria
+        th.nine.wide Sub Categoria
+    tbody
+        tr.cursor(
+        rv-each-row='choose.data.rows'
+        rv-on-click='choose.select'
+        rv-data-key='row.dream_subcategorias_key'
+        )
+            td
+                | {row.num_order}
+            td
+                | {row.category}
+            td
+                | {row.subcategory}

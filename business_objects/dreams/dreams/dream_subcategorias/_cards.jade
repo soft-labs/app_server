@@ -1,0 +1,20 @@
+//
+    Template default para: dreams.dreams.dream_subcategorias
+    Criado em Fri Jun 17 2016 15:44:50 GMT-0300 (BRT)
+
+.ui.fluid.card(rv-each-row='dreams.dreams.dream_subcategorias.data.rows')
+    .content
+        .header {row.undefined} - {row.}
+        .meta Keys:  - sem dependências -
+        .description
+
+    .extra.content
+        span.left.floated.button
+            button.ui.orange.icon.mini.button(data-action='dreams dreams dream_subcategorias edit', rv-data-key='row.undefined')
+                i.edit.icon
+                | Editar
+
+        span.right.floated.button
+            button.ui.red.icon.mini.button(rv-data-action='dreams dreams dream_subcategorias delete', rv-data-key='row.undefined')
+                i.delete.icon
+                | Remover

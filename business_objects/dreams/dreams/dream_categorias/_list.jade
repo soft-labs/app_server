@@ -1,0 +1,28 @@
+//
+    Template default para: dreams.dreams.dream_categorias
+    Criado em Fri Jun 17 2016 15:44:50 GMT-0300 (BRT)
+
+table.ui.compact.striped.celled.table
+    thead
+        tr.cursor
+            th.one.wide Ativo
+            th.one.wide Ordem
+            th.fourteen.wide Categoria
+    tbody
+        tr(rv-each-row='dreams.dreams.dream_categorias.data.rows')
+            td
+                .ui.toggle.checkbox
+                    input(
+                        type="checkbox"
+                        rv-checked='row._active'
+                        rv-row-key='row.dream_categorias_key'
+                        server-onchange='dreams dreams dream_categorias update'
+                    )
+            td
+                | {row.num_order}
+            td(
+                rv-row-key='row.dream_categorias_key'
+                server='dreams dreams dream_categorias edit'
+                )
+                i.edit.icon
+                | {row.category}
