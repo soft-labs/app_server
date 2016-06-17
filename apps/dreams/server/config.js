@@ -26,6 +26,19 @@ module.exports = {
         }
     },
 
+    // Conexões à repositórios de dados
+    conexoes:{
+
+        // Base Default
+        drivers: {
+            mysql: {
+                date    : '%d/%m/%Y',
+                datetime: '%d/%m/%Y %H:%i:%s'
+            }
+        },
+
+    },
+
     // Auditoria nivel aplicativo
     auditing: {
 
